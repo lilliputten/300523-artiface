@@ -4,6 +4,9 @@
  *  @changed 2019.09.09, 14:55
  */
 
+// es5-shim/es5-shim es5-shim/es5-sham react-app-polyfill/ie9 react-app-polyfill/stable react react-dom
+// es5-shim react-app-polyfill react react-dom
+
 import 'es5-shim/es5-shim'
 import 'es5-shim/es5-sham'
 import 'react-app-polyfill/ie9'
@@ -15,7 +18,7 @@ import { render } from 'react-dom'
 import { Hello } from './demo/Hello.jsx'
 
 // Root styles
-import './index.pcss'
+// import './index.pcss'
 
 render(
   <Hello />,
