@@ -1,48 +1,43 @@
 /** @module babel.config
- *  @description Babel configuration
+ *  @desc Babel configuration
  *  @since 2019.03.06, 12:00
- *  @changed 2019.09.03, 10:29
+ *  @changed 2020.05.18, 15:23
  */
 
-const srcFolders = [
-  // 'actions',
-  // 'api',
-  // 'components',
-  // 'config',
-  // 'constants',
-  // 'containers',
-  // 'helpers',
-  // 'i18n',
-  // // 'lib',
-  // 'pages',
-  // 'reducers',
-  // 'saga',
-  // 'sagas',
-  // 'store',
-  // 'template',
-  // 'tests',
-  // 'uikit',
-]
+// const srcFolders = [
+//   // 'actions',
+//   // 'api',
+//   // 'components',
+//   // 'config',
+//   // 'constants',
+//   // 'containers',
+//   // 'helpers',
+//   // 'i18n',
+//   // // 'lib',
+//   // 'pages',
+//   // 'reducers',
+//   // 'saga',
+//   // 'sagas',
+//   // 'store',
+//   // 'template',
+//   // 'tests',
+//   // 'uikit',
+// ]
 
 module.exports = {
   presets: [
     ['@babel/preset-env', {
       targets: {
         ie: '11',
-        // esmodules: true,
       },
       useBuiltIns: 'usage',
-      // useBuiltIns: 'entry',
       corejs: 3,
-      // corejs: 2,
-      // debug: true,
-      // modules: false,
       loose: true,
-      exclude: [
-        // '@babel/plugin-transform-typeof-symbol',
-        // '@babel/polyfill',
-        // '@babel/plugin-transform-runtime',
-      ],
+      // exclude: [
+      //   // '@babel/plugin-transform-typeof-symbol',
+      //   // '@babel/polyfill',
+      //   // '@babel/plugin-transform-runtime',
+      // ],
     }],
     ['@babel/preset-react'],
     // ['@babel/preset-flow'],
