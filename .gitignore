@@ -1,6 +1,7 @@
 .DS_Store
 node_modules
-\!UNUSED
+\!UNUSED*
+\!ARC*
 
 # IDE
 .idea
@@ -11,6 +12,7 @@ node_modules
 /build*
 /dist*
 /demo*
+tags
 .webpack-stats.json
 
 # Temp project files
