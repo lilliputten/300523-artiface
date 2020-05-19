@@ -1,4 +1,4 @@
-/** @desc Update changed datetag file
+/** @desc Update changed tag file with current timestamp
  *  @changed 2020.05.19, 19:40
  */
 

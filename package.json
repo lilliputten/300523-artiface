@@ -95,6 +95,7 @@
     "build-dev-watch": "npm run -s build-dist-dev-watch",
     "build": "npm run -s build-dist-prod",
     "build-all": "npm-run-all build-dist-dev build-dev-prod build-demo-dev build-demo-prod",
+    "update-changed-tag": "echo --Update changed tag file with current timestamp-- && node util-update-changed.js",
     "help": "echo --List all available script commands-- && npm-package-user-scripts-list"
   }
 }
