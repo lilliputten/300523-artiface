@@ -11,10 +11,10 @@ const webpack = require('webpack')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const WebpackBuildNotifierPlugin = require('webpack-build-notifier') // https://www.npmjs.com/package/webpack-build-notifier
 // const CopyWebpackPlugin = require('copy-webpack-plugin')
+const CreateFileWebpack = require('create-file-webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-// const UglifyJS = require('uglify-js');
-// const TerserPlugin = require('terser-webpack-plugin')
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+// const UglifyJS = require('uglify-js')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 // TODO: OptimizeCSSAssetsPlugin params (source map etc)
 const ExtractCssPlugin = require('mini-css-extract-plugin')
@@ -57,12 +57,15 @@ module.exports = (env, argv) => {
   process.env.THEME = THEME
   process.env.THEME_FILE = THEME_FILE
 
+  const isDist = !!env.DIST
+  const isDemo = !isDist
+
   // Project configuration
   const pkgFile = path.resolve(rootPath, 'package')
   const pkgConfig = require(pkgFile)
 
   // Project version, application title
-  const { version } = pkgConfig
+  const { name: projectName, version } = pkgConfig
 
   // Date stamps
   const dateStringFormat = 'yyyy.mm.dd HH:MM:ss'
@@ -70,17 +73,39 @@ module.exports = (env, argv) => {
   const now = new Date()
   const dateString = dateformat(now, dateStringFormat)
   const dateTag = dateformat(now, dateTagFormat)
+  const changedFile = 'changed-tag.txt'
+  const changedTag = fs.existsSync(changedFile) && fs.readFileSync(changedFile, 'utf8') || dateTag
 
   const htmlFilename = 'index.html'
 
-  const buildFolder = isProd ? 'dist' : 'dist-dev'
+  const buildType = isDist ? 'dist' : 'demo'
+  const buildMode = isProd ? 'prod' : 'dev'
+  const buildModePostfix = isDev ? '-dev' : ''
+  const buildFolder = buildType + buildModePostfix
   const buildPath = path.resolve(rootPath, buildFolder)
+
+  const buildTag = [ // Contruct general-purpose build tag
+    'v.' + version,
+    buildType,
+    buildMode,
+    THEME,
+    changedTag,
+  ].join('-')
 
   const useHashes = false // NOTE: Not works with pseudo-dynamic bundles loading method (with hardcoded urls)
   const bundleName = ({ ext, name, dir } = {}) => (dir || 'js/') + (name || '[name]') + (useHashes && !isWatch && !isDevServer ? '-[contenthash:8]' : '') + (ext || '.js')
 
-  const stylesConfigFile = path.resolve(srcPath, 'config', 'css.js')
-  const stylesConfig = fs.existsSync(stylesConfigFile) ? require(stylesConfigFile) : {}
+  const jsEntryFile = isDist ? 'dist.js' : 'demo.jsx' // js source
+
+  const libOutput = isDist ? { // Additional webpack output for library mode
+    library: projectName,
+    libraryTarget: 'commonjs2',
+    filename: 'bundle.js',
+    auxiliaryComment: 'Test Comment', // ???
+  } : {}
+
+  const cssConfigFile = path.resolve(srcPath, 'config', 'css.js')
+  const cssConfig = fs.existsSync(cssConfigFile) ? require(cssConfigFile) : {}
 
   const postcssPlugins = [
     require('postcss-flexbugs-fixes'),
@@ -92,7 +117,7 @@ module.exports = (env, argv) => {
     }),
     require('postcss-advanced-variables')({ // https://github.com/jonathantneal/postcss-advanced-variables
       // unresolved: 'warn', // 'ignore',
-      variables: stylesConfig,
+      variables: cssConfig,
     }),
     require('postcss-simple-vars'), // https://github.com/postcss/postcss-simple-vars
     require('postcss-color-function'), // https://github.com/postcss/postcss-color-function
@@ -111,11 +136,34 @@ module.exports = (env, argv) => {
     require('postcss-reporter'),
   ].filter(x => x)
 
+  const passParameters = { // Pass parameters to code (js & styles)
+    bodyBgColor: cssConfig.bodyBgColor,
+    THEME,
+    THEME_FILE,
+    DEBUG,
+    DEV_DEBUG: DEBUG && env.DEV_DEBUG, // Extra debug level (on developers' machine, usually from `webpack.env.local.js` or specific npm script command)
+    DEV_SERVER: DEBUG && env.DEV_SERVER, // Debug server
+    isDist,
+    isDemo,
+    isDevServer,
+    isDev,
+    isProd,
+    isWatch,
+    dateTag,
+    changedTag,
+    buildTag,
+    dateString,
+    version,
+  }
+
   // Stats waiting only json on output...
   const debugModes = [
+    buildTag,
     // dateTag,
     // mode,
     // 'ip:' + myIP,
+    isDist && 'Dist',
+    isDemo && 'Demo',
     isCosmos && 'Cosmos',
     isDevServer && 'DevServer',
     isWatch && 'Watch',
@@ -130,21 +178,26 @@ module.exports = (env, argv) => {
     THEME && 'theme:' + THEME,
   ].filter(x => x).join(' ')
   if (!isStats) {
-    console.log('Build parameters:', debugModes) // eslint-disable-line no-console
+    console.log('Building:', debugModes) // eslint-disable-line no-console
   }
 
   return {
     mode,
-    entry: path.resolve(srcPath, 'index.jsx'),
+    entry: path.resolve(srcPath, jsEntryFile),
+    performance: { hints: false },
+    watch: isWatch,
+    devtool: useDevTool && 'source-map', // 'cheap-module-source-map',
     resolve: {
       extensions: ['.js', '.jsx'],
     },
     output: {
       path: buildPath,
       filename: bundleName(), // 'js/bundle.js',
+      ...libOutput
     },
-    watch: isWatch,
-    devtool: useDevTool && 'source-map', // 'cheap-module-source-map',
+    externals: {
+      react: true,
+    },
     devServer: {
       hot: hotReload,
       index: htmlFilename,
@@ -201,20 +254,9 @@ module.exports = (env, argv) => {
         // dry: false,
       }),
       new webpack.DefinePlugin({ // Pass constants to source code
-        'process.env': {
-          THEME: JSON.stringify(THEME),
-          THEME_FILE: JSON.stringify(THEME_FILE),
-          DEBUG: JSON.stringify(DEBUG),
-          DEV_SERVER: JSON.stringify(DEBUG && env.DEV_SERVER), // Debug server
-          DEV_DEBUG: JSON.stringify(DEBUG && env.DEV_DEBUG), // Extra debug level (on developers' machine, usually from `webpack.env.local.js` or specific npm script command)
-          isDevServer: JSON.stringify(isDevServer),
-          isDev: JSON.stringify(isDev),
-          isProd: JSON.stringify(isProd),
-          isWatch: JSON.stringify(isWatch),
-          dateTag: JSON.stringify(dateTag),
-          dateString: JSON.stringify(dateString),
-          version: JSON.stringify(version),
-        },
+        'process.env': Object.entries(passParameters).reduce((data, [key, val]) => {
+          return { data, [key]: JSON.stringify(val) };
+        }, {})
       }),
       /* // UNUSED: CopyWebpackPlugin
        * new CopyWebpackPlugin( // Simply copies the files over
@@ -235,20 +277,21 @@ module.exports = (env, argv) => {
        *   },
        * ),
        */
-      new HtmlWebpackPlugin({
+      isDemo && new HtmlWebpackPlugin({
         template: path.resolve(rootPath, 'html', htmlFilename),
         filename: htmlFilename,
         cache: true,
         inject: true,
         minimify: minimizeBundles,
         // title: appTitle, // Not using; see i18n-specific appTitle** variables above (passed to js code env)
-        templateParameters: Object.assign({}, stylesConfig, {
+        templateParameters: Object.assign({}, cssConfig, {
           THEME,
-          // bodyBgColor: stylesConfig.bodyBgColor,
+          // bodyBgColor: cssConfig.bodyBgColor,
           rootPath,
           // appTitle, // Not using; see i18n-specific appTitle** variables above (passed to js code env)
           dateString,
           dateTag,
+          changedTag,
           version,
         }),
       }),
@@ -259,9 +302,15 @@ module.exports = (env, argv) => {
        * new webpack.NoEmitOnErrorsPlugin
        */
       !cssHotReload && new ExtractCssPlugin({ // Extract css
-        filename: bundleName({ ext: '.css', dir: 'css/' }),
+        filename: isDist ? 'styles.css' : bundleName({ ext: '.css', dir: 'css/' }),
       }),
       // new webpack.NoEmitOnErrorsPlugin(), // ???
+      new CreateFileWebpack({ // Create build tag file // TODO: Pre-generate & copy on build?
+        // path: './',
+        path: buildPath,
+        fileName: 'version.txt',
+        content: buildTag,
+      }),
       new WebpackBuildNotifierPlugin({
         // title, logo,
         suppressSuccess: true,
@@ -269,7 +318,7 @@ module.exports = (env, argv) => {
     ].filter(x => x),
     optimization: {
       // Minimize if not preprocess and minimize flags configured
-      minimize: true, // preprocessBundles || minimizeBundles,
+      minimize: preprocessBundles || minimizeBundles,
       minimizer: [
         new UglifyJsPlugin({
           test: /\.js$/i,
@@ -297,34 +346,36 @@ module.exports = (env, argv) => {
         }),
         new OptimizeCSSAssetsPlugin({}),
       ],
-      splitChunks: {
-        cacheGroups: {
-          // chunks: 'all',
-          // minSize: 0,
-          // maxSize: 0,
-          // minChunks: 1,
-          // maxAsyncRequests: 5,
-          // maxInitialRequests: 3,
-          // automaticNameDelimiter: '-',
-          // name: true,
-          default: false,
-          vendors: false,
-          vendor: {
-            name: 'vendor',
-            chunks: 'all',
-            test: /node_modules/,
-            priority: 20,
-          },
-          common: {
-            name: 'common',
-            minChunks: 2,
-            chunks: 'all',
-            priority: 10,
-            reuseExistingChunk: true,
-            enforce: true,
-          },
-        },
-      },
+      /* // UNUSED: splitChunks
+       * splitChunks: {
+       *   cacheGroups: {
+       *     // chunks: 'all',
+       *     // minSize: 0,
+       *     // maxSize: 0,
+       *     // minChunks: 1,
+       *     // maxAsyncRequests: 5,
+       *     // maxInitialRequests: 3,
+       *     // automaticNameDelimiter: '-',
+       *     // name: true,
+       *     default: false,
+       *     vendors: false,
+       *     vendor: {
+       *       name: 'vendor',
+       *       chunks: 'all',
+       *       test: /node_modules/,
+       *       priority: 20,
+       *     },
+       *     common: {
+       *       name: 'common',
+       *       minChunks: 2,
+       *       chunks: 'all',
+       *       priority: 10,
+       *       reuseExistingChunk: true,
+       *       enforce: true,
+       *     },
+       *   },
+       * },
+       */
     },
     /* // WebUi optimization mode
      * optimization: {

@@ -10,6 +10,8 @@ node_modules
 # Builds
 /build*
 /dist*
+/demo*
+.webpack-stats.json
 
 # Temp project files
 tags
