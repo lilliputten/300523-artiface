@@ -8,7 +8,7 @@ TARGET_BRANCH="dev"
 # If no arguments specified...
 if [ $# -lt 1 ]; then
   echo "Merging specified branch to target branch"
-  echo "Usage: $0 <BRANCH> <TARGET_BRANCH>"
+  echo "Usage: $0 <BRANCH> [<TARGET_BRANCH>]"
   echo "Default target branch is $TARGET_BRANCH"
   echo "Available branches:"
   git --no-pager branch --sort=committerdate
