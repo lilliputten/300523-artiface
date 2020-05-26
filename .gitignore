@@ -9,14 +9,20 @@ node_modules
 *.session
 
 # Builds
-/build*
-/dist*
-/demo*
-tags
-.webpack-stats.json
+/dist/
+/dist-dev/
+/demo/
+/demo-dev/
+/publish/
 
 # Temp project files
+.webpack-stats.json
 tags
+.*.sw?
+*.tmp
+*.bak
+*~
+*_
 
 # -- Ignore personal config files --
 # .lvimrc

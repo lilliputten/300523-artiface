@@ -73,8 +73,8 @@ module.exports = (env, argv) => {
   const now = new Date()
   const dateString = dateformat(now, dateStringFormat)
   const dateTag = dateformat(now, dateTagFormat)
-  const changedFile = 'changed-tag.txt'
-  const changedTag = fs.existsSync(changedFile) && fs.readFileSync(changedFile, 'utf8') || dateTag
+  const buildTagFile = 'build-tag.txt'
+  const buildTag = fs.existsSync(buildTagFile) && fs.readFileSync(buildTagFile, 'utf8') || dateTag
 
   const htmlFilename = 'index.html'
 
@@ -84,12 +84,12 @@ module.exports = (env, argv) => {
   const buildFolder = buildType + buildModePostfix
   const buildPath = path.resolve(rootPath, buildFolder)
 
-  const buildTag = [ // Contruct general-purpose build tag
+  const versionTag = [ // Contruct general-purpose build tag
     'v.' + version,
+    buildTag,
     buildType,
     buildMode,
     THEME,
-    changedTag,
   ].join('-')
 
   const useHashes = false // NOTE: Not works with pseudo-dynamic bundles loading method (with hardcoded urls)
@@ -150,15 +150,15 @@ module.exports = (env, argv) => {
     isProd,
     isWatch,
     dateTag,
-    changedTag,
     buildTag,
+    versionTag,
     dateString,
     version,
   }
 
   // Stats waiting only json on output...
   const debugModes = [
-    buildTag,
+    versionTag,
     // dateTag,
     // mode,
     // 'ip:' + myIP,
@@ -291,7 +291,7 @@ module.exports = (env, argv) => {
           // appTitle, // Not using; see i18n-specific appTitle** variables above (passed to js code env)
           dateString,
           dateTag,
-          changedTag,
+          buildTag,
           version,
         }),
       }),
@@ -309,7 +309,7 @@ module.exports = (env, argv) => {
         // path: './',
         path: buildPath,
         fileName: 'version.txt',
-        content: buildTag,
+        content: versionTag,
       }),
       new WebpackBuildNotifierPlugin({
         // title, logo,
