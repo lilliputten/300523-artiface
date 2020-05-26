@@ -12,6 +12,8 @@ if [ $# -lt 1 ]; then
   echo "Default target branch is $TARGET_BRANCH"
   echo "Available branches:"
   git --no-pager branch --sort=committerdate
+  CURRENT_BRANCH=`git branch --show-current`
+  echo "Current branch is $CURRENT_BRANCH"
   exit 1
 fi
 
