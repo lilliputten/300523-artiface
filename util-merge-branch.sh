@@ -17,10 +17,15 @@ fi
 
 # Target branch specified
 if [ $# -eq 2 ]; then
-  TARGET_BRANCH=$2
+  TARGET_BRANCH="$2"
 fi
 
 BRANCH=$1
+
+if [ "$BRANCH" = "$TARGET_BRANCH" ]; then
+  echo "The source branch must be different from target branch"
+  exit 1
+fi
 
 echo "Merging branch $BRANCH to $TARGET_BRANCH" && \
   git checkout $TARGET_BRANCH && \
