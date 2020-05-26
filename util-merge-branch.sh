@@ -11,7 +11,7 @@ if [ $# -lt 1 ]; then
   echo "Usage: $0 <BRANCH> <TARGET_BRANCH>"
   echo "Default target branch is $TARGET_BRANCH"
   echo "Available branches:"
-  git branch --sort=committerdate
+  git --no-pager branch --sort=committerdate
   exit 1
 fi
 
