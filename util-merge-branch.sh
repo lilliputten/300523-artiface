@@ -15,15 +15,15 @@ if [ $# -lt 1 ]; then
   exit 1
 fi
 
+BRANCH=$1
+
 # Target branch specified
 if [ $# -eq 2 ]; then
   TARGET_BRANCH="$2"
 fi
 
-BRANCH=$1
-
 if [ "$BRANCH" = "$TARGET_BRANCH" ]; then
-  echo "The source branch must be different from target branch"
+  echo "The source branch must be different from target branch ($TARGET_BRANCH)"
   exit 1
 fi
 
