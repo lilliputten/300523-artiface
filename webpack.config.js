@@ -1,16 +1,16 @@
 /** @desc Webpack configuration
  *  @since 2020.05.18, 12:00
- *  @changed 2020.05.18, 15:22
+ *  @changed 2020.05.26, 22:34
  */
 
 const fs = require('fs')
 const path = require('path')
-const dateformat = require('dateformat')
+// const dateformat = require('dateformat') // NOTE: Useing pre-generated timestamp from `package.json`
 
 const webpack = require('webpack')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const WebpackBuildNotifierPlugin = require('webpack-build-notifier') // https://www.npmjs.com/package/webpack-build-notifier
-// const CopyWebpackPlugin = require('copy-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 const CreateFileWebpack = require('create-file-webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
@@ -30,11 +30,11 @@ module.exports = (env, argv) => {
   const isWatch = !!argv.watch
   const isDev = (/* isDevServer || */ mode === 'development')
   const isProd = !isDev // mode === 'production'
-  const useDevTool = true && (isDev || isDevServer) // Need server restart
-  const minimizeBundles = true && isProd // To minimize production bundles
+  const useDevTool = true // && (isDev || isDevServer) // Need server restart
+  const minimizeBundles = false && isProd // To minimize production bundles
   // // const stripDebugger = true // Comment out all the `debugger` statements from source code
-  const preprocessBundles = true && isProd // To minimize production bundles
-  const sourceMaps = !preprocessBundles // To minimize production bundles
+  // const preprocessBundles = true && isProd // To minimize production bundles
+  const sourceMaps = false // !preprocessBundles // To minimize production bundles
   // const extemeUglify = false // Use mangling (WARNING: May broke some code! Don't use without testing!)
   const DEBUG = true && (isDev || isDevServer)
   const rootPath = path.resolve(__dirname)
@@ -65,28 +65,52 @@ module.exports = (env, argv) => {
   const pkgConfig = require(pkgFile)
 
   // Project version, application title
-  const { name: projectName, version } = pkgConfig
+  const {
+    name: projectName,
+    version,
+    timestamp,
+    timetag,
+  } = pkgConfig
 
-  // Date stamps
-  const dateStringFormat = 'yyyy.mm.dd HH:MM:ss'
-  const dateTagFormat = 'yymmdd-HHMM'
-  const now = new Date()
-  const dateString = dateformat(now, dateStringFormat)
-  const dateTag = dateformat(now, dateTagFormat)
-  const buildTagFile = 'build-tag.txt'
-  const buildTag = fs.existsSync(buildTagFile) && fs.readFileSync(buildTagFile, 'utf8') || dateTag
+  // TODO: Load version, timestamp, timetag from generated files
+
+  // // Generate time stamps...
+  // const dateStringFormat = 'yyyy.mm.dd HH:MM:ss'
+  // const dateTagFormat = 'yymmdd-HHMM'
+  // const now = new Date()
+  // const timestamp = dateformat(now, dateStringFormat)
+  // const timetag = dateformat(now, dateTagFormat)
+  // const buildTagFile = 'build-timetag.txt'
+  // const buildTag = fs.existsSync(buildTagFile) && fs.readFileSync(buildTagFile, 'utf8') || timetag
+
+  const CopyWebpackPluginOptions = {
+    globOptions: {
+      ignore: [
+        // Temp files
+        '**/*.tmp',
+        '**/*.bak',
+        '**/*.sw?',
+        // Misc backup files
+        '**/*_',
+        '**/*~',
+        // Auxilary files
+        '**/*.diff',
+        '**/*.orig',
+      ],
+    },
+  }
 
   const htmlFilename = 'index.html'
 
-  const buildType = isDist ? 'dist' : 'demo'
+  const buildType = isDevServer ? 'server' : isDist ? 'build' : 'demo'
   const buildMode = isProd ? 'prod' : 'dev'
   const buildModePostfix = isDev ? '-dev' : ''
   const buildFolder = buildType + buildModePostfix
   const buildPath = path.resolve(rootPath, buildFolder)
 
-  const versionTag = [ // Contruct general-purpose build tag
+  const buildTag = [ // Construct general-purpose build tag
     'v.' + version,
-    buildTag,
+    timetag,
     buildType,
     buildMode,
     THEME,
@@ -95,7 +119,7 @@ module.exports = (env, argv) => {
   const useHashes = false // NOTE: Not works with pseudo-dynamic bundles loading method (with hardcoded urls)
   const bundleName = ({ ext, name, dir } = {}) => (dir || 'js/') + (name || '[name]') + (useHashes && !isWatch && !isDevServer ? '-[contenthash:8]' : '') + (ext || '.js')
 
-  const jsEntryFile = isDist ? 'dist.js' : 'demo.jsx' // js source
+  const jsEntryFile = isDist ? 'build.js' : 'demo.jsx' // js source
 
   const libOutput = isDist ? { // Additional webpack output for library mode
     library: projectName,
@@ -137,6 +161,7 @@ module.exports = (env, argv) => {
   ].filter(x => x)
 
   const passParameters = { // Pass parameters to code (js & styles)
+    rootPath,
     bodyBgColor: cssConfig.bodyBgColor,
     THEME,
     THEME_FILE,
@@ -149,17 +174,15 @@ module.exports = (env, argv) => {
     isDev,
     isProd,
     isWatch,
-    dateTag,
+    timetag,
     buildTag,
-    versionTag,
-    dateString,
+    timestamp,
     version,
   }
 
   // Stats waiting only json on output...
   const debugModes = [
-    versionTag,
-    // dateTag,
+    buildTag,
     // mode,
     // 'ip:' + myIP,
     isDist && 'Dist',
@@ -170,9 +193,9 @@ module.exports = (env, argv) => {
     isDev && 'Development',
     isProd && 'Production',
     useDevTool && 'DevTool',
-    // minimizeBundles && 'minimize',
+    minimizeBundles && 'minimize',
     // preprocessBundles && 'preprocess',
-    // sourceMaps && 'sourceMaps',
+    sourceMaps && 'sourceMaps',
     // extemeUglify && 'extemeUglify',
     DEBUG && 'DEBUG',
     THEME && 'theme:' + THEME,
@@ -255,28 +278,14 @@ module.exports = (env, argv) => {
       }),
       new webpack.DefinePlugin({ // Pass constants to source code
         'process.env': Object.entries(passParameters).reduce((data, [key, val]) => {
-          return { data, [key]: JSON.stringify(val) };
+          return { ...data, [key]: JSON.stringify(val) }
         }, {})
       }),
-      /* // UNUSED: CopyWebpackPlugin
-       * new CopyWebpackPlugin( // Simply copies the files over
-       *   [
-       *     // !isProd && { from: debugDataPath, to: './debug-data/' }, // Dev-server-only data stubs
-       *     { from: 'html', to: './' },
-       *     { from: 'favicon.ico', to: './favicon.ico' },
-       *     // TODO: Assets copy/build rules!
-       *     // { from: srcCss, to: buildPath },
-       *     // { from: dirImg, to: './img/' },
-       *   ].filter(x => x),
-       *   {
-       *     ignore: [
-       *       '**[>{.tmp,.sw?,.ORIG.*}', // Temp files
-       *       '**[>{_,~}', // Misc backup files
-       *       '*.{diff,orig}', // Auxilary files
-       *     ],
-       *   },
-       * ),
-       */
+      !isDevServer && new CopyWebpackPlugin({ // Simply copies the files over
+        patterns: [
+          { from: 'build-static', to: './', ...CopyWebpackPluginOptions },
+        ].filter(x => x),
+      }),
       isDemo && new HtmlWebpackPlugin({
         template: path.resolve(rootPath, 'html', htmlFilename),
         filename: htmlFilename,
@@ -284,32 +293,17 @@ module.exports = (env, argv) => {
         inject: true,
         minimify: minimizeBundles,
         // title: appTitle, // Not using; see i18n-specific appTitle** variables above (passed to js code env)
-        templateParameters: Object.assign({}, cssConfig, {
-          THEME,
-          // bodyBgColor: cssConfig.bodyBgColor,
-          rootPath,
-          // appTitle, // Not using; see i18n-specific appTitle** variables above (passed to js code env)
-          dateString,
-          dateTag,
-          buildTag,
-          version,
-        }),
+        templateParameters: Object.assign({}, cssConfig, passParameters),
       }),
-      /* TODO:
-       * new webpack.DefinePlugin // Pass constants to source code
-       * new CopyWebpackPlugin
-       * new HtmlWebpackPlugin
-       * new webpack.NoEmitOnErrorsPlugin
-       */
       !cssHotReload && new ExtractCssPlugin({ // Extract css
         filename: isDist ? 'styles.css' : bundleName({ ext: '.css', dir: 'css/' }),
       }),
       // new webpack.NoEmitOnErrorsPlugin(), // ???
-      new CreateFileWebpack({ // Create build tag file // TODO: Pre-generate & copy on build?
+      !isDevServer && new CreateFileWebpack({ // Create build tag file // TODO: Pre-generate & copy on build?
         // path: './',
         path: buildPath,
         fileName: 'version.txt',
-        content: versionTag,
+        content: buildTag,
       }),
       new WebpackBuildNotifierPlugin({
         // title, logo,
@@ -318,7 +312,7 @@ module.exports = (env, argv) => {
     ].filter(x => x),
     optimization: {
       // Minimize if not preprocess and minimize flags configured
-      minimize: preprocessBundles || minimizeBundles,
+      minimize: /* preprocessBundles || */ minimizeBundles,
       minimizer: [
         new UglifyJsPlugin({
           test: /\.js$/i,

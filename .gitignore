@@ -9,14 +9,13 @@ node_modules
 *.session
 
 # Builds
-/dist/
-/dist-dev/
-/demo/
-/demo-dev/
+/build*/
+/demo*/
 /publish/
 
 # Temp project files
 .webpack-stats.json
+.gitmodules
 tags
 .*.sw?
 *.tmp

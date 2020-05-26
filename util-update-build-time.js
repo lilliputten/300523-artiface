@@ -11,5 +11,5 @@ const buildTime = dateformat(now, 'yyyy.mm.dd, HH:MM')
 
 console.log('Updating build tag/time: ' + buildTag + ' / ' + buildTime)
 
-fs.writeFileSync('build-tag.txt', buildTag, 'utf8')
-fs.writeFileSync('build-time.txt', buildTime, 'utf8')
+fs.writeFileSync('build-timetag.txt', buildTag, 'utf8')
+fs.writeFileSync('build-timestamp.txt', buildTime, 'utf8')
