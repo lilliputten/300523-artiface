@@ -1,3 +1,10 @@
 .Hello {
   border: 1px solid red;
+  &-Image {
+    img {
+      $maxSize: 64px;
+      max-width: $maxSize;
+      max-height: $maxSize;
+    }
+  }
 }

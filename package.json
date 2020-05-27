@@ -1,9 +1,9 @@
 {
   "name": "ArtiFace",
   "description": "Arti Webpack UI Library",
-  "version": "0.0.6",
-  "timestamp": "2020.05.26, 22:32",
-  "timetag": "200526-2232",
+  "version": "0.0.9",
+  "timestamp": "2020.05.27, 22:51",
+  "timetag": "200527-2251",
   "main": "dist/bundle.js",
   "keywords": [
     "UI",
@@ -16,6 +16,7 @@
     "null-loader": "^3.0.0"
   },
   "dependencies": {
+    "@bem-react/classname": "^1.5.8",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
   },
@@ -43,6 +44,7 @@
     "es5-shim": "^4.5.14",
     "eslint": "^7.0.0",
     "eslint-plugin-react": "^7.20.0",
+    "file-loader": "^6.0.0",
     "html-webpack-plugin": "^4.3.0",
     "jest": "^24.8.0",
     "mini-css-extract-plugin": "^0.7.0",

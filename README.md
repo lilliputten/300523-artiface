@@ -1,5 +1,11 @@
 # Webpack-react-cosmos test project
 
+## Install
+
+```shell
+npm i -S git+https://github.com/lilliputten/200523-artiface-dist.git
+```
+
 ## Cosmos links
 
 - [react-cosmos/react-cosmos: A dev environment for building scalable, high-quality user interfaces](https://github.com/react-cosmos/react-cosmos#getting-started)

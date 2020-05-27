@@ -57,12 +57,12 @@ module.exports = (env, argv) => {
   process.env.THEME = THEME
   process.env.THEME_FILE = THEME_FILE
 
-  const isDist = !!env.DIST
-  const isDemo = !isDist
+  const isBuild = !!env.DIST
+  const isDemo = !isBuild
 
   // Project configuration
-  const pkgFile = path.resolve(rootPath, 'package')
-  const pkgConfig = require(pkgFile)
+  const packageFile = path.resolve(rootPath, 'package')
+  const pkgConfig = require(packageFile)
 
   // Project version, application title
   const {
@@ -93,6 +93,7 @@ module.exports = (env, argv) => {
         // Misc backup files
         '**/*_',
         '**/*~',
+        '**/*UNUSED',
         // Auxilary files
         '**/*.diff',
         '**/*.orig',
@@ -102,7 +103,7 @@ module.exports = (env, argv) => {
 
   const htmlFilename = 'index.html'
 
-  const buildType = isDevServer ? 'server' : isDist ? 'build' : 'demo'
+  const buildType = isDevServer ? 'server' : isBuild ? 'build' : 'demo'
   const buildMode = isProd ? 'prod' : 'dev'
   const buildModePostfix = isDev ? '-dev' : ''
   const buildFolder = buildType + buildModePostfix
@@ -116,12 +117,58 @@ module.exports = (env, argv) => {
     THEME,
   ].join('-')
 
+  const buildLibName = 'ArtiFaceDist'
+
   const useHashes = false // NOTE: Not works with pseudo-dynamic bundles loading method (with hardcoded urls)
   const bundleName = ({ ext, name, dir } = {}) => (dir || 'js/') + (name || '[name]') + (useHashes && !isWatch && !isDevServer ? '-[contenthash:8]' : '') + (ext || '.js')
 
-  const jsEntryFile = isDist ? 'build.js' : 'demo.jsx' // js source
+  const mirrorStaticFolders = false // NOTE: Mirror static folders structure (eg: `.../bootstrap/distr/...`)
+  const staticFolderUrl = 'assets' // Relative to css folder
 
-  const libOutput = isDist ? { // Additional webpack output for library mode
+  const fileLoaderOptions = {
+    // limit: 1, // Extract all resources
+    // // Simple name (plain folder)
+    // // name: (isDevServer || isDevServer) ? '[path][name].[ext]' : staticFolderUrl + '/[name]-[contenthash:8].[ext]',
+    // name: (isDevServer || isDevServer) ? '[path][name].[ext]' : staticFolderUrl + '/[name]-[hash:8].[ext]',
+    // Mirroring static files folders
+    // publicPath: '..', // Root relative to 'css' folder
+    name: (file) => {
+      let name = file
+      if (isDevServer /* || isDev */) {
+        name = '[path][name].[ext]'
+      }
+      else if (mirrorStaticFolders) {
+        if (name.startsWith(rootPath)) {
+          name = name.substr(rootPath.length)
+        }
+        name = staticFolderUrl + name
+          .replace(/\\/g, '/')
+          // .replace(/^\//, '')
+          .replace(/^\/node_modules/, '')
+          .replace(/([^/]+)$/, '[name]-[hash:8].[ext]')
+          // .replace(/([^/]+)$/, '[name].[ext]')
+      }
+      else {
+        name = staticFolderUrl + '/[name]-[hash:8].[ext]'
+      }
+      return name
+    },
+  }
+
+  const jsEntryFile = isBuild ? 'build.js' : 'demo.jsx' // js source
+
+  // Create build package file contents
+  const getBuildPackageConfig = () => {
+    const buildPkg = { ...pkgConfig }
+    delete buildPkg.unusedDependencies
+    delete buildPkg.devDependencies
+    delete buildPkg.scripts
+    buildPkg.main = jsEntryFile
+    buildPkg.name = buildLibName
+    return buildPkg
+  }
+
+  const libOutput = isBuild ? { // Additional webpack output for library mode
     library: projectName,
     libraryTarget: 'commonjs2',
     filename: 'bundle.js',
@@ -168,7 +215,7 @@ module.exports = (env, argv) => {
     DEBUG,
     DEV_DEBUG: DEBUG && env.DEV_DEBUG, // Extra debug level (on developers' machine, usually from `webpack.env.local.js` or specific npm script command)
     DEV_SERVER: DEBUG && env.DEV_SERVER, // Debug server
-    isDist,
+    isBuild,
     isDemo,
     isDevServer,
     isDev,
@@ -185,7 +232,7 @@ module.exports = (env, argv) => {
     buildTag,
     // mode,
     // 'ip:' + myIP,
-    isDist && 'Dist',
+    isBuild && 'Dist',
     isDemo && 'Demo',
     isCosmos && 'Cosmos',
     isDevServer && 'DevServer',
@@ -204,6 +251,12 @@ module.exports = (env, argv) => {
     console.log('Building:', debugModes) // eslint-disable-line no-console
   }
 
+  const externalModules = isBuild && [
+    'react',
+    'react-dom',
+    '@bem-react/classname',
+  ]
+
   return {
     mode,
     entry: path.resolve(srcPath, jsEntryFile),
@@ -218,9 +271,9 @@ module.exports = (env, argv) => {
       filename: bundleName(), // 'js/bundle.js',
       ...libOutput
     },
-    externals: {
-      react: true,
-    },
+    externals: externalModules && externalModules.reduce((result, module) => {
+      return { ...result, [module]: true }
+    }, {}) || {},
     devServer: {
       hot: hotReload,
       index: htmlFilename,
@@ -262,9 +315,11 @@ module.exports = (env, argv) => {
           },
         ],
       },
-      /* TODO:
-       * resources (Not for demo)
-       */
+      { // resources
+        test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
+        loader: require.resolve('file-loader'),
+        options: fileLoaderOptions,
+      },
     ]},
     plugins: [
       !isDevServer && !isStats && new CleanWebpackPlugin({ // Cleanup before build
@@ -296,14 +351,18 @@ module.exports = (env, argv) => {
         templateParameters: Object.assign({}, cssConfig, passParameters),
       }),
       !cssHotReload && new ExtractCssPlugin({ // Extract css
-        filename: isDist ? 'styles.css' : bundleName({ ext: '.css', dir: 'css/' }),
+        filename: isBuild ? 'styles.css' : bundleName({ ext: '.css', dir: 'css/' }),
       }),
       // new webpack.NoEmitOnErrorsPlugin(), // ???
-      !isDevServer && new CreateFileWebpack({ // Create build tag file // TODO: Pre-generate & copy on build?
-        // path: './',
+      isBuild && new CreateFileWebpack({ // Create build tag file
         path: buildPath,
         fileName: 'version.txt',
         content: buildTag,
+      }),
+      isBuild && new CreateFileWebpack({ // Create build package.json file
+        path: buildPath,
+        fileName: 'package.json',
+        content: JSON.stringify(getBuildPackageConfig(), null, 2),
       }),
       new WebpackBuildNotifierPlugin({
         // title, logo,
@@ -340,69 +399,7 @@ module.exports = (env, argv) => {
         }),
         new OptimizeCSSAssetsPlugin({}),
       ],
-      /* // UNUSED: splitChunks
-       * splitChunks: {
-       *   cacheGroups: {
-       *     // chunks: 'all',
-       *     // minSize: 0,
-       *     // maxSize: 0,
-       *     // minChunks: 1,
-       *     // maxAsyncRequests: 5,
-       *     // maxInitialRequests: 3,
-       *     // automaticNameDelimiter: '-',
-       *     // name: true,
-       *     default: false,
-       *     vendors: false,
-       *     vendor: {
-       *       name: 'vendor',
-       *       chunks: 'all',
-       *       test: /node_modules/,
-       *       priority: 20,
-       *     },
-       *     common: {
-       *       name: 'common',
-       *       minChunks: 2,
-       *       chunks: 'all',
-       *       priority: 10,
-       *       reuseExistingChunk: true,
-       *       enforce: true,
-       *     },
-       *   },
-       * },
-       */
     },
-    /* // WebUi optimization mode
-     * optimization: {
-     *   // XXX 2019.06.03, 12:41 -- Minimize properties added by Igor
-     *   minimize: isProd,
-     *   minimizer: [
-     *     new TerserPlugin({}),
-     *     new OptimizeCSSAssetsPlugin({}),
-     *   ],
-     *   splitChunks: {
-     *     chunks: 'all',
-     *     minSize: 30000,
-     *     maxSize: 0,
-     *     minChunks: 1,
-     *     maxAsyncRequests: 5,
-     *     maxInitialRequests: 3,
-     *     automaticNameDelimiter: '~',
-     *     name: true,
-     *     cacheGroups: {
-     *       vendors: {
-     *         name: 'vendor',
-     *         test: /[\\/]node_modules[\\/]/,
-     *         priority: -10,
-     *         reuseExistingChunk: true,
-     *       },
-     *       default: {
-     *         minChunks: 2,
-     *         priority: -20,
-     *       },
-     *     },
-     *   },
-     * },
-     */
     stats: {
       // Nice colored output
       colors: true,
