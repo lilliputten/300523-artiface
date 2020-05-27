@@ -7,6 +7,15 @@ import Image from './img/LockColor2.svg'
 
 const cnHello = cn('Hello')
 
+/*DEBUG: Test one-string debug */ console.log('One-string debug output')
+
+/*DEBUG-BEGIN: Test multiline debug */
+console.log('Multiline debug output')
+debugger
+/*DEBUG-END*/
+
+/*NO-DEBUG console.log('No-debug output'); */
+
 export const Hello = ({ greeting = 'Greeting', name = 'Name' }) => {
   return (
     <div className={cnHello()}>

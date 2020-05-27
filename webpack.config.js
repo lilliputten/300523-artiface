@@ -1,11 +1,11 @@
 /** @desc Webpack configuration
  *  @since 2020.05.18, 12:00
- *  @changed 2020.05.26, 22:34
+ *  @changed 2020.05.27, 23:48
  */
 
 const fs = require('fs')
 const path = require('path')
-// const dateformat = require('dateformat') // NOTE: Useing pre-generated timestamp from `package.json`
+// const dateformat = require('dateformat') // NOTE: Useing pre-generated timestamps from `package.json`
 
 const webpack = require('webpack')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
@@ -15,8 +15,8 @@ const CreateFileWebpack = require('create-file-webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 // const UglifyJS = require('uglify-js')
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
-// TODO: OptimizeCSSAssetsPlugin params (source map etc)
+// const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const WebpackFilePreprocessorPlugin = require('webpack-file-preprocessor-plugin')
 const ExtractCssPlugin = require('mini-css-extract-plugin')
 
 module.exports = (env, argv) => {
@@ -32,9 +32,8 @@ module.exports = (env, argv) => {
   const isProd = !isDev // mode === 'production'
   const useDevTool = true // && (isDev || isDevServer) // Need server restart
   const minimizeBundles = false && isProd // To minimize production bundles
-  // // const stripDebugger = true // Comment out all the `debugger` statements from source code
-  // const preprocessBundles = true && isProd // To minimize production bundles
-  const sourceMaps = false // !preprocessBundles // To minimize production bundles
+  const preprocessBundles = true && isProd // To minimize production bundles
+  const sourceMaps = true // !preprocessBundles // To minimize production bundles
   // const extemeUglify = false // Use mangling (WARNING: May broke some code! Don't use without testing!)
   const DEBUG = true && (isDev || isDevServer)
   const rootPath = path.resolve(__dirname)
@@ -155,6 +154,22 @@ module.exports = (env, argv) => {
     },
   }
 
+  const preprocessJs = (src) => {
+
+    // Preprocess DEBUG/DEBUG-BEGIN...DEBUG-END/NO-DEBUG statements
+    src = src
+      .replace(/(\/\*\s*DEBUG-BEGIN.*?)(\*\/[\s\S]*?\/\*)(.*?DEBUG-END\s*\*\/)/gm, (_match, begin, body, end) => {
+        body = body
+          .replace(/\/\*/g, '[>')
+          .replace(/\*\//g, '<]')
+        return begin + body + end
+      })
+      .replace(/\/\*\s*DEBUG\b(|[^-].*?)\*\//gm, '//DEBUG$1//') // /*DEBUG...*/
+      .replace(/(\/\*\s*NO-?DEBUG)(\s+)([\s\S]*?)(\s*\*\/)/gm, '$1$4$2$3') // TODO: Babelify code?
+
+    return src
+
+  }
   const jsEntryFile = isBuild ? 'build.js' : 'demo.jsx' // js source
 
   // Create build package file contents
@@ -353,6 +368,11 @@ module.exports = (env, argv) => {
       !cssHotReload && new ExtractCssPlugin({ // Extract css
         filename: isBuild ? 'styles.css' : bundleName({ ext: '.css', dir: 'css/' }),
       }),
+      isBuild && preprocessBundles && new WebpackFilePreprocessorPlugin({
+          debug: !isStats, // Prints processed assets if set to true (default: false)
+          pattern: /\.js$/,
+          process: preprocessJs
+      }),
       // new webpack.NoEmitOnErrorsPlugin(), // ???
       isBuild && new CreateFileWebpack({ // Create build tag file
         path: buildPath,
@@ -397,7 +417,12 @@ module.exports = (env, argv) => {
             // beautify: false,
           },
         }),
-        new OptimizeCSSAssetsPlugin({}),
+        // new OptimizeCSSAssetsPlugin({
+        //   cssProcessorPluginOptions: {
+        //     sourceMap: sourceMaps,
+        //     // preset: ['default', { discardComments: { removeAll: true } }],
+        //   },
+        // }),
       ],
     },
     stats: {
