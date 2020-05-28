@@ -4,8 +4,7 @@
  *  @changed 2020.05.27, 22:58
  */
 
-import { Hello } from './demo/Hello.jsx'
+export config from 'config'
 
-export default {
-  Hello,
-}
+// export { Hello } from './demo/Hello.jsx'
+export Hello from './demo/Hello.jsx'

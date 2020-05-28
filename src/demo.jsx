@@ -12,7 +12,14 @@ import 'react-app-polyfill/stable'
 import React from 'react'
 import { render } from 'react-dom'
 
-import { Hello } from './demo/Hello.jsx'
+import {
+  // config,
+  Hello,
+} from './build'
+// import Hello from './demo/Hello.jsx'
+
+// console.log(config.userAgent)
+// debugger
 
 // Root styles
 // import './index.pcss'

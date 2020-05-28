@@ -1,4 +1,7 @@
 import React from 'react'
-import { Hello } from './Hello'
+import Hello from './Hello'
 
-export default <Hello greeting="Aloha" name="Alexa" />
+export default {
+  basic: <Hello />,
+  aloha: <Hello greeting="Aloha" name="Alexa" />,
+}

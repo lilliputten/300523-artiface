@@ -5,7 +5,6 @@
 
 const fs = require('fs')
 const path = require('path')
-// const dateformat = require('dateformat') // NOTE: Useing pre-generated timestamps from `package.json`
 
 const webpack = require('webpack')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
@@ -73,14 +72,16 @@ module.exports = (env, argv) => {
 
   // TODO: Load version, timestamp, timetag from generated files
 
-  // // Generate time stamps...
-  // const dateStringFormat = 'yyyy.mm.dd HH:MM:ss'
-  // const dateTagFormat = 'yymmdd-HHMM'
-  // const now = new Date()
-  // const timestamp = dateformat(now, dateStringFormat)
-  // const timetag = dateformat(now, dateTagFormat)
-  // const buildTagFile = 'build-timetag.txt'
-  // const buildTag = fs.existsSync(buildTagFile) && fs.readFileSync(buildTagFile, 'utf8') || timetag
+  /* // UNUSED: Generate time stamps...
+   * const dateStringFormat = 'yyyy.mm.dd HH:MM:ss'
+   * const dateTagFormat = 'yymmdd-HHMM'
+   * const now = new Date()
+   * const dateformat = require('dateformat') // NOTE: Useing pre-generated timestamps from `package.json`
+   * const timestamp = dateformat(now, dateStringFormat)
+   * const timetag = dateformat(now, dateTagFormat)
+   * const buildTagFile = 'build-timetag.txt'
+   * const buildTag = fs.existsSync(buildTagFile) && fs.readFileSync(buildTagFile, 'utf8') || timetag
+   */
 
   const CopyWebpackPluginOptions = {
     globOptions: {
@@ -102,6 +103,7 @@ module.exports = (env, argv) => {
 
   const htmlFilename = 'index.html'
 
+  // Build profile params...
   const buildType = isDevServer ? 'server' : isBuild ? 'build' : 'demo'
   const buildMode = isProd ? 'prod' : 'dev'
   const buildModePostfix = isDev ? '-dev' : ''
@@ -190,6 +192,7 @@ module.exports = (env, argv) => {
     auxiliaryComment: 'Test Comment', // ???
   } : {}
 
+  // Common used style variables
   const cssConfigFile = path.resolve(srcPath, 'config', 'css.js')
   const cssConfig = fs.existsSync(cssConfigFile) ? require(cssConfigFile) : {}
 
@@ -222,22 +225,22 @@ module.exports = (env, argv) => {
     require('postcss-reporter'),
   ].filter(x => x)
 
-  const passParameters = { // Pass parameters to code (js & styles)
+  const passParameters = { // Pass parameters to code (to js & pcss)
     rootPath,
     bodyBgColor: cssConfig.bodyBgColor,
     THEME,
     THEME_FILE,
     DEBUG,
     DEV_DEBUG: DEBUG && env.DEV_DEBUG, // Extra debug level (on developers' machine, usually from `webpack.env.local.js` or specific npm script command)
-    DEV_SERVER: DEBUG && env.DEV_SERVER, // Debug server
+    // DEV_SERVER: DEBUG && env.DEV_SERVER, // Debug server
     isBuild,
     isDemo,
     isDevServer,
     isDev,
     isProd,
     isWatch,
-    timetag,
     buildTag,
+    timetag,
     timestamp,
     version,
   }
@@ -274,10 +277,20 @@ module.exports = (env, argv) => {
 
   return {
     mode,
+    devtool: useDevTool && 'source-map', // 'cheap-module-source-map',
     entry: path.resolve(srcPath, jsEntryFile),
     performance: { hints: false },
     watch: isWatch,
-    devtool: useDevTool && 'source-map', // 'cheap-module-source-map',
+    watchOptions: {
+      ignored: [
+        'node_modules/**',
+        'src/**/.*.sw?',
+        'src/**/*.bak',
+        'src/**/*_',
+        'src/**/*~',
+        'src/**/*UNUSED',
+      ],
+    },
     resolve: {
       extensions: ['.js', '.jsx'],
     },
