@@ -14,17 +14,25 @@ import { render } from 'react-dom'
 
 import {
   // config,
+  FormItemDummy,
   Hello,
 } from './build'
+
 // import Hello from './demo/Hello.jsx'
 
-// console.log(config.userAgent)
+// console.log(config.userAgent, FormItemDummy)
 // debugger
 
 // Root styles
 // import './index.pcss'
 
-render(
-  <Hello />,
-  document.getElementById('root'),
+const demoContent = (
+  <div className="demo">
+    <Hello />
+    <FormItemDummy>
+      Test
+    </FormItemDummy>
+  </div>
 )
+
+render(demoContent, document.getElementById('root'))

@@ -1,0 +1,12 @@
+@define-mixin FormItemMixin {
+  display: inline-block;
+  box-sizing: border-box;
+  &_solid {
+    height: $(formItemHeight)px;
+    line-height: $(formItemHeight)px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  /* @mixin debug; */
+}

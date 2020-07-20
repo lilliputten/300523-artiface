@@ -1,0 +1,146 @@
+/** @module FormItemDummy.styles
+ *  @class FormItemDummy
+ *  @since 2020.07.20, 19:24
+ *  @changed 2020.07.20, 19:24
+ */
+
+.FormItemDummy {
+  cursor: default;
+  border: 1px solid transparent; // Hide default css frame for `button` tags (if applied)
+  &.FormItem_hoverable:not(.FormItem_disabled) {
+    cursor: pointer;
+  }
+
+  padding: 0 $(formItemInnerPaddingH)px;
+
+  &-Icon {
+    color: $neutralColor; // Default icon color
+  }
+  &-Text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    // max-width: 100%;
+  }
+  &-Icon + &-Text { // Spacing between icon and text
+    margin-left: $(formItemInnerPaddingH)px;
+  }
+
+  &_plain.FormItem_hovered {
+    ^&-Text {
+      text-decoration: underline;
+    }
+    ^&-Icon {
+      color: color($neutralColor shade(5));
+    }
+  }
+
+  // &_fullWidth {
+  //   display: block;
+  // }
+
+  position: relative;
+  &:before {
+    border-radius: @calc($formItemBorderRadius - 1)px;
+    position: absolute;
+    display: block;
+    left: 1px;
+    top: 1px;
+    right: 1px;
+    bottom: 1px;
+    content: '';
+    // z-index: 0;
+  }
+  &-Text, &-Icon {
+    display: block;
+    // display: inline-block;
+    position: relative;
+    // z-index: 1;
+  }
+  &_hasIcon {
+    min-width: @calc($defaultIconSize + $formItemInnerPaddingH)px;
+  }
+  &_hasText&_hasIcon {
+    ^&-Icon {
+      position: absolute;
+    }
+    ^&-Text {
+      margin-left: @calc($defaultIconSize)px;
+    }
+  }
+
+  &_hasText&_hasIcon&_rightIcon {
+    ^&-Text {
+      margin-right: @calc($defaultIconSize)px;
+      margin-left: 0;
+    }
+    ^&-Icon {
+      position: absolute;
+      right: 0;
+      right: @calc($formItemInnerPaddingH)px;
+    }
+  }
+
+  &_style { // Button styles...
+
+    // Mixin params: $bgColor, $borderColor, $iconColor, $textColor
+    @define-mixin buttonStyle $bgColor, $borderColor: $formItemBorderColor, $iconColor: $neutralShadedColor, $textColor: $formItemTextColor {
+      background-color: $borderColor;
+      &:before {
+        background-color: $bgColor;
+      }
+      box-shadow: inset 0 0 0 1px $borderColor;
+      ^^&-Text {
+        color: $textColor;
+      }
+      ^^&-Icon {
+        color: $iconColor;
+      }
+      &.FormItem_hovered {
+        $hoveredBorderColor: color($borderColor shade(10));
+        background-color: $hoveredBorderColor;
+        &:before {
+          background-color: color($bgColor shade(7));
+        }
+        // box-shadow: inset 0 0 0 1px $hoveredBorderColor, 0 0 2px 2px color($borderColor alpha(50%));
+        box-shadow: inset 0 0 0 1px $hoveredBorderColor;
+        //, 0 0 2px 2px color($borderColor alpha(50%));
+        ^^^&-Icon, ^^^&-Text {
+          opacity: .9;
+        }
+        // ^^^&-Icon {
+        //   // color: color($iconColor shade(10));
+        // }
+      }
+    }
+
+    &_default {
+      $bgColor: color($neutralLightColor tint(10));
+      $borderColor: $formItemBorderColor;
+      $iconColor: $neutralTintedDarkColor;
+      $textColor: #000;
+      @mixin buttonStyle $bgColor, $borderColor, $iconColor, $textColor;
+    }
+
+    &_primary {
+      $bgColor: $primaryColor;
+      // $borderColor: $formItemBorderColor;
+      $borderColor: color($primaryColor shade(10)); // $formItemBorderColor;
+      $textColor: $primaryContrastColor;
+      $iconColor: color($textColor alpha(.5));
+      @mixin buttonStyle $bgColor, $borderColor, $iconColor, $textColor;
+    }
+
+    &_secondary {
+      $bgColor: $secondaryColor;
+      $borderColor: color($secondaryColor shade(10)); // $formItemBorderColor;
+      $textColor: $secondaryContrastColor;
+      $iconColor: color($textColor alpha(.5));
+      @mixin buttonStyle $bgColor, $borderColor, $iconColor, $textColor;
+    }
+
+    // TODO: styles: error, warn, success, info
+  }
+
+  // TODO: States: `clicked`, `rightIcon`, `onlyIcon`, `largeIcon` (+large button), large sizes (`xl`, `xxl`?)
+
+}

@@ -15,7 +15,8 @@ const textColor = theme.textColor || '#444'
 const defaultTransitonTime = 250
 const defaultAnimateTimeout = 500
 
-module.exports = { // Common-used css variables...
+// module.exports = { // Common-used css variables...
+const cssConfig = { // Common-used css variables...
 
   THEME: THEME,
 
@@ -115,3 +116,26 @@ module.exports = { // Common-used css variables...
   // useGlobalClipping: true,
 
 }
+
+module.exports = Object.assign({}, cssConfig, { // Common-used css variables...
+
+  // Forms...
+
+  formItemHeight: 32, // px
+  formItemBorderRadius: 4, // px
+  formItemBorderColor: cssConfig.neutralColor,
+  formItemActorColor: cssConfig.neutralDarkColor,
+  formItemBgColor: '#fff',
+  formItemTextColor: cssConfig.defaultTextColor,
+  formItemPlaceholderColor: cssConfig.neutralColor,
+  formItemInnerPaddingH: 8,
+  formItemDisabledOpacity: .5,
+
+  formPlaceholderColor: '#ccc',
+
+  tableBorderWidth: 2,
+
+  defaultIconSize: 24,
+  smallIconSize: 16,
+
+})

@@ -277,6 +277,10 @@ module.exports = (env, argv) => {
     'react',
     'react-dom',
     '@bem-react/classname',
+    // TODO...
+    // 'es5-shim',
+    // 'react-app-polyfill',
+    // '@fortawesome/react-fontawesome',
   ]
 
   return {
