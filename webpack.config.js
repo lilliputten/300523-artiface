@@ -1,6 +1,6 @@
 /** @desc Webpack configuration
  *  @since 2020.05.18, 12:00
- *  @changed 2020.05.27, 23:48
+ *  @changed 2020.07.20, 15:56
  */
 
 const fs = require('fs')
@@ -172,15 +172,19 @@ module.exports = (env, argv) => {
     return src
 
   }
+
   const jsEntryFile = isBuild ? 'build.js' : 'demo.jsx' // js source
+
+  const bundleFile = 'bundle.js'
 
   // Create build package file contents
   const getBuildPackageConfig = () => {
     const buildPkg = { ...pkgConfig }
     delete buildPkg.unusedDependencies
     delete buildPkg.devDependencies
+    // TDDO 2020.07.20, 15:56 -- Use `bundleDependencies` instead `dependencies`.
     delete buildPkg.scripts
-    buildPkg.main = jsEntryFile
+    buildPkg.main = bundleFile
     buildPkg.name = buildLibName
     return buildPkg
   }
@@ -188,7 +192,7 @@ module.exports = (env, argv) => {
   const libOutput = isBuild ? { // Additional webpack output for library mode
     library: projectName,
     libraryTarget: 'commonjs2',
-    filename: 'bundle.js',
+    filename: bundleFile,
     auxiliaryComment: 'Test Comment', // ???
   } : {}
 
@@ -345,7 +349,11 @@ module.exports = (env, argv) => {
       },
       { // resources
         test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
-        loader: require.resolve('file-loader'),
+        // Using `url-loader` for library but `file-loader` for demo-server
+        // due to incorrect webpack `publicPath` resolving for library.
+        // See [How to ship assets?](https://github.com/webpack/webpack/issues/7353)
+        // TODO: M.b. here exists the solution for store library assets outside js code?
+        loader: isDevServer ? require.resolve('file-loader') : require.resolve('url-loader'),
         options: fileLoaderOptions,
       },
     ]},

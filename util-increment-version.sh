@@ -3,7 +3,7 @@
 # @changed 2020.05.27, 22:54
 
 VERSION_FILE="build-version.txt"
-BACKUP="#VERSION_FILE.bak"
+BACKUP="$VERSION_FILE.bak"
 
 echo "Version: `cat $VERSION_FILE`"
 

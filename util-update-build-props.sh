@@ -1,6 +1,6 @@
 #!/bin/sh
 # @desc Update version number & build timestamps
-# @changed 2020.05.26, 18:47
+# @changed 2020.07.20, 14:41
 
 node util-update-build-time.js
 

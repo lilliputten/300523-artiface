@@ -1,9 +1,35 @@
-# Webpack-react-cosmos test project
+# ARTI WebInterface library
 
 ## Install
 
 ```shell
 npm i -S git+https://github.com/lilliputten/200523-artiface-dist.git
+```
+
+## Build & publish cycle
+
+Increment patch version:
+
+```shell
+util-increment-version.sh
+```
+
+Update build info (build version, date/time stamp & tag):
+
+```shell
+util-update-build-props.sh
+```
+
+Build default target (usually `build-prod-default`, 'Build production library'):
+
+```shell
+npm run -s build
+```
+
+Update & push `publish` repository:
+
+```shell
+npm run -s publish
 ```
 
 ## Cosmos links
@@ -27,5 +53,5 @@ See documentation:
 See `react-cosmos-master/website/src` -- live-demo source.
 
 <!--
- @changed 2020.05.18, 15:36
+ @changed 2020.07.20, 14:38
 -->

@@ -19,7 +19,7 @@ module.exports = {
     ['@babel/preset-env', {
       targets: { ie: '11' },
       // useBuiltIns: 'usage', // NOTE: Causes over-transpiling (eg, for userAgent) and crashing in Chrome's DevTool with "Cannot assign to read only property 'exports' of object '#<Object>'" for config ES5 modules
-      corejs: 3,
+      // corejs: 3,
       loose: true,
     }],
     ['@babel/preset-react'],

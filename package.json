@@ -1,9 +1,10 @@
 {
   "name": "ArtiFace",
   "description": "Arti Webpack UI Library",
-  "version": "0.0.9",
-  "timestamp": "2020.05.27, 22:51",
-  "timetag": "200527-2251",
+  "NOTE": "All version and time stamp properties are updated automatically (see `util-update-build-props.sh`, `util-increment-version.sh`)!",
+  "version": "0.0.13",
+  "timestamp": "2020.07.20, 17:46",
+  "timetag": "200720-1746",
   "main": "dist/bundle.js",
   "keywords": [
     "UI",
@@ -72,6 +73,7 @@
     "stylelint": "^13.5.0",
     "stylelint-scss": "^3.17.2",
     "uglifyjs-webpack-plugin": "^2.2.0",
+    "url-loader": "^4.1.0",
     "webpack": "^4.43.0",
     "webpack-build-notifier": "^2.0.0",
     "webpack-bundle-analyzer": "^3.7.0",
