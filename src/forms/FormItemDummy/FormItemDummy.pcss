@@ -5,13 +5,24 @@
  */
 
 .FormItemDummy {
-  cursor: default;
+
+  @mixin FormItemMixin;
+
   border: 1px solid transparent; // Hide default css frame for `button` tags (if applied)
+  border-radius: @calc($formItemBorderRadius)px;
+  padding: 0 $(formItemInnerPaddingH)px;
+  // display: inline-block;
+
+  // &_fullWidth {
+  //   display: block;
+  // }
+
+  position: relative;
+
+  cursor: default;
   &.FormItem_hoverable:not(.FormItem_disabled) {
     cursor: pointer;
   }
-
-  padding: 0 $(formItemInnerPaddingH)px;
 
   &-Icon {
     color: $neutralColor; // Default icon color
@@ -25,34 +36,30 @@
     margin-left: $(formItemInnerPaddingH)px;
   }
 
-  &_plain.FormItem_hovered {
-    ^&-Text {
-      text-decoration: underline;
-    }
-    ^&-Icon {
-      color: color($neutralColor shade(5));
-    }
-  }
-
-  // &_fullWidth {
-  //   display: block;
+  // &_plain.FormItem_hovered {
+  //   ^&-Text {
+  //     text-decoration: underline;
+  //   }
+  //   ^&-Icon {
+  //     color: color($neutralColor shade(5));
+  //   }
   // }
 
-  position: relative;
-  &:before {
-    border-radius: @calc($formItemBorderRadius - 1)px;
-    position: absolute;
-    display: block;
-    left: 1px;
-    top: 1px;
-    right: 1px;
-    bottom: 1px;
-    content: '';
-    // z-index: 0;
-  }
+  // &:before {
+  //   border-radius: @calc($formItemBorderRadius - 1)px;
+  //   position: absolute;
+  //   display: block;
+  //   left: 1px;
+  //   top: 1px;
+  //   right: 1px;
+  //   bottom: 1px;
+  //   content: '';
+  //   // z-index: 0;
+  // }
+
   &-Text, &-Icon {
     display: block;
-    // display: inline-block;
+    display: inline-block;
     position: relative;
     // z-index: 1;
   }
@@ -84,11 +91,9 @@
 
     // Mixin params: $bgColor, $borderColor, $iconColor, $textColor
     @define-mixin buttonStyle $bgColor, $borderColor: $formItemBorderColor, $iconColor: $neutralShadedColor, $textColor: $formItemTextColor {
-      background-color: $borderColor;
-      &:before {
-        background-color: $bgColor;
-      }
-      box-shadow: inset 0 0 0 1px $borderColor;
+      border-color: $borderColor;
+      background-color: $bgColor;
+      // box-shadow: inset 0 0 0 1px $borderColor;
       ^^&-Text {
         color: $textColor;
       }
@@ -97,13 +102,9 @@
       }
       &.FormItem_hovered {
         $hoveredBorderColor: color($borderColor shade(10));
-        background-color: $hoveredBorderColor;
-        &:before {
-          background-color: color($bgColor shade(7));
-        }
+        border-color: $hoveredBorderColor;
+        background-color: color($bgColor shade(7));
         // box-shadow: inset 0 0 0 1px $hoveredBorderColor, 0 0 2px 2px color($borderColor alpha(50%));
-        box-shadow: inset 0 0 0 1px $hoveredBorderColor;
-        //, 0 0 2px 2px color($borderColor alpha(50%));
         ^^^&-Icon, ^^^&-Text {
           opacity: .9;
         }

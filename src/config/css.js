@@ -54,6 +54,15 @@ const cssConfig = { // Common-used css variables...
   neutralLightColor: '#e0e0e0',
   neutralExtraLightColor: '#f0f0f0',
 
+  // Layout colors...
+
+  bodyBgColor: theme.bodyBgColor || '#fff',
+  bodyTextColor: theme.bodyTextColor || '#333',
+  layoutBgColor: theme.layoutBgColor || '#f0f0f0',
+  layoutLightBgColor: theme.layoutLightBgColor || '#f7f7f7',
+
+  layoutBorderColor: theme.layoutBorderColor || '#ccc',
+
   // Fonts...
 
   defaultFont: theme.defaultFont || '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
@@ -117,12 +126,12 @@ const cssConfig = { // Common-used css variables...
 
 }
 
-module.exports = Object.assign({}, cssConfig, { // Common-used css variables...
+Object.assign(cssConfig, { // Form properties...
 
   // Forms...
 
   formItemHeight: 32, // px
-  formItemBorderRadius: 4, // px
+  formItemBorderRadius: 3, // px
   formItemBorderColor: cssConfig.neutralColor,
   formItemActorColor: cssConfig.neutralDarkColor,
   formItemBgColor: '#fff',
@@ -139,3 +148,5 @@ module.exports = Object.assign({}, cssConfig, { // Common-used css variables...
   smallIconSize: 16,
 
 })
+
+module.exports = cssConfig

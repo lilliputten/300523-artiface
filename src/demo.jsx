@@ -1,7 +1,7 @@
-/** @module index
- *  @desc App root entry point
- *  @since 2019.08.29, 10:28
- *  @changed 2019.09.09, 14:55
+/** @module demo
+ *  @desc Demo app entry point
+ *  @since 2020.05.19, 17:16
+ *  @changed 2020.05.27, 22:58
  */
 
 import 'es5-shim/es5-shim'
@@ -11,6 +11,15 @@ import 'react-app-polyfill/stable'
 
 import React from 'react'
 import { render } from 'react-dom'
+
+// import { cn } from '@bem-react/classname'
+
+// import { // Icons (regular)...
+// } from '@fortawesome/free-regular-svg-icons'
+import { // Icons (solid)...
+  faPlus,
+} from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import {
   // config,
@@ -23,13 +32,13 @@ import {
 // console.log(config.userAgent, FormItemDummy)
 // debugger
 
-// Root styles
-// import './index.pcss'
+// Demo app styles
+import './demo.pcss'
 
 const demoContent = (
   <div className="demo">
     <Hello />
-    <FormItemDummy>
+    <FormItemDummy icon={faPlus} style="default" className="DemoTest" focusable={false} >
       Test
     </FormItemDummy>
   </div>

@@ -277,10 +277,15 @@ module.exports = (env, argv) => {
     'react',
     'react-dom',
     '@bem-react/classname',
+    'es5-shim',
+    'react-app-polyfill',
+    '@fortawesome/fontawesome-free',
+    '@fortawesome/fontawesome-svg-core',
+    '@fortawesome/free-brands-svg-icons',
+    '@fortawesome/free-regular-svg-icons',
+    '@fortawesome/free-solid-svg-icons',
+    '@fortawesome/react-fontawesome',
     // TODO...
-    // 'es5-shim',
-    // 'react-app-polyfill',
-    // '@fortawesome/react-fontawesome',
   ]
 
   return {

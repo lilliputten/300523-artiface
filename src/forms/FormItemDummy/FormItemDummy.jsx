@@ -9,9 +9,9 @@ import React from 'react'
 // import connect from 'react-redux/es/connect/connect'
 import { cn } from '@bem-react/classname'
 
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import FormItemHOC from '../FormItemHOC'
 
-// import FormItem from '../FormItem' // UNUSED: Should be implemented as wrapper in composition setup
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import './FormItemDummy.pcss'
 
@@ -36,33 +36,28 @@ class FormItemDummy extends React.Component /** @lends @FormItemDummy.prototype 
     }
   }
 
-  /* UNUSED: getDerivedStateFromProps
-   * static getDerivedStateFromProps(props[> , state <]) { // ???
-   *   const {
-   *     plain,
-   *     style,
-   *     hasIcon,
-   *     hasText,
-   *     onlyIcon,
-   *     text,
-   *     icon,
-   *     children,
-   *     hoverable,
-   *     clickable,
-   *     checked,
-   *   } = props
-   *   const isPlain = !!(plain || style === 'plain')
-   *   return {
-   *     hoverable: (hoverable != null) ? hoverable : true,
-   *     clickable: (clickable != null) ? clickable : true,
-   *     checked,
-   *     hasIcon: !!(hasIcon || icon),
-   *     hasText: !onlyIcon && !!(hasText || text || children),
-   *     plain: isPlain,
-   *     framed: !isPlain,
-   *   }
-   * }
-   */
+  static getDerivedStateFromProps(props/* , state */) { // ???
+    const {
+      // plain,
+      // style,
+      hasIcon,
+      hasText,
+      onlyIcon,
+      text,
+      icon,
+      children,
+      // hoverable,
+      // clickable,
+      // checked,
+    } = props
+    return {
+      // hoverable: (hoverable != null) ? hoverable : true,
+      // clickable: (clickable != null) ? clickable : true,
+      // checked,
+      hasIcon: !!(hasIcon || icon),
+      hasText: !onlyIcon && !!(hasText || text || children),
+    }
+  }
 
   getClassName() {
     // TODO: Refactor properties!
@@ -73,24 +68,27 @@ class FormItemDummy extends React.Component /** @lends @FormItemDummy.prototype 
       rightIcon,
       style,
       fullWidth,
-      checked,
+      // checked,
       type,
-      plain,
+      // plain,
+    } = this.props
+    const {
       hasIcon,
       hasText,
-    } = this.props
+    } = this.state
     const classList = cnFormItemDummy({
-        id,
-        style,
-        fullWidth,
-        checked,
-        plain,
-        hasIcon,
-        hasText,
-        onlyIcon,
-        largeIcon,
-        rightIcon,
-        type,
+      id,
+      style,
+      fullWidth,
+      // checked,
+      // plain,
+      hasIcon,
+      hasText,
+      onlyIcon,
+      largeIcon,
+      rightIcon,
+      type,
+      solid: true,
     }, [this.props.className])
     return classList
   }
@@ -113,47 +111,58 @@ class FormItemDummy extends React.Component /** @lends @FormItemDummy.prototype 
   render() {
 
     const {
-      // id,
+      id,
       // name,
       children,
       text,
       tag,
       type,
       title,
+      icon,
+      setDomRef,
+      // faIcon,
       // hasIcon,
       // hasText,
-      // icon,
       // onClick,
     } = this.props
+    const {
+      hasIcon,
+      hasText,
+    } = this.state
 
-    /* // UNUSED: icon & text
-     * const iconElem = hasIcon && (
-     *   <span key="Icon" className={cnFormItemDummy('Icon')}>
-     *     <FontAwesomeIcon className={cnFormItemDummy('IconImg')} icon={icon} />
-     *   </span>
-     * )
-     * const textElem = hasText && (
-     *   <span key="Text" className={cnFormItemDummy('Text')}>
-     *     {text || children}
-     *   </span>
-     * )
-     */
+    // Create fortawesome icon element if passed icon image (svg icon)
+    const iconImg = (icon && icon.iconName) ? <FontAwesomeIcon className={cnFormItemDummy('IconImg')} icon={icon} /> : icon
+    const iconElem = hasIcon && (
+      <span key="Icon" className={cnFormItemDummy('Icon')}>
+        {iconImg}
+      </span>
+    )
+
+    // Text element
+    const textElem = hasText && (
+      <span key="Text" className={cnFormItemDummy('Text')}>
+        {text || children}
+      </span>
+    )
 
     // const basicRenderProps = this.getRenderProps() // Get from props not from overrided `super`
     const renderProps = {
       // ...basicRenderProps,
+      id,
+      className: this.getClassName(),
       title,
       type,
       onClick: this.onClick,
+      ref: setDomRef,
     }
 
-    const content = children || text
+    const content = [ iconElem, textElem ] // children || text
 
     const tagName = tag || 'div'
-    const element = React.createElement(tagName, renderProps, content) // [ iconElem, textElem ])
+    const element = React.createElement(tagName, renderProps, content)
     return element
   }
 
 }
 
-export default FormItemDummy
+export default FormItemHOC(FormItemDummy)
