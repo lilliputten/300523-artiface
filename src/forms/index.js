@@ -6,13 +6,13 @@
 
 // Form elements...
 
-export FormItemDummy from './FormItemDummy'
+export FormItemDummy from './FormItemDummy' // Demo element
+
+export FormButton from './FormButton'
 
 // export FormGroup from './FormGroup'
 // export FormLabeledGroup from './FormLabeledGroup'
 // export FormItem from './FormItem'
-//
-// export FormButton from './FormButton'
 //
 // export FormText from './FormText'
 // export FormLabel from './FormLabel'

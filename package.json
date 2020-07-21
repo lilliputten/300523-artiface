@@ -2,9 +2,9 @@
   "name": "ArtiFace",
   "description": "Arti Webpack UI Library",
   "NOTE": "All version and time stamp properties are updated automatically (see `util-update-build-props.sh`, `util-increment-version.sh`)!",
-  "version": "0.0.13",
-  "timestamp": "2020.07.20, 17:46",
-  "timetag": "200720-1746",
+  "version": "0.0.14",
+  "timestamp": "2020.07.21, 20:26",
+  "timetag": "200721-2026",
   "main": "dist/bundle.js",
   "keywords": [
     "UI",

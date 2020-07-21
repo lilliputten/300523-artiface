@@ -17,20 +17,19 @@ import { render } from 'react-dom'
 // import { // Icons (regular)...
 // } from '@fortawesome/free-regular-svg-icons'
 import { // Icons (solid)...
-  faPlus,
+  // faPlus,
+  faCheck,
 } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-import {
+import { // Demo components
   // config,
-  FormItemDummy,
+  // FormItemDummy,
+  FormButton,
   Hello,
 } from './build'
 
 // import Hello from './demo/Hello.jsx'
-
-// console.log(config.userAgent, FormItemDummy)
-// debugger
 
 // Demo app styles
 import './demo.pcss'
@@ -38,9 +37,14 @@ import './demo.pcss'
 const demoContent = (
   <div className="demo">
     <Hello />
-    <FormItemDummy icon={faPlus} style="default" className="DemoTest" focusable={false} >
+    <FormButton icon={faCheck} style="default" className="Demo">
+      Test
+    </FormButton>
+    {/*
+    <FormItemDummy icon={faPlus} style="default" className="Demo">
       Test
     </FormItemDummy>
+    */}
   </div>
 )
 
