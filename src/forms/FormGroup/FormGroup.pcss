@@ -1,0 +1,56 @@
+/** @module FormGroup.styles
+ *  @class FormGroup
+ *  @since 2020.07.20, 19:24
+ *  @changed 2020.07.20, 19:24
+ */
+
+.FormGroup {
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  // TODO: Use config for values?
+  $hMargin: 2;
+  $vMargin: 2;
+
+  margin: -$(vMargin)px -$(hMargin)px;
+
+  &_padded {
+    padding: $(innerPadding)px;
+  }
+
+  &_background {
+    &_shaded {
+      background-color: $neutralExtraLightColor;
+    }
+  }
+
+  &_flow {
+    display: flex;
+    flex-wrap: nowrap;
+    & > .FormItem_fill {
+      flex: 1;
+    }
+  }
+
+  & > & {
+    &_align_right {
+      // Align to right
+      justify-content: flex-end;
+      align-items: flex-end;
+      flex: 1;
+    }
+  }
+
+  // No margins for nested groups
+  & > &.FormItem {
+    // margin-top: 0;
+    // margin-bottom: 0;
+    margin: 0;
+  }
+
+  > .FormItem {
+    margin: $(vMargin)px $(hMargin)px;
+  }
+}

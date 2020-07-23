@@ -25,6 +25,8 @@ import { // Icons (solid)...
 import { // Demo components
   // config,
   // FormItemDummy,
+  // FormLabel,
+  FormGroup,
   FormButton,
   Hello,
 } from './build'
@@ -36,10 +38,15 @@ import './demo.pcss'
 
 const demoContent = (
   <div className="demo">
-    <Hello />
-    <FormButton icon={faCheck} style="default" className="Demo">
-      Test
-    </FormButton>
+    <Hello greeting="Hi" />
+    <FormGroup>
+      <FormButton style="default" className="PassClassName">
+        Default
+      </FormButton>
+      <FormButton icon={faCheck} style="default">
+        With icon
+      </FormButton>
+    </FormGroup>
     {/*
     <FormItemDummy icon={faPlus} style="default" className="Demo">
       Test

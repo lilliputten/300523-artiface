@@ -126,11 +126,18 @@ const cssConfig = { // Common-used css variables...
 
 }
 
+const formItemHeight = 32 // px
+const formItemBorderSize = 1 // px
+const formItemInnerHeight = formItemHeight - formItemBorderSize // px
+
 Object.assign(cssConfig, { // Form properties...
 
   // Forms...
 
-  formItemHeight: 32, // px
+  formItemHeight, // px
+  formItemBorderSize, // px
+  formItemInnerHeight, // px
+
   formItemBorderRadius: 3, // px
   formItemBorderColor: cssConfig.neutralColor,
   formItemActorColor: cssConfig.neutralDarkColor,

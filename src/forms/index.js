@@ -9,8 +9,10 @@
 export FormItemDummy from './FormItemDummy' // Demo element
 
 export FormButton from './FormButton'
+export FormGroup from './FormGroup'
 
-// export FormGroup from './FormGroup'
+// TODO...
+
 // export FormLabeledGroup from './FormLabeledGroup'
 // export FormItem from './FormItem'
 //

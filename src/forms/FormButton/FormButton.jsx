@@ -15,6 +15,7 @@ import FormItemHOC from '../FormItemHOC'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import './FormButton.pcss'
+import './FormButton-Styles.pcss'
 
 const cnFormButton = cn('FormButton')
 
