@@ -30,8 +30,8 @@ const classNameModifiers = [ // Pass props/state params to class modifiers
 ]
 
 const defaultState = { // Default state
-  hoverable: true,
-  focusable: true,
+  // hoverable: false,
+  // focusable: false,
 }
 
 const props2State = [ // Pass props to state
@@ -41,15 +41,28 @@ const props2State = [ // Pass props to state
 
 // Helper functions...
 
-const deriveStateFromProps = (props, defaultState) => {
+const deriveState = (...sets) => {
   return props2State.reduce((state, id) =>{
-    const val = props[id]
+    const val = sets.reduce((val, set) => {
+      return (set[id] != null /* && val == null */) ? set[id] : val
+    }, null)
     if (val != null) {
       return { ...state, [id]: val }
     }
     return state
   }, defaultState)
 }
+/* // UNUSED: deriveStateFromProps
+ * const deriveStateFromProps = (props, defaultState) => {
+ *   return props2State.reduce((state, id) =>{
+ *     const val = props[id]
+ *     if (val != null) {
+ *       return { ...state, [id]: val }
+ *     }
+ *     return state
+ *   }, defaultState)
+ * }
+ */
 
 const wrapFormItemHOC = (WrappedComponent, params = {}) => class extends React.Component {
 
@@ -63,14 +76,18 @@ const wrapFormItemHOC = (WrappedComponent, params = {}) => class extends React.C
 
   constructor(props) {
     super(props)
-    this.state = deriveStateFromProps(props, defaultState)
+    this.state = deriveState(defaultState, params, props) // deriveStateFromProps(props, defaultState)
+    // if (params.hoverable) {
+    //   console.log(this.state)
+    //   debugger
+    // }
     this.id = props.id || params.id
     this.formItemRef = React.createRef()
   }
 
   static getDerivedStateFromProps(props, state) {
     // TODO: Update event subscriptions if `hoverable` flag changed?
-    return deriveStateFromProps(props, state)
+    return deriveState(params, props, state) // deriveStateFromProps(props, state)
   }
 
   componentDidMount() {

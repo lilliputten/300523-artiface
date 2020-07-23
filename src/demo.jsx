@@ -40,7 +40,7 @@ const demoContent = (
   <div className="demo">
     <Hello greeting="Hi" />
     <FormGroup>
-      <FormButton style="default" className="PassClassName">
+      <FormButton style="default" className="PassedClassName">
         Default
       </FormButton>
       <FormButton icon={faCheck} style="default">
