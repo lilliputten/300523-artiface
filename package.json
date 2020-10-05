@@ -93,7 +93,7 @@
     "webpack-file-preprocessor-plugin": "0.0.2"
   },
   "scripts": {
-    "postinstall-publish-submodule": "echo --Install publish submodule-- && touch .gitmodules git submodule add -f git@github.com:lilliputten/YouFaceDist.git publish && git rm --cached -f publish .gitmodules",
+    "postinstall-publish-submodule": "echo --Install publish submodule-- && touch .gitmodules && git submodule add -f git@github.com:lilliputten/YouFaceDist.git publish && git rm --cached -f publish .gitmodules",
     "postinstall": "echo --Run postinstall tasks-- && npm run -s postinstall-publish-submodule",
     "stylelint": "echo --Styles linting-- && stylelint src/**/*.{css,pcss} --syntax scss && echo No styles problems found",
     "eslint": "echo --JS source code linting-- && eslint src --ext .js && echo No code problems found",
