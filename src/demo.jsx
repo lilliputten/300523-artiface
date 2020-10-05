@@ -36,9 +36,30 @@ import { // Demo components
 // Demo app styles
 import './demo.pcss'
 
+import FormButtonFixture from 'forms/FormButton/FormButton.fixture'
+
+const placeFicture = (fixture, Wrapper = React.Fragment) => {
+  // Wrapper = React.Fragment
+  const content = Object.entries(fixture).map(([key, Component]) => {
+    return { ...Component, key }
+  })
+  return (
+    <Wrapper>
+      {content}
+    </Wrapper>
+  )
+}
+
+const FormButtonFixtureContent = placeFicture(FormButtonFixture)
+
+// console.log(FormButtonFixture, FormButtonFixtureContent)
+// debugger
+
 const demoContent = (
   <div className="demo">
     <Hello greeting="Hi" />
+    {FormButtonFixtureContent}
+    {/*
     <FormGroup>
       <FormButton style="default" className="PassedClassName">
         Default
@@ -47,7 +68,6 @@ const demoContent = (
         With icon
       </FormButton>
     </FormGroup>
-    {/*
     <FormItemDummy icon={faPlus} style="default" className="Demo">
       Test
     </FormItemDummy>
