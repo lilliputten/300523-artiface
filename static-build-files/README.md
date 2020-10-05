@@ -1,4 +1,4 @@
-# ARTI WebInterface library cpmponents distributive
+# ARTI WebInterface components library distributive
 
 __TODO:__ Create end-user (app-developer) how-to & manual reference notes.
 
@@ -13,13 +13,13 @@ __TODO:__ Create end-user (app-developer) how-to & manual reference notes.
 Library can be added in `dependencies` section of `package.json` file as:
 
 ```json
-  "DistName": "git+{{REPO_ADDR}}"
+  "DistName": "git+{{DIST_REPO_ADDR}}"
 ```
 
 or via npm:
 
 ```shell
-npm i -S git+{{REPO_ADDR}} DistName
+npm i -S git+{{DIST_REPO_ADDR}} DistName
 ```
 
 To update to actual library package version use command:
