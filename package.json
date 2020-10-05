@@ -2,9 +2,9 @@
   "name": "YouFace",
   "description": "Arti UI Components Library",
   "NOTE": "All version and time stamp properties are updated automatically (see `util-update-build-variables.sh`, `util-increment-version.sh`)!",
-  "version": "0.0.17",
-  "timetag": "201006-0047",
-  "timestamp": "2020.10.06, 00:47",
+  "version": "0.0.18",
+  "timetag": "201006-0218",
+  "timestamp": "2020.10.06, 02:18",
   "changed": "2020.10.06, 01:52",
   "main": "src/build.js",
   "keywords": [

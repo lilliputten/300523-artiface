@@ -2,9 +2,9 @@
 
 ## Build info (auto-generated)
 
-- Version: 0.0.17
-- Last changes timestamp: 2020.10.06, 00:47
-- Last changes timetag: 201006-0047
+- Version: 0.0.18
+- Last changes timestamp: 2020.10.06, 02:18
+- Last changes timetag: 201006-0218
 
 ## Requirements
 
@@ -40,13 +40,19 @@ The npm requirements using in final (builded) library code, contained in `depend
 - `src` -- Source files
 - `static-build-files` -- Static files added to the build.
 
-## Installation & usage
+## Build & publish cycle
+
+### Debug & develop with dev-server in demo mode:
 
 ```shell
-npm i -S git+{{REPO_ADDR}}
+npm run -s server
 ```
 
-## Build & publish cycle
+Locate browser to default url: [http://localhost:8080/](http://localhost:8080/).)
+
+Specify demo fixture to display in url query or select from main demo page:
+
+`http://localhost:8080/?fixture=Hello`
 
 ### Increment patch (minor number) version:
 
@@ -76,13 +82,17 @@ NOTE: Target repository specified in npm script `postinstall-publish-submodule`.
 
 TODO: To use external automation scripts? To use crossplatform replacements for posix commands?
 
-After publishing you need to update requirements in target projects using command:
+## Installation & usage in target project
+
+### Add npm dependency:
+
+From command line:
 
 ```shell
-npm update -S DistName
+npm i -S git+{{DIST_REPO_ADDR}} DistName
 ```
 
-Update command suitable if you using npm requirement string like:
+Or specify directly in `package.json`:
 
 ```json
   "dependencies": {
@@ -90,7 +100,13 @@ Update command suitable if you using npm requirement string like:
     ...
 ```
 
-### Using in js code with imports:
+### Update distributive to latest build using:
+
+```shell
+npm update -S DistName
+```
+
+### Use in js code with imports:
 
 ```javascript
 import * as DistName from 'DistName' // Import code bundle
@@ -100,5 +116,5 @@ render(<Hello />, document.getElementById('root')) // Minimalistic render sample
 ```
 
 <!--
- @changed 2020.10.06, 01:52
+ @changed 2020.10.06, 02:32
 -->

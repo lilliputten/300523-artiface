@@ -1,6 +1,6 @@
 #!/bin/sh
 # @desc Update version number & build timestamps
-# @changed 2020.10.06, 01:15
+# @changed 2020.10.06, 02:18
 
 node ./util-update-build-time.js
 
@@ -36,6 +36,6 @@ function UPDATE_FILE() {
 }
 
 UPDATE_FILE "package.json"
-UPDATE_FILE "build-static/package.json"
+UPDATE_FILE "static-build-files/package.json"
 UPDATE_FILE "README.md"
-UPDATE_FILE "build-static/README.md"
+UPDATE_FILE "static-build-files/README.md"
