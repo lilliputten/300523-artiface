@@ -10,10 +10,10 @@
 
 Some maintenance commands (`*.sh` scripts or commands in `scripts` section of `package.json`) utilizes specific posix command line commands like next:
 
-- cp
-- mv
-- rm
-- test
+- `cp`
+- `mv`
+- `rm`
+- `test`
 
 (...and so on...)
 
@@ -21,9 +21,9 @@ They may be installed on windows via cygin or similar software.
 
 Some scripts (rarely used) used some posix commands what doubles windows cmd commands (with different syntax):
 
-- date
-- find
-- tar
+- `date`
+- `find`
+- `tar`
 
 They postfixed with underscore (`_`; eg, `find_`). You can use symlinks if working under linux/macos etc.
 
@@ -90,8 +90,6 @@ Update command suitable if you using npm requirement string like:
     ...
 ```
 
-(And finally use optional `npm install` command for install new/updated requirements.)
-
 ### Using in js code with imports:
 
 ```javascript
@@ -101,36 +99,6 @@ const { Hello } = DistName // Destruct specific components
 render(<Hello />, document.getElementById('root')) // Minimalistic render sample
 ```
 
-### Run cosmos components indpector:
-
-```
-npm run -s cosmos
-```
-
-### Open comsos server url in browser:
-
-Use link [http://localhost:5000](http://localhost:5000)
-
-## Using React Cosmos
-
-- [react-cosmos/react-cosmos: A dev environment for building scalable, high-quality user interfaces](https://github.com/react-cosmos/react-cosmos#getting-started)
-- [react-cosmos/docs at master · react-cosmos/react-cosmos](https://github.com/react-cosmos/react-cosmos/tree/master/docs)
-- [Тестирование компонентов React / Блог компании RUVDS.com / Хабр](https://habr.com/ru/company/ruvds/blog/345236/)
-
-### Configuration
-
-`config.schema.json` is a scheme for `cosmos.config.json` -- cosmos project configuration file.
-
-See documentation:
-
-- [react-cosmos/docs at master · react-cosmos/react-cosmos](https://github.com/react-cosmos/react-cosmos/tree/master/docs#config)
-
-### Examples
-
-- [React Cosmos Live Demo](https://reactcosmos.org/live-demo/)
-
-See `react-cosmos-master/website/src` -- live-demo source.
-
 <!--
- @changed 2020.10.06, 00:47
+ @changed 2020.10.06, 01:52
 -->
