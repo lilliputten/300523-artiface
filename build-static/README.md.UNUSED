@@ -13,7 +13,7 @@ TODO: Some end-user (app-developer) how-to & manual reference notes comes here.
 Library can be added in `dependencies` section of `package.json` file as:
 
 ```json
-  "ArtiFaceDist": "git+{{REPO_ADDR}}",
+  "DistName": "git+{{REPO_ADDR}}",
 ```
 
 or via npm:
@@ -24,13 +24,13 @@ npm i -S git+{{REPO_ADDR}}
 
 To update to actual library package use:
 ```shell
-npm i ArtiFaceDist
+npm i DistName
 ```
 
 In js code use imports:
 
 ```javascript
-import ArtiFaceDist from 'ArtiFaceDist'
-import 'ArtiFaceDist/styles.css'
+import DistName from 'DistName'
+import 'DistName/styles.css'
 ```
 

@@ -1,6 +1,6 @@
 /** @desc Webpack configuration
  *  @since 2020.05.18, 12:00
- *  @changed 2020.10.05, 22:14
+ *  @changed 2020.10.05, 22:49
  */
 
 const fs = require('fs')
@@ -72,7 +72,7 @@ module.exports = (env, argv) => {
 
   // TODO: Load version, timestamp, timetag from generated files
 
-  /* // UNUSED: Generate time stamps...
+  /* // UNUSED: Generate time stamps... (UNUSED: see `util-update-build-time.*` scripts)
    * const dateStringFormat = 'yyyy.mm.dd HH:MM:ss'
    * const dateTagFormat = 'yymmdd-HHMM'
    * const now = new Date()
@@ -101,6 +101,7 @@ module.exports = (env, argv) => {
     },
   }
 
+  // Only for demo mode
   const htmlFilename = 'index.html'
 
   // Build profile params...
@@ -118,7 +119,8 @@ module.exports = (env, argv) => {
     THEME,
   ].join('-')
 
-  const buildLibName = 'ArtiFaceDist'
+  // NOTE: Dynamically created dist library name from project name
+  const buildLibName = pkgConfig.name + 'Dist' // 'YouFaceDist'
 
   const useHashes = false // NOTE: Not works with pseudo-dynamic bundles loading method (with hardcoded urls)
   const bundleName = ({ ext, name, dir } = {}) => (dir || 'js/') + (name || '[name]') + (useHashes && !isWatch && !isDevServer ? '-[contenthash:8]' : '') + (ext || '.js')

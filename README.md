@@ -1,4 +1,4 @@
-# ARTI WebInterface library
+# ARTI WebInterface UI components library
 
 ## Build info
 
@@ -8,7 +8,7 @@
 
 ## Requirements
 
-Many maintenance commands (`*.sh` scripts or commands in `scripts` section of `package.json`) utilizes posix command line commands like `cp`, `mv`, `test`. They may be installed on windows via cygin or similar software.
+Some maintenance commands (`*.sh` scripts or commands in `scripts` section of `package.json`) utilizes posix command line commands like `cp`, `mv`, `test`. They may be installed on windows via cygin or similar software.
 
 ## Install
 
@@ -49,14 +49,14 @@ TODO: To use external automation scripts? To use crossplatform replacements for 
 After publishing you need to update requirements in target projects using command:
 
 ```shell
-npm update -S ArtiFaceDist
+npm update -S DistName
 ```
 
 Update command suitable if you using npm requirement string like:
 
 ```json
   "dependencies": {
-    "ArtiFaceDist": "git+{{DIST_REPO_ADDR}}",
+    "DistName": "git+{{DIST_REPO_ADDR}}",
     ...
 ```
 
@@ -65,9 +65,9 @@ Update command suitable if you using npm requirement string like:
 ### Using in js code with imports:
 
 ```javascript
-import * as ArtiFaceDist from 'ArtiFaceDist' // Import code bundle
-import 'ArtiFaceDist/styles.css' // Import styles
-const { Hello } = ArtiFaceDist // Destruct specific components
+import * as DistName from 'DistName' // Import code bundle
+import 'DistName/styles.css' // Import styles
+const { Hello } = DistName // Destruct specific components
 render(<Hello />, document.getElementById('root')) // Minimalistic render sample
 ```
 
@@ -103,5 +103,5 @@ See documentation:
 See `react-cosmos-master/website/src` -- live-demo source.
 
 <!--
- @changed 2020.07.20, 14:38
+ @changed 2020.10.05, 22:53
 -->
