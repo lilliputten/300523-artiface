@@ -12,6 +12,7 @@ node_modules
 /build*/
 /demo*/
 /publish/
+!/build-static/
 
 # Temp project files
 .webpack-stats.json

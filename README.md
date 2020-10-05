@@ -1,52 +1,94 @@
 # ARTI WebInterface library
 
+## Build info
+
+- Version: 0.0.15
+- Last changes timestamp: 2020.10.05, 20:39
+- Last changes timetag: 201005-2039
+
+## Requirements
+
+Many maintenance commands (`*.sh` scripts or commands in `scripts` section of `package.json`) utilizes posix command line commands like `cp`, `mv`, `test`. They may be installed on windows via cygin or similar software.
+
 ## Install
 
 ```shell
-npm i -S git+https://github.com/lilliputten/{PRJNAME}.git
+npm i -S git+{{REPO_ADDR}}
 ```
 
 ## Build & publish cycle
 
-Increment patch version:
+### Increment patch version:
 
 ```shell
 util-increment-version.sh
 ```
 
-Update build info (build version, date/time stamp & tag):
+### Update build info (build version, date/time stamp & tag):
 
 ```shell
 util-update-build-props.sh
 ```
 
-Build default target (usually `build-prod-default`, 'Build production library'):
+### Build default target (usually `build-prod-default`, 'Build production library'):
 
 ```shell
 npm run -s build
 ```
 
-Update & push `publish` repository:
+### Update & push `publish` repository:
 
 ```shell
 npm run -s publish
 ```
 
-Run cosmos components indpector:
+NOTE: Target repository specified in npm script `postinstall-publish-submodule`.
+
+TODO: To use external automation scripts? To use crossplatform replacements for posix commands?
+
+After publishing you need to update requirements in target projects using command:
+
+```shell
+npm update -S ArtiFaceDist
+```
+
+Update command suitable if you using npm requirement string like:
+
+```json
+  "dependencies": {
+    "ArtiFaceDist": "git+{{DIST_REPO_ADDR}}",
+    ...
+```
+
+(And finally use optional `npm install` command for install new/updated requirements.)
+
+### Using in js code with imports:
+
+```javascript
+import * as ArtiFaceDist from 'ArtiFaceDist' // Import code bundle
+import 'ArtiFaceDist/styles.css' // Import styles
+const { Hello } = ArtiFaceDist // Destruct specific components
+render(<Hello />, document.getElementById('root')) // Minimalistic render sample
+```
+
+
+### Run cosmos components indpector:
 
 ```
 npm run -s cosmos
 ```
 
-Open comsos server url in browser: [http://localhost:5000](http://localhost:5000)
+### Open comsos server url in browser:
 
-## Cosmos links
+Use link [http://localhost:5000](http://localhost:5000)
+
+## Using React Cosmos
 
 - [react-cosmos/react-cosmos: A dev environment for building scalable, high-quality user interfaces](https://github.com/react-cosmos/react-cosmos#getting-started)
 - [react-cosmos/docs at master · react-cosmos/react-cosmos](https://github.com/react-cosmos/react-cosmos/tree/master/docs)
 - [Тестирование компонентов React / Блог компании RUVDS.com / Хабр](https://habr.com/ru/company/ruvds/blog/345236/)
 
-## Configuration
+### Configuration
 
 `config.schema.json` is a scheme for `cosmos.config.json` -- cosmos project configuration file.
 
@@ -54,7 +96,7 @@ See documentation:
 
 - [react-cosmos/docs at master · react-cosmos/react-cosmos](https://github.com/react-cosmos/react-cosmos/tree/master/docs#config)
 
-## Examples
+### Examples
 
 - [React Cosmos Live Demo](https://reactcosmos.org/live-demo/)
 

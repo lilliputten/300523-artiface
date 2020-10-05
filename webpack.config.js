@@ -1,6 +1,6 @@
 /** @desc Webpack configuration
  *  @since 2020.05.18, 12:00
- *  @changed 2020.07.20, 15:56
+ *  @changed 2020.10.05, 22:14
  */
 
 const fs = require('fs')
@@ -181,7 +181,9 @@ module.exports = (env, argv) => {
   const getBuildPackageConfig = () => {
     const buildPkg = { ...pkgConfig }
     delete buildPkg.unusedDependencies
+    delete buildPkg.unusedDependencies
     delete buildPkg.devDependencies
+    // NOTE: Preserving `peerDependencies`???
     // TDDO 2020.07.20, 15:56 -- Use `bundleDependencies` instead `dependencies`.
     delete buildPkg.scripts
     buildPkg.main = bundleFile
@@ -384,6 +386,7 @@ module.exports = (env, argv) => {
       !isDevServer && new CopyWebpackPlugin({ // Simply copies the files over
         patterns: [
           { from: 'build-static', to: './', ...CopyWebpackPluginOptions },
+          { from: 'README.md', to: './', ...CopyWebpackPluginOptions }, // Readme listed at last position -- then can be overriden if readme exists in `build-static` (commands executiong in reversed order?).
         ].filter(x => x),
       }),
       isDemo && new HtmlWebpackPlugin({

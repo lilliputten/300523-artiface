@@ -3,18 +3,23 @@
   "description": "Arti Webpack UI Library",
   "NOTE": "All version and time stamp properties are updated automatically (see `util-update-build-props.sh`, `util-increment-version.sh`)!",
   "version": "0.0.15",
-  "timestamp": "2020.10.05, 20:39",
-  "timetag": "201005-2039",
-  "main": "dist/bundle.js",
+  "timetag": "201005-2204",
+  "timestamp": "2020.10.05, 22:04",
+  "changed": "2020.10.05, 22:15",
+  "main": "src/build.js",
   "keywords": [
+    "ARTI",
     "UI",
     "webpack",
+    "components",
     "library"
   ],
-  "author": "",
+  "author": "igor@lilliputten.ru",
   "license": "ISC",
   "unusedDependencies": {
     "null-loader": "^3.0.0"
+  },
+  "peerDependencies": {
   },
   "dependencies": {
     "@bem-react/classname": "^1.5.8",
@@ -100,7 +105,7 @@
     "tags": "ctags -R --exclude=@.ctagsignore .",
     "cosmos": "cosmos --mode development",
     "cosmos-export": "cosmos-export",
-    "publish": "echo --Publish build-- && ( test -d build || npm run -s build ) && cd publish && git pull && rm -Rf * && cp -Rfu ../build/* . && git add . -Av && git commit -am \"auto-commit\" && git push && cd ..",
+    "publish": "echo --Publish build (posix cmd commands required)-- && ( test -d build || npm run -s build ) && cd publish && git pull && rm -Rf * && cp -Rfu ../build/* . && git add . -Av && git commit -am \"auto-commit\" && git push && cd ..",
     "webpack-stats-dev": "echo --Generate webpack stats-- && webpack --profile --json --env.DIST --mode development > .webpack-stats.json",
     "webpack-stats-analyze-dev": "echo --Analyze webpack stats-- && npm run -s webpack-stats && webpack-bundle-analyzer .webpack-stats.json build-dev",
     "webpack-stats": "echo --Generate webpack stats-- && webpack --profile --json --env.DIST > .webpack-stats.json",
