@@ -1,16 +1,46 @@
 # ARTI WebInterface UI components library
 
-## Build info
+## Build info (auto-generated)
 
-- Version: 0.0.15
-- Last changes timestamp: 2020.10.05, 20:39
-- Last changes timetag: 201005-2039
+- Version: 0.0.17
+- Last changes timestamp: 2020.10.06, 00:47
+- Last changes timetag: 201006-0047
 
 ## Requirements
 
-Some maintenance commands (`*.sh` scripts or commands in `scripts` section of `package.json`) utilizes posix command line commands like `cp`, `mv`, `test`. They may be installed on windows via cygin or similar software.
+Some maintenance commands (`*.sh` scripts or commands in `scripts` section of `package.json`) utilizes specific posix command line commands like next:
 
-## Install
+- cp
+- mv
+- rm
+- test
+
+(...and so on...)
+
+They may be installed on windows via cygin or similar software.
+
+Some scripts (rarely used) used some posix commands what doubles windows cmd commands (with different syntax):
+
+- date
+- find
+- tar
+
+They postfixed with underscore (`_`; eg, `find_`). You can use symlinks if working under linux/macos etc.
+
+The npm requirements using in final (builded) library code, contained in `dependencies` and `peerDependencies` sections in `package.json` (`devDependencies` using only for build/dev environment).
+
+## Project folders structure
+
+- `!Docs` (optional) -- Some project documentation (other than included in the `README*` files).
+- `!Work` (optional) -- Some work materials (what may be useful in future).
+- `build` (auto-generated; see `build` npm script) -- Production build.
+- `build-dev` (auto-generated; see `build-dev` npm script) -- Development build (debug & tesing only).
+- `demo-html` -- Demo html template folder.
+- `publish` (auto-initialized with publish submodule; see `publish` and `postinstall-publish-submodule` npm scripts) -- Folder for syncing with 'dist' repository (specified in `util-config*`).
+- `src` -- Source files
+- `static-build-files` -- Static files added to the build.
+
+## Installation & usage
 
 ```shell
 npm i -S git+{{REPO_ADDR}}
@@ -18,7 +48,7 @@ npm i -S git+{{REPO_ADDR}}
 
 ## Build & publish cycle
 
-### Increment patch version:
+### Increment patch (minor number) version:
 
 ```shell
 util-increment-version.sh
@@ -27,7 +57,7 @@ util-increment-version.sh
 ### Update build info (build version, date/time stamp & tag):
 
 ```shell
-util-update-build-props.sh
+util-update-build-variables.sh
 ```
 
 ### Build default target (usually `build-prod-default`, 'Build production library'):
@@ -71,7 +101,6 @@ const { Hello } = DistName // Destruct specific components
 render(<Hello />, document.getElementById('root')) // Minimalistic render sample
 ```
 
-
 ### Run cosmos components indpector:
 
 ```
@@ -103,5 +132,5 @@ See documentation:
 See `react-cosmos-master/website/src` -- live-demo source.
 
 <!--
- @changed 2020.10.05, 22:53
+ @changed 2020.10.06, 00:47
 -->

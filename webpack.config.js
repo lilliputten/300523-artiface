@@ -387,12 +387,12 @@ module.exports = (env, argv) => {
       }),
       !isDevServer && new CopyWebpackPlugin({ // Simply copies the files over
         patterns: [
-          { from: 'build-static', to: './', ...CopyWebpackPluginOptions },
-          { from: 'README.md', to: './', ...CopyWebpackPluginOptions }, // Readme listed at last position -- then can be overriden if readme exists in `build-static` (commands executiong in reversed order?).
+          { from: 'static-build-files', to: './', ...CopyWebpackPluginOptions },
+          { from: 'README.md', to: './', ...CopyWebpackPluginOptions }, // Readme listed at last position -- then can be overriden if readme exists in `static-build-files` (commands executiong in reversed order?).
         ].filter(x => x),
       }),
       isDemo && new HtmlWebpackPlugin({
-        template: path.resolve(rootPath, 'html', htmlFilename),
+        template: path.resolve(rootPath, 'demo-html', htmlFilename),
         filename: htmlFilename,
         cache: true,
         inject: true,

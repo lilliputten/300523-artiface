@@ -25,4 +25,4 @@ echo "Increment patch number ($PATCH_NUMBER -> $NEXT_PATCH_NUMBER)" \
     > "$VERSION_FILE" \
   && rm "$BACKUP" \
   && echo "Updated version: `cat $VERSION_FILE`" \
-  && sh "util-update-build-props.sh"
+  && sh "./util-update-build-variables.sh"
