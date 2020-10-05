@@ -1,7 +1,7 @@
 /** @module demo
  *  @desc Demo app entry point
  *  @since 2020.05.19, 17:16
- *  @changed 2020.05.27, 22:58
+ *  @changed 2020.10.05, 20:31
  */
 
 import 'es5-shim/es5-shim'
@@ -12,54 +12,44 @@ import 'react-app-polyfill/stable'
 import React from 'react'
 import { render } from 'react-dom'
 
-// import { cn } from '@bem-react/classname'
-
-// import { // Icons (regular)...
-// } from '@fortawesome/free-regular-svg-icons'
-import { // Icons (solid)...
-  // faPlus,
-  faCheck,
-} from '@fortawesome/free-solid-svg-icons'
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-
-import { // Demo components
-  // config,
-  // FormItemDummy,
-  // FormLabel,
-  FormGroup,
-  FormButton,
-  Hello,
-} from './build'
-
-// import Hello from './demo/Hello.jsx'
+import {
+  PlaceFixture,
+  FixturesContents,
+} from './demoSupport'
 
 // Demo app styles
 import './demo.pcss'
 
-import FormButtonFixture from 'forms/FormButton/FormButton.fixture'
-
-const placeFicture = (fixture, Wrapper = React.Fragment) => {
-  // Wrapper = React.Fragment
-  const content = Object.entries(fixture).map(([key, Component]) => {
-    return { ...Component, key }
-  })
-  return (
-    <Wrapper>
-      {content}
-    </Wrapper>
-  )
+const fixtureComponentsList = {
+  Hello: require('demo/Hello/Hello.fixture'),
+  FormButton: require('forms/FormButton/FormButton.fixture'),
+  FormGroup: require('forms/FormGroup/FormGroup.fixture'),
 }
 
-const FormButtonFixtureContent = placeFicture(FormButtonFixture)
+const findFixture = window.location.search && window.location.search.match(/\bfixture=([^&]+)/)
+const fixtureId = findFixture && findFixture[1]
+const fixtureModuleExports = fixtureComponentsList[fixtureId]
 
-// console.log(FormButtonFixture, FormButtonFixtureContent)
-// debugger
+let content
+
+if (fixtureModuleExports) { // Fixture specified
+  const {
+    default: fixture,
+    demoTitle = 'Demo fixture: ' + fixtureId,
+    DemoWrapper,
+  } = fixtureModuleExports
+  content = PlaceFixture({ fixture, demoTitle, DemoWrapper })
+}
+else { // List available fixtures to display
+  content = FixturesContents(fixtureComponentsList)
+}
 
 const demoContent = (
   <div className="demo">
-    <Hello greeting="Hi" />
-    {FormButtonFixtureContent}
+    {content}
     {/*
+    <Hello greeting="Hi" />
+    <FixtureInfo text="FormButtonFixture" />
     <FormGroup>
       <FormButton style="default" className="PassedClassName">
         Default

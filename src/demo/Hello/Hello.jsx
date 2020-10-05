@@ -1,3 +1,8 @@
+/** @module Hello
+ *  @since 2020.07.20, 19:07
+ *  @changed 2020.07.20, 19:07
+ */
+
 import React from 'react'
 import { cn } from '@bem-react/classname'
 // import config from 'config'

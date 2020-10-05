@@ -3,7 +3,7 @@
 ## Install
 
 ```shell
-npm i -S git+https://github.com/lilliputten/200523-artiface-dist.git
+npm i -S git+https://github.com/lilliputten/{PRJNAME}.git
 ```
 
 ## Build & publish cycle
@@ -31,6 +31,14 @@ Update & push `publish` repository:
 ```shell
 npm run -s publish
 ```
+
+Run cosmos components indpector:
+
+```
+npm run -s cosmos
+```
+
+Open comsos server url in browser: [http://localhost:5000](http://localhost:5000)
 
 ## Cosmos links
 

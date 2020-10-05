@@ -1,6 +1,5 @@
 /** @module FormGroup
  *  @class FormGroup
- *  @desc Demo form item
  *  @since 2020.07.20, 19:07
  *  @changed 2020.07.20, 19:07
  */
