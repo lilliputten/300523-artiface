@@ -1,8 +1,14 @@
 #!/bin/sh
 # @desc Publish (and make if absent) dist build
-# @changed 2020.10.05, 23:57
+# @changed 2020.10.06, 01:52
 
-if [ ! -d publish ]; then
+# Import config variables (expected variables `$DIST_REPO` and `$PUBLISH_FOLDER`)...
+# DIST_REPO="git@github.com:lilliputten/YouFaceDist.git"
+# PUBLISH_FOLDER="publish"
+test -f "./util-config.sh" && . "./util-config.sh"
+test -f "./util-config-local.sh" && . "./util-config-local.sh"
+
+if [ ! -d "$PUBLISH_FOLDER" ]; then
   echo "No publish folder. Probably submodule was not initialized. Use script 'util-publish-init.sh'."
   exit 1
 fi
@@ -18,7 +24,7 @@ echo "Publishing build ($VERSION, $TIMESTAMP)..."
 
 # TODO: Compare actual and previously published versions? (The git is checking for changes itself anyway.)
 
-cd publish && \
+cd "$PUBLISH_FOLDER" && \
   git pull && \
   rm -Rf * &&
   cp -Rfu ../build/* . &&
