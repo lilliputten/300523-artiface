@@ -1,6 +1,6 @@
 /** @module FormButton.fixture
  *  @since 2020.07.20, 19:07
- *  @changed 2020.10.05, 20:34
+ *  @changed 2020.10.07, 00:28
  */
 
 import React from 'react'
@@ -18,5 +18,14 @@ export const DemoWrapper = FormGroup // ({ children }) => {
 
 export default {
   default: <FormButton style="default" text="Default button" />,
-  defaultWithIcon: <FormButton icon={faCheck} style="default" text="Default button with icon" />,
+  withIconAsComponent: <FormButton icon={faCheck} style="default" text="With icon as string" />,
+  withIconAsString: <FormButton icon="faCheck" style="default" text="With icon as text" />,
+  /* // TODO:
+   * - onlyIcon
+   * - largeIcon
+   * - rightIcon
+   * - style
+   * - fullWidth
+   * - type
+  */
 }

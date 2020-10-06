@@ -1,7 +1,7 @@
 /** @module FormButton
  *  @class FormButton
  *  @since 2020.07.20, 19:07
- *  @changed 2020.07.20, 19:07
+ *  @changed 2020.10.07, 00:28
  */
 
 import React from 'react'
@@ -12,6 +12,10 @@ import { cn } from '@bem-react/classname'
 import FormItemHOC from '../FormItemHOC'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import * as defaultIcons from '@fortawesome/free-solid-svg-icons'
+// import * as regularIcons from '@fortawesome/free-regular-svg-icons'
+// TODO: Add optional prefix ('regular', 'solid', 'default') to icon id for choosing icons set.
+
 
 import './FormButton.pcss'
 import './FormButton-Styles.pcss'
@@ -20,22 +24,27 @@ const cnFormButton = cn('FormButton')
 
 class FormButton extends React.Component /** @lends @FormButton.prototype */ {
 
-  constructor(props) {
-    super(props)
-    // const {
-    //   hoverable,
-    //   clickable,
-    //   checked,
-    // } = props
-    this.state = {
-      // // FormItem states...
-      // solid: true,
-      // hoverable: (hoverable != null) ? hoverable : true,
-      // clickable: (clickable != null) ? clickable : true,
-      // checked,
-      // framed: true,
-    }
-  }
+  state = {}
+
+  /* // constructor: Temporarily unused
+   * constructor(props) {
+   *   super(props)
+   *   // (OLD) Get props...
+   *   // const {
+   *   //   hoverable,
+   *   //   clickable,
+   *   //   checked,
+   *   // } = props
+   *   this.state = {
+   *     // // (OLD) FormItem states...
+   *     // solid: true,
+   *     // hoverable: (hoverable != null) ? hoverable : true,
+   *     // clickable: (clickable != null) ? clickable : true,
+   *     // checked,
+   *     // framed: true,
+   *   }
+   * }
+   */
 
   static getDerivedStateFromProps(props/* , state */) { // ???
     const {
@@ -113,6 +122,7 @@ class FormButton extends React.Component /** @lends @FormButton.prototype */ {
 
     const {
       id,
+      disabled,
       // name,
       children,
       text,
@@ -132,7 +142,8 @@ class FormButton extends React.Component /** @lends @FormButton.prototype */ {
     } = this.state
 
     // Create fortawesome icon element if passed icon image (svg icon)
-    const iconImg = (icon && icon.iconName) ? <FontAwesomeIcon className={cnFormButton('IconImg')} icon={icon} /> : icon
+    const iconComponent = (icon && typeof icon === 'string') ? defaultIcons[icon] : icon
+    const iconImg = (iconComponent && iconComponent.iconName) ? <FontAwesomeIcon className={cnFormButton('IconImg')} icon={iconComponent} /> : iconComponent
     const iconElem = hasIcon && (
       <span key="Icon" className={cnFormButton('Icon')}>
         {iconImg}
@@ -151,6 +162,7 @@ class FormButton extends React.Component /** @lends @FormButton.prototype */ {
       // ...basicRenderProps,
       id,
       className: this.getClassName(),
+      disabled,
       title,
       type,
       onClick: this.onClick,
