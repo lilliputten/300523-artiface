@@ -25,8 +25,9 @@
 
 # Core files
 
-- `src/index.jsx`
+- `src/build.jsx`
+- `src/demo.jsx`
 
 ## Source file extensions (for search & replace)
 
-`*.js,*.jsx,*.ts,*.tsx,*.less,*.pcss,*.css,*.bemhtml,*.bemjson,*.json,*.md,*.txt`
+`*.js,*.jsx,*.pcss,*.css,*.json,*.md,*.txt`
