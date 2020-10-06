@@ -52,7 +52,8 @@ Locate browser to default url: [http://localhost:8080/](http://localhost:8080/).
 
 Specify demo fixture to display in url query or select from main demo page:
 
-`http://localhost:8080/?fixture=Hello`
+- `http://localhost:8080/?fixture=Hello`
+- `http://localhost:8080/?fixture=FormButton:defaultWithIcon`
 
 ### Increment patch (minor number) version:
 
