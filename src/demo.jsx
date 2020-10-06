@@ -20,6 +20,7 @@ import './demo.pcss'
 const fixtureComponentsList = {
   Hello: require('demo/Hello/Hello.fixture'),
   FormLabel: require('forms/FormLabel/FormLabel.fixture'),
+  FormTextInput: require('forms/FormTextInput/FormTextInput.fixture'),
   FormButton: require('forms/FormButton/FormButton.fixture'),
   FormGroup: require('forms/FormGroup/FormGroup.fixture'),
 }
