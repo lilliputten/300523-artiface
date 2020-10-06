@@ -4,6 +4,10 @@
 
 # Project environment
 
+- `util-config.sh`
+- `util-config-local.sh`
+- `webpack.env.local.js`
+- `webpack.env.js`
 - `package.json`
 - `babel.config.js`
 - `webpack.config.js`
@@ -22,16 +26,6 @@
 # Core files
 
 - `src/index.jsx`
-- `src/pages/index.jsx`
-
-- `src/constants/index.jsx`
-- `src/i18n/languages.js`
-
-- `src/components/App.jsx`
-
-## Auth fake requests
-
-- `src/components/auth/AuthManager.jsx`
 
 ## Source file extensions (for search & replace)
 
