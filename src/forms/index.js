@@ -8,6 +8,7 @@
 
 export FormItemDummy from './FormItemDummy' // Demo element
 
+export FormLabel from './FormLabel'
 export FormButton from './FormButton'
 export FormGroup from './FormGroup'
 
