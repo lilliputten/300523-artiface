@@ -26,6 +26,7 @@ export const PlaceFixture = ({ fixture, fixtureItemId, demoTitle, DemoWrapper = 
   const cnFixture = cn('Fixture')
   let content
   if (fixtureItemId) {
+    demoTitle += ' (' + fixtureItemId + ')'
     content = fixture[fixtureItemId]
     if (!content) {
       content = (

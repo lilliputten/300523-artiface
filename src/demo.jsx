@@ -24,7 +24,7 @@ const fixtureComponentsList = {
 }
 
 const findFixture = window.location.search && window.location.search.match(/\bfixture=(([^&:]+)(?::([^&]+))?)/)
-const fullFixtureId = findFixture && findFixture[1]
+// const fullFixtureId = findFixture && findFixture[1]
 const fixtureId = findFixture && findFixture[2]
 const fixtureItemId = findFixture && findFixture[3]
 const fixtureModuleExports = fixtureComponentsList[fixtureId]
@@ -34,7 +34,7 @@ let content
 if (fixtureModuleExports) { // Fixture specified
   const {
     default: fixture,
-    demoTitle = 'Demo fixture: ' + fullFixtureId,
+    demoTitle = 'Demo fixture: ' + fixtureId, // fullFixtureId,
     DemoWrapper,
   } = fixtureModuleExports
   content = demoSupport.PlaceFixture({ fixture, fixtureItemId, demoTitle, DemoWrapper })
