@@ -1,7 +1,7 @@
 /** @module demo
  *  @desc Demo app entry point
  *  @since 2020.05.19, 17:16
- *  @changed 2020.10.06, 21:53
+ *  @changed 2020.10.07, 00:11
  */
 
 import 'es5-shim/es5-shim'
@@ -19,6 +19,7 @@ import './demo.pcss'
 
 const fixtureComponentsList = {
   Hello: require('demo/Hello/Hello.fixture'),
+  FormLabel: require('forms/FormLabel/FormLabel.fixture'),
   FormButton: require('forms/FormButton/FormButton.fixture'),
   FormGroup: require('forms/FormGroup/FormGroup.fixture'),
 }
@@ -40,7 +41,13 @@ if (fixtureModuleExports) { // Fixture specified
   content = demoSupport.PlaceFixture({ fixture, fixtureItemId, demoTitle, DemoWrapper })
 }
 else { // List available fixtures to display
-  content = demoSupport.FixturesContents(fixtureComponentsList)
+  const fixtures = demoSupport.FixturesContents(fixtureComponentsList)
+  content = (
+    <div className="demoIndex">
+      {fixtures}
+      <p className="demoIndex-Comment">TODO: Demos list, navigation, styles</p>
+    </div>
+  )
 }
 
 const demoContent = (

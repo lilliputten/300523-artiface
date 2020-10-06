@@ -25,7 +25,7 @@ export const FixtureInfo = ({ children }) => {
 export const PlaceFixture = ({ fixture, fixtureItemId, demoTitle, DemoWrapper = React.Fragment }) => {
   const cnFixture = cn('Fixture')
   let content
-  if (fixtureItemId) {
+  if (fixtureItemId) { // Display specific fixture item
     demoTitle += ' (' + fixtureItemId + ')'
     content = fixture[fixtureItemId]
     if (!content) {
@@ -36,7 +36,7 @@ export const PlaceFixture = ({ fixture, fixtureItemId, demoTitle, DemoWrapper = 
       )
     }
   }
-  else {
+  else { // Display entire fixture (all items)
     content = Object.entries(fixture).map(([key, Component]) => {
       return { ...Component, key }
     })
