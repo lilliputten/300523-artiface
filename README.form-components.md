@@ -19,6 +19,10 @@ Legend: `[~]` -- in progress, `[+]` -- done;
 - [ ] `FormText`
 - [~] `FormTextInput`
 
+## Newsly added:
+
+- `InlineIcon` (2020.10.07)
+
 ## To implement
 
 - `FormSwitch`
