@@ -6,6 +6,8 @@
 import React from 'react'
 import FormButton from './FormButton'
 import FormGroup from '../FormGroup'
+import InlineIcon from 'elements/InlineIcon'
+
 
 import { // Icons (solid)...
   faCheck,
@@ -16,8 +18,11 @@ import 'demo.pcss'
 
 export const DemoWrapper = FormGroup // ({ children }) => {
 
+const inlineIcon = <InlineIcon icon={faCheck} className="extraIconClass" />
+
 export default {
-  default: <FormButton style="default" text="Default button" />,
+  default: <FormButton style="default" text="Default button" className="extraButtonClass" />,
+  withInlineIcon: <FormButton icon={inlineIcon} style="default" text="With inline icon" />,
   withIconAsComponent: <FormButton icon={faCheck} style="default" text="With icon as string" />,
   withIconAsString: <FormButton icon="faCheck" style="default" text="With icon as text" />,
   /* // TODO:

@@ -1,7 +1,7 @@
 /** @module FormButton
  *  @class FormButton
  *  @since 2020.07.20, 19:07
- *  @changed 2020.10.07, 00:28
+ *  @changed 2020.10.07, 03:00
  */
 
 import React from 'react'
@@ -11,11 +11,7 @@ import { cn } from '@bem-react/classname'
 
 import FormItemHOC from '../FormItemHOC'
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import * as defaultIcons from '@fortawesome/free-solid-svg-icons'
-// import * as regularIcons from '@fortawesome/free-regular-svg-icons'
-// TODO: Add optional prefix ('regular', 'solid', 'default') to icon id for choosing icons set.
-
+import InlineIcon from 'elements/InlineIcon'
 
 import './FormButton.pcss'
 import './FormButton-Styles.pcss'
@@ -24,9 +20,7 @@ const cnFormButton = cn('FormButton')
 
 class FormButton extends React.Component /** @lends @FormButton.prototype */ {
 
-  state = {}
-
-  /* // constructor: Temporarily unused
+  /* // UNUSED: constructor
    * constructor(props) {
    *   super(props)
    *   // (OLD) Get props...
@@ -46,27 +40,44 @@ class FormButton extends React.Component /** @lends @FormButton.prototype */ {
    * }
    */
 
-  static getDerivedStateFromProps(props/* , state */) { // ???
+  /* // UNUSED: getDerivedStateFromProps
+   * static getDerivedStateFromProps(props[> , state <]) { // ??? -- M.b. better to evaluate in render?
+   *   const {
+   *     // plain,
+   *     // style,
+   *     hasIcon,
+   *     hasText,
+   *     onlyIcon,
+   *     text,
+   *     icon,
+   *     children,
+   *     // hoverable,
+   *     // clickable,
+   *     // checked,
+   *   } = props
+   *   return {
+   *     // hoverable: (hoverable != null) ? hoverable : true,
+   *     // clickable: (clickable != null) ? clickable : true,
+   *     // checked,
+   *     hasIcon: !!(hasIcon || icon),
+   *     hasText: !onlyIcon && !!(hasText || text || children),
+   *   }
+   * }
+   */
+
+  hasIcon() {
+    const { icon, hasIcon } = this.props
+    return !!(hasIcon || icon)
+  }
+
+  hasText() {
     const {
-      // plain,
-      // style,
-      hasIcon,
       hasText,
       onlyIcon,
-      text,
-      icon,
       children,
-      // hoverable,
-      // clickable,
-      // checked,
-    } = props
-    return {
-      // hoverable: (hoverable != null) ? hoverable : true,
-      // clickable: (clickable != null) ? clickable : true,
-      // checked,
-      hasIcon: !!(hasIcon || icon),
-      hasText: !onlyIcon && !!(hasText || text || children),
-    }
+      text,
+    } = this.props
+    return !onlyIcon && !!(hasText || text || children)
   }
 
   getClassName() {
@@ -82,18 +93,14 @@ class FormButton extends React.Component /** @lends @FormButton.prototype */ {
       type,
       // plain,
     } = this.props
-    const {
-      hasIcon,
-      hasText,
-    } = this.state
     const classList = cnFormButton({
       id,
       style,
       fullWidth,
       // checked,
       // plain,
-      hasIcon,
-      hasText,
+      hasIcon: this.hasIcon(),
+      hasText: this.hasText(),
       onlyIcon,
       largeIcon,
       rightIcon,
@@ -118,44 +125,58 @@ class FormButton extends React.Component /** @lends @FormButton.prototype */ {
 
   // Render...
 
+  renderIcon() {
+    const hasIcon = this.hasIcon()
+    if (hasIcon) {
+      const { icon } = this.props
+      if (icon && icon.type === InlineIcon) { // Already InlineIcon
+        // Extend with updated `className` props
+        const props = {
+          ...icon.props,
+          className: cnFormButton('Icon', [icon.props.className]),
+        }
+        const newIcon = { ...icon, props }
+        return newIcon
+      }
+      return (
+        <InlineIcon icon={icon} className={cnFormButton('Icon')} />
+      )
+    }
+  }
+
+  renderText() {
+    const hasText = this.hasText() // !onlyIcon && !!(hasText || text || children
+    if (hasText) {
+      const { text, children } = this.props
+      return hasText && (
+        <span className={cnFormButton('Text')}>
+          {text || children}
+        </span>
+      )
+    }
+  }
+
   render() {
 
     const {
       id,
       disabled,
       // name,
-      children,
-      text,
+      // children,
+      // text,
       tag,
       type,
       title,
-      icon,
+      // icon,
       setDomRef,
       // faIcon,
       // hasIcon,
       // hasText,
       // onClick,
     } = this.props
-    const {
-      hasIcon,
-      hasText,
-    } = this.state
 
-    // Create fortawesome icon element if passed icon image (svg icon)
-    const iconComponent = (icon && typeof icon === 'string') ? defaultIcons[icon] : icon
-    const iconImg = (iconComponent && iconComponent.iconName) ? <FontAwesomeIcon className={cnFormButton('IconImg')} icon={iconComponent} /> : iconComponent
-    const iconElem = hasIcon && (
-      <span key="Icon" className={cnFormButton('Icon')}>
-        {iconImg}
-      </span>
-    )
-
-    // Text element
-    const textElem = hasText && (
-      <span key="Text" className={cnFormButton('Text')}>
-        {text || children}
-      </span>
-    )
+    const iconElem = this.renderIcon() // Icon element
+    const textElem = this.renderText() // Text element
 
     // const basicRenderProps = this.getRenderProps() // Get from props not from overrided `super`
     const renderProps = {
@@ -169,7 +190,13 @@ class FormButton extends React.Component /** @lends @FormButton.prototype */ {
       ref: setDomRef,
     }
 
-    const content = [ iconElem, textElem ] // children || text
+    // const content = [ iconElem, textElem ] // children || text
+    const content = (
+      <React.Fragment>
+        {iconElem}
+        {textElem}
+      </React.Fragment>
+    )
 
     const tagName = tag || 'div'
     const element = React.createElement(tagName, renderProps, content)
