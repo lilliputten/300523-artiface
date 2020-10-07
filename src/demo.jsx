@@ -17,6 +17,8 @@ import * as demoSupport from './demoSupport'
 // Demo app styles
 import './demo.pcss'
 
+import './build'
+
 const fixtureComponentsList = {
   Hello: require('demo/Hello/Hello.fixture'),
   InlineIcon: require('elements/InlineIcon/InlineIcon.fixture'),

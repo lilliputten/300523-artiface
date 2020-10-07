@@ -8,7 +8,6 @@ import FormButton from './FormButton'
 import FormGroup from '../FormGroup'
 import InlineIcon from 'elements/InlineIcon'
 
-
 import { // Icons (solid)...
   faCheck,
 } from '@fortawesome/free-solid-svg-icons'

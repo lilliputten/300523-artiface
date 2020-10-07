@@ -233,4 +233,4 @@ FormButton.propTypes = {
 
   checked: PropTypes.bool, // FormItem: Checked state
 }
-export default FormItemHOC({ hoverable: true })(FormButton)
+export default FormItemHOC({ hoverable: true, framed: true })(FormButton)

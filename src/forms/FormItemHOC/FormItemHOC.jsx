@@ -69,20 +69,22 @@ const wrapFormItemHOC = (WrappedComponent, params = {}) => class extends React.C
   // Helper methods...
 
   getFlag(id) { // Get parameter from state or from props
-    return (this.state[id] != null) ? this.state[id] : this.props[id]
+    return (this.state[id] != null) ? this.state[id] :
+      (this.props[id] != null) ? this.props[id] :
+        params[id]
   }
 
   // Lifecycle methods...
 
   constructor(props) {
     super(props)
-    this.state = deriveState(defaultState, params, props) // deriveStateFromProps(props, defaultState)
-    // if (params.hoverable) {
+    // if (params.framed) {
     //   console.log(this.state)
     //   debugger
     // }
+    this.state = deriveState(defaultState, params, props) // deriveStateFromProps(props, defaultState)
     this.id = props.id || params.id
-    this.formItemRef = React.createRef()
+    // this.formItemRef = React.createRef()
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -169,6 +171,10 @@ const wrapFormItemHOC = (WrappedComponent, params = {}) => class extends React.C
   }
 }
 
+/** Usage:
+ * FormItemHOC(component)
+ * FormItemHOC(params)(component)
+ */
 const FormItemHOC = (params) => {
   if (typeof params === 'string') { // Passed identifier
     params = { id: params }

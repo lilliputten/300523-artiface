@@ -11,3 +11,6 @@ export * from './forms'
 
 // Demo component
 export Hello from './demo/Hello'
+
+// Basic styles
+import './build.pcss'

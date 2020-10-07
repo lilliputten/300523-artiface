@@ -1,13 +1,35 @@
+/** @module FormItemHOC.style
+ *  @since 2019.09.25, 19:18
+ *  @changed 2020.06.04, 22:58
+ */
+
 .FormItem {
   // @mixin debug;
   // @mixin FormItemMixin;
   display: inline-block;
-  box-sizing: border-box;
+  // box-sizing: border-box; // NOTE: Use formItemInnerHeight for inner elements
   &_solid {
     height: $(formItemHeight)px;
     line-height: $(formItemHeight)px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+  }
+  &_framed {
+    @mixin FormItemFramed;
+    // border-color: $formItemBorderColor;
+    // box-shadow: inset 0 0 0 1px $formItemBorderColor;
+    // background-color: $formItemBgColor;
+    &^&_hovered {
+      border-color: color($formItemBorderColor shade(10%));
+      // box-shadow: inset 0 0 0 1px color($formItemBorderColor shade(10%));
+      // 0 0 2px 1px color($formItemBorderColor alpha(50%)); // Outer shadow (not using due to clipping issues)
+    }
+    // focusable:
+    &^&_focused {
+      border-color: color($formItemBorderColor shade(20%));
+      // box-shadow: inset 0 0 1px 1px color($formItemBorderColor shade(20%));
+      // 0 0 2px 2px color($formItemBorderColor alpha(70%)); // Outer shadow (not using due to clipping issues)
+    }
   }
 }

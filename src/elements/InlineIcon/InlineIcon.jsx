@@ -34,6 +34,7 @@ class InlineIcon extends React.Component /** @lends @InlineIcon.prototype */ {
       tag,
       title,
       icon,
+      onClick,
       // key,
     } = this.props
 
@@ -45,6 +46,7 @@ class InlineIcon extends React.Component /** @lends @InlineIcon.prototype */ {
       id,
       className: this.getClassName(),
       title,
+      onClick,
       // key,
     }
 

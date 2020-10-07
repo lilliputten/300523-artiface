@@ -128,7 +128,7 @@ const cssConfig = { // Common-used css variables...
 
 const formItemHeight = 32 // px
 const formItemBorderSize = 1 // px
-const formItemInnerHeight = formItemHeight - formItemBorderSize // px
+const formItemInnerHeight = formItemHeight - formItemBorderSize * 2 // px
 
 Object.assign(cssConfig, { // Form properties...
 

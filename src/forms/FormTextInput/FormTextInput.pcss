@@ -4,5 +4,38 @@
  */
 
 .FormTextInput {
+  // NOTE: FormItem is inherited
+  input&-Control {
+    @mixin FormItemTextControlMixin;
+    // outline: none;
+    &:-internal-autofill-selected,
+    &:-webkit-autofill:active,
+    &:-webkit-autofill:hover,
+    &:-webkit-autofill:focus,
+    &:-internal-autofill-previewed,
+    &:-webkit-autofill {
+      // TODO -- 2020.05.06, 03:03 Override autofill font-size styles?
+      font-family: $defaultFont !important;
+      font-size: $(defaultFontSize)px !important;
+      outline: none;
+    }
+    &:-webkit-autofill { // Emulate input frame (hidden by autofill background)
+      border: 1px solid $neutralColor;
+    }
+  }
+  &_hasIcon {
+    position: relative;
+    & input^&-Control {
+      padding-right: 40px;
+    }
+    & ^&-Icon {
+      position: absolute;
+      right: 8px;
+      opacity: .25;
+      &_clickable { // Check for `disabled`?
+        cursor: pointer;
+      }
+    }
+  }
 }
 
