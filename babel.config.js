@@ -9,6 +9,7 @@ const srcPath = './src'
 const srcFolders = [
   'demo',
   'config',
+  'elements',
   'forms',
   // 'helpers',
   // 'lib',

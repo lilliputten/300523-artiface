@@ -6,6 +6,7 @@
 
 export config from 'config'
 
+export * from './elements'
 export * from './forms'
 
 // Demo component

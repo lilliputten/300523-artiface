@@ -19,6 +19,7 @@ import './demo.pcss'
 
 const fixtureComponentsList = {
   Hello: require('demo/Hello/Hello.fixture'),
+  InlineIcon: require('elements/InlineIcon/InlineIcon.fixture'),
   FormLabel: require('forms/FormLabel/FormLabel.fixture'),
   FormTextInput: require('forms/FormTextInput/FormTextInput.fixture'),
   FormButton: require('forms/FormButton/FormButton.fixture'),
@@ -45,8 +46,11 @@ else { // List available fixtures to display
   const fixtures = demoSupport.FixturesContents(fixtureComponentsList)
   content = (
     <div className="demoIndex">
+      <h3 className="demoIndex-Title">Available fixtures</h3>
       {fixtures}
-      <p className="demoIndex-Comment">TODO: Demos list, navigation, styles</p>
+      <h3 className="demoIndex-Title">Available demos</h3>
+      (TODO)
+      <p className="demoIndex-Comment">TODO: Navigation, styles</p>
     </div>
   )
 }
