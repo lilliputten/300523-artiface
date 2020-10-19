@@ -2,22 +2,22 @@
 
 ## Components to refactor
 
-Legend: `[~]` -- in progress, `[+]` -- done;
+Legend: `[x]` -- in progress, `[x]` -- done;
 
-- [+] `FormButton` (TODO: styles)
+- ~~[x] `FormButton` (TODO: styles)~~
 - [ ] `FormDateRange`
 - [ ] `FormDateTime`
-- [~] `FormGroup`
+- [x] `FormGroup`
 - [ ] `FormHoverableHOC` (?)
-- [~] `FormItem` (mods: fullWidth, innerFlex (?), disabled, framed (?))
-- [~] `FormLabel`
+- [x] `FormItem` (mods: fullWidth, innerFlex (?), disabled, framed (?))
+- [x] `FormLabel`
 - [ ] `FormLabeledGroup`
 - [ ] `FormPager`
 - [ ] `FormPasswordInput`
 - [ ] `FormRadio`
 - [ ] `FormSelect`
 - [ ] `FormText`
-- [~] `FormTextInput`
+- [x] `FormTextInput`
 
 ## Newsly added:
 
@@ -33,5 +33,5 @@ Legend: `[~]` -- in progress, `[+]` -- done;
 - Different item sizes (sm, md, xl, xxl).
 
 <!--
- @changed 2020.10.06, 22:36
+ @changed 2020.10.19, 23:36
 -->
