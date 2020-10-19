@@ -1,9 +1,11 @@
 #!/bin/sh
 # @desc Increment version number
-# @changed 2020.05.27, 22:54
+# @changed 2020.10.19, 03:57
 
 VERSION_FILE="build-version.txt"
 BACKUP="$VERSION_FILE.bak"
+
+test -f "$VERSION_FILE" || echo "0.0.0" > "$VERSION_FILE"
 
 echo "Version: `cat $VERSION_FILE`"
 

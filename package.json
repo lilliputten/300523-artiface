@@ -92,6 +92,7 @@
     "webpack-file-preprocessor-plugin": "0.0.2"
   },
   "scripts": {
+    "postinstall-patches-UNUSED": "echo --Apply patches (posix commands used)-- && cd \"!Patches\" && pwd && sh ./patch-tool-apply-all && cd ..",
     "postinstall-publish-submodule": "echo --Install publish submodule (posix commands used)-- && sh ./util-publish-init.sh",
     "postinstall": "echo --Run postinstall tasks-- && npm-run-all postinstall-publish-submodule",
     "stylelint": "echo --Styles linting-- && stylelint src/**/*.{css,pcss} --syntax scss && echo No styles problems found",
@@ -120,8 +121,9 @@
     "webpack": "echo --Build development demo and watch changes (alias to build-demo-dev-watch)-- && webpack --mode development --watch",
     "build": "npm run -s build-prod",
     "build-all": "npm-run-all build-dev build-prod build-demo-dev build-demo-prod",
-    "update-build-time": "echo --Update build timestamp-- && node ./util-update-build-time.js",
-    "update-build-props": "echo --Update build properties-- && sh ./util-update-build-variables.sh",
+    "increment-version": "echo --Increment patch version-- && node util-increment-version.js",
+    "update-build-time": "echo --Update build timestamp-- && node util-update-build-time.js",
+    "update-build-variables": "echo --Update build properties-- && sh util-update-build-variables.sh",
     "help": "echo --List all available script commands-- && npm-package-user-scripts-list"
   }
 }
