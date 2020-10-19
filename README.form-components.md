@@ -2,7 +2,7 @@
 
 ## Components to refactor
 
-Legend: `[x]` -- in progress, `[x]` -- done;
+Legend: `[ ]` -- todo, `[x]` -- in progress, ~~`[x]`~~ -- done;
 
 - ~~[x] `FormButton` (TODO: styles)~~
 - [ ] `FormDateRange`
