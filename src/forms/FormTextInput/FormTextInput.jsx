@@ -18,6 +18,13 @@ import './FormTextInput.pcss'
 
 const cnFormTextInput = cn('FormTextInput')
 
+// const classNameModifiers = [
+//   // Basic element properties
+//   'id',
+//   // Style-related modifiers...
+//   'fullWidth',
+// ]
+
 class FormTextInput extends React.Component /** @lends @FormTextInput.prototype */ {
 
   // constructor(props) {
@@ -35,6 +42,14 @@ class FormTextInput extends React.Component /** @lends @FormTextInput.prototype 
       id,
     }, [this.props.className])
     return classList
+    // const mods = classNameModifiers.reduce((mods, id) => {
+    //   const val = [> (this.state[id] != null) ? this.state[id] : <] this.props[id]
+    //   if (val != null) {
+    //     return { ...mods, [id]: val }
+    //   }
+    //   return mods
+    // }, {})
+    // return cnFormTextInput(mods, [this.props.className])
   }
 
   // Event handlers...
@@ -92,6 +107,7 @@ class FormTextInput extends React.Component /** @lends @FormTextInput.prototype 
       disabled,
       onChange,
       placeholder,
+      title,
       type = 'text',
     } = this.props
 
@@ -105,6 +121,7 @@ class FormTextInput extends React.Component /** @lends @FormTextInput.prototype 
       // value: value,
       // defaultValue: defaultValue,
       // onChange: this.handleChange,
+      title,
       placeholder: placeholder,
       ref: (domElem) => { this.inputDomElem = domElem },
       // onFocus: this.onFocusIn,
@@ -155,15 +172,16 @@ class FormTextInput extends React.Component /** @lends @FormTextInput.prototype 
 
     const {
       id,
-      inputId,
-      name,
-      value,
-      defaultValue,
+      // inputId,
+      // name,
+      // value,
+      // defaultValue,
       disabled,
-      placeholder,
+      // placeholder,
       type = 'text',
       icon,
       iconTitle,
+      // title,
       onIconClick,
       setDomRef,
     } = this.props

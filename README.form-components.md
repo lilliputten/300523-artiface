@@ -19,7 +19,7 @@ Legend: `[ ]` -- todo, `[x]` -- in progress, ~~`[x]`~~ -- done;
 - [ ] `FormText`
 - [x] `FormTextInput`
 
-## Newsly added:
+## Recently added service components:
 
 - `InlineIcon` (2020.10.07)
 

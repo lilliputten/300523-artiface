@@ -21,6 +21,7 @@ const classNameModifiers = [
   'padded',
   'background',
   'flow',
+  // 'fullWidth',
 ]
 
 const cnFormGroup = cn('FormGroup')
@@ -34,7 +35,6 @@ class FormGroup extends React.Component /** @lends @FormGroup.prototype */ {
   }
 
   getClassName() {
-
     const mods = classNameModifiers.reduce((mods, id) => {
       const val = (this.state[id] != null) ? this.state[id] : this.props[id]
       if (val != null) {
@@ -42,7 +42,6 @@ class FormGroup extends React.Component /** @lends @FormGroup.prototype */ {
       }
       return mods
     }, {})
-
     return cnFormGroup(mods, [this.props.className])
   }
 

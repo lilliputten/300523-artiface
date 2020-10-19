@@ -6,7 +6,7 @@
 import React from 'react'
 import FormTextInput from './FormTextInput'
 import FormGroup from '../FormGroup'
-import FormButton from '../FormButton'
+// import FormButton from '../FormButton'
 
 // Demo styles for cosmos engine
 import 'demo.pcss'
@@ -18,7 +18,8 @@ export default {
     className="addClassName"
     type="text"
     name="name"
-    id="id"
+    id="defaultInput"
+    inputId="defaultInputControl"
     value="value"
     placeholder="placeholder"
     title="title"
@@ -30,5 +31,11 @@ export default {
     ref={(domElem) => { this.LimitInput = domElem }}
     */
   />,
-  buttonSample: <FormButton text="Button sample" style="default" />
+  fullWidth: <FormTextInput
+    type="text"
+    name="name"
+    id="fullWidthInput"
+    fullWidth
+  />,
+  // buttonSample: <FormButton text="Button sample" style="default" />
 }

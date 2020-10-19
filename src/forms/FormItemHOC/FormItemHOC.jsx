@@ -68,7 +68,7 @@ const wrapFormItemHOC = (WrappedComponent, params = {}) => class extends React.C
 
   // Helper methods...
 
-  getFlag(id) { // Get parameter from state or from props
+  getStateOrPropOrParam(id) { // Get parameter from state or from props
     return (this.state[id] != null) ? this.state[id] :
       (this.props[id] != null) ? this.props[id] :
         params[id]
@@ -117,7 +117,7 @@ const wrapFormItemHOC = (WrappedComponent, params = {}) => class extends React.C
   getClassName() {
     // Collect modifier values from state or props
     const mods = classNameModifiers.reduce((mods, id) =>{
-      const val = this.getFlag(id) // (this.state[id] != null) ? this.state[id] : this.props[id]
+      const val = this.getStateOrPropOrParam(id) // (this.state[id] != null) ? this.state[id] : this.props[id]
       if (val != null) {
         mods[id] = val
       }
@@ -136,15 +136,15 @@ const wrapFormItemHOC = (WrappedComponent, params = {}) => class extends React.C
    */
 
   handleMouseOver = () => {
-    const disabled = this.getFlag('disabled')
-    const hoverable = this.getFlag('hoverable')
+    const disabled = this.getStateOrPropOrParam('disabled')
+    const hoverable = this.getStateOrPropOrParam('hoverable')
     if (hoverable && !disabled) {
       this.setState({ hovered: true })
     }
   }
   handleMouseOut = () => {
-    const disabled = this.getFlag('disabled')
-    const hoverable = this.getFlag('hoverable')
+    const disabled = this.getStateOrPropOrParam('disabled')
+    const hoverable = this.getStateOrPropOrParam('hoverable')
     if (hoverable && !disabled) {
       this.setState({ hovered: false })
     }

@@ -83,7 +83,7 @@ class FormLabel extends React.Component /** @lends @FormLabel.prototype */ {
           htmlFor={htmlFor}
           title={title}
         >
-          {text || title || children}
+          {children || text || title}
         </label>
       </div>
     )
