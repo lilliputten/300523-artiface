@@ -12,21 +12,21 @@ Newly added instructions must be added to next places:
 
 Legend: `[ ]` -- todo, `[x]` -- in progress, ~~`[x]`~~ -- done;
 
+- ~~[x] `FormItemHOC` (mods: fullWidth, innerFlex (?), disabled, framed (?))~~
 - ~~[x] `FormButton`~~
 - ~~[x] `FormButtonGroup`~~
 - ~~[x] `FormInputGroup`~~
 -   [ ] `FormDateRange`
 -   [ ] `FormDateTime`
--   [x] `FormGroup`
--   [x] `FormItem` (mods: fullWidth, innerFlex (?), disabled, framed (?))
--   [x] `FormLabel`
+- ~~[x] `FormGroup`~~
+- ~~[x] `FormLabel`~~
 -   [ ] `FormLabeledGroup`
 -   [ ] `FormPager`
 -   [ ] `FormPasswordInput`
 -   [ ] `FormRadio`
 -   [ ] `FormSelect`
 -   [ ] `FormText`
--   [x] `FormTextInput`
+- ~~[x] `FormTextInput`~~
 -   [ ] `FormTextareaInput`
 
 ## Elements to remove?
