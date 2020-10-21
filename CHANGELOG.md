@@ -1,5 +1,7 @@
 # CHANGELOG
 
+- 2020.10.21, 23:45 -- FormButtonGroup.
+- 2020.10.21, 20:45 -- FormButton styles (theme & raw colors).
 - 2020.10.20, 01:12 -- FormTextInput, FormLabel, FormGroup, FormItem: demo fixtures, fullWidth property.
 - 2020.10.07, 15:36 -- `FormTextInput`: done in general.
 - 2020.10.06, 13:39 -- v.0.1.1: Scaffolded repos on `gitlab.local` (with tag).

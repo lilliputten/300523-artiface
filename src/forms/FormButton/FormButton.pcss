@@ -1,6 +1,6 @@
 /** @module FormButton.styles
  *  @since 2020.07.20, 19:24
- *  @changed 2020.07.20, 19:24
+ *  @changed 2020.10.21, 23:42
  */
 
 .FormButton {
@@ -69,6 +69,10 @@
     }
   }
 
+  &.FormItem_hovered {
+    z-index: 10; // Lift active item up
+  }
+
   // &_fullWidth {
   //   display: block;
   // }
@@ -82,4 +86,3 @@
   // }
 
 }
-
