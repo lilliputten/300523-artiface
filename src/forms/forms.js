@@ -15,7 +15,7 @@ export FormGroup from './FormGroup'
 // TODO...
 
 // export FormLabeledGroup from './FormLabeledGroup'
-// export FormItem from './FormItem'
+// export FormItem from './FormItem' // Used as HOC mixin, invisible
 //
 // export FormText from './FormText'
 // export FormLabel from './FormLabel'
@@ -23,7 +23,7 @@ export FormGroup from './FormGroup'
 // export FormDateRange from './FormDateRange'
 // export FormDateTime from './FormDateTime'
 // export FormSelect from './FormSelect'
-// export FormTextInput from './FormTextInput'
+export FormTextInput from './FormTextInput'
 // export FormPasswordInput from './FormPasswordInput'
 // export FormRadio from './FormRadio'
 //

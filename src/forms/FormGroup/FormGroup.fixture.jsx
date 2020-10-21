@@ -5,6 +5,8 @@
 
 import React from 'react'
 import FormGroup from './FormGroup'
+
+import FormLabel from '../FormLabel'
 import FormButton from '../FormButton'
 import FormTextInput from '../FormTextInput'
 
@@ -14,6 +16,8 @@ import { // Icons (solid)...
 
 // Demo styles for cosmos engine
 import 'demo.pcss'
+
+import './FormGroup.fixture.pcss'
 
 export const demoTitle = 'FormGroup component'
 
@@ -25,11 +29,13 @@ export default {
     </FormGroup>
   ),
   fullWidth: (
-    <FormGroup fullWidth>
+    <FormGroup fullWidth id="FormGroupFixture">
+      <FormLabel htmlFor="fullWidthControl" title="Label">Label</FormLabel>
       <FormTextInput
         type="text"
         name="name"
         id="fullWidthInput"
+        inputId="fullWidthControl"
         fullWidth
       />
     </FormGroup>

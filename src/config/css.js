@@ -1,7 +1,7 @@
 /** @module config.css
  *  @description Global styles config
  *  @since 2019.08.29, 10:28
- *  @changed 2019.09.03, 11:04
+ *  @changed 2020.10.21, 22:52
  */
 
 // Theme...
@@ -34,11 +34,13 @@ const cssConfig = { // Common-used css variables...
 
   // Colors for dialogs styles
   errorColor: theme.errorColor || '#c33',
-  warnColor: theme.warnColor || '#f96',
-  successColor: theme.successColor || '#ac9',
-  infoColor: theme.infoColor || '#9bd',
-  confirmColor: theme.confirmColor || theme.primaryColor || textColor,
+  warnColor: theme.warnColor || '#f73', // '#f96',
+  successColor: theme.successColor || '#593', // '#ac9',
+  infoColor: theme.infoColor || '#29a', // '#9bd',
+  confirmColor: theme.confirmColor /* || theme.primaryColor || textColor */ || '#891', // '#07f',
   selectColor: theme.selectColor || '#05b',
+
+  specialContrastColor: '#fff', // Generic contrast for accenting colors
 
   textColor,
   defaultTextColor: textColor,
@@ -126,6 +128,7 @@ const cssConfig = { // Common-used css variables...
 
 }
 
+const formItemSpacing = 4
 const formItemHeight = 32 // px
 const formItemBorderSize = 1 // px
 const formItemInnerHeight = formItemHeight - formItemBorderSize * 2 // px
@@ -134,6 +137,7 @@ Object.assign(cssConfig, { // Form properties...
 
   // Forms...
 
+  formItemSpacing, // px
   formItemHeight, // px
   formItemBorderSize, // px
   formItemInnerHeight, // px
@@ -149,7 +153,7 @@ Object.assign(cssConfig, { // Form properties...
 
   formPlaceholderColor: '#ccc',
 
-  tableBorderWidth: 2,
+  // tableBorderWidth: 2,
 
   defaultIconSize: 24,
   smallIconSize: 16,

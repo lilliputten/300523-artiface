@@ -7,6 +7,7 @@
   // NOTE: FormItem is inherited
   border-color: $formItemBorderColor;
   input&-Control {
+    // box-shadow: inset 0 0 1px red; // DEBUG
     @mixin FormItemTextControlMixin;
     // outline: none;
     &:-internal-autofill-selected,
@@ -22,6 +23,9 @@
     }
     &:-webkit-autofill { // Emulate input frame (hidden by autofill background)
       border: 1px solid $neutralColor;
+    }
+    &::-ms-clear {
+      display: none;
     }
   }
   &_hasIcon {

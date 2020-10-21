@@ -17,6 +17,7 @@ import * as demoSupport from './demoSupport'
 // Demo app styles
 import './demo.pcss'
 
+// import * as build from './build'
 import './build'
 
 const fixtureComponentsList = {
@@ -52,7 +53,7 @@ else { // List available fixtures to display
       {fixtures}
       <h3 className="demoIndex-Title">Available demos</h3>
       (TODO)
-      <p className="demoIndex-Comment">TODO: Navigation, styles</p>
+      <p className="demoIndex-Comment">TODO: Navigation, styles, hierarchical components structure</p>
     </div>
   )
 }
