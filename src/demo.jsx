@@ -28,6 +28,7 @@ const fixtureComponentsList = {
   FormButton: require('forms/FormButton/FormButton.fixture'),
   FormGroup: require('forms/FormGroup/FormGroup.fixture'),
   FormButtonGroup: require('forms/FormButtonGroup/FormButtonGroup.fixture'),
+  FormInputGroup: require('forms/FormInputGroup/FormInputGroup.fixture'),
 }
 
 const findFixture = window.location.search && window.location.search.match(/\bfixture=(([^&:]+)(?::([^&]+))?)/)

@@ -1,7 +1,7 @@
 /** @module forms
  *  @desc Form components
  *  @since 2020.07.20, 19:21
- *  @changed 2020.07.20, 19:21
+ *  @changed 2020.10.22, 00:16
  */
 
 // Form elements...
@@ -12,6 +12,7 @@ export FormLabel from './FormLabel'
 export FormButton from './FormButton'
 export FormGroup from './FormGroup'
 export FormButtonGroup from './FormButtonGroup'
+export FormInputGroup from './FormInputGroup'
 
 // TODO...
 

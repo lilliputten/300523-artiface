@@ -1,0 +1,31 @@
+/** @module FormInputGroup.styles
+ *  @class FormInputGroup
+ *  @since 2020.10.21, 23:43
+ *  @changed 2020.10.21, 23:43
+ */
+
+.FormInputGroup {
+  $hMargin: $formItemSpacing;
+  $vMargin: $formItemSpacing;
+  > .FormItem {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  > .FormItem:not(:last-child) {
+    margin-right: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    // border-right-width: 0;
+  }
+  > .FormItem:not(:first-child) {
+    margin-left: 0;
+    margin-left: -1px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    // border-left-width: 0;
+  }
+  .FormGroup > .FormItem& {
+    margin-top: $(vMargin)px;
+    margin-bottom: $(vMargin)px;
+  }
+}

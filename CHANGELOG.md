@@ -1,5 +1,6 @@
 # CHANGELOG
 
+- 2020.10.22, 00:15 -- FormInputGroup.
 - 2020.10.21, 23:45 -- FormButtonGroup.
 - 2020.10.21, 20:45 -- FormButton styles (theme & raw colors).
 - 2020.10.20, 01:12 -- FormTextInput, FormLabel, FormGroup, FormItem: demo fixtures, fullWidth property.
