@@ -1,6 +1,6 @@
 {
   "bundleDependencies": false,
-  "name": "YouFaceDist",
+  "name": "WebUiCoreDist",
   "version": "0.0.6",
   "timestamp": "2020.05.26, 22:32",
   "timetag": "200526-2232",
