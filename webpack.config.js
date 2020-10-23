@@ -120,7 +120,7 @@ module.exports = (env, argv) => {
   ].join('-')
 
   // NOTE: Dynamically created dist library name from project name
-  const buildLibName = pkgConfig.name + 'Dist' // 'YouFaceDist'
+  const buildLibName = pkgConfig.name + 'Dist' // 'WebUiCoreDist'
 
   const useHashes = false // NOTE: Not works with pseudo-dynamic bundles loading method (with hardcoded urls)
   const bundleName = ({ ext, name, dir } = {}) => (dir || 'js/') + (name || '[name]') + (useHashes && !isWatch && !isDevServer ? '-[contenthash:8]' : '') + (ext || '.js')

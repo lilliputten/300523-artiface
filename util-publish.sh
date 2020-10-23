@@ -3,7 +3,7 @@
 # @changed 2020.10.06, 01:52
 
 # Import config variables (expected variables `$DIST_REPO` and `$PUBLISH_FOLDER`)...
-# DIST_REPO="git@github.com:lilliputten/YouFaceDist.git"
+# DIST_REPO="git@github.com:lilliputten/WebUiCoreDist.git"
 # PUBLISH_FOLDER="publish"
 test -f "./util-config.sh" && . "./util-config.sh"
 test -f "./util-config-local.sh" && . "./util-config-local.sh"

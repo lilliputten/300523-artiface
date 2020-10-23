@@ -2,7 +2,7 @@
 # @desc Config variables (common version -- stored in repository)
 # @changed 2020.10.06, 01:52
 
-# DIST_REPO="git@github.com:lilliputten/YouFaceDist.git"
-DIST_REPO="http://gitlab.local/lilliputten/WebUiYouFaceDist.git"
+# DIST_REPO="git@github.com:lilliputten/WebUiCoreDist.git"
+DIST_REPO="http://gitlab.local/lilliputten/WebUiCoreDist.git"
 
 PUBLISH_FOLDER="publish"

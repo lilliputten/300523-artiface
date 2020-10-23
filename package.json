@@ -1,5 +1,5 @@
 {
-  "name": "YouFace",
+  "name": "WebUiCore",
   "description": "Arti UI Components Library",
   "NOTE": "All version and time stamp properties are updated automatically (see `util-update-build-variables.sh`, `util-increment-version.sh`)!",
   "version": "0.0.18",
