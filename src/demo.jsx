@@ -20,9 +20,14 @@ import './demo.pcss'
 // import * as build from './build'
 import './build'
 
+// import { Popup } from 'elements'
+// console.log(Popup)
+// debugger
+
 const fixtureComponentsList = {
   Hello: require('demo/Hello/Hello.fixture'),
   InlineIcon: require('elements/InlineIcon/InlineIcon.fixture'),
+  Popup: require('elements/Popup/Popup.fixture'),
   FormLabel: require('forms/FormLabel/FormLabel.fixture'),
   FormTextInput: require('forms/FormTextInput/FormTextInput.fixture'),
   FormButton: require('forms/FormButton/FormButton.fixture'),

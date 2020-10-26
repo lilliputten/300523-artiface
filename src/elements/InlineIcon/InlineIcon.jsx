@@ -22,9 +22,9 @@ const cnInlineIcon = cn('InlineIcon')
 class InlineIcon extends React.Component /** @lends @InlineIcon.prototype */ {
 
   getClassName() {
-    const classList = cnInlineIcon({
+    const className = cnInlineIcon({
     }, [this.props.className])
-    return classList
+    return className
   }
 
   render() {
@@ -58,5 +58,3 @@ class InlineIcon extends React.Component /** @lends @InlineIcon.prototype */ {
 }
 
 export default InlineIcon
-
-// export const wrapInlineIcon = (icon) => { }

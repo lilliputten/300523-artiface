@@ -5,3 +5,4 @@
  */
 
 export InlineIcon from './InlineIcon'
+export Popup from './Popup'

@@ -111,7 +111,7 @@
     "webpack-stats": "echo --Generate webpack stats-- && webpack --profile --json --env.DIST > .webpack-stats.json",
     "webpack-stats-analyze": "echo --Analyze webpack stats-- && npm run -s webpack-stats && webpack-bundle-analyzer .webpack-stats.json build",
     "start": "echo --Run demo server-- && webpack-dev-server --mode development --hot --inline --watch",
-    "server": "echo --Run demo server (alias)-- && echo --Build production demo-- && npm run -s start",
+    "server": "echo --Run demo server (alias)-- && npm run -s start",
     "build-prod": "echo --Build production library-- && webpack --env.DIST --mode production",
     "build-dev": "echo --Build development library-- && webpack --env.DIST --mode development",
     "build-dev-watch": "echo --Build development library and watch changes-- && webpack --env.DIST --mode development --watch",

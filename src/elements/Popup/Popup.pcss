@@ -1,0 +1,52 @@
+/** @module Popup.styles
+ *  @since 2020.10.27, 00:39
+ *  @changed 2020.10.27, 00:39
+ */
+
+.Popup {
+  &-ControlWrapper {
+  }
+  &-ContentWrapper {
+    position: absolute;
+    // display: none;
+    visibility: hidden;
+    animation-name: WebUiCore_Popup;
+    animation-duration: .2s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+    background: #fff;
+    box-shadow: 0 0 0 1px rgba(0,0,0,.1), 0 10px 20px -5px rgba(0,0,0,.4);
+    &_show {
+      // display: block;
+      visibility: visible;
+      animation-name: WebUiCore_Popup_visible;
+    }
+    @keyframes WebUiCore_Popup_visible {
+      0% {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    @keyframes WebUiCore_Popup {
+      0% {
+        visibility: visible;
+        margin: 0;
+        transform: translateY(0);
+        opacity: 1;
+      }
+      99% {
+        margin: 0;
+        transform: translateY(10px);
+      }
+      100% {
+        visibility: hidden;
+        margin: -9999px 0 0 -9999px;
+        opacity: 0;
+      }
+    }
+  }
+}
