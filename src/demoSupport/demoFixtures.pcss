@@ -1,0 +1,45 @@
+/** @module demoSupport.pcss
+ *  @since 2020.10.05, 13:59
+ *  @changed 2020.10.06, 22:07
+ */
+
+.demoIndex {
+  &-Title {
+    font-size: $(fontSizeXxl)px;
+  }
+}
+
+.FixturesContents {
+  &-List {
+    display: block;
+    padding-left: 0;
+    margin: 10px 0;
+    padding-bottom: 10px;
+    &_root {
+    }
+    &_subitems {
+      font-size: $(defaultFontSize)px;
+      margin-left: -8px;
+      margin-right: -8px;
+    }
+  }
+  &-Item {
+    list-style-type: none;
+    a {
+      text-decoration: none;
+      color: $defaultTextColor;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+    &_root {
+      border-top: 1px solid $neutralLightColor;
+      padding-top: 15px;
+      font-size: $(fontSizeLg)px;
+    }
+    &_subitem {
+      display: inline-block;
+      padding: 2px 8px;
+    }
+  }
+}

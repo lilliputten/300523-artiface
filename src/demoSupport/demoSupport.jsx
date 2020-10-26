@@ -8,10 +8,11 @@ import { cn } from '@bem-react/classname'
 // import config from 'config'
 
 // import './demoSupport.pcss'
+import './demoFixtures.pcss'
 
 export const FixtureInfo = ({ children }) => {
   return (
-    <h3 className="FixtureInfo">{children}</h3>
+    <h2 className="FixtureInfo">{children}</h2>
   )
 }
 
@@ -77,7 +78,7 @@ export const FixturesContents = (hash) => {
     )
     // Create full fixture description (link, title, sub-items)...
     return (
-      <li key={id} className={cnFixturesContents('Item')}>
+      <li key={id} className={cnFixturesContents('Item', { root: true })}>
         <a href={link}>
           {demoTitle}
         </a>
@@ -89,7 +90,7 @@ export const FixturesContents = (hash) => {
   return (
     <div className={cnFixturesContents()}>
       <FixtureInfo text="Available fixtures:" />
-      <ul className={cnFixturesContents('List')}>
+      <ul className={cnFixturesContents('List', { root: true })}>
         {listContent}
       </ul>
     </div>
