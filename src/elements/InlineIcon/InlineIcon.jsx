@@ -22,7 +22,11 @@ const cnInlineIcon = cn('InlineIcon')
 class InlineIcon extends React.Component /** @lends @InlineIcon.prototype */ {
 
   getClassName() {
+    const {
+      id,
+    } = this.props
     const className = cnInlineIcon({
+      id,
     }, [this.props.className])
     return className
   }

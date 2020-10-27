@@ -96,11 +96,14 @@ class Popup extends React.Component /** @lends @Popup.prototype */ {
 
   getClassName() {
     const {
+      id,
+    } = this.props
+    const {
       show,
       // wasShown,
     } = this.state
-
     const className = cnPopup({
+      id,
       show,
     }, [this.props.className])
     return className

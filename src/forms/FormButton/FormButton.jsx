@@ -168,7 +168,7 @@ class FormButton extends React.Component /** @lends @FormButton.prototype */ {
       type,
       title,
       // icon,
-      setDomRef,
+      setDomRef, // From FormItemHOC
       // faIcon,
       // hasIcon,
       // hasText,
@@ -187,7 +187,7 @@ class FormButton extends React.Component /** @lends @FormButton.prototype */ {
       title,
       type,
       onClick: this.onClick,
-      ref: setDomRef,
+      ref: setDomRef, // Init ref for FormItemHOC
     }
 
     // const content = [ iconElem, textElem ] // children || text

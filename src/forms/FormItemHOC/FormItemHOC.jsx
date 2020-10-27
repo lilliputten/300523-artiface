@@ -78,10 +78,6 @@ const wrapFormItemHOC = (WrappedComponent, params = {}) => class extends React.C
 
   constructor(props) {
     super(props)
-    // if (params.framed) {
-    //   console.log(this.state)
-    //   debugger
-    // }
     this.state = deriveState(defaultState, params, props) // deriveStateFromProps(props, defaultState)
     this.id = props.id || params.id
     // this.formItemRef = React.createRef()
@@ -150,7 +146,7 @@ const wrapFormItemHOC = (WrappedComponent, params = {}) => class extends React.C
     }
   }
 
-  setDomRef = (domRef) => {
+  setDomRef = (domRef) => { // Children dom node receiver
     this.formItemDomRef = domRef
   }
 
@@ -165,7 +161,7 @@ const wrapFormItemHOC = (WrappedComponent, params = {}) => class extends React.C
         hovered={hovered}
         focused={focused}
         className={this.getClassName()}
-        setDomRef={this.setDomRef}
+        setDomRef={this.setDomRef} // Children dom node receiver
       />
     )
   }

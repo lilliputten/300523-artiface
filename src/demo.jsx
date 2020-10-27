@@ -20,20 +20,22 @@ import './demo.pcss'
 // import * as build from './build'
 import './build'
 
-// import { Popup } from 'elements'
-// console.log(Popup)
-// debugger
-
 const fixtureComponentsList = {
+
   Hello: require('demo/Hello/Hello.fixture'),
+
   InlineIcon: require('elements/InlineIcon/InlineIcon.fixture'),
   Popup: require('elements/Popup/Popup.fixture'),
+  Menu: require('elements/Menu/Menu.fixture'),
+  MenuItem: require('elements/MenuItem/MenuItem.fixture'),
+
   FormLabel: require('forms/FormLabel/FormLabel.fixture'),
   FormTextInput: require('forms/FormTextInput/FormTextInput.fixture'),
   FormButton: require('forms/FormButton/FormButton.fixture'),
   FormGroup: require('forms/FormGroup/FormGroup.fixture'),
   FormButtonGroup: require('forms/FormButtonGroup/FormButtonGroup.fixture'),
   FormInputGroup: require('forms/FormInputGroup/FormInputGroup.fixture'),
+
 }
 
 const findFixture = window.location.search && window.location.search.match(/\bfixture=(([^&:]+)(?::([^&]+))?)/)
