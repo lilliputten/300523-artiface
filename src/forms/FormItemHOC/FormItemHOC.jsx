@@ -64,6 +64,9 @@ const deriveState = (...sets) => {
  * }
  */
 
+// Unique id counter
+let uniqIdCount = 1
+
 const wrapFormItemHOC = (WrappedComponent, params = {}) => class extends React.Component {
 
   // Helper methods...
@@ -72,6 +75,15 @@ const wrapFormItemHOC = (WrappedComponent, params = {}) => class extends React.C
     return (this.state[id] != null) ? this.state[id] :
       (this.props[id] != null) ? this.props[id] :
         params[id]
+  }
+
+  createUniqId() {
+    return 'FormItem' + (uniqIdCount++)
+  }
+
+  getId(props) {
+    props = props || this.props
+    return props.id || this.id || (this.id = this.createUniqId())
   }
 
   // Lifecycle methods...
@@ -151,13 +163,16 @@ const wrapFormItemHOC = (WrappedComponent, params = {}) => class extends React.C
   }
 
   render() {
+    // const id = this.getId() // this.props.id || this.id || (this.id = this.createUniqId())
     const {
       hovered,
       focused,
     } = this.state
+    // TODO: Generate unique id?
     return (
       <WrappedComponent
         {...this.props}
+        // id={id}
         hovered={hovered}
         focused={focused}
         className={this.getClassName()}

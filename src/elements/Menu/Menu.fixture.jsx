@@ -23,13 +23,13 @@ const items = [
   { val: 1, text: 'Swimming' },
   { val: 2, text: 'Skiing' },
 ]
-const itemElems = items.map((props) => {
-  return React.createElement(MenuItem, { ...props, key: props.val })
+const itemElems = items.map((props, i) => {
+  return i ? props : React.createElement(MenuItem, { ...props, key: props.val })
 })
 
 export default {
   default: (
-    <Menu>
+    <Menu layout="vertical">
       {itemElems}
     </Menu>
   ),

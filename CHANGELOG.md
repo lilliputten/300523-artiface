@@ -1,5 +1,7 @@
 # CHANGELOG
 
+- 2020.10.27, 05:58 -- Menu, MenuItems: basic functional.
+- 2020.10.27, 01:00 -- Popup: basic functional.
 - 2020.10.22, 00:15 -- FormInputGroup.
 - 2020.10.21, 23:45 -- FormButtonGroup.
 - 2020.10.21, 20:45 -- FormButton styles (theme & raw colors).

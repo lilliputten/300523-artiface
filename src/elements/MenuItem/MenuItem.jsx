@@ -17,8 +17,16 @@ const cnMenuItem = cn('MenuItem')
 
 class MenuItem extends React.Component /** @lends @MenuItem.prototype */ {
 
+  // Event handlers...
+
   onClick = () => {
+    const { id, val, onClick } = this.props
+    if (typeof onClick === 'function') {
+      onClick({ id, val, component: this })
+    }
   }
+
+  // Helper methods...
 
   getClassName() {
     const {
@@ -38,6 +46,8 @@ class MenuItem extends React.Component /** @lends @MenuItem.prototype */ {
     return className
   }
 
+  // Render...
+
   renderContent() {
     const {
       children,
@@ -51,13 +61,14 @@ class MenuItem extends React.Component /** @lends @MenuItem.prototype */ {
   render() {
 
     const {
-      id,
-      // onClick,
+      // id,
+      htmlId,
       setDomRef, // From FormItemHOC
     } = this.props
 
     const renderProps = {
-      id,
+      // id,
+      id: htmlId,
       className: this.getClassName(),
       onClick: this.onClick,
       ref: setDomRef, // Init ref for FormItemHOC
@@ -75,4 +86,3 @@ class MenuItem extends React.Component /** @lends @MenuItem.prototype */ {
 }
 
 export default FormItemHOC({ hoverable: true })(MenuItem)
-

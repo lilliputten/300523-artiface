@@ -12,19 +12,22 @@ Newly added instructions must be added to next places:
 
 Legend: `[ ]` -- todo, `[x]` -- in progress, ~~`[x]`~~ -- done;
 
+- ~~[x] `InlineIcon`~~
+-   [x] `Popup`
+-   [x] `Menu`, `MenuItem` (in progress)
 - ~~[x] `FormItemHOC` (mods: fullWidth, innerFlex (?), disabled, framed (?))~~
 - ~~[x] `FormButton`~~
 - ~~[x] `FormButtonGroup`~~
 - ~~[x] `FormInputGroup`~~
--   [ ] `FormDateRange`
--   [ ] `FormDateTime`
+-   [ ] `FormDateRange` (???)
+-   [ ] `FormDateTime` (???)
 - ~~[x] `FormGroup`~~
 - ~~[x] `FormLabel`~~
 -   [ ] `FormLabeledGroup`
 -   [ ] `FormPager`
 -   [ ] `FormPasswordInput`
 -   [ ] `FormRadio`
--   [ ] `FormSelect`
+-   [ ] `FormSelect` (based on `Popup` & `Menu`)
 -   [ ] `FormText`
 - ~~[x] `FormTextInput`~~
 -   [ ] `FormTextareaInput`
@@ -33,19 +36,14 @@ Legend: `[ ]` -- todo, `[x]` -- in progress, ~~`[x]`~~ -- done;
 
 - [ ] `FormHoverableHOC` (?)
 
-## Recently added service components:
-
-- `InlineIcon` (2020.10.07)
-
 ## To implement
 
 - `FormSwitch`
-- `Popup`
 
 ## TODO
 
 - Different item sizes (sm, md, xl, xxl).
 
 <!--
- @changed 2020.10.22, 00:16
+ @changed 2020.10.27, 06:05
 -->

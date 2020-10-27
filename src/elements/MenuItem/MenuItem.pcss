@@ -4,7 +4,14 @@
  */
 
 .MenuItem {
+  padding: 2px 6px;
   &:not(&_disabled) {
     cursor: pointer;
+  }
+  &.FormItem {
+    &_hovered {
+      background-color: $primaryColor;
+      color: $primaryContrastColor;
+    }
   }
 }
