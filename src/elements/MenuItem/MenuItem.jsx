@@ -9,6 +9,8 @@ import React from 'react'
 // import connect from 'react-redux/es/connect/connect'
 import { cn } from '@bem-react/classname'
 
+import InlineIcon from 'elements/InlineIcon'
+
 import FormItemHOC from 'forms/FormItemHOC'
 
 import './MenuItem.pcss'
@@ -32,6 +34,7 @@ class MenuItem extends React.Component /** @lends @MenuItem.prototype */ {
     const {
       id,
       checkable,
+      withIcon,
       checked,
       disabled,
       // title,
@@ -40,6 +43,7 @@ class MenuItem extends React.Component /** @lends @MenuItem.prototype */ {
     const className = cnMenuItem({
       id,
       checkable,
+      withIcon,
       checked,
       disabled,
     }, [this.props.className])
@@ -48,20 +52,36 @@ class MenuItem extends React.Component /** @lends @MenuItem.prototype */ {
 
   // Render...
 
-  renderContent() {
+  renderIconContent() {
+    const {
+      withIcon,
+      checkable,
+      checked,
+      icon,
+    } = this.props
+    if ((withIcon && icon) || (checkable && checked)) {
+      const iconContent = icon || 'faCheck'
+      return iconContent && <InlineIcon icon={iconContent} className={cnMenuItem('Icon')} />
+    }
+  }
+
+  renderTextContent() {
     const {
       children,
       text,
-      // title,
-      // val,
     } = this.props
-    return children || text
+    return (
+      <span className={cnMenuItem('Text')}>
+        {children || text}
+      </span>
+    )
   }
 
   render() {
 
     const {
       // id,
+      val,
       htmlId,
       setDomRef, // From FormItemHOC
     } = this.props
@@ -74,11 +94,15 @@ class MenuItem extends React.Component /** @lends @MenuItem.prototype */ {
       ref: setDomRef, // Init ref for FormItemHOC
     }
 
-    const content = this.renderContent()
+    const iconContent = this.renderIconContent()
+    const textContent = this.renderTextContent()
+
+    console.log('MenuItem:render', val)
 
     return (
       <div {...renderProps}>
-        {content}
+        {iconContent}
+        {textContent}
       </div>
     )
   }

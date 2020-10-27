@@ -1,6 +1,6 @@
 /** @module Menu.fixture
  *  @since 2020.10.27, 02:58
- *  @changed 2020.10.27, 02:58
+ *  @changed 2020.10.27, 21:16
  */
 
 import React from 'react'
@@ -10,9 +10,9 @@ import MenuItem from '../MenuItem'
 // import FormButton from 'forms/FormButton'
 // import FormGroup from '../FormGroup'
 
-import { // Icons (solid)...
-  faCheck,
-} from '@fortawesome/free-solid-svg-icons'
+// import { // Icons (solid)...
+//   faCheck,
+// } from '@fortawesome/free-solid-svg-icons'
 
 // Demo styles for cosmos engine
 import 'demo.pcss'
@@ -21,15 +21,29 @@ import 'demo.pcss'
 
 const items = [
   { val: 1, text: 'Swimming' },
-  { val: 2, text: 'Skiing' },
+  { val: 2, text: 'Skiing', checked: true },
 ]
 const itemElems = items.map((props, i) => {
   return i ? props : React.createElement(MenuItem, { ...props, key: props.val })
 })
 
+const onChange = ({ checkedValues }) => {
+  console.log('Menu.fixture: onChange handler', checkedValues)
+  // debugger
+}
+const onClick = ({ val }) => {
+  console.log('Menu.fixture: onClick handler', val)
+  // debugger
+}
+
 export default {
   default: (
-    <Menu layout="vertical">
+    <Menu layout="vertical" onClick={onClick}>
+      {itemElems}
+    </Menu>
+  ),
+  checkable: (
+    <Menu checkable={true} _singleChoice="mandatory" onChange={onChange}>
       {itemElems}
     </Menu>
   ),

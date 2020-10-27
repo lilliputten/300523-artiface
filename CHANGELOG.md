@@ -1,5 +1,6 @@
 # CHANGELOG
 
+- 2020.10.27, 21:28 -- Checkable menu (multiple, single, single-mandatory modes), onClick & onChange event handlers. MenuItem: checkable,checked, withIcon, icon props.
 - 2020.10.27, 05:58 -- Menu, MenuItems: basic functional.
 - 2020.10.27, 01:00 -- Popup: basic functional.
 - 2020.10.22, 00:15 -- FormInputGroup.
@@ -11,5 +12,5 @@
 - 2020.10.05, 20:38 -- v.0.0.15: Extracted `demoSupport.jsx` routines, fixture selection from url query (parameter `fixture`), added avaialble fixtures list if fixture to display is not specified, added DemoWrapper & demoTitle exportable ficture parameters for demo rendering.
 
 <!--
- @changed 2020.10.06, 13:39
+ @changed 2020.10.27, 21:29
 -->

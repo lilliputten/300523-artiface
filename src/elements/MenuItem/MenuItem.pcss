@@ -14,4 +14,17 @@
       color: $primaryContrastColor;
     }
   }
+  &_checkable,
+  &_withIcon {
+    position: relative;
+    ^&-Icon {
+      position: absolute;
+      left: 8px;
+      opacity: .5; // ???
+      // color: $(primaryColor);
+    }
+    ^&-Text {
+      padding-left: 25px;
+    }
+  }
 }
