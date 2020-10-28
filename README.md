@@ -6,6 +6,14 @@
 - Last changes timestamp: 2020.10.06, 02:18
 - Last changes timetag: 201006-0218
 
+## Documents
+
+- README.md (this document)
+- CHANGELOG.md
+- TODO.md
+- README.cosmos.md
+- README.form-components.md
+
 ## Requirements
 
 Some maintenance commands (`*.sh` scripts or commands in `scripts` section of `package.json`) utilizes specific posix command line commands like next:

@@ -38,8 +38,14 @@ export const PlaceFixture = ({ fixture, fixtureItemId, demoTitle, DemoWrapper = 
     }
   }
   else { // Display entire fixture (all items)
-    content = Object.entries(fixture).map(([key, Component]) => {
-      return { ...Component, key }
+    content = Object.entries(fixture).map(([id, Component]) => {
+      return { ...Component, key: id }
+      // return (
+      //   <div className="FixtureDemo">
+      //     <div key="FixtureTitle" className="FixtureTitle">{id}</div>
+      //     {{ ...Component, key: id }}
+      //   </div>
+      // )
     })
   }
   return (
@@ -79,9 +85,11 @@ export const FixturesContents = (hash) => {
     // Create full fixture description (link, title, sub-items)...
     return (
       <li key={id} className={cnFixturesContents('Item', { root: true })}>
-        <a href={link}>
-          {demoTitle}
-        </a>
+        <span className={cnFixturesContents('ItemTitle', { root: true })}>
+          <a href={link}>
+            {demoTitle}
+          </a>
+        </span>
         {items}
       </li>
     )

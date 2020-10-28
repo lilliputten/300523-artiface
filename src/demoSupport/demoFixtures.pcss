@@ -9,6 +9,14 @@
   }
 }
 
+.FixtureTitle {
+  // border-top: 1px solid $neutralLightColor;
+  margin: 10px 0;
+  padding: 2px 8px;
+  font-size: $(fontSizeLg)px;
+  background-color: $neutralLightColor;
+}
+
 .FixturesContents {
   &-List {
     display: block;
@@ -24,6 +32,12 @@
     }
   }
   &-Item {
+    &Title {
+      padding: 2px 8px;
+      background-color: $neutralLightColor;
+      display: block;
+      // font-size: $(fontSizeLg)px;
+    }
     list-style-type: none;
     a {
       text-decoration: none;
@@ -33,9 +47,8 @@
       }
     }
     &_root {
-      border-top: 1px solid $neutralLightColor;
-      padding-top: 15px;
-      font-size: $(fontSizeLg)px;
+      // border-top: 1px solid $neutralLightColor;
+      // padding-top: 15px;
     }
     &_subitem {
       display: inline-block;

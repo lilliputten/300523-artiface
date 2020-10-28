@@ -35,6 +35,7 @@ const fixtureComponentsList = {
   FormGroup: require('forms/FormGroup/FormGroup.fixture'),
   FormButtonGroup: require('forms/FormButtonGroup/FormButtonGroup.fixture'),
   FormInputGroup: require('forms/FormInputGroup/FormInputGroup.fixture'),
+  FormSelect: require('forms/FormSelect/FormSelect.fixture'),
 
 }
 
@@ -54,7 +55,7 @@ if (fixtureModuleExports) { // Fixture specified
   } = fixtureModuleExports
   content = demoSupport.PlaceFixture({ fixture, fixtureItemId, demoTitle, DemoWrapper })
 }
-else { // List available fixtures to display
+else { // List all available fixtures to display
   const fixtures = demoSupport.FixturesContents(fixtureComponentsList)
   content = (
     <div className="demoIndex">

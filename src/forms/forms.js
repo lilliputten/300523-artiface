@@ -24,7 +24,7 @@ export FormInputGroup from './FormInputGroup'
 //
 // export FormDateRange from './FormDateRange'
 // export FormDateTime from './FormDateTime'
-// export FormSelect from './FormSelect'
+export FormSelect from './FormSelect'
 export FormTextInput from './FormTextInput'
 // export FormPasswordInput from './FormPasswordInput'
 // export FormRadio from './FormRadio'
