@@ -20,6 +20,7 @@ const classNameModifiers = [ // Pass props/state params to class modifiers
   // Behavior-related modifiers...
   'hoverable', // Allow hover effects
   'focusable', // Allow hover effects
+  'clickable',
   // States...
   'hovered',
   'focused',

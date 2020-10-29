@@ -11,27 +11,20 @@ import { cn } from '@bem-react/classname'
 
 import FormItemHOC from '../FormItemHOC'
 
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-
 import './FormLabel.pcss'
 
 const cnFormLabel = cn('FormLabel')
 
 class FormLabel extends React.Component /** @lends @FormLabel.prototype */ {
 
-  // constructor(props) {
-  //   super(props)
-  //   this.state = {
-  //   }
-  // }
-
   getClassName() {
-    // TODO: Refactor properties!
     const {
       id,
+      // clickable,
     } = this.props
     const classList = cnFormLabel({
       id,
+      // clickable,
     }, [this.props.className])
     return classList
   }
@@ -42,9 +35,9 @@ class FormLabel extends React.Component /** @lends @FormLabel.prototype */ {
     const {
       disabled,
       onClick,
-      clickable,
+      // clickable,
     } = this.props
-    if (clickable && !disabled && onClick && typeof onClick === 'function') {
+    if (/* clickable && */ !disabled && onClick && typeof onClick === 'function') {
       onClick(event)
     }
   }
@@ -63,14 +56,11 @@ class FormLabel extends React.Component /** @lends @FormLabel.prototype */ {
       title,
     } = this.props
 
-    // const renderProps = this.getRenderProps()
     const renderProps = {
-      // ...basicRenderProps,
       id,
       className: this.getClassName(),
       disabled,
       title,
-      // onClick: this.onClick, // ???
     }
 
     return (

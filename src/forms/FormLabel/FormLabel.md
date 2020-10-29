@@ -1,6 +1,6 @@
 # FormLabel
 
-Mods: fixed, firstInBlock
+Mods: fixed, firstInBlock, clickable
 
 Props: disabled, htmlFor, {text|title|children}
 
