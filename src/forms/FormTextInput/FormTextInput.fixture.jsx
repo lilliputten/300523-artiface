@@ -1,6 +1,6 @@
 /** @module FormTextInput.fixture
  *  @since 2020.10.07, 00:20
- *  @changed 2020.10.07, 00:49
+ *  @changed 2020.10.29, 23:44
  */
 
 import React from 'react'
@@ -33,11 +33,14 @@ export default {
     ref={(domElem) => { this.LimitInput = domElem }}
     */
   />,
+  withIcon: <FormTextInput
+    icon="faEye"
+    iconTitle="Show value"
+  />,
   fullWidth: <FormTextInput
     type="text"
     name="name"
     id="fullWidthInput"
     fullWidth
   />,
-  // buttonSample: <FormButton text="Button sample" style="default" />
 }

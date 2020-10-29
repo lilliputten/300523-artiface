@@ -1,7 +1,7 @@
 /** @module FormTextInput
  *  @class FormTextInput
  *  @since 2020.10.07, 00:20
- *  @changed 2020.10.07, 00:20
+ *  @changed 2020.10.29, 23:44
  */
 
 import React from 'react'
@@ -25,8 +25,9 @@ class FormTextInput extends React.Component /** @lends @FormTextInput.prototype 
 
   constructor(props) {
     super(props)
+    const { value = '' } = this.props
     this.state = {
-      value: this.props.value,
+      value,
     }
   }
 
@@ -50,6 +51,22 @@ class FormTextInput extends React.Component /** @lends @FormTextInput.prototype 
 
   // Helper methods...
 
+  hasValue() {
+    const {
+      value,
+    } = this.state
+    return value != null && value !== ''
+  }
+
+  hasIcon() {
+    const {
+      icon,
+      hasIcon,
+      hasClear,
+    } = this.props
+    return hasIcon || !!icon || (hasClear && this.hasValue())
+  }
+
   updateValue = (state) => {
     const { id, onChange, disabled, numericValue } = this.props
     if (!disabled && typeof onChange === 'function') {
@@ -63,31 +80,20 @@ class FormTextInput extends React.Component /** @lends @FormTextInput.prototype 
   }
 
   getClassName() {
-    // TODO: Refactor properties!
-    const {
-      value,
-    } = this.state
     const {
       id,
       hasClear,
     } = this.props
-
-    const hasValue = value != null && value !== ''
+    const hasValue = this.hasValue()
     const hasClearActive = hasClear && hasValue
-
     const classList = cnFormTextInput({
       id,
-      hasClear: hasClearActive,
+      hasIcon: this.hasIcon(),
+      hasValue: this.hasValue(),
+      hasClear,
+      hasClearActive,
     }, [this.props.className])
     return classList
-    // const mods = classNameModifiers.reduce((mods, id) => {
-    //   const val = [> (this.state[id] != null) ? this.state[id] : <] this.props[id]
-    //   if (val != null) {
-    //     return { ...mods, [id]: val }
-    //   }
-    //   return mods
-    // }, {})
-    // return cnFormTextInput(mods, [this.props.className])
   }
 
   // Event handlers...
@@ -161,13 +167,6 @@ class FormTextInput extends React.Component /** @lends @FormTextInput.prototype 
       // onFocus: this.onFocusIn,
       // onBlur: this.onFocusOut,
     }
-    // if (onChange && typeof onChange === 'function') {
-    //   inputProps.onChange = this.handleChange
-    //   inputProps.value = value
-    // }
-    // else {
-    //   inputProps.defaultValue = value
-    // }
     return (
       <input
         {...inputProps}
@@ -177,27 +176,37 @@ class FormTextInput extends React.Component /** @lends @FormTextInput.prototype 
 
   renderClearIcon() { // DELETE
     const {
+      hasClear,
       clearIcon,
       clearIconTitle,
       // onClearClick,
     } = this.props
-
-    return (
-      /*
-       * <span
-       *   key="Icon"
-       *   className={cnFormTextInput('Icon', { clickable: !!onIconClick })}
-       *   onClick={onIconClick}
-       *   title={iconTitle}
-       * >
-       *   <FontAwesomeIcon className={cnFormTextInput('IconImg')} icon={icon} />
-       * </span>
-       */
+    const hasValue = this.hasValue()
+    const hasClearActive = hasClear && hasValue
+    return hasClearActive && (
       <InlineIcon
         icon={clearIcon || 'faTimes'}
-        className={cnFormTextInput('ClearIcon')}
+        className={cnFormTextInput('Icon', { mode: 'Clear' })}
         onClick={this.onClearClick}
         title={clearIconTitle || 'Clear content'}
+      />
+    )
+  }
+
+  renderIcon() { // DELETE
+    const {
+      // hasIcon,
+      icon,
+      iconTitle,
+      onIconClick,
+    } = this.props
+
+    return icon && (
+      <InlineIcon
+        icon={icon}
+        className={cnFormTextInput('Icon')}
+        onClick={onIconClick}
+        title={iconTitle}
       />
     )
   }
@@ -205,21 +214,14 @@ class FormTextInput extends React.Component /** @lends @FormTextInput.prototype 
   render() {
 
     const {
-      value,
-    } = this.state
-    const {
       id,
       disabled,
       type = 'text',
       title,
       setDomRef, // For FormItem interactive dom access
-      hasClear,
     } = this.props
 
     const inputElem = this.renderInput()
-
-    const hasValue = value != null && value !== ''
-    const hasClearActive = hasClear && hasValue
 
     const renderProps = {
       id,
@@ -234,7 +236,7 @@ class FormTextInput extends React.Component /** @lends @FormTextInput.prototype 
     return (
       <div {...renderProps}>
         {inputElem}
-        {hasClearActive && this.renderClearIcon()}
+        {this.renderIcon() || this.renderClearIcon()}
       </div>
     )
 
