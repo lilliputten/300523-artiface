@@ -35,17 +35,13 @@ class FormTextInput extends React.Component /** @lends @FormTextInput.prototype 
     const prevValue = prevProps.value
     const propsValue = this.props.value
     const stateValue = this.state.value
-    // console.log(prevValue, propsValue, stateValue, prevState.value)
-    // debugger
     if (prevValue !== propsValue && propsValue !== stateValue) {
       this.setState({
         value: propsValue,
       }, this.updateValue)
-      return true
     }
     else if (prevState.value !== stateValue) {
       this.updateValue(this.state)
-      return true
     }
   }
 

@@ -20,7 +20,7 @@ export FormText from './FormText'
 
 export FormSelect from './FormSelect'
 export FormTextInput from './FormTextInput'
-// export FormPasswordInput from './FormPasswordInput'
+export FormPasswordInput from './FormPasswordInput'
 
 // export FormLabeledGroup from './FormLabeledGroup'
 

@@ -30,7 +30,6 @@ export default {
     onChange={this.onLimitChange}
     onFocusOut={this.validateValues}
     disabled={false}
-    ref={(domElem) => { this.LimitInput = domElem }}
     */
   />,
   withIcon: <FormTextInput
