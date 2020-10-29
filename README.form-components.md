@@ -28,7 +28,7 @@ Legend: `[ ]` -- todo, `[x]` -- in progress, ~~`[x]`~~ -- done;
 -   [ ] `FormPasswordInput`
 -   [ ] `FormRadio`
 - ~~[x] `FormSelect` (based on `Popup` & `Menu`)~~
--   [ ] `FormText`
+- ~~[x] `FormText`~~
 - ~~[x] `FormTextInput`~~
 -   [ ] `FormTextareaInput`
 
