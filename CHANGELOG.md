@@ -1,5 +1,7 @@
 # CHANGELOG
 
+- 2020.10.30, 00:04 -- Added `FormPasswordInput` component.
+- 2020.10.29, 22:41 -- FormTextInput: icon property, hasClear feature. Added components: `FormText`. FormItem: clickable mod, minor changes.
 - 2020.10.29, 03:14 -- `FormSelect` component, advanced `Popup`, popup-adapted `FormButton` (variation:popupControl).
 - 2020.10.27, 21:28 -- Checkable menu (multiple, single, single-mandatory modes), onClick & onChange event handlers. MenuItem: checkable,checked, withIcon, icon props.
 - 2020.10.27, 05:58 -- Menu, MenuItems: basic functional.
@@ -13,5 +15,5 @@
 - 2020.10.05, 20:38 -- v.0.0.15: Extracted `demoSupport.jsx` routines, fixture selection from url query (parameter `fixture`), added avaialble fixtures list if fixture to display is not specified, added DemoWrapper & demoTitle exportable ficture parameters for demo rendering.
 
 <!--
- @changed 2020.10.27, 21:29
+ @changed 2020.10.30, 00:06
 -->

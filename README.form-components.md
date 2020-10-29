@@ -12,24 +12,24 @@ Newly added instructions must be added to next places:
 
 Legend: `[ ]` -- todo, `[x]` -- in progress, ~~`[x]`~~ -- done;
 
-- ~~[x] `InlineIcon`~~
-- ~~[x] `Popup`~~
-- ~~[x] `Menu`, `MenuItem` (in progress)~~
-- ~~[x] `FormItemHOC` (mods: fullWidth, innerFlex (?), disabled, framed (?))~~
-- ~~[x] `FormButton`~~
-- ~~[x] `FormButtonGroup`~~
-- ~~[x] `FormInputGroup`~~
+- -[x] `InlineIcon`-
+- -[x] `Popup`-
+- -[x] `Menu`, `MenuItem` (in progress)-
+- -[x] `FormItemHOC` (mods: fullWidth, innerFlex (\?), disabled, framed (\?))-
+- -[x] `FormButton`-
+- -[x] `FormButtonGroup`-
+- -[x] `FormInputGroup`-
 -   [ ] `FormDateRange` (???)
 -   [ ] `FormDateTime` (???)
-- ~~[x] `FormGroup`~~
-- ~~[x] `FormLabel`~~
+- -[x] `FormGroup`-
+- -[x] `FormLabel`-
 -   [ ] `FormLabeledGroup`
 -   [ ] `FormPager`
--   [ ] `FormPasswordInput`
+- -[x] `FormPasswordInput`-
 -   [ ] `FormRadio`
-- ~~[x] `FormSelect` (based on `Popup` & `Menu`)~~
-- ~~[x] `FormText`~~
-- ~~[x] `FormTextInput`~~
+- -[x] `FormSelect` (based on `Popup` & `Menu`)-
+- -[x] `FormText`-
+- -[x] `FormTextInput`-
 -   [ ] `FormTextareaInput`
 
 ## Elements to remove?
@@ -45,5 +45,5 @@ Legend: `[ ]` -- todo, `[x]` -- in progress, ~~`[x]`~~ -- done;
 - Different item sizes (sm, md, xl, xxl).
 
 <!--
- @changed 2020.10.29, 03:18
+ @changed 2020.10.30, 00:06
 -->
