@@ -93,13 +93,14 @@ class FormSelect extends React.Component /** @lends @FormSelect.prototype */ {
       title,
       show,
       singleChoice,
+      controlButtonStyle,
     } = this.props
 
     const controlContent = (
       <FormButton
         icon="faChevronDown"
         rightIcon
-        style="primary"
+        style={controlButtonStyle || 'primary'}
         variation="popupControl"
         rotatedIcon
         text={text}

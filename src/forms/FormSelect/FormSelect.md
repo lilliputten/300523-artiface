@@ -3,17 +3,19 @@
 ## Params:
 
 - closeOnSelect (Boolean) -- Close popup on item click
-- title (String) -- Control button title
-- text (String) -- Control button text
-- options ({ val, text, key, checked }[]) -- Optiions list
-- singleChoice (Boolean,String:'mandatory') -- Only single option can be choosed at a time (mandatory -- the choice is required)
-- show (Boolean) -- Show popup by default
+- controlButtonStyle
 - onControlClick -- Control button click handler
-- onMenuItemClick -- Menu item click handler
 - onMenuChange -- Menu items list change handler
+- onMenuItemClick -- Menu item click handler
+- options ({ val, text, key, checked }[]) -- Optiions list
+- show (Boolean) -- Show popup by default
+- singleChoice (Boolean,String:'mandatory') -- Only single option can be choosed at a time (mandatory -- the choice is required)
+- text (String) -- Control button text
+- title (String) -- Control button title
 
 ## TODO:
 
+- selectColor/selectStyle?
 - disabled
 - Form-compatible hidden input?
 
