@@ -13,7 +13,7 @@ Newly added instructions must be added to next places:
 Legend: `[ ]` -- todo, `[x]` -- in progress, ~~`[x]`~~ -- done;
 
 - ~~[x] `InlineIcon`~~
--   [x] `Popup`
+- ~~[x] `Popup`~~
 -   [x] `Menu`, `MenuItem` (in progress)
 - ~~[x] `FormItemHOC` (mods: fullWidth, innerFlex (?), disabled, framed (?))~~
 - ~~[x] `FormButton`~~
@@ -27,7 +27,7 @@ Legend: `[ ]` -- todo, `[x]` -- in progress, ~~`[x]`~~ -- done;
 -   [ ] `FormPager`
 -   [ ] `FormPasswordInput`
 -   [ ] `FormRadio`
--   [ ] `FormSelect` (based on `Popup` & `Menu`)
+- ~~[x] `FormSelect` (based on `Popup` & `Menu`)~~
 -   [ ] `FormText`
 - ~~[x] `FormTextInput`~~
 -   [ ] `FormTextareaInput`
@@ -45,5 +45,5 @@ Legend: `[ ]` -- todo, `[x]` -- in progress, ~~`[x]`~~ -- done;
 - Different item sizes (sm, md, xl, xxl).
 
 <!--
- @changed 2020.10.27, 06:05
+ @changed 2020.10.29, 03:18
 -->
