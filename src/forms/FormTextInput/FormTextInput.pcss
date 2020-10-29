@@ -28,17 +28,19 @@
       display: none;
     }
   }
-  &_hasIcon {
+  &_hasClear { // ???
     position: relative;
     & input^&-Control {
-      padding-right: 40px;
+      padding-right: 30px;
     }
-    & ^&-Icon {
+    & ^&-ClearIcon {
       position: absolute;
       right: 8px;
-      opacity: .25;
-      &_clickable { // Check for `disabled`?
-        cursor: pointer;
+      top: 2px;
+      opacity: .5;
+      cursor: pointer;
+      &:hover { // Check for `disabled`?
+        opacity: .75;
       }
     }
   }

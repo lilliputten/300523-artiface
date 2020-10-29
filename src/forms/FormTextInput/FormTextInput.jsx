@@ -18,28 +18,66 @@ import './FormTextInput.pcss'
 
 const cnFormTextInput = cn('FormTextInput')
 
-// const classNameModifiers = [
-//   // Basic element properties
-//   'id',
-//   // Style-related modifiers...
-//   'fullWidth',
-// ]
-
 class FormTextInput extends React.Component /** @lends @FormTextInput.prototype */ {
 
-  // constructor(props) {
-  //   super(props)
-  //   this.state = {
-  //   }
-  // }
+
+  // Lifecycle...
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      value: this.props.value,
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const prevValue = prevProps.value
+    const propsValue = this.props.value
+    const stateValue = this.state.value
+    // console.log(prevValue, propsValue, stateValue, prevState.value)
+    // debugger
+    if (prevValue !== propsValue && propsValue !== stateValue) {
+      this.setState({
+        value: propsValue,
+      }, this.updateValue)
+      return true
+    }
+    else if (prevState.value !== stateValue) {
+      this.updateValue(this.state)
+      return true
+    }
+  }
+
+  // Helper methods...
+
+  updateValue = (state) => {
+    const { id, onChange, disabled, numericValue } = this.props
+    if (!disabled && typeof onChange === 'function') {
+      const { target } = event
+      let { value } = state
+      if (numericValue && !isNaN(value)) {
+        value = Number(value)
+      }
+      onChange({ event, id, target, value })
+    }
+  }
 
   getClassName() {
     // TODO: Refactor properties!
     const {
+      value,
+    } = this.state
+    const {
       id,
+      hasClear,
     } = this.props
+
+    const hasValue = value != null && value !== ''
+    const hasClearActive = hasClear && hasValue
+
     const classList = cnFormTextInput({
       id,
+      hasClear: hasClearActive,
     }, [this.props.className])
     return classList
     // const mods = classNameModifiers.reduce((mods, id) => {
@@ -55,15 +93,13 @@ class FormTextInput extends React.Component /** @lends @FormTextInput.prototype 
   // Event handlers...
 
   handleChange = (event) => {
-    const { id, onChange, disabled, numericValue } = this.props
-    if (!disabled && typeof onChange === 'function') {
-      const { target } = event
-      let { value } = target
-      if (numericValue && !isNaN(value)) {
-        value = Number(value)
-      }
-      onChange({ event, id, target, value })
-    }
+    const { target } = event
+    const { value } = target
+    this.setState({ value })
+  }
+
+  onClearClick = () => {
+    this.setState({ value: '' })
   }
 
   onKeyPress = (event) => {
@@ -99,15 +135,15 @@ class FormTextInput extends React.Component /** @lends @FormTextInput.prototype 
 
   renderInput() {
     const {
+      value,
+    } = this.state
+    const {
       id,
       inputId,
       name,
-      value,
-      defaultValue,
       disabled,
-      onChange,
+      // onChange,
       placeholder,
-      title,
       type = 'text',
     } = this.props
 
@@ -118,22 +154,20 @@ class FormTextInput extends React.Component /** @lends @FormTextInput.prototype 
       id: inputId || id || name,
       name: name || inputId || id,
       disabled: disabled,
-      // value: value,
-      // defaultValue: defaultValue,
-      // onChange: this.handleChange,
-      title,
       placeholder: placeholder,
       ref: (domElem) => { this.inputDomElem = domElem },
+      onChange: this.handleChange,
+      value,
       // onFocus: this.onFocusIn,
       // onBlur: this.onFocusOut,
     }
-    if (onChange && typeof onChange === 'function') {
-      inputProps.onChange = this.handleChange
-      inputProps.value = value
-    }
-    else {
-      inputProps.defaultValue = (defaultValue != null) ? defaultValue : value
-    }
+    // if (onChange && typeof onChange === 'function') {
+    //   inputProps.onChange = this.handleChange
+    //   inputProps.value = value
+    // }
+    // else {
+    //   inputProps.defaultValue = value
+    // }
     return (
       <input
         {...inputProps}
@@ -141,14 +175,14 @@ class FormTextInput extends React.Component /** @lends @FormTextInput.prototype 
     )
   }
 
-  renderIcon() {
+  renderClearIcon() { // DELETE
     const {
-      icon,
-      iconTitle,
-      onIconClick,
+      clearIcon,
+      clearIconTitle,
+      // onClearClick,
     } = this.props
 
-    return icon && (
+    return (
       /*
        * <span
        *   key="Icon"
@@ -160,10 +194,10 @@ class FormTextInput extends React.Component /** @lends @FormTextInput.prototype 
        * </span>
        */
       <InlineIcon
-        icon={icon}
-        className={cnFormTextInput('Icon', { clickable: !!onIconClick })}
-        onClick={onIconClick}
-        title={iconTitle}
+        icon={clearIcon || 'faTimes'}
+        className={cnFormTextInput('ClearIcon')}
+        onClick={this.onClearClick}
+        title={clearIconTitle || 'Clear content'}
       />
     )
   }
@@ -171,98 +205,40 @@ class FormTextInput extends React.Component /** @lends @FormTextInput.prototype 
   render() {
 
     const {
+      value,
+    } = this.state
+    const {
       id,
-      // inputId,
-      // name,
-      // value,
-      // defaultValue,
       disabled,
-      // placeholder,
       type = 'text',
-      icon,
-      iconTitle,
-      // title,
-      onIconClick,
-      setDomRef,
+      title,
+      setDomRef, // For FormItem interactive dom access
+      hasClear,
     } = this.props
 
     const inputElem = this.renderInput()
-    const iconElem = icon && (
-      /*
-       * <span
-       *   key="Icon"
-       *   className={cnFormTextInput('Icon', { clickable: !!onIconClick })}
-       *   onClick={onIconClick}
-       *   title={iconTitle}
-       * >
-       *   <FontAwesomeIcon className={cnFormTextInput('IconImg')} icon={icon} />
-       * </span>
-       */
-      <InlineIcon
-        icon={icon}
-        className={cnFormTextInput('Icon', { clickable: !!onIconClick })}
-        onClick={onIconClick}
-        title={iconTitle}
-      />
-    )
+
+    const hasValue = value != null && value !== ''
+    const hasClearActive = hasClear && hasValue
 
     const renderProps = {
-      // ...basicRenderProps,
       id,
       className: this.getClassName(),
       disabled,
-      // title,
+      title,
       type,
       onClick: this.onClick,
       ref: setDomRef,
     }
 
-
     return (
       <div {...renderProps}>
         {inputElem}
-        {iconElem}
+        {hasClearActive && this.renderClearIcon()}
       </div>
     )
 
   }
-
-  /*
-   * render() {
-   *   const {
-   *     id,
-   *     name,
-   *     disabled,
-   *     htmlFor,
-   *     text,
-   *     children,
-   *     title,
-   *   } = this.props
-   *   // const renderProps = this.getRenderProps()
-   *   const renderProps = {
-   *     // ...basicRenderProps,
-   *     id,
-   *     className: this.getClassName(),
-   *     disabled,
-   *     title,
-   *     // onClick: this.onClick, // ???
-   *   }
-   *   return (
-   *     <div {...renderProps}>
-   *       <label
-   *         className="FormTextInput-Control"
-   *         id={id}
-   *         name={name}
-   *         disabled={disabled}
-   *         htmlFor={htmlFor}
-   *         title={title}
-   *       >
-   *         {text || title || children}
-   *       </label>
-   *     </div>
-   *   )
-   * }
-   */
 
 }
 

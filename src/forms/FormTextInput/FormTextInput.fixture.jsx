@@ -20,9 +20,11 @@ export default {
     name="name"
     id="defaultInput"
     inputId="defaultInputControl"
-    value="value"
+    value="text value"
     placeholder="placeholder"
     title="title"
+    hasClear
+    fullWidth
     /*
     defaultValue="defaultValue"
     onChange={this.onLimitChange}
