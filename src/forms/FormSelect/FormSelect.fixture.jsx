@@ -11,7 +11,7 @@ import FormGroup from '../FormGroup'
 // Demo styles for cosmos engine
 import 'demo.pcss'
 
-// export const DemoWrapper = FormGroup // ({ children }) => {
+export const DemoWrapper = FormGroup // ({ children }) => {
 
 const options = [
   { val: 1, text: 'Swimming' },
@@ -27,15 +27,13 @@ export default {
     />
   ),
   withItem: (
-    <FormGroup>
-      <FormSelect
-        title="Select title"
-        text="Select"
-        options={options}
-        singleChoice
-        closeOnSelect
-        show
-      />
-    </FormGroup>
+    <FormSelect
+      title="Select title"
+      text="Select"
+      options={options}
+      singleChoice
+      closeOnSelect
+      show
+    />
   ),
 }
