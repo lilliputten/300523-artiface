@@ -13,7 +13,7 @@ import './Popup.pcss'
 
 const cnPopup = cn('Popup')
 
-const delayedClickTimeout = 100
+const delayedClickTimeout = 200
 const globalClickEventName = 'mousedown'
 
 class Popup extends React.Component /** @lends @Popup.prototype */ {
@@ -23,12 +23,12 @@ class Popup extends React.Component /** @lends @Popup.prototype */ {
   // Helpers...
 
   delayedGlobalClickHandler = () => { // Close popup
-    // console.log('Popup:delayedGlobalClickHandler')
+    console.log('Popup:delayedGlobalClickHandler')
     this.setState({ show: false })
   }
 
   clearDelayedClickTimerHandler = () => {
-    // console.log('Popup:clearDelayedClickTimerHandler', this.delayedClickTimerHandler)
+    console.log('Popup:clearDelayedClickTimerHandler', this.delayedClickTimerHandler)
     if (this.delayedClickTimerHandler) {
       clearTimeout(this.delayedClickTimerHandler)
       this.delayedClickTimerHandler = null
@@ -38,7 +38,7 @@ class Popup extends React.Component /** @lends @Popup.prototype */ {
   globalClickHandler = () => {
     this.clearDelayedClickTimerHandler()
     this.delayedClickTimerHandler = setTimeout(this.delayedGlobalClickHandler, delayedClickTimeout)
-    // console.log('Popup:globalClickHandler (set handler)', this.delayedClickTimerHandler)
+    console.log('Popup:globalClickHandler (set handler)', this.delayedClickTimerHandler)
   }
 
   registerGlobalClickHandler() {

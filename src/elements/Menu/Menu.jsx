@@ -168,7 +168,7 @@ class Menu extends React.Component /** @lends @Menu.prototype */ {
 
   onMenuItemClick = ({ /* id, component, */ val }) => {
     const { onClick, singleChoice } = this.props
-    if (typeof onClick === 'function') { // Invoke onCkick handler
+    if (typeof onClick === 'function') { // Invoke onClick handler
       onClick({ val })
     }
     const { valChecked } = this.state

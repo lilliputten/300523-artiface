@@ -14,7 +14,7 @@ Legend: `[ ]` -- todo, `[x]` -- in progress, ~~`[x]`~~ -- done;
 
 - ~~[x] `InlineIcon`~~
 - ~~[x] `Popup`~~
--   [x] `Menu`, `MenuItem` (in progress)
+- ~~[x] `Menu`, `MenuItem` (in progress)~~
 - ~~[x] `FormItemHOC` (mods: fullWidth, innerFlex (?), disabled, framed (?))~~
 - ~~[x] `FormButton`~~
 - ~~[x] `FormButtonGroup`~~
