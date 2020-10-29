@@ -6,7 +6,7 @@
 import React from 'react'
 import FormSelect from './FormSelect'
 import FormGroup from '../FormGroup'
-import FormButton from '../FormButton'
+// import FormButton from '../FormButton'
 
 // Demo styles for cosmos engine
 import 'demo.pcss'
@@ -18,22 +18,16 @@ const options = [
   { val: 2, text: 'Skiing', checked: true },
 ]
 
-const testButtonClick = () => {
-  console.log('testButtonClick')
-}
-
 export default {
-  // default: (
-  //   <FormSelect
-  //     title="Select title"
-  //     text="Select"
-  //     options={options}
-  //   />
-  // ),
+  default: (
+    <FormSelect
+      title="Select title"
+      text="Select"
+      options={options}
+    />
+  ),
   withItem: (
     <FormGroup>
-      <FormButton text="Item aside" style="default" />
-      <FormButton text="Item aside" style="default" onClick={testButtonClick} />
       <FormSelect
         title="Select title"
         text="Select"

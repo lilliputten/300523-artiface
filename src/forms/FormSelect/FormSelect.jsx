@@ -101,6 +101,7 @@ class FormSelect extends React.Component /** @lends @FormSelect.prototype */ {
         rightIcon
         style="primary"
         variation="popupControl"
+        rotatedIcon
         text={text}
         title={title}
       />

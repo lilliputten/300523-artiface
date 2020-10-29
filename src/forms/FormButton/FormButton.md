@@ -1,8 +1,28 @@
 # FormButton
 
-Mods: fullWidth, innerFlex (?), disabled, framed (?)
+## Mods:
 
-ClassMods: onlyIcon, largeIcon, rightIcon, style, fullWidth, type (?)
+- fullWidth
+- innerFlex
+- disabled
+- framed
+
+## ClassMods:
+
+- checked
+- fullWidth
+- icon
+- id
+- largeIcon
+- onlyIcon
+- rightIcon
+- rotatedIcon
+- style
+- text
+- title
+- type
+- variation
+
 
 
 ## TODO
@@ -13,5 +33,5 @@ ClassMods: onlyIcon, largeIcon, rightIcon, style, fullWidth, type (?)
 - 2020.10.07, 00:33 -- `checkable` mod?
 
 <!--
- @changed 2020.10.06, 22:36
+ @changed 2020.10.29, 03:30
 -->

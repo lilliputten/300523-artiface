@@ -1,7 +1,7 @@
 /** @module FormButton
  *  @class FormButton
  *  @since 2020.07.20, 19:07
- *  @changed 2020.10.07, 03:00
+ *  @changed 2020.10.29, 03:30
  */
 
 import React from 'react'
@@ -20,51 +20,6 @@ import './FormButton-Styles.pcss'
 const cnFormButton = cn('FormButton')
 
 class FormButton extends React.Component /** @lends @FormButton.prototype */ {
-
-  /* // UNUSED: constructor
-   * constructor(props) {
-   *   super(props)
-   *   // (OLD) Get props...
-   *   // const {
-   *   //   hoverable,
-   *   //   clickable,
-   *   //   checked,
-   *   // } = props
-   *   this.state = {
-   *     // // (OLD) FormItem states...
-   *     // solid: true,
-   *     // hoverable: (hoverable != null) ? hoverable : true,
-   *     // clickable: (clickable != null) ? clickable : true,
-   *     // checked,
-   *     // framed: true,
-   *   }
-   * }
-   */
-
-  /* // UNUSED: getDerivedStateFromProps
-   * static getDerivedStateFromProps(props[> , state <]) { // ??? -- M.b. better to evaluate in render?
-   *   const {
-   *     // plain,
-   *     // style,
-   *     hasIcon,
-   *     hasText,
-   *     onlyIcon,
-   *     text,
-   *     icon,
-   *     children,
-   *     // hoverable,
-   *     // clickable,
-   *     // checked,
-   *   } = props
-   *   return {
-   *     // hoverable: (hoverable != null) ? hoverable : true,
-   *     // clickable: (clickable != null) ? clickable : true,
-   *     // checked,
-   *     hasIcon: !!(hasIcon || icon),
-   *     hasText: !onlyIcon && !!(hasText || text || children),
-   *   }
-   * }
-   */
 
   hasIcon() {
     const { icon, hasIcon } = this.props
@@ -89,6 +44,7 @@ class FormButton extends React.Component /** @lends @FormButton.prototype */ {
       fullWidth,
       id,
       largeIcon,
+      rotatedIcon,
       onlyIcon,
       rightIcon,
       style,
@@ -101,6 +57,7 @@ class FormButton extends React.Component /** @lends @FormButton.prototype */ {
       fullWidth,
       id,
       largeIcon,
+      rotatedIcon,
       onlyIcon,
       rightIcon,
       solid: true,

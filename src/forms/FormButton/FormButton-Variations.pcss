@@ -1,21 +1,43 @@
 /** @module FormButton-Styles.styles
  *  @since 2020.07.20, 19:24
- *  @changed 2020.10.21, 22:52
+ *  @changed 2020.10.29, 03:30
  */
 
 .FormButton {
 
-  &_variation { // Button styles...
-
+  &_variation { // Button variations...
     &_popupControl {
-      & .FormButton-Icon {
+    }
+  }
+
+  &_rotatedIcon {
+    & .FormButton-Icon {
+      transform: rotate(0deg);
+      animation-duration: .2s;
+      // animation-timing-function: ease-out;
+      animation-fill-mode: forwards;
+      animation-name: WebUiCore_FormButton_rotatedIcon_normal;
+    }
+    &.FormButton_checked .FormButton-Icon {
+      transform: rotate(180deg);
+      animation-name: WebUiCore_FormButton_rotatedIcon_checked;
+    }
+    @keyframes WebUiCore_FormButton_rotatedIcon_normal {
+      0% {
+        transform: rotate(180deg);
+      }
+      100% {
         transform: rotate(0deg);
       }
-      &.FormButton_checked .FormButton-Icon {
+    }
+    @keyframes WebUiCore_FormButton_rotatedIcon_checked {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
         transform: rotate(180deg);
       }
     }
-
   }
 
 }
