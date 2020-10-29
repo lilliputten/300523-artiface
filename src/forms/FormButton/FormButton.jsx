@@ -14,6 +14,7 @@ import FormItemHOC from '../FormItemHOC'
 import InlineIcon from 'elements/InlineIcon'
 
 import './FormButton.pcss'
+import './FormButton-Variations.pcss'
 import './FormButton-Styles.pcss'
 
 const cnFormButton = cn('FormButton')
@@ -83,29 +84,34 @@ class FormButton extends React.Component /** @lends @FormButton.prototype */ {
   getClassName() {
     // TODO: Refactor properties!
     const {
+      // plain,
+      checked,
+      fullWidth,
       id,
-      onlyIcon,
       largeIcon,
+      onlyIcon,
       rightIcon,
       style,
-      fullWidth,
-      // checked,
       type,
-      // plain,
+      variation,
     } = this.props
-    const classList = cnFormButton({
-      id,
-      style,
-      fullWidth,
-      // checked,
+    const mods = {
       // plain,
+      checked,
+      fullWidth,
+      id,
+      largeIcon,
+      onlyIcon,
+      rightIcon,
+      solid: true,
+      style,
+      type,
+      variation,
+    }
+    const classList = cnFormButton({
+      ...mods,
       hasIcon: this.hasIcon(),
       hasText: this.hasText(),
-      onlyIcon,
-      largeIcon,
-      rightIcon,
-      type,
-      solid: true,
     }, [this.props.className])
     return classList
   }
@@ -116,9 +122,9 @@ class FormButton extends React.Component /** @lends @FormButton.prototype */ {
     const {
       disabled,
       onClick,
-      clickable,
+      // clickable,
     } = this.props
-    if (clickable && !disabled && onClick && typeof onClick === 'function') {
+    if (!disabled && onClick && typeof onClick === 'function') {
       onClick(event)
     }
   }

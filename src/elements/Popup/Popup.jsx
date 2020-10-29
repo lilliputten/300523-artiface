@@ -1,7 +1,7 @@
 /** @module Popup
  *  @class Popup
  *  @since 2020.10.27, 00:39
- *  @changed 2020.10.27, 00:39
+ *  @changed 2020.10.29, 03:14
  */
 
 import React from 'react'
@@ -13,41 +13,127 @@ import './Popup.pcss'
 
 const cnPopup = cn('Popup')
 
+const delayedClickTimeout = 300
+const globalClickEventName = 'mousedown'
+
 class Popup extends React.Component /** @lends @Popup.prototype */ {
 
-  constructor(props) {
-    super(props)
-    const { showPopup } = props
-    this.state = {
-      show: showPopup, // Is content element displaying now?
-      wasShown: showPopup, // Memorized state: did content element once displayed?
+  delayedClickTimerHandler = null
+
+  // Helpers...
+
+  delayedGlobalClickHandler = () => { // Close popup
+    console.log('Popup:delayedGlobalClickHandler')
+    this.setState({ show: false })
+  }
+
+  clearDelayedClickTimerHandler = () => {
+    console.log('Popup:clearDelayedClickTimerHandler', this.delayedClickTimerHandler)
+    if (this.delayedClickTimerHandler) {
+      clearTimeout(this.delayedClickTimerHandler)
+      this.delayedClickTimerHandler = null
     }
   }
 
-  componentDidUpdate(prevProps) {
+  globalClickHandler = () => {
+    this.clearDelayedClickTimerHandler()
+    this.delayedClickTimerHandler = setTimeout(this.delayedGlobalClickHandler, delayedClickTimeout)
+    console.log('Popup:globalClickHandler (set handler)', this.delayedClickTimerHandler)
+  }
+
+  registerGlobalClickHandler() {
+    window.addEventListener(globalClickEventName, this.globalClickHandler)
+  }
+
+  unregisterGlobalClickHandler() {
+    this.clearDelayedClickTimerHandler()
+    window.removeEventListener(globalClickEventName, this.globalClickHandler)
+  }
+
+  updateGlobalClickHandlerByState = (state) => {
+    const { show } = state
+    if (show) {
+      this.registerGlobalClickHandler()
+    }
+    else {
+      this.unregisterGlobalClickHandler()
+    }
+  }
+
+  // Lifecycle...
+
+  constructor(props) {
+    super(props)
+    const { showPopup, registerHideStopper } = props
+    this.state = {
+      // show: false, // Is content element displaying now?
+      // wasShown: false, // Memorized state: did content element once displayed?
+      show: showPopup, // Is content element displaying now?
+      wasShown: showPopup, // Memorized state: did content element once displayed?
+    }
+    if (typeof registerHideStopper === 'function') { // External hide canceler (FormSelect: on Menu click etc)
+      registerHideStopper(this.clearDelayedClickTimerHandler)
+    }
+  }
+
+  componentDidMount() {
+    const { show } = this.state
+    if (show) {
+      this.registerGlobalClickHandler()
+    }
+  }
+
+  componentWillUnmount() {
+    this.unregisterGlobalClickHandler()
+  }
+
+  componentDidUpdate(prevProps, prevState) {
     const prevShowPopup = prevProps.showPopup
     const showPopup = this.props.showPopup
     if (prevShowPopup !== showPopup) {
       this.setState({
         show: showPopup,
         wasShown: this.state.wasShown || showPopup,
-      })
+      }, this.updateGlobalClickHandlerByState)
+    }
+    else if (prevState.show !== this.state.show) {
+      this.updateGlobalClickHandlerByState(this.state)
     }
   }
 
-  switchPopup = ({ show }) => {
+  // Handlers...
+
+  onControlClick = ({ show }) => {
+    this.clearDelayedClickTimerHandler()
     if (show == null) { // Toggle state if no value passed
       show = !this.state.show
     }
-    // console.log('Popup:switchPopup:', {
-    //   show,
-    // })
-    // debugger
     this.setState({
       show,
       wasShown: this.state.wasShown || show,
     })
+    const { onControlClick } = this.props
+    if (typeof onControlClick === 'function') {
+      onControlClick({ show })
+    }
   }
+
+  getClassName() {
+    const {
+      id,
+    } = this.props
+    const {
+      show,
+      // wasShown,
+    } = this.state
+    const className = cnPopup({
+      id,
+      show,
+    }, [this.props.className])
+    return className
+  }
+
+  // Render...
 
   renderPopupControl() {
     let { popupControl } = this.props
@@ -63,8 +149,8 @@ class Popup extends React.Component /** @lends @Popup.prototype */ {
       ...popupControl,
       props: {
         ...controlProps,
-        switchPopup: controlProps.switchPopup || this.switchPopup,
-        showPopup: show,
+        onClick: /* controlProps.onControlClick || */ this.onControlClick,
+        checked: show,
       },
     }
 
@@ -94,21 +180,6 @@ class Popup extends React.Component /** @lends @Popup.prototype */ {
     )
   }
 
-  getClassName() {
-    const {
-      id,
-    } = this.props
-    const {
-      show,
-      // wasShown,
-    } = this.state
-    const className = cnPopup({
-      id,
-      show,
-    }, [this.props.className])
-    return className
-  }
-
   render() {
 
     const {
@@ -119,21 +190,11 @@ class Popup extends React.Component /** @lends @Popup.prototype */ {
     const renderProps = {
       id,
       className: this.getClassName(),
-      // title,
-      // onClick,
     }
-
-    // console.log('Popup:render:', {
-    //   popupControl,
-    //   popupContent,
-    // })
-    // debugger
 
     const renderPopupControl = this.renderPopupControl()
     const renderPopupContent = this.renderPopupContent()
 
-    // const tagName = tag || 'div'
-    // const element = React.createElement(tagName, renderProps, content)
     return (
       <div {...renderProps}>
         {renderPopupControl}

@@ -1,0 +1,21 @@
+/** @module FormButton-Styles.styles
+ *  @since 2020.07.20, 19:24
+ *  @changed 2020.10.21, 22:52
+ */
+
+.FormButton {
+
+  &_variation { // Button styles...
+
+    &_popupControl {
+      & .FormButton-Icon {
+        transform: rotate(0deg);
+      }
+      &.FormButton_checked .FormButton-Icon {
+        transform: rotate(180deg);
+      }
+    }
+
+  }
+
+}

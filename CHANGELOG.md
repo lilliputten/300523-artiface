@@ -1,5 +1,6 @@
 # CHANGELOG
 
+- 2020.10.29, 03:14 -- `FormSelect` element, advanced `Popup`.
 - 2020.10.27, 21:28 -- Checkable menu (multiple, single, single-mandatory modes), onClick & onChange event handlers. MenuItem: checkable,checked, withIcon, icon props.
 - 2020.10.27, 05:58 -- Menu, MenuItems: basic functional.
 - 2020.10.27, 01:00 -- Popup: basic functional.

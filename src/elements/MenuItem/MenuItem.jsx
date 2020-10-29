@@ -97,7 +97,7 @@ class MenuItem extends React.Component /** @lends @MenuItem.prototype */ {
     const iconContent = this.renderIconContent()
     const textContent = this.renderTextContent()
 
-    console.log('MenuItem:render', val)
+    // console.log('MenuItem:render', val)
 
     return (
       <div {...renderProps}>

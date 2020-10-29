@@ -19,6 +19,7 @@ import 'demo.pcss'
 
 // export const DemoWrapper = FormGroup // ({ children }) => {
 
+// NOTE: Menu items can be provided as `MenuItem` elements or description objects (`{ val: 2, text: 'Skiing', checked: true }`).
 const items = [
   { val: 1, text: 'Swimming' },
   { val: 2, text: 'Skiing', checked: true },
