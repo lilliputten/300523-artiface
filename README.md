@@ -8,11 +8,11 @@
 
 ## Documents
 
-- README.md (this document)
-- CHANGELOG.md
-- TODO.md
-- README.cosmos.md
-- README.form-components.md
+- [README.md](README.md) (this document)
+- [CHANGELOG.md](CHANGELOG.md)
+- [TODO.md](TODO.md)
+- [README.cosmos.md](README.cosmos.md)
+- [README.form-components.md](README.form-components.md)
 
 ## Requirements
 
@@ -125,5 +125,5 @@ render(<Hello />, document.getElementById('root')) // Minimalistic render sample
 ```
 
 <!--
- @changed 2020.10.06, 02:32
+ @changed 2020.11.05, 11:56
 -->
