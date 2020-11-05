@@ -19,18 +19,19 @@ Legend: `[ ]` -- todo, `[x]` -- in progress, ~~`[x]`~~ -- done;
 - ~~[x] `FormButton`~~
 - ~~[x] `FormButtonGroup`~~
 - ~~[x] `FormInputGroup`~~
-- [ ] `FormDateRange` (???)
-- [ ] `FormDateTime` (???)
+-   [ ] `FormDateRange` (???)
+-   [ ] `FormDateTime` (???)
+-   [ ] `FormDate` (???)
 - ~~[x] `FormGroup`~~
 - ~~[x] `FormLabel`~~
-- [ ] `FormLabeledGroup`
-- [ ] `FormPager`
+-   [ ] `FormLabeledGroup`
+-   [ ] `FormPager`
 - ~~[x] `FormPasswordInput`~~
-- [ ] `FormRadio`
+-   [ ] `FormRadio`
 - ~~[x] `FormSelect` (based on `Popup` & `Menu`)~~
 - ~~[x] `FormText`~~
 - ~~[x] `FormTextInput`~~
-- [ ] `FormTextareaInput`
+-   [ ] `FormTextareaInput`
 
 ## Elements to remove?
 

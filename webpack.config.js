@@ -1,6 +1,6 @@
 /** @desc Webpack configuration
  *  @since 2020.05.18, 12:00
- *  @changed 2020.10.05, 22:49
+ *  @changed 2020.11.05, 19:31
  */
 
 const fs = require('fs')
@@ -175,7 +175,10 @@ module.exports = (env, argv) => {
 
   }
 
-  const jsEntryFile = isBuild ? 'build.js' : 'demo.jsx' // js source
+  const demoModule = // 'AsyncModal' ||
+    env.DEMO_MODULE || 'demo'
+
+  const jsEntryFile = isBuild ? 'build.js' : demoModule + '.jsx' // js source
 
   const bundleFile = 'bundle.js'
 
@@ -231,7 +234,7 @@ module.exports = (env, argv) => {
     }),
     minimizeBundles && require('postcss-csso'),
     require('postcss-reporter'),
-  ].filter(x => x)
+  ].filter(Boolean)
 
   const passParameters = { // Pass parameters to code (to js & pcss)
     rootPath,
@@ -260,6 +263,7 @@ module.exports = (env, argv) => {
     // 'ip:' + myIP,
     isBuild && 'Dist',
     isDemo && 'Demo',
+    isDemo && demoModule && ('demoModule:' + demoModule),
     isCosmos && 'Cosmos',
     isDevServer && 'DevServer',
     isWatch && 'Watch',
@@ -272,7 +276,7 @@ module.exports = (env, argv) => {
     // extemeUglify && 'extemeUglify',
     DEBUG && 'DEBUG',
     THEME && 'theme:' + THEME,
-  ].filter(x => x).join(' ')
+  ].filter(Boolean).join(' ')
   if (!isStats) {
     console.log('Building:', debugModes) // eslint-disable-line no-console
   }
@@ -389,7 +393,7 @@ module.exports = (env, argv) => {
         patterns: [
           { from: 'static-build-files', to: './', ...CopyWebpackPluginOptions },
           { from: 'README.md', to: './', ...CopyWebpackPluginOptions }, // Readme listed at last position -- then can be overriden if readme exists in `static-build-files` (commands executiong in reversed order?).
-        ].filter(x => x),
+        ].filter(Boolean),
       }),
       isDemo && new HtmlWebpackPlugin({
         template: path.resolve(rootPath, 'demo-html', htmlFilename),
@@ -423,7 +427,7 @@ module.exports = (env, argv) => {
         // title, logo,
         suppressSuccess: true,
       }),
-    ].filter(x => x),
+    ].filter(Boolean),
     optimization: {
       // Minimize if not preprocess and minimize flags configured
       minimize: /* preprocessBundles || */ minimizeBundles,
