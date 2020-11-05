@@ -1,5 +1,6 @@
 # TODO
 
+- 2020.10.30, 20:04 -- FormSelect: add hidden html input to sync selected item values & support html form submission.
 - 2020.10.07, 00:32 -- FormButton: Add optional prefix ('regular', 'solid', 'default') to icon id for choosing icons set.
 - 2020.10.07, 00:08 -- Demo index: Add demos list, actions, styles
 - 2020.10.07, 00:03 -- Update all PropTypes (or disuse?).
