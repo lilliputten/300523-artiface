@@ -24,6 +24,7 @@ module.exports = {
       // corejs: 3,
       loose: true,
     }],
+    ['@babel/preset-flow'],
     ['@babel/preset-react'],
   ],
   plugins: [

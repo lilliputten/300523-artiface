@@ -343,7 +343,7 @@ module.exports = (env, argv) => {
         },
       },
       { // css/postcss
-        test: /\.(pcss)$/,
+        test: /\.(pcss|css)$/,
         // exclude: /node_modules/, // Some imports may be from `node_modules/...`
         use: [
           cssHotReload ? 'style-loader' : ExtractCssPlugin.loader, // Hot styles realoading for dev-server

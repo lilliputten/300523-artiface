@@ -63,6 +63,14 @@ Specify demo fixture to display in url query or select from main demo page:
 - `http://localhost:8080/?fixture=Hello`
 - `http://localhost:8080/?fixture=FormButton:defaultWithIcon`
 
+To specify custom demo root entrypoint use:
+
+```
+npm run -s server -- --env.DEMO_MODULE=demo-201005-popper
+```
+
+-- in this example module `src/demo-201005-popper.jsx` will be used.
+
 ### Increment patch (minor number) version:
 
 ```shell
