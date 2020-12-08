@@ -11,6 +11,7 @@ const srcFolders = [
   'config',
   'elements',
   'forms',
+  'utils',
   // 'helpers',
   // 'lib',
   // 'tests',

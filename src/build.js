@@ -5,6 +5,7 @@
  */
 
 export config from 'config'
+export * as utils from 'utils'
 
 export * from './elements'
 export * from './forms'

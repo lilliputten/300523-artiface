@@ -1,5 +1,6 @@
 #!/bin/sh
-# @desc Publish (and make if absent) dist build
+# @desc Update publish folder (prepare remote update)
+# @since 2020.12.08, 13:44
 # @changed 2020.12.08, 13:49
 
 # Import config variables (expected variables `$DIST_REPO` and `$PUBLISH_FOLDER`)...
@@ -14,20 +15,18 @@ if [ ! -d "$PUBLISH_FOLDER" ]; then
 fi
 
 # Make build if absent
-sh ./util-publish-update.sh || exit 1
+test -d build || npm run -s build || exit 1
 
 TIMESTAMP=`cat build-timestamp.txt`
 TIMETAG=`cat build-timetag.txt`
 VERSION=`cat build-version.txt`
 
-echo "Publishing build ($VERSION, $TIMESTAMP)..."
+echo "Updating publish folder ($VERSION, $TIMESTAMP)..."
 
-# TODO: Compare actual and previously published versions? (The git is checking for changes itself anyway.)
-
+  # git pull && \
 cd "$PUBLISH_FOLDER" && \
-  git fetch && \
-  git add . -Av && \
-  git commit -am "Build v.$VERSION, $TIMESTAMP ($TIMETAG)" &&
-  git push &&
+  rm -Rf * &&
+  cp -fu ../build/.??* . &&
+  cp -Rfu ../build/* . &&
   cd .. && \
   echo OK

@@ -1,6 +1,9 @@
 #!/bin/sh
-# @desc Publish (and make if absent) dist build
-# @changed 2020.12.08, 13:49
+# @desc Update publish folder to debug project location (DEBUG_LOCATION)
+# @since 2020.12.08, 20:50
+# @changed 2020.12.08, 20:50
+
+DEBUG_LOCATION='../WebUi/node_modules/WebUiCore/'
 
 # Import config variables (expected variables `$DIST_REPO` and `$PUBLISH_FOLDER`)...
 # DIST_REPO="git@github.com:lilliputten/WebUiCoreDist.git"
@@ -14,20 +17,13 @@ if [ ! -d "$PUBLISH_FOLDER" ]; then
 fi
 
 # Make build if absent
-sh ./util-publish-update.sh || exit 1
+test -d build || npm run -s build || exit 1
 
 TIMESTAMP=`cat build-timestamp.txt`
 TIMETAG=`cat build-timetag.txt`
 VERSION=`cat build-version.txt`
 
-echo "Publishing build ($VERSION, $TIMESTAMP)..."
-
-# TODO: Compare actual and previously published versions? (The git is checking for changes itself anyway.)
-
-cd "$PUBLISH_FOLDER" && \
-  git fetch && \
-  git add . -Av && \
-  git commit -am "Build v.$VERSION, $TIMESTAMP ($TIMETAG)" &&
-  git push &&
+echo "Updating publish folder ($VERSION, $TIMESTAMP)..." && \
+  cp -vRfu build/* $DEBUG_LOCATION &&
   cd .. && \
   echo OK

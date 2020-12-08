@@ -8,4 +8,12 @@ module.exports = { // Common-used app variables...
 
   defaultPageSize: 20, // Number of entries per page
 
+  useCssModules: false, // To use css-module mappings (see `cssMappings` below)
+
+  // Css-modules mappings in format `{ [originalClassName]: transformedClassName }`.
+  // Set it with `WebUiCore.utils.setFactoryOptions(React, { useCssModules: true, cssMappings })`
+  cssMappings: null,
+
+  // cssModulePrefix: 'WebUiCore', // UNUSED
+
 }

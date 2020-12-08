@@ -2,9 +2,9 @@
 
 ## Build info (auto-generated)
 
-- Version: 0.1.2
-- Last changes timestamp: 2020.12.08, 13:39
-- Last changes timetag: 201208-1339
+- Version: 0.1.4
+- Last changes timestamp: 2020.12.08, 22:16
+- Last changes timetag: 201208-2216
 
 ## Documents
 
@@ -109,12 +109,25 @@ From command line:
 npm i -S git+{{DIST_REPO_ADDR}} DistName
 ```
 
+For example:
+
+```shell
+npm i -S http://gitlab.local/lilliputten/WebUiCoreDist/-/archive/master/WebUiCoreDist-master.tar.gz
+```
+
 Or specify directly in `package.json`:
 
 ```json
   "dependencies": {
     "DistName": "git+{{DIST_REPO_ADDR}}",
     ...
+```
+
+For example:
+
+```json
+    "WebUiCore": "git+ssh://git@github.com/lilliputten/WebUiCoreDist.git",
+    "WebUiCore": "http://gitlab.local/lilliputten/WebUiCoreDist/-/archive/master/WebUiCoreDist-master.tar.gz",
 ```
 
 ### Update distributive to latest build using:

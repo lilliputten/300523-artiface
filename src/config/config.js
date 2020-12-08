@@ -5,10 +5,10 @@
  */
 
 const config = {
+  app: require('./app'),
   build: require('./build'),
   css: require('./css'),
   userAgent: require('./userAgent'),
-  // app: require('./app'),
   // constants: require('./constants'),
 }
 

@@ -20,6 +20,18 @@ import './demo.pcss'
 // import * as build from './build'
 import './build'
 
+/* // DEBUG: Test css-module mappings substitution
+ * import { utils } from './build'
+ * utils.setConfigOptions({
+ *   useCssModules: true,
+ *   cssMappings: {
+ *     WebUiCoreTest: '__MODULE__WebUiCoreTest',
+ *     Test: '__MODULE__Test',
+ *     Hello: '__MODULE__Hello',
+ *   },
+ * })
+ */
+
 const fixtureComponentsList = {
 
   Hello: require('demo/Hello/Hello.fixture'),
