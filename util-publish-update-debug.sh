@@ -1,7 +1,7 @@
 #!/bin/sh
 # @desc Update publish folder to debug project location (DEBUG_LOCATION)
 # @since 2020.12.08, 20:50
-# @changed 2020.12.08, 20:50
+# @changed 2020.12.08, 22:33
 
 DEBUG_LOCATION='../WebUi/node_modules/WebUiCore/'
 
@@ -23,7 +23,7 @@ TIMESTAMP=`cat build-timestamp.txt`
 TIMETAG=`cat build-timetag.txt`
 VERSION=`cat build-version.txt`
 
-echo "Updating publish folder ($VERSION, $TIMESTAMP)..." && \
+echo "Updating debug installation ($VERSION, $TIMESTAMP)..." && \
   cp -vRfu build/* $DEBUG_LOCATION &&
   cd .. && \
   echo OK
