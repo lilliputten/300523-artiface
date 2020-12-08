@@ -1,5 +1,6 @@
 # CHANGELOG
 
+- 2020.12.08, 13:38 -- PD-3474, v.0.1.2: Dark & plain button styles. Eslint configuration (from current `WebUi` project).
 - 2020.10.30, 00:04 -- Added `FormPasswordInput` component.
 - 2020.10.29, 22:41 -- FormTextInput: icon property, hasClear feature. Added components: `FormText`. FormItem: clickable mod, minor changes.
 - 2020.10.29, 03:14 -- `FormSelect` component, advanced `Popup`, popup-adapted `FormButton` (variation:popupControl).

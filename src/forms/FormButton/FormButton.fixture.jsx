@@ -24,6 +24,7 @@ export default {
   withInlineIcon: <FormButton icon={inlineIcon} style="default" text="With inline icon" />,
   withIconAsComponent: <FormButton icon={faCheck} style="default" text="With icon as string" />,
   withIconAsString: <FormButton icon="faCheck" style="default" text="With icon as text" />,
+  plain: <FormButton icon={inlineIcon} style="plain" text="Style: plain with icon" />,
   primary: <FormButton icon="faPlay" style="primary" text="Style: primary" />,
   secondary: <FormButton icon="faPlayCircle" style="secondary" text="Style: secondary" />,
   error: <FormButton icon="faBolt" style="error" text="Style: error" />,

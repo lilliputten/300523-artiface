@@ -3,6 +3,7 @@
  *  @since 2020.07.20, 19:07
  *  @changed 2020.10.29, 03:30
  */
+/* eslint-disable react/require-default-props */
 
 import React from 'react'
 import PropTypes from 'prop-types'
@@ -19,7 +20,7 @@ import './FormButton-Styles.pcss'
 
 const cnFormButton = cn('FormButton')
 
-class FormButton extends React.Component /** @lends @FormButton.prototype */ {
+class FormButton extends React.PureComponent /** @lends @FormButton.prototype */ {
 
   hasIcon() {
     const { icon, hasIcon } = this.props
@@ -48,6 +49,8 @@ class FormButton extends React.Component /** @lends @FormButton.prototype */ {
       onlyIcon,
       rightIcon,
       style,
+      onDark,
+      plain,
       type,
       variation,
     } = this.props
@@ -62,6 +65,8 @@ class FormButton extends React.Component /** @lends @FormButton.prototype */ {
       rightIcon,
       solid: true,
       style,
+      onDark,
+      plain,
       type,
       variation,
     }
@@ -166,34 +171,38 @@ class FormButton extends React.Component /** @lends @FormButton.prototype */ {
     return element
   }
 
+  static propTypes = {
+    id: PropTypes.string,
+
+    // hoverable: PropTypes.bool, // FormItem: Allowed hovered events
+    // focusable: PropTypes.bool, // FormItem: Allowed focused events
+
+    // TODO: Actualize & check next properties, implement cosmos fixtures...
+
+    // TODO: formId -- id for form element (passed on form submit)
+    // name: PropTypes.string, // ???
+    disabled: PropTypes.bool,
+    onClick: PropTypes.func,
+
+    hasIcon: PropTypes.bool, // Optional
+    hasText: PropTypes.bool, // Optional
+    text: PropTypes.string, // Text content (may be passed as node children)
+    icon: PropTypes.oneOfType([ // Icon component. May be as image resource loaded with `file/url-loader` as `FontAwesomeIcon` component.
+      PropTypes.string,
+      PropTypes.object,
+    ]),
+    onlyIcon: PropTypes.bool, // Only icon
+    largeIcon: PropTypes.bool, // Large icon
+    rightIcon: PropTypes.bool, // Icon placed at right side
+    // TODO: size: PropTypes.string, // Different form item sizes? (eg: md -- default, sm, xs, lg, xl, xxl)
+
+    style: PropTypes.string, // Button style (plain, default, primary, secondary, error, warn, success, info, etc -- some are in progress -- see styles file)
+    onDark:  PropTypes.bool, // On dark background
+    fullWidth: PropTypes.bool, // Occupies all horizontal space
+    plain: PropTypes.bool, // ??? Plain icon (no border & background -- if no style specified, looks as link)
+
+    checked: PropTypes.bool, // FormItem: Checked state
+  }
 }
 
-FormButton.propTypes = {
-  id: PropTypes.string,
-
-  hoverable: PropTypes.bool, // FormItem: Allowed hovered events
-  focusable: PropTypes.bool, // FormItem: Allowed focused events
-
-  // TODO: Actualize & check next properties, implement cosmos fixtures...
-
-  // TODO: formId -- id for form element (passed on form submit)
-  name: PropTypes.string, // ???
-  disabled: PropTypes.bool,
-  onClick: PropTypes.func,
-
-  hasIcon: PropTypes.bool, // Optional
-  hasText: PropTypes.bool, // Optional
-  text: PropTypes.string, // Text content (may be passed as node children)
-  icon: PropTypes.any, // Icon component. May be as image resource loaded with `file/url-loader` as `FontAwesomeIcon` component.
-  onlyIcon: PropTypes.bool, // Only icon
-  largeIcon: PropTypes.bool, // Large icon
-  rightIcon: PropTypes.bool, // Icon placed at right side
-  // TODO: size: PropTypes.string, // Different form item sizes? (eg: md -- default, sm, xs, lg, xl, xxl)
-
-  style: PropTypes.string, // Button style (plain, default, primary, secondary, error, warn, success, info, etc -- some are in progress -- see styles file)
-  fullWidth: PropTypes.bool, // Occupies all horizontal space
-  // plain: PropTypes.bool, // ??? Plain icon (no border & background -- if no style specified, looks as link)
-
-  checked: PropTypes.bool, // FormItem: Checked state
-}
 export default FormItemHOC({ hoverable: true, framed: true })(FormButton)

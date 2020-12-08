@@ -32,6 +32,7 @@ const fixtureComponentsList = {
   FormLabel: require('forms/FormLabel/FormLabel.fixture'),
   FormTextInput: require('forms/FormTextInput/FormTextInput.fixture'),
   FormPasswordInput: require('forms/FormPasswordInput/FormPasswordInput.fixture'),
+  FormButtonDark: require('forms/FormButton/FormButton-Dark.fixture'),
   FormButton: require('forms/FormButton/FormButton.fixture'),
   FormGroup: require('forms/FormGroup/FormGroup.fixture'),
   FormButtonGroup: require('forms/FormButtonGroup/FormButtonGroup.fixture'),

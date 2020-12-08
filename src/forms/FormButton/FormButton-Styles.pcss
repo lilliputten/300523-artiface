@@ -12,10 +12,10 @@
       border-color: $borderColor;
       background-color: $bgColor;
       // box-shadow: inset 0 0 0 1px $borderColor;
-      ^^&-Text {
+      .FormButton-Text {
         color: $textColor;
       }
-      ^^&-Icon {
+      .FormButton-Icon {
         color: $iconColor;
       }
       &.FormItem_hovered {
@@ -23,10 +23,11 @@
         border-color: $hoveredBorderColor;
         background-color: color($bgColor shade(7));
         // box-shadow: inset 0 0 0 1px $hoveredBorderColor, 0 0 2px 2px color($borderColor alpha(50%));
-        ^^^&-Icon, ^^^&-Text {
+        // ^^^&-Icon, ^^^&-Text {
+        .FormButton-Icon, .FormButton-Text {
           opacity: .9;
         }
-        // ^^^&-Icon {
+        // .FormButton-Icon {
         //   // color: color($iconColor shade(10));
         // }
       }
@@ -39,6 +40,16 @@
       $iconColor: color($textColor alpha(.5));
       @mixin buttonStyle $bgColor, $borderColor, $iconColor, $textColor;
     }
+    // @define-mixin styledDarkButton $bgColor, $textColor: $specialContrastColor {
+    // ... ???
+
+    &_plain {
+      &^^&_onDark {
+        .FormButton-Text {
+          color: #fff;
+        }
+      }
+    }
 
     &_default {
       $bgColor: color($neutralLightColor tint(10));
@@ -46,7 +57,21 @@
       $iconColor: $neutralTintedDarkColor;
       $textColor: #000;
       @mixin buttonStyle $bgColor, $borderColor, $iconColor, $textColor;
+      &^^&_onDark {
+        $darkBgColor: color($bgColor alpha(.2));
+        $darkBorderColor: color($borderColor alpha(.2));
+        $darkTextColor: #fff;
+        @mixin buttonStyle $darkBgColor, $darkBorderColor, $iconColor, $darkTextColor;
+      }
     }
+
+    // &_default^&_onDark {
+    //   $bgColor: color($neutralExtraDarkColor tint(10));
+    //   $borderColor: $formItemBorderColor;
+    //   $iconColor: $neutralTintedDarkColor;
+    //   $textColor: #000;
+    //   @mixin buttonStyle $bgColor, $borderColor, $iconColor, $textColor;
+    // }
 
     // Theme colors
 
