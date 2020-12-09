@@ -7,7 +7,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 // import connect from 'react-redux/es/connect/connect'
-import { cn } from '@bem-react/classname'
+import { cn } from 'utils'
 
 import FormItemHOC from '../FormItemHOC'
 import FormGroup from '../FormGroup'

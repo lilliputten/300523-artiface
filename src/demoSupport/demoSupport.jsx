@@ -2,9 +2,10 @@
  *  @since 2020.10.05, 13:59
  *  @changed 2020.10.06, 22:07
  */
+/* eslint-disable react/no-multi-comp */
 
 import React from 'react'
-import { cn } from '@bem-react/classname'
+import { cn } from 'utils'
 // import config from 'config'
 
 // import './demoSupport.pcss'
@@ -39,6 +40,7 @@ export const PlaceFixture = ({ fixture, fixtureItemId, demoTitle, DemoWrapper = 
   }
   else { // Display entire fixture (all items)
     content = Object.entries(fixture).map(([id, Component]) => {
+      // TODO: Filter out `background` proxy and non-component entries
       return { ...Component, key: id }
       // return (
       //   <div className="FixtureDemo">

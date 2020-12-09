@@ -15,18 +15,27 @@ import { // Icons (solid)...
 // Demo styles for cosmos engine
 import 'demo.pcss'
 
-export const DemoWrapper = ({ children }) => {
+// export const DemoWrapper = ({ children }) => {
+//   return (
+//     <FormGroup>
+//       {children}
+//     </FormGroup>
+//   )
+// }
+
+export const DarkBg = ({ children }) => {
   return (
-    <FormGroup className="darkBackground" id="Dark">
+    <FormGroup className="DarkBg" id="Dark">
       {children}
     </FormGroup>
   )
 }
 
+
 const inlineIcon = <InlineIcon icon={faCheck} className="extraIconClass" />
 
 export default {
-  default: <FormButton icon={inlineIcon} style="default" text="Compare with default" />,
-  plain: <FormButton icon={inlineIcon} style="plain" onDark text="Style: plain" />,
-  dark: <FormButton icon={inlineIcon} style="default" onDark text="Style: default, onDark" />,
+  // default: <DarkBg><FormButton icon={inlineIcon} style="default" text="Compare with default" /></DarkBg>,
+  plain: <DarkBg><FormButton icon={inlineIcon} style="plain" onDark text="Style: plain" /></DarkBg>,
+  default: <DarkBg><FormButton icon={inlineIcon} style="default" onDark text="Style: default, onDark" /></DarkBg>,
 }

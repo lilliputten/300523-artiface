@@ -20,6 +20,17 @@ export const DemoWrapper = FormGroup // ({ children }) => {
 const inlineIcon = <InlineIcon icon={faCheck} className="extraIconClass" />
 
 export default {
+  /* // Classic format...
+   * default: {
+   *   component: FormButton,
+   *   props: {
+   *     icon: inlineIcon,
+   *     style: 'default',
+   *     text: 'Compare with default',
+   *   },
+   * },
+   */
+
   default: <FormButton style="default" text="Style: default" className="extraButtonClass" />,
   withInlineIcon: <FormButton icon={inlineIcon} style="default" text="With inline icon" />,
   withIconAsComponent: <FormButton icon={faCheck} style="default" text="With icon as string" />,
