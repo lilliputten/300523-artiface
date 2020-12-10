@@ -1,5 +1,6 @@
 # CHANGELOG
 
+- 2020.12.10, 18:45 -- Migrated FormDelim, FormSpacer, FormInputGroup, FormLabeledGroup uikit modules.
 - 2020.12.10, 18:44 -- README.migrate-from-uikit.md -- Minimal instructions fro migrating old-style `uikit` modules (in progress).
 - 2020.12.10, 18:43 -- Added FormRadio component.
 - 2020.12.10, 18:42 -- FormItemHOC: focusable modifier & dom node events.
