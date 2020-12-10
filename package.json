@@ -2,9 +2,9 @@
   "name": "WebUiCore",
   "description": "Arti UI Components Library",
   "NOTE": "All version and time stamp properties are updated automatically (see `util-update-build-variables.sh`, `util-increment-version.sh`)!",
-  "version": "0.1.4",
-  "timetag": "201208-2216",
-  "timestamp": "2020.12.08, 22:16",
+  "version": "0.1.5",
+  "timetag": "201209-2308",
+  "timestamp": "2020.12.09, 23:08",
   "changed": "2020.11.05, 19:31",
   "main": "src/build.js",
   "keywords": [

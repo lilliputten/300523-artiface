@@ -1,5 +1,6 @@
 # CHANGELOG
 
+- 2020.12.09, 23:08 -- v.0.1.5
 - 2020.12.08, 22:15 -- PD-3476, v.0.1.4: Css-modules class name transformations. Using wrapper for `@bem-react/classname/cn()` in `utils/configure/cn()` -- `import { cn } from 'utils'`). In target project must be set configuration options: `WebUiCore.utils.setConfigOptions({ useCssModules: true, cssMappings })` where `cssMappings` is import result of `WebUiCore` webpacked css file (`import cssMappings from 'WebUiCore/styles.css'`). In progress, TODO: Replace all `cn` invokes with `cn` from `utils` submodule.
 - 2020.12.08, 13:38 -- PD-3474, v.0.1.2: Dark & plain button styles. Eslint configuration (from current `WebUi` project).
 - 2020.10.30, 00:04 -- Added `FormPasswordInput` component.
