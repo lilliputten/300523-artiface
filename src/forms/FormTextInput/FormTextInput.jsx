@@ -3,6 +3,7 @@
  *  @since 2020.10.07, 00:20
  *  @changed 2020.10.29, 23:44
  */
+/* eslint-disable react/require-default-props */
 
 import React from 'react'
 import PropTypes from 'prop-types'
@@ -18,8 +19,7 @@ import './FormTextInput.pcss'
 
 const cnFormTextInput = cn('FormTextInput')
 
-class FormTextInput extends React.Component /** @lends @FormTextInput.prototype */ {
-
+class FormTextInput extends React.PureComponent /** @lends @FormTextInput.prototype */ {
 
   // Lifecycle...
 
@@ -35,13 +35,13 @@ class FormTextInput extends React.Component /** @lends @FormTextInput.prototype 
     const prevValue = prevProps.value
     const propsValue = this.props.value
     const stateValue = this.state.value
-    if (prevValue !== propsValue && propsValue !== stateValue) {
+    if (propsValue !== prevValue && propsValue !== stateValue) { // New value from props
       this.setState({
         value: propsValue,
-      }, this.updateValue)
+      }, this.updateValueWithState)
     }
-    else if (prevState.value !== stateValue) {
-      this.updateValue(this.state)
+    else if (stateValue !== prevState.value) { // New value from state
+      this.updateValueWithState(this.state)
     }
   }
 
@@ -63,15 +63,14 @@ class FormTextInput extends React.Component /** @lends @FormTextInput.prototype 
     return hasIcon || !!icon || (hasClear && this.hasValue())
   }
 
-  updateValue = (state) => {
+  updateValueWithState = (state) => {
     const { id, onChange, disabled, numericValue } = this.props
     if (!disabled && typeof onChange === 'function') {
-      const { target } = event
       let { value } = state
       if (numericValue && !isNaN(value)) {
         value = Number(value)
       }
-      onChange({ event, id, target, value })
+      onChange({ id, value })
     }
   }
 
@@ -238,9 +237,10 @@ class FormTextInput extends React.Component /** @lends @FormTextInput.prototype 
 
   }
 
+  static propTypes = {
+    id: PropTypes.string,
+  }
+
 }
 
-FormTextInput.propTypes = {
-  id: PropTypes.string,
-}
 export default FormItemHOC({ hoverable: true, framed: true })(FormTextInput)

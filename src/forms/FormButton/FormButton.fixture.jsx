@@ -20,7 +20,7 @@ export const DemoWrapper = FormGroup // ({ children }) => {
 const inlineIcon = <InlineIcon icon={faCheck} className="extraIconClass" />
 
 export default {
-  /* // Classic format...
+  /* // Old cosmos-classic format example...
    * default: {
    *   component: FormButton,
    *   props: {

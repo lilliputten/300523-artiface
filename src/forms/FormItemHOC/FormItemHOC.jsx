@@ -104,21 +104,34 @@ const wrapFormItemHOC = (WrappedComponent, params = {}) => class extends React.C
   componentDidMount() {
     // const { formItemRef: { current } = {} } = this
     const { formItemDomRef } = this
-    const { hoverable } = this.state
-    if (hoverable && formItemDomRef && formItemDomRef.addEventListener) {
-      this.hoverableInited = true
-      formItemDomRef.addEventListener('mouseover', this.handleMouseOver)
-      formItemDomRef.addEventListener('mouseout', this.handleMouseOut)
+    if (formItemDomRef && formItemDomRef.addEventListener) {
+      const hoverable = this.getStateOrPropOrParam('hoverable')
+      const focusable = this.getStateOrPropOrParam('focusable')
+      if (hoverable && !this.hoverableInited) {
+        this.hoverableInited = true
+        formItemDomRef.addEventListener('mouseover', this.handleMouseOver)
+        formItemDomRef.addEventListener('mouseout', this.handleMouseOut)
+      }
+      if (focusable && !this.focusableInited) {
+        this.focusableInited = true
+        formItemDomRef.addEventListener('focus', this.handleFocus)
+        formItemDomRef.addEventListener('blur', this.handleBlur)
+      }
     }
   }
 
   componentWillUnmount() {
-    if (this.hoverableInited) {
-      // const { formItemRef: { current } = {} } = this
-      const { formItemDomRef } = this
-      if (formItemDomRef && formItemDomRef.removeEventListener) {
+    const { formItemDomRef } = this
+    if (formItemDomRef && formItemDomRef.removeEventListener) {
+      // const hoverable = this.getStateOrPropOrParam('hoverable')
+      // const focusable = this.getStateOrPropOrParam('focusable')
+      if (this.hoverableInited) {
         formItemDomRef.removeEventListener('mouseover', this.handleMouseOver)
         formItemDomRef.removeEventListener('mouseout', this.handleMouseOut)
+      }
+      if (this.focusableInited) {
+        formItemDomRef.removeEventListener('focus', this.handleFocus)
+        formItemDomRef.removeEventListener('blur', this.handleBlur)
       }
     }
   }
@@ -159,8 +172,24 @@ const wrapFormItemHOC = (WrappedComponent, params = {}) => class extends React.C
     }
   }
 
+  handleFocus = () => {
+    const disabled = this.getStateOrPropOrParam('disabled')
+    const focusable = this.getStateOrPropOrParam('focusable')
+    if (focusable && !disabled) {
+      this.setState({ focused: true })
+    }
+  }
+  handleBlur = () => {
+    const disabled = this.getStateOrPropOrParam('disabled')
+    const focusable = this.getStateOrPropOrParam('focusable')
+    if (focusable && !disabled) {
+      this.setState({ focused: false })
+    }
+  }
+
   setDomRef = (domRef) => { // Children dom node receiver
     this.formItemDomRef = domRef
+    domRef && domRef.focus && domRef.focus()
   }
 
   render() {
@@ -170,17 +199,25 @@ const wrapFormItemHOC = (WrappedComponent, params = {}) => class extends React.C
       focused,
     } = this.state
     // TODO: Generate unique id?
+    const renderProps = {
+      hovered,
+      focused,
+      className: this.getClassName(),
+      setDomRef: this.setDomRef, // Children dom node receiver
+    }
+    const focusable = this.getStateOrPropOrParam('focusable')
+    if (focusable) {
+      renderProps.tabIndex = 0
+    }
     return (
       <WrappedComponent
         {...this.props}
+        {...renderProps}
         // id={id}
-        hovered={hovered}
-        focused={focused}
-        className={this.getClassName()}
-        setDomRef={this.setDomRef} // Children dom node receiver
       />
     )
   }
+
 }
 
 /** Usage:
