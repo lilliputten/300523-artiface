@@ -1,0 +1,92 @@
+/** @module FormRadio.styles
+ *  @class FormRadio
+ *  @since 2020.04.02, 14:53
+ *  @changed 2020.04.02, 14:53
+ */
+
+.FormRadio {
+  $innerColor: #fff;
+  $defaultColor: $neutralColor;
+  $hoveredColor: color($defaultColor shade(10));
+  $focusedColor: color($defaultColor shade(15));
+  $frameWidth: 2px;
+  $hoveredFrameWidth: @calc($frameWidth + 1px);
+  $focusedFrameWidth: @calc($frameWidth + 1px);
+  overflow: hidden;
+  // @mixin debug;
+  // NOTE: FormItem inherited
+  &-Control {
+    // @mixin debug gray;
+    @mixin FormItemActorMixin;
+  }
+  &-Control, &-Frame, &-Actor {
+    border-radius: 50%;
+    position: relative;
+    box-sizing: border-box;
+  }
+  &-Frame, &-Actor {
+    position: absolute;
+  }
+  &-Frame {
+    $offset: 6px;
+    top: $offset;
+    bottom: $offset;
+    left: $offset;
+    right: $offset;
+    box-shadow: 0 0 0 $frameWidth $defaultColor;
+    background-color: $innerColor;
+    transition: all .15s;
+  }
+  &-Actor {
+    $offset: 4px;
+    top: $offset;
+    bottom: $offset;
+    left: $offset;
+    right: $offset;
+    // background-color: $innerColor;
+    background-color: $defaultColor;
+    opacity: .1;
+    transition: all .15s;
+    ^&_checked & {
+      // background-color: $defaultColor;
+      opacity: .9;
+    }
+  }
+  &-Input {
+    opacity: 0;
+    cursor: pointer;
+    height: $(formItemHeight)px;
+    width: $(formItemHeight)px;
+    // top: 0;
+    // left: 0;
+    border: 0;
+    margin: 0;
+    &:focus {
+      // outline: 0;
+    }
+  }
+  .FormItem_hovered& & {
+    &-Frame {
+      box-shadow: 0 0 0 $hoveredFrameWidth $hoveredColor;
+    }
+    &-Actor {
+      background-color: $hoveredColor;
+    }
+  }
+  .FormItem_focused& & {
+    &-Frame {
+      box-shadow: 0 0 0 $focusedFrameWidth $hoveredColor;
+    }
+    &-Actor {
+      background-color: $hoveredColor;
+    }
+  }
+  .FormItem_hovered.FormItem_focused& & {
+    &-Frame {
+      box-shadow: 0 0 0 $focusedFrameWidth $focusedColor;
+    }
+    &-Actor {
+      background-color: $focusedColor;
+    }
+  }
+}
