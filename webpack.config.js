@@ -1,6 +1,6 @@
 /** @desc Webpack configuration
  *  @since 2020.05.18, 12:00
- *  @changed 2020.11.05, 19:31
+ *  @changed 2020.12.10, 18:46
  */
 
 const fs = require('fs')
@@ -373,7 +373,7 @@ module.exports = (env, argv) => {
         loader: isDevServer ? require.resolve('file-loader') : require.resolve('url-loader'),
         options: fileLoaderOptions,
       },
-    ]},
+    ] },
     plugins: [
       !isDevServer && !isStats && new CleanWebpackPlugin({ // Cleanup before build
         cleanOnceBeforeBuildPatterns: [
@@ -392,6 +392,7 @@ module.exports = (env, argv) => {
       !isDevServer && new CopyWebpackPlugin({ // Simply copies the files over
         patterns: [
           { from: 'static-build-files', to: './', ...CopyWebpackPluginOptions },
+          { from: 'CHANGELOG.md', to: './', ...CopyWebpackPluginOptions },
           { from: 'README.md', to: './', ...CopyWebpackPluginOptions }, // Readme listed at last position -- then can be overriden if readme exists in `static-build-files` (commands executiong in reversed order?).
         ].filter(Boolean),
       }),
@@ -408,9 +409,9 @@ module.exports = (env, argv) => {
         filename: isBuild ? 'styles.css' : bundleName({ ext: '.css', dir: 'css/' }),
       }),
       isBuild && preprocessBundles && new WebpackFilePreprocessorPlugin({
-          debug: !isStats, // Prints processed assets if set to true (default: false)
-          pattern: /\.js$/,
-          process: preprocessJs
+        debug: !isStats, // Prints processed assets if set to true (default: false)
+        pattern: /\.js$/,
+        process: preprocessJs
       }),
       // new webpack.NoEmitOnErrorsPlugin(), // ???
       isBuild && new CreateFileWebpack({ // Create build tag file
