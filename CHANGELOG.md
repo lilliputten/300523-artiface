@@ -1,5 +1,7 @@
 # CHANGELOG
 
+- 2020.12.10, 18:44 -- README.migrate-from-uikit.md -- Minimal instructions fro migrating old-style `uikit` modules (in progress).
+- 2020.12.10, 18:43 -- Added FormRadio component.
 - 2020.12.10, 18:42 -- FormItemHOC: focusable modifier & dom node events.
 - 2020.12.09, 23:08 -- v.0.1.5
 - 2020.12.08, 22:15 -- PD-3476, v.0.1.4: Css-modules class name transformations. Using wrapper for `@bem-react/classname/cn()` in `utils/configure/cn()` -- `import { cn } from 'utils'`). In target project must be set configuration options: `WebUiCore.utils.setConfigOptions({ useCssModules: true, cssMappings })` where `cssMappings` is import result of `WebUiCore` webpacked css file (`import cssMappings from 'WebUiCore/styles.css'`). In progress, TODO: Replace all `cn` invokes with `cn` from `utils` submodule.
