@@ -12,7 +12,31 @@ import 'demo.pcss'
 
 export const DemoWrapper = FormGroup // ({ children }) => {
 
+class DemoFormRadio extends React.PureComponent /** @lends @FormRadio.prototype */ {
+  constructor(props) {
+    super(props)
+    this.state = {
+      value: true,
+    }
+  }
+  handleChange = ({ /* id, */ value }) => {
+    this.setState({ value })
+  }
+  render() {
+    const { value } = this.state
+    return (
+      <FormRadio
+        id="DemoRadio"
+        onChange={this.handleChange}
+        value={value}
+      />
+    )
+  }
+}
+
+
 export default {
-  default: <FormRadio className="extraButtonClass" />,
+  demo: <DemoFormRadio />,
+  // default: <FormRadio className="extraButtonClass" />,
   // checked: <FormRadio value={true} />,
 }

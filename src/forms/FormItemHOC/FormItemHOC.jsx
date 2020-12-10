@@ -68,7 +68,7 @@ const deriveState = (...sets) => {
 // Unique id counter
 let uniqIdCount = 1
 
-const wrapFormItemHOC = (WrappedComponent, params = {}) => class extends React.Component {
+const wrapFormItemHOC = (WrappedComponent, params = {}) => class FormItem extends React.Component {
 
   // Helper methods...
 
