@@ -1,6 +1,6 @@
 # CHANGELOG
 
-- 2020.12.11, 01:16 -- Using generative themes based on `config.css.themeColors` list (plus `primary`, `secondary` etc).
+- 2020.12.11, 01:16 -- PD-3481, v.0.1.6: Using generative themes based on `config.css.themeColors` list (plus `primary`, `secondary` etc).
 - 2020.12.11, 01:16 -- Replace `style` prop with `theme` for form elements.
 - 2020.12.10, 18:45 -- Migrated FormDelim, FormSpacer, FormInputGroup, FormLabeledGroup uikit modules.
 - 2020.12.10, 18:44 -- README.migrate-from-uikit.md -- Minimal instructions fro migrating old-style `uikit` modules (in progress).
@@ -24,5 +24,5 @@
 - 2020.10.05, 20:38 -- v.0.0.15: Extracted `demoSupport.jsx` routines, fixture selection from url query (parameter `fixture`), added avaialble fixtures list if fixture to display is not specified, added DemoWrapper & demoTitle exportable ficture parameters for demo rendering.
 
 <!--
- @changed 2020.10.30, 00:06
+ @changed 2020.12.11, 01:26
 -->
