@@ -25,6 +25,7 @@ export FormTextInput from './FormTextInput'
 export FormPasswordInput from './FormPasswordInput'
 
 export FormRadio from './FormRadio'
+// export FormCheck from './FormCheck'
 // export FormSwitch from './FormSwitch'
 
 // TODO...

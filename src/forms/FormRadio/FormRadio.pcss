@@ -4,14 +4,7 @@
  *  @changed 2020.04.02, 14:53
  */
 
-.FormRadio {
-  $innerColor: #fff;
-  $defaultColor: $neutralColor;
-  $hoveredColor: color($defaultColor shade(10));
-  $focusedColor: color($defaultColor shade(15));
-  $frameWidth: 2px;
-  $hoveredFrameWidth: @calc($frameWidth + 1px);
-  $focusedFrameWidth: @calc($frameWidth + 1px);
+.FormRadio { // Basic geometry. For styles look for `FormRadio-Styles.pcss`
   overflow: hidden;
   // @mixin debug;
   // NOTE: FormItem inherited
@@ -33,8 +26,6 @@
     bottom: $offset;
     left: $offset;
     right: $offset;
-    box-shadow: 0 0 0 $frameWidth $defaultColor;
-    background-color: $innerColor;
     transition: all .15s;
   }
   &-Actor {
@@ -43,12 +34,10 @@
     bottom: $offset;
     left: $offset;
     right: $offset;
-    // background-color: $innerColor;
-    background-color: $defaultColor;
-    opacity: .1;
+    // opacity: .1; // Some color tint for inactive items?
+    opacity: 0;
     transition: all .15s;
     ^&_checked & {
-      // background-color: $defaultColor;
       opacity: .9;
     }
   }
@@ -63,30 +52,6 @@
     margin: 0;
     &:focus {
       // outline: 0;
-    }
-  }
-  .FormItem_hovered& & {
-    &-Frame {
-      box-shadow: 0 0 0 $hoveredFrameWidth $hoveredColor;
-    }
-    &-Actor {
-      background-color: $hoveredColor;
-    }
-  }
-  .FormItem_focused& & {
-    &-Frame {
-      box-shadow: 0 0 0 $focusedFrameWidth $hoveredColor;
-    }
-    &-Actor {
-      background-color: $hoveredColor;
-    }
-  }
-  .FormItem_hovered.FormItem_focused& & {
-    &-Frame {
-      box-shadow: 0 0 0 $focusedFrameWidth $focusedColor;
-    }
-    &-Actor {
-      background-color: $focusedColor;
     }
   }
 }

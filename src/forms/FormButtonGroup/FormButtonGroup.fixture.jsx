@@ -23,10 +23,10 @@ export const demoTitle = 'FormButtonGroup component'
 export default {
   default: (
     <FormGroup id="OuterGroupFixture">
-      <FormButton style="default" text="Outer" id="Outer item" />
+      <FormButton theme="default" text="Outer" id="Outer item" />
       <FormButtonGroup id="FormButtonGroupFixture">
-        <FormButton style="default" text="Button" />
-        <FormButton icon={faCheck} style="default" text="Button with icon" />
+        <FormButton theme="default" text="Button" />
+        <FormButton icon={faCheck} theme="default" text="Button with icon" />
       </FormButtonGroup>
     </FormGroup>
   ),

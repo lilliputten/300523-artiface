@@ -116,6 +116,10 @@ const wrapFormItemHOC = (WrappedComponent, params = {}) => class FormItem extend
         this.focusableInited = true
         formItemDomRef.addEventListener('focus', this.handleFocus)
         formItemDomRef.addEventListener('blur', this.handleBlur)
+        this.focus = () => { // Focus handler
+          const domRef = this.formItemDomRef
+          domRef && domRef.focus && domRef.focus()
+        }
       }
     }
   }
@@ -189,7 +193,7 @@ const wrapFormItemHOC = (WrappedComponent, params = {}) => class FormItem extend
 
   setDomRef = (domRef) => { // Children dom node receiver
     this.formItemDomRef = domRef
-    domRef && domRef.focus && domRef.focus()
+    // domRef && domRef.focus && domRef.focus()
   }
 
   render() {
@@ -204,6 +208,7 @@ const wrapFormItemHOC = (WrappedComponent, params = {}) => class FormItem extend
       focused,
       className: this.getClassName(),
       setDomRef: this.setDomRef, // Children dom node receiver
+      // formItemDomRef: this.formItemDomRef,
     }
     const focusable = this.getStateOrPropOrParam('focusable')
     if (focusable) {

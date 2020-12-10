@@ -15,6 +15,13 @@ const textColor = theme.textColor || '#444'
 const defaultTransitonTime = 250
 const defaultAnimateTimeout = 500
 
+const errorColor = theme.errorColor || '#c33'
+const warnColor = theme.warnColor || '#f73' // '#f96'
+const successColor = theme.successColor || '#593' // '#ac9'
+const infoColor = theme.infoColor || '#29a' // '#9bd'
+const confirmColor = theme.confirmColor /* || theme.primaryColor || textColor */ || '#891' // '#07f'
+const selectColor = theme.selectColor || '#05b'
+
 // module.exports = { // Common-used css variables...
 const cssConfig = { // Common-used css variables...
 
@@ -33,12 +40,12 @@ const cssConfig = { // Common-used css variables...
   // Colors...
 
   // Colors for dialogs styles
-  errorColor: theme.errorColor || '#c33',
-  warnColor: theme.warnColor || '#f73', // '#f96',
-  successColor: theme.successColor || '#593', // '#ac9',
-  infoColor: theme.infoColor || '#29a', // '#9bd',
-  confirmColor: theme.confirmColor /* || theme.primaryColor || textColor */ || '#891', // '#07f',
-  selectColor: theme.selectColor || '#05b',
+  errorColor, // theme.errorColor || '#c33',
+  warnColor, // theme.warnColor || '#f73', // '#f96',
+  successColor, // theme.successColor || '#593', // '#ac9',
+  infoColor, // theme.infoColor || '#29a', // '#9bd',
+  confirmColor, // theme.confirmColor /* || theme.primaryColor || textColor */ || '#891', // '#07f',
+  selectColor, // theme.selectColor || '#05b',
 
   specialContrastColor: '#fff', // Generic contrast for accenting colors
 
@@ -64,6 +71,53 @@ const cssConfig = { // Common-used css variables...
   layoutLightBgColor: theme.layoutLightBgColor || '#f7f7f7',
 
   layoutBorderColor: theme.layoutBorderColor || '#ccc',
+
+  themeColors: { // Generic theming colors...
+
+    // primary: theme.primaryColor,
+    // secondary: theme.primaryColor,
+
+    error: errorColor,
+    warn: warnColor,
+    success: successColor,
+    info: infoColor,
+    confirm: confirmColor,
+    select: selectColor,
+
+    // red: '#c33',
+    // orange: '#f73',
+    // green: '#593',
+    // grassGreen: '#891',
+    // Blue: '#05b',
+    // lightBue: '#29a',
+
+    maroon: '#800000',
+    red: '#ff0000',
+    purple: '#800080',
+    fuchsia: '#ff00ff',
+    green: '#008000',
+    // lime: '#00ff00',
+    olive: '#808000',
+    // yellow: '#ffff00',
+    navy: '#000080',
+    blue: '#0000ff',
+    teal: '#008080',
+    // aqua: '#00ffff',
+    orange: '#ffa500',
+
+    blueviolet: '#8a2be2',
+    brown: '#a52a2a',
+    cadetblue: '#5f9ea0',
+    darkblue: '#00008b',
+    darkcyan: '#008b8b',
+    darkgoldenrod: '#b8860b',
+    darkorange: '#ff8c00',
+    darkorchid: '#9932cc',
+    darkred: '#8b0000',
+    darkslateblue: '#483d8b',
+    darkslategray: '#2f4f4f',
+
+  },
 
   // Fonts...
 

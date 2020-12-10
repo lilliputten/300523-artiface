@@ -1,5 +1,7 @@
 # CHANGELOG
 
+- 2020.12.11, 01:16 -- Using generative themes based on `config.css.themeColors` list (plus `primary`, `secondary` etc).
+- 2020.12.11, 01:16 -- Replace `style` prop with `theme` for form elements.
 - 2020.12.10, 18:45 -- Migrated FormDelim, FormSpacer, FormInputGroup, FormLabeledGroup uikit modules.
 - 2020.12.10, 18:44 -- README.migrate-from-uikit.md -- Minimal instructions fro migrating old-style `uikit` modules (in progress).
 - 2020.12.10, 18:43 -- Added FormRadio component.

@@ -41,17 +41,24 @@ const fixtureComponentsList = {
   Menu: require('elements/Menu/Menu.fixture'),
   MenuItem: require('elements/MenuItem/MenuItem.fixture'),
 
+  FormButton: require('forms/FormButton/FormButton.fixture'),
+  FormButtonThemes: require('forms/FormButton/FormButton-Themes.fixture'),
+  FormButtonDark: require('forms/FormButton/FormButton-Dark.fixture'),
+
   FormLabel: require('forms/FormLabel/FormLabel.fixture'),
   FormTextInput: require('forms/FormTextInput/FormTextInput.fixture'),
   FormPasswordInput: require('forms/FormPasswordInput/FormPasswordInput.fixture'),
-  FormButton: require('forms/FormButton/FormButton.fixture'),
-  FormButtonDark: require('forms/FormButton/FormButton-Dark.fixture'),
   FormGroup: require('forms/FormGroup/FormGroup.fixture'),
   FormButtonGroup: require('forms/FormButtonGroup/FormButtonGroup.fixture'),
   FormInputGroup: require('forms/FormInputGroup/FormInputGroup.fixture'),
   FormSelect: require('forms/FormSelect/FormSelect.fixture'),
   FormText: require('forms/FormText/FormText.fixture'),
+
+  // Booleans:
   FormRadio: require('forms/FormRadio/FormRadio.fixture'),
+  FormRadioThemes: require('forms/FormRadio/FormRadio-Themes.fixture'),
+  // FormCheck: require('forms/FormCheck/FormCheck.fixture'),
+  // FormSwitch: require('forms/FormSwitch/FormSwitch.fixture'),
 
 }
 
@@ -59,17 +66,20 @@ const findFixture = window.location.search && window.location.search.match(/\bfi
 // const fullFixtureId = findFixture && findFixture[1]
 const fixtureId = findFixture && findFixture[2]
 const fixtureItemId = findFixture && findFixture[3]
-const fixtureModuleExports = fixtureComponentsList[fixtureId]
+const fixtureModuleExports = fixtureId && fixtureComponentsList[fixtureId]
 
 let content
 
-if (fixtureModuleExports) { // Fixture specified
+if (fixtureModuleExports) { // Found fixture
   const {
     default: fixture,
     demoTitle = 'Demo fixture: ' + fixtureId, // fullFixtureId,
     DemoWrapper,
   } = fixtureModuleExports
   content = demoSupport.PlaceFixture({ fixture, fixtureItemId, demoTitle, DemoWrapper })
+}
+else if (fixtureId) { // Fixture specified but not found!
+  content = 'Fixture for id "' + fixtureId + '" not found!'
 }
 else { // List all available fixtures to display
   const fixtures = demoSupport.FixturesContents(fixtureComponentsList)

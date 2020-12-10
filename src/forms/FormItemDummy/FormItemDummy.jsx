@@ -66,7 +66,7 @@ class FormItemDummy extends React.Component /** @lends @FormItemDummy.prototype 
       onlyIcon,
       largeIcon,
       rightIcon,
-      style,
+      theme,
       fullWidth,
       // checked,
       type,
@@ -78,7 +78,7 @@ class FormItemDummy extends React.Component /** @lends @FormItemDummy.prototype 
     } = this.state
     const classList = cnFormItemDummy({
       id,
-      style,
+      theme,
       fullWidth,
       // checked,
       // plain,

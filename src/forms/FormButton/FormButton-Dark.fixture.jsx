@@ -35,7 +35,7 @@ export const DarkBg = ({ children }) => {
 const inlineIcon = <InlineIcon icon={faCheck} className="extraIconClass" />
 
 export default {
-  // default: <DarkBg><FormButton icon={inlineIcon} style="default" text="Compare with default" /></DarkBg>,
-  plain: <DarkBg><FormButton icon={inlineIcon} style="plain" onDark text="Style: plain" /></DarkBg>,
-  default: <DarkBg><FormButton icon={inlineIcon} style="default" onDark text="Style: default, onDark" /></DarkBg>,
+  // default: <DarkBg><FormButton icon={inlineIcon} theme="default" text="Compare with default" /></DarkBg>,
+  plain: <DarkBg><FormButton icon={inlineIcon} theme="plain" onDark text="Style: plain" /></DarkBg>,
+  default: <DarkBg><FormButton icon={inlineIcon} theme="default" onDark text="Style: default, onDark" /></DarkBg>,
 }

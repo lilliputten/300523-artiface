@@ -1,0 +1,71 @@
+/** @module FormRadio.styles
+ *  @class FormRadio
+ *  @since 2020.04.02, 14:53
+ *  @changed 2020.04.02, 14:53
+ */
+
+.FormRadio { // Styles. For basic geometry look for `FormRadio.pcss`
+
+  // Sizes...
+  $frameWidth: 2px;
+  $hoveredFrameWidth: @calc($frameWidth + 1px);
+  $focusedFrameWidth: @calc($frameWidth + 1px);
+
+  // Basic colors:
+  $innerColor: #fff; // 'Background' color
+  $defaultColor: $neutralColor;
+  // $hoveredColor: color($defaultColor shade(10));
+  // $focusedColor: color($defaultColor shade(20));
+
+  @define-mixin colorStyle $defaultColor, $hoveredColor, $focusedColor, $innerColor = $innerColor {
+    .FormRadio-Frame {
+      box-shadow: 0 0 0 $frameWidth $defaultColor;
+      background-color: $innerColor; // Actor outer frame ('background' color). Used?
+    }
+    .FormRadio-Actor {
+      background-color: $defaultColor;
+    }
+    .FormItem_hovered& {
+      .FormRadio-Frame {
+        box-shadow: 0 0 0 $hoveredFrameWidth $hoveredColor;
+      }
+      .FormRadio-Actor {
+        background-color: $hoveredColor;
+      }
+    }
+    .FormItem_focused& {
+      .FormRadio-Frame {
+        box-shadow: 0 0 0 $focusedFrameWidth $hoveredColor;
+      }
+      .FormRadio-Actor {
+        background-color: $hoveredColor;
+      }
+    }
+    .FormItem_hovered.FormItem_focused& {
+      .FormRadio-Frame {
+        box-shadow: 0 0 0 $focusedFrameWidth $focusedColor;
+      }
+      .FormRadio-Actor {
+        background-color: $focusedColor;
+      }
+    }
+  }
+  @define-mixin shadedColorStyle $defaultColor, $innerColor = $innerColor {
+    $hoveredColor: color($defaultColor shade(10));
+    $focusedColor: color($defaultColor shade(20));
+    @mixin colorStyle $defaultColor, $hoveredColor, $focusedColor, $innerColor;
+  }
+
+  &, &_theme_default {
+    @mixin shadedColorStyle $defaultColor, $innerColor;
+  }
+
+  &_theme_primary { @mixin shadedColorStyle $primaryColor }
+  &_theme_secondary { @mixin shadedColorStyle $secondaryColor }
+
+  // Generate theme colors...
+  @each $color $name in $themeColors {
+    &_theme_$(name) { @mixin shadedColorStyle $color }
+  }
+
+}

@@ -5,7 +5,7 @@
 
 .FormButton {
 
-  &_style { // Button styles...
+  &_theme { // Button styles...
 
     // Mixin params: $bgColor, $borderColor, $iconColor, $textColor
     @define-mixin buttonStyle $bgColor, $borderColor: $formItemBorderColor, $iconColor: $neutralShadedColor, $textColor: $formItemTextColor {
@@ -77,49 +77,53 @@
 
     &_primary { @mixin styledButton $primaryColor, $primaryContrastColor }
     &_secondary { @mixin styledButton $secondaryColor, $secondaryContrastColor }
-    &_error { @mixin styledButton $errorColor }
-    &_warn { @mixin styledButton $warnColor }
-    &_success { @mixin styledButton $successColor }
-    &_info { @mixin styledButton $infoColor }
-    &_confirm { @mixin styledButton $confirmColor }
-    &_select { @mixin styledButton $selectColor }
 
-    // Custom colors (see https://developer.mozilla.org/en-US/docs/Web/CSS/color_value)
+    // Theme colors...
+    @each $color $name in $themeColors {
+      &_$(name) { @mixin styledButton $color }
+    }
 
-    // &_red { @mixin styledButton #c33 }
-    // &_orange { @mixin styledButton #f73 }
-    // &_green { @mixin styledButton #593 }
-    // &_grassGreen { @mixin styledButton #891 }
-    // &_Blue { @mixin styledButton #05b }
-    // &_lightBue { @mixin styledButton #29a }
-
-    &_maroon { @mixin styledButton #800000 }
-    &_red { @mixin styledButton #ff0000 }
-    &_purple { @mixin styledButton #800080 }
-    &_fuchsia { @mixin styledButton #ff00ff }
-    &_green { @mixin styledButton #008000 }
-    // &_lime { @mixin styledButton #00ff00 }
-    &_olive { @mixin styledButton #808000 }
-    // &_yellow { @mixin styledButton #ffff00 }
-    &_navy { @mixin styledButton #000080 }
-    &_blue { @mixin styledButton #0000ff }
-    &_teal { @mixin styledButton #008080 }
-    // &_aqua { @mixin styledButton #00ffff }
-    &_orange { @mixin styledButton #ffa500 }
-
-    &_blueviolet { @mixin styledButton #8a2be2 }
-    &_brown { @mixin styledButton #a52a2a }
-    &_cadetblue { @mixin styledButton #5f9ea0 }
-    &_darkblue { @mixin styledButton #00008b }
-    &_darkcyan { @mixin styledButton #008b8b }
-    &_darkgoldenrod { @mixin styledButton #b8860b }
-    &_darkorange { @mixin styledButton #ff8c00 }
-    &_darkorchid { @mixin styledButton #9932cc }
-    &_darkred { @mixin styledButton #8b0000 }
-    &_darkslateblue { @mixin styledButton #483d8b }
-    &_darkslategray { @mixin styledButton #2f4f4f }
-
-    // TODO: styles: error, warn, success, info
+    // &_error { @mixin styledButton $errorColor }
+    // &_warn { @mixin styledButton $warnColor }
+    // &_success { @mixin styledButton $successColor }
+    // &_info { @mixin styledButton $infoColor }
+    // &_confirm { @mixin styledButton $confirmColor }
+    // &_select { @mixin styledButton $selectColor }
+    //
+    // // Custom colors (see https://developer.mozilla.org/en-US/docs/Web/CSS/color_value)
+    //
+    // // &_red { @mixin styledButton #c33 }
+    // // &_orange { @mixin styledButton #f73 }
+    // // &_green { @mixin styledButton #593 }
+    // // &_grassGreen { @mixin styledButton #891 }
+    // // &_Blue { @mixin styledButton #05b }
+    // // &_lightBue { @mixin styledButton #29a }
+    //
+    // &_maroon { @mixin styledButton #800000 }
+    // &_red { @mixin styledButton #ff0000 }
+    // &_purple { @mixin styledButton #800080 }
+    // &_fuchsia { @mixin styledButton #ff00ff }
+    // &_green { @mixin styledButton #008000 }
+    // // &_lime { @mixin styledButton #00ff00 }
+    // &_olive { @mixin styledButton #808000 }
+    // // &_yellow { @mixin styledButton #ffff00 }
+    // &_navy { @mixin styledButton #000080 }
+    // &_blue { @mixin styledButton #0000ff }
+    // &_teal { @mixin styledButton #008080 }
+    // // &_aqua { @mixin styledButton #00ffff }
+    // &_orange { @mixin styledButton #ffa500 }
+    //
+    // &_blueviolet { @mixin styledButton #8a2be2 }
+    // &_brown { @mixin styledButton #a52a2a }
+    // &_cadetblue { @mixin styledButton #5f9ea0 }
+    // &_darkblue { @mixin styledButton #00008b }
+    // &_darkcyan { @mixin styledButton #008b8b }
+    // &_darkgoldenrod { @mixin styledButton #b8860b }
+    // &_darkorange { @mixin styledButton #ff8c00 }
+    // &_darkorchid { @mixin styledButton #9932cc }
+    // &_darkred { @mixin styledButton #8b0000 }
+    // &_darkslateblue { @mixin styledButton #483d8b }
+    // &_darkslategray { @mixin styledButton #2f4f4f }
   }
 
   // TODO: States: `clicked`, `rightIcon`, `onlyIcon`, `largeIcon` (+large button), large sizes (`xl`, `xxl`?)

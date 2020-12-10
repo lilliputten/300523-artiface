@@ -15,6 +15,7 @@ import FormItemHOC from '../FormItemHOC'
 import FormBooleanHOC from '../FormBooleanHOC'
 
 import './FormRadio.pcss'
+import './FormRadio-Themes.pcss'
 
 const cnFormRadio = cn('FormRadio')
 
@@ -35,9 +36,9 @@ class FormRadio extends React.PureComponent /** @lends @FormRadio.prototype */ {
   // Helper methods...
 
   getClassName() {
-    const { id, value } = this.props
+    const { id, value, theme } = this.props
     const checked = !!value
-    const mods = { id, checked }
+    const mods = { id, checked, theme }
     const classList = cnFormRadio(mods, [this.props.className])
     return classList
   }
@@ -100,5 +101,5 @@ class FormRadio extends React.PureComponent /** @lends @FormRadio.prototype */ {
 // export default FormItemHOC({ hoverable: true, focusable: true, framed: false })(FormRadio)
 export default compose(
   FormItemHOC({ hoverable: true, focusable: true, framed: false }),
-  FormBooleanHOC({ id: 'FormRadio' }),
+  FormBooleanHOC,
 )(FormRadio)

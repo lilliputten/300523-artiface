@@ -24,8 +24,8 @@ export const demoTitle = 'FormGroup component'
 export default {
   default: (
     <FormGroup>
-      <FormButton style="default" text="Button" />
-      <FormButton icon={faCheck} style="default" text="Button with icon" />
+      <FormButton theme="default" text="Button" />
+      <FormButton icon={faCheck} theme="default" text="Button with icon" />
     </FormGroup>
   ),
   fullWidth: (

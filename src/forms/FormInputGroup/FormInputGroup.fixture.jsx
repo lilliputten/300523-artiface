@@ -24,7 +24,7 @@ export const demoTitle = 'FormInputGroup component'
 export default {
   default: (
     <FormGroup id="OuterGroupFixture">
-      <FormButton style="default" text="Outer" id="Outer item" />
+      <FormButton theme="default" text="Outer" id="Outer item" />
       <FormInputGroup id="FormInputGroupFixture">
         <FormTextInput
           type="text"
@@ -32,7 +32,7 @@ export default {
           id="Input"
           inputId="InputControl"
         />
-        <FormButton icon={faCheck} style="default" text="Button" />
+        <FormButton icon={faCheck} theme="default" text="Button" />
       </FormInputGroup>
     </FormGroup>
   ),

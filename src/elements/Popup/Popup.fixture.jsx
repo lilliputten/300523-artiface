@@ -53,7 +53,7 @@ const fixtureDefault = (
 const fixtureWithButton = (
   <Popup
     showPopup={true}
-    popupControl={<FormButton icon="faChevronDown" rightIcon style="primary" variation="popupControl" text="Button" />}
+    popupControl={<FormButton icon="faChevronDown" rightIcon theme="primary" variation="popupControl" text="Button" />}
     popupContent={popupContentEl}
     // popupControl={PopupControl}
     // popupContent={PopupContent}
@@ -82,7 +82,7 @@ const fixtureWithMenu = (
   <Popup
     showPopup={true}
     onControlClick={buttonOnClick}
-    popupControl={<FormButton icon="faChevronDown" rightIcon style="primary" variation="popupControl" text="Button" />}
+    popupControl={<FormButton icon="faChevronDown" rightIcon theme="primary" variation="popupControl" text="Button" />}
     popupContent={demoMenu}
     // popupControl={PopupControl}
     // popupContent={PopupContent}

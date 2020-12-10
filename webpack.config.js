@@ -224,6 +224,7 @@ module.exports = (env, argv) => {
     require('postcss-calc')(),
     require('postcss-nested-ancestors'), // https://github.com/toomuchdesign/postcss-nested-ancestors
     require('postcss-nested'),
+    require('postcss-each'),
     require('postcss-url')({
       url: 'rebase',
       // maxSize: 20,

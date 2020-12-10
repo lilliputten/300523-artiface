@@ -17,7 +17,7 @@ import InlineIcon from 'elements/InlineIcon'
 
 import './FormButton.pcss'
 import './FormButton-Variations.pcss'
-import './FormButton-Styles.pcss'
+import './FormButton-Themes.pcss'
 
 const cnFormButton = cn('FormButton')
 
@@ -49,7 +49,7 @@ class FormButton extends React.PureComponent /** @lends @FormButton.prototype */
       rotatedIcon,
       onlyIcon,
       rightIcon,
-      style,
+      theme,
       onDark,
       plain,
       type,
@@ -65,7 +65,7 @@ class FormButton extends React.PureComponent /** @lends @FormButton.prototype */
       onlyIcon,
       rightIcon,
       solid: true,
-      style,
+      theme,
       onDark,
       plain,
       type,
@@ -197,7 +197,7 @@ class FormButton extends React.PureComponent /** @lends @FormButton.prototype */
     rightIcon: PropTypes.bool, // Icon placed at right side
     // TODO: size: PropTypes.string, // Different form item sizes? (eg: md -- default, sm, xs, lg, xl, xxl)
 
-    style: PropTypes.string, // Button style (plain, default, primary, secondary, error, warn, success, info, etc -- some are in progress -- see styles file)
+    theme: PropTypes.string, // Button style (plain, default, primary, secondary, error, warn, success, info, etc -- some are in progress -- see styles file)
     onDark:  PropTypes.bool, // On dark background
     fullWidth: PropTypes.bool, // Occupies all horizontal space
     plain: PropTypes.bool, // ??? Plain icon (no border & background -- if no style specified, looks as link)

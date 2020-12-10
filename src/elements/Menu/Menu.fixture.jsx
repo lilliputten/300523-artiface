@@ -48,7 +48,4 @@ export default {
       {itemElems}
     </Menu>
   ),
-  // button: (
-  //   <FormButton style="default" text="Style: default" className="extraButtonClass" />
-  // ),
 }

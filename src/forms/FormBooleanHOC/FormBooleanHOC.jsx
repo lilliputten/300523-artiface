@@ -9,15 +9,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { cn } from 'utils'
 
-// import FormItem from '../FormItem'
-// import FormItemHOC from '../FormItemHOC'
-
-import './FormBooleanHOC.pcss'
-
 const cnFormBooleanHOC = cn('FormBooleanHOC')
-
-// Unique id counter
-let uniqIdCount = 1
 
 const defaultState = { // Default state
   // hoverable: false,
@@ -40,31 +32,7 @@ const wrapFormBooleanHOC = (WrappedComponent, params = {}) => class FormBoolean 
     value: false,
   }
 
-  // Helper methods...
-
-  getStateOrPropOrParam(id) { // Get parameter from state or from props
-    return (this.state[id] != null) ? this.state[id] :
-      (this.props[id] != null) ? this.props[id] :
-        params[id]
-  }
-
-  createUniqId() {
-    return 'FormItem' + (uniqIdCount++)
-  }
-
-  getId(props) {
-    props = props || this.props
-    return props.id || this.id || (this.id = this.createUniqId())
-  }
-
   // Lifecycle methods...
-
-  /* getDerivedStateFromProps???
-   * static getDerivedStateFromProps(props, state) {
-   *   // TODO: Update event subscriptions if `hoverable` flag changed?
-   *   return deriveState(params, props, state) // deriveStateFromProps(props, state)
-   * }
-   */
 
   constructor(props) {
     super(props)
@@ -111,12 +79,6 @@ const wrapFormBooleanHOC = (WrappedComponent, params = {}) => class FormBoolean 
   focus() { // Invoke containing input focus method
     // if (this.inputDomElem && typeof this.inputDomElem.focus == 'function') {
     //   this.inputDomElem.focus()
-    // }
-  }
-
-  select() { // Invoke containing input select method
-    // if (this.inputDomElem && typeof this.inputDomElem.select == 'function') {
-    //   this.inputDomElem.select()
     // }
   }
 

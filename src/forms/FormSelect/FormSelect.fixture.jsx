@@ -33,7 +33,7 @@ export default {
       options={options}
       singleChoice
       closeOnSelect
-      controlButtonStyle="success"
+      controlButtonTheme="success"
       show
     />
   ),
