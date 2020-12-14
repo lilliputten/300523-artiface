@@ -2,6 +2,8 @@
  *  @class InlineIcon
  *  @since 2020.10.07, 02:08
  *  @changed 2020.10.07, 02:08
+ *
+ *  TODO 2020.12.14, 16:39 -- Uase theme prop (as in `FormButton`, `FormRadio` etc)
  */
 
 import React from 'react'
@@ -10,16 +12,19 @@ import React from 'react'
 import { cn } from 'utils'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import * as defaultIcons from '@fortawesome/free-solid-svg-icons'
-// import * as regularIcons from '@fortawesome/free-regular-svg-icons'
-// TODO: Add optional prefix ('regular', 'solid', 'default') to icon id for choosing icons set.
+import * as solidIcons from '@fortawesome/free-solid-svg-icons'
+import * as regularIcons from '@fortawesome/free-regular-svg-icons'
 
+const iconGroups = {
+  solid: solidIcons,
+  regular: regularIcons,
+}
 
 import './InlineIcon.pcss'
 
 const cnInlineIcon = cn('InlineIcon')
 
-class InlineIcon extends React.Component /** @lends @InlineIcon.prototype */ {
+class InlineIcon extends React.PureComponent /** @lends @InlineIcon.prototype */ {
 
   getClassName() {
     const {
@@ -29,6 +34,21 @@ class InlineIcon extends React.Component /** @lends @InlineIcon.prototype */ {
       id,
     }, [this.props.className])
     return className
+  }
+
+  getIconComponent(id) {
+    let iconId = id
+    let icons = solidIcons
+    const matchGroup = iconId.match(/^(\w+):(.*)/)
+    if (matchGroup) {
+      const [, groupId, nextId] = matchGroup
+      if (groupId && iconGroups[groupId] && nextId) {
+        icons = iconGroups[groupId]
+        iconId = nextId
+      }
+    }
+    const component = icons && icons[iconId] || 'questionCircle'
+    return component
   }
 
   render() {
@@ -43,7 +63,7 @@ class InlineIcon extends React.Component /** @lends @InlineIcon.prototype */ {
     } = this.props
 
     // Create fortawesome icon element if passed icon image (svg icon)
-    const iconComponent = (icon && typeof icon === 'string') ? defaultIcons[icon] : icon
+    const iconComponent = (icon && typeof icon === 'string') ? this.getIconComponent(icon) : icon
     const content = (iconComponent && iconComponent.iconName) ? <FontAwesomeIcon className={cnInlineIcon('IconImg')} icon={iconComponent} /> : iconComponent
 
     const renderProps = {
