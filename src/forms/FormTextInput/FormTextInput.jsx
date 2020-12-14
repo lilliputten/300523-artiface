@@ -64,13 +64,14 @@ class FormTextInput extends React.PureComponent /** @lends @FormTextInput.protot
   }
 
   updateValueWithState = (state) => {
-    const { id, onChange, disabled, numericValue } = this.props
+    const { id, inputId, name, onChange, disabled, numericValue } = this.props
     if (!disabled && typeof onChange === 'function') {
       let { value } = state
       if (numericValue && !isNaN(value)) {
         value = Number(value)
       }
-      onChange({ id, value })
+      const setId = inputId || id || name
+      onChange({ id: setId, value })
     }
   }
 
