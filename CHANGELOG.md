@@ -1,5 +1,6 @@
 # CHANGELOG
 
+- 2020.12.14, 20:14 -- FormLabel, FormItemHOC, FormGroup: Component styles & props.
 - 2020.12.14, 20:12 -- FormTextInput, FormBooleanHOC: Using combo id (from `inputId`, `id`, `name` props) for editable components.
 - 2020.12.14, 20:06 -- utils:configure: cssMapping processing classnames absent in css mappings. Eg: if not found `XXX_id_*`, but found `XXX` (mapped to `YYY`), then producing `YYY_id_*`. Same for `XXX-*`.
 - 2020.12.14, 20:05 -- InlineIcon: Use icon id prefix (in form `prefix:id`) for choose icons library (eg, `regular` for `@fortawesome/free-regular-svg-icons` etc).
@@ -27,5 +28,5 @@
 - 2020.10.05, 20:38 -- v.0.0.15: Extracted `demoSupport.jsx` routines, fixture selection from url query (parameter `fixture`), added avaialble fixtures list if fixture to display is not specified, added DemoWrapper & demoTitle exportable ficture parameters for demo rendering.
 
 <!--
- @changed 2020.12.11, 01:26
+ @changed 2020.12.14, 20:14
 -->
