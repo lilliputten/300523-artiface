@@ -4,7 +4,6 @@
   /* border-radius: $(formItemBorderRadius)px; */
   padding: 0 $(formItemInnerPaddingH)px;
   width: 100%;
-  box-sizing: border-box;
   height: $(formItemHeight)px;
   line-height: $(formItemHeight)px;
   background: none;

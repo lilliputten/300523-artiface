@@ -28,6 +28,7 @@ import './build'
  *     WebUiCoreTest: '__MODULE__WebUiCoreTest',
  *     Test: '__MODULE__Test',
  *     Hello: '__MODULE__Hello',
+ *     FormLabel: '__MODULE__FormLabel',
  *   },
  * })
  */
