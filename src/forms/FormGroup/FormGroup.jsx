@@ -3,6 +3,7 @@
  *  @since 2020.07.20, 19:07
  *  @changed 2020.07.20, 19:07
  */
+/* eslint-disable react/require-default-props, react/no-unused-prop-types */
 
 import React from 'react'
 import PropTypes from 'prop-types'
@@ -13,20 +14,36 @@ import FormItemHOC from '../FormItemHOC'
 
 import './FormGroup.pcss'
 
-const classNameModifiers = [
-  // Basic element properties
-  'id',
-  // Style-related modifiers...
-  'align',
-  'padded',
-  'background',
-  'flow',
-  // 'fullWidth',
-]
-
 const cnFormGroup = cn('FormGroup')
 
-class FormGroup extends React.Component /** @lends @FormGroup.prototype */ {
+class FormGroup extends React.PureComponent /** @lends @FormGroup.prototype */ {
+
+  static propTypes = {
+    id: PropTypes.string,
+    align: PropTypes.string,
+    background: PropTypes.string,
+    flow: PropTypes.oneOfType([ PropTypes.bool, PropTypes.string ]),
+    fullWidth: PropTypes.bool,
+    padded: PropTypes.bool,
+    stack: PropTypes.oneOfType([ PropTypes.bool, PropTypes.string ]),
+    // name: PropTypes.string,
+    // disabled: PropTypes.bool,
+    // value: PropTypes.any,
+    // valueType: PropTypes.string,
+    // onChange: PropTypes.func,
+  }
+
+  static classNameModifiers = [
+    // Basic element properties
+    'id',
+    // Style-related modifiers...
+    'align',
+    'background',
+    'flow',
+    'fullWidth',
+    'padded',
+    'stack',
+  ]
 
   constructor(props) {
     super(props)
@@ -35,7 +52,7 @@ class FormGroup extends React.Component /** @lends @FormGroup.prototype */ {
   }
 
   getClassName() {
-    const mods = classNameModifiers.reduce((mods, id) => {
+    const mods = FormGroup.classNameModifiers.reduce((mods, id) => {
       const val = (this.state[id] != null) ? this.state[id] : this.props[id]
       if (val != null) {
         return { ...mods, [id]: val }
@@ -67,13 +84,4 @@ class FormGroup extends React.Component /** @lends @FormGroup.prototype */ {
 
 }
 
-FormGroup.propTypes = {
-  id: PropTypes.string,
-  name: PropTypes.string,
-  disabled: PropTypes.bool,
-  flow: PropTypes.bool,
-  value: PropTypes.any,
-  valueType: PropTypes.string,
-  onChange: PropTypes.func,
-}
 export default FormItemHOC(FormGroup)

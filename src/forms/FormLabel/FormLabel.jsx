@@ -3,6 +3,7 @@
  *  @since 2020.10.06, 23:45
  *  @changed 2020.10.06, 23:46
  */
+/* eslint-disable react/require-default-props */
 
 import React from 'react'
 import PropTypes from 'prop-types'
@@ -15,15 +16,23 @@ import './FormLabel.pcss'
 
 const cnFormLabel = cn('FormLabel')
 
-class FormLabel extends React.Component /** @lends @FormLabel.prototype */ {
+class FormLabel extends React.PureComponent /** @lends @FormLabel.prototype */ {
+
+  static propTypes = {
+    id: PropTypes.string,
+  }
 
   getClassName() {
     const {
       id,
+      fixed,
+      firstInBlock,
       // clickable,
     } = this.props
     const classList = cnFormLabel({
       id,
+      fixed,
+      firstInBlock,
       // clickable,
     }, [this.props.className])
     return classList
@@ -66,7 +75,7 @@ class FormLabel extends React.Component /** @lends @FormLabel.prototype */ {
     return (
       <div {...renderProps}>
         <label
-          className="FormLabel-Control"
+          className={cnFormLabel('Control')}
           id={id}
           name={name}
           disabled={disabled}
@@ -77,13 +86,8 @@ class FormLabel extends React.Component /** @lends @FormLabel.prototype */ {
         </label>
       </div>
     )
-
   }
 
-
 }
 
-FormLabel.propTypes = {
-  id: PropTypes.string,
-}
-export default FormItemHOC({ hoverable: true })(FormLabel)
+export default FormItemHOC({ hoverable: true, solid: true })(FormLabel)

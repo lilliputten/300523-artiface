@@ -4,6 +4,20 @@
  */
 
 .FormLabel {
-  // height: $(formItemHeight)px;
-  line-height: $(formItemHeight)px;
+  /*!KEEP*/
+  label&-Control {
+    @mixin FormItemTextInputMixin;
+    margin-bottom: 0; // Override bootstrap styles
+    overflow: hidden;
+    text-overflow: ellipsis;
+    ^&_firstInBlock & { // First label in block-level (non-flow) group: indent by left side
+      padding-left: 0;
+    }
+    &[for] {
+      cursor: pointer;
+    }
+  }
+  // &_fixed, &_firstInBlock {
+  //   [>!KEEP<]
+  // }
 }
