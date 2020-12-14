@@ -55,12 +55,26 @@ export const cssMapping = (classNames) => {
     throw new Error('Class list must be an array!')
   }
   const resultList = classNamesList.map(className => {
-    const result = cssMappings[className] || className
+    let result = cssMappings[className]
+    if (!result) { // Try to make className by similarity (eg: not found 'XXX_*', but found 'XXX')...
+      const pos = [className.indexOf('-'), className.indexOf('_')].filter(x => x !== -1)
+      const minPos = pos && pos.length && Math.min.apply(Math, pos)
+      if (minPos) {
+        // const match = className.match(/^(\w+?)([-_].*)$/)
+        // const [, base, rest] = match
+        const base = className.substr(0, minPos)
+        const rest = className.substr(minPos)
+        const baseClassName = cssMappings[base]
+        if (baseClassName) {
+          result = baseClassName + rest
+        }
+      }
+    }
     // if (className !== result) {
     //   console.log('WebUiCore:utils:cssMapping', className, '->', result)
     //   debugger
     // }
-    return result
+    return result || className
   })
   return resultList.join(' ')
 }
