@@ -39,7 +39,7 @@ const wrapFormBooleanHOC = (WrappedComponent, params = {}) => class FormBoolean 
     // this.formItemRef = React.createRef()
     const { value } = this.props
     // this.state = deriveState(defaultState, params, props) // deriveStateFromProps(props, defaultState)
-    this.id = props.id || params.id
+    this.id = props.id || params.id || props.inputId || props.name
     this.state = {
       value,
     }
@@ -68,7 +68,8 @@ const wrapFormBooleanHOC = (WrappedComponent, params = {}) => class FormBoolean 
   // Helper methods...
 
   getClassName() {
-    const { id } = this.props
+    const { id } = this
+    // const { id } = this.props
     const { value } = this.state
     const checked = !!value
     const mods = { id, checked }

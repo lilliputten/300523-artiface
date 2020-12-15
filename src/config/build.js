@@ -14,6 +14,8 @@ module.exports = { // Common-used build variables...
 
   THEME: process.env.THEME,
   buildTag: process.env.buildTag,
+  timestamp: process.env.timestamp,
+  timetag: process.env.timetag,
   version: process.env.version,
 
 }
