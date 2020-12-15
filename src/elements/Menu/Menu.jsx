@@ -18,7 +18,7 @@ const cnMenu = cn('Menu')
 // Unique id counter
 let uniqIdCount = 1
 
-class Menu extends React.Component /** @lends @Menu.prototype */ {
+class Menu extends React.PureComponent /** @lends @Menu.prototype */ {
 
   // Helper fuctions...
 
@@ -173,7 +173,7 @@ class Menu extends React.Component /** @lends @Menu.prototype */ {
     }
     const { valChecked } = this.state
     const setChecked = !valChecked[val]
-    if (singleChoice === 'mandatory' && !setChecked) { // Don not made changes if single mode and clicked item was checked
+    if (singleChoice === 'forced' && !setChecked) { // Don not made changes if single mode and clicked item was checked
       return
     }
     this.updateChildrenItems({ [val]: setChecked }) // Apply items changes

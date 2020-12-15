@@ -9,7 +9,7 @@
 - onMenuItemClick -- Menu item click handler
 - options ({ val, text, key, checked }[]) -- Optiions list
 - show (Boolean) -- Show popup by default
-- singleChoice (Boolean,String:'mandatory') -- Only single option can be choosed at a time (mandatory -- the choice is required)
+- singleChoice (Boolean,String:'reguired') -- Only single option can be choosed at a time (mandatory -- the choice is forced)
 - text (String) -- Control button text
 - title (String) -- Control button title
 

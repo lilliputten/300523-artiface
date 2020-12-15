@@ -5,9 +5,10 @@
  */
 
 import React from 'react'
-// import PropTypes from 'prop-types'
+import PropTypes from 'prop-types'
 // import connect from 'react-redux/es/connect/connect'
 import { cn } from 'utils'
+// import withOnClickOutside from 'react-onclickoutside' // To use?
 
 import './Popup.pcss'
 
@@ -15,20 +16,51 @@ const cnPopup = cn('Popup')
 
 const delayedClickTimeout = 200
 const globalClickEventName = 'mousedown'
+const globalKeyPressEventName = 'keydown'
 
-class Popup extends React.Component /** @lends @Popup.prototype */ {
+class Popup extends React.PureComponent /** @lends @Popup.prototype */ {
+
+  static propTypes = {
+    className: PropTypes.string,
+    // closeOnClickOutside: PropTypes.oneOfType([ PropTypes.bool, PropTypes.string ]), // true, false, 'force'
+    closeOnClickOutside: PropTypes.bool,
+    closeOnEscPressed: PropTypes.bool,
+    id: PropTypes.string,
+    onControlClick: PropTypes.func,
+    onEscPressed: PropTypes.func,
+    onKeyPress: PropTypes.func,
+    popupContent: PropTypes.oneOfType([ PropTypes.func, PropTypes.object ]).isRequired,
+    popupControl: PropTypes.oneOfType([ PropTypes.func, PropTypes.object ]).isRequired,
+    registerHideStopper: PropTypes.func, // registerHideStopper(handler = this.clearDelayedClickTimerHandler) -- handler stored by parent component and called when detected click on pulldown menu -- prevents popup content closing
+    showPopup: PropTypes.bool,
+  }
+
+  static defaultProps = {
+    className: null,
+    closeOnClickOutside: true,
+    closeOnEscPressed: true,
+    id: null,
+    onControlClick: null,
+    onEscPressed: null,
+    onKeyPress: null,
+    // popupContent: null,
+    // popupControl: null,
+    registerHideStopper: null,
+    showPopup: false,
+  }
 
   delayedClickTimerHandler = null
+  globalHandlersRegistered = false
 
   // Helpers...
 
   delayedGlobalClickHandler = () => { // Close popup
-    console.log('Popup:delayedGlobalClickHandler')
+    // console.log('Popup:delayedGlobalClickHandler')
     this.setState({ show: false })
   }
 
   clearDelayedClickTimerHandler = () => {
-    console.log('Popup:clearDelayedClickTimerHandler', this.delayedClickTimerHandler)
+    // console.log('Popup:clearDelayedClickTimerHandler', this.delayedClickTimerHandler)
     if (this.delayedClickTimerHandler) {
       clearTimeout(this.delayedClickTimerHandler)
       this.delayedClickTimerHandler = null
@@ -36,27 +68,76 @@ class Popup extends React.Component /** @lends @Popup.prototype */ {
   }
 
   globalClickHandler = () => {
+    // console.log('Popup:globalClickHandler (set handler)', this.delayedClickTimerHandler)
     this.clearDelayedClickTimerHandler()
     this.delayedClickTimerHandler = setTimeout(this.delayedGlobalClickHandler, delayedClickTimeout)
-    console.log('Popup:globalClickHandler (set handler)', this.delayedClickTimerHandler)
+  }
+
+  globalKeyPressHandler = (event) => {
+    var { keyCode } = event
+    const {
+      id,
+      onKeyPress,
+      onEscPressed,
+      closeOnEscPressed,
+    } = this.props
+    const cbProps = { event, id, keyCode }
+    if (typeof onKeyPress === 'function') {
+      onKeyPress(cbProps)
+    }
+    const isEsc = keyCode === 27 // Esc?
+    if (isEsc) {
+      if (typeof onEscPressed === 'function') {
+        onEscPressed(cbProps)
+      }
+      if (closeOnEscPressed) {
+        this.setState({ show: false })
+      }
+    }
   }
 
   registerGlobalClickHandler() {
-    window.addEventListener(globalClickEventName, this.globalClickHandler)
+    // window?
+    document.addEventListener(globalClickEventName, this.globalClickHandler)
   }
 
   unregisterGlobalClickHandler() {
     this.clearDelayedClickTimerHandler()
-    window.removeEventListener(globalClickEventName, this.globalClickHandler)
+    document.removeEventListener(globalClickEventName, this.globalClickHandler)
+  }
+
+  registerGlobalKeyPressHandler() {
+    document.addEventListener(globalKeyPressEventName, this.globalKeyPressHandler)
+  }
+
+  unregisterGlobalKeyPressHandler() {
+    document.removeEventListener(globalKeyPressEventName, this.globalKeyPressHandler)
+  }
+
+  registerGlobalHandlers() {
+    if (!this.globalHandlersRegistered) {
+      const { closeOnClickOutside/* , closeOnEscPressed */ } = this.props
+      closeOnClickOutside && this.registerGlobalClickHandler()
+      /* closeOnEscPressed && */ this.registerGlobalKeyPressHandler()
+      this.globalHandlersRegistered = true
+    }
+  }
+  unregisterGlobalHandlers() {
+    if (this.globalHandlersRegistered) {
+      const { closeOnClickOutside/* , closeOnEscPressed */ } = this.props
+      closeOnClickOutside && this.unregisterGlobalClickHandler()
+      /* closeOnEscPressed && */ this.unregisterGlobalKeyPressHandler()
+      this.globalHandlersRegistered = false
+    }
   }
 
   updateGlobalClickHandlerByState = (state) => {
     const { show } = state
     if (show) {
-      this.registerGlobalClickHandler()
+      this.registerGlobalHandlers()
     }
     else {
-      this.unregisterGlobalClickHandler()
+      this.unregisterGlobalHandlers()
     }
   }
 
@@ -79,22 +160,23 @@ class Popup extends React.Component /** @lends @Popup.prototype */ {
   componentDidMount() {
     const { show } = this.state
     if (show) {
-      this.registerGlobalClickHandler()
+      this.registerGlobalHandlers()
     }
   }
 
   componentWillUnmount() {
-    this.unregisterGlobalClickHandler()
+    this.unregisterGlobalHandlers()
+    // TODO: unregisterHideStopper -- is it required?
   }
 
   componentDidUpdate(prevProps, prevState) {
     const prevShowPopup = prevProps.showPopup
     const showPopup = this.props.showPopup
     if (prevShowPopup !== showPopup) {
-      this.setState({
+      this.setState(({ wasShown }) => ({
         show: showPopup,
-        wasShown: this.state.wasShown || showPopup,
-      }, this.updateGlobalClickHandlerByState)
+        wasShown: wasShown || showPopup,
+      }), this.updateGlobalClickHandlerByState)
     }
     else if (prevState.show !== this.state.show) {
       this.updateGlobalClickHandlerByState(this.state)
@@ -108,15 +190,24 @@ class Popup extends React.Component /** @lends @Popup.prototype */ {
     if (show == null) { // Toggle state if no value passed
       show = !this.state.show
     }
-    this.setState({
+    this.setState(({ wasShown }) => ({
       show,
-      wasShown: this.state.wasShown || show,
-    })
+      wasShown: wasShown || show,
+    }))
     const { onControlClick } = this.props
     if (typeof onControlClick === 'function') {
       onControlClick({ show })
     }
   }
+
+  /* // UNUSED? handleClickOutside -- form withOnClickOutside
+   * handleClickOutside = (ev) => {
+   *   console.log(ev)
+   *   debugger
+   * }
+   */
+
+  // Helper methods...
 
   getClassName() {
     const {
@@ -206,3 +297,4 @@ class Popup extends React.Component /** @lends @Popup.prototype */ {
 }
 
 export default Popup
+// export default withOnClickOutside(Popup) // To use?

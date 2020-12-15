@@ -11,12 +11,6 @@ import { cn } from 'utils'
 
 const cnFormBooleanHOC = cn('FormBooleanHOC')
 
-const defaultState = { // Default state
-  // hoverable: false,
-  // focusable: false,
-}
-
-// class FormBooleanHOC extends React.PureComponent [>* @lends @FormBooleanHOC.prototype <] {
 const wrapFormBooleanHOC = (WrappedComponent, params = {}) => class FormBoolean extends React.Component {
 
   static propTypes = {
@@ -38,7 +32,6 @@ const wrapFormBooleanHOC = (WrappedComponent, params = {}) => class FormBoolean 
     super(props)
     // this.formItemRef = React.createRef()
     const { value } = this.props
-    // this.state = deriveState(defaultState, params, props) // deriveStateFromProps(props, defaultState)
     this.id = props.id || params.id || props.inputId || props.name
     this.state = {
       value,

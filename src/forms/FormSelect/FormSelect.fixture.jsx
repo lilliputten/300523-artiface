@@ -13,7 +13,7 @@ import 'demo.pcss'
 
 export const DemoWrapper = FormGroup // ({ children }) => {
 
-const options = [
+const demoOptions = [
   { val: 1, text: 'Swimming' },
   { val: 2, text: 'Skiing', checked: true },
 ]
@@ -23,14 +23,14 @@ export default {
     <FormSelect
       title="Select title"
       text="Select"
-      options={options}
+      options={demoOptions}
     />
   ),
-  withItem: (
+  withExtraOptions: (
     <FormSelect
       title="Select title"
       text="Select"
-      options={options}
+      options={demoOptions}
       singleChoice
       closeOnSelect
       controlButtonTheme="success"

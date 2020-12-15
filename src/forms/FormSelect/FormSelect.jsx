@@ -129,22 +129,14 @@ class FormSelect extends React.PureComponent /** @lends @FormSelect.prototype */
 
   // Render...
 
-  render() {
-
+  renderControlContent() {
     const {
-      id,
-      // htmlId,
-      // name,
-      disabled,
       text,
-      // children,
       title,
-      show,
-      singleChoice,
       controlButtonTheme,
     } = this.props
 
-    const controlContent = (
+    return (
       <FormButton
         icon="faChevronDown"
         rightIcon
@@ -155,8 +147,14 @@ class FormSelect extends React.PureComponent /** @lends @FormSelect.prototype */
         title={title}
       />
     )
+  }
 
-    const menuContent = (
+  renderMenuContent() {
+    const {
+      singleChoice,
+    } = this.props
+
+    return (
       <Menu
         checkable={true}
         singleChoice={singleChoice}
@@ -169,8 +167,26 @@ class FormSelect extends React.PureComponent /** @lends @FormSelect.prototype */
         ]}
       </Menu>
     )
+  }
 
-    // const renderProps = this.getRenderProps()
+  render() {
+
+    const {
+      id,
+      // htmlId,
+      // name,
+      disabled,
+      // text,
+      // children,
+      title,
+      show,
+      // singleChoice,
+      // controlButtonTheme,
+    } = this.props
+
+    const controlContent = this.renderControlContent()
+    const menuContent =  this.renderMenuContent()
+
     const renderProps = {
       // ...basicRenderProps,
       id,

@@ -2,6 +2,7 @@
  *  @since 2020.10.27, 02:58
  *  @changed 2020.10.27, 21:16
  */
+/* eslint-disable no-console */
 
 import React from 'react'
 import Menu from './Menu'
@@ -39,12 +40,22 @@ const onClick = ({ val }) => {
 
 export default {
   default: (
-    <Menu layout="vertical" onClick={onClick}>
+    <Menu>
+      {itemElems}
+    </Menu>
+  ),
+  horizontal: (
+    <Menu layout="horizontal" onClick={onClick}>
+      {itemElems}
+    </Menu>
+  ),
+  checkableMultiply: (
+    <Menu checkable={true} singleChoice="forced" onChange={onChange}>
       {itemElems}
     </Menu>
   ),
   checkable: (
-    <Menu checkable={true} _singleChoice="mandatory" onChange={onChange}>
+    <Menu checkable={true} singleChoice="forced" onChange={onChange}>
       {itemElems}
     </Menu>
   ),
