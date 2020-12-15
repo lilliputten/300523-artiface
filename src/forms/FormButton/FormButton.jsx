@@ -23,6 +23,41 @@ const cnFormButton = cn('FormButton')
 
 class FormButton extends React.PureComponent /** @lends @FormButton.prototype */ {
 
+  static propTypes = { // TODO!!!
+    id: PropTypes.string,
+
+    // hoverable: PropTypes.bool, // FormItem: Allowed hovered events
+    // focusable: PropTypes.bool, // FormItem: Allowed focused events
+
+    // TODO: Actualize & check next properties, implement cosmos fixtures...
+
+    // TODO: formId -- id for form element (passed on form submit)
+    // name: PropTypes.string, // ???
+    disabled: PropTypes.bool,
+    onClick: PropTypes.func,
+
+    hasIcon: PropTypes.bool, // Optional
+    hasText: PropTypes.bool, // Optional
+    text: PropTypes.string, // Text content (may be passed as node children)
+    icon: PropTypes.oneOfType([ // Icon component. May be as image resource loaded with `file/url-loader` as `FontAwesomeIcon` component.
+      PropTypes.string,
+      PropTypes.object,
+    ]),
+    onlyIcon: PropTypes.bool, // Only icon
+    largeIcon: PropTypes.bool, // Large icon
+    rightIcon: PropTypes.bool, // Icon placed at right side
+    // TODO: size: PropTypes.string, // Different form item sizes? (eg: md -- default, sm, xs, lg, xl, xxl)
+
+    theme: PropTypes.string, // Button style (plain, default, primary, secondary, error, warn, success, info, etc -- some are in progress -- see styles file)
+    onDark:  PropTypes.bool, // On dark background
+    fullWidth: PropTypes.bool, // Occupies all horizontal space
+    plain: PropTypes.bool, // ??? Plain icon (no border & background -- if no style specified, looks as link)
+
+    checked: PropTypes.bool, // FormItem: Checked state
+  }
+
+  // Helpers...
+
   hasIcon() {
     const { icon, hasIcon } = this.props
     return !!(hasIcon || icon)
@@ -130,18 +165,10 @@ class FormButton extends React.PureComponent /** @lends @FormButton.prototype */
     const {
       id,
       disabled,
-      // name,
-      // children,
-      // text,
       tag,
       type,
       title,
-      // icon,
       setDomRef, // From FormItemHOC
-      // faIcon,
-      // hasIcon,
-      // hasText,
-      // onClick,
     } = this.props
 
     const iconElem = this.renderIcon() // Icon element
@@ -159,7 +186,6 @@ class FormButton extends React.PureComponent /** @lends @FormButton.prototype */
       ref: setDomRef, // Init ref for FormItemHOC
     }
 
-    // const content = [ iconElem, textElem ] // children || text
     const content = (
       <React.Fragment>
         {iconElem}
@@ -172,38 +198,6 @@ class FormButton extends React.PureComponent /** @lends @FormButton.prototype */
     return element
   }
 
-  static propTypes = {
-    id: PropTypes.string,
-
-    // hoverable: PropTypes.bool, // FormItem: Allowed hovered events
-    // focusable: PropTypes.bool, // FormItem: Allowed focused events
-
-    // TODO: Actualize & check next properties, implement cosmos fixtures...
-
-    // TODO: formId -- id for form element (passed on form submit)
-    // name: PropTypes.string, // ???
-    disabled: PropTypes.bool,
-    onClick: PropTypes.func,
-
-    hasIcon: PropTypes.bool, // Optional
-    hasText: PropTypes.bool, // Optional
-    text: PropTypes.string, // Text content (may be passed as node children)
-    icon: PropTypes.oneOfType([ // Icon component. May be as image resource loaded with `file/url-loader` as `FontAwesomeIcon` component.
-      PropTypes.string,
-      PropTypes.object,
-    ]),
-    onlyIcon: PropTypes.bool, // Only icon
-    largeIcon: PropTypes.bool, // Large icon
-    rightIcon: PropTypes.bool, // Icon placed at right side
-    // TODO: size: PropTypes.string, // Different form item sizes? (eg: md -- default, sm, xs, lg, xl, xxl)
-
-    theme: PropTypes.string, // Button style (plain, default, primary, secondary, error, warn, success, info, etc -- some are in progress -- see styles file)
-    onDark:  PropTypes.bool, // On dark background
-    fullWidth: PropTypes.bool, // Occupies all horizontal space
-    plain: PropTypes.bool, // ??? Plain icon (no border & background -- if no style specified, looks as link)
-
-    checked: PropTypes.bool, // FormItem: Checked state
-  }
 }
 
 export default FormItemHOC({ hoverable: true, framed: true })(FormButton)
