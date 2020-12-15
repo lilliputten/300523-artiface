@@ -1,7 +1,7 @@
 /** @module demo
  *  @desc Demo app entry point
  *  @since 2020.05.19, 17:16
- *  @changed 2020.10.07, 00:11
+ *  @changed 2020.12.15, 21:59
  */
 
 import 'es5-shim/es5-shim'
@@ -20,6 +20,21 @@ import './demo.pcss'
 // import * as build from './build'
 import './build'
 
+/* // DEBUG: Check strings module
+ * import { strings } from 'utils'
+ * console.log(strings)
+ * debugger
+ * const x = strings.toType('number', '11')
+ * debugger
+ */
+
+/* DEBUG: Check configure module
+ * import { configure } from 'utils'
+ * console.log(configure && configure.cssMapping)
+ * debugger
+ */
+
+
 /* // DEBUG: Test css-module mappings substitution
  * import { utils } from './build'
  * utils.setConfigOptions({
@@ -32,6 +47,7 @@ import './build'
  *   },
  * })
  */
+
 
 const fixtureComponentsList = {
 

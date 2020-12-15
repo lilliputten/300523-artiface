@@ -1,5 +1,6 @@
 # CHANGELOG
 
+- 2020.12.15, 21:59 -- Added `utils/strings` module, added `utils/configure` as 'atomic' module (previously, it was only presented as spreaded module).
 - 2020.12.14, 20:14 -- FormLabel, FormItemHOC, FormGroup: Component styles & props.
 - 2020.12.14, 20:12 -- FormTextInput, FormBooleanHOC: Using combo id (from `inputId`, `id`, `name` props) for editable components.
 - 2020.12.14, 20:06 -- utils:configure: cssMapping processing classnames absent in css mappings. Eg: if not found `XXX_id_*`, but found `XXX` (mapped to `YYY`), then producing `YYY_id_*`. Same for `XXX-*`.
