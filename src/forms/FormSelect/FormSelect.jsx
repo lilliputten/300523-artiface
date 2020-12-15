@@ -3,6 +3,7 @@
  *  @since 2020.10.28, 22:49
  *  @changed 2020.10.29, 03:14
  */
+/* eslint-disable react/require-default-props */
 
 import React from 'react'
 import PropTypes from 'prop-types'
@@ -23,13 +24,47 @@ import './FormSelect.pcss'
 
 const cnFormSelect = cn('FormSelect')
 
-class FormSelect extends React.Component /** @lends @FormSelect.prototype */ {
+class FormSelect extends React.PureComponent /** @lends @FormSelect.prototype */ {
+
+  static propTypes = {
+    id: PropTypes.string,
+  }
+
+  // Lifecycle methods...
+
+  constructor(props) {
+    super(props)
+    // this.formItemRef = React.createRef()
+    const { value } = this.props
+    // this.state = deriveState(defaultState, params, props) // deriveStateFromProps(props, defaultState)
+    this.id = props.id || props.inputId || props.name
+    this.state = {
+      value,
+    }
+  }
+
+  componentDidMount() {
+    // const { formItemRef: { current } = {} } = this
+    this.afterRender()
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const prevValue = prevProps.value
+    const propsValue = this.props.value
+    const stateValue = this.state.value
+    if (propsValue !== prevValue && propsValue !== stateValue) { // New value from props
+      this.setState({
+        value: propsValue,
+      }, this.updateValueWithState)
+    }
+    else if (stateValue !== prevState.value) { // New value from state
+      this.updateValueWithState(this.state)
+    }
+    this.afterRender()
+  }
 
   getClassName() {
-    // TODO: Refactor properties!
-    const {
-      id,
-    } = this.props
+    const { id } = this
     const classList = cnFormSelect({
       id,
     }, [this.props.className])
@@ -148,7 +183,4 @@ class FormSelect extends React.Component /** @lends @FormSelect.prototype */ {
 
 }
 
-FormSelect.propTypes = {
-  id: PropTypes.string,
-}
 export default FormItemHOC({ hoverable: true })(FormSelect)
