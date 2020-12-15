@@ -152,7 +152,7 @@ class FormTextInput extends React.PureComponent /** @lends @FormTextInput.protot
     const inputProps = {
       key: 'Input',
       type,
-      className: cnFormTextInput('Control'),
+      className: cnFormTextInput('Control', ['FormItem-Control']),
       id: inputId || id || name,
       name: name || inputId || id,
       disabled: disabled,

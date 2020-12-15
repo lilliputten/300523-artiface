@@ -84,7 +84,7 @@ class FormRadio extends React.PureComponent /** @lends @FormRadio.prototype */ {
     return (
       <div {...renderProps}>
         <div
-          className={cnFormRadio('Control')}
+          className={cnFormRadio('Control', ['FormItem-Control'])}
           disabled={disabled}
         >
           <span className={cnFormRadio('Frame')}>

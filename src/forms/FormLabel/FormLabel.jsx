@@ -75,7 +75,7 @@ class FormLabel extends React.PureComponent /** @lends @FormLabel.prototype */ {
     return (
       <div {...renderProps}>
         <label
-          className={cnFormLabel('Control')}
+          className={cnFormLabel('Control', ['FormItem-Control'])}
           id={id}
           name={name}
           disabled={disabled}
