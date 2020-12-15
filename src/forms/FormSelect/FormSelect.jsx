@@ -63,12 +63,25 @@ class FormSelect extends React.PureComponent /** @lends @FormSelect.prototype */
     this.afterRender()
   }
 
+  // Helper methods...
+
   getClassName() {
     const { id } = this
     const classList = cnFormSelect({
       id,
     }, [this.props.className])
     return classList
+  }
+
+  afterRender() { // Calling after each (including first) render
+  }
+
+  updateValueWithState = (state) => {
+    const { onChange, disabled } = this.props
+    if (!disabled && typeof onChange === 'function') {
+      const { value } = state
+      onChange({ id: this.id, value })
+    }
   }
 
   // Handlers...

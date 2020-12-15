@@ -96,11 +96,10 @@ const wrapFormBooleanHOC = (WrappedComponent, params = {}) => class FormBoolean 
   }
 
   updateValueWithState = (state) => {
-    const { id, inputId, name, onChange, disabled } = this.props
+    const { onChange, disabled } = this.props
     if (!disabled && typeof onChange === 'function') {
       const { value } = state
-      const setId = inputId || id || name
-      onChange({ id: setId, value })
+      onChange({ id: this.id, value })
     }
   }
 
