@@ -1,7 +1,7 @@
 /** @module Popup
  *  @class Popup
  *  @since 2020.10.27, 00:39
- *  @changed 2020.10.29, 03:14
+ *  @changed 2020.12.15, 21:59
  */
 
 import React from 'react'
@@ -9,14 +9,32 @@ import PropTypes from 'prop-types'
 // import connect from 'react-redux/es/connect/connect'
 import { cn } from 'utils'
 // import withOnClickOutside from 'react-onclickoutside' // To use?
+import { strings } from 'utils'
 
 import './Popup.pcss'
 
 const cnPopup = cn('Popup')
 
 const delayedClickTimeout = 200
+
+const domNodeGeometryKeys = [
+  'offsetLeft',
+  'offsetTop',
+  'offsetWidth',
+  'offsetHeight',
+]
+
+const globalGeometryKeys = {
+  viewWidth: { obj: window, key: 'innerWidth' },
+  viewHeight: { obj: window, key: 'innerHeight' },
+  scrollX: { obj: window },
+  scrollY: { obj: window },
+}
+
 const globalClickEventName = 'mousedown'
 const globalKeyPressEventName = 'keydown'
+const globalScrollEventName = 'scroll'
+const globalResizeEventName = 'resize'
 
 class Popup extends React.PureComponent /** @lends @Popup.prototype */ {
 
@@ -51,6 +69,7 @@ class Popup extends React.PureComponent /** @lends @Popup.prototype */ {
 
   delayedClickTimerHandler = null
   globalHandlersRegistered = false
+  geometry = {}
 
   // Helpers...
 
@@ -96,38 +115,102 @@ class Popup extends React.PureComponent /** @lends @Popup.prototype */ {
     }
   }
 
-  registerGlobalClickHandler() {
-    // window?
-    document.addEventListener(globalClickEventName, this.globalClickHandler)
+  globalScrollHandler = (/* event */) => {
+    this.updateGeometry()
   }
 
-  unregisterGlobalClickHandler() {
-    this.clearDelayedClickTimerHandler()
-    document.removeEventListener(globalClickEventName, this.globalClickHandler)
+  globalResizeHandler = (/* event */) => {
+    this.updateGeometry()
   }
 
-  registerGlobalKeyPressHandler() {
-    document.addEventListener(globalKeyPressEventName, this.globalKeyPressHandler)
+  getDomNodeGeometry(domNode, id) {
+    id = id || 'default'
+    const geometry = domNodeGeometryKeys.reduce((geometry, key) => {
+      const val = domNode && domNode[key]
+      if (val != null) {
+        const resultKey = id + strings.ucFirst(key)
+        geometry[resultKey] = val
+      }
+      return geometry
+    }, {})
+    return geometry
   }
 
-  unregisterGlobalKeyPressHandler() {
-    document.removeEventListener(globalKeyPressEventName, this.globalKeyPressHandler)
+  getGlobalGeometry() {
+    const geometry = Object.entries(globalGeometryKeys).reduce((geometry, [id, descr]) => {
+      const obj = descr.obj
+      const key = descr.key || id
+      const val = obj[key]
+      // const isUpdated = (val !== origGeometry[id])
+      // if (isUpdated && !updatedGeometryKeys.includes[id]) {
+      //   updatedGeometryKeys.push(id)
+      // }
+      return { ...geometry, [id]: val }
+    }, {})
+    return geometry
+  }
+
+  getUpdatedGeometryKeys(geometry) {
+    const origGeometry = this.geometry
+    const updatedKeys = []
+    Object.entries(geometry).forEach(([key, val]) => {
+      if (val !== origGeometry[key]) {
+        updatedKeys.push(key)
+      }
+    })
+    return updatedKeys
+  }
+
+  updateGeometry = () => {
+    const origGeometry = this.geometry
+    const controlGeometry = this.getDomNodeGeometry(this.controlDomNode, 'control')
+    const globalGeometry = this.getGlobalGeometry()
+    const geometry = { ...globalGeometry, ...controlGeometry } // + ...contentGeometry
+    const updatedGeometryKeys = this.getUpdatedGeometryKeys(geometry)
+    // TODO: contentGeometry (contentOffsetWidth, contentOffsetHeight)
+    // Calcs: see `201215-PopupLayout.psd`
+    // controlViewOffsetTop = controlOffsetTop - scrollY // = 914 - 25 = 889
+    // controlViewOffsetBottom = controlViewOffsetTop + controlOffsetHeight // = 889 + 32 = 921
+    // controlViewOffsetBottom(b:from-bottom) = viewHeight - controlViewOffsetTop - controlOffsetHeight // = 979 - 889 - 32 = 58
+    // Default position: from (bottom, left) -> down
+    // TODO: Check controlViewOffsetBottom + contentHeight > viewHeight => display content from (top, *) -> up
+    // TODO: Horizontal checking?
+    // TODO: Check controlViewOffsetRight + contentWidth > viewWidth => display content from (*, right) -> left (?)
+    console.log('Popup:updateGeometry', {
+      updatedGeometryKeys,
+      controlGeometry,
+      geometry,
+      origGeometry,
+    })
+    debugger
+    // Store geometry data object
+    this.geometry = geometry
   }
 
   registerGlobalHandlers() {
+    const { closeOnClickOutside } = this.props
     if (!this.globalHandlersRegistered) {
-      const { closeOnClickOutside/* , closeOnEscPressed */ } = this.props
-      closeOnClickOutside && this.registerGlobalClickHandler()
-      /* closeOnEscPressed && */ this.registerGlobalKeyPressHandler()
       this.globalHandlersRegistered = true
+      this.updateGeometry()
+      if (closeOnClickOutside) {
+        document.addEventListener(globalClickEventName, this.globalClickHandler)
+      }
+      document.addEventListener(globalKeyPressEventName, this.globalKeyPressHandler)
+      document.addEventListener(globalScrollEventName, this.globalScrollHandler)
+      window.addEventListener(globalResizeEventName, this.globalResizeHandler)
     }
   }
   unregisterGlobalHandlers() {
+    const { closeOnClickOutside } = this.props
     if (this.globalHandlersRegistered) {
-      const { closeOnClickOutside/* , closeOnEscPressed */ } = this.props
-      closeOnClickOutside && this.unregisterGlobalClickHandler()
-      /* closeOnEscPressed && */ this.unregisterGlobalKeyPressHandler()
       this.globalHandlersRegistered = false
+      if (closeOnClickOutside) {
+        this.clearDelayedClickTimerHandler()
+        document.removeEventListener(globalClickEventName, this.globalClickHandler)
+      }
+      document.removeEventListener(globalKeyPressEventName, this.globalKeyPressHandler)
+      document.removeEventListener(globalScrollEventName, this.globalScrollHandler)
+      window.removeEventListener(globalResizeEventName, this.globalResizeHandler)
     }
   }
 
@@ -207,7 +290,7 @@ class Popup extends React.PureComponent /** @lends @Popup.prototype */ {
    * }
    */
 
-  // Helper methods...
+  // Render helpers...
 
   getClassName() {
     const {
@@ -224,10 +307,20 @@ class Popup extends React.PureComponent /** @lends @Popup.prototype */ {
     return className
   }
 
+  // Handlers...
+
+  setDomRef = (domNode) => {
+    this.domNode = domNode
+  }
+
+  setControlRef = (domNode) => {
+    this.controlDomNode = domNode
+  }
+
   // Render...
 
   renderPopupControl() {
-    let { popupControl } = this.props
+    const { popupControl } = this.props
 
     const {
       show,
@@ -242,6 +335,7 @@ class Popup extends React.PureComponent /** @lends @Popup.prototype */ {
         ...controlProps,
         onClick: /* controlProps.onControlClick || */ this.onControlClick,
         checked: show,
+        setDomRef: this.setControlRef,
       },
     }
 
@@ -253,7 +347,7 @@ class Popup extends React.PureComponent /** @lends @Popup.prototype */ {
   }
 
   renderPopupContent() {
-    let { popupContent } = this.props
+    const { popupContent } = this.props
 
     const {
       show,
@@ -281,6 +375,7 @@ class Popup extends React.PureComponent /** @lends @Popup.prototype */ {
     const renderProps = {
       id,
       className: this.getClassName(),
+      ref: this.setDomRef,
     }
 
     const renderPopupControl = this.renderPopupControl()

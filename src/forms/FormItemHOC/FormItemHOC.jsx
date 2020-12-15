@@ -192,17 +192,19 @@ const wrapFormItemHOC = (WrappedComponent, params = {}) => class FormItem extend
   }
 
   setDomRef = (domRef) => { // Children dom node receiver
+    const { setDomRef } = this.props
     this.formItemDomRef = domRef
-    // domRef && domRef.focus && domRef.focus()
+    if (typeof setDomRef === 'function') {
+      setDomRef(domRef)
+    }
+    // domRef && domRef.focus && domRef.focus() // ???
   }
 
   render() {
-    // const id = this.getId() // this.props.id || this.id || (this.id = this.createUniqId())
     const {
       hovered,
       focused,
     } = this.state
-    // TODO: Generate unique id?
     const renderProps = {
       hovered,
       focused,
@@ -218,7 +220,6 @@ const wrapFormItemHOC = (WrappedComponent, params = {}) => class FormItem extend
       <WrappedComponent
         {...this.props}
         {...renderProps}
-        // id={id}
       />
     )
   }

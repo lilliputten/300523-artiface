@@ -1,5 +1,6 @@
 # CHANGELOG
 
+- 2020.12.15, 22:05 -- Popup: added geometry analize basic methods (in porogress), fixed click inside/outside handlers. FormItemHOC: passed `setDomRed` handlers valls up to parents.
 - 2020.12.15, 21:59 -- Added `utils/strings` module, added `utils/configure` as 'atomic' module (previously, it was only presented as spreaded module).
 - 2020.12.14, 20:14 -- FormLabel, FormItemHOC, FormGroup: Component styles & props.
 - 2020.12.14, 20:12 -- FormTextInput, FormBooleanHOC: Using combo id (from `inputId`, `id`, `name` props) for editable components.
