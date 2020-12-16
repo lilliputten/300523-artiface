@@ -194,6 +194,7 @@ class Menu extends React.PureComponent /** @lends @Menu.prototype */ {
       // title,
       // onClick,
       // children,
+      setDomRef, // From FormItemHOC
     } = this.props
 
     const renderProps = {
@@ -202,6 +203,7 @@ class Menu extends React.PureComponent /** @lends @Menu.prototype */ {
       // title,
       // onClick,
       // key,
+      ref: setDomRef, // Init ref for FormItemHOC
     }
 
     const content = this.renderContent()

@@ -28,6 +28,8 @@ class FormSelect extends React.PureComponent /** @lends @FormSelect.prototype */
 
   static propTypes = {
     id: PropTypes.string,
+    value: PropTypes.oneOfType([ PropTypes.string, PropTypes.number, PropTypes.arrayOf(PropTypes.oneOfType([ PropTypes.string, PropTypes.number ])) ]),
+    onChange: PropTypes.func,
   }
 
   // Lifecycle methods...
@@ -45,23 +47,25 @@ class FormSelect extends React.PureComponent /** @lends @FormSelect.prototype */
 
   componentDidMount() {
     // const { formItemRef: { current } = {} } = this
-    this.afterRender()
+    // this.afterRender()
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    const prevValue = prevProps.value
-    const propsValue = this.props.value
-    const stateValue = this.state.value
-    if (propsValue !== prevValue && propsValue !== stateValue) { // New value from props
-      this.setState({
-        value: propsValue,
-      }, this.updateValueWithState)
-    }
-    else if (stateValue !== prevState.value) { // New value from state
-      this.updateValueWithState(this.state)
-    }
-    this.afterRender()
-  }
+  /*
+   * componentDidUpdate(prevProps, prevState) {
+   *   const prevValue = prevProps.value
+   *   const propsValue = this.props.value
+   *   const stateValue = this.state.value
+   *   if (propsValue !== prevValue && propsValue !== stateValue) { // New value from props
+   *     this.setState({
+   *       value: propsValue,
+   *     }, this.updateValueWithState)
+   *   }
+   *   else if (stateValue !== prevState.value) { // New value from state
+   *     this.updateValueWithState(this.state)
+   *   }
+   *   this.afterRender()
+   * }
+   */
 
   // Helper methods...
 
@@ -73,8 +77,10 @@ class FormSelect extends React.PureComponent /** @lends @FormSelect.prototype */
     return classList
   }
 
-  afterRender() { // Calling after each (including first) render
-  }
+  /*
+   * afterRender() { // Calling after each (including first) render
+   * }
+   */
 
   updateValueWithState = (state) => {
     const { onChange, disabled } = this.props
@@ -102,9 +108,9 @@ class FormSelect extends React.PureComponent /** @lends @FormSelect.prototype */
     }
   }
   onMenuChange = (params) => {
-    const { onMenuChange } = this.props
-    if (typeof onMenuChange === 'function') {
-      onMenuChange(params)
+    const { onChange } = this.props
+    if (typeof onChange === 'function') {
+      onChange(params)
     }
   }
 

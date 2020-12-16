@@ -10,6 +10,7 @@ import PropTypes from 'prop-types'
 import { cn } from 'utils'
 // import withOnClickOutside from 'react-onclickoutside' // To use?
 import { strings } from 'utils'
+import { debounce } from 'throttle-debounce'
 
 import './Popup.pcss'
 
@@ -22,6 +23,8 @@ const domNodeGeometryKeys = [
   'offsetTop',
   'offsetWidth',
   'offsetHeight',
+  'clientWidth',
+  'clientHeight',
 ]
 
 const globalGeometryKeys = {
@@ -35,6 +38,8 @@ const globalClickEventName = 'mousedown'
 const globalKeyPressEventName = 'keydown'
 const globalScrollEventName = 'scroll'
 const globalResizeEventName = 'resize'
+
+const debouncedUpdateGeometryTimeout = 150
 
 class Popup extends React.PureComponent /** @lends @Popup.prototype */ {
 
@@ -69,6 +74,8 @@ class Popup extends React.PureComponent /** @lends @Popup.prototype */ {
 
   delayedClickTimerHandler = null
   globalHandlersRegistered = false
+  controlDomNode = null
+  contentDomNode = null
   geometry = {}
 
   // Helpers...
@@ -116,11 +123,11 @@ class Popup extends React.PureComponent /** @lends @Popup.prototype */ {
   }
 
   globalScrollHandler = (/* event */) => {
-    this.updateGeometry()
+    // this.updateGeometryDebounced()
   }
 
   globalResizeHandler = (/* event */) => {
-    this.updateGeometry()
+    // this.updateGeometryDebounced()
   }
 
   getDomNodeGeometry(domNode, id) {
@@ -161,28 +168,63 @@ class Popup extends React.PureComponent /** @lends @Popup.prototype */ {
     return updatedKeys
   }
 
-  updateGeometry = () => {
-    const origGeometry = this.geometry
+  updateGeometry = () => { // UNUSED? TODO? Update geometry
+    // TODO: Call `updateGeometry` on content update?
+    // const origGeometry = this.geometry
     const controlGeometry = this.getDomNodeGeometry(this.controlDomNode, 'control')
+    const contentGeometry = this.getDomNodeGeometry(this.contentDomNode, 'content')
     const globalGeometry = this.getGlobalGeometry()
-    const geometry = { ...globalGeometry, ...controlGeometry } // + ...contentGeometry
+    const geometry = { ...globalGeometry, ...controlGeometry, ...contentGeometry }
+    /* Sample geometry keys:
+     * contentClientHeight
+     * contentClientWidth
+     * contentOffsetHeight
+     * contentOffsetLeft
+     * contentOffsetTop
+     * contentOffsetWidth
+     * controlClientHeight
+     * controlClientWidth
+     * controlOffsetHeight
+     * controlOffsetLeft
+     * controlOffsetTop
+     * controlOffsetWidth
+     * scrollX
+     * scrollY
+     * viewHeight
+     * viewWidth
+     */
     const updatedGeometryKeys = this.getUpdatedGeometryKeys(geometry)
-    // TODO: contentGeometry (contentOffsetWidth, contentOffsetHeight)
-    // Calcs: see `201215-PopupLayout.psd`
-    // controlViewOffsetTop = controlOffsetTop - scrollY // = 914 - 25 = 889
-    // controlViewOffsetBottom = controlViewOffsetTop + controlOffsetHeight // = 889 + 32 = 921
-    // controlViewOffsetBottom(b:from-bottom) = viewHeight - controlViewOffsetTop - controlOffsetHeight // = 979 - 889 - 32 = 58
-    // Default position: from (bottom, left) -> down
-    // TODO: Check controlViewOffsetBottom + contentHeight > viewHeight => display content from (top, *) -> up
-    // TODO: Horizontal checking?
-    // TODO: Check controlViewOffsetRight + contentWidth > viewWidth => display content from (*, right) -> left (?)
-    console.log('Popup:updateGeometry', {
-      updatedGeometryKeys,
-      controlGeometry,
-      geometry,
-      origGeometry,
-    })
-    debugger
+    const verticalGeometryKeys = [
+      'contentClientHeight',
+      'contentOffsetHeight',
+      'contentOffsetTop',
+      'controlClientHeight',
+      'controlOffsetHeight',
+      'controlOffsetTop',
+      'scrollY',
+      'viewHeight',
+    ]
+    const changedVerticalKeys = verticalGeometryKeys.some(key => updatedGeometryKeys.includes(key))
+    if (changedVerticalKeys) {
+      // TODO: contentGeometry (contentOffsetWidth, contentOffsetHeight)
+      // Calcs: see `201215-PopupLayout.psd`
+      const controlViewOffsetTop = geometry.controlOffsetTop - geometry.scrollY // = 914 - 25 = 889
+      const controlViewOffsetBottom = controlViewOffsetTop + geometry.controlOffsetHeight // = 889 + 32 = 921
+      const controlViewBottomRest = geometry.viewHeight - controlViewOffsetBottom
+      // Is it better to show content above control?
+      const showAbove = controlViewBottomRest < controlViewOffsetTop && geometry.contentClientHeight > controlViewBottomRest - 5
+      // Default position: from (bottom, left) -> down
+      // TODO: Horizontal checking?
+      console.log('Popup:updateGeometry', { // eslint-disable-line no-console
+        showAbove,
+        controlViewOffsetTop,
+        controlViewOffsetBottom,
+        controlViewBottomRest,
+        updatedGeometryKeys,
+        geometry,
+      })
+      // debugger
+    }
     // Store geometry data object
     this.geometry = geometry
   }
@@ -191,7 +233,7 @@ class Popup extends React.PureComponent /** @lends @Popup.prototype */ {
     const { closeOnClickOutside } = this.props
     if (!this.globalHandlersRegistered) {
       this.globalHandlersRegistered = true
-      this.updateGeometry()
+      // this.updateGeometryDebounced() // ???
       if (closeOnClickOutside) {
         document.addEventListener(globalClickEventName, this.globalClickHandler)
       }
@@ -230,14 +272,13 @@ class Popup extends React.PureComponent /** @lends @Popup.prototype */ {
     super(props)
     const { showPopup, registerHideStopper } = props
     this.state = {
-      // show: false, // Is content element displaying now?
-      // wasShown: false, // Memorized state: did content element once displayed?
       show: showPopup, // Is content element displaying now?
       wasShown: showPopup, // Memorized state: did content element once displayed?
     }
     if (typeof registerHideStopper === 'function') { // External hide canceler (FormSelect: on Menu click etc)
       registerHideStopper(this.clearDelayedClickTimerHandler)
     }
+    this.updateGeometryDebounced = debounce(debouncedUpdateGeometryTimeout, this.updateGeometry)
   }
 
   componentDidMount() {
@@ -255,11 +296,18 @@ class Popup extends React.PureComponent /** @lends @Popup.prototype */ {
   componentDidUpdate(prevProps, prevState) {
     const prevShowPopup = prevProps.showPopup
     const showPopup = this.props.showPopup
+    if (this.state && !prevState.wasShown) {
+      // this.updateGeometryDebounced()
+    }
     if (prevShowPopup !== showPopup) {
-      this.setState(({ wasShown }) => ({
-        show: showPopup,
-        wasShown: wasShown || showPopup,
-      }), this.updateGlobalClickHandlerByState)
+      this.setState(({ wasShown }) => {
+        // if (!prevShowPopup.wasShown && showPopup) {
+        // }
+        return {
+          show: showPopup,
+          wasShown: wasShown || showPopup,
+        }
+      }, this.updateGlobalClickHandlerByState)
     }
     else if (prevState.show !== this.state.show) {
       this.updateGlobalClickHandlerByState(this.state)
@@ -317,6 +365,10 @@ class Popup extends React.PureComponent /** @lends @Popup.prototype */ {
     this.controlDomNode = domNode
   }
 
+  setContentRef = (domNode) => {
+    this.contentDomNode = domNode
+  }
+
   // Render...
 
   renderPopupControl() {
@@ -359,7 +411,7 @@ class Popup extends React.PureComponent /** @lends @Popup.prototype */ {
     }
 
     return (
-      <div className={cnPopup('ContentWrapper', { show })}>
+      <div className={cnPopup('ContentWrapper', { show })} ref={this.setContentRef}>
         {popupContent}
       </div>
     )

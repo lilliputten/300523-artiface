@@ -2,6 +2,7 @@
  *  @since 2020.10.28, 22:49
  *  @changed 2020.10.29, 03:14
  */
+/* eslint-disable no-console */
 
 import React from 'react'
 import FormSelect from './FormSelect'
@@ -17,6 +18,11 @@ const demoOptions = [
   { val: 1, text: 'Swimming' },
   { val: 2, text: 'Skiing', checked: true },
 ]
+
+const demoChange = (props) => {
+  console.log('demoChange', props)
+  debugger
+}
 
 export default {
   default: (
@@ -34,6 +40,7 @@ export default {
       singleChoice
       closeOnSelect
       controlButtonTheme="success"
+      onChange={demoChange}
       show
     />
   ),
