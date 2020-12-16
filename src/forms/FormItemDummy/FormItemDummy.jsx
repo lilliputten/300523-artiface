@@ -17,7 +17,7 @@ import './FormItemDummy.pcss'
 
 const cnFormItemDummy = cn('FormItemDummy')
 
-class FormItemDummy extends React.Component /** @lends @FormItemDummy.prototype */ {
+class FormItemDummy extends React.PureComponent /** @lends @FormItemDummy.prototype */ {
 
   constructor(props) {
     super(props)

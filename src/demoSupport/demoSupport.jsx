@@ -50,14 +50,17 @@ export const PlaceFixture = ({ fixture, fixtureItemId, demoTitle, DemoWrapper = 
       // )
     })
   }
+  const contentWrapper = React.isValidElement(DemoWrapper) ? React.cloneElement(DemoWrapper, { key: 'content' }, content) : (
+    <DemoWrapper key="content">
+      {content}
+    </DemoWrapper>
+  )
   return (
     <div className={cnFixture()}>
       <FixtureInfo key="demoTitle">
         {demoTitle}
       </FixtureInfo>
-      <DemoWrapper>
-        {content}
-      </DemoWrapper>
+      {contentWrapper}
     </div>
   )
 }

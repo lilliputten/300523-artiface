@@ -2,6 +2,8 @@
  *  @class FormSelect
  *  @since 2020.10.28, 22:49
  *  @changed 2020.10.29, 03:14
+ *
+ *  TODO 2020.12.16, 23:07 -- Add hidden html form element (for form submission)
  */
 /* eslint-disable react/require-default-props */
 
@@ -28,8 +30,15 @@ class FormSelect extends React.PureComponent /** @lends @FormSelect.prototype */
 
   static propTypes = {
     id: PropTypes.string,
-    value: PropTypes.oneOfType([ PropTypes.string, PropTypes.number, PropTypes.arrayOf(PropTypes.oneOfType([ PropTypes.string, PropTypes.number ])) ]),
+    // value: PropTypes.oneOfType([ PropTypes.string, PropTypes.number, PropTypes.arrayOf(PropTypes.oneOfType([ PropTypes.string, PropTypes.number ])) ]),
+    value: PropTypes.oneOfType([ PropTypes.string, PropTypes.number ]),
+    checked: PropTypes.arrayOf(PropTypes.oneOfType([ PropTypes.string, PropTypes.number ])),
+    options: PropTypes.arrayOf(PropTypes.shape({ val: PropTypes.oneOfType([ PropTypes.string, PropTypes.number ]), text: PropTypes.string })),
     onChange: PropTypes.func,
+    fullWidth: PropTypes.bool,
+    text: PropTypes.string,
+    placeholder: PropTypes.string,
+    disabled: PropTypes.bool,
   }
 
   // Lifecycle methods...
@@ -37,35 +46,12 @@ class FormSelect extends React.PureComponent /** @lends @FormSelect.prototype */
   constructor(props) {
     super(props)
     // this.formItemRef = React.createRef()
-    const { value } = this.props
-    // this.state = deriveState(defaultState, params, props) // deriveStateFromProps(props, defaultState)
     this.id = props.id || props.inputId || props.name
+    const { checked, value } = props
     this.state = {
-      value,
+      checked: Array.isArray(checked) ? checked : value && [value] || []
     }
   }
-
-  componentDidMount() {
-    // const { formItemRef: { current } = {} } = this
-    // this.afterRender()
-  }
-
-  /*
-   * componentDidUpdate(prevProps, prevState) {
-   *   const prevValue = prevProps.value
-   *   const propsValue = this.props.value
-   *   const stateValue = this.state.value
-   *   if (propsValue !== prevValue && propsValue !== stateValue) { // New value from props
-   *     this.setState({
-   *       value: propsValue,
-   *     }, this.updateValueWithState)
-   *   }
-   *   else if (stateValue !== prevState.value) { // New value from state
-   *     this.updateValueWithState(this.state)
-   *   }
-   *   this.afterRender()
-   * }
-   */
 
   // Helper methods...
 
@@ -77,17 +63,15 @@ class FormSelect extends React.PureComponent /** @lends @FormSelect.prototype */
     return classList
   }
 
-  /*
-   * afterRender() { // Calling after each (including first) render
-   * }
-   */
-
-  updateValueWithState = (state) => {
-    const { onChange, disabled } = this.props
-    if (!disabled && typeof onChange === 'function') {
-      const { value } = state
-      onChange({ id: this.id, value })
-    }
+  getItemsText() {
+    const { checked } = this.state
+    const { options } = this.props
+    const text = Array.isArray(options) && Array.isArray(checked) && options.map(({ val, text }) => {
+      if (checked.includes(val)) {
+        return text
+      }
+    }).filter(Boolean).join(', ')
+    return text
   }
 
   // Handlers...
@@ -108,40 +92,30 @@ class FormSelect extends React.PureComponent /** @lends @FormSelect.prototype */
     }
   }
   onMenuChange = (params) => {
+    const { checked } = params
     const { onChange } = this.props
     if (typeof onChange === 'function') {
       onChange(params)
     }
+    this.setState({ checked })
   }
 
   registerHideStopper = (hideStopper) => { // Called from popup
     this.hideStopper = hideStopper
   }
 
-  // onChange
-  // onIemClick
-  /* // onClick
-   * onClick = (event) => {
-   *   const {
-   *     disabled,
-   *     onClick,
-   *     clickable,
-   *   } = this.props
-   *   if (clickable && !disabled && onClick && typeof onClick === 'function') {
-   *     onClick(event)
-   *   }
-   * }
-   */
-
   // Render...
 
   renderControlContent() {
     const {
       text,
+      placeholder,
       title,
       controlButtonTheme,
+      fullWidth,
+      disabled,
     } = this.props
-
+    const buttonText = this.getItemsText() || placeholder || text
     return (
       <FormButton
         icon="faChevronDown"
@@ -149,8 +123,10 @@ class FormSelect extends React.PureComponent /** @lends @FormSelect.prototype */
         theme={controlButtonTheme || 'primary'}
         variation="popupControl"
         rotatedIcon
-        text={text}
+        text={buttonText}
         title={title}
+        fullWidth={fullWidth}
+        disabled={disabled}
       />
     )
   }
@@ -158,19 +134,23 @@ class FormSelect extends React.PureComponent /** @lends @FormSelect.prototype */
   renderMenuContent() {
     const {
       singleChoice,
+      options,
+      checked,
+      value,
+      disabled,
+      // inputId, // ???
     } = this.props
-
     return (
       <Menu
         checkable={true}
         singleChoice={singleChoice}
         onChange={this.onMenuChange}
         onClick={this.onMenuItemClick}
+        checked={checked}
+        value={value}
+        disabled={disabled}
       >
-        {[
-          { val: 1, text: 'Swimming' },
-          { val: 2, text: 'Skiing', checked: true },
-        ]}
+        {options}
       </Menu>
     )
   }
@@ -179,22 +159,16 @@ class FormSelect extends React.PureComponent /** @lends @FormSelect.prototype */
 
     const {
       id,
-      // htmlId,
-      // name,
       disabled,
-      // text,
-      // children,
       title,
       show,
-      // singleChoice,
-      // controlButtonTheme,
+      fullWidth,
     } = this.props
 
     const controlContent = this.renderControlContent()
     const menuContent =  this.renderMenuContent()
 
-    const renderProps = {
-      // ...basicRenderProps,
+    const popupProps = {
       id,
       className: this.getClassName(),
       disabled,
@@ -204,17 +178,14 @@ class FormSelect extends React.PureComponent /** @lends @FormSelect.prototype */
       popupContent: menuContent,
       onControlClick: this.onControlClick,
       registerHideStopper: this.registerHideStopper,
-      // onControlClick: buttonOnClick,
-      // asItem: true
-      // onClick: this.onClick, // ???
+      fullWidth,
     }
 
     return (
-      <Popup {...renderProps} />
+      <Popup {...popupProps} />
     )
 
   }
-
 
 }
 

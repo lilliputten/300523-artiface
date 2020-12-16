@@ -1,3 +1,8 @@
+/**
+ * @desc webpack preprocessing samples
+ */
+/* eslint-disable no-console */
+
 /*DEBUG: Test one-string debug */ console.log('One-string debug output')
 
 /*DEBUG-BEGIN: Test multiline debug */

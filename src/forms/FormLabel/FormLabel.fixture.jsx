@@ -11,21 +11,27 @@ import FormTextInput from '../FormTextInput'
 // Demo styles for cosmos engine
 import 'demo.pcss'
 
-export const DemoWrapper = FormGroup // ({ children }) => {
+// export const DemoWrapper = FormGroup // ({ children }) => {
+export const DemoWrapper = <FormGroup stack id="Wrapper" /> // ({ children }) => {
 
 export default {
-  onlyLabel: <FormLabel title="Only title">
+  onlyLabel: (
+    <FormLabel title="Only title">
       Only label
-  </FormLabel>,
-  withInput: <FormGroup fullWidth>
-    <FormLabel htmlFor="testId" title="Label title">Label</FormLabel>
-    <FormTextInput
-      className="addClassName"
-      type="text"
-      name="testName"
-      inputId="testId"
-      placeholder="Input placeholder"
-      title="Input title"
-    />
-  </FormGroup>,
+    </FormLabel>
+  ),
+  withInput: (
+    <FormGroup flow fullWidth>
+      <FormLabel htmlFor="testId" title="Label title">Label</FormLabel>
+      <FormTextInput
+        className="addClassName"
+        type="text"
+        name="testName"
+        inputId="testId"
+        placeholder="Input placeholder"
+        title="Input title"
+        fullWidth
+      />
+    </FormGroup>
+  ),
 }

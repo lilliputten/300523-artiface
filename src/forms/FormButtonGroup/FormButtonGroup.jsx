@@ -3,6 +3,7 @@
  *  @since 2020.10.21, 23:43
  *  @changed 2020.10.21, 23:43
  */
+/* eslint-disable react/require-default-props */
 
 import React from 'react'
 import PropTypes from 'prop-types'
@@ -18,16 +19,21 @@ const classNameModifiers = [
   // Basic element properties
   'id',
   // Style-related modifiers...
-  'align',
-  'padded',
-  'background',
-  'flow',
+  // 'align',
+  // 'padded',
+  // 'background',
+  // 'flow',
   // 'fullWidth',
 ]
 
 const cnFormButtonGroup = cn('FormButtonGroup')
 
-class FormButtonGroup extends React.Component /** @lends @FormButtonGroup.prototype */ {
+class FormButtonGroup extends React.PureComponent /** @lends @FormButtonGroup.prototype */ {
+
+  static propTypes = {
+    id: PropTypes.string,
+    // flow: PropTypes.bool,
+  }
 
   getClassName() {
     const mods = classNameModifiers.reduce((mods, id) => {
@@ -57,13 +63,4 @@ class FormButtonGroup extends React.Component /** @lends @FormButtonGroup.protot
 
 }
 
-FormButtonGroup.propTypes = {
-  id: PropTypes.string,
-  name: PropTypes.string,
-  disabled: PropTypes.bool,
-  flow: PropTypes.bool,
-  value: PropTypes.any,
-  valueType: PropTypes.string,
-  onChange: PropTypes.func,
-}
 export default FormItemHOC(FormButtonGroup)

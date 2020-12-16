@@ -1,5 +1,6 @@
 # TODO
 
+- 2020.12.16, 23:41 -- Testing: https://medium.com/capital-one-tech/unit-testing-behavior-of-react-components-with-test-driven-development-ae15b03a3689, https://reactjs.org/docs/testing.html, https://reactjs.org/docs/testing-recipes.html
 - 2020.12.15, 13:52 -- External internationalization.
 - 2020.10.30, 20:04 -- FormSelect: add hidden html input to sync selected item values & support html form submission.
 - 2020.10.07, 00:32 -- FormButton: Add optional prefix ('regular', 'solid', 'default') to icon id for choosing icons set.
@@ -9,5 +10,5 @@
 - 2020.10.06, 13:29 -- PD-2814: Refactoring all of used components. (See `README.form-components.md`.)
 
 <!--
- @changed 2020.12.15, 13:52
+ @changed 2020.12.16, 23:41
 -->

@@ -12,16 +12,17 @@ import FormGroup from '../FormGroup'
 // Demo styles for cosmos engine
 import 'demo.pcss'
 
-export const DemoWrapper = FormGroup // ({ children }) => {
+// export const DemoWrapper = FormGroup // ({ children }) => {
+export const DemoWrapper = <FormGroup stack id="Wrapper" /> // ({ children }) => {
 
 const demoOptions = [
-  { val: 1, text: 'Swimming' },
-  { val: 2, text: 'Skiing', checked: true },
+  { val: 1, text: 'Ruinning' },
+  { val: 2, text: 'Swimming extra long text item name string value' },
 ]
 
-const demoChange = (props) => {
-  console.log('demoChange', props)
-  debugger
+const demoChange = ({ checked, value }) => {
+  console.log('demoChange', { checked, value })
+  // debugger
 }
 
 export default {
@@ -41,6 +42,20 @@ export default {
       closeOnSelect
       controlButtonTheme="success"
       onChange={demoChange}
+    />
+  ),
+  Question: (
+    <FormSelect
+      title="Select question"
+      placeholder="Select some option"
+      _singleChoice="force"
+      _value={1}
+      checked={[1]}
+      onChange={demoChange}
+      options={demoOptions}
+      _closeOnSelect
+      controlButtonTheme="default"
+      _fullWidth
       show
     />
   ),

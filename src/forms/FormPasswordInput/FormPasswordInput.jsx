@@ -10,7 +10,7 @@ import React from 'react'
 import { cn } from 'utils'
 
 // import InlineIcon from 'elements/InlineIcon'
-import FormItemHOC from '../FormItemHOC'
+// import FormItemHOC from '../FormItemHOC'
 import FormTextInput from '../FormTextInput'
 
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -19,7 +19,7 @@ import './FormPasswordInput.pcss'
 
 const cnFormPasswordInput = cn('FormPasswordInput')
 
-class FormPasswordInput extends React.Component /** @lends @FormPasswordInput.prototype */ {
+class FormPasswordInput extends React.PureComponent /** @lends @FormPasswordInput.prototype */ {
 
   // Lifecycle...
 

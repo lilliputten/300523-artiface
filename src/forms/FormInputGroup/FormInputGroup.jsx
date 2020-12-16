@@ -3,6 +3,7 @@
  *  @since 2020.10.21, 23:43
  *  @changed 2020.10.21, 23:43
  */
+/* eslint-disable react/require-default-props */
 
 import React from 'react'
 import PropTypes from 'prop-types'
@@ -18,16 +19,24 @@ const classNameModifiers = [
   // Basic element properties
   'id',
   // Style-related modifiers...
-  'align',
-  'padded',
-  'background',
-  'flow',
+  // 'align',
+  // 'padded',
+  // 'background',
+  // 'flow',
   // 'fullWidth',
 ]
 
 const cnFormInputGroup = cn('FormInputGroup')
 
-class FormInputGroup extends React.Component /** @lends @FormInputGroup.prototype */ {
+class FormInputGroup extends React.PureComponent /** @lends @FormInputGroup.prototype */ {
+
+  static propTypes = {
+    id: PropTypes.string,
+    // disabled: PropTypes.bool, // ???
+    // align: PropTypes.string,
+    // padded: PropTypes.bool,
+    // flow: PropTypes.bool,
+  }
 
   getClassName() {
     const mods = classNameModifiers.reduce((mods, id) => {
@@ -43,13 +52,6 @@ class FormInputGroup extends React.Component /** @lends @FormInputGroup.prototyp
   // Render...
 
   render() {
-    // const {
-    //   id,
-    //   // name,
-    //   // disabled,
-    //   children,
-    //   content,
-    // } = this.props
     return (
       <FormGroup {...this.props} className={this.getClassName()} />
     )
@@ -57,13 +59,4 @@ class FormInputGroup extends React.Component /** @lends @FormInputGroup.prototyp
 
 }
 
-FormInputGroup.propTypes = {
-  id: PropTypes.string,
-  name: PropTypes.string,
-  disabled: PropTypes.bool,
-  flow: PropTypes.bool,
-  value: PropTypes.any,
-  valueType: PropTypes.string,
-  onChange: PropTypes.func,
-}
 export default FormItemHOC(FormInputGroup)

@@ -3,6 +3,7 @@
  *  @since 2020.05.19, 17:16
  *  @changed 2020.11.06, 01:46
  */
+/* eslint-disable react/no-multi-comp */
 
 import 'es5-shim/es5-shim'
 import 'es5-shim/es5-sham'
@@ -66,7 +67,7 @@ const DatePickerExample = () => {
   return (
     <DatePicker
       selected={startDate}
-      onChange={date => setStartDate(date)}
+      onChange={setStartDate}
       // locale="en-US"
     />
   )
@@ -87,21 +88,21 @@ const PopperExample = () => {
         // placement={popperPlacement}
         // {...popperProps}
       >
-        {({ ref, style, placement, arrowProps }) => (
-            <div
-              {...{ ref, style }}
-              className="test-popper"
-              data-placement={placement}
-              // onKeyDown={popperOnKeyDown}
-            >
+        {({ ref, style, placement/* , arrowProps */ }) => (
+          <div
+            {...{ ref, style }}
+            className="test-popper"
+            data-placement={placement}
+            // onKeyDown={popperOnKeyDown}
+          >
               popper
             {/* React.cloneElement(popperComponent, { arrowProps }) */}
-            </div>
+          </div>
         )}
       </Popper>
 
     </Manager>
-   )
+  )
 }
 
 const demoContent = (

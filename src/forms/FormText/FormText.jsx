@@ -3,6 +3,7 @@
  *  @since 2020.10.29, 21:25
  *  @changed 2020.10.29, 22:42
  */
+/* eslint-disable react/require-default-props */
 
 import React from 'react'
 import PropTypes from 'prop-types'
@@ -15,7 +16,11 @@ import './FormText.pcss'
 
 const cnFormText = cn('FormText')
 
-class FormText extends React.Component /** @lends @FormText.prototype */ {
+class FormText extends React.PureComponent /** @lends @FormText.prototype */ {
+
+  static propTypes = {
+    id: PropTypes.string,
+  }
 
   getClassName() {
     const {
@@ -66,10 +71,6 @@ class FormText extends React.Component /** @lends @FormText.prototype */ {
 
   }
 
-
 }
 
-FormText.propTypes = {
-  id: PropTypes.string,
-}
 export default FormItemHOC({ hoverable: true })(FormText)

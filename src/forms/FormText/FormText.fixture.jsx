@@ -14,16 +14,18 @@ import 'demo.pcss'
 export const DemoWrapper = FormGroup // ({ children }) => {
 
 export default {
-  // defaultVariant: <FormText title="Title" text="Text" />,
-  withInput: <FormGroup fullWidth>
-    <FormText title="Title" text="Text" clickable hoverable={false} />
-    <FormTextInput
-      className="addClassName"
-      type="text"
-      name="testName"
-      inputId="testId"
-      placeholder="Input placeholder"
-      title="Input title"
-    />
-  </FormGroup>,
+  simple: <FormText title="Title" text="Text" />,
+  withInput: (
+    <FormGroup fullWidth>
+      <FormText title="Title" text="Text" clickable hoverable={false} />
+      <FormTextInput
+        className="addClassName"
+        type="text"
+        name="testName"
+        inputId="testId"
+        placeholder="Input placeholder"
+        title="Input title"
+      />
+    </FormGroup>
+  ),
 }

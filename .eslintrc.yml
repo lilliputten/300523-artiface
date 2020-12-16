@@ -24,6 +24,9 @@ env:
 parserOptions:
   ecmaFeatures:
     jsx: true
+settings:
+  react:
+    version: '16.13'
 rules:
   # linebreak-style: [2, 'unix']
   arrow-body-style: 0

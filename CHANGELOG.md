@@ -1,5 +1,7 @@
 # CHANGELOG
 
+- 2020.12.16, 23:50 -- Added test dependencies (jest, enzyme), fixed all linting errors/warnings.
+- 2020.12.16, 20:23 -- Menu: Updated checked items processing algorithm.
 - 2020.12.16, 16:39 -- Popup: checks for case when content must be shown above control element (unused).
 - 2020.12.15, 22:05 -- Popup: added geometry analize basic methods (in porogress), fixed click inside/outside handlers. FormItemHOC: passed `setDomRed` handlers valls up to parents.
 - 2020.12.15, 21:59 -- Added `utils/strings` module, added `utils/configure` as 'atomic' module (previously, it was only presented as spreaded module).
@@ -31,5 +33,5 @@
 - 2020.10.05, 20:38 -- v.0.0.15: Extracted `demoSupport.jsx` routines, fixture selection from url query (parameter `fixture`), added avaialble fixtures list if fixture to display is not specified, added DemoWrapper & demoTitle exportable ficture parameters for demo rendering.
 
 <!--
- @changed 2020.12.14, 20:14
+ @changed 2020.12.16, 23:50
 -->

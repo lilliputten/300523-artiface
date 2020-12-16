@@ -31,7 +31,7 @@ function detectSafari() {
   try {
     isSafari = /constructor/i.test(String(global.HTMLElement))
   }
-  catch(error) {} // eslint-disable-line no-empty
+  catch (error) {} // eslint-disable-line no-empty
   if (!isSafari) {
     var notificationObject = global.safari && (typeof global.safari !== 'undefined' && global.safari.pushNotification)
     isSafari = !!notificationObject && (String(notificationObject) === '[object SafariRemoteNotification]')
