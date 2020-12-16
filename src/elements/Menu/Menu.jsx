@@ -1,7 +1,7 @@
 /** @module Menu
  *  @class Menu
  *  @since 2020.10.27, 02:58
- *  @changed 2020.10.27, 21:16
+ *  @changed 2020.12.16, 20:21
  */
 
 import React from 'react'
@@ -43,10 +43,10 @@ class Menu extends React.PureComponent /** @lends @Menu.prototype */ {
     // console.log('Menu:setChildrenItemsFromProps', {
     //   children,
     // })
-    // debugger
     let children = this.props.children
-    const valChecked = {}
+    const checkedList = []
     if (Array.isArray(children)) {
+      const { singleChoice } = this.props
       children = children.map((item) => {
         const isArray = !!item && Array.isArray(item)
         const isObject = !!item && typeof item ==='object' && !isArray // Array.isArray(item)
@@ -60,7 +60,6 @@ class Menu extends React.PureComponent /** @lends @Menu.prototype */ {
         //   isObject,
         //   isMenuItem,
         // })
-        // debugger
         if (isRawObject || isMenuItem) {
           const itemProps = isRawObject ? item : item.props
           // Construct unique key values...
@@ -81,8 +80,8 @@ class Menu extends React.PureComponent /** @lends @Menu.prototype */ {
           else if (isMenuItem) { // MenuItem -> Add onClick handler if handler is not defined
             item = { ...item, props: newProps }
           }
-          if (item.props.checked) {
-            valChecked[val] = true
+          if (item.props.checked && (!singleChoice || !checkedList.length)) {
+            checkedList.push(val)
           }
         }
         // TODO: Process arrays (subitems/groups)?
@@ -91,14 +90,15 @@ class Menu extends React.PureComponent /** @lends @Menu.prototype */ {
     }
     this.setState({
       items: children,
-      valChecked,
+      checkedList,
     })
     // return children
   }
 
   updateChildrenItems(checkedValStates) {
     const { singleChoice, onChange } = this.props
-    let { valChecked, items } = this.state
+    let { items } = this.state
+    const checkedList = []
     if (Array.isArray(items)) {
       items = items.map((item) => {
         const isObject = !!item && typeof item ==='object'
@@ -107,16 +107,15 @@ class Menu extends React.PureComponent /** @lends @Menu.prototype */ {
         if (isMenuItem) {
           const itemProps = item.props
           const { val, checked } = itemProps
-          let setChecked = checkedValStates[val]
-          if (setChecked != null) {
-            if (setChecked !== checked) {
-              item = { ...item, props: { ...itemProps, checked: setChecked } }
-              valChecked[val] = setChecked
-            }
+          let checkedVal = checkedValStates[val]
+          if (checkedVal == null) { // Check out all other items if single mode
+            checkedVal = singleChoice ? false : checked
           }
-          else if (singleChoice && itemProps.checked) {
-            item = { ...item, props: { ...itemProps, checked: false } }
-            valChecked[val] = false
+          if (checkedVal !== checked) {
+            item = { ...item, props: { ...itemProps, checked: checkedVal } }
+          }
+          if (checkedVal) { // && (!singleChoice || !checkedList.length)) {
+            checkedList.push(val)
           }
         }
         return item
@@ -124,13 +123,14 @@ class Menu extends React.PureComponent /** @lends @Menu.prototype */ {
     }
     this.setState({
       items,
-      valChecked,
+      checkedList,
     })
     if (typeof onChange === 'function') {
-      const checkedValues = Object.entries(valChecked)
-        .map(([val, checked]) => checked && val)
-        .filter(Boolean)
-      onChange({ checkedValues })
+      const params = { checked: checkedList }
+      if (singleChoice && checkedList.length) { // Add `val` param if singleChoice mode (and has checked)
+        params.val = checkedList[0]
+      }
+      onChange(params)
     }
   }
 
@@ -171,8 +171,8 @@ class Menu extends React.PureComponent /** @lends @Menu.prototype */ {
     if (typeof onClick === 'function') { // Invoke onClick handler
       onClick({ val })
     }
-    const { valChecked } = this.state
-    const setChecked = !valChecked[val]
+    const { checkedList } = this.state
+    const setChecked = !checkedList.includes(val)
     if (singleChoice === 'forced' && !setChecked) { // Don not made changes if single mode and clicked item was checked
       return
     }
