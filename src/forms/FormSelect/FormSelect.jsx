@@ -16,7 +16,8 @@ import FormItemHOC from '../FormItemHOC'
 
 // import FormGroup from 'forms/FormGroup'
 // import FormGroup from '../FormGroup'
-import Popup from 'elements/Popup'
+// import Popup from 'elements/Popup'
+import { FormItemPopup } from 'elements/Popup'
 import Menu from 'elements/Menu'
 import FormButton from 'forms/FormButton'
 
@@ -92,10 +93,14 @@ class FormSelect extends React.PureComponent /** @lends @FormSelect.prototype */
     }
   }
   onMenuChange = (params) => {
-    const { checked } = params
     const { onChange } = this.props
+    const { checked } = params
     if (typeof onChange === 'function') {
-      onChange(params)
+      const { id, inputId, name, singleChoice } = this.props
+      const value = singleChoice ? checked[0] : checked
+      const setId = id || inputId || name
+      const setParams = { id: setId, checked, value }
+      onChange(setParams)
     }
     this.setState({ checked })
   }
@@ -182,7 +187,7 @@ class FormSelect extends React.PureComponent /** @lends @FormSelect.prototype */
     }
 
     return (
-      <Popup {...popupProps} />
+      <FormItemPopup {...popupProps} />
     )
 
   }

@@ -47,6 +47,8 @@ class Menu extends React.PureComponent /** @lends @Menu.prototype */ {
     const checkedList = []
     if (Array.isArray(children)) {
       const { singleChoice } = this.props
+      const { value, checked } = this.props
+      const propsChecked = (singleChoice && value != null) ? [value] : checked
       children = children.map((item) => {
         const isArray = !!item && Array.isArray(item)
         const isObject = !!item && typeof item ==='object' && !isArray // Array.isArray(item)
@@ -64,13 +66,14 @@ class Menu extends React.PureComponent /** @lends @Menu.prototype */ {
           const itemProps = isRawObject ? item : item.props
           // Construct unique key values...
           const val = itemProps.val
+          const checked = Array.isArray(propsChecked) ? propsChecked.includes(val) : itemProps.checked
           // const checked = checkedValStates && checkedValStates[val] != null ? checkedValStates[val] : itemProps.checked
           const checkable = itemProps.checkable != null ? itemProps.checkable : this.props.checkable
           const newProps = {
             ...itemProps,
             onClick: itemProps.onClick || this.onMenuItemClick,
             checkable,
-            // checked,
+            checked,
           }
           if (isRawObject) { // Raw object -> create MenuItem
             const key = item && item.key || this.getId() + '_Item_' + (itemProps.id || itemProps.val)
@@ -128,7 +131,7 @@ class Menu extends React.PureComponent /** @lends @Menu.prototype */ {
     if (typeof onChange === 'function') {
       const params = { checked: checkedList }
       if (singleChoice && checkedList.length) { // Add `val` param if singleChoice mode (and has checked)
-        params.val = checkedList[0]
+        params.value = checkedList[0]
       }
       onChange(params)
     }
@@ -169,7 +172,7 @@ class Menu extends React.PureComponent /** @lends @Menu.prototype */ {
   onMenuItemClick = ({ /* id, component, */ val }) => {
     const { onClick, singleChoice } = this.props
     if (typeof onClick === 'function') { // Invoke onClick handler
-      onClick({ val })
+      onClick({ value: val })
     }
     const { checkedList } = this.state
     const setChecked = !checkedList.includes(val)

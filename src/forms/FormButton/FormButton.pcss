@@ -5,10 +5,10 @@
 
 .FormButton {
 
-  // @mixin FormItemMixin;
-
   // border: 1px solid transparent; // Hide default css frame for `button` tags (if applied)
   padding: 0 $(formItemInnerPaddingH)px;
+
+  max-width: 100%; // ??? Fit in container?
 
   // @mixin FormItemFramed;
   // border-width: 1px;
@@ -37,8 +37,10 @@
 
   &-Icon {
     color: $neutralColor; // Default icon color
+    left: @calc($formItemInnerPaddingH)px;
   }
   &-Text {
+    display: block; // ???
     // @mixin debug green;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -65,6 +67,7 @@
     ^&-Icon {
       position: absolute;
       right: @calc($formItemInnerPaddingH)px;
+      left: auto;
     }
   }
 

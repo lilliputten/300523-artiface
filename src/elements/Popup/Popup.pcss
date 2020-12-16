@@ -5,9 +5,25 @@
 
 .Popup {
   /*!KEEP*/
+  position: relative;
+  // overflow-x: hidden; // Make children element shrinkable (TODO: Rernder content in portal or move dom to root?)
+  // overflow-y: visible;
+  // NOTE: flex cause to 0-height to control?
+  // display: flex;
+  // flex-direction: column;
   &-ControlWrapper {
+    // flex: 1;
+    // display: flex;
+    > .FormItem {
+      display: block;
+      overflow: hidden; // Make item shrinkable
+      // ^^& & {
+      //   width: 0; // ??? for fullWidth?
+      // }
+    }
   }
   &-ContentWrapper {
+    max-width: 100%;
     z-index: 100; // Lift above all other regular elements
     position: absolute;
     // display: none;
@@ -31,14 +47,14 @@
       }
       100% {
         opacity: 1;
-        transform: translateY(0);
+        transform: translateY(4px);
       }
     }
     @keyframes WebUiCore_Popup {
       0% {
         visibility: visible;
         margin: 0;
-        transform: translateY(0);
+        transform: translateY(4px);
         opacity: 1;
       }
       99% {

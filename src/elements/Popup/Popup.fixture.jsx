@@ -44,12 +44,12 @@ const PopupContent = () => {
 const popupControlEl = <PopupControl />
 const popupContentEl = <PopupContent />
 
-const menuOnChange = ({ checked, val }) => { // `val` passed only for `singleChoice` mode, `checked` is array
-  console.log('Popup.fixture: menuOnChange', { checked, val })
+const menuOnChange = ({ checked, value }) => { // `value` passed only for `singleChoice` mode, `checked` is array
+  console.log('Popup.fixture: menuOnChange', { checked, value })
   // debugger
 }
-const menuOnClick = ({ val }) => {
-  console.log('Popup.fixture: menuOnClick', { val })
+const menuOnClick = ({ value }) => {
+  console.log('Popup.fixture: menuOnClick', { value })
   // debugger
   cbHideStopper && cbHideStopper()
 }
@@ -60,7 +60,7 @@ const buttonOnClick = ({ show }) => {
 
 const demoOptions = [
   { val: 1, text: 'Swimming' },
-  { val: 2, text: 'Skiing', checked: true },
+  { val: 2, text: 'Skiing' },
 ]
 const demoMenu = (
   <Menu
@@ -100,6 +100,7 @@ const stayOpenAfterItemClick = (
     popupContent={demoMenu}
     closeOnClickOutside={true}
     registerHideStopper={registerHideStopper}
+    fullWidth
   />
 )
 

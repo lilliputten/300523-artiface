@@ -7,10 +7,13 @@
 import React from 'react'
 import FormSelect from './FormSelect'
 import FormGroup from '../FormGroup'
-// import FormButton from '../FormButton'
+import FormLabeledGroup from '../FormLabeledGroup'
+import FormLabel from '../FormLabel'
 
 // Demo styles for cosmos engine
 import 'demo.pcss'
+
+import './FormSelect.fixture.pcss'
 
 // export const DemoWrapper = FormGroup // ({ children }) => {
 export const DemoWrapper = <FormGroup stack id="Wrapper" /> // ({ children }) => {
@@ -25,6 +28,7 @@ const demoChange = ({ checked, value }) => {
   // debugger
 }
 
+// TODO: With label
 export default {
   default: (
     <FormSelect
@@ -55,8 +59,37 @@ export default {
       options={demoOptions}
       _closeOnSelect
       controlButtonTheme="default"
-      _fullWidth
-      show
+      fullWidth
+      // show
     />
+  ),
+  withLabel: (
+    <FormGroup id="withLabel" flow fullWidth>
+      <FormLabel htmlFor="testId" title="Label title">Label</FormLabel>
+      <FormSelect
+        title="Select question"
+        placeholder="Select some option"
+        checked={[2]}
+        onChange={demoChange}
+        options={demoOptions}
+        controlButtonTheme="default"
+        fullWidth
+        // show
+      />
+    </FormGroup>
+  ),
+  withLabeledGroup: (
+    <FormLabeledGroup id="withLabeledGroup" title="withLabeledGroup" fullWidth flow>
+      <FormSelect
+        title="Select question"
+        placeholder="Select some option"
+        checked={[2]}
+        onChange={demoChange}
+        options={demoOptions}
+        controlButtonTheme="default"
+        fullWidth
+        // show
+      />
+    </FormLabeledGroup>
   ),
 }

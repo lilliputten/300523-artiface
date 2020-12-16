@@ -5,8 +5,12 @@
 
 .Menu {
   &:not(&_layout_horizontal) {
+    max-width: 100%;
     .MenuItem {
       display: block;
+      &_fullWidth {
+        width: 100%;
+      }
     }
   }
 }

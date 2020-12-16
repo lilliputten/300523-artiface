@@ -20,10 +20,10 @@ import 'demo.pcss'
 
 // export const DemoWrapper = FormGroup // ({ children }) => {
 
-// NOTE: Menu items can be provided as `MenuItem` elements or description objects (`{ val: 2, text: 'Skiing', checked: true }`).
+// NOTE: Menu items can be provided as `MenuItem` elements or description objects (`{ val: 2, text: 'Skiing' }`).
 const items = [
   { val: 1, text: 'Swimming' },
-  { val: 2, text: 'Skiing', checked: true },
+  { val: 2, text: 'Skiing' },
 ]
 const itemElems = items.map((props, i) => {
   return i ? props : React.createElement(MenuItem, { ...props, key: props.val })
@@ -39,23 +39,23 @@ const onClick = ({ val }) => {
 }
 
 export default {
-  default: (
-    <Menu>
-      {itemElems}
-    </Menu>
-  ),
+  // simple: (
+  //   <Menu id="simple">
+  //     {itemElems}
+  //   </Menu>
+  // ),
   horizontal: (
-    <Menu layout="horizontal" onClick={onClick}>
+    <Menu id="horizontal" _checkable={true} layout="horizontal" onClick={onClick}>
       {itemElems}
     </Menu>
   ),
   checkableMultiply: (
-    <Menu checkable={true} singleChoice="forced" onChange={onChange}>
+    <Menu id="checkableMultiply" checkable={true} singleChoice="forced" onChange={onChange}>
       {itemElems}
     </Menu>
   ),
-  checkable: (
-    <Menu checkable={true} singleChoice="forced" onChange={onChange}>
+  checkableSingle: (
+    <Menu id="checkableSingle" checkable={true} singleChoice="forced" onChange={onChange}>
       {itemElems}
     </Menu>
   ),

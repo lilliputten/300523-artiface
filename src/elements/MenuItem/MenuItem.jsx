@@ -17,7 +17,7 @@ import './MenuItem.pcss'
 
 const cnMenuItem = cn('MenuItem')
 
-class MenuItem extends React.Component /** @lends @MenuItem.prototype */ {
+class MenuItem extends React.PureComponent /** @lends @MenuItem.prototype */ {
 
   // Event handlers...
 
@@ -71,17 +71,15 @@ class MenuItem extends React.Component /** @lends @MenuItem.prototype */ {
       text,
     } = this.props
     return (
-      <span className={cnMenuItem('Text')}>
+      <div className={cnMenuItem('Text')}>
         {children || text}
-      </span>
+      </div>
     )
   }
 
   render() {
 
     const {
-      // id,
-      val,
       htmlId,
       setDomRef, // From FormItemHOC
     } = this.props
