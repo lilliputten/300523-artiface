@@ -212,6 +212,8 @@ Object.assign(cssConfig, { // Form properties...
   defaultIconSize: 24,
   smallIconSize: 16,
 
+  popupContentGap: 4,
+
 })
 
 module.exports = cssConfig

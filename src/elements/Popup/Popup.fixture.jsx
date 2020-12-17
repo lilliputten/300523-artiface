@@ -1,6 +1,6 @@
 /** @module Popup.fixture
  *  @since 2020.10.27, 00:39
- *  @changed 2020.10.29, 03:14
+ *  @changed 2020.12.18, 01:32
  */
 /* eslint-disable react/no-multi-comp, no-console */
 
@@ -36,7 +36,9 @@ const PopupControl = (props) => {
 const PopupContent = () => {
   return (
     <div className="DemoPopupContent">
-      DemoPopupContent
+      <div className="DemoPopupContent-Container">
+        DemoPopupContent
+      </div>
     </div>
   )
 }

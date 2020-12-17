@@ -1,5 +1,7 @@
 # CHANGELOG
 
+- 2020.12.18, 01:33 -- Implemented smart popup positioning algorithm (some tests required).
+- 2020.12.18, 01:33 -- Done (from TODO): 2020.12.17, 01:52 -- FormSelect/Popup: confilct between visible popup content and shrinkable control. See example `withLabeledGroup` -- Popup can be adaptive for available space only if `overflow: hidden` is specified in css; then content is clipped out and unvisible.
 - 2020.12.17, 17:28 -- Refactoring select based on portals (in progress, stage 1). See `https://github.com/tajo/react-portal`.
 - 2020.12.16, 23:50 -- Added test dependencies (jest, enzyme), fixed all linting errors/warnings.
 - 2020.12.16, 20:23 -- Menu: Updated checked items processing algorithm.
