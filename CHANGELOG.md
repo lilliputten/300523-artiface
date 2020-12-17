@@ -1,5 +1,6 @@
 # CHANGELOG
 
+- 2020.12.17, 17:28 -- Refactoring select based on portals (in progress, stage 1).
 - 2020.12.16, 23:50 -- Added test dependencies (jest, enzyme), fixed all linting errors/warnings.
 - 2020.12.16, 20:23 -- Menu: Updated checked items processing algorithm.
 - 2020.12.16, 16:39 -- Popup: checks for case when content must be shown above control element (unused).

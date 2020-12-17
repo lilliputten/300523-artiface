@@ -12,12 +12,14 @@ import { cn } from 'utils'
 import { strings } from 'utils'
 import { debounce } from 'throttle-debounce'
 import FormItemHOC from 'forms/FormItemHOC'
+import { PortalWithState } from 'react-portal'
 
 import './Popup.pcss'
 
 const cnPopup = cn('Popup')
+const cnPopupControl = cn('PopupControl')
 
-const delayedClickTimeout = 150
+// const delayedClickTimeout = 150
 const debouncedUpdateGeometryTimeout = 50
 
 const domNodeGeometryKeys = [
@@ -28,17 +30,16 @@ const domNodeGeometryKeys = [
   'clientWidth',
   'clientHeight',
 ]
-/* const verticalGeometryKeys = [
- *   'contentClientHeight',
- *   'contentOffsetHeight',
- *   'contentOffsetTop',
- *   'controlClientHeight',
- *   'controlOffsetHeight',
- *   'controlOffsetTop',
- *   'scrollY',
- *   'viewHeight',
- * ]
- */
+const verticalGeometryKeys = [
+  'contentClientHeight',
+  'contentOffsetHeight',
+  'contentOffsetTop',
+  'controlClientHeight',
+  'controlOffsetHeight',
+  'controlOffsetTop',
+  'scrollY',
+  'viewHeight',
+]
 const horizontalGeometryKeys = [
   'contentClientWidth',
   'contentOffsetWidth',
@@ -57,8 +58,8 @@ const globalGeometryKeys = {
   scrollY: { obj: window },
 }
 
-const globalClickEventName = 'mousedown'
-const globalKeyPressEventName = 'keydown'
+// const globalClickEventName = 'mousedown'
+// const globalKeyPressEventName = 'keydown'
 const globalScrollEventName = 'scroll'
 const globalResizeEventName = 'resize'
 
@@ -114,34 +115,36 @@ class Popup extends React.PureComponent /** @lends @Popup.prototype */ {
     }
   }
 
-  globalClickHandler = () => {
-    // console.log('Popup:globalClickHandler (set handler)', this.delayedClickTimerHandler)
-    this.clearDelayedClickTimerHandler()
-    this.delayedClickTimerHandler = setTimeout(this.delayedGlobalClickHandler, delayedClickTimeout)
-  }
+  /* // globalClickHandler = () => {
+   *   // console.log('Popup:globalClickHandler (set handler)', this.delayedClickTimerHandler)
+   *   this.clearDelayedClickTimerHandler()
+   *   this.delayedClickTimerHandler = setTimeout(this.delayedGlobalClickHandler, delayedClickTimeout)
+   * }
+   */
 
-  globalKeyPressHandler = (event) => {
-    var { keyCode } = event
-    const {
-      id,
-      onKeyPress,
-      onEscPressed,
-      closeOnEscPressed,
-    } = this.props
-    const cbProps = { event, id, keyCode }
-    if (typeof onKeyPress === 'function') {
-      onKeyPress(cbProps)
-    }
-    const isEsc = keyCode === 27 // Esc?
-    if (isEsc) {
-      if (typeof onEscPressed === 'function') {
-        onEscPressed(cbProps)
-      }
-      if (closeOnEscPressed) {
-        this.setState({ show: false })
-      }
-    }
-  }
+  /* // globalKeyPressHandler = (event) => {
+   *   var { keyCode } = event
+   *   const {
+   *     id,
+   *     onKeyPress,
+   *     onEscPressed,
+   *     closeOnEscPressed,
+   *   } = this.props
+   *   const cbProps = { event, id, keyCode }
+   *   if (typeof onKeyPress === 'function') {
+   *     onKeyPress(cbProps)
+   *   }
+   *   const isEsc = keyCode === 27 // Esc?
+   *   if (isEsc) {
+   *     if (typeof onEscPressed === 'function') {
+   *       onEscPressed(cbProps)
+   *     }
+   *     if (closeOnEscPressed) {
+   *       this.setState({ show: false })
+   *     }
+   *   }
+   * }
+   */
 
   globalScrollHandler = (/* event */) => {
     this.updateGeometryDebounced()
@@ -244,9 +247,9 @@ class Popup extends React.PureComponent /** @lends @Popup.prototype */ {
      * viewWidth
      */
     const updatedGeometryKeys = this.getUpdatedGeometryKeys(geometry)
-    // const changedVerticalKeys = verticalGeometryKeys.some(key => updatedGeometryKeys.includes(key))
     const changedHorizontalKeys = horizontalGeometryKeys.some(key => updatedGeometryKeys.includes(key))
-    // console.log('Popup:updateGeometry', { updatedGeometryKeys, changedHorizontalKeys })
+    const changedVerticalKeys = verticalGeometryKeys.some(key => updatedGeometryKeys.includes(key))
+    console.log('Popup:updateGeometry', { updatedGeometryKeys, changedHorizontalKeys, changedVerticalKeys, geometry })
     // if (changedVerticalKeys) { // UNUSED
     //   this.updateShowContentAbove(geometry, updatedGeometryKeys)
     // }
@@ -258,27 +261,25 @@ class Popup extends React.PureComponent /** @lends @Popup.prototype */ {
   }
 
   registerGlobalHandlers() {
-    const { closeOnClickOutside } = this.props
     if (!this.globalHandlersRegistered) {
       this.globalHandlersRegistered = true
-      this.updateGeometryDebounced() // ???
-      if (closeOnClickOutside) {
-        document.addEventListener(globalClickEventName, this.globalClickHandler)
-      }
-      document.addEventListener(globalKeyPressEventName, this.globalKeyPressHandler)
+      // this.updateGeometryDebounced() // ???
+      // if (this.props.closeOnClickOutside) {
+      //   document.addEventListener(globalClickEventName, this.globalClickHandler)
+      // }
+      // document.addEventListener(globalKeyPressEventName, this.globalKeyPressHandler)
       document.addEventListener(globalScrollEventName, this.globalScrollHandler)
       window.addEventListener(globalResizeEventName, this.globalResizeHandler)
     }
   }
   unregisterGlobalHandlers() {
-    const { closeOnClickOutside } = this.props
     if (this.globalHandlersRegistered) {
       this.globalHandlersRegistered = false
-      if (closeOnClickOutside) {
-        this.clearDelayedClickTimerHandler()
-        document.removeEventListener(globalClickEventName, this.globalClickHandler)
-      }
-      document.removeEventListener(globalKeyPressEventName, this.globalKeyPressHandler)
+      // if (this.props.closeOnClickOutside) {
+      //   this.clearDelayedClickTimerHandler()
+      //   document.removeEventListener(globalClickEventName, this.globalClickHandler)
+      // }
+      // document.removeEventListener(globalKeyPressEventName, this.globalKeyPressHandler)
       document.removeEventListener(globalScrollEventName, this.globalScrollHandler)
       window.removeEventListener(globalResizeEventName, this.globalResizeHandler)
     }
@@ -298,67 +299,68 @@ class Popup extends React.PureComponent /** @lends @Popup.prototype */ {
 
   constructor(props) {
     super(props)
-    const { showPopup, registerHideStopper } = props
+    // const { defaultOpen } = props
+    // const { showPopup, registerHideStopper } = props
     this.state = {
-      show: showPopup, // Is content element displaying now?
-      wasShown: showPopup, // Memorized state: did content element once displayed?
+      // show: showPopup, // Is content element displaying now?
+      // wasShown: showPopup, // Memorized state: did content element once displayed?
     }
-    if (typeof registerHideStopper === 'function') { // External hide canceler (FormSelect: on Menu click etc)
-      registerHideStopper(this.clearDelayedClickTimerHandler)
-    }
+    // if (typeof registerHideStopper === 'function') { // External hide canceler (FormSelect: on Menu click etc)
+    //   registerHideStopper(this.clearDelayedClickTimerHandler)
+    // }
     this.updateGeometryDebounced = debounce(debouncedUpdateGeometryTimeout, this.updateGeometry)
   }
 
-  componentDidMount() {
-    const { show } = this.state
-    if (show) {
-      this.registerGlobalHandlers()
-    }
-  }
+  // componentDidMount() {
+  //   const { show } = this.state
+  //   if (show) {
+  //     this.registerGlobalHandlers()
+  //   }
+  // }
 
   componentWillUnmount() {
     this.unregisterGlobalHandlers()
     // TODO: unregisterHideStopper -- is it required?
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    const prevShowPopup = prevProps.showPopup
-    const showPopup = this.props.showPopup
-    if (this.state && !prevState.wasShown) {
-      this.updateGeometryDebounced()
-    }
-    if (prevShowPopup !== showPopup) {
-      this.setState(({ wasShown }) => {
-        // if (!prevShowPopup.wasShown && showPopup) {
-        // }
-        return {
-          show: showPopup,
-          wasShown: wasShown || showPopup,
-        }
-      }, this.updateGlobalClickHandlerByState)
-    }
-    else if (prevState.show !== this.state.show) {
-      this.updateGlobalClickHandlerByState(this.state)
-    }
-  }
+  // componentDidUpdate(prevProps, prevState) {
+  //   const prevShowPopup = prevProps.showPopup
+  //   const showPopup = this.props.showPopup
+  //   if (this.state && !prevState.wasShown) {
+  //     this.updateGeometryDebounced()
+  //   }
+  //   if (prevShowPopup !== showPopup) {
+  //     this.setState(({ wasShown }) => {
+  //       // if (!prevShowPopup.wasShown && showPopup) {
+  //       // }
+  //       return {
+  //         show: showPopup,
+  //         wasShown: wasShown || showPopup,
+  //       }
+  //     }, this.updateGlobalClickHandlerByState)
+  //   }
+  //   else if (prevState.show !== this.state.show) {
+  //     this.updateGlobalClickHandlerByState(this.state)
+  //   }
+  // }
 
   // Handlers...
 
-  onControlClick = ({ show }) => {
-    this.clearDelayedClickTimerHandler()
-    if (show == null) { // Toggle state if no value passed
-      show = !this.state.show
-    }
-    // console.log('Popup:onControlClick', { show })
-    this.setState(({ wasShown }) => ({
-      show,
-      wasShown: wasShown || show,
-    }))
-    const { onControlClick } = this.props
-    if (typeof onControlClick === 'function') {
-      onControlClick({ show })
-    }
-  }
+  // onControlClick = ({ show }) => {
+  //   this.clearDelayedClickTimerHandler()
+  //   if (show == null) { // Toggle state if no value passed
+  //     show = !this.state.show
+  //   }
+  //   // console.log('Popup:onControlClick', { show })
+  //   this.setState(({ wasShown }) => ({
+  //     show,
+  //     wasShown: wasShown || show,
+  //   }))
+  //   const { onControlClick } = this.props
+  //   if (typeof onControlClick === 'function') {
+  //     onControlClick({ show })
+  //   }
+  // }
 
   /* // UNUSED? handleClickOutside -- form withOnClickOutside
    * handleClickOutside = (ev) => {
@@ -369,18 +371,25 @@ class Popup extends React.PureComponent /** @lends @Popup.prototype */ {
 
   // Render helpers...
 
-  getClassName() {
+  getClassName(params) {
+    const {
+      isOpen,
+      cnCtx,
+      // openPortal,
+      // closePortal,
+      // portal,
+    } = params
     const {
       id,
       fullWidth,
     } = this.props
-    const {
-      show,
-      // wasShown,
-    } = this.state
-    const className = cnPopup({
+    // const {
+    //   show,
+    //   // wasShown,
+    // } = this.state
+    const className = cnCtx && cnCtx({
       id,
-      show,
+      show: isOpen,
       fullWidth,
     }, [this.props.className])
     return className
@@ -402,13 +411,18 @@ class Popup extends React.PureComponent /** @lends @Popup.prototype */ {
 
   // Render...
 
-  renderPopupControl() {
-    const { popupControl } = this.props
-
+  renderPopupControl(portalParams) {
     const {
-      show,
-      // wasShown,
-    } = this.state
+      isOpen,
+      openPortal,
+      closePortal,
+      // portal,
+    } = portalParams
+    const { id, popupControl } = this.props
+    // const {
+    //   show,
+    //   // wasShown,
+    // } = this.state
 
     const controlProps = popupControl && popupControl.props
 
@@ -416,59 +430,96 @@ class Popup extends React.PureComponent /** @lends @Popup.prototype */ {
       ...popupControl,
       props: {
         ...controlProps,
-        onClick: /* controlProps.onControlClick || */ this.onControlClick,
-        checked: show,
+        onClick: isOpen ? closePortal : openPortal,
+        // onClick: [> controlProps.onControlClick || <] this.onControlClick,
+        checked: isOpen,
         setDomRef: this.setControlRef,
       },
     }
 
+    const renderProps = {
+      id,
+      className: this.getClassName({ cnCtx: cnPopupControl, ...portalParams }),
+      ref: this.setControlRef,
+    }
     return (
-      <div className={cnPopup('ControlWrapper')}>
+      <div {...renderProps}>
         {content}
       </div>
     )
   }
 
-  renderPopupContent() {
-    const { popupContent } = this.props
-
+  renderPopupContent(portalParams) {
     const {
-      show,
-      wasShown,
-    } = this.state
-
-    if (!show && !wasShown) { // Content hidden and was not initialized
-      return null
+      isOpen,
+      // openPortal,
+      // closePortal,
+      portal,
+    } = portalParams
+    const { id, popupContent } = this.props
+    // const {
+    //   show,
+    //   wasShown,
+    // } = this.state
+    // if (!show && !wasShown) { // Content hidden and was not initialized
+    //   return null
+    // }
+    const renderProps = {
+      id,
+      className: this.getClassName({ cnCtx: cnPopup, ...portalParams }),
+      ref: this.setContentRef,
     }
-
-    return (
-      <div className={cnPopup('ContentWrapper', { show })} ref={this.setContentRef}>
+    return portal(
+      <div {...renderProps}>
         {popupContent}
       </div>
     )
   }
 
-  render() {
-
+  renderContent = (portalParams) => {
     const {
-      id,
-      // onChange,
-    } = this.props
-
-    const renderProps = {
-      id,
-      className: this.getClassName(),
-      ref: this.setDomRef,
+      isOpen,
+      // openPortal,
+      // closePortal,
+      // portal,
+    } = portalParams
+    if (isOpen !== this.isOpen) {
+      if (isOpen) {
+        this.updateGeometryDebounced()
+        this.registerGlobalHandlers()
+      }
+      else {
+        this.wasOpen = true
+        this.unregisterGlobalHandlers()
+      }
+      this.isOpen = isOpen
     }
-
-    const renderPopupControl = this.renderPopupControl()
-    const renderPopupContent = this.renderPopupContent()
-
+    // const { id } = this.props
+    // const renderProps = {
+    //   id,
+    //   className: this.getClassName({ isOpen }),
+    //   ref: this.setDomRef,
+    // }
+    // return (
+    //   <div {...renderProps}>
+    //     {this.renderPopupControl(portalParams)}
+    //     {this.renderPopupContent(portalParams)}
+    //   </div>
+    // )
     return (
-      <div {...renderProps}>
-        {renderPopupControl}
-        {renderPopupContent}
-      </div>
+      <React.Fragment>
+        {this.renderPopupControl(portalParams)}
+        {this.renderPopupContent(portalParams)}
+      </React.Fragment>
+    )
+  }
+
+  render() {
+    const node = document && document.getElementById('Popups')
+    return (
+      <PortalWithState node={node} closeOnOutsideClick closeOnEsc>
+        {this.renderContent}
+      </PortalWithState>
     )
   }
 

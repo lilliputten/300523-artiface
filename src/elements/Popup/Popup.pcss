@@ -3,69 +3,136 @@
  *  @changed 2020.10.29, 03:14
  */
 
+#Popups { // Root popups element...
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  pointer-events: none;
+  // // visibility: hidden;
+}
+
+.PopupControl {
+  /*!KEEP*/
+}
 .Popup {
   /*!KEEP*/
-  position: relative;
-  // overflow-x: hidden; // Make children element shrinkable (TODO: Rernder content in portal or move dom to root?)
-  // overflow-y: visible;
-  // NOTE: flex cause to 0-height to control?
-  // display: flex;
-  // flex-direction: column;
-  &-ControlWrapper {
-    // flex: 1;
-    // display: flex;
-    > .FormItem {
-      display: block;
-      overflow: hidden; // Make item shrinkable
-      // ^^& & {
-      //   width: 0; // ??? for fullWidth?
-      // }
+  // max-width: 100%;
+  // z-index: 100; // Lift above all other regular elements
+  position: absolute;
+  // display: none;
+  visibility: hidden;
+  background: #fff;
+  box-shadow: 0 0 0 1px rgba(0,0,0,.1), 0 10px 20px -5px rgba(0,0,0,.4);
+  border-radius: $(formItemBorderRadius)px;
+  animation-name: WebUiCore_Popup;
+  animation-duration: .3s;
+  animation-timing-function: ease-out;
+  animation-fill-mode: forwards;
+  &_show {
+    // display: block;
+    visibility: visible;
+    animation-name: WebUiCore_Popup_visible;
+    pointer-events: all;
+  }
+  @keyframes WebUiCore_Popup_visible {
+    0% {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    20% {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(4px);
     }
   }
-  &-ContentWrapper {
-    max-width: 100%;
-    z-index: 100; // Lift above all other regular elements
-    position: absolute;
-    // display: none;
-    visibility: hidden;
-    animation-name: WebUiCore_Popup;
-    animation-duration: .2s;
-    animation-timing-function: ease-out;
-    animation-fill-mode: forwards;
-    background: #fff;
-    box-shadow: 0 0 0 1px rgba(0,0,0,.1), 0 10px 20px -5px rgba(0,0,0,.4);
-    border-radius: $(formItemBorderRadius)px;
-    &_show {
-      // display: block;
+  @keyframes WebUiCore_Popup {
+    0% {
       visibility: visible;
-      animation-name: WebUiCore_Popup_visible;
+      margin: 0;
+      transform: translateY(4px);
+      opacity: 1;
     }
-    @keyframes WebUiCore_Popup_visible {
-      0% {
-        opacity: 0;
-        transform: translateY(10px);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(4px);
-      }
+    99% {
+      margin: 0;
+      transform: translateY(10px);
     }
-    @keyframes WebUiCore_Popup {
-      0% {
-        visibility: visible;
-        margin: 0;
-        transform: translateY(4px);
-        opacity: 1;
-      }
-      99% {
-        margin: 0;
-        transform: translateY(10px);
-      }
-      100% {
-        visibility: hidden;
-        margin: -9999px 0 0 -9999px;
-        opacity: 0;
-      }
+    100% {
+      visibility: hidden;
+      margin: -9999px 0 0 -9999px;
+      opacity: 0;
     }
   }
 }
+
+// .Popup {
+//   [>!KEEP<]
+//   position: relative;
+//   // overflow-x: hidden; // Make children element shrinkable (TODO: Rernder content in portal or move dom to root?)
+//   // overflow-y: visible;
+//   // NOTE: flex cause to 0-height to control?
+//   // display: flex;
+//   // flex-direction: column;
+//   &-ControlWrapper {
+//     // flex: 1;
+//     // display: flex;
+//     // > .FormItem {
+//     //   display: block;
+//     //   overflow: hidden; // Make item shrinkable
+//     //   // ^^& & {
+//     //   //   width: 0; // ??? for fullWidth?
+//     //   // }
+//     // }
+//   }
+//   &-ContentWrapper {
+//     max-width: 100%;
+//     z-index: 100; // Lift above all other regular elements
+//     position: absolute;
+//     // display: none;
+//     visibility: hidden;
+//     animation-name: WebUiCore_Popup;
+//     animation-duration: .2s;
+//     animation-timing-function: ease-out;
+//     animation-fill-mode: forwards;
+//     background: #fff;
+//     box-shadow: 0 0 0 1px rgba(0,0,0,.1), 0 10px 20px -5px rgba(0,0,0,.4);
+//     border-radius: $(formItemBorderRadius)px;
+//     &_show {
+//       // display: block;
+//       visibility: visible;
+//       animation-name: WebUiCore_Popup_visible;
+//       pointer-events: all;
+//     }
+//     @keyframes WebUiCore_Popup_visible {
+//       0% {
+//         opacity: 0;
+//         transform: translateY(10px);
+//       }
+//       100% {
+//         opacity: 1;
+//         transform: translateY(4px);
+//       }
+//     }
+//     @keyframes WebUiCore_Popup {
+//       0% {
+//         visibility: visible;
+//         margin: 0;
+//         transform: translateY(4px);
+//         opacity: 1;
+//       }
+//       99% {
+//         margin: 0;
+//         transform: translateY(10px);
+//       }
+//       100% {
+//         visibility: hidden;
+//         margin: -9999px 0 0 -9999px;
+//         opacity: 0;
+//       }
+//     }
+//   }
+// }

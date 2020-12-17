@@ -117,4 +117,4 @@ const demoContent = (
   </div>
 )
 
-render(demoContent, document.getElementById('root'))
+render(demoContent, document.getElementById('Root'))
