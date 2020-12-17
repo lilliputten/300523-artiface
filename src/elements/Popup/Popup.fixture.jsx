@@ -76,12 +76,15 @@ const demoMenu = (
 )
 
 const simple = (
-  <Popup
-    id="simple"
-    showPopup={false}
-    popupControl={popupControlEl}
-    popupContent={popupContentEl}
-  />
+  <div className="simpleContainer">
+    <div className="simpleStub">simpleStub</div>
+    <Popup
+      id="simple"
+      showPopup={false}
+      popupControl={popupControlEl}
+      popupContent={popupContentEl}
+    />
+  </div>
 )
 
 const closingImmediately = (

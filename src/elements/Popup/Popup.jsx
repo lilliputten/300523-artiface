@@ -1,7 +1,10 @@
 /** @module Popup
  *  @class Popup
  *  @since 2020.10.27, 00:39
- *  @changed 2020.12.18, 01:32
+ *  @changed 2020.12.18, 02:34
+ *
+ *  TODO 2020.12.18, 01:50 -- Popup: Reset both `storedContentSize` if content changed (use registrable handler)?
+ *  TODO 2020.12.18, 02:15 -- Popup: Use static `PopupStack` component and close same-level (from stack end to first `Modal` or stack begin) popups
  */
 
 import React from 'react'
@@ -21,7 +24,8 @@ import './Popup.pcss'
 const cnPopup = cn('Popup')
 const cnPopupControl = cn('PopupControl')
 
-// const delayedClickTimeout = 150
+const popupsContainerId = 'Popups' // Id of dom node which contains all popups (`<div id="Popups"></div>`). TODO: Store in config?
+
 const debouncedUpdateGeometryTimeout = 50
 
 const updateGeometryTimerDelay = 100 // 0 - Update by timer is disabled, must be above than debounce delay (`debouncedUpdateGeometryTimeout`, above)
@@ -34,7 +38,7 @@ const domNodeGeometryKeys = [
   'clientWidth',
   'clientHeight',
 ]
-const verticalGeometryKeys = [ // eslint-disable-line no-unused-vars
+const verticalGeometryKeys = [
   'contentClientHeight',
   'contentOffsetHeight',
   'contentOffsetTop',
@@ -44,7 +48,7 @@ const verticalGeometryKeys = [ // eslint-disable-line no-unused-vars
   'scrollY',
   'viewHeight',
 ]
-const horizontalGeometryKeys = [ // eslint-disable-line no-unused-vars
+const horizontalGeometryKeys = [
   'contentClientWidth',
   'contentOffsetWidth',
   'contentOffsetLeft',
@@ -54,15 +58,6 @@ const horizontalGeometryKeys = [ // eslint-disable-line no-unused-vars
   'scrollX',
   'viewWidth',
 ]
-/* // const contentGeometryKeys = [
- *   'contentClientHeight',
- *   'contentOffsetHeight',
- *   'contentOffsetTop',
- *   'contentClientWidth',
- *   'contentOffsetWidth',
- *   'contentOffsetLeft',
- * ]
- */
 
 const globalGeometryKeys = {
   viewWidth: { obj: window, key: 'innerWidth' },
@@ -110,32 +105,31 @@ const globalResizeEventName = 'resize'
 class Popup extends React.PureComponent /** @lends @Popup.prototype */ {
 
   static propTypes = {
+    // onEscPressed: PropTypes.func,
+    // onKeyPress: PropTypes.func,
+    // registerCallback: PropTypes.func, // registerCallback(handler = this.someMethod) -- handler stored by parent component and called when detected click on pulldown menu -- prevents popup content closing
     className: PropTypes.string,
-    // closeOnClickOutside: PropTypes.oneOfType([ PropTypes.bool, PropTypes.string ]), // true, false, 'force'
     closeOnClickOutside: PropTypes.bool,
     closeOnEscPressed: PropTypes.bool,
     id: PropTypes.string,
     onControlClick: PropTypes.func,
-    onEscPressed: PropTypes.func,
-    onKeyPress: PropTypes.func,
+    open: PropTypes.bool,
     popupContent: PropTypes.oneOfType([ PropTypes.func, PropTypes.object ]).isRequired,
     popupControl: PropTypes.oneOfType([ PropTypes.func, PropTypes.object ]).isRequired,
-    registerHideStopper: PropTypes.func, // registerHideStopper(handler = this.clearDelayedClickTimerHandler) -- handler stored by parent component and called when detected click on pulldown menu -- prevents popup content closing
-    showPopup: PropTypes.bool,
   }
 
   static defaultProps = {
+    // onEscPressed: null,
+    // onKeyPress: null,
+    // popupContent: null,
+    // popupControl: null,
+    // registerCallback: null,
     className: null,
     closeOnClickOutside: true,
     closeOnEscPressed: true,
     id: null,
     onControlClick: null,
-    onEscPressed: null,
-    onKeyPress: null,
-    // popupContent: null,
-    // popupControl: null,
-    registerHideStopper: null,
-    showPopup: false,
+    open: false,
   }
 
   delayedClickTimerHandler = null
@@ -144,59 +138,22 @@ class Popup extends React.PureComponent /** @lends @Popup.prototype */ {
   contentDomNode = null
   geometry = {}
 
+  // Lifecycle...
+
+  constructor(props) {
+    super(props)
+    // // NOTE: Example of callback register
+    // if (typeof props.registerCallback === 'function') { // External hide canceler (FormSelect: on Menu click etc)
+    //   props.registerCallback(this.someMethod)
+    // }
+    this.updateGeometryDebounced = debounce(debouncedUpdateGeometryTimeout, this.updateGeometry)
+  }
+
+  componentWillUnmount() {
+    this.unregisterGlobalHandlers()
+  }
+
   // Helpers...
-
-  delayedGlobalClickHandler = () => { // Close popup
-    // console.log('Popup:delayedGlobalClickHandler')
-    this.setState({ show: false })
-  }
-
-  clearDelayedClickTimerHandler = () => {
-    // console.log('Popup:clearDelayedClickTimerHandler', this.delayedClickTimerHandler)
-    if (this.delayedClickTimerHandler) {
-      clearTimeout(this.delayedClickTimerHandler)
-      this.delayedClickTimerHandler = null
-    }
-  }
-
-  /* // globalClickHandler = () => {
-   *   // console.log('Popup:globalClickHandler (set handler)', this.delayedClickTimerHandler)
-   *   this.clearDelayedClickTimerHandler()
-   *   this.delayedClickTimerHandler = setTimeout(this.delayedGlobalClickHandler, delayedClickTimeout)
-   * }
-   */
-
-  /* // globalKeyPressHandler = (event) => {
-   *   var { keyCode } = event
-   *   const {
-   *     id,
-   *     onKeyPress,
-   *     onEscPressed,
-   *     closeOnEscPressed,
-   *   } = this.props
-   *   const cbProps = { event, id, keyCode }
-   *   if (typeof onKeyPress === 'function') {
-   *     onKeyPress(cbProps)
-   *   }
-   *   const isEsc = keyCode === 27 // Esc?
-   *   if (isEsc) {
-   *     if (typeof onEscPressed === 'function') {
-   *       onEscPressed(cbProps)
-   *     }
-   *     if (closeOnEscPressed) {
-   *       this.setState({ show: false })
-   *     }
-   *   }
-   * }
-   */
-
-  globalScrollHandler = (/* event */) => {
-    this.updateGeometryDebounced()
-  }
-
-  globalResizeHandler = (/* event */) => {
-    this.updateGeometryDebounced()
-  }
 
   getDomNodeGeometry(domNode, id) {
     id = id || 'default'
@@ -216,10 +173,6 @@ class Popup extends React.PureComponent /** @lends @Popup.prototype */ {
       const obj = descr.obj
       const key = descr.key || id
       const val = obj[key]
-      // const isUpdated = (val !== origGeometry[id])
-      // if (isUpdated && !updatedGeometryKeys.includes[id]) {
-      //   updatedGeometryKeys.push(id)
-      // }
       return { ...geometry, [id]: val }
     }, {})
     return geometry
@@ -250,7 +203,7 @@ class Popup extends React.PureComponent /** @lends @Popup.prototype */ {
    * @param {Object} geometry
    * @param {String[]} updatedGeometryKeys
    */
-  updateOneAxisContentPos(axis, geometry, updatedGeometryKeys) {
+  updateOneAxisContentPos(axis, geometry/* , updatedGeometryKeys */) {
     const domNode = this.contentDomNode
     if (!domNode) { // Error?
       return
@@ -414,13 +367,8 @@ class Popup extends React.PureComponent /** @lends @Popup.prototype */ {
   registerGlobalHandlers() {
     if (!this.globalHandlersRegistered) {
       this.globalHandlersRegistered = true
-      // this.updateGeometryDebounced() // ???
-      // if (this.props.closeOnClickOutside) {
-      //   document.addEventListener(globalClickEventName, this.globalClickHandler)
-      // }
-      // document.addEventListener(globalKeyPressEventName, this.globalKeyPressHandler)
-      document.addEventListener(globalScrollEventName, this.globalScrollHandler)
-      window.addEventListener(globalResizeEventName, this.globalResizeHandler)
+      document.addEventListener(globalScrollEventName, this.updateGeometryDebounced)
+      window.addEventListener(globalResizeEventName, this.updateGeometryDebounced)
       if (!this.updateGeometryTimer && updateGeometryTimerDelay) {
         this.updateGeometryTimer = setInterval(this.updateGeometryDebounced, updateGeometryTimerDelay)
       }
@@ -429,103 +377,14 @@ class Popup extends React.PureComponent /** @lends @Popup.prototype */ {
   unregisterGlobalHandlers() {
     if (this.globalHandlersRegistered) {
       this.globalHandlersRegistered = false
-      // if (this.props.closeOnClickOutside) {
-      //   this.clearDelayedClickTimerHandler()
-      //   document.removeEventListener(globalClickEventName, this.globalClickHandler)
-      // }
-      // document.removeEventListener(globalKeyPressEventName, this.globalKeyPressHandler)
-      document.removeEventListener(globalScrollEventName, this.globalScrollHandler)
-      window.removeEventListener(globalResizeEventName, this.globalResizeHandler)
+      document.removeEventListener(globalScrollEventName, this.updateGeometryDebounced)
+      window.removeEventListener(globalResizeEventName, this.updateGeometryDebounced)
       if (this.updateGeometryTimer) {
         clearInterval(this.updateGeometryTimer)
         this.updateGeometryTimer = null
       }
     }
   }
-
-  updateGlobalClickHandlerByState = (state) => {
-    const { show } = state
-    if (show) {
-      this.registerGlobalHandlers()
-    }
-    else {
-      this.unregisterGlobalHandlers()
-    }
-  }
-
-  // Lifecycle...
-
-  constructor(props) {
-    super(props)
-    // const { defaultOpen } = props
-    // const { showPopup, registerHideStopper } = props
-    this.state = {
-      // show: showPopup, // Is content element displaying now?
-      // wasShown: showPopup, // Memorized state: did content element once displayed?
-    }
-    // if (typeof registerHideStopper === 'function') { // External hide canceler (FormSelect: on Menu click etc)
-    //   registerHideStopper(this.clearDelayedClickTimerHandler)
-    // }
-    this.updateGeometryDebounced = debounce(debouncedUpdateGeometryTimeout, this.updateGeometry)
-  }
-
-  // componentDidMount() {
-  //   const { show } = this.state
-  //   if (show) {
-  //     this.registerGlobalHandlers()
-  //   }
-  // }
-
-  componentWillUnmount() {
-    this.unregisterGlobalHandlers()
-    // TODO: unregisterHideStopper -- is it required?
-  }
-
-  // componentDidUpdate(prevProps, prevState) {
-  //   const prevShowPopup = prevProps.showPopup
-  //   const showPopup = this.props.showPopup
-  //   if (this.state && !prevState.wasShown) {
-  //     this.updateGeometryDebounced()
-  //   }
-  //   if (prevShowPopup !== showPopup) {
-  //     this.setState(({ wasShown }) => {
-  //       // if (!prevShowPopup.wasShown && showPopup) {
-  //       // }
-  //       return {
-  //         show: showPopup,
-  //         wasShown: wasShown || showPopup,
-  //       }
-  //     }, this.updateGlobalClickHandlerByState)
-  //   }
-  //   else if (prevState.show !== this.state.show) {
-  //     this.updateGlobalClickHandlerByState(this.state)
-  //   }
-  // }
-
-  // Handlers...
-
-  // onControlClick = ({ show }) => {
-  //   this.clearDelayedClickTimerHandler()
-  //   if (show == null) { // Toggle state if no value passed
-  //     show = !this.state.show
-  //   }
-  //   // console.log('Popup:onControlClick', { show })
-  //   this.setState(({ wasShown }) => ({
-  //     show,
-  //     wasShown: wasShown || show,
-  //   }))
-  //   const { onControlClick } = this.props
-  //   if (typeof onControlClick === 'function') {
-  //     onControlClick({ show })
-  //   }
-  // }
-
-  /* // UNUSED? handleClickOutside -- form withOnClickOutside
-   * handleClickOutside = (ev) => {
-   *   console.log(ev)
-   *   debugger
-   * }
-   */
 
   // Render helpers...
 
@@ -541,24 +400,31 @@ class Popup extends React.PureComponent /** @lends @Popup.prototype */ {
       id,
       fullWidth,
     } = this.props
-    // const {
-    //   show,
-    //   // wasShown,
-    // } = this.state
     const className = cnCtx && cnCtx({
       id,
-      show: isOpen,
+      open: isOpen,
       fullWidth,
     }, [this.props.className])
     return className
   }
 
-  // Handlers...
+  // External methods...
 
-  /* // setDomRef = (domNode) => {
-   *   this.domNode = domNode
-   * }
-   */
+  close = () => { // External method for using in `PopupStack`
+    const { isOpen, closePortal } = this
+    if (isOpen && typeof closePortal === 'function') {
+      closePortal()
+    }
+  }
+
+  open = () => { // External method for using in `PopupStack`
+    const { isOpen, openPortal } = this
+    if (!isOpen && typeof openPortal === 'function') {
+      openPortal()
+    }
+  }
+
+  // Handlers...
 
   setControlRef = (domNode) => {
     this.controlDomNode = domNode
@@ -568,7 +434,7 @@ class Popup extends React.PureComponent /** @lends @Popup.prototype */ {
     this.contentDomNode = domNode
   }
 
-  clearContentGeometry() {
+  clearContentGeometry() { // UNUSED? Must be used on content update (using registrable callback; see example in constructor).
     Object.keys(this.geometry).forEach(key => {
       if (key.startsWith('content')) {
         this.geometry[key] = null
@@ -577,16 +443,31 @@ class Popup extends React.PureComponent /** @lends @Popup.prototype */ {
   }
 
   handlePortalOpen = () => {
+    // TODO: Register/unregister popup in `PopupStack`
     this.updateGeometry()
     this.registerGlobalHandlers()
     this.isOpen = true
   }
 
   handlePortalClose = () => {
+    // TODO: Register/unregister popup in `PopupStack`
     this.wasOpen = true
     this.unregisterGlobalHandlers()
     this.isOpen = false
     // this.clearContentGeometry() // Due to content is destroyed when hidden
+  }
+
+  onControlClick = (event) => {
+    const { isOpen, openPortal, closePortal } = this
+    const method = isOpen ? closePortal : openPortal
+    if (typeof method === 'function') {
+      method(event)
+    }
+    // TODO: Notify `PopupStack` when popup opens for closing all other popups from same level (before first modal in popups stack). (Now user can open several popups at the same time.
+    const { onControlClick } = this.props
+    if (typeof onControlClick === 'function') {
+      onControlClick({ open: !isOpen })
+    }
   }
 
   // Render...
@@ -599,10 +480,9 @@ class Popup extends React.PureComponent /** @lends @Popup.prototype */ {
       // portal,
     } = portalParams
     const { id, popupControl } = this.props
-    // const {
-    //   show,
-    //   // wasShown,
-    // } = this.state
+
+    this.openPortal = openPortal
+    this.closePortal = closePortal
 
     const controlProps = popupControl && popupControl.props
 
@@ -610,7 +490,8 @@ class Popup extends React.PureComponent /** @lends @Popup.prototype */ {
       ...popupControl,
       props: {
         ...controlProps,
-        onClick: isOpen ? closePortal : openPortal,
+        onClick: this.onControlClick,
+        // onClick: isOpen ? closePortal : openPortal,
         // onClick: [> controlProps.onControlClick || <] this.onControlClick,
         checked: isOpen,
         setDomRef: this.setControlRef,
@@ -637,13 +518,6 @@ class Popup extends React.PureComponent /** @lends @Popup.prototype */ {
       portal,
     } = portalParams
     const { id, popupContent } = this.props
-    // const {
-    //   show,
-    //   wasShown,
-    // } = this.state
-    // if (!show && !wasShown) { // Content hidden and was not initialized
-    //   return null
-    // }
     const renderProps = {
       id,
       className: this.getClassName({ cnCtx: cnPopup, ...portalParams }),
@@ -656,32 +530,7 @@ class Popup extends React.PureComponent /** @lends @Popup.prototype */ {
     )
   }
 
-  renderContent = (portalParams) => {
-    // const {
-    //   isOpen,
-    //   // openPortal,
-    //   // closePortal,
-    //   // portal,
-    // } = portalParams
-    // if (isOpen !== this.isOpen) {
-    //   if (isOpen) {
-    //   }
-    //   else {
-    //   }
-    //   this.isOpen = isOpen
-    // }
-    // const { id } = this.props
-    // const renderProps = {
-    //   id,
-    //   className: this.getClassName({ isOpen }),
-    //   ref: this.setDomRef,
-    // }
-    // return (
-    //   <div {...renderProps}>
-    //     {this.renderPopupControl(portalParams)}
-    //     {this.renderPopupContent(portalParams)}
-    //   </div>
-    // )
+  renderPortalContent = (portalParams) => {
     return (
       <React.Fragment>
         {this.renderPopupControl(portalParams)}
@@ -691,16 +540,22 @@ class Popup extends React.PureComponent /** @lends @Popup.prototype */ {
   }
 
   render() {
-    const node = document && document.getElementById('Popups')
+    const {
+      closeOnClickOutside,
+      closeOnEscPressed,
+      open,
+    } = this.props
+    const node = document.getElementById(popupsContainerId)
     return (
       <PortalWithState
         node={node}
         onOpen={this.handlePortalOpen}
         onClose={this.handlePortalClose}
-        closeOnOutsideClick
-        closeOnEsc
+        closeOnOutsideClick={closeOnClickOutside}
+        closeOnEsc={closeOnEscPressed}
+        defaultOpen={open}
       >
-        {this.renderContent}
+        {this.renderPortalContent}
       </PortalWithState>
     )
   }

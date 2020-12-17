@@ -14,21 +14,30 @@
 .PopupControl_id_simple {
   border: 1px solid green;
   float: left; // DEBUG: Suppress full-width mode
-  // DEBUG: Positioning control on vertical and horizontal axis
-  margin-top: 200px;
-  margin-left: 100px;
+  // // DEBUG: Positioning control on vertical and horizontal axis
+  // margin-top: 250px;
+  // margin-left: 100px;
 }
 .Popup_id_simple {
-  box-sizing: border-box;
-  border: 1px solid blue;
-  overflow: scroll;
+  // box-sizing: border-box;
+  // border: 1px solid blue;
+  overflow: auto;
   // DEBUG: Set content size limit
   // max-height: 500px;
   .DemoPopupContent {
-    box-sizing: border-box;
-    border: 1px solid orange;
-    // DEBUG: Set internal content size
-    height: 600px;
-    width: 400px;
+    // box-sizing: border-box;
+    // border: 1px solid orange;
+    // // DEBUG: Set internal content size
+    // height: 400px;
+    // width: 400px;
   }
+}
+.simpleContainer {
+  .simpleStub {
+    float: left;
+  }
+}
+.PopupControl {
+  float: left;
+  display: flex;
 }

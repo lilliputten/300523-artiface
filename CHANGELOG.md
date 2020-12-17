@@ -1,5 +1,6 @@
 # CHANGELOG
 
+- 2020.12.18, 02:40 -- Popup: Updated props types list, removed state & unused methods, cleaned up code, added external methods `close`, `open` (for using in future `PopupStack`), added (restored) `onControlClick` handler processing.
 - 2020.12.18, 01:33 -- Implemented smart popup positioning algorithm (some tests required).
 - 2020.12.18, 01:33 -- Done (from TODO): 2020.12.17, 01:52 -- FormSelect/Popup: confilct between visible popup content and shrinkable control. See example `withLabeledGroup` -- Popup can be adaptive for available space only if `overflow: hidden` is specified in css; then content is clipped out and unvisible.
 - 2020.12.17, 17:28 -- Refactoring select based on portals (in progress, stage 1). See `https://github.com/tajo/react-portal`.
@@ -36,5 +37,5 @@
 - 2020.10.05, 20:38 -- v.0.0.15: Extracted `demoSupport.jsx` routines, fixture selection from url query (parameter `fixture`), added avaialble fixtures list if fixture to display is not specified, added DemoWrapper & demoTitle exportable ficture parameters for demo rendering.
 
 <!--
- @changed 2020.12.16, 23:50
+ @changed 2020.12.18, 02:45
 -->
