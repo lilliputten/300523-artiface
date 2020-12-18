@@ -8,8 +8,10 @@
   background: none;
   border: none;
   outline: 0;
-  display: inline-block;
+  /* display: inline-block; */
+  display: block;
   color: $formItemTextColor;
+  overflow: hidden;
   &::placeholder {
     color: $formItemPlaceholderColor;
   }

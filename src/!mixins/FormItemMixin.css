@@ -1,5 +1,5 @@
 @define-mixin FormItemMixin {
-  display: inline-block;
+  display: block;
   box-sizing: border-box;
   &_solid {
     height: $(formItemHeight)px;

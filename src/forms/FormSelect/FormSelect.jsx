@@ -16,8 +16,8 @@ import FormItemHOC from '../FormItemHOC'
 
 // import FormGroup from 'forms/FormGroup'
 // import FormGroup from '../FormGroup'
-// import Popup from 'elements/Popup'
-import { FormItemPopup } from 'elements/Popup'
+import Popup from 'elements/Popup'
+// import { FormItemPopup } from 'elements/Popup'
 import Menu from 'elements/Menu'
 import FormButton from 'forms/FormButton'
 
@@ -30,16 +30,17 @@ const cnFormSelect = cn('FormSelect')
 class FormSelect extends React.PureComponent /** @lends @FormSelect.prototype */ {
 
   static propTypes = {
-    id: PropTypes.string,
     // value: PropTypes.oneOfType([ PropTypes.string, PropTypes.number, PropTypes.arrayOf(PropTypes.oneOfType([ PropTypes.string, PropTypes.number ])) ]),
-    value: PropTypes.oneOfType([ PropTypes.string, PropTypes.number ]),
     checked: PropTypes.arrayOf(PropTypes.oneOfType([ PropTypes.string, PropTypes.number ])),
-    options: PropTypes.arrayOf(PropTypes.shape({ val: PropTypes.oneOfType([ PropTypes.string, PropTypes.number ]), text: PropTypes.string })),
-    onChange: PropTypes.func,
-    fullWidth: PropTypes.bool,
-    text: PropTypes.string,
-    placeholder: PropTypes.string,
     disabled: PropTypes.bool,
+    fullWidth: PropTypes.bool,
+    id: PropTypes.string,
+    onChange: PropTypes.func,
+    open: PropTypes.bool,
+    options: PropTypes.arrayOf(PropTypes.shape({ val: PropTypes.oneOfType([ PropTypes.string, PropTypes.number ]), text: PropTypes.string })),
+    placeholder: PropTypes.string,
+    text: PropTypes.string,
+    value: PropTypes.oneOfType([ PropTypes.string, PropTypes.number ]),
   }
 
   // Lifecycle methods...
@@ -84,12 +85,15 @@ class FormSelect extends React.PureComponent /** @lends @FormSelect.prototype */
     }
   }
   onMenuItemClick = (params) => {
-    if (typeof this.hideStopper === 'function' && !this.props.closeOnSelect) {
-      this.hideStopper()
-    }
-    const { onMenuItemClick } = this.props
+    // if (typeof this.hideStopper === 'function' && !this.props.closeOnSelect) {
+    //   this.hideStopper()
+    // }
+    const { closeOnSelect, onMenuItemClick } = this.props
     if (typeof onMenuItemClick === 'function') {
       onMenuItemClick(params)
+    }
+    if (closeOnSelect && this.popupNode) {
+      this.popupNode.close()
     }
   }
   onMenuChange = (params) => {
@@ -105,9 +109,13 @@ class FormSelect extends React.PureComponent /** @lends @FormSelect.prototype */
     this.setState({ checked })
   }
 
-  registerHideStopper = (hideStopper) => { // Called from popup
-    this.hideStopper = hideStopper
+  setPopupRef = (node) => {
+    this.popupNode = node
   }
+
+  // registerHideStopper = (hideStopper) => { // Called from popup
+  //   this.hideStopper = hideStopper
+  // }
 
   // Render...
 
@@ -140,11 +148,14 @@ class FormSelect extends React.PureComponent /** @lends @FormSelect.prototype */
     const {
       singleChoice,
       options,
-      checked,
-      value,
+      // checked,
+      // value,
       disabled,
       // inputId, // ???
     } = this.props
+    const {
+      checked,
+    } = this.state
     return (
       <Menu
         checkable={true}
@@ -152,7 +163,7 @@ class FormSelect extends React.PureComponent /** @lends @FormSelect.prototype */
         onChange={this.onMenuChange}
         onClick={this.onMenuItemClick}
         checked={checked}
-        value={value}
+        // value={value}
         disabled={disabled}
       >
         {options}
@@ -166,7 +177,7 @@ class FormSelect extends React.PureComponent /** @lends @FormSelect.prototype */
       id,
       disabled,
       title,
-      show,
+      open,
       fullWidth,
     } = this.props
 
@@ -176,22 +187,24 @@ class FormSelect extends React.PureComponent /** @lends @FormSelect.prototype */
     const popupProps = {
       id,
       className: this.getClassName(),
+      contentClassName: 'XXX',
       disabled,
       title,
-      showPopup: show,
+      open,
       popupControl: controlContent,
       popupContent: menuContent,
       onControlClick: this.onControlClick,
-      registerHideStopper: this.registerHideStopper,
+      // registerHideStopper: this.registerHideStopper,
       fullWidth,
+      ref: this.setPopupRef,
     }
 
     return (
-      <FormItemPopup {...popupProps} />
+      <Popup {...popupProps} />
     )
 
   }
 
 }
 
-export default FormItemHOC({ hoverable: true })(FormSelect)
+export default FormItemHOC({ solid: true, hoverable: true })(FormSelect)

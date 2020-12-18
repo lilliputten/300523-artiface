@@ -244,4 +244,4 @@ class FormTextInput extends React.PureComponent /** @lends @FormTextInput.protot
 
 }
 
-export default FormItemHOC({ hoverable: true, framed: true })(FormTextInput)
+export default FormItemHOC({ solid: true, hoverable: true, framed: true })(FormTextInput)

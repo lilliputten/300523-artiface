@@ -230,6 +230,7 @@ module.exports = (env, argv) => {
       // maxSize: 20,
       // url: 'rebase',
     }),
+    require('postcss-flexbugs-fixes'),
     require('autoprefixer')({
       flexbox: 'no-2009',
     }),

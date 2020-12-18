@@ -23,14 +23,14 @@ const demoOptions = [
   { val: 2, text: 'Swimming extra long text item name string value' },
 ]
 
-const demoChange = ({ checked, value }) => {
-  console.log('demoChange', { checked, value })
+const demoChange = ({ id, checked, value }) => {
+  console.log('demoChange', { id, checked, value })
   // debugger
 }
 
 // TODO: With label
 export default {
-  default: (
+  simple: (
     <FormSelect
       title="Select title"
       text="Select"
@@ -52,15 +52,15 @@ export default {
     <FormSelect
       title="Select question"
       placeholder="Select some option"
-      _singleChoice="force"
+      singleChoice="forced"
       _value={1}
       checked={[1]}
       onChange={demoChange}
       options={demoOptions}
-      _closeOnSelect
+      closeOnSelect
       controlButtonTheme="default"
       fullWidth
-      // show
+      // open
     />
   ),
   withLabel: (
@@ -74,7 +74,7 @@ export default {
         options={demoOptions}
         controlButtonTheme="default"
         fullWidth
-        // show
+        // open
       />
     </FormGroup>
   ),
@@ -88,7 +88,6 @@ export default {
         options={demoOptions}
         controlButtonTheme="default"
         fullWidth
-        // show
       />
     </FormLabeledGroup>
   ),

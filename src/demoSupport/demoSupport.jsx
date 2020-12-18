@@ -24,7 +24,7 @@ export const FixtureInfo = ({ children }) => {
  * @param {String} [demoTitle] - Optional title for displaying before demo group element
  * @return {React.Element}
  */
-export const PlaceFixture = ({ fixture, fixtureItemId, demoTitle, DemoWrapper = React.Fragment }) => {
+export const PlaceFixture = ({ fixtureId, fixture, fixtureItemId, demoTitle, DemoWrapper = React.Fragment }) => {
   const cnFixture = cn('Fixture')
   let content
   if (fixtureItemId) { // Display specific fixture item
@@ -41,7 +41,7 @@ export const PlaceFixture = ({ fixture, fixtureItemId, demoTitle, DemoWrapper = 
   else { // Display entire fixture (all items)
     content = Object.entries(fixture).map(([id, Component]) => {
       // TODO: Filter out `background` proxy and non-component entries
-      return { ...Component, key: id }
+      return { ...Component, key: id, id: id }
       // return (
       //   <div className="FixtureDemo">
       //     <div key="FixtureTitle" className="FixtureTitle">{id}</div>
@@ -50,13 +50,13 @@ export const PlaceFixture = ({ fixture, fixtureItemId, demoTitle, DemoWrapper = 
       // )
     })
   }
-  const contentWrapper = React.isValidElement(DemoWrapper) ? React.cloneElement(DemoWrapper, { key: 'content' }, content) : (
-    <DemoWrapper key="content">
+  const contentWrapper = React.isValidElement(DemoWrapper) ? React.cloneElement(DemoWrapper, { key: 'content', fixtureId }, content) : (
+    <DemoWrapper key="content" fixtureId={fixtureId}>
       {content}
     </DemoWrapper>
   )
   return (
-    <div className={cnFixture()}>
+    <div className={cnFixture({ id: fixtureId })}>
       <FixtureInfo key="demoTitle">
         {demoTitle}
       </FixtureInfo>

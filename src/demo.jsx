@@ -93,7 +93,7 @@ if (fixtureModuleExports) { // Found fixture
     demoTitle = 'Demo fixture: ' + fixtureId, // fullFixtureId,
     DemoWrapper,
   } = fixtureModuleExports
-  content = demoSupport.PlaceFixture({ fixture, fixtureItemId, demoTitle, DemoWrapper })
+  content = demoSupport.PlaceFixture({ fixtureId, fixture, fixtureItemId, demoTitle, DemoWrapper })
 }
 else if (fixtureId) { // Fixture specified but not found!
   content = 'Fixture for id "' + fixtureId + '" not found!'

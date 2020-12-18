@@ -171,13 +171,13 @@ class Menu extends React.PureComponent /** @lends @Menu.prototype */ {
 
   onMenuItemClick = ({ /* id, component, */ val }) => {
     const { onClick, singleChoice } = this.props
-    if (typeof onClick === 'function') { // Invoke onClick handler
-      onClick({ value: val })
-    }
     const { checkedList } = this.state
     const setChecked = !checkedList.includes(val)
     if (singleChoice === 'forced' && !setChecked) { // Don not made changes if single mode and clicked item was checked
       return
+    }
+    if (typeof onClick === 'function') { // Invoke onClick handler
+      onClick({ value: val })
     }
     this.updateChildrenItems({ [val]: setChecked }) // Apply items changes
   }

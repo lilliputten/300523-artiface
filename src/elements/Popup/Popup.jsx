@@ -26,17 +26,23 @@ const cnPopupControl = cn('PopupControl')
 
 const popupsContainerId = 'Popups' // Id of dom node which contains all popups (`<div id="Popups"></div>`). TODO: Store in config?
 
-const debouncedUpdateGeometryTimeout = 50
+const doDebug = false // DEBUG!
 
-const updateGeometryTimerDelay = 100 // 0 - Update by timer is disabled, must be above than debounce delay (`debouncedUpdateGeometryTimeout`, above)
+// Debounce delay
+const debouncedUpdateGeometryTimeout = /*DEBUG*/ doDebug ? 500 :
+  50
+
+// Update by timer (0 - disabled), must be above than debounce delay (`debouncedUpdateGeometryTimeout`, above)
+const updateGeometryTimerDelay = /*DEBUG*/ doDebug ? 0 :
+  100 // 0
 
 const domNodeGeometryKeys = [
   'offsetLeft',
   'offsetTop',
   'offsetWidth',
   'offsetHeight',
-  'clientWidth',
-  'clientHeight',
+  // 'clientWidth',
+  // 'clientHeight',
 ]
 const verticalGeometryKeys = [
   'contentClientHeight',
@@ -49,10 +55,10 @@ const verticalGeometryKeys = [
   'viewHeight',
 ]
 const horizontalGeometryKeys = [
-  'contentClientWidth',
+  // 'contentClientWidth',
   'contentOffsetWidth',
   'contentOffsetLeft',
-  'controlClientWidth',
+  // 'controlClientWidth',
   'controlOffsetWidth',
   'controlOffsetLeft',
   'scrollX',
@@ -156,11 +162,18 @@ class Popup extends React.PureComponent /** @lends @Popup.prototype */ {
 
   constructor(props) {
     super(props)
+    const { open } = props
+    this.updateGeometryDebounced = debounce(debouncedUpdateGeometryTimeout, this.updateGeometry)
+    if (open) {
+      this.handlePortalOpen()
+      // this.isOpen = true
+      // this.registerGlobalHandlers()
+      // this.updateGeometryDebounced()
+    }
     // // NOTE: Example of callback register
     // if (typeof props.registerCallback === 'function') { // External hide canceler (FormSelect: on Menu click etc)
     //   props.registerCallback(this.someMethod)
     // }
-    this.updateGeometryDebounced = debounce(debouncedUpdateGeometryTimeout, this.updateGeometry)
   }
 
   componentWillUnmount() {
@@ -203,13 +216,26 @@ class Popup extends React.PureComponent /** @lends @Popup.prototype */ {
     return updatedKeys
   }
 
-  updateContentWidth(geometry, updatedGeometryKeys) {
-    if (updatedGeometryKeys.includes('controlClientWidth')) {
-      const domNode = this.contentDomNode
-      const width = geometry.controlClientWidth
-      // console.log('Popup:updatedGeometryKeys: Update content wrapper width', width, geometry, updatedGeometryKeys)
-      domNode.style.width = width + 'px'
+  updateContentWidth(geometry, updatedGeometryKeys) { // eslint-disable-line no-unused-vars
+    // if (updatedGeometryKeys.includes('controlOffsetWidth') || updatedGeometryKeys.includes('contentOffsetWidth')) {
+    const width = geometry.controlOffsetWidth
+    const domNode = this.contentDomNode
+    const setWidth = width + 'px'
+    /* // DEBUG
+     * console.log('Popup:updateContentWidth', {
+     *   width,
+     *   'geometry.contentOffsetWidth': geometry.contentOffsetWidth,
+     *   // geometry,
+     *   updatedGeometryKeys,
+     * })
+     * debugger
+     */
+    if (domNode.style.width !== setWidth) {
+      geometry.contentOffsetWidth = width
+      domNode.storedContentWidth = null // Reset stored width
+      domNode.style.width = setWidth
     }
+    // }
   }
 
   /** updateOneAxisContentPos -- Calculate content position/size for one axis (horizontal, vertical)
@@ -304,8 +330,8 @@ class Popup extends React.PureComponent /** @lends @Popup.prototype */ {
      *   // controlScreenAfter,
      *   // General...
      *   updatedGeometryKeys,
-     *   // geometry: geometry,
-     *   // 'this.geometry': this.geometry,
+     *   geometry: geometry,
+     *   'this.geometry': this.geometry,
      *   'changed geometry': Object.entries(geometry).reduce((result, [key, val]) => {
      *     if (updatedGeometryKeys.includes(key)) {
      *       result[key] = val
@@ -323,7 +349,7 @@ class Popup extends React.PureComponent /** @lends @Popup.prototype */ {
   }
 
   updateGeometry = () => { // UNUSED? TODO? Update geometry
-    // const { fullWidth } = this.props
+    const { fullWidth } = this.props
     // TODO: Call `updateGeometry` on content update? How? Use timer?
     const controlGeometry = this.getDomNodeGeometry(this.controlDomNode, 'control')
     const contentGeometry = this.getDomNodeGeometry(this.contentDomNode, 'content')
@@ -331,13 +357,13 @@ class Popup extends React.PureComponent /** @lends @Popup.prototype */ {
     const geometry = { ...globalGeometry, ...controlGeometry, ...contentGeometry }
     /* Sample geometry keys:
      * contentClientHeight
-     * contentClientWidth
+     * contentClientWidth (UNUSED)
      * contentOffsetHeight
      * contentOffsetLeft
      * contentOffsetTop
      * contentOffsetWidth
      * controlClientHeight
-     * controlClientWidth
+     * controlClientWidth (UNUSED)
      * controlOffsetHeight
      * controlOffsetLeft
      * controlOffsetTop
@@ -347,8 +373,6 @@ class Popup extends React.PureComponent /** @lends @Popup.prototype */ {
      * viewHeight
      * viewWidth
      */
-    // console.log(this.geometry.contentOffsetLeft)
-    // debugger
     const updatedGeometryKeys = this.getUpdatedGeometryKeys(geometry)
     const changedHorizontalKeys = horizontalGeometryKeys.some(key => updatedGeometryKeys.includes(key))
     const changedVerticalKeys = verticalGeometryKeys.some(key => updatedGeometryKeys.includes(key))
@@ -376,11 +400,15 @@ class Popup extends React.PureComponent /** @lends @Popup.prototype */ {
     if (!updatedGeometryKeys.length) { // Do nothing if no changes found
       return
     }
-    changedHorizontalKeys && this.updateOneAxisContentPos('horizontal', geometry, updatedGeometryKeys) // Update horizontal position & size...
-    changedVerticalKeys && this.updateOneAxisContentPos('vertical', geometry, updatedGeometryKeys) // Update vertical position & size...
-    // if (changedHorizontalKeys && fullWidth) { // TODO?
-    //   this.updateContentWidth(geometry, updatedGeometryKeys)
-    // }
+    if (changedVerticalKeys) {
+      this.updateOneAxisContentPos('vertical', geometry, updatedGeometryKeys) // Update vertical position & size...
+    }
+    if (changedHorizontalKeys) {
+      if (fullWidth) { // TODO?
+        this.updateContentWidth(geometry, updatedGeometryKeys)
+      }
+      this.updateOneAxisContentPos('horizontal', geometry, updatedGeometryKeys) // Update horizontal position & size...
+    }
     this.geometry = geometry
   }
 
@@ -412,20 +440,17 @@ class Popup extends React.PureComponent /** @lends @Popup.prototype */ {
     const {
       isOpen,
       cnCtx,
-      // openPortal,
-      // closePortal,
-      // portal,
+      className,
     } = params
     const {
       id,
       fullWidth,
     } = this.props
-    const className = cnCtx && cnCtx({
+    return cnCtx && cnCtx({
       id,
       open: isOpen,
       fullWidth,
-    }, [this.props.className])
-    return className
+    }, [/* this.props. */className])
   }
 
   // External methods...
@@ -464,7 +489,7 @@ class Popup extends React.PureComponent /** @lends @Popup.prototype */ {
 
   handlePortalOpen = () => {
     // TODO: Register/unregister popup in `PopupStack`
-    this.updateGeometry()
+    this.updateGeometryDebounced()
     this.registerGlobalHandlers()
     this.isOpen = true
   }
@@ -474,21 +499,21 @@ class Popup extends React.PureComponent /** @lends @Popup.prototype */ {
     this.wasOpen = true
     this.unregisterGlobalHandlers()
     this.isOpen = false
-    // this.clearContentGeometry() // Due to content is destroyed when hidden
+    this.clearContentGeometry() // Due to content is destroyed when hidden
   }
 
-  onControlClick = (event) => {
+  onControlClick = (/* event */) => {
     const { isOpen, openPortal, closePortal } = this
     const method = isOpen ? closePortal : openPortal
     if (typeof method === 'function') {
       // method(event)
-      setTimeout(method, 0)
-      // const fakeEvent = {
-      //   nativeEvent: {
-      //     stopImmediatePropagation: () => {},
-      //   },
-      // }
-      // setTimeout(() => method(fakeEvent), 0)
+      // setTimeout(method, 0)
+      const fakeEvent = {
+        nativeEvent: {
+          stopImmediatePropagation: () => {},
+        },
+      }
+      setTimeout(() => method(fakeEvent), 0)
     }
     // TODO: Notify `PopupStack` when popup opens for closing all other popups from same level (before first modal in popups stack). (Now user can open several popups at the same time.
     const { onControlClick } = this.props
@@ -506,7 +531,11 @@ class Popup extends React.PureComponent /** @lends @Popup.prototype */ {
       closePortal,
       // portal,
     } = portalParams
-    const { id, popupControl } = this.props
+    const {
+      id,
+      popupControl,
+      className,
+    } = this.props
 
     this.openPortal = openPortal
     this.closePortal = closePortal
@@ -527,7 +556,7 @@ class Popup extends React.PureComponent /** @lends @Popup.prototype */ {
 
     const renderProps = {
       id,
-      className: this.getClassName({ cnCtx: cnPopupControl, ...portalParams }),
+      className: this.getClassName({ cnCtx: cnPopupControl, className, ...portalParams }),
       ref: this.setControlRef,
     }
     return (
@@ -544,10 +573,14 @@ class Popup extends React.PureComponent /** @lends @Popup.prototype */ {
       // closePortal,
       portal,
     } = portalParams
-    const { id, popupContent } = this.props
+    const {
+      id,
+      popupContent,
+      contentClassName: className,
+    } = this.props
     const renderProps = {
       id,
-      className: this.getClassName({ cnCtx: cnPopup, ...portalParams }),
+      className: this.getClassName({ cnCtx: cnPopup, className, ...portalParams }),
       ref: this.setContentRef,
     }
     return portal(

@@ -6,12 +6,15 @@
 import React from 'react'
 import FormTextInput from './FormTextInput'
 import FormGroup from '../FormGroup'
-// import FormButton from '../FormButton'
+import FormLabel from '../FormLabel'
 
 // Demo styles for cosmos engine
 import 'demo.pcss'
 
-export const DemoWrapper = FormGroup // ({ children }) => {
+import './FormTextInput.fixture.pcss'
+
+// export const DemoWrapper = FormGroup // ({ children }) => {
+export const DemoWrapper = <FormGroup stack id="Wrapper" /> // ({ children }) => {
 
 export default {
   default: <FormTextInput
@@ -42,4 +45,18 @@ export default {
     id="fullWidthInput"
     fullWidth
   />,
+  withLabel: (
+    <FormGroup flow fullWidth>
+      <FormLabel htmlFor="testId" title="Label title">Label</FormLabel>
+      <FormTextInput
+        className="addClassName"
+        type="text"
+        name="testName"
+        inputId="testId"
+        placeholder="Input placeholder"
+        title="Input title"
+        fullWidth
+      />
+    </FormGroup>
+  ),
 }

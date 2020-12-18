@@ -200,4 +200,4 @@ class FormButton extends React.PureComponent /** @lends @FormButton.prototype */
 
 }
 
-export default FormItemHOC({ hoverable: true, framed: true })(FormButton)
+export default FormItemHOC({ solid: true, hoverable: true, framed: true })(FormButton)

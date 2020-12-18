@@ -29,6 +29,9 @@ const classNameModifiers = [ // Pass props/state params to class modifiers
   'disabled',
   'fill', // (???)
 ]
+const classNameExpectedModifierTypes = {
+  checked: 'boolean',
+}
 
 const defaultState = { // Default state
   // hoverable: false,
@@ -73,9 +76,13 @@ const wrapFormItemHOC = (WrappedComponent, params = {}) => class FormItem extend
   // Helper methods...
 
   getStateOrPropOrParam(id) { // Get parameter from state or from props
-    return (this.state[id] != null) ? this.state[id] :
+    let val = (this.state[id] != null) ? this.state[id] :
       (this.props[id] != null) ? this.props[id] :
         params[id]
+    if (classNameExpectedModifierTypes[id] && typeof val !== classNameExpectedModifierTypes[id]) {
+      val = null
+    }
+    return val
   }
 
   createUniqId() {

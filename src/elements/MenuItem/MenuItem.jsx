@@ -107,4 +107,4 @@ class MenuItem extends React.PureComponent /** @lends @MenuItem.prototype */ {
 
 }
 
-export default FormItemHOC({ hoverable: true })(MenuItem)
+export default FormItemHOC({ solid: true, hoverable: true })(MenuItem)

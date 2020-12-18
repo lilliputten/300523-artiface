@@ -6,9 +6,10 @@
 
 .FormGroup {
 
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  // display: flex;
+  // flex-direction: row;
+  // flex-wrap: wrap;
+  // align-items: stretch;
 
   // TODO: Use config for values?
   $hMargin: $formItemSpacing;
@@ -29,13 +30,11 @@
   }
 
   &_stack {
+    // border: 1px solid blue; // DEBUG
     &, &_horizontal {
       display: flex;
       flex-wrap: nowrap;
       align-items: stretch;
-      & > .FormItem_fill {
-        flex: 1;
-      }
     }
     & {
       flex-direction: column;
@@ -44,9 +43,6 @@
       flex-direction: row;
     }
   }
-  // &_fullWidth {
-  //   [>!KEEP<]
-  // }
   &_flow {
     &, &_vertical {
       display: flex;

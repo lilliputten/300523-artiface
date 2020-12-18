@@ -1,5 +1,6 @@
 # CHANGELOG
 
+- 2020.12.19, 01:23 -- Added browserlist (for autoprefixer), ixed ie11 styles (PD-3500), Menu: prevent uncheck checked items for `singleChoice=forced`, FormSelect: restored popup closing for `closeOnSelect`, Popup: adjust content width for control width if fullWidth enabled, other minor changes.
 - 2020.12.18, 16:57 -- Popup: Fixed css prop names for IE11, demo for uncloseable underlaying popups.
 - 2020.12.18, 02:40 -- Popup: Updated props types list, removed state & unused methods, cleaned up code, added external methods `close`, `open` (for using in future `PopupStack`), added (restored) `onControlClick` handler processing.
 - 2020.12.18, 01:33 -- Implemented smart popup positioning algorithm (some tests required).
