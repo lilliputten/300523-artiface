@@ -62,8 +62,8 @@ const horizontalGeometryKeys = [
 const globalGeometryKeys = {
   viewWidth: { obj: window, key: 'innerWidth' },
   viewHeight: { obj: window, key: 'innerHeight' },
-  scrollX: { obj: window },
-  scrollY: { obj: window },
+  scrollX: { obj: window, key: 'pageXOffset' },
+  scrollY: { obj: window, key: 'pageYOffset' },
 }
 
 const axisKeys = { // Used in `updateOneAxisContentPos`
@@ -101,6 +101,20 @@ const axisKeys = { // Used in `updateOneAxisContentPos`
 // const globalKeyPressEventName = 'keydown'
 const globalScrollEventName = 'scroll'
 const globalResizeEventName = 'resize'
+
+/* // DEBUG: Demo for prevent closing underlaying popups. (Can be used for modal windows. See crrsp styles & html layout.)
+ * const debugHide = document.getElementById('DebugHide')
+ * setTimeout(() => {
+ *   if (debugHide) {
+ *     debugHide.style.display = 'block'
+ *   }
+ * }, 3000)
+ * const debugHideListener = (ev) => {
+ *   // ev.stopImmediatePropagation()
+ *   ev.stopPropagation()
+ * }
+ * debugHide && debugHide.addEventListener('click', debugHideListener)
+ */
 
 class Popup extends React.PureComponent /** @lends @Popup.prototype */ {
 
@@ -203,7 +217,7 @@ class Popup extends React.PureComponent /** @lends @Popup.prototype */ {
    * @param {Object} geometry
    * @param {String[]} updatedGeometryKeys
    */
-  updateOneAxisContentPos(axis, geometry/* , updatedGeometryKeys */) {
+  updateOneAxisContentPos(axis, geometry, updatedGeometryKeys) { // eslint-disable-line no-unused-vars
     const domNode = this.contentDomNode
     if (!domNode) { // Error?
       return
@@ -275,7 +289,7 @@ class Popup extends React.PureComponent /** @lends @Popup.prototype */ {
     }
 
     /* // DEBUG...
-     * console.log('Popup:updateOneAxisContentPos', { // eslint-disable-line no-console
+     * console.log('Popup:updateOneAxisContentPos', {
      *   // Parameters...
      *   axis,
      *   placeBefore,
@@ -338,30 +352,36 @@ class Popup extends React.PureComponent /** @lends @Popup.prototype */ {
     const updatedGeometryKeys = this.getUpdatedGeometryKeys(geometry)
     const changedHorizontalKeys = horizontalGeometryKeys.some(key => updatedGeometryKeys.includes(key))
     const changedVerticalKeys = verticalGeometryKeys.some(key => updatedGeometryKeys.includes(key))
-    /*
-     * // DEBUG...
+    /* // DEBUG...
      * console.log('Popup:updateGeometry', {
      *   updatedGeometryKeys,
      *   // changedHorizontalKeys,
      *   // changedVerticalKeys,
-     *   geometry,
-     *   'this.geometry': this.geometry,
+     *   // geometry,
+     *   // 'this.geometry': this.geometry,
+     *   'changed geometry': Object.entries(geometry).reduce((result, [key, val]) => {
+     *     if (updatedGeometryKeys.includes(key)) {
+     *       result[key] = val
+     *     }
+     *     return result
+     *   }, {}),
+     *   'changed this.geometry': Object.entries(this.geometry).reduce((result, [key, val]) => {
+     *     if (updatedGeometryKeys.includes(key)) {
+     *       result[key] = val
+     *     }
+     *     return result
+     *   }, {}),
      * })
      */
-    // debugger
-    if (!updatedGeometryKeys.length) { // Do not nothing if no changed
+    if (!updatedGeometryKeys.length) { // Do nothing if no changes found
       return
     }
-    // Store geometry data object
-    // this.updateContentPos(geometry, updatedGeometryKeys)
     changedHorizontalKeys && this.updateOneAxisContentPos('horizontal', geometry, updatedGeometryKeys) // Update horizontal position & size...
     changedVerticalKeys && this.updateOneAxisContentPos('vertical', geometry, updatedGeometryKeys) // Update vertical position & size...
     // if (changedHorizontalKeys && fullWidth) { // TODO?
     //   this.updateContentWidth(geometry, updatedGeometryKeys)
     // }
     this.geometry = geometry
-    // console.log(this.geometry.contentOffsetLeft)
-    // debugger
   }
 
   registerGlobalHandlers() {
@@ -461,7 +481,14 @@ class Popup extends React.PureComponent /** @lends @Popup.prototype */ {
     const { isOpen, openPortal, closePortal } = this
     const method = isOpen ? closePortal : openPortal
     if (typeof method === 'function') {
-      method(event)
+      // method(event)
+      setTimeout(method, 0)
+      // const fakeEvent = {
+      //   nativeEvent: {
+      //     stopImmediatePropagation: () => {},
+      //   },
+      // }
+      // setTimeout(() => method(fakeEvent), 0)
     }
     // TODO: Notify `PopupStack` when popup opens for closing all other popups from same level (before first modal in popups stack). (Now user can open several popups at the same time.
     const { onControlClick } = this.props

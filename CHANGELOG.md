@@ -1,5 +1,6 @@
 # CHANGELOG
 
+- 2020.12.18, 16:57 -- Popup: Fixed css prop names for IE11, demo for uncloseable underlaying popups.
 - 2020.12.18, 02:40 -- Popup: Updated props types list, removed state & unused methods, cleaned up code, added external methods `close`, `open` (for using in future `PopupStack`), added (restored) `onControlClick` handler processing.
 - 2020.12.18, 01:33 -- Implemented smart popup positioning algorithm (some tests required).
 - 2020.12.18, 01:33 -- Done (from TODO): 2020.12.17, 01:52 -- FormSelect/Popup: confilct between visible popup content and shrinkable control. See example `withLabeledGroup` -- Popup can be adaptive for available space only if `overflow: hidden` is specified in css; then content is clipped out and unvisible.

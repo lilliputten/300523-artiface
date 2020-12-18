@@ -3,6 +3,18 @@
  *  @changed 2020.12.18, 01:32
  */
 
+/* // DEBUG: Demo for prevent closing underlaying popups. (Can be used for modal windows)
+ * #DebugHide {
+ *   position: absolute;
+ *   top: 0;
+ *   left: 0;
+ *   bottom: 0;
+ *   right: 0;
+ *   background: rgba(0,0,0,.5);
+ *   display: none;
+ * }
+ */
+
 .DemoPopupControl {
   cursor: pointer;
 }
@@ -28,8 +40,8 @@
     // box-sizing: border-box;
     // border: 1px solid orange;
     // // DEBUG: Set internal content size
-    // height: 400px;
-    // width: 400px;
+    height: 400px;
+    width: 400px;
   }
 }
 .simpleContainer {
