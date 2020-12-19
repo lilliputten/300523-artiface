@@ -54,10 +54,15 @@
     &_vertical {
       flex-direction: column;
     }
+    &^&_alignItems {
+      &_center {
+        justify-content: center;
+      }
+    }
   }
 
   & > & {
-    &_align_right {
+    &_align_right { // flow
       // Align to right
       justify-content: flex-end;
       align-items: flex-end;

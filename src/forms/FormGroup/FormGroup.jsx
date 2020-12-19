@@ -21,6 +21,7 @@ class FormGroup extends React.PureComponent /** @lends @FormGroup.prototype */ {
   static propTypes = {
     id: PropTypes.string,
     align: PropTypes.string,
+    alignItems: PropTypes.string,
     background: PropTypes.string,
     flow: PropTypes.oneOfType([ PropTypes.bool, PropTypes.string ]),
     fullWidth: PropTypes.bool,
@@ -38,6 +39,7 @@ class FormGroup extends React.PureComponent /** @lends @FormGroup.prototype */ {
     'id',
     // Style-related modifiers...
     'align',
+    'alignItems',
     'background',
     'flow',
     'fullWidth',
