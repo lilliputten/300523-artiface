@@ -110,7 +110,11 @@ class FormSelect extends React.PureComponent /** @lends @FormSelect.prototype */
   }
 
   setPopupRef = (node) => {
+    const { setPopupNodeRef } = this.props
     this.popupNode = node
+    if (setPopupNodeRef && typeof setPopupNodeRef === 'function') {
+      setPopupNodeRef(node)
+    }
   }
 
   // registerHideStopper = (hideStopper) => { // Called from popup

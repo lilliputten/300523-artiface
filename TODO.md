@@ -1,5 +1,6 @@
 # TODO
 
+- 2020.12.19, 03:35 -- Popup: Use nearest scrollable container ancestor as popup base? Or clip to it bounds? Or hide popup if countrol is (partially) out of this bounds?
 - 2020.12.18, 02:47 -- FormSelect: Implement items state management (items will be rerendered in portal-updated `Popup` component).
 - 2020.12.18, 02:15 -- Popup: Use static `PopupStack` component and close same-level (from stack end to first `Modal` or stack begin) popups
 - 2020.12.18, 01:50 -- Popup: Reset both `storedContentSize` if content changed (use registrable handler)?
@@ -13,5 +14,5 @@
 - 2020.10.06, 13:29 -- PD-2814: Refactoring all of used components. (See `README.form-components.md`.)
 
 <!--
- @changed 2020.12.18, 02:48
+ @changed 2020.12.19, 03:37
 -->

@@ -2,6 +2,44 @@
  *  @since 2020.10.28, 22:49
  *  @changed 2020.10.29, 03:14
  */
-.FormLabel_fixed {
-  width: 150px;
+.Fixture_id_FormSelect {
+  // margin: 475px 0; // Make scrolls on page
+  border: 1px solid blue;
+  .FormLabel_fixed {
+    width: 150px;
+  }
+  .Fixed { // Emulate modal popup container
+    &-Curtain {
+      position: fixed;
+      // top: 0;
+      // bottom: 0;
+      // left: 0;
+      // right: 0;
+      background-color: #666;
+    }
+    &-Wrapper {
+      position: relative;
+      top: 40%;
+      // transform: translateY(-50%);
+      overflow: hidden;
+      margin: 30px auto;
+      width: 90%;
+      background-color: #666;
+      border-radius: 10px;
+      box-sizing: border-box;
+      border: 1px solid rgba(0,0,0,.1);
+      box-shadow: 5px 5px 10px rgba(0,0,0,.2);
+    }
+    &-Scrollable { // Scrollable box
+      position: relative;
+      background-color: #fff;
+      height: 100px;
+      overflow: auto;
+    }
+    &-Container {
+      padding: 20px;
+      height: 200px;
+      width: 400px;
+    }
+  }
 }
