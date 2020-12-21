@@ -34,10 +34,9 @@ import './build'
  * debugger
  */
 
-
 /* // DEBUG: Test css-module mappings substitution
  * import { utils } from './build'
- * utils.setConfigOptions({
+ * utils.configure.setConfigOptions({
  *   useCssModules: true,
  *   cssMappings: {
  *     WebUiCoreTest: '__MODULE__WebUiCoreTest',
@@ -47,7 +46,6 @@ import './build'
  *   },
  * })
  */
-
 
 const fixtureComponentsList = {
 

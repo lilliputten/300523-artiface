@@ -9,7 +9,7 @@
 import React from 'react'
 // import PropTypes from 'prop-types'
 // import connect from 'react-redux/es/connect/connect'
-import { cn } from 'utils'
+import { cn } from 'utils/configure'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import * as solidIcons from '@fortawesome/free-solid-svg-icons'

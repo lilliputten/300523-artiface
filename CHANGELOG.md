@@ -1,5 +1,6 @@
 # CHANGELOG
 
+- 2020.12.21, 19:02 -- PD-3503: Using utils modules (strings, domUtils) from WebUiCore.
 - 2020.12.19, 04:20 -- FormGroup alignItems prop added.
 - 2020.12.19, 01:23 -- Added browserlist (for autoprefixer), ixed ie11 styles (PD-3500), Menu: prevent uncheck checked items for `singleChoice=forced`, FormSelect: restored popup closing for `closeOnSelect`, Popup: adjust content width for control width if fullWidth enabled, other minor changes.
 - 2020.12.18, 16:57 -- Popup: Fixed css prop names for IE11, demo for uncloseable underlaying popups.

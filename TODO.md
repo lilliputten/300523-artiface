@@ -1,11 +1,10 @@
 # TODO
 
-- 2020.12.19, 03:35 -- Popup: Use nearest scrollable container ancestor as popup base? Or clip to it bounds? Or hide popup if countrol is (partially) out of this bounds?
-- 2020.12.18, 02:47 -- FormSelect: Implement items state management (items will be rerendered in portal-updated `Popup` component).
+- 2020.12.19, 03:35 -- Popup: Use nearest scrollable container ancestor as popup base? Or clip to it bounds? Or hide popup if control is (partially) out of this bounds?
 - 2020.12.18, 02:15 -- Popup: Use static `PopupStack` component and close same-level (from stack end to first `Modal` or stack begin) popups
 - 2020.12.18, 01:50 -- Popup: Reset both `storedContentSize` if content changed (use registrable handler)?
 - 2020.12.16, 23:41 -- Testing: https://medium.com/capital-one-tech/unit-testing-behavior-of-react-components-with-test-driven-development-ae15b03a3689, https://reactjs.org/docs/testing.html, https://reactjs.org/docs/testing-recipes.html
-- 2020.12.15, 13:52 -- External internationalization.
+- 2020.12.15, 13:52 -- External internationalization (i18n data provided by target project).
 - 2020.10.30, 20:04 -- FormSelect: add hidden html input to sync selected item values & support html form submission.
 - 2020.10.07, 00:32 -- FormButton: Add optional prefix ('regular', 'solid', 'default') to icon id for choosing icons set.
 - 2020.10.07, 00:08 -- Demo index: Add demos list, actions, styles

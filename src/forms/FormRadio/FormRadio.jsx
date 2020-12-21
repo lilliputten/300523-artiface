@@ -7,7 +7,7 @@
 
 import React from 'react'
 import PropTypes from 'prop-types'
-import { cn } from 'utils'
+import { cn } from 'utils/configure'
 import { compose } from 'redux'
 
 // import FormItem from '../FormItem'

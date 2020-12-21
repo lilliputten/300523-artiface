@@ -7,7 +7,7 @@
 import React from 'react'
 // import PropTypes from 'prop-types'
 // import connect from 'react-redux/es/connect/connect'
-import { cn } from 'utils'
+import { cn } from 'utils/configure'
 
 // import InlineIcon from 'elements/InlineIcon'
 // import FormItemHOC from '../FormItemHOC'

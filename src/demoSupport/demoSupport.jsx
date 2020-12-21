@@ -5,7 +5,7 @@
 /* eslint-disable react/no-multi-comp */
 
 import React from 'react'
-import { cn } from 'utils'
+import { cn } from 'utils/configure'
 // import config from 'config'
 
 // import './demoSupport.pcss'
@@ -51,7 +51,7 @@ export const PlaceFixture = ({ fixtureId, fixture, fixtureItemId, demoTitle, Dem
     })
   }
   const contentWrapper = React.isValidElement(DemoWrapper) ? React.cloneElement(DemoWrapper, { key: 'content', fixtureId }, content) : (
-    <DemoWrapper key="content" fixtureId={fixtureId}>
+    <DemoWrapper key="content" /* fixtureId={fixtureId} */>
       {content}
     </DemoWrapper>
   )
