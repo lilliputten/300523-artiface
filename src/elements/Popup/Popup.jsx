@@ -7,7 +7,7 @@
  *  TODO 2020.12.18, 02:15 -- Popup: Use static `PopupStack` component and close same-level (from stack end to first `Modal` or stack begin) popups
  *  TODO 2020.12.19, 03:35 -- Popup: Use nearest scrollable container ancestor as popup base? Or clip to it bounds? Or hide popup if countrol is (partially) out of this bounds?
  *
- *  External methods:
+ *  External methods (for PopupStack):
  *  - close
  *  - open
  *  - updateGeometry
@@ -22,15 +22,18 @@ import { strings } from 'utils'
 import { debounce } from 'throttle-debounce'
 import FormItemHOC from 'forms/FormItemHOC'
 import { PortalWithState } from 'react-portal'
-
+/* UNUSED: Transitions
+ * import { // Transitions...
+ *   CSSTransition,
+ *   TransitionGroup,
+ * } from 'react-transition-group'
+ */
 import config from 'config'
 
 import './Popup.pcss'
 
 const cnPopup = cn('Popup')
 const cnPopupControl = cn('PopupControl')
-
-const popupsContainerId = 'Popups' // Id of dom node which contains all popups (`<div id="Popups"></div>`). TODO: Store in config?
 
 const doDebug = false // DEBUG!
 
@@ -180,9 +183,15 @@ class Popup extends React.PureComponent /** @lends @Popup.prototype */ {
 
   constructor(props) {
     super(props)
-    const { open } = props
+    const popupsInited = config.popups.isInited
+    this.state = {
+      popupsInited,
+    }
+    if (!popupsInited) {
+      config.popups.initPromise.then(this.setPopupsInited)
+    }
     this.updateGeometry = debounce(debouncedUpdateGeometryTimeout, this.updateGeometryInstant)
-    this.state = {}
+    const { open } = props
     if (open) {
       this.handlePortalOpen()
     }
@@ -190,6 +199,20 @@ class Popup extends React.PureComponent /** @lends @Popup.prototype */ {
     // if (typeof props.registerCallback === 'function') { // External hide canceler (FormSelect: on Menu click etc)
     //   props.registerCallback(this.someMethod)
     // }
+    /* // Check for element is Popup
+     * setTimeout(() => {
+     *   const node = this
+     *   const isElement = React.isValidElement(node)
+     *   const isPopup = node instanceof Popup // true for Popup and FormItemPopup
+     *   const isFormItemPopup = node instanceof FormItemPopup // Always false
+     *   console.log('debug', {
+     *     isElement,
+     *     isPopup,
+     *     isFormItemPopup,
+     *   })
+     *   debugger
+     * }, 1000)
+     */
   }
 
   componentWillUnmount() {
@@ -197,6 +220,10 @@ class Popup extends React.PureComponent /** @lends @Popup.prototype */ {
   }
 
   // Helpers...
+
+  setPopupsInited = () => {
+    this.setState({ popupsInited: true })
+  }
 
   getDomNodeGeometry(domNode, id) {
     id = id || 'default'
@@ -598,6 +625,20 @@ class Popup extends React.PureComponent /** @lends @Popup.prototype */ {
       className: this.getClassName({ cnCtx: cnPopup, className, ...portalParams }),
       ref: this.setContentRef,
     }
+    /* // TRY: css-transitions
+     * <TransitionGroup className={cnPopup('TransitionGroup')}>
+     *   <CSSTransition
+     *     key={id}
+     *     timeout={5000}
+     *     // timeout={config.css.animateTimeout}
+     *     classNames={cnPopup('Transition')}
+     *   >
+     *     <div {...renderProps}>
+     *       {popupContent}
+     *     </div>
+     *   </CSSTransition>
+     * </TransitionGroup>
+     */
     return portal(
       <div {...renderProps}>
         {popupContent}
@@ -605,7 +646,7 @@ class Popup extends React.PureComponent /** @lends @Popup.prototype */ {
     )
   }
 
-  renderPortalContent = (portalParams) => {
+  renderPortal = (portalParams) => {
     return (
       <React.Fragment>
         {this.renderPopupControl(portalParams)}
@@ -620,17 +661,17 @@ class Popup extends React.PureComponent /** @lends @Popup.prototype */ {
       closeOnEscPressed,
       open,
     } = this.props
-    const node = document.getElementById(popupsContainerId)
-    return (
+    const { popupsInited } = this.state
+    return popupsInited && (
       <PortalWithState
-        node={node}
+        node={config.popups.domNode}
         onOpen={this.handlePortalOpen}
         onClose={this.handlePortalClose}
         closeOnOutsideClick={closeOnClickOutside}
         closeOnEsc={closeOnEscPressed}
         defaultOpen={open}
       >
-        {this.renderPortalContent}
+        {this.renderPortal}
       </PortalWithState>
     )
   }

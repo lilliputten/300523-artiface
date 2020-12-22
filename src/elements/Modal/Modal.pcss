@@ -1,0 +1,111 @@
+/** @module Modal.styles
+ *  @since 2020.12.21, 22:58
+ *  @changed 2020.12.21, 22:58
+ */
+
+.Modal {
+  /*!KEEP*/
+  box-sizing: border-box;
+  overflow: hidden;
+  // max-width: 100%;
+  // z-index: 100; // Lift above all other regular elements
+  position: absolute;
+  // display: none;
+  background: #fff;
+  box-shadow: 0 0 0 1px rgba(0,0,0,.1), 0 10px 20px -5px rgba(0,0,0,.4);
+  border-radius: $(formItemBorderRadius)px;
+  $timeout: $(transitionTime)ms;
+  // $timeout: 3000ms; // DEBUG
+  $descent: 30px;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  // Transition...
+  &-Transition {
+    // Modal-Transition-enter
+    // Modal-Transition-enter-active
+    // Modal-Transition-enter-done
+    // Modal-Transition-exit
+    // Modal-Transition-exit-active
+    // Modal-Transition-exit-done
+    &-enter {
+      // opacity: 0;
+      visibility: visible;
+      margin-top: -$descent;
+    }
+    &-enter-active {
+      opacity: 1;
+      margin-top: 0px;
+      transition: margin-top $timeout, opacity $timeout;
+    }
+    &-enter-done {
+      visibility: visible;
+      opacity: 1;
+      pointer-events: all;
+    }
+    &-exit {
+      visibility: visible;
+      opacity: 1;
+      // margin-top: 0px;
+    }
+    &-exit-active {
+      opacity: 0;
+      margin-top: -$descent;
+      transition: margin-top $timeout, opacity $timeout;
+    }
+    // ^&,
+    &-exit-done {
+      visibility: hidden;
+      opacity: 0;
+      pointer-events: none;
+    }
+  }
+  /*
+   * visibility: hidden;
+   * // opacity: 0;
+   * animation-name: WebUiCore_Modal_hidden;
+   * animation-duration: $timeout;
+   * animation-timing-function: ease-out;
+   * animation-fill-mode: forwards;
+   * &_show {
+   *   // display: block;
+   *   visibility: visible;
+   *   opacity: 1;
+   *   animation-name: WebUiCore_Modal_visible;
+   *   pointer-events: all;
+   * }
+   * // Animations...
+   * // TODO: To use css-transitions?
+   * @keyframes WebUiCore_Modal_visible {
+   *   0% {
+   *     opacity: 0;
+   *     transform: translateY(10px);
+   *   }
+   *   20% {
+   *     opacity: 0;
+   *     transform: translateY(10px);
+   *   }
+   *   100% {
+   *     opacity: 1;
+   *     transform: translateY(0px);
+   *   }
+   * }
+   * @keyframes WebUiCore_Modal_hidden {
+   *   0% {
+   *     // visibility: visible;
+   *     margin: 0;
+   *     transform: translateY(0px);
+   *     opacity: 1;
+   *   }
+   *   99% {
+   *     margin: 0;
+   *     transform: translateY(10px);
+   *   }
+   *   100% {
+   *     visibility: hidden;
+   *     margin: -9999px 0 0 -9999px;
+   *     opacity: 0;
+   *   }
+   * }
+   */
+}

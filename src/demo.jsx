@@ -1,7 +1,7 @@
 /** @module demo
  *  @desc Demo app entry point
  *  @since 2020.05.19, 17:16
- *  @changed 2020.12.15, 21:59
+ *  @changed 2020.12.22, 00:32
  */
 
 import 'es5-shim/es5-shim'
@@ -18,7 +18,7 @@ import * as demoSupport from './demoSupport'
 import './demo.pcss'
 
 // import * as build from './build'
-import './build'
+import WebUiCore from './build'
 
 /* // DEBUG: Check strings module
  * import { strings } from 'utils'
@@ -52,6 +52,7 @@ const fixtureComponentsList = {
   Hello: require('demo/Hello/Hello.fixture'),
 
   InlineIcon: require('elements/InlineIcon/InlineIcon.fixture'),
+  Modal: require('elements/Modal/Modal.fixture'),
   Popup: require('elements/Popup/Popup.fixture'),
   Menu: require('elements/Menu/Menu.fixture'),
   MenuItem: require('elements/MenuItem/MenuItem.fixture'),
@@ -110,9 +111,12 @@ else { // List all available fixtures to display
 }
 
 const demoContent = (
-  <div className="demo">
-    {content}
-  </div>
+  <React.Fragment>
+    <div className="demo">
+      {content}
+    </div>
+    <WebUiCore />
+  </React.Fragment>
 )
 
 render(demoContent, document.getElementById('Root'))

@@ -10,9 +10,7 @@
 
 ## TODO:
 
-- Close on ESC
-- Popup positioning/size (depends on position relative to window border edges -- scroll/crop).
-- disabled
+- disabled (?)
 
 <!--
  @since 2020.10.27, 00:39

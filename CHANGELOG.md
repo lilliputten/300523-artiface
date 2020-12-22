@@ -1,5 +1,6 @@
 # CHANGELOG
 
+- 2020.12.22, 04:54 -- PD-3504: PopupsContainer dynamic container + integrated popups/modals manager + init promise & other properties (in config.popups), Modal component + show/hide animations (in progress).
 - 2020.12.21, 19:02 -- PD-3503: Using utils modules (strings, domUtils) from WebUiCore.
 - 2020.12.19, 04:20 -- FormGroup alignItems prop added.
 - 2020.12.19, 01:23 -- Added browserlist (for autoprefixer), ixed ie11 styles (PD-3500), Menu: prevent uncheck checked items for `singleChoice=forced`, FormSelect: restored popup closing for `closeOnSelect`, Popup: adjust content width for control width if fullWidth enabled, other minor changes.
@@ -41,5 +42,5 @@
 - 2020.10.05, 20:38 -- v.0.0.15: Extracted `demoSupport.jsx` routines, fixture selection from url query (parameter `fixture`), added avaialble fixtures list if fixture to display is not specified, added DemoWrapper & demoTitle exportable ficture parameters for demo rendering.
 
 <!--
- @changed 2020.12.19, 04:20
+ @changed 2020.12.22, 00:32
 -->

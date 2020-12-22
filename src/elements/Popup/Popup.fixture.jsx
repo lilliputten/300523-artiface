@@ -6,6 +6,7 @@
 
 import React from 'react'
 
+import { FormItemPopup } from './Popup'
 import Popup from './Popup'
 // import FormGroup from 'forms/FormGroup'
 import FormButton from 'forms/FormButton'
@@ -18,10 +19,6 @@ import './Popup.fixture.pcss'
 
 // export const DemoWrapper = FormGroup // ({ children }) => {
 
-let cbHideStopper = null
-const registerHideStopper = (cbStopper) => {
-  cbHideStopper = cbStopper
-}
 const PopupControl = (props) => {
   const { onClick } = props
   // console.log('DemoPopupControl:', props)
@@ -53,7 +50,7 @@ const menuOnChange = ({ checked, value }) => { // `value` passed only for `singl
 const menuOnClick = ({ value }) => {
   console.log('Popup.fixture: menuOnClick', { value })
   // debugger
-  cbHideStopper && cbHideStopper()
+  // cbHideStopper && cbHideStopper()
 }
 const buttonOnClick = ({ show }) => {
   console.log('Popup.fixture: buttonOnClick', { show })
@@ -80,7 +77,6 @@ const simple = (
     <div className="simpleStub">simpleStub</div>
     <Popup
       id="simple"
-      showPopup={false}
       popupControl={popupControlEl}
       popupContent={popupContentEl}
     />
@@ -90,7 +86,6 @@ const simple = (
 const closingImmediately = (
   <Popup
     id="closingImmediately"
-    showPopup={false}
     popupControl={<FormButton icon="faChevronRight" rightIcon theme="primary" variation="popupControl" text="Closing immediately" />}
     popupContent={demoMenu}
   />
@@ -99,13 +94,12 @@ const closingImmediately = (
 const stayOpenAfterItemClick = (
   <Popup
     id="stayOpenAfterItemClick"
-    showPopup={false}
     onControlClick={buttonOnClick}
     popupControl={<FormButton icon="faChevronRight" rightIcon theme="primary" variation="popupControl" text="Stay open after item click" />}
     popupContent={demoMenu}
     closeOnClickOutside={true}
-    registerHideStopper={registerHideStopper}
     fullWidth
+    open
   />
 )
 
