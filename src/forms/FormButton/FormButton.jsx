@@ -3,7 +3,7 @@
  *  @since 2020.07.20, 19:07
  *  @changed 2020.10.29, 03:30
  */
-/* eslint-disable react/require-default-props */
+/* eslint-disable -react/require-default-props */
 
 import React from 'react'
 import PropTypes from 'prop-types'
@@ -24,36 +24,42 @@ const cnFormButton = cn('FormButton')
 class FormButton extends React.PureComponent /** @lends @FormButton.prototype */ {
 
   static propTypes = { // TODO!!!
-    id: PropTypes.string,
-
-    // hoverable: PropTypes.bool, // FormItem: Allowed hovered events
-    // focusable: PropTypes.bool, // FormItem: Allowed focused events
-
-    // TODO: Actualize & check next properties, implement cosmos fixtures...
-
-    // TODO: formId -- id for form element (passed on form submit)
-    // name: PropTypes.string, // ???
+    // TODO: size: PropTypes.string, // Different form item sizes? (eg: md -- default, sm, xs, lg, xl, xxl)
+    checked: PropTypes.bool, // FormItem: Checked state
     disabled: PropTypes.bool,
-    onClick: PropTypes.func,
-
+    fullWidth: PropTypes.bool, // Occupies all horizontal space
     hasIcon: PropTypes.bool, // Optional
     hasText: PropTypes.bool, // Optional
-    text: PropTypes.string, // Text content (may be passed as node children)
-    icon: PropTypes.oneOfType([ // Icon component. May be as image resource loaded with `file/url-loader` as `FontAwesomeIcon` component.
-      PropTypes.string,
-      PropTypes.object,
-    ]),
-    onlyIcon: PropTypes.bool, // Only icon
+    icon: PropTypes.oneOfType([ PropTypes.string, PropTypes.object ]), // Icon component. May be as image resource loaded with `file/url-loader` as `FontAwesomeIcon` component.
+    id: PropTypes.string,
+    inline: PropTypes.bool,
     largeIcon: PropTypes.bool, // Large icon
-    rightIcon: PropTypes.bool, // Icon placed at right side
-    // TODO: size: PropTypes.string, // Different form item sizes? (eg: md -- default, sm, xs, lg, xl, xxl)
-
-    theme: PropTypes.string, // Button style (plain, default, primary, secondary, error, warn, success, info, etc -- some are in progress -- see styles file)
+    onClick: PropTypes.func,
     onDark:  PropTypes.bool, // On dark background
-    fullWidth: PropTypes.bool, // Occupies all horizontal space
+    onlyIcon: PropTypes.bool, // Only icon
     plain: PropTypes.bool, // ??? Plain icon (no border & background -- if no style specified, looks as link)
+    rightIcon: PropTypes.bool, // Icon placed at right side
+    text: PropTypes.string, // Text content (may be passed as node children)
+    theme: PropTypes.string, // Button style (plain, default, primary, secondary, error, warn, success, info, etc -- some are in progress -- see styles file)
+  }
 
-    checked: PropTypes.bool, // FormItem: Checked state
+  static defaultProps = {
+    checked: null,
+    disabled: null,
+    fullWidth: null,
+    hasIcon: null,
+    hasText: null,
+    icon: null,
+    id: null,
+    inline: null,
+    largeIcon: null,
+    onClick: null,
+    onDark: null,
+    onlyIcon: null,
+    plain: null,
+    rightIcon: null,
+    text: null,
+    theme: null,
   }
 
   // Helpers...
@@ -80,13 +86,14 @@ class FormButton extends React.PureComponent /** @lends @FormButton.prototype */
       checked,
       fullWidth,
       id,
+      inline,
       largeIcon,
-      rotatedIcon,
-      onlyIcon,
-      rightIcon,
-      theme,
       onDark,
+      onlyIcon,
       plain,
+      rightIcon,
+      rotatedIcon,
+      theme,
       type,
       variation,
     } = this.props
@@ -95,18 +102,22 @@ class FormButton extends React.PureComponent /** @lends @FormButton.prototype */
       checked,
       fullWidth,
       id,
+      inline,
       largeIcon,
-      rotatedIcon,
-      onlyIcon,
-      rightIcon,
-      solid: true,
-      theme,
       onDark,
+      onlyIcon,
       plain,
+      rightIcon,
+      rotatedIcon,
+      theme,
       type,
       variation,
     }
+    const staticMods = {
+      solid: true,
+    }
     const classList = cnFormButton({
+      ...staticMods,
       ...mods,
       hasIcon: this.hasIcon(),
       hasText: this.hasText(),

@@ -18,7 +18,7 @@ import * as demoSupport from './demoSupport'
 import './demo.pcss'
 
 // import * as build from './build'
-import WebUiCore from './build'
+import { RootComponent as WebUiCoreRootComponent } from './build'
 
 /* // DEBUG: Check strings module
  * import { strings } from 'utils'
@@ -115,7 +115,7 @@ const demoContent = (
     <div className="demo">
       {content}
     </div>
-    <WebUiCore />
+    <WebUiCoreRootComponent />
   </React.Fragment>
 )
 

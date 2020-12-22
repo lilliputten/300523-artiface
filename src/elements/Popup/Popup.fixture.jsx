@@ -6,7 +6,7 @@
 
 import React from 'react'
 
-import { FormItemPopup } from './Popup'
+// import { FormItemPopup } from './Popup'
 import Popup from './Popup'
 // import FormGroup from 'forms/FormGroup'
 import FormButton from 'forms/FormButton'

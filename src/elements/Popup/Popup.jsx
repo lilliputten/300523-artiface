@@ -497,17 +497,29 @@ class Popup extends React.PureComponent /** @lends @Popup.prototype */ {
 
   // External methods...
 
+  isVisible = () => {
+    return this.isOpen
+  }
+
   close = () => { // External method for using in `PopupStack`
+    const { id, onClose } = this.props
     const { isOpen, closePortal } = this
     if (isOpen && typeof closePortal === 'function') {
       closePortal()
+      if (typeof onClose === 'function') {
+        onClose({ id })
+      }
     }
   }
 
   open = () => { // External method for using in `PopupStack`
+    const { id, onOpen } = this.props
     const { isOpen, openPortal } = this
     if (!isOpen && typeof openPortal === 'function') {
       openPortal()
+      if (typeof onOpen === 'function') {
+        onOpen({ id })
+      }
     }
   }
 
@@ -630,7 +642,7 @@ class Popup extends React.PureComponent /** @lends @Popup.prototype */ {
      *   <CSSTransition
      *     key={id}
      *     timeout={5000}
-     *     // timeout={config.css.animateTimeout}
+     *     // timeout={config.css.animateTime}
      *     classNames={cnPopup('Transition')}
      *   >
      *     <div {...renderProps}>

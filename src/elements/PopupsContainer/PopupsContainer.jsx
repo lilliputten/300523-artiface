@@ -9,10 +9,10 @@ import ReactDOM from 'react-dom'
 import { Portal } from 'react-portal'
 // import { cssMapping } from 'utils/configure'
 import { cn } from 'utils/configure'
-import { // Transitions...
-  // CSSTransition,
-  TransitionGroup,
-} from 'react-transition-group'
+// import { // Transitions...
+//   // CSSTransition,
+//   TransitionGroup,
+// } from 'react-transition-group'
 import config from 'config'
 
 import './PopupsContainer.pcss'
@@ -42,8 +42,8 @@ class PopupsContainer extends React.PureComponent /** @lends @PopupsContainer.pr
   componentDidMount() {
     // this.registerGlobalHandlers()
     if (typeof config.popups._initPromiseResolve == 'function') {
-      // config.popups._initPromiseResolve()
-      setTimeout(config.popups._initPromiseResolve, 1000)
+      config.popups._initPromiseResolve()
+      // setTimeout(config.popups._initPromiseResolve, 1000) // Delayed initializing?
     }
     config.popups.isInited = true
     config.popups.containerNode = this
@@ -89,7 +89,7 @@ class PopupsContainer extends React.PureComponent /** @lends @PopupsContainer.pr
      *   <CSSTransition
      *     key={id}
      *     timeout={5000}
-     *     // timeout={config.css.animateTimeout}
+     *     // timeout={config.css.animateTime}
      *     classNames={cnPopupsContainer('Transition')}
      *   >
      *     <div {...renderProps}>
@@ -102,9 +102,7 @@ class PopupsContainer extends React.PureComponent /** @lends @PopupsContainer.pr
      * </TransitionGroup>
      */
     return (
-      <div {...renderProps}>
-        <div>xxx</div>
-      </div>
+      <div {...renderProps} />
 
     )
   }

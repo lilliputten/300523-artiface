@@ -18,5 +18,5 @@ import './build.pcss'
 
 import PopupsContainer from './elements/PopupsContainer'
 
-export default PopupsContainer
+export const RootComponent = PopupsContainer
 

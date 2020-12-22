@@ -1,7 +1,7 @@
 /** @module config.css
  *  @description Global styles config
  *  @since 2019.08.29, 10:28
- *  @changed 2020.10.21, 22:52
+ *  @changed 2020.12.23, 00:20
  */
 
 // Theme...
@@ -12,8 +12,8 @@ const theme = require(process.env.THEME_FILE)
 const defaultFontSize = theme.defaultFontSize || 16
 const textColor = theme.textColor || '#444'
 
-const defaultTransitonTime = 250
-const defaultAnimateTimeout = 500
+const defaultTransitionTime = 250
+const defaultAnimateTime = 500
 
 const errorColor = theme.errorColor || '#c33'
 const warnColor = theme.warnColor || '#f73' // '#f96'
@@ -169,10 +169,10 @@ const cssConfig = { // Common-used css variables...
 
   // Timeouts & delays...
 
-  transitionTime: defaultTransitonTime, // ms
-
-  animateTimeout: defaultAnimateTimeout, // ms
-  modalAnimateTimeout: defaultAnimateTimeout, // ms
+  transitionTime: defaultTransitionTime, // ms
+  animateTime: defaultAnimateTime, // ms
+  modalAnimateTime: defaultTransitionTime, // defaultAnimateTime,
+  modalWindowAnimateTime: defaultTransitionTime,
 
   // Parameters...
 
