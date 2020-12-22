@@ -1,7 +1,6 @@
 # CHANGELOG
 
 - 2020.12.23, 00:43 -- PD-3504: Modals: Close-on-click-outside mechanism (closeOnClickOutside prop), close-on-esc (closeOnEscPressed prop), rendering witch active (portal activated) and show (animation triggered) states, global & internal dom events registration, generic modal/popup interface (isVisible, close, open), improved demo fixture, basic wrapper/window & animations styles. Other minor changes (FormButton inline mod, updated PropTypes, WebUiCore RootComponent).
-
 - 2020.12.22, 04:54 -- PD-3504: PopupsContainer dynamic container + integrated popups/modals manager + init promise & other properties (in config.popups), Modal component + show/hide animations (in progress).
 - 2020.12.21, 19:02 -- PD-3503: Using utils modules (strings, domUtils) from WebUiCore.
 - 2020.12.19, 04:20 -- FormGroup alignItems prop added.
