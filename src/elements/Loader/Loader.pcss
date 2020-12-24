@@ -1,0 +1,47 @@
+/** @module Loader.pcss
+ *  @since 2020.12.24, 22:38
+ *  @changed 2020.12.24, 22:38
+ */
+
+.Loader {
+  text-align: center;
+  transition: all $(animateTime)ms ease-out;
+  opacity: 0;
+  pointer-events: none;
+  overflow: hidden;
+  &_show {
+    opacity: 1;
+    pointer-events: all;
+  }
+  &-Container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  &-Spinner,
+  &-Text,
+  &-Actions {
+    margin: 5px;
+  }
+  &-Actions {
+    margin-bottom: 0;
+  }
+  &-Spinner {
+    display: inline-block;
+    $size: 60px;
+    $borderSize: 5px;
+    width: $size;
+    height: $size;
+    &:after {
+      border: $borderSize solid #fff;
+      content: " ";
+      display: block;
+      $innerSize: @calc($size - $borderSize * 2);
+      width: $innerSize;
+      height: $innerSize;
+      border-radius: 50%;
+    }
+  }
+}
+

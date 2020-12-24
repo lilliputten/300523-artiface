@@ -1,0 +1,46 @@
+/** @module Loader-animation.pcss
+ *  @since 2020.12.24, 22:38
+ *  @changed 2020.12.24, 22:38
+ */
+
+.Loader {
+  &_mode_local { // Loader overlaps closest relative positioned container
+    position: absolute;
+  }
+  &_mode_block { // Loader overlaps entire page
+    position: fixed;
+  }
+  &-Container {
+    width: 100%;
+  }
+  &_mode_local, &_mode_block {
+    z-index: 250; // Below footer, but above header?
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    // Center vertically with flexbox
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    // & ^&-Container {
+    //   // // Mode 1: with `translate`
+    //   // position: absolute;
+    //   // top: 50%;
+    //   // transform: translate(0, -50%);
+    //   // // Mode 2: without `translate` but not excactly centered vertically
+    //   // position: relative;
+    //   // top: 45%;
+    //   // margin-top: -50px;
+    // }
+  }
+  &_mode_inplace { // Regular location (regular block element)
+    // & ^&-Container {
+    //   position: relative;
+    //   // top: initial; // ???
+    //   // left: initial; // ???
+    //   // transform: none;
+    // }
+  }
+}

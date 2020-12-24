@@ -1,0 +1,55 @@
+/** @module Loader-animation.pcss
+ *  @since 2020.12.24, 22:38
+ *  @changed 2020.12.24, 22:38
+ */
+
+.Loader {
+  background-color: color(#000 alpha(0.7));
+  color: white;
+  &-Spinner::after {
+    border-color: #fff transparent #fff transparent;
+  }
+  // Override hardcoded in `styles.css` colors (Ruslan's LESS PhpStorm solution)
+  &_theme_Light { // Light loader theme (white background, dark text)
+    $bgColor: color(#fff alpha(.9));
+    $textColor: #666;
+    $ringColor: #aaa;
+    background-color: $bgColor;
+    & ^&-Text {
+      color: $textColor;
+    }
+    & ^&-Spinner::after {
+      border-top-color: $ringColor;
+      border-bottom-color: $ringColor;
+      border-width: 4px;
+    }
+  }
+  &_theme_Dark { // Dark loader theme
+    $bgColor: color(#000 alpha(.8));
+    $textColor: #fff;
+    $ringColor: #fff;
+    background-color: $bgColor;
+    & ^&-Text {
+      color: $textColor;
+    }
+    & ^&-Spinner::after {
+      border-top-color: $ringColor;
+      border-bottom-color: $ringColor;
+      border-width: 4px;
+    }
+  }
+  &_theme_MediumDark { // MediumDark loader theme
+    $bgColor: color($neutralExtraDarkColor alpha(.85));
+    $textColor: #fff;
+    $ringColor: #fff;
+    background-color: $bgColor;
+    & ^&-Text {
+      color: $textColor;
+    }
+    & ^&-Spinner::after {
+      border-top-color: $ringColor;
+      border-bottom-color: $ringColor;
+      border-width: 4px;
+    }
+  }
+}

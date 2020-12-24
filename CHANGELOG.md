@@ -1,5 +1,6 @@
 # CHANGELOG
 
+- 2020.12.24, 23:54 -- Added `Loader` element.
 - 2020.12.24, 21:25 -- v.0.1.7
 - 2020.12.24, 21:13 -- (DONE TODO from 2020.12.24, 04:23) Modal: Using `autoClose` prop (self-close on any action), calling `onAction` handlers on modal deactivating.
 - 2020.12.24, 20:45 -- (DONE TODO from 2020.12.24, 04:18) ActionsContext + Catching actions events from child of `actions` sub-component in Modals.

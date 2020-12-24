@@ -1,0 +1,18 @@
+/** @module Loader-animation.pcss
+ *  @since 2020.12.24, 22:38
+ *  @changed 2020.12.24, 22:38
+ */
+
+.Loader-Spinner {
+  &:after {
+    animation: Loader-Spinner-Animation 1.5s linear infinite;
+    @keyframes Loader-Spinner-Animation {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+  }
+}

@@ -3,6 +3,7 @@
  *  @since 2020.05.19, 17:16
  *  @changed 2020.12.22, 00:32
  */
+/* eslint-disable react/jsx-max-depth */
 
 import 'es5-shim/es5-shim'
 import 'es5-shim/es5-sham'
@@ -11,6 +12,8 @@ import 'react-app-polyfill/stable'
 
 import React from 'react'
 import { render } from 'react-dom'
+
+import Loader from 'elements/Loader'
 
 import * as demoSupport from './demoSupport'
 
@@ -50,6 +53,8 @@ import { RootComponent as WebUiCoreRootComponent } from './build'
 const fixtureComponentsList = {
 
   Hello: require('demo/Hello/Hello.fixture'),
+
+  Loader: require('elements/Loader/Loader.fixture'),
 
   InlineIcon: require('elements/InlineIcon/InlineIcon.fixture'),
   Modal: require('elements/Modal/Modal.fixture'),
