@@ -12,7 +12,7 @@ const srcFolders = [
   'elements',
   'forms',
   'utils',
-  // 'helpers',
+  'helpers',
   // 'lib',
   // 'tests',
 ]
