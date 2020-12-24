@@ -162,6 +162,7 @@ const cssConfig = { // Common-used css variables...
 
   // Modal sizes...
   modalMinWidth: 300, // Minimal width for 'auto' mode
+  modalWindowPadding: 20, // Windows padding
   modalSizes: { // Generic theming colors...
     xs: 200,
     sm: 400,
@@ -170,6 +171,10 @@ const cssConfig = { // Common-used css variables...
     xl: 1000,
     xxl: 1200,
   },
+
+  // Typical icons:
+  // error: faExclamationTriangle
+  // error: faExclamationCircle
 
   // Spacings & paddings...
 

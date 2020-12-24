@@ -29,8 +29,8 @@ class InlineIcon extends React.PureComponent /** @lends @InlineIcon.prototype */
     theme: PropTypes.string,
     tag: PropTypes.string,
     title: PropTypes.string,
-    icon: PropTypes.string,
-    onClick: PropTypes.oneOfType([ PropTypes.string, PropTypes.object ]),
+    icon: PropTypes.oneOfType([ PropTypes.string, PropTypes.object ]),
+    onClick: PropTypes.func,
   }
 
   getClassName() {
@@ -70,6 +70,11 @@ class InlineIcon extends React.PureComponent /** @lends @InlineIcon.prototype */
       onClick,
       // key,
     } = this.props
+
+    const iconType = typeof icon
+    if (iconType !== 'string') {
+      debugger
+    }
 
     // Create fortawesome icon element if passed icon image (svg icon)
     const iconComponent = (icon && typeof icon === 'string') ? this.getIconComponent(icon) : icon

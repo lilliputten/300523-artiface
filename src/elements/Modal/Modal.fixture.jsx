@@ -58,7 +58,7 @@ class Simple extends React.PureComponent /** @lends @PopupsContainer.prototype *
       <React.Fragment>
         <Modal
           id="simple"
-          icon="FaCheck"
+          icon="faExclamationCircle"
           show={show}
           className="ModalClass"
           windowClassName="WindowClass"

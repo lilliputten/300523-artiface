@@ -17,30 +17,36 @@
     display: flex;
     flex-direction: column;
   }
-  $windowPadding: 20px;
+
   &-Window {
+    position: relative;
     box-sizing: border-box;
     overflow: hidden;
-    margin: $windowPadding auto; // Horizontally auto sizing & centering
-    min-width: $(modalMinWidth)px;
-    @media (max-width: @calc($(modalMinWidth)px + $windowPadding * 2)) {
-      margin: $windowPadding;
-      min-width: auto;
-    }
-    position: relative;
-    // Center window:
+    margin: $(modalWindowPadding)px auto; // Auto size & center window horizontally
+    // Center window vertically:
     top: 40%;
     transform: translate(0, -50%);
   }
 
-  // Widths (based on `config.css.modalSizes`)...
+  // Sizes...
+
+  // Default ('auto') size...
+  &-Window {
+    min-width: $(modalMinWidth)px;
+    @media (max-width: @calc($modalMinWidth + $modalWindowPadding * 2)px) {
+      margin: $(modalWindowPadding)px;
+      min-width: auto;
+    }
+  }
+
+  // Window widths (based on `config.css.modalSizes`)...
   &-Window_width {
     @each $width $id in $modalSizes {
       &_$(id) {
-        margin: $windowPadding;
-        $extraWidth: @calc($(width)px + $windowPadding * 2);
+        margin: $(modalWindowPadding)px;
+        $extraWidth: @calc($width + $modalWindowPadding * 2)px;
         @media (min-width: $extraWidth) {
-          margin: $windowPadding auto;
+          margin: $(modalWindowPadding)px auto;
           width: $(width)px;
         }
       }
