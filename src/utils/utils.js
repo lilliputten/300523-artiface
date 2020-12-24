@@ -1,5 +1,5 @@
-/** @module build
- *  @desc Library exportable ditributive
+/** @module utils
+ *  @desc Library utilities
  *  @since 2020.05.19, 17:16
  *  @changed 2020.12.15, 21:12
  */

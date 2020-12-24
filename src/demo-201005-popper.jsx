@@ -19,7 +19,7 @@ import { render } from 'react-dom'
 // import { injectGlobal } from 'react-emotion'
 // import { compose, withState } from 'recompose'
 // import { Transition } from 'react-spring/renderprops'
-import { Manager, Reference, Popper/* , placements */ } from 'react-popper'
+import { Manager, Reference, Popper/* , placements */ } from 'react-popper' // To remove!
 
 import DatePicker from 'react-datepicker' // @see [GitHub - Hacker0x01/react-datepicker: A simple and reusable datepicker component for React](https://github.com/Hacker0x01/react-datepicker)
 // import DatePicker from 'react-datepicker/dist/es'

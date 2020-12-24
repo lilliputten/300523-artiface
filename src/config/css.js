@@ -18,7 +18,7 @@ const defaultAnimateTime = 500
 const errorColor = theme.errorColor || '#c33'
 const warnColor = theme.warnColor || '#f73' // '#f96'
 const successColor = theme.successColor || '#593' // '#ac9'
-const infoColor = theme.infoColor || '#29a' // '#9bd'
+const infoColor = theme.infoColor || theme.primaryColor // '#29a' // '#9bd'
 const confirmColor = theme.confirmColor /* || theme.primaryColor || textColor */ || '#891' // '#07f'
 const selectColor = theme.selectColor || '#05b'
 

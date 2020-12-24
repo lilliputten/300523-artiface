@@ -6,11 +6,12 @@
 
 const config = {
   app: require('./app'),
-  popups: require('./popups'),
   build: require('./build'),
+  constants: require('./constants'),
   css: require('./css'),
+  popups: require('./popups'),
+  ui: require('./ui'),
   userAgent: require('./userAgent'),
-  // constants: require('./constants'),
 }
 
 module.exports = config
