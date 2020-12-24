@@ -1,7 +1,7 @@
 /** @module FormButton-Styles.styles
  *  @desc Additional elements variations
  *  @since 2020.07.20, 19:24
- *  @changed 2020.10.29, 03:30
+ *  @changed 2020.12.24, 04:09
  */
 
 .FormButton {
@@ -12,7 +12,17 @@
   }
 
   &_inline {
-    display: inline-block;
+    // display: inline-block;
+    float: left;
+  }
+
+  &_largeIcon {
+    .FormButton-Icon {
+      svg {
+        font-size: $(fontSizeXl)px; // 20px;
+        margin-top: 5px;
+      }
+    }
   }
 
   &_rotatedIcon {

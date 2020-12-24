@@ -1,7 +1,22 @@
 /** @module InlineIcon.styles
  *  @since 2020.10.07, 02:08
- *  @changed 2020.10.07, 02:08
+ *  @changed 2020.12.24, 04:05
  */
 
 .InlineIcon {
+  // TODO: Theme styles
+  &_theme {
+
+    @define-mixin styledIcon $color {
+      color: $color;
+    }
+
+    &_primary { @mixin styledIcon $primaryColor }
+    &_secondary { @mixin styledIcon $secondaryColor }
+
+    // Theme colors...
+    @each $color $name in $themeColors {
+      &_$(name) { @mixin styledIcon $color }
+    }
+  }
 }

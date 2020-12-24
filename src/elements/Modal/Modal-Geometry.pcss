@@ -1,0 +1,133 @@
+/** @module Modal.styles
+ *  @desc Basic modal layout styles
+ *  @since 2020.12.21, 22:58
+ *  @changed 2020.12.24, 02:43
+ */
+
+.Modal {
+  &, &-Wrapper {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    overflow: hidden;
+  }
+  &-Wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+  &-Window {
+    box-sizing: border-box;
+    overflow: hidden;
+    // max-width: 100%;
+    // z-index: 100; // Lift above all other regular elements
+    margin: 20px auto;
+    position: relative;
+    // Center window:
+    top: 40%;
+    transform: translate(0, -50%);
+    // Other experiments:
+    // position: fixed;
+    // left: 50%;
+    // Blurry? NOTE: Need to pay attention to the parity of the window width!
+    // transform: translate3d(-50%, -50%, 0) scale(2, 2);
+    // zoom: 0.5;
+    // -webkit-font-smoothing: subpixel-antialiased;
+    // transform: translateX(-50%) translateY(-50%);
+    // Fix for blurry effect?
+    // transform: translate(calc(-50% + 0.5px), calc(-50% + 0.5px));
+  }
+
+  // Layout items: Window, Header, Container, Content, Layout, LayoutMain, Actions
+
+  &-Window,
+  &-Header,
+  &-Container,
+  &-Content,
+  &-Layout,
+  &-LayoutMain {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    align-content: stretch;
+    // align-items: center;
+    // align-content: center;
+  }
+  &-Window {
+    flex-direction: column;
+    align-content: stretch;
+    // border: 1px solid blue;
+  }
+  &-Header {
+    // border: 1px solid green;
+    align-items: center;
+    background-color: $neutralLightColor;
+    padding: 8px 10px;
+  }
+  &-HeaderIcon,
+  &-HeaderTitle,
+  &-HeaderCloseButton {
+    padding: 0 5px;
+  }
+  &-HeaderIcon {
+    padding-left: 7px; // Depends on icon shape & thickness?
+  }
+  &-HeaderCloseButton {
+    padding-right: 0;
+  }
+  &-HeaderIcon {
+    width: 32px;
+    text-align: center;
+    color: $neutralDarkColor;
+    // color: #000; // $neutralColor;
+    .InlineIcon {
+      display: inline-block;
+      position: relative;
+      vertical-align: bottom;
+      svg {
+        font-size: 28px; // $(fontSizeXl)px; // 20px;
+        margin-top: 2px;
+      }
+    }
+  }
+  &-HeaderTitle {
+    flex: 1 1 auto;
+    // border: 1px solid blue;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: $(fontSizeXxl)px;
+    // font-weight: 400;
+    color: $neutralDarkColor;
+    margin-bottom: 3px;
+  }
+  &-Layout {
+    flex: 1 1 auto;
+    // border: 1px solid purple;
+    // align-items: center;
+    padding: 10px;
+  }
+  &-LayoutMain {
+    flex: 1 1 auto;
+    flex-direction: column;
+    // border: 1px solid red;
+  }
+  &-Container {
+    flex: 1 1 auto;
+    align-items: center;
+    align-content: center;
+    // align-self: center;
+    // border: 1px solid blue;
+    padding: 10px;
+  }
+  &-LeftContent {
+    align-self: center;
+    // border: 1px solid green;
+    padding: 10px;
+  }
+  &-Actions {
+    padding: 10px;
+  }
+}

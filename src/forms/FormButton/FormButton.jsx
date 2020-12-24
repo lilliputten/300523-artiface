@@ -3,7 +3,6 @@
  *  @since 2020.07.20, 19:07
  *  @changed 2020.10.29, 03:30
  */
-/* eslint-disable -react/require-default-props */
 
 import React from 'react'
 import PropTypes from 'prop-types'
@@ -43,24 +42,8 @@ class FormButton extends React.PureComponent /** @lends @FormButton.prototype */
     theme: PropTypes.string, // Button style (plain, default, primary, secondary, error, warn, success, info, etc -- some are in progress -- see styles file)
   }
 
-  static defaultProps = {
-    checked: null,
-    disabled: null,
-    fullWidth: null,
-    hasIcon: null,
-    hasText: null,
-    icon: null,
-    id: null,
-    inline: null,
-    largeIcon: null,
-    onClick: null,
-    onDark: null,
-    onlyIcon: null,
-    plain: null,
-    rightIcon: null,
-    text: null,
-    theme: null,
-  }
+  // static defaultProps = {
+  // }
 
   // Helpers...
 

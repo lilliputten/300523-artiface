@@ -1,7 +1,7 @@
 /** @module FormButton.styles
  *  @desc Only basic elements geometry
  *  @since 2020.07.20, 19:24
- *  @changed 2020.10.21, 23:42
+ *  @changed 2020.12.24, 04:09
  */
 
 .FormButton {
@@ -38,7 +38,6 @@
 
   &-Icon {
     color: $neutralColor; // Default icon color
-    left: @calc($formItemInnerPaddingH)px;
   }
   &-Text {
     display: block; // ???
@@ -54,6 +53,7 @@
   &_hasText&_hasIcon {
     ^&-Icon {
       position: absolute;
+      left: @calc($formItemInnerPaddingH)px;
     }
     ^&-Text {
       margin-left: @calc($defaultIconSize)px;
@@ -70,6 +70,11 @@
       right: @calc($formItemInnerPaddingH)px;
       left: auto;
     }
+  }
+
+  &_hasIcon:not(&_hasText),
+  &_onlyIcon {
+    text-align: center;
   }
 
   &.FormItem_hovered {

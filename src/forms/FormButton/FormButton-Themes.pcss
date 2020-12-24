@@ -1,11 +1,45 @@
 /** @module FormButton-Styles.styles
  *  @since 2020.07.20, 19:24
- *  @changed 2020.10.21, 22:52
+ *  @changed 2020.12.24, 04:09
  */
 
 .FormButton {
 
-  &_theme { // Button styles...
+  &_plain {
+    // $bgColor: transparent; // color($neutralLightColor tint(10));
+    // $borderColor: transparent; // $formItemBorderColor;
+    $color: #000; // $neutralDarkColor;
+    $textColor: #000;
+    // @mixin buttonStyle $bgColor, $borderColor, $iconColor, $textColor;
+    .FormButton-Text,
+    .FormButton-Icon {
+      color: $color;
+    }
+    .FormButton-Icon {
+      opacity: .8;
+    }
+    .FormButton-Icon {
+      opacity: .3;
+    }
+    &.FormItem_hovered {
+      border-color: transparent;
+      .FormButton-Text {
+        opacity: 1;
+      }
+      .FormButton-Icon {
+        opacity: .5;
+      }
+    }
+    &.FormButton_onDark {
+      $color: #fff; // $neutralDarkColor;
+      .FormButton-Icon,
+      .FormButton-Text {
+        color: $color;
+      }
+    }
+  }
+
+  &_theme { // Button themes...
 
     // Mixin params: $bgColor, $borderColor, $iconColor, $textColor
     @define-mixin buttonStyle $bgColor, $borderColor: $formItemBorderColor, $iconColor: $neutralShadedColor, $textColor: $formItemTextColor {
@@ -42,14 +76,6 @@
     }
     // @define-mixin styledDarkButton $bgColor, $textColor: $specialContrastColor {
     // ... ???
-
-    &_plain {
-      &^^&_onDark {
-        .FormButton-Text {
-          color: #fff;
-        }
-      }
-    }
 
     &_default {
       $bgColor: color($neutralLightColor tint(10));

@@ -1,0 +1,30 @@
+/** @module Modal-Themes.styles
+ *  @desc Themes
+ *  @since 2020.12.21, 22:58
+ *  @changed 2020.12.24, 02:43
+ */
+
+.Modal {
+  &-Wrapper {
+    &, &_theme_transparentBlack {
+      background-color: rgba(0,0,0,.5);
+    }
+    &_theme_opaqueGray {
+      background-color: #666;
+    }
+    &_theme_opaqueWhite {
+      background-color: #fff;
+    }
+    &_theme_transparentWhite {
+      background-color: rgba(255,255,255,.5);
+    }
+  }
+  &-Window {
+    background: #fff;
+    border: 1px solid color(#000 alpha(.1));
+    // box-shadow: 0 0 0 1px rgba(0,0,0,.1), 0 10px 20px -5px rgba(0,0,0,.4);
+    box-shadow: 5px 5px 10px color(#000 alpha(.2)); // , inset 0 0 1px 1px color(#fff alpha(1));
+    // border-radius: $(formItemBorderRadius)px;
+    border-radius: 5px;
+  }
+}

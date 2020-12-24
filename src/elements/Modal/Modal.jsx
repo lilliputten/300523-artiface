@@ -1,14 +1,14 @@
 /** @module Modal
  *  @class Modal
  *  @since 2020.12.21, 22:58
- *  @changed 2020.12.23, 00:43
+ *  @changed 2020.12.24, 03:06
  *
  *  External methods (for PopupStack):
  *  - close
  *  - open
  *  - updateGeometry
  */
-/* eslint-disable no-console */
+/* --eslint-disable no-console */
 
 import React from 'react'
 import PropTypes from 'prop-types'
@@ -26,7 +26,12 @@ import { // Transitions...
 } from 'react-transition-group'
 import config from 'config'
 
-import './Modal.pcss'
+import InlineIcon from 'elements/InlineIcon'
+import FormButton from 'forms/FormButton'
+
+import './Modal-Geometry.pcss'
+import './Modal-Themes.pcss'
+import './Modal-Transitions.pcss'
 
 const cnModal = cn('Modal')
 
@@ -34,6 +39,7 @@ const cnModal = cn('Modal')
 
 const mouseDownEvent = 'mousedown'
 const mouseUpEvent = 'mouseup'
+const mouseLeaveEvent = 'mouseleave'
 const globalKeyPressEventName = 'keydown'
 
 // // Unused events:
@@ -59,60 +65,49 @@ class Modal extends React.PureComponent /** @lends @Modal.prototype */ {
   // Props...
 
   static propTypes = {
-    // actions: PropTypes.oneOfType([ PropTypes.array, PropTypes.object ]),
     // loading: PropTypes.bool, // Show Loader flashback
-    // onAction: PropTypes.func,
-    // onKeyPress: PropTypes.func,
-    // registerCallback: PropTypes.func, // registerCallback(handler = this.someMethod) -- handler stored by parent component and called when detected click on pulldown menu -- prevents popup content closing
-    // setModalNodeRef: PropTypes.func,
-    // title: PropTypes.string,
-    className: PropTypes.string,
-    closeOnClickOutside: PropTypes.bool,
-    closeOnEscPressed: PropTypes.bool,
-    id: PropTypes.string,
-    onActivate: PropTypes.func,
-    onClickOutside: PropTypes.func,
-    onClose: PropTypes.func,
-    onDeactivate: PropTypes.func,
-    onEscPressed: PropTypes.func,
-    onOpen: PropTypes.func,
-    show: PropTypes.bool,
-    windowClassName: PropTypes.string,
-    windowTheme: PropTypes.string,
-    wrapperClassName: PropTypes.string,
-    wrapperTheme: PropTypes.string,
+    // onAction: PropTypes.func, // Event fired on action invoked (see `actions` prop)
+    // registerCallback: PropTypes.func, // ??? registerCallback(handler = this.someMethod) -- handler stored by parent component and called when detected click on pulldown menu -- prevents popup content closing
+    // setModalNodeRef: PropTypes.func, // ??? Demo?
+    // size: PropTypes.string, // Modal window width (predefined variants: xs, sm, md, lg, xl, xxl)
+    actions: PropTypes.oneOfType([ PropTypes.array, PropTypes.object ]), // Actions component(s) (TODO: `ActionsContext` must be used)
+    className: PropTypes.string, // Modal class name
+    closeOnClickOutside: PropTypes.bool, // Close (cancel) modal by click outside modal window (on 'curtain')
+    closeOnEscPressed: PropTypes.bool, // Close (cancel) modal on esc key pressed
+    closeWithCloseButton: PropTypes.bool, // Close (cancel) modal by click on header 'Close' button
+    content: PropTypes.oneOfType([ PropTypes.string, PropTypes.object ]), // Main modal content
+    icon:  PropTypes.oneOfType([ PropTypes.string, PropTypes.object ]), // Show icon in header
+    id: PropTypes.string, // Modal id
+    leftContent: PropTypes.oneOfType([ PropTypes.string, PropTypes.object ]), // Content at left of main content and actions (ideal place for large visual icon)
+    onActivate: PropTypes.func, // Event fired on activate (before show)
+    onCancel: PropTypes.func, // Event fired on forced close (by click-outside, esc-pressed or close-button)
+    onClickOutside: PropTypes.func, // Event fired on click outside modal
+    onClose: PropTypes.func, // Event fired on modal close
+    onCloseButtonClick: PropTypes.func, // Event fired on header 'Close' button click
+    onDeactivate: PropTypes.func, // Event fired on deactivate (unmounting from dom)
+    onEscPressed: PropTypes.func, // Event fired on esc key pressed
+    onOpen: PropTypes.func, // Event fired on modal open
+    show: PropTypes.bool, // Show modal by default
+    showCloseButton: PropTypes.bool, // Display close button in header
+    title: PropTypes.string, // Modal title
+    windowClassName: PropTypes.string, // Modal window class name
+    wrapperClassName: PropTypes.string, // Modal wrapper class name
+    theme: PropTypes.string, // Modal theme (default theme for all other themed elements, see `*Theme`)
+    iconTheme: PropTypes.string, // Icon theme (using `theme` if not specified)
+    windowTheme: PropTypes.string, // Window theme (using `theme` if not specified)
+    headerTheme: PropTypes.string, // Header theme (using `theme` if not specified)
+    wrapperTheme: PropTypes.string, // Wrapper (back-curtain) theme (using `theme` if not specified)
   }
 
   static defaultProps = {
-    // actions: null,
-    // className: null,
-    // loading: false,
-    // onKeyPress: null,
-    // popupContent: null,
-    // popupControl: null,
-    // registerCallback: null,
-    // setModalNodeRef: null,
-    // title: null,
-    className: null,
-    closeOnClickOutside: true,
-    closeOnEscPressed: true,
-    id: null,
-    onActivate: null,
-    onClickOutside: null,
-    onClose: null,
-    onDeactivate: null,
-    onEscPressed: null,
-    onOpen: null,
-    show: false,
-    windowClassName: null,
-    windowTheme: null,
-    wrapperClassName: null,
-    wrapperTheme: null,
+    closeOnClickOutside: true, // Close (cancel, with `onCancel` event) modal by outisde-click.
+    closeOnEscPressed: true, // Close (cancel, with `onCancel` event) modal by esc-key.
+    closeWithCloseButton: true, // Close (cancel, with `onCancel` event) with 'Close button' (if present in layout -- see `showCloseButton`) show: false, // Show modal by default
+    showCloseButton: false, // Display 'Close button'?
   }
 
   // Instance variables...
-
-  waitForWrapperMouseUp = false
+  isOutsideClickWaiting = false
   globalHandlersRegistered = false
   wrapperDomNode = null
   windowDomNode = null
@@ -165,7 +160,7 @@ class Modal extends React.PureComponent /** @lends @Modal.prototype */ {
     const { id, onActivate } = this.props
     const { active } = this.state
     if (!active) {
-      console.log('Modal:activate', id, active)
+      // console.log('Modal:activate', id, active)
       this.setState({ active: true }, () => {
         if (typeof cb === 'function') {
           cb()
@@ -184,7 +179,7 @@ class Modal extends React.PureComponent /** @lends @Modal.prototype */ {
     const { id, onDeactivate } = this.props
     const { active } = this.state
     if (active) {
-      console.log('Modal:deactivate', id)
+      // console.log('Modal:deactivate', id)
       this.setState({ active: false }, () => {
         if (typeof onDeactivate === 'function') {
           onDeactivate({ id })
@@ -194,9 +189,9 @@ class Modal extends React.PureComponent /** @lends @Modal.prototype */ {
   }
 
   toggle = () => { // External method for using in `ModalStack`
-    const { id } = this.props
+    // const { id } = this.props
     const { show } = this.state
-    console.log('Modal:ctoggle', id, show)
+    // console.log('Modal:ctoggle', id, show)
     if (show) {
       this.close()
     }
@@ -208,7 +203,7 @@ class Modal extends React.PureComponent /** @lends @Modal.prototype */ {
   close = () => { // External method for using in `ModalStack`
     const { id, onClose } = this.props
     const { show } = this.state
-    console.log('Modal:close', id, show)
+    // console.log('Modal:close', id, show)
     if (show) {
       this.setState({ show: false }, (state) => {
         this.updateShowWithState(state)
@@ -223,7 +218,7 @@ class Modal extends React.PureComponent /** @lends @Modal.prototype */ {
   open = () => { // External method for using in `ModalStack`
     const { id, onOpen } = this.props
     const { show } = this.state
-    console.log('Modal:open', id, show)
+    // console.log('Modal:open', id, show)
     if (!show) {
       // First activate portal then enter into opening animation
       this.activate(() => {
@@ -247,7 +242,7 @@ class Modal extends React.PureComponent /** @lends @Modal.prototype */ {
     // const { closeOnClickOutside } = this.props
     if (!this.globalHandlersRegistered) {
       this.globalHandlersRegistered = true // Set flag
-      console.log('registerGlobalHandlers')
+      // console.log('registerGlobalHandlers')
       if (!windowDomNode || !wrapperDomNode) {
         const error = new Error('Modal: dom nodes is undefined on registerGlobalHandlers')
         console.error(error) // eslint-disable-line no-console
@@ -263,8 +258,8 @@ class Modal extends React.PureComponent /** @lends @Modal.prototype */ {
        */
       document.addEventListener(globalKeyPressEventName, this.onKeyPress)
       if (windowDomNode && wrapperDomNode) {
-        wrapperDomNode.addEventListener(mouseDownEvent, this.onWrapperMouseDown)
-        windowDomNode.addEventListener(mouseUpEvent, this.onWindowMouseUp)
+        wrapperDomNode.addEventListener(mouseDownEvent, this.startOutsideClickWaiting)
+        windowDomNode.addEventListener(mouseUpEvent, this.stopOutsideClickWaiting)
       }
     }
   }
@@ -275,7 +270,7 @@ class Modal extends React.PureComponent /** @lends @Modal.prototype */ {
     // const { closeOnClickOutside } = this.props
     if (this.globalHandlersRegistered) {
       this.globalHandlersRegistered = false // Reset flag
-      console.log('unregisterGlobalHandlers')
+      // console.log('unregisterGlobalHandlers')
       if (!windowDomNode || !wrapperDomNode) {
         const error = new Error('Modal: dom nodes is undefined on unregisterGlobalHandlers')
         console.error(error) // eslint-disable-line no-console
@@ -291,12 +286,9 @@ class Modal extends React.PureComponent /** @lends @Modal.prototype */ {
        */
       document.removeEventListener(globalKeyPressEventName, this.onKeyPress)
       if (windowDomNode && wrapperDomNode) {
-        if (this.waitForWrapperMouseUp) {
-          wrapperDomNode.removeEventListener(mouseUpEvent, this.onWrapperMouseUp)
-          this.waitForWrapperMouseUp = false
-        }
-        wrapperDomNode.removeEventListener(mouseDownEvent, this.onWrapperMouseDown)
-        windowDomNode.removeEventListener(mouseUpEvent, this.onWindowMouseUp)
+        this.stopOutsideClickWaiting()
+        wrapperDomNode.removeEventListener(mouseDownEvent, this.startOutsideClickWaiting)
+        windowDomNode.removeEventListener(mouseUpEvent, this.stopOutsideClickWaiting)
       }
     }
   }
@@ -314,7 +306,9 @@ class Modal extends React.PureComponent /** @lends @Modal.prototype */ {
   setPopupsInited = () => {
     this.setState({ popupsInited: true })
     const { show } = this.props
-    this.setState({ show })
+    if (show) { // Immediately open if passed show status
+      this.activate(() => this.setState({ show: true }))
+    }
   }
 
   // Handlers...
@@ -327,43 +321,70 @@ class Modal extends React.PureComponent /** @lends @Modal.prototype */ {
       // onEnterPressed,
       onEscPressed,
       closeOnEscPressed,
+      onCancel,
     } = this.props
     const isEscPressed = (keyCode === 27)
     const cbProps = { event, id, keyCode }
     // onKeyPress && onKeyPress(cbProps)
     if (isEscPressed) {
-      onEscPressed && onEscPressed(cbProps)
       if (closeOnEscPressed) {
         this.close()
+        if (typeof onCancel === 'function') {
+          onCancel({ id })
+        }
+      }
+      if (typeof onEscPressed === 'function') {
+        onEscPressed(cbProps)
       }
     }
   }
 
-  onWindowMouseUp = () => { // Mouse released on window --> cancel waiting for mouse up on wrapper (don't close modal)
-    const { wrapperDomNode } = this
-    console.log('onWindowMouseUp')
-    if (wrapperDomNode && this.waitForWrapperMouseUp) {
-      wrapperDomNode.removeEventListener(mouseUpEvent, this.onWrapperMouseUp)
-      this.waitForWrapperMouseUp = false
+  stopOutsideClickWaiting = (/* ev */) => { // Mouse released on window --> cancel waiting for mouse up on wrapper (don't close modal)
+    const { wrapperDomNode, windowDomNode } = this
+    if (this.isOutsideClickWaiting && wrapperDomNode && windowDomNode) {
+      // const type  = ev && ev.type
+      // const target  = ev && ev.target
+      // console.log('stopOutsideClickWaiting', type, target)
+      wrapperDomNode.removeEventListener(mouseUpEvent, this.onOutsideClickDone)
+      windowDomNode.removeEventListener(mouseLeaveEvent, this.stopOutsideClickWaiting)
+      this.isOutsideClickWaiting = false
     }
   }
-  onWrapperMouseDown = () => { // Start waiting for mouse up on wrapper (close modal) or window (continue working)
-    const { wrapperDomNode } = this
-    console.log('onWrapperMouseDown')
-    if (wrapperDomNode) { // Start waiting for
-      this.waitForWrapperMouseUp = true
-      wrapperDomNode.addEventListener(mouseUpEvent, this.onWrapperMouseUp)
+  startOutsideClickWaiting = () => { // Start waiting for mouse up on wrapper (close modal) or window (continue working)
+    const { wrapperDomNode, windowDomNode } = this
+    // console.log('startOutsideClickWaiting')
+    if (!this.isOutsideClickWaiting && wrapperDomNode && windowDomNode) { // Start waiting for
+      this.isOutsideClickWaiting = true
+      wrapperDomNode.addEventListener(mouseUpEvent, this.onOutsideClickDone)
+      windowDomNode.addEventListener(mouseLeaveEvent, this.stopOutsideClickWaiting)
     }
   }
-  onWrapperMouseUp = () => { // Mouse released on wrapper --> close modal
-    const { id, onClickOutside } = this.props
-    console.log('onWrapperMouseUp')
-    const { closeOnClickOutside } = this.props
+  onOutsideClickDone = () => { // Mouse released on wrapper --> close modal
+    const { id, closeOnClickOutside, onClickOutside, onCancel } = this.props
+    // console.log('onOutsideClickDone')
+    this.stopOutsideClickWaiting()
     if (closeOnClickOutside) {
       this.close()
+      if (typeof onCancel === 'function') {
+        onCancel({ id })
+      }
     }
     if (typeof onClickOutside === 'function') {
       onClickOutside({ id })
+    }
+  }
+
+  onCloseButtonClick = () => { // Mouse released on wrapper --> close modal
+    const { id, closeWithCloseButton, onCloseButtonClick, onCancel } = this.props
+    // console.log('onCloseButtonClick')
+    if (closeWithCloseButton) {
+      this.close()
+      if (typeof onCancel === 'function') {
+        onCancel({ id })
+      }
+    }
+    if (typeof onCloseButtonClick === 'function') {
+      onCloseButtonClick({ id })
     }
   }
 
@@ -379,28 +400,106 @@ class Modal extends React.PureComponent /** @lends @Modal.prototype */ {
 
   // Render...
 
-  renderModalWindow() {
-    const { id, windowTheme, windowClassName } = this.props
-    // const { show } = this.state
+  renderHeaderTitle() {
+    const { title } = this.props
+    return title && (
+      <div className={cnModal('HeaderTitle')}>
+        {title}
+      </div>
+    )
+  }
+  renderHeaderCloseButton() {
+    const { showCloseButton } = this.props
+    return showCloseButton && (
+      <div className={cnModal('HeaderCloseButton')}>
+        <FormButton
+          icon="faTimes"
+          largeIcon
+          plain
+          title="Close window" // TODO; Translate?
+          onClick={this.onCloseButtonClick}
+        />
+        {/* <InlineIcon icon="faTimes" /> */}
+      </div>
+    )
+  }
+  renderHeaderIcon() {
+    const { icon, iconTheme } = this.props
+    const theme = iconTheme || this.props.theme
+    return icon && (
+      <div className={cnModal('HeaderIcon', { theme })}>
+        <InlineIcon theme={theme} icon={icon} />
+      </div>
+    )
+  }
+
+  renderHeader() {
+    const { headerTheme, theme } = this.props
+    return (
+      <div className={cnModal('Header', { theme: headerTheme || theme })}>
+        {this.renderHeaderIcon()}
+        {this.renderHeaderTitle()}
+        {this.renderHeaderCloseButton()}
+      </div>
+    )
+  }
+
+  renderLeftContent() {
+    const { leftContent } = this.props
+    return leftContent && (
+      <div className={cnModal('LeftContent')}>
+        {leftContent}
+      </div>
+    )
+  }
+
+  renderContent() {
+    const { content } = this.props
+    return content && (
+      <div className={cnModal('Container')}>
+        <div className={cnModal('Content')}>
+          {content}
+        </div>
+      </div>
+    )
+  }
+
+  renderActions() {
+    const { actions } = this.props
+    return actions && (
+      <div className={cnModal('Actions')}>
+        {actions}
+      </div>
+    )
+  }
+
+  renderWindow() {
+    const { windowTheme, theme, windowClassName } = this.props
     return (
       <div
-        id={id}
-        className={cnModal('Window', { theme: windowTheme }, [windowClassName])}
+        className={cnModal('Window', { theme: windowTheme || theme }, [windowClassName])}
         ref={this.setWindowDomRef}
       >
-        Modal {id}
+        {this.renderHeader()}
+        <div className={cnModal('Layout')}>
+          {this.renderLeftContent()}
+          <div className={cnModal('LayoutMain')}>
+            {this.renderContent()}
+            {this.renderActions()}
+          </div>
+        </div>
       </div>
     )
   }
 
   renderModal() {
-    const { id, wrapperTheme, className, wrapperClassName } = this.props
+    const { id, theme, wrapperTheme, className, wrapperClassName } = this.props
     const { show } = this.state
-    console.log('Modal:renderModal', { id, show })
+    // console.log('Modal:renderModal', { id, show })
     return (
       <CSSTransition
         key={id}
-        id={id}
+        // id={id}
         timeout={this.transitionTime}
         in={show}
         classNames={cnModal()}
@@ -410,10 +509,10 @@ class Modal extends React.PureComponent /** @lends @Modal.prototype */ {
           ref={this.setRootDomRef}
         >
           <div
-            className={cnModal('Wrapper', { theme: wrapperTheme }, [wrapperClassName])}
+            className={cnModal('Wrapper', { theme: wrapperTheme || theme }, [wrapperClassName])}
             ref={this.setWrapperDomRef}
           >
-            {this.renderModalWindow()}
+            {this.renderWindow()}
             {/* TODO: Optional Loader */}
           </div>
         </div>
@@ -422,10 +521,10 @@ class Modal extends React.PureComponent /** @lends @Modal.prototype */ {
   }
 
   render() {
-    const { id } = this.props
-    const { popupsInited, active, show } = this.state
+    // const { id } = this.props
+    const { popupsInited, active/* , show */ } = this.state
     const toDisplay = popupsInited && active
-    console.log('Modal:render', { id, popupsInited, active, show })
+    // console.log('Modal:render', { id, popupsInited, active, show })
     return toDisplay && (
       <Portal node={config.popups.domNode}>
         {this.renderModal()}

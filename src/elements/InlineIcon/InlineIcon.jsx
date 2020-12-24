@@ -1,13 +1,11 @@
 /** @module InlineIcon
  *  @class InlineIcon
  *  @since 2020.10.07, 02:08
- *  @changed 2020.10.07, 02:08
- *
- *  TODO 2020.12.14, 16:39 -- Uase theme prop (as in `FormButton`, `FormRadio` etc)
+ *  @changed 2020.12.24, 04:06
  */
 
 import React from 'react'
-// import PropTypes from 'prop-types'
+import PropTypes from 'prop-types'
 // import connect from 'react-redux/es/connect/connect'
 import { cn } from 'utils/configure'
 
@@ -26,12 +24,23 @@ const cnInlineIcon = cn('InlineIcon')
 
 class InlineIcon extends React.PureComponent /** @lends @InlineIcon.prototype */ {
 
+  static propTypes = {
+    id: PropTypes.string,
+    theme: PropTypes.string,
+    tag: PropTypes.string,
+    title: PropTypes.string,
+    icon: PropTypes.string,
+    onClick: PropTypes.oneOfType([ PropTypes.string, PropTypes.object ]),
+  }
+
   getClassName() {
     const {
       id,
+      theme,
     } = this.props
     const className = cnInlineIcon({
       id,
+      theme,
     }, [this.props.className])
     return className
   }
@@ -47,7 +56,7 @@ class InlineIcon extends React.PureComponent /** @lends @InlineIcon.prototype */
         iconId = nextId
       }
     }
-    const component = icons && icons[iconId] || 'questionCircle'
+    const component = icons && icons[iconId] || icons['faQuestionCircle']
     return component
   }
 
