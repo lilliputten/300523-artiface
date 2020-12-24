@@ -1,5 +1,6 @@
 # TODO
 
+- 2020.12.24, 22:49 -- How to pass target app owned and render-controlling in library parameters (like LANG i18n object)?
 - 2020.12.23, 00:43 -- PD-3504: Modals: Actions wrapper component with catching contained buttons `onClick` events. Modals/Popups interactions with PopupsContainer -- maintain stack of Popup/Modal with visible state.
 - 2020.12.19, 03:35 -- Popup: Use nearest scrollable container ancestor as popup base? Or clip to it bounds? Or hide popup if control is (partially) out of this bounds?
 - 2020.12.18, 02:15 -- Popup: Use static `PopupStack` component and close same-level (from stack end to first `Modal` or stack begin) popups
