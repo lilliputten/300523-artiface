@@ -1,6 +1,8 @@
 # CHANGELOG
 
-- 2020.12.24, 19:00 -- Added ActionsContext module (provides actions context for hjtrowing up actions event throught components tree).
+- 2020.12.24, 21:13 -- (DONE TODO from 2020.12.24, 04:23) Modal: Using `autoClose` prop (self-close on any action), calling `onAction` handlers on modal deactivating.
+- 2020.12.24, 20:45 -- (DONE TODO from 2020.12.24, 04:18) ActionsContext + Catching actions events from child of `actions` sub-component in Modals.
+- 2020.12.24, 19:00 -- Added ActionsContext module (provides actions context for throwing up actions event throught components tree)
 - 2020.12.24, 18:21 -- Predefined modal sizes (based on `config.css.modalSizes`: xs, sm, md, lg, xl, xxl, using prop `width`).
 - 2020.12.24, 04:31 -- Lift PopupsContainer to topmost level with `z-index`.
 - 2020.12.24, 04:17 -- PD-3504: Modal: window layout (Window, Header, Container, Content, Layout, LayoutMain, Actions), styles, blurry-less window geometry (flex-based), improved click-outside processing (catch mouseleave to cancel click waiting), correct activating on popupInited event in show:true state, firing `onCancel` event on close by click-outside, esc-press, close-button, extra logging disabled; InclineIcon theming (via `config.css.themeColors`), FormButton mods: plain, largeIcon, onlyIcon.
@@ -47,5 +49,5 @@
 - 2020.10.05, 20:38 -- v.0.0.15: Extracted `demoSupport.jsx` routines, fixture selection from url query (parameter `fixture`), added avaialble fixtures list if fixture to display is not specified, added DemoWrapper & demoTitle exportable ficture parameters for demo rendering.
 
 <!--
- @changed 2020.12.24, 21:15
+ @changed 2020.12.24, 21:20
 -->

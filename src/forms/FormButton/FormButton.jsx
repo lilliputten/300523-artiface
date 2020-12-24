@@ -5,10 +5,15 @@
  */
 
 import React from 'react'
+import { compose } from 'redux'
 import PropTypes from 'prop-types'
 // import connect from 'react-redux/es/connect/connect'
 // import { cn } from '@bem-react/classname'
 import { cn } from 'utils/configure'
+import {
+  withActionsContext,
+  // ActionsContextConsumer,
+} from 'helpers/ActionsContext'
 
 import FormItemHOC from '../FormItemHOC'
 
@@ -112,12 +117,17 @@ class FormButton extends React.PureComponent /** @lends @FormButton.prototype */
 
   onClick = (event) => {
     const {
+      id,
+      actionsContextNode, // ActionContext Provider
       disabled,
       onClick,
       // clickable,
     } = this.props
     if (!disabled && onClick && typeof onClick === 'function') {
       onClick(event)
+    }
+    if (actionsContextNode && typeof actionsContextNode.onAction) {
+      actionsContextNode.onAction({ id })
     }
   }
 
@@ -163,6 +173,7 @@ class FormButton extends React.PureComponent /** @lends @FormButton.prototype */
       type,
       title,
       setDomRef, // From FormItemHOC
+      actionsContextNode,
     } = this.props
 
     const iconElem = this.renderIcon() // Icon element
@@ -194,4 +205,8 @@ class FormButton extends React.PureComponent /** @lends @FormButton.prototype */
 
 }
 
-export default FormItemHOC({ solid: true, hoverable: true, framed: true })(FormButton)
+// export default FormItemHOC({ solid: true, hoverable: true, framed: true })(FormButton)
+export default compose(
+  withActionsContext,
+  FormItemHOC({ solid: true, hoverable: true, framed: true }),
+)(FormButton)

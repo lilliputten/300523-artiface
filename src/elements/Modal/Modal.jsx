@@ -1,7 +1,7 @@
 /** @module Modal
  *  @class Modal
  *  @since 2020.12.21, 22:58
- *  @changed 2020.12.24, 18:19
+ *  @changed 2020.12.24, 21:24
  *
  *  External methods (for PopupStack):
  *  - close
@@ -12,12 +12,7 @@
 
 import React from 'react'
 import PropTypes from 'prop-types'
-// import connect from 'react-redux/es/connect/connect'
 import { cn } from 'utils/configure'
-// import withOnClickOutside from 'react-onclickoutside' // To use?
-// import { strings } from 'utils'
-// import { debounce } from 'throttle-debounce'
-// import { PortalWithState } from 'react-portal'
 import { Portal } from 'react-portal'
 import { // Transitions...
   // Transition,
@@ -28,6 +23,8 @@ import config from 'config'
 
 import InlineIcon from 'elements/InlineIcon'
 import FormButton from 'forms/FormButton'
+
+import { ActionsContextProvider } from 'helpers/ActionsContext'
 
 import './Modal-Geometry.pcss'
 import './Modal-Themes.pcss'
@@ -42,36 +39,22 @@ const mouseUpEvent = 'mouseup'
 const mouseLeaveEvent = 'mouseleave'
 const globalKeyPressEventName = 'keydown'
 
-// // Unused events:
-// const globalScrollEventName = 'scroll'
-// const globalResizeEventName = 'resize'
+export const selfCloseActionId = '--modal-self-close--'
+export const externalCloseActionId = '--modal-external-close--'
 
-/* // DEBUG: Demo for prevent closing underlaying popups. (Can be used for modal windows. See crrsp styles & html layout.)
- * const debugHide = document.getElementById('DebugHide')
- * setTimeout(() => {
- *   if (debugHide) {
- *     debugHide.style.display = 'block'
- *   }
- * }, 3000)
- * const debugHideListener = (ev) => {
- *   // ev.stopImmediatePropagation()
- *   ev.stopPropagation()
- * }
- * debugHide && debugHide.addEventListener('click', debugHideListener)
- */
-
-class Modal extends React.PureComponent /** @lends @Modal.prototype */ {
+export default class Modal extends React.PureComponent /** @lends @Modal.prototype */ {
 
   // Props...
 
   static propTypes = {
     // loading: PropTypes.bool, // Show Loader flashback
-    // onAction: PropTypes.func, // Event fired on action invoked (see `actions` prop)
+    onAction: PropTypes.func, // Event fired on action invoked (see `actions` prop)
     // registerCallback: PropTypes.func, // ??? registerCallback(handler = this.someMethod) -- handler stored by parent component and called when detected click on pulldown menu -- prevents popup content closing
     // setModalNodeRef: PropTypes.func, // ??? Demo?
     width: PropTypes.string, // Modal window width (predefined variants: xs, sm, md, lg, xl, xxl)
     actions: PropTypes.oneOfType([ PropTypes.array, PropTypes.object ]), // Actions component(s) (TODO: `ActionsContext` must be used)
     className: PropTypes.string, // Modal class name
+    closeOnCancelAction: PropTypes.bool, // Auto-close on `cancel` action event
     closeOnClickOutside: PropTypes.bool, // Close (cancel) modal by click outside modal window (on 'curtain')
     closeOnEscPressed: PropTypes.bool, // Close (cancel) modal on esc key pressed
     closeWithCloseButton: PropTypes.bool, // Close (cancel) modal by click on header 'Close' button
@@ -79,15 +62,15 @@ class Modal extends React.PureComponent /** @lends @Modal.prototype */ {
     icon:  PropTypes.oneOfType([ PropTypes.string, PropTypes.object ]), // Show icon in header
     id: PropTypes.string, // Modal id
     leftContent: PropTypes.oneOfType([ PropTypes.string, PropTypes.object ]), // Content at left of main content and actions (ideal place for large visual icon)
-    onActivate: PropTypes.func, // Event fired on activate (before show)
-    onCancel: PropTypes.func, // Event fired on forced close (by click-outside, esc-pressed or close-button)
+    onActivate: PropTypes.func, // Event fired on activate (before open)
     onClickOutside: PropTypes.func, // Event fired on click outside modal
-    onClose: PropTypes.func, // Event fired on modal close
     onCloseButtonClick: PropTypes.func, // Event fired on header 'Close' button click
     onDeactivate: PropTypes.func, // Event fired on deactivate (unmounting from dom)
     onEscPressed: PropTypes.func, // Event fired on esc key pressed
     onOpen: PropTypes.func, // Event fired on modal open
-    show: PropTypes.bool, // Show modal by default
+    onClose: PropTypes.func, // Event fired on modal close
+    handleOpenState: PropTypes.func, // Event fired on modal open state change (update external open/close state) ({ open, id } => void)
+    open: PropTypes.bool, // Show modal by default
     showCloseButton: PropTypes.bool, // Display close button in header
     title: PropTypes.string, // Modal title
     windowClassName: PropTypes.string, // Modal window class name
@@ -100,9 +83,9 @@ class Modal extends React.PureComponent /** @lends @Modal.prototype */ {
   }
 
   static defaultProps = {
-    closeOnClickOutside: true, // Close (cancel, with `onCancel` event) modal by outisde-click.
-    closeOnEscPressed: true, // Close (cancel, with `onCancel` event) modal by esc-key.
-    closeWithCloseButton: true, // Close (cancel, with `onCancel` event) with 'Close button' (if present in layout -- see `showCloseButton`) show: false, // Show modal by default
+    closeOnClickOutside: true, // Close (with `selfCloseActionId` action id) modal by outisde-click.
+    closeOnEscPressed: true, // Close (with `selfCloseActionId` action id) modal by esc-key.
+    closeWithCloseButton: true, // Close (with `selfCloseActionId` action id) with 'Close button' (if present in layout -- see `showCloseButton`)
     showCloseButton: false, // Display 'Close button'?
   }
 
@@ -113,6 +96,8 @@ class Modal extends React.PureComponent /** @lends @Modal.prototype */ {
   windowDomNode = null
   transitionTime = 0
 
+  resolvingAction = null // Resulting action
+
   // Lifecycle...
 
   constructor(props) {
@@ -121,7 +106,7 @@ class Modal extends React.PureComponent /** @lends @Modal.prototype */ {
     this.state = {
       popupsInited: false,
       active: false,
-      show: false,
+      open: false,
     }
     config.popups.initPromise.then(this.setPopupsInited)
     this.transitionTime = config.css.modalAnimateTime
@@ -134,16 +119,16 @@ class Modal extends React.PureComponent /** @lends @Modal.prototype */ {
   componentDidUpdate(prevProps, prevState) {
     const props = this.props
     const state = this.state
-    if (props.show !== prevProps.show && props.show !== state.show) { // New show from props
-      if (props.show) {
-        this.activate(() => this.setState({ show: true }))
+    if (props.open !== prevProps.open && props.open !== state.open) { // New open from props
+      if (props.open) {
+        this.activate(() => this.setState({ open: true }))
       }
       else {
-        this.setState({ show: false })
+        this.setState({ open: false })
       }
     }
-    else if (state.show !== prevState.show) { // New show from state
-      if (!state.active) { // Is it real case (changing `show` on inactive modal?
+    else if (state.open !== prevState.open) { // New open from state
+      if (!state.active) { // Is it real case (changing `open` on inactive modal?
         this.activate()
       }
       this.updateShowWithState()
@@ -153,13 +138,14 @@ class Modal extends React.PureComponent /** @lends @Modal.prototype */ {
   // External methods...
 
   isVisible = () => {
-    return this.state.show
+    return this.state.open
   }
 
   activate = (cb) => {
     const { id, onActivate } = this.props
     const { active } = this.state
     if (!active) {
+      // this.resolvingAction = null // Activating in `open` method
       // console.log('Modal:activate', id, active)
       this.setState({ active: true }, () => {
         if (typeof cb === 'function') {
@@ -180,19 +166,19 @@ class Modal extends React.PureComponent /** @lends @Modal.prototype */ {
     const { active } = this.state
     if (active) {
       // console.log('Modal:deactivate', id)
-      this.setState({ active: false }, () => {
-        if (typeof onDeactivate === 'function') {
-          onDeactivate({ id })
-        }
-      })
+      this.resolveAction() // `resolvingAction` must be defined?
+      if (typeof onDeactivate === 'function') {
+        onDeactivate({ id })
+      }
+      this.setState({ active: false })
     }
   }
 
   toggle = () => { // External method for using in `ModalStack`
     // const { id } = this.props
-    const { show } = this.state
-    // console.log('Modal:ctoggle', id, show)
-    if (show) {
+    const { open } = this.state
+    // console.log('Modal:ctoggle', id, open)
+    if (open) {
       this.close()
     }
     else {
@@ -201,35 +187,42 @@ class Modal extends React.PureComponent /** @lends @Modal.prototype */ {
   }
 
   close = () => { // External method for using in `ModalStack`
-    const { id, onClose } = this.props
-    const { show } = this.state
-    // console.log('Modal:close', id, show)
-    if (show) {
-      this.setState({ show: false }, (state) => {
+    const { id, onClose, handleOpenState } = this.props
+    const { open } = this.state
+    // console.log('Modal:close', id, open)
+    if (open) {
+      this.setState({ open: false }, (state) => {
         this.updateShowWithState(state)
         setTimeout(this.deactivate, this.transitionTime) // TODO?
       })
       if (typeof onClose === 'function') {
         onClose({ id })
       }
+      if (typeof handleOpenState === 'function') {
+        handleOpenState({ id, open: false })
+      }
     }
   }
 
   open = () => { // External method for using in `ModalStack`
-    const { id, onOpen } = this.props
-    const { show } = this.state
-    // console.log('Modal:open', id, show)
-    if (!show) {
+    const { id, onOpen, handleOpenState } = this.props
+    const { open } = this.state
+    // console.log('Modal:open', id, open)
+    if (!open) {
+      this.resolvingAction = null // Reset resolving action
       // First activate portal then enter into opening animation
       this.activate(() => {
-        this.setState({ show: true }, () => {
+        this.setState({ open: true }, () => {
           this.updateShowWithState()
           if (typeof onOpen === 'function') {
             onOpen({ id })
           }
+          if (typeof handleOpenState === 'function') {
+            handleOpenState({ id, open: true })
+          }
         })
       })
-      this.activate(() => this.setState({ show: true }, this.updateShowWithState))
+      this.activate(() => this.setState({ open: true }, this.updateShowWithState))
     }
   }
 
@@ -294,8 +287,8 @@ class Modal extends React.PureComponent /** @lends @Modal.prototype */ {
   }
 
   updateShowWithState = (state) => {
-    const { show } = state || this.state
-    if (show) {
+    const { open } = state || this.state
+    if (open) {
       this.registerGlobalHandlers()
     }
     else {
@@ -305,33 +298,60 @@ class Modal extends React.PureComponent /** @lends @Modal.prototype */ {
 
   setPopupsInited = () => {
     this.setState({ popupsInited: true })
-    const { show } = this.props
-    if (show) { // Immediately open if passed show status
-      this.activate(() => this.setState({ show: true }))
+    const { open } = this.props
+    if (open) { // Immediately open if passed open status
+      this.activate(() => this.setState({ open: true }))
     }
   }
 
+  resolveAction() { // Final method on close or on action event with autoClose mode
+    const actionId = this.resolvingAction || externalCloseActionId
+    /* // UNUSED: Throw an error if actionId is undefined
+     * if (!actionId) {
+     *   const error = new Error('Modal: resolving action is undefined')
+     *   console.error(error) // eslint-disable-line no-console
+     *   debugger // eslint-disable-line no-debugger
+     *   throw error // ???
+     * }
+     */
+    const { id, onAction } = this.props
+    if (typeof onAction === 'function') {
+      onAction({ id: actionId, modalId: id })
+    }
+    this.resolvingAction = null // Reset action back
+  }
+
   // Handlers...
+
+  onAction = (actionProps) => { // Event handler for ActionContext consumed children
+    const actionId = actionProps.id
+    const { /* id, */ actionsContextNode, autoClose, closeOnCancelAction } = this.props
+    this.resolvingAction = actionId
+    // console.log('Modal:onAction', id, actionId)
+    if (autoClose || (closeOnCancelAction && actionId === 'cancel')) { // Close and call `resolveAction` when window is closed
+      this.close()
+    }
+    else { // ...Or all `resolveAction` immediatelly
+      this.resolveAction()
+    }
+    if (actionsContextNode && typeof actionsContextNode.onAction) {
+      actionsContextNode.onAction(actionProps)
+    }
+  }
 
   onKeyPress = (event) => {
     var { keyCode } = event
     const {
       id,
-      // onKeyPress,
-      // onEnterPressed,
       onEscPressed,
       closeOnEscPressed,
-      onCancel,
     } = this.props
     const isEscPressed = (keyCode === 27)
     const cbProps = { event, id, keyCode }
-    // onKeyPress && onKeyPress(cbProps)
     if (isEscPressed) {
       if (closeOnEscPressed) {
+        this.resolvingAction = selfCloseActionId
         this.close()
-        if (typeof onCancel === 'function') {
-          onCancel({ id })
-        }
       }
       if (typeof onEscPressed === 'function') {
         onEscPressed(cbProps)
@@ -360,14 +380,12 @@ class Modal extends React.PureComponent /** @lends @Modal.prototype */ {
     }
   }
   onOutsideClickDone = () => { // Mouse released on wrapper --> close modal
-    const { id, closeOnClickOutside, onClickOutside, onCancel } = this.props
+    const { id, closeOnClickOutside, onClickOutside } = this.props
     // console.log('onOutsideClickDone')
     this.stopOutsideClickWaiting()
     if (closeOnClickOutside) {
+      this.resolvingAction = selfCloseActionId
       this.close()
-      if (typeof onCancel === 'function') {
-        onCancel({ id })
-      }
     }
     if (typeof onClickOutside === 'function') {
       onClickOutside({ id })
@@ -375,13 +393,11 @@ class Modal extends React.PureComponent /** @lends @Modal.prototype */ {
   }
 
   onCloseButtonClick = () => { // Mouse released on wrapper --> close modal
-    const { id, closeWithCloseButton, onCloseButtonClick, onCancel } = this.props
+    const { id, closeWithCloseButton, onCloseButtonClick } = this.props
     // console.log('onCloseButtonClick')
     if (closeWithCloseButton) {
+      this.resolvingAction = selfCloseActionId
       this.close()
-      if (typeof onCancel === 'function') {
-        onCancel({ id })
-      }
     }
     if (typeof onCloseButtonClick === 'function') {
       onCloseButtonClick({ id })
@@ -426,9 +442,10 @@ class Modal extends React.PureComponent /** @lends @Modal.prototype */ {
   renderHeaderIcon() {
     const { icon, iconTheme } = this.props
     const theme = iconTheme || this.props.theme
-    return icon && (
+    const showIcon = icon || theme && config.ui.defaultIcons[theme]
+    return showIcon && (
       <div className={cnModal('HeaderIcon', { theme })}>
-        <InlineIcon theme={theme} icon={icon} />
+        <InlineIcon theme={theme} icon={showIcon} />
       </div>
     )
   }
@@ -468,7 +485,9 @@ class Modal extends React.PureComponent /** @lends @Modal.prototype */ {
     const { actions } = this.props
     return actions && (
       <div className={cnModal('Actions')}>
-        {actions}
+        <ActionsContextProvider value={this}>
+          {actions}
+        </ActionsContextProvider>
       </div>
     )
   }
@@ -487,6 +506,7 @@ class Modal extends React.PureComponent /** @lends @Modal.prototype */ {
             {this.renderContent()}
             {this.renderActions()}
           </div>
+          {/* renderRightContent? */}
         </div>
       </div>
     )
@@ -494,14 +514,14 @@ class Modal extends React.PureComponent /** @lends @Modal.prototype */ {
 
   renderModal() {
     const { id, theme, wrapperTheme, className, wrapperClassName } = this.props
-    const { show } = this.state
-    // console.log('Modal:renderModal', { id, show })
+    const { open } = this.state
+    // console.log('Modal:renderModal', { id, open })
     return (
       <CSSTransition
         key={id}
         // id={id}
         timeout={this.transitionTime}
-        in={show}
+        in={open}
         classNames={cnModal()}
       >
         <div
@@ -522,9 +542,9 @@ class Modal extends React.PureComponent /** @lends @Modal.prototype */ {
 
   render() {
     // const { id } = this.props
-    const { popupsInited, active/* , show */ } = this.state
+    const { popupsInited, active/* , open */ } = this.state
     const toDisplay = popupsInited && active
-    // console.log('Modal:render', { id, popupsInited, active, show })
+    // console.log('Modal:render', { id, popupsInited, active, open })
     return toDisplay && (
       <Portal node={config.popups.domNode}>
         {this.renderModal()}
@@ -533,5 +553,3 @@ class Modal extends React.PureComponent /** @lends @Modal.prototype */ {
   }
 
 }
-
-export default Modal

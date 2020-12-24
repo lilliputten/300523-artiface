@@ -1,7 +1,5 @@
 # TODO
 
-- 2020.12.24, 04:23 -- Modal: Use autoClose prop (self-close on any action), call cancel & action handlers if closing on modal deactivating.
-- 2020.12.24, 04:18 -- ActionsContext + Catch actions events from child of `actions` sub-component in Modals.
 - 2020.12.23, 00:43 -- PD-3504: Modals: Actions wrapper component with catching contained buttons `onClick` events. Modals/Popups interactions with PopupsContainer -- maintain stack of Popup/Modal with visible state.
 - 2020.12.19, 03:35 -- Popup: Use nearest scrollable container ancestor as popup base? Or clip to it bounds? Or hide popup if control is (partially) out of this bounds?
 - 2020.12.18, 02:15 -- Popup: Use static `PopupStack` component and close same-level (from stack end to first `Modal` or stack begin) popups
@@ -16,5 +14,5 @@
 - 2020.10.06, 13:29 -- PD-2814: Refactoring all of used components. (See `README.form-components.md`.)
 
 <!--
- @changed 2020.12.24, 04:24
+ @changed 2020.12.24, 21:15
 -->

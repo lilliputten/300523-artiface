@@ -17,7 +17,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 // import connect from 'react-redux/es/connect/connect'
 import { cn } from 'utils/configure'
-// import withOnClickOutside from 'react-onclickoutside' // To use?
 import { strings } from 'utils'
 import { debounce } from 'throttle-debounce'
 import FormItemHOC from 'forms/FormItemHOC'
