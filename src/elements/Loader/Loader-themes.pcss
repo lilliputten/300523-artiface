@@ -10,46 +10,52 @@
     border-color: #fff transparent #fff transparent;
   }
   // Override hardcoded in `styles.css` colors (Ruslan's LESS PhpStorm solution)
+  @define-mixin themed $bgColor, $textColor, $ringColor {
+    background-color: $bgColor;
+    & ^&-Text {
+      color: $textColor;
+    }
+    & ^&-Spinner::after {
+      border-top-color: $ringColor;
+      border-bottom-color: $ringColor;
+    }
+  }
   &_theme_Light { // Light loader theme (white background, dark text)
     $bgColor: color(#fff alpha(.9));
     $textColor: #666;
     $ringColor: #aaa;
-    background-color: $bgColor;
-    & ^&-Text {
-      color: $textColor;
-    }
-    & ^&-Spinner::after {
-      border-top-color: $ringColor;
-      border-bottom-color: $ringColor;
-      border-width: 4px;
-    }
+    @mixin themed $bgColor, $textColor, $ringColor;
   }
   &_theme_Dark { // Dark loader theme
-    $bgColor: color(#000 alpha(.8));
+    $bgColor: color(#222 alpha(.9));
     $textColor: #fff;
     $ringColor: #fff;
-    background-color: $bgColor;
-    & ^&-Text {
-      color: $textColor;
-    }
-    & ^&-Spinner::after {
-      border-top-color: $ringColor;
-      border-bottom-color: $ringColor;
-      border-width: 4px;
-    }
+    @mixin themed $bgColor, $textColor, $ringColor;
   }
   &_theme_MediumDark { // MediumDark loader theme
-    $bgColor: color($neutralExtraDarkColor alpha(.85));
+    $bgColor: color(#555 alpha(.9));
+    // $bgColor: $neutralExtraDarkColor;
     $textColor: #fff;
     $ringColor: #fff;
-    background-color: $bgColor;
-    & ^&-Text {
-      color: $textColor;
-    }
-    & ^&-Spinner::after {
-      border-top-color: $ringColor;
-      border-bottom-color: $ringColor;
-      border-width: 4px;
-    }
+    @mixin themed $bgColor, $textColor, $ringColor;
+  }
+  // TODO: OpaqueLight, OpaqueDark, OpaqueMediumDark
+  &_theme_OpaqueLight { // Light loader theme (white background, dark text)
+    $bgColor: #fff;
+    $textColor: #666;
+    $ringColor: #aaa;
+    @mixin themed $bgColor, $textColor, $ringColor;
+  }
+  &_theme_OpaqueDark { // Dark loader theme
+    $bgColor: #333;
+    $textColor: #fff;
+    $ringColor: #fff;
+    @mixin themed $bgColor, $textColor, $ringColor;
+  }
+  &_theme_OpaqueMediumDark { // MediumDark loader theme
+    $bgColor: #666; // $neutralExtraDarkColor;
+    $textColor: #fff;
+    $ringColor: #fff;
+    @mixin themed $bgColor, $textColor, $ringColor;
   }
 }

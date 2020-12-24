@@ -19,26 +19,26 @@ const onCancel = (event) => {
 }
 
 export default {
-  modeInplace: (
-    <div className="LoaderDemoWrapper">
-      <Loader
-        mode="inplace"
-        theme="MediumDark"
-        text="MediumDark, inplace"
-        show
-      />
-    </div>
-  ),
-  modeBlock: (
-    <div className="LoaderDemoWrapper">
-      <Loader
-        mode="block"
-        theme="Dark"
-        text="Dark, block (full-page)"
-        show
-      />
-    </div>
-  ),
+  // modeInplace: (
+  //   <div className="LoaderDemoWrapper">
+  //     <Loader
+  //       mode="inplace"
+  //       theme="MediumDark"
+  //       text="MediumDark, inplace"
+  //       show
+  //     />
+  //   </div>
+  // ),
+  // modeBlock: ( // Full page
+  //   <div className="LoaderDemoWrapper">
+  //     <Loader
+  //       mode="block"
+  //       theme="Dark"
+  //       text="Dark, block (full-page)"
+  //       show
+  //     />
+  //   </div>
+  // ),
   themeLight: (
     <div className="LoaderDemoWrapper">
       <Loader
@@ -65,6 +65,36 @@ export default {
         mode="local"
         theme="Dark"
         text="Dark"
+        show
+      />
+    </div>
+  ),
+  themeOpaqueLight: (
+    <div className="LoaderDemoWrapper">
+      <Loader
+        mode="local"
+        theme="OpaqueLight"
+        text="OpaqueLight"
+        show
+      />
+    </div>
+  ),
+  themeOpaqueMediumDark: (
+    <div className="LoaderDemoWrapper">
+      <Loader
+        mode="local"
+        theme="OpaqueMediumDark"
+        text="OpaqueMediumDark"
+        show
+      />
+    </div>
+  ),
+  themeOpaqueDark: (
+    <div className="LoaderDemoWrapper">
+      <Loader
+        mode="local"
+        theme="OpaqueDark"
+        text="OpaqueDark"
         show
       />
     </div>

@@ -22,6 +22,7 @@ import { // Transitions...
 import config from 'config'
 
 import InlineIcon from 'elements/InlineIcon'
+import Loader from 'elements/Loader'
 import FormButton from 'forms/FormButton'
 
 import { ActionsContextProvider } from 'helpers/ActionsContext'
@@ -47,11 +48,12 @@ export default class Modal extends React.PureComponent /** @lends @Modal.prototy
   // Props...
 
   static propTypes = {
-    // loading: PropTypes.bool, // Show Loader flashback
+    loading: PropTypes.bool, // Show Loader flashback
     onAction: PropTypes.func, // Event fired on action invoked (see `actions` prop)
     // registerCallback: PropTypes.func, // ??? registerCallback(handler = this.someMethod) -- handler stored by parent component and called when detected click on pulldown menu -- prevents popup content closing
     // setModalNodeRef: PropTypes.func, // ??? Demo?
     width: PropTypes.string, // Modal window width (predefined variants: xs, sm, md, lg, xl, xxl)
+    handleLoaderCancel: PropTypes.func, // Loader onCancel event handler
     actions: PropTypes.oneOfType([ PropTypes.array, PropTypes.object ]), // Actions component(s) (TODO: `ActionsContext` must be used)
     className: PropTypes.string, // Modal class name
     closeOnCancelAction: PropTypes.bool, // Auto-close on `cancel` action event
@@ -80,12 +82,14 @@ export default class Modal extends React.PureComponent /** @lends @Modal.prototy
     windowTheme: PropTypes.string, // Window theme (using `theme` if not specified)
     headerTheme: PropTypes.string, // Header theme (using `theme` if not specified)
     wrapperTheme: PropTypes.string, // Wrapper (back-curtain) theme (using `theme` if not specified)
+    loaderTheme: PropTypes.string, // Loader theme ('MediumDark' is default)
   }
 
   static defaultProps = {
     closeOnClickOutside: true, // Close (with `selfCloseActionId` action id) modal by outisde-click.
     closeOnEscPressed: true, // Close (with `selfCloseActionId` action id) modal by esc-key.
     closeWithCloseButton: true, // Close (with `selfCloseActionId` action id) with 'Close button' (if present in layout -- see `showCloseButton`)
+    loaderTheme: 'MediumDark',
     showCloseButton: false, // Display 'Close button'?
   }
 
@@ -340,21 +344,24 @@ export default class Modal extends React.PureComponent /** @lends @Modal.prototy
   }
 
   onKeyPress = (event) => {
-    var { keyCode } = event
     const {
       id,
       onEscPressed,
       closeOnEscPressed,
+      loading,
     } = this.props
-    const isEscPressed = (keyCode === 27)
-    const cbProps = { event, id, keyCode }
-    if (isEscPressed) {
-      if (closeOnEscPressed) {
-        this.resolvingAction = selfCloseActionId
-        this.close()
-      }
-      if (typeof onEscPressed === 'function') {
-        onEscPressed(cbProps)
+    if (!loading) {
+      var { keyCode } = event
+      const isEscPressed = (keyCode === 27)
+      const cbProps = { event, id, keyCode }
+      if (isEscPressed) {
+        if (closeOnEscPressed) {
+          this.resolvingAction = selfCloseActionId
+          this.close()
+        }
+        if (typeof onEscPressed === 'function') {
+          onEscPressed(cbProps)
+        }
       }
     }
   }
@@ -371,12 +378,15 @@ export default class Modal extends React.PureComponent /** @lends @Modal.prototy
     }
   }
   startOutsideClickWaiting = () => { // Start waiting for mouse up on wrapper (close modal) or window (continue working)
-    const { wrapperDomNode, windowDomNode } = this
-    // console.log('startOutsideClickWaiting')
-    if (!this.isOutsideClickWaiting && wrapperDomNode && windowDomNode) { // Start waiting for
-      this.isOutsideClickWaiting = true
-      wrapperDomNode.addEventListener(mouseUpEvent, this.onOutsideClickDone)
-      windowDomNode.addEventListener(mouseLeaveEvent, this.stopOutsideClickWaiting)
+    const { loading } = this.props
+    if (!loading) {
+      const { wrapperDomNode, windowDomNode } = this
+      // console.log('startOutsideClickWaiting')
+      if (!this.isOutsideClickWaiting && wrapperDomNode && windowDomNode) { // Start waiting for
+        this.isOutsideClickWaiting = true
+        wrapperDomNode.addEventListener(mouseUpEvent, this.onOutsideClickDone)
+        windowDomNode.addEventListener(mouseLeaveEvent, this.stopOutsideClickWaiting)
+      }
     }
   }
   onOutsideClickDone = () => { // Mouse released on wrapper --> close modal
@@ -512,6 +522,13 @@ export default class Modal extends React.PureComponent /** @lends @Modal.prototy
     )
   }
 
+  renderLoader() {
+    const { loading, loaderTheme, handleLoaderCancel } = this.props
+    return (
+      <Loader mode="local" theme={loaderTheme} show={loading} onCancel={handleLoaderCancel} />
+    )
+  }
+
   renderModal() {
     const { id, theme, wrapperTheme, className, wrapperClassName } = this.props
     const { open } = this.state
@@ -533,7 +550,7 @@ export default class Modal extends React.PureComponent /** @lends @Modal.prototy
             ref={this.setWrapperDomRef}
           >
             {this.renderWindow()}
-            {/* TODO: Optional Loader */}
+            {this.renderLoader()}
           </div>
         </div>
       </CSSTransition>

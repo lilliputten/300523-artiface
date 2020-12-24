@@ -6,17 +6,18 @@
 
 .Modal {
   &-Wrapper {
-    &, &_theme_transparentBlack {
-      background-color: rgba(0,0,0,.5);
+    // See for example `Loader` themes definitions in `Loader-themes.pcss`
+    &, &_theme_Dark {
+      background-color: color(#000 alpha(.5));
     }
-    &_theme_opaqueGray {
+    &_theme_OpaqueMediumDark {
       background-color: #666;
     }
-    &_theme_opaqueWhite {
+    &_theme_OpaqueLight {
       background-color: #fff;
     }
-    &_theme_transparentWhite {
-      background-color: rgba(255,255,255,.5);
+    &_theme_Light {
+      background-color: color(#fff alpha(.5));
     }
   }
   &-Window {

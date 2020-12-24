@@ -24,6 +24,7 @@ class Simple extends React.PureComponent /** @lends @PopupsContainer.prototype *
     super(props)
     this.state = {
       open: true,
+      loading: true,
     }
     // setTimeout(this.close, 3000)
     // setInterval(this.toggle, 5000)
@@ -39,6 +40,10 @@ class Simple extends React.PureComponent /** @lends @PopupsContainer.prototype *
   }
   setModalRef = (ref) => {
     this.modalRef = ref
+  }
+  handleLoaderCancel = () => {
+    console.log('handleLoaderCancel')
+    this.setState(({ loading }) => ({ loading: !loading }))
   }
   renderActions() {
     return (
@@ -92,6 +97,9 @@ class Simple extends React.PureComponent /** @lends @PopupsContainer.prototype *
           // leftContent="left" // Left column (with icon visual, eg)
           showCloseButton
           autoClose
+          loading={this.state.loading}
+          // loaderTheme="Dark"
+          handleLoaderCancel={this.handleLoaderCancel}
         >
           <div className="simpleContainer">
             <div className="simpleStub">simpleStub</div>
