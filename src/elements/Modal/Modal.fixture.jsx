@@ -70,7 +70,7 @@ class Simple extends React.PureComponent /** @lends @PopupsContainer.prototype *
           title="Modal title"
           content="Main content"
           theme="error"
-          width="md"
+          // width="md"
           // leftContent="left" // Left column (with icon visual, eg)
           showCloseButton
         >

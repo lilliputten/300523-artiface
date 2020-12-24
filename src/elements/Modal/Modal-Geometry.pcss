@@ -22,23 +22,15 @@
     box-sizing: border-box;
     overflow: hidden;
     margin: $windowPadding auto; // Horizontally auto sizing & centering
-    // @media (max-width: 400px) {
-    //   margin: $windowPadding;
-    // }
+    min-width: $(modalMinWidth)px;
+    @media (max-width: @calc($(modalMinWidth)px + $windowPadding * 2)) {
+      margin: $windowPadding;
+      min-width: auto;
+    }
     position: relative;
     // Center window:
     top: 40%;
     transform: translate(0, -50%);
-    // Other experiments:
-    // position: fixed;
-    // left: 50%;
-    // Blurry? NOTE: Need to pay attention to the parity of the window width!
-    // transform: translate3d(-50%, -50%, 0) scale(2, 2);
-    // zoom: 0.5;
-    // -webkit-font-smoothing: subpixel-antialiased;
-    // transform: translateX(-50%) translateY(-50%);
-    // Fix for blurry effect?
-    // transform: translate(calc(-50% + 0.5px), calc(-50% + 0.5px));
   }
 
   // Widths (based on `config.css.modalSizes`)...
