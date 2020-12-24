@@ -221,7 +221,7 @@ module.exports = (env, argv) => {
     }),
     require('postcss-simple-vars'), // https://github.com/postcss/postcss-simple-vars
     require('postcss-color-function'), // https://github.com/postcss/postcss-color-function
-    require('postcss-calc')(),
+    require('postcss-calc')({ mediaQueries: true, selectors: true }), // https://github.com/postcss/postcss-calc
     require('postcss-nested-ancestors'), // https://github.com/toomuchdesign/postcss-nested-ancestors
     require('postcss-nested'),
     require('postcss-each'),

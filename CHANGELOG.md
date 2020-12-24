@@ -1,5 +1,6 @@
 # CHANGELOG
 
+- 2020.12.24, 18:21 -- Predefined modal sizes (based on `config.css.modalSizes`: xs, sm, md, lg, xl, xxl, using prop `width`).
 - 2020.12.24, 04:31 -- Lift PopupsContainer to topmost level with `z-index`.
 - 2020.12.24, 04:17 -- PD-3504: Modal: window layout (Window, Header, Container, Content, Layout, LayoutMain, Actions), styles, blurry-less window geometry (flex-based), improved click-outside processing (catch mouseleave to cancel click waiting), correct activating on popupInited event in show:true state, firing `onCancel` event on close by click-outside, esc-press, close-button, extra logging disabled; InclineIcon theming (via `config.css.themeColors`), FormButton mods: plain, largeIcon, onlyIcon.
 - 2020.12.23, 00:43 -- PD-3504: Modals: Close-on-click-outside mechanism (closeOnClickOutside prop), close-on-esc (closeOnEscPressed prop), rendering witch active (portal activated) and show (animation triggered) states, global & internal dom events registration, generic modal/popup interface (isVisible, close, open), improved demo fixture, basic wrapper/window & animations styles. Other minor changes (FormButton inline mod, updated PropTypes, WebUiCore RootComponent).

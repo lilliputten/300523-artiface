@@ -1,6 +1,6 @@
 /** @module Modal.fixture
  *  @since 2020.12.21, 22:58
- *  @changed 2020.12.24, 02:43
+ *  @changed 2020.12.24, 18:19
  */
 /* eslint-disable react/jsx-max-depth, react/no-multi-comp, no-console */
 
@@ -70,6 +70,7 @@ class Simple extends React.PureComponent /** @lends @PopupsContainer.prototype *
           title="Modal title"
           content="Main content"
           theme="error"
+          width="md"
           // leftContent="left" // Left column (with icon visual, eg)
           showCloseButton
         >

@@ -1,7 +1,7 @@
 /** @module Modal
  *  @class Modal
  *  @since 2020.12.21, 22:58
- *  @changed 2020.12.24, 03:06
+ *  @changed 2020.12.24, 18:19
  *
  *  External methods (for PopupStack):
  *  - close
@@ -69,7 +69,7 @@ class Modal extends React.PureComponent /** @lends @Modal.prototype */ {
     // onAction: PropTypes.func, // Event fired on action invoked (see `actions` prop)
     // registerCallback: PropTypes.func, // ??? registerCallback(handler = this.someMethod) -- handler stored by parent component and called when detected click on pulldown menu -- prevents popup content closing
     // setModalNodeRef: PropTypes.func, // ??? Demo?
-    // size: PropTypes.string, // Modal window width (predefined variants: xs, sm, md, lg, xl, xxl)
+    width: PropTypes.string, // Modal window width (predefined variants: xs, sm, md, lg, xl, xxl)
     actions: PropTypes.oneOfType([ PropTypes.array, PropTypes.object ]), // Actions component(s) (TODO: `ActionsContext` must be used)
     className: PropTypes.string, // Modal class name
     closeOnClickOutside: PropTypes.bool, // Close (cancel) modal by click outside modal window (on 'curtain')
@@ -474,10 +474,10 @@ class Modal extends React.PureComponent /** @lends @Modal.prototype */ {
   }
 
   renderWindow() {
-    const { windowTheme, theme, windowClassName } = this.props
+    const { width, windowTheme, theme, windowClassName } = this.props
     return (
       <div
-        className={cnModal('Window', { theme: windowTheme || theme }, [windowClassName])}
+        className={cnModal('Window', { width, theme: windowTheme || theme }, [windowClassName])}
         ref={this.setWindowDomRef}
       >
         {this.renderHeader()}

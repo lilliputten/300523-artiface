@@ -1,7 +1,7 @@
 /** @module config.css
  *  @description Global styles config
  *  @since 2019.08.29, 10:28
- *  @changed 2020.12.23, 00:20
+ *  @changed 2020.12.24, 18:19
  */
 
 // Theme...
@@ -63,7 +63,7 @@ const cssConfig = { // Common-used css variables...
   neutralLightColor: '#e0e0e0',
   neutralExtraLightColor: '#f0f0f0',
 
-  // Layout colors...
+  // Theme colors...
 
   bodyBgColor: theme.bodyBgColor || '#fff',
   bodyTextColor: theme.bodyTextColor || '#333',
@@ -159,6 +159,16 @@ const cssConfig = { // Common-used css variables...
   bm_lg: 800,
   bm_xl_pre: 1099.98,
   bm_xl: 1100,
+
+  // Modal sizes...
+  modalSizes: { // Generic theming colors...
+    xs: 200,
+    sm: 400,
+    md: 600,
+    lg: 800,
+    xl: 1000,
+    xxl: 1200,
+  },
 
   // Spacings & paddings...
 

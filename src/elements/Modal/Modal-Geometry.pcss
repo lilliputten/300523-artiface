@@ -17,12 +17,14 @@
     display: flex;
     flex-direction: column;
   }
+  $windowPadding: 20px;
   &-Window {
     box-sizing: border-box;
     overflow: hidden;
-    // max-width: 100%;
-    // z-index: 100; // Lift above all other regular elements
-    margin: 20px auto;
+    margin: $windowPadding auto; // Horizontally auto sizing & centering
+    // @media (max-width: 400px) {
+    //   margin: $windowPadding;
+    // }
     position: relative;
     // Center window:
     top: 40%;
@@ -37,6 +39,20 @@
     // transform: translateX(-50%) translateY(-50%);
     // Fix for blurry effect?
     // transform: translate(calc(-50% + 0.5px), calc(-50% + 0.5px));
+  }
+
+  // Widths (based on `config.css.modalSizes`)...
+  &-Window_width {
+    @each $width $id in $modalSizes {
+      &_$(id) {
+        margin: $windowPadding;
+        $extraWidth: @calc($(width)px + $windowPadding * 2);
+        @media (min-width: $extraWidth) {
+          margin: $windowPadding auto;
+          width: $(width)px;
+        }
+      }
+    }
   }
 
   // Layout items: Window, Header, Container, Content, Layout, LayoutMain, Actions
