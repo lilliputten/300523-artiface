@@ -55,12 +55,11 @@ export default class Modal extends React.PureComponent /** @lends @Modal.prototy
     width: PropTypes.string, // Modal window width (predefined variants: xs, sm, md, lg, xl, xxl)
     handleLoaderCancel: PropTypes.func, // Loader onCancel event handler
     actions: PropTypes.oneOfType([ PropTypes.array, PropTypes.object ]), // Actions component(s) (TODO: `ActionsContext` must be used)
-    className: PropTypes.string, // Modal class name
     closeOnCancelAction: PropTypes.bool, // Auto-close on `cancel` action event
     closeOnClickOutside: PropTypes.bool, // Close (cancel) modal by click outside modal window (on 'curtain')
     closeOnEscPressed: PropTypes.bool, // Close (cancel) modal on esc key pressed
     closeWithCloseButton: PropTypes.bool, // Close (cancel) modal by click on header 'Close' button
-    icon:  PropTypes.oneOfType([ PropTypes.string, PropTypes.object ]), // Show icon in header
+    icon: PropTypes.oneOfType([ PropTypes.string, PropTypes.object ]), // Show icon in header
     id: PropTypes.string, // Modal id
     leftContent: PropTypes.oneOfType([ PropTypes.string, PropTypes.object ]), // Content at left of main content and actions (ideal place for large visual icon)
     onActivate: PropTypes.func, // Event fired on activate (before open)
@@ -74,6 +73,8 @@ export default class Modal extends React.PureComponent /** @lends @Modal.prototy
     open: PropTypes.bool, // Show modal by default
     showCloseButton: PropTypes.bool, // Display close button in header
     title: PropTypes.string, // Modal title
+    className: PropTypes.string, // Modal class name
+    contentClassName: PropTypes.string, // Content element class name
     windowClassName: PropTypes.string, // Modal window class name
     wrapperClassName: PropTypes.string, // Modal wrapper class name
     theme: PropTypes.string, // Modal theme (default theme for all other themed elements, see `*Theme`)
@@ -368,8 +369,8 @@ export default class Modal extends React.PureComponent /** @lends @Modal.prototy
   stopOutsideClickWaiting = (/* ev */) => { // Mouse released on window --> cancel waiting for mouse up on wrapper (don't close modal)
     const { wrapperDomNode, windowDomNode } = this
     if (this.isOutsideClickWaiting && wrapperDomNode && windowDomNode) {
-      // const type  = ev && ev.type
-      // const target  = ev && ev.target
+      // const type = ev && ev.type
+      // const target = ev && ev.target
       // console.log('stopOutsideClickWaiting', type, target)
       wrapperDomNode.removeEventListener(mouseUpEvent, this.onOutsideClickDone)
       windowDomNode.removeEventListener(mouseLeaveEvent, this.stopOutsideClickWaiting)
@@ -484,12 +485,12 @@ export default class Modal extends React.PureComponent /** @lends @Modal.prototy
   }
 
   renderContent() {
-    const { children } = this.props
+    const { children, contentClassName } = this.props
+    // {[> <div className={cnModal('Container')}> <]}
+    // {[> </div> <]}
     return children && (
-      <div className={cnModal('Container')}>
-        <div className={cnModal('Content')}>
-          {children}
-        </div>
+      <div className={cnModal('Content', [ contentClassName ])}>
+        {children}
       </div>
     )
   }

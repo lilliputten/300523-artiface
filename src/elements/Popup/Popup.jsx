@@ -692,5 +692,3 @@ class Popup extends React.PureComponent /** @lends @Popup.prototype */ {
 export default Popup
 
 export const FormItemPopup = FormItemHOC(Popup)
-
-// export default withOnClickOutside(Popup) // To use?

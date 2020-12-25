@@ -57,7 +57,7 @@
 
   &-Window,
   &-Header,
-  &-Container,
+  // &-Container,
   &-Content,
   &-Layout,
   &-Main {
@@ -127,14 +127,20 @@
     flex: 1 1 auto;
     flex-direction: column;
     // border: 1px solid red;
+    overflow: hidden;
   }
-  &-Container {
+  // &-Container {
+  &-Content {
     flex: 1 1 auto;
     align-items: center;
     align-content: center;
     // align-self: center;
     // border: 1px solid blue;
     padding: 10px;
+    overflow: hidden;
+    &_scrollable {
+      overflow: auto;
+    }
   }
   &-LeftContent {
     align-self: center;

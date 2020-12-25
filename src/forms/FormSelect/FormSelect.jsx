@@ -85,9 +85,6 @@ class FormSelect extends React.PureComponent /** @lends @FormSelect.prototype */
     }
   }
   onMenuItemClick = (params) => {
-    // if (typeof this.hideStopper === 'function' && !this.props.closeOnSelect) {
-    //   this.hideStopper()
-    // }
     const { closeOnSelect, onMenuItemClick } = this.props
     if (typeof onMenuItemClick === 'function') {
       onMenuItemClick(params)
@@ -116,10 +113,6 @@ class FormSelect extends React.PureComponent /** @lends @FormSelect.prototype */
       setPopupNodeRef(node)
     }
   }
-
-  // registerHideStopper = (hideStopper) => { // Called from popup
-  //   this.hideStopper = hideStopper
-  // }
 
   // Render...
 
@@ -198,7 +191,6 @@ class FormSelect extends React.PureComponent /** @lends @FormSelect.prototype */
       popupControl: controlContent,
       popupContent: menuContent,
       onControlClick: this.onControlClick,
-      // registerHideStopper: this.registerHideStopper,
       fullWidth,
       ref: this.setPopupRef,
     }
