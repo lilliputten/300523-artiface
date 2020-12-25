@@ -21,11 +21,6 @@ const cnPopupsContainer = cn('PopupsContainer')
 
 // const doDebug = false // DEBUG!
 
-// const globalClickEventName = 'mousedown'
-// const globalKeyPressEventName = 'keydown'
-// const globalScrollEventName = 'scroll'
-// const globalResizeEventName = 'resize'
-
 class PopupsContainer extends React.PureComponent /** @lends @PopupsContainer.prototype */ {
 
   // Lifecycle...
@@ -119,7 +114,3 @@ class PopupsContainer extends React.PureComponent /** @lends @PopupsContainer.pr
 }
 
 export default PopupsContainer
-
-// TODO!
-// export const registerModalComponent
-// export const registerPopupComponent

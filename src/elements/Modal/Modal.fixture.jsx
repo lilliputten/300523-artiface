@@ -19,7 +19,7 @@ import './Modal.fixture.pcss'
 // export const DemoWrapper = FormGroup // ({ children }) => {
 
 // Interactive modal (self-closing)
-class Simple extends React.PureComponent /** @lends @PopupsContainer.prototype */ {
+class Interactive extends React.PureComponent /** @lends @PopupsContainer.prototype */ {
   constructor(props) {
     super(props)
     this.state = {
@@ -92,7 +92,6 @@ class Simple extends React.PureComponent /** @lends @PopupsContainer.prototype *
           ref={this.setModalRef}
           actions={actions}
           title="Modal title"
-          content="Main content"
           width="sm"
           // leftContent="left" // Left column (with icon visual, eg)
           showCloseButton
@@ -114,18 +113,17 @@ class Simple extends React.PureComponent /** @lends @PopupsContainer.prototype *
     )
   }
 }
-const simple = <Simple />
-/*
- * const simple = (
- *   <Modal
- *     id="simple"
- *   >
- *     <div className="simpleContainer">
- *       <div className="simpleStub">simpleStub</div>
- *     </div>
- *   </Modal>
- * )
- */
+const interactive = <Interactive />
+const simple = (
+  <Modal
+    id="simple"
+    open
+  >
+    <div className="simpleContainer">
+      <div className="simpleStub">simpleStub</div>
+    </div>
+  </Modal>
+)
 
 export default {
   simple,

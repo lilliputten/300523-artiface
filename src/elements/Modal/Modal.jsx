@@ -1,7 +1,7 @@
 /** @module Modal
  *  @class Modal
  *  @since 2020.12.21, 22:58
- *  @changed 2020.12.24, 21:24
+ *  @changed 2020.12.25, 15:30
  *
  *  External methods (for PopupStack):
  *  - close
@@ -60,7 +60,6 @@ export default class Modal extends React.PureComponent /** @lends @Modal.prototy
     closeOnClickOutside: PropTypes.bool, // Close (cancel) modal by click outside modal window (on 'curtain')
     closeOnEscPressed: PropTypes.bool, // Close (cancel) modal on esc key pressed
     closeWithCloseButton: PropTypes.bool, // Close (cancel) modal by click on header 'Close' button
-    content: PropTypes.oneOfType([ PropTypes.string, PropTypes.object ]), // Main modal content
     icon:  PropTypes.oneOfType([ PropTypes.string, PropTypes.object ]), // Show icon in header
     id: PropTypes.string, // Modal id
     leftContent: PropTypes.oneOfType([ PropTypes.string, PropTypes.object ]), // Content at left of main content and actions (ideal place for large visual icon)
@@ -109,7 +108,7 @@ export default class Modal extends React.PureComponent /** @lends @Modal.prototy
     // const popupsInited = config.popups.isInited
     this.state = {
       popupsInited: false,
-      active: false,
+      activated: false,
       open: false,
     }
     config.popups.initPromise.then(this.setPopupsInited)
@@ -132,7 +131,7 @@ export default class Modal extends React.PureComponent /** @lends @Modal.prototy
       }
     }
     else if (state.open !== prevState.open) { // New open from state
-      if (!state.active) { // Is it real case (changing `open` on inactive modal?
+      if (!state.activated) { // Is it real case (changing `open` on inactive modal?
         this.activate()
       }
       this.updateShowWithState()
@@ -147,11 +146,11 @@ export default class Modal extends React.PureComponent /** @lends @Modal.prototy
 
   activate = (cb) => {
     const { id, onActivate } = this.props
-    const { active } = this.state
-    if (!active) {
+    const { activated } = this.state
+    if (!activated) {
       // this.resolvingAction = null // Activating in `open` method
-      // console.log('Modal:activate', id, active)
-      this.setState({ active: true }, () => {
+      // console.log('Modal:activate', id, activated)
+      this.setState({ activated: true }, () => {
         if (typeof cb === 'function') {
           cb()
         }
@@ -167,14 +166,14 @@ export default class Modal extends React.PureComponent /** @lends @Modal.prototy
 
   deactivate = () => {
     const { id, onDeactivate } = this.props
-    const { active } = this.state
-    if (active) {
+    const { activated } = this.state
+    if (activated) {
       // console.log('Modal:deactivate', id)
       this.resolveAction() // `resolvingAction` must be defined?
       if (typeof onDeactivate === 'function') {
         onDeactivate({ id })
       }
-      this.setState({ active: false })
+      this.setState({ activated: false })
     }
   }
 
@@ -426,10 +425,20 @@ export default class Modal extends React.PureComponent /** @lends @Modal.prototy
 
   // Render...
 
+  renderHeaderIcon() {
+    const { icon, iconTheme } = this.props
+    const theme = iconTheme || this.props.theme
+    const showIcon = icon || theme && config.ui.defaultIcons[theme]
+    return showIcon && (
+      <div key="HeaderIcon" className={cnModal('HeaderIcon', { theme })}>
+        <InlineIcon theme={theme} icon={showIcon} />
+      </div>
+    )
+  }
   renderHeaderTitle() {
     const { title } = this.props
     return title && (
-      <div className={cnModal('HeaderTitle')}>
+      <div key="HeaderTitle" className={cnModal('HeaderTitle')}>
         {title}
       </div>
     )
@@ -437,7 +446,7 @@ export default class Modal extends React.PureComponent /** @lends @Modal.prototy
   renderHeaderCloseButton() {
     const { showCloseButton } = this.props
     return showCloseButton && (
-      <div className={cnModal('HeaderCloseButton')}>
+      <div key="HeaderCloseButton" className={cnModal('HeaderCloseButton')}>
         <FormButton
           icon="faTimes"
           largeIcon
@@ -449,24 +458,18 @@ export default class Modal extends React.PureComponent /** @lends @Modal.prototy
       </div>
     )
   }
-  renderHeaderIcon() {
-    const { icon, iconTheme } = this.props
-    const theme = iconTheme || this.props.theme
-    const showIcon = icon || theme && config.ui.defaultIcons[theme]
-    return showIcon && (
-      <div className={cnModal('HeaderIcon', { theme })}>
-        <InlineIcon theme={theme} icon={showIcon} />
-      </div>
-    )
-  }
 
   renderHeader() {
     const { headerTheme, theme } = this.props
-    return (
+    const content = [
+      this.renderHeaderIcon(),
+      this.renderHeaderTitle(),
+      this.renderHeaderCloseButton(),
+    ].filter(Boolean)
+    const hasHeader = !!(content && content.length)
+    return hasHeader && (
       <div className={cnModal('Header', { theme: headerTheme || theme })}>
-        {this.renderHeaderIcon()}
-        {this.renderHeaderTitle()}
-        {this.renderHeaderCloseButton()}
+        {content}
       </div>
     )
   }
@@ -481,11 +484,11 @@ export default class Modal extends React.PureComponent /** @lends @Modal.prototy
   }
 
   renderContent() {
-    const { content } = this.props
-    return content && (
+    const { children } = this.props
+    return children && (
       <div className={cnModal('Container')}>
         <div className={cnModal('Content')}>
-          {content}
+          {children}
         </div>
       </div>
     )
@@ -512,7 +515,7 @@ export default class Modal extends React.PureComponent /** @lends @Modal.prototy
         {this.renderHeader()}
         <div className={cnModal('Layout')}>
           {this.renderLeftContent()}
-          <div className={cnModal('LayoutMain')}>
+          <div className={cnModal('Main')}>
             {this.renderContent()}
             {this.renderActions()}
           </div>
@@ -558,10 +561,8 @@ export default class Modal extends React.PureComponent /** @lends @Modal.prototy
   }
 
   render() {
-    // const { id } = this.props
-    const { popupsInited, active/* , open */ } = this.state
-    const toDisplay = popupsInited && active
-    // console.log('Modal:render', { id, popupsInited, active, open })
+    const { popupsInited, activated } = this.state
+    const toDisplay = popupsInited && activated
     return toDisplay && (
       <Portal node={config.popups.domNode}>
         {this.renderModal()}
