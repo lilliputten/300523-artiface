@@ -135,12 +135,14 @@ class WithSelect extends React.PureComponent /** @lends @PopupsContainer.prototy
   close = () => this.setState({ open: false })
   handleOpenState = ({ open }) => this.setState({ open })
   toggle = () => {
+    debugger
     this.modalRef && this.modalRef.toggle()
     // this.setState(({ open }) => {
     //   return { open: !open }
     // })
   }
   setModalRef = (ref) => {
+    debugger
     this.modalRef = ref
   }
   handleLoaderCancel = () => {

@@ -83,11 +83,12 @@ const simple = (
   </div>
 )
 
-const closingImmediately = (
+const withMenu = (
   <Popup
-    id="closingImmediately"
-    popupControl={<FormButton icon="faChevronRight" rightIcon theme="primary" variation="popupControl" text="Closing immediately" />}
+    id="withMenu"
+    popupControl={<FormButton icon="faChevronRight" rightIcon theme="primary" variation="popupControl" text="withMenu" />}
     popupContent={demoMenu}
+    open
   />
 )
 
@@ -105,6 +106,6 @@ const stayOpenAfterItemClick = (
 
 export default {
   simple,
-  closingImmediately,
+  withMenu,
   stayOpenAfterItemClick,
 }

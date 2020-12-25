@@ -20,7 +20,8 @@ import { cn } from 'utils/configure'
 import { strings } from 'utils'
 import { debounce } from 'throttle-debounce'
 import FormItemHOC from 'forms/FormItemHOC'
-import { PortalWithState } from 'react-portal'
+// import { PortalWithState } from 'react-portal'
+import { Portal } from 'react-portal'
 /* UNUSED: Transitions
  * import { // Transitions...
  *   CSSTransition,
@@ -163,13 +164,9 @@ class Popup extends React.PureComponent /** @lends @Popup.prototype */ {
     // popupContent: null,
     // popupControl: null,
     // registerCallback: null,
-    className: null,
     closeOnClickOutside: true,
     closeOnEscPressed: true,
-    id: null,
-    onControlClick: null,
     open: false,
-    setPopupNodeRef: null,
   }
 
   delayedClickTimerHandler = null
@@ -185,6 +182,8 @@ class Popup extends React.PureComponent /** @lends @Popup.prototype */ {
     const popupsInited = config.popups.isInited
     this.state = {
       popupsInited,
+      activated: false,
+      open: false,
     }
     if (!popupsInited) {
       config.popups.initPromise.then(this.setPopupsInited)
@@ -578,23 +577,25 @@ class Popup extends React.PureComponent /** @lends @Popup.prototype */ {
   // Render...
 
   renderPopupControl(portalParams) {
-    const {
-      isOpen,
-      openPortal,
-      closePortal,
-      // portal,
-    } = portalParams
+    // const {
+    //   isOpen,
+    //   openPortal,
+    //   closePortal,
+    //   // portal,
+    // } = portalParams || {}
     const {
       id,
       popupControl,
       className,
     } = this.props
+    const { open } = this.state
 
-    this.openPortal = openPortal
-    this.closePortal = closePortal
+    // this.openPortal = openPortal
+    // this.closePortal = closePortal
 
     const controlProps = popupControl && popupControl.props
 
+    // TODO: Cache modidied `popupControl` in state?
     const content = {
       ...popupControl,
       props: {
@@ -602,7 +603,7 @@ class Popup extends React.PureComponent /** @lends @Popup.prototype */ {
         onClick: this.onControlClick,
         // onClick: isOpen ? closePortal : openPortal,
         // onClick: [> controlProps.onControlClick || <] this.onControlClick,
-        checked: isOpen,
+        checked: open,
         setDomRef: this.setControlRef,
       },
     }
@@ -620,17 +621,18 @@ class Popup extends React.PureComponent /** @lends @Popup.prototype */ {
   }
 
   renderPopupContent(portalParams) {
-    const {
-      // isOpen,
-      // openPortal,
-      // closePortal,
-      portal,
-    } = portalParams
+    // const {
+    //   // isOpen,
+    //   // openPortal,
+    //   // closePortal,
+    //   portal,
+    // } = portalParams || {}
     const {
       id,
       popupContent,
       contentClassName: className,
     } = this.props
+    // const { open } = this.state
     const renderProps = {
       id,
       className: this.getClassName({ cnCtx: cnPopup, className, ...portalParams }),
@@ -650,14 +652,22 @@ class Popup extends React.PureComponent /** @lends @Popup.prototype */ {
      *   </CSSTransition>
      * </TransitionGroup>
      */
-    return portal(
-      <div {...renderProps}>
-        {popupContent}
-      </div>
+    //     node={config.popups.domNode}
+    return (
+      <Portal node={config.popups.domNode}>
+        <div {...renderProps}>
+          {popupContent}
+        </div>
+      </Portal>
     )
+    // return portal(
+    //   <div {...renderProps}>
+    //     {popupContent}
+    //   </div>
+    // )
   }
 
-  renderPortal = (portalParams) => {
+  renderPopop = (portalParams) => {
     return (
       <React.Fragment>
         {this.renderPopupControl(portalParams)}
@@ -673,18 +683,19 @@ class Popup extends React.PureComponent /** @lends @Popup.prototype */ {
       open,
     } = this.props
     const { popupsInited } = this.state
-    return popupsInited && (
-      <PortalWithState
-        node={config.popups.domNode}
-        onOpen={this.handlePortalOpen}
-        onClose={this.handlePortalClose}
-        closeOnOutsideClick={closeOnClickOutside}
-        closeOnEsc={closeOnEscPressed}
-        defaultOpen={open}
-      >
-        {this.renderPortal}
-      </PortalWithState>
-    )
+    return popupsInited && this.renderPopop()
+    // return popupsInited && (
+    //   <PortalWithState
+    //     node={config.popups.domNode}
+    //     onOpen={this.handlePortalOpen}
+    //     onClose={this.handlePortalClose}
+    //     closeOnOutsideClick={closeOnClickOutside}
+    //     closeOnEsc={closeOnEscPressed}
+    //     defaultOpen={open}
+    //   >
+    //     {this.renderPortal}
+    //   </PortalWithState>
+    // )
   }
 
 }

@@ -13,16 +13,18 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { cn } from 'utils/configure'
-import { Portal } from 'react-portal'
-import { // Transitions...
-  // Transition,
-  CSSTransition,
-  // TransitionGroup,
-} from 'react-transition-group'
+// import { Portal } from 'react-portal'
+// import { // Transitions...
+//   // Transition,
+//   CSSTransition,
+//   // TransitionGroup,
+// } from 'react-transition-group'
 import config from 'config'
 
+import ModalPortal from 'elements/ModalPortal'
+
 import InlineIcon from 'elements/InlineIcon'
-import Loader from 'elements/Loader'
+// import Loader from 'elements/Loader'
 import FormButton from 'forms/FormButton'
 
 import { ActionsContextProvider } from 'helpers/ActionsContext'
@@ -35,10 +37,10 @@ const cnModal = cn('Modal')
 
 // const doDebug = false // DEBUG!
 
-const mouseDownEvent = 'mousedown'
-const mouseUpEvent = 'mouseup'
-const mouseLeaveEvent = 'mouseleave'
-const globalKeyPressEventName = 'keydown'
+// const mouseDownEvent = 'mousedown'
+// const mouseUpEvent = 'mouseup'
+// const mouseLeaveEvent = 'mouseleave'
+// const globalKeyPressEventName = 'keydown'
 
 export const selfCloseActionId = '--modal-self-close--'
 export const externalCloseActionId = '--modal-external-close--'
@@ -48,6 +50,7 @@ export default class Modal extends React.PureComponent /** @lends @Modal.prototy
   // Props...
 
   static propTypes = {
+    useLoader: PropTypes.bool,
     loading: PropTypes.bool, // Show Loader flashback
     onAction: PropTypes.func, // Event fired on action invoked (see `actions` prop)
     // registerCallback: PropTypes.func, // ??? registerCallback(handler = this.someMethod) -- handler stored by parent component and called when detected click on pulldown menu -- prevents popup content closing
@@ -90,7 +93,10 @@ export default class Modal extends React.PureComponent /** @lends @Modal.prototy
     closeOnEscPressed: true, // Close (with `selfCloseActionId` action id) modal by esc-key.
     closeWithCloseButton: true, // Close (with `selfCloseActionId` action id) with 'Close button' (if present in layout -- see `showCloseButton`)
     loaderTheme: 'MediumDark',
+    loading: false,
+    open: false,
     showCloseButton: false, // Display 'Close button'?
+    useLoader: false,
   }
 
   // Instance variables...
@@ -104,13 +110,12 @@ export default class Modal extends React.PureComponent /** @lends @Modal.prototy
 
   // Lifecycle...
 
+  typeId = 'Modal'
+
   constructor(props) {
     super(props)
-    // const popupsInited = config.popups.isInited
     this.state = {
-      popupsInited: false,
-      activated: false,
-      open: false,
+      open: props.open,
     }
     config.popups.initPromise.then(this.setPopupsInited)
     this.transitionTime = config.css.modalAnimateTime
@@ -120,229 +125,39 @@ export default class Modal extends React.PureComponent /** @lends @Modal.prototy
     this.unregisterGlobalHandlers()
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    const props = this.props
-    const state = this.state
-    if (props.open !== prevProps.open && props.open !== state.open) { // New open from props
-      if (props.open) {
-        this.activate(() => this.setState({ open: true }))
-      }
-      else {
-        this.setState({ open: false })
-      }
-    }
-    else if (state.open !== prevState.open) { // New open from state
-      if (!state.activated) { // Is it real case (changing `open` on inactive modal?
-        this.activate()
-      }
-      this.updateShowWithState()
-    }
-  }
-
-  // External methods...
-
-  isVisible = () => {
-    return this.state.open
-  }
-
-  activate = (cb) => {
-    const { id, onActivate } = this.props
-    const { activated } = this.state
-    if (!activated) {
-      // this.resolvingAction = null // Activating in `open` method
-      // console.log('Modal:activate', id, activated)
-      this.setState({ activated: true }, () => {
-        if (typeof cb === 'function') {
-          cb()
-        }
-        if (typeof onActivate === 'function') {
-          onActivate({ id })
-        }
-      })
-    }
-    else if (typeof cb === 'function') {
-      cb()
-    }
-  }
-
-  deactivate = () => {
-    const { id, onDeactivate } = this.props
-    const { activated } = this.state
-    if (activated) {
-      // console.log('Modal:deactivate', id)
-      this.resolveAction() // `resolvingAction` must be defined?
-      if (typeof onDeactivate === 'function') {
-        onDeactivate({ id })
-      }
-      this.setState({ activated: false })
-    }
-  }
-
-  toggle = () => { // External method for using in `ModalStack`
-    // const { id } = this.props
-    const { open } = this.state
-    // console.log('Modal:ctoggle', id, open)
-    if (open) {
-      this.close()
-    }
-    else {
-      this.open()
-    }
-  }
-
-  close = () => { // External method for using in `ModalStack`
-    const { id, onClose, handleOpenState } = this.props
-    const { open } = this.state
-    // console.log('Modal:close', id, open)
-    if (open) {
-      this.setState({ open: false }, (state) => {
-        this.updateShowWithState(state)
-        setTimeout(this.deactivate, this.transitionTime) // TODO?
-      })
-      if (typeof onClose === 'function') {
-        onClose({ id })
-      }
-      if (typeof handleOpenState === 'function') {
-        handleOpenState({ id, open: false })
-      }
-    }
-  }
-
-  open = () => { // External method for using in `ModalStack`
-    const { id, onOpen, handleOpenState } = this.props
-    const { open } = this.state
-    // console.log('Modal:open', id, open)
-    if (!open) {
-      this.resolvingAction = null // Reset resolving action
-      // First activate portal then enter into opening animation
-      this.activate(() => {
-        this.setState({ open: true }, () => {
-          this.updateShowWithState()
-          if (typeof onOpen === 'function') {
-            onOpen({ id })
-          }
-          if (typeof handleOpenState === 'function') {
-            handleOpenState({ id, open: true })
-          }
-        })
-      })
-      this.activate(() => this.setState({ open: true }, this.updateShowWithState))
-    }
-  }
-
-  updateGeometry = () => null // External method stub
-
   // Helpers...
-
-  registerGlobalHandlers() {
-    const { windowDomNode, wrapperDomNode } = this
-    // const { closeOnClickOutside } = this.props
-    if (!this.globalHandlersRegistered) {
-      this.globalHandlersRegistered = true // Set flag
-      // console.log('registerGlobalHandlers')
-      if (!windowDomNode || !wrapperDomNode) {
-        const error = new Error('Modal: dom nodes is undefined on registerGlobalHandlers')
-        console.error(error) // eslint-disable-line no-console
-        debugger // eslint-disable-line no-debugger
-        throw error // ???
-      }
-      /* // Update geometry (UNUSED)
-       * document.addEventListener(globalScrollEventName, this.updateGeometry)
-       * window.addEventListener(globalResizeEventName, this.updateGeometry)
-       * if (!this.updateGeometryTimer && updateGeometryTimerDelay) {
-       *   this.updateGeometryTimer = setInterval(this.updateGeometry, updateGeometryTimerDelay)
-       * }
-       */
-      document.addEventListener(globalKeyPressEventName, this.onKeyPress)
-      if (windowDomNode && wrapperDomNode) {
-        wrapperDomNode.addEventListener(mouseDownEvent, this.startOutsideClickWaiting)
-        windowDomNode.addEventListener(mouseUpEvent, this.stopOutsideClickWaiting)
-      }
-    }
-  }
-
-  unregisterGlobalHandlers() {
-    const { windowDomNode, wrapperDomNode } = this
-    // TODO: Check for dom nodes exists during close process
-    // const { closeOnClickOutside } = this.props
-    if (this.globalHandlersRegistered) {
-      this.globalHandlersRegistered = false // Reset flag
-      // console.log('unregisterGlobalHandlers')
-      if (!windowDomNode || !wrapperDomNode) {
-        const error = new Error('Modal: dom nodes is undefined on unregisterGlobalHandlers')
-        console.error(error) // eslint-disable-line no-console
-        debugger // eslint-disable-line no-debugger
-        throw error // ???
-      }
-      /* // Update geometry (UNUSED)
-       * document.removeEventListener(globalScrollEventName, this.updateGeometry)
-       * window.removeEventListener(globalResizeEventName, this.updateGeometry)
-       * if (!this.updateGeometryTimer && updateGeometryTimerDelay) {
-       *   this.updateGeometryTimer = setInterval(this.updateGeometry, updateGeometryTimerDelay)
-       * }
-       */
-      document.removeEventListener(globalKeyPressEventName, this.onKeyPress)
-      if (windowDomNode && wrapperDomNode) {
-        this.stopOutsideClickWaiting()
-        wrapperDomNode.removeEventListener(mouseDownEvent, this.startOutsideClickWaiting)
-        windowDomNode.removeEventListener(mouseUpEvent, this.stopOutsideClickWaiting)
-      }
-    }
-  }
-
-  updateShowWithState = (state) => {
-    const { open } = state || this.state
-    if (open) {
-      this.registerGlobalHandlers()
-    }
-    else {
-      this.unregisterGlobalHandlers()
-    }
-  }
-
-  setPopupsInited = () => {
-    this.setState({ popupsInited: true })
-    const { open } = this.props
-    if (open) { // Immediately open if passed open status
-      this.activate(() => this.setState({ open: true }))
-    }
-  }
-
-  resolveAction() { // Final method on close or on action event with autoClose mode
-    const actionId = this.resolvingAction || externalCloseActionId
-    /* // UNUSED: Throw an error if actionId is undefined
-     * if (!actionId) {
-     *   const error = new Error('Modal: resolving action is undefined')
-     *   console.error(error) // eslint-disable-line no-console
-     *   debugger // eslint-disable-line no-debugger
-     *   throw error // ???
-     * }
-     */
-    const { id, onAction } = this.props
-    if (typeof onAction === 'function') {
-      onAction({ id: actionId, modalId: id })
-    }
-    this.resolvingAction = null // Reset action back
-  }
 
   // Handlers...
 
+  handleOpenState = ({ open }) => {
+    this.setState({ open })
+    const { id, onClose, handleOpenState } = this.props
+    if (typeof handleOpenState === 'function') {
+      handleOpenState({ id, open })
+    }
+  }
+
   onAction = (actionProps) => { // Event handler for ActionContext consumed children
     const actionId = actionProps.id
-    const { /* id, */ actionsContextNode, autoClose, closeOnCancelAction } = this.props
-    this.resolvingAction = actionId
-    // console.log('Modal:onAction', id, actionId)
+    const { id, actionsContextNode, autoClose, closeOnCancelAction } = this.props
+    // TODO: ModalPortal.setResult(actionId)
+    // this.resolvingAction = actionId
+    console.log('Modal:onAction', id, actionId)
+    debugger;
     if (autoClose || (closeOnCancelAction && actionId === 'cancel')) { // Close and call `resolveAction` when window is closed
-      this.close()
+      // TODO: ModalPortal.close()
+      // this.close()
     }
     else { // ...Or all `resolveAction` immediatelly
-      this.resolveAction()
+      // TODO: ModalPortal.resolveResult()
+      // this.resolveAction()
     }
     if (actionsContextNode && typeof actionsContextNode.onAction) {
       actionsContextNode.onAction(actionProps)
     }
   }
 
+  // Handled in ModalPortal: onKeyPress, *OutsideClick*
   onKeyPress = (event) => {
     const {
       id,
@@ -366,48 +181,15 @@ export default class Modal extends React.PureComponent /** @lends @Modal.prototy
     }
   }
 
-  stopOutsideClickWaiting = (/* ev */) => { // Mouse released on window --> cancel waiting for mouse up on wrapper (don't close modal)
-    const { wrapperDomNode, windowDomNode } = this
-    if (this.isOutsideClickWaiting && wrapperDomNode && windowDomNode) {
-      // const type = ev && ev.type
-      // const target = ev && ev.target
-      // console.log('stopOutsideClickWaiting', type, target)
-      wrapperDomNode.removeEventListener(mouseUpEvent, this.onOutsideClickDone)
-      windowDomNode.removeEventListener(mouseLeaveEvent, this.stopOutsideClickWaiting)
-      this.isOutsideClickWaiting = false
-    }
-  }
-  startOutsideClickWaiting = () => { // Start waiting for mouse up on wrapper (close modal) or window (continue working)
-    const { loading } = this.props
-    if (!loading) {
-      const { wrapperDomNode, windowDomNode } = this
-      // console.log('startOutsideClickWaiting')
-      if (!this.isOutsideClickWaiting && wrapperDomNode && windowDomNode) { // Start waiting for
-        this.isOutsideClickWaiting = true
-        wrapperDomNode.addEventListener(mouseUpEvent, this.onOutsideClickDone)
-        windowDomNode.addEventListener(mouseLeaveEvent, this.stopOutsideClickWaiting)
-      }
-    }
-  }
-  onOutsideClickDone = () => { // Mouse released on wrapper --> close modal
-    const { id, closeOnClickOutside, onClickOutside } = this.props
-    // console.log('onOutsideClickDone')
-    this.stopOutsideClickWaiting()
-    if (closeOnClickOutside) {
-      this.resolvingAction = selfCloseActionId
-      this.close()
-    }
-    if (typeof onClickOutside === 'function') {
-      onClickOutside({ id })
-    }
-  }
-
   onCloseButtonClick = () => { // Mouse released on wrapper --> close modal
     const { id, closeWithCloseButton, onCloseButtonClick } = this.props
-    // console.log('onCloseButtonClick')
+    console.log('Modal: onCloseButtonClick', id)
+    debugger;
     if (closeWithCloseButton) {
-      this.resolvingAction = selfCloseActionId
-      this.close()
+      // TODO: ModalPortal.setResult(actionId)
+      // this.resolvingAction = selfCloseActionId
+      // TODO: ModalPortal.close()
+      // this.close()
     }
     if (typeof onCloseButtonClick === 'function') {
       onCloseButtonClick({ id })
@@ -506,7 +288,11 @@ export default class Modal extends React.PureComponent /** @lends @Modal.prototy
     )
   }
 
-  renderWindow() {
+  renderWindow(portalProps) {
+    const { ModalPortal } = portalProps
+    // console.log(portalProps)
+    // debugger
+    this.ModalPortal = ModalPortal // Save ModalPortal handler (TODO)
     const { width, windowTheme, theme, windowClassName } = this.props
     return (
       <div
@@ -526,48 +312,22 @@ export default class Modal extends React.PureComponent /** @lends @Modal.prototy
     )
   }
 
-  renderLoader() {
-    const { loading, loaderTheme, handleLoaderCancel } = this.props
-    return (
-      <Loader mode="local" theme={loaderTheme} show={loading} onCancel={handleLoaderCancel} />
-    )
-  }
-
-  renderModal() {
-    const { id, theme, wrapperTheme, className, wrapperClassName } = this.props
-    const { open } = this.state
-    // console.log('Modal:renderModal', { id, open })
-    return (
-      <CSSTransition
-        key={id}
-        // id={id}
-        timeout={this.transitionTime}
-        in={open}
-        classNames={cnModal()}
-      >
-        <div
-          className={cnModal({ id }, [className])}
-          ref={this.setRootDomRef}
-        >
-          <div
-            className={cnModal('Wrapper', { theme: wrapperTheme || theme }, [wrapperClassName])}
-            ref={this.setWrapperDomRef}
-          >
-            {this.renderWindow()}
-            {this.renderLoader()}
-          </div>
-        </div>
-      </CSSTransition>
-    )
-  }
-
   render() {
-    const { popupsInited, activated } = this.state
-    const toDisplay = popupsInited && activated
-    return toDisplay && (
-      <Portal node={config.popups.domNode}>
-        {this.renderModal()}
-      </Portal>
+    const {
+      open,
+    } = this.state
+    const {
+      loading,
+    } = this.props
+    const modalPortalProps = {
+      open,
+      loading,
+      // TOTO: Other wrapper, window related props...
+    }
+    return (
+      <ModalPortal {...modalPortalProps}>
+        {this.renderWindow}
+      </ModalPortal>
     )
   }
 
