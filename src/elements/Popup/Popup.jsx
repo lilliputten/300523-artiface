@@ -555,7 +555,9 @@ class Popup extends React.PureComponent /** @lends @Popup.prototype */ {
   }
 
   onControlClick = (/* event */) => {
+    const { id } = this.props
     const { isOpen, openPortal, closePortal } = this
+    console.log('Popup:onControlClick', id, isOpen)
     const method = isOpen ? closePortal : openPortal
     if (typeof method === 'function') {
       // method(event)

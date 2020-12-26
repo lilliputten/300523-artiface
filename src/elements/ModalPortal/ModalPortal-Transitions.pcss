@@ -1,10 +1,10 @@
-/** @module Modal-Transitions.styles
- *  @desc Modal show/hide transitions
+/** @module ModalPortal-Transitions.styles
+ *  @desc ModalPortal show/hide transitions
  *  @since 2020.12.21, 22:58
- *  @changed 2020.12.24, 02:43
+ *  @changed 2020.12.26, 21:31
  */
 
-.Modal { // Animation transitions...
+.ModalPortal { // Animation transitions...
   $timeout: $(modalAnimateTime)ms;
   // $windowTimeout: $(animateTime)ms; // Slow
   // $windowTimeout: $(transitionTime)ms; // Quick
@@ -20,21 +20,21 @@
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  .Modal-Window {
+  .ModalPortal-Window {
     opacity: 0;
     margin-top: 0;
   }
   &-enter {
     // opacity: 0;
     visibility: visible;
-    .Modal-Window {
+    .ModalPortal-Window {
       margin-top: -$descent;
     }
   }
   &-enter-active {
     opacity: 1;
     transition: opacity $timeout;
-    .Modal-Window {
+    .ModalPortal-Window {
       transition: opacity $windowTimeout, margin-top $windowTimeout;
       opacity: 1;
       margin-top: 0px;
@@ -44,21 +44,21 @@
     visibility: visible;
     opacity: 1;
     pointer-events: all;
-    .Modal-Window {
+    .ModalPortal-Window {
       opacity: 1;
     }
   }
   &-exit {
     visibility: visible;
     opacity: 1;
-    .Modal-Window {
+    .ModalPortal-Window {
       opacity: 1;
     }
   }
   &-exit-active {
     opacity: 0;
     transition: opacity $timeout;
-    .Modal-Window {
+    .ModalPortal-Window {
       transition: opacity $windowTimeout, margin-top $windowTimeout;
       opacity: 0;
       margin-top: -$descent;
@@ -68,7 +68,7 @@
     visibility: hidden;
     opacity: 0;
     pointer-events: none;
-    .Modal-Window {
+    .ModalPortal-Window {
       opacity: 0;
     }
   }

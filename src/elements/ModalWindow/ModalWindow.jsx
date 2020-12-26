@@ -1,5 +1,5 @@
-/** @module Modal
- *  @class Modal
+/** @module ModalWindow
+ *  @class ModalWindow
  *  @since 2020.12.21, 22:58
  *  @changed 2020.12.25, 15:30
  *
@@ -29,11 +29,11 @@ import FormButton from 'forms/FormButton'
 
 import { ActionsContextProvider } from 'helpers/ActionsContext'
 
-import './Modal-Geometry.pcss'
-import './Modal-Themes.pcss'
-import './Modal-Transitions.pcss'
+import './ModalWindow-Geometry.pcss'
+import './ModalWindow-Themes.pcss'
+// import './ModalWindow-Transitions.pcss'
 
-const cnModal = cn('Modal')
+const cnModalWindow = cn('ModalWindow')
 
 // const doDebug = false // DEBUG!
 
@@ -45,7 +45,7 @@ const cnModal = cn('Modal')
 export const selfCloseActionId = '--modal-self-close--'
 export const externalCloseActionId = '--modal-external-close--'
 
-export default class Modal extends React.PureComponent /** @lends @Modal.prototype */ {
+export default class ModalWindow extends React.PureComponent /** @lends @ModalWindow.prototype */ {
 
   // Props...
 
@@ -55,7 +55,7 @@ export default class Modal extends React.PureComponent /** @lends @Modal.prototy
     onAction: PropTypes.func, // Event fired on action invoked (see `actions` prop)
     // registerCallback: PropTypes.func, // ??? registerCallback(handler = this.someMethod) -- handler stored by parent component and called when detected click on pulldown menu -- prevents popup content closing
     // setModalNodeRef: PropTypes.func, // ??? Demo?
-    width: PropTypes.string, // Modal window width (predefined variants: xs, sm, md, lg, xl, xxl)
+    width: PropTypes.string, // ModalWindow window width (predefined variants: xs, sm, md, lg, xl, xxl)
     handleLoaderCancel: PropTypes.func, // Loader onCancel event handler
     actions: PropTypes.oneOfType([ PropTypes.array, PropTypes.object ]), // Actions component(s) (TODO: `ActionsContext` must be used)
     closeOnCancelAction: PropTypes.bool, // Auto-close on `cancel` action event
@@ -63,7 +63,7 @@ export default class Modal extends React.PureComponent /** @lends @Modal.prototy
     closeOnEscPressed: PropTypes.bool, // Close (cancel) modal on esc key pressed
     closeWithCloseButton: PropTypes.bool, // Close (cancel) modal by click on header 'Close' button
     icon: PropTypes.oneOfType([ PropTypes.string, PropTypes.object ]), // Show icon in header
-    id: PropTypes.string, // Modal id
+    id: PropTypes.string, // ModalWindow id
     leftContent: PropTypes.oneOfType([ PropTypes.string, PropTypes.object ]), // Content at left of main content and actions (ideal place for large visual icon)
     onActivate: PropTypes.func, // Event fired on activate (before open)
     onClickOutside: PropTypes.func, // Event fired on click outside modal
@@ -75,12 +75,12 @@ export default class Modal extends React.PureComponent /** @lends @Modal.prototy
     handleOpenState: PropTypes.func, // Event fired on modal open state change (update external open/close state) ({ open, id } => void)
     open: PropTypes.bool, // Show modal by default
     showCloseButton: PropTypes.bool, // Display close button in header
-    title: PropTypes.string, // Modal title
-    className: PropTypes.string, // Modal class name
+    title: PropTypes.string, // ModalWindow title
+    className: PropTypes.string, // ModalWindow class name
     contentClassName: PropTypes.string, // Content element class name
-    windowClassName: PropTypes.string, // Modal window class name
-    wrapperClassName: PropTypes.string, // Modal wrapper class name
-    theme: PropTypes.string, // Modal theme (default theme for all other themed elements, see `*Theme`)
+    windowClassName: PropTypes.string, // ModalWindow window class name
+    wrapperClassName: PropTypes.string, // ModalWindow wrapper class name
+    theme: PropTypes.string, // ModalWindow theme (default theme for all other themed elements, see `*Theme`)
     iconTheme: PropTypes.string, // Icon theme (using `theme` if not specified)
     windowTheme: PropTypes.string, // Window theme (using `theme` if not specified)
     headerTheme: PropTypes.string, // Header theme (using `theme` if not specified)
@@ -99,26 +99,16 @@ export default class Modal extends React.PureComponent /** @lends @Modal.prototy
     useLoader: false,
   }
 
-  // Instance variables...
-  isOutsideClickWaiting = false
-  globalHandlersRegistered = false
-  wrapperDomNode = null
-  windowDomNode = null
-  transitionTime = 0
-
-  resolvingAction = null // Resulting action
-
   // Lifecycle...
 
-  typeId = 'Modal'
+  // typeId = 'ModalWindow'
 
   constructor(props) {
     super(props)
-    this.state = {
-      open: props.open,
-    }
+    // this.state = {
+    //   // open: props.open,
+    // }
     config.popups.initPromise.then(this.setPopupsInited)
-    this.transitionTime = config.css.modalAnimateTime
   }
 
   componentWillUnmount() {
@@ -130,78 +120,93 @@ export default class Modal extends React.PureComponent /** @lends @Modal.prototy
   // Handlers...
 
   handleOpenState = ({ open }) => {
-    this.setState({ open })
-    const { id, onClose, handleOpenState } = this.props
+    // this.setState({ open })
+    const { id, handleOpenState } = this.props
     if (typeof handleOpenState === 'function') {
       handleOpenState({ id, open })
     }
   }
 
   onAction = (actionProps) => { // Event handler for ActionContext consumed children
-    const actionId = actionProps.id
-    const { id, actionsContextNode, autoClose, closeOnCancelAction } = this.props
-    // TODO: ModalPortal.setResult(actionId)
-    // this.resolvingAction = actionId
-    console.log('Modal:onAction', id, actionId)
-    debugger;
-    if (autoClose || (closeOnCancelAction && actionId === 'cancel')) { // Close and call `resolveAction` when window is closed
-      // TODO: ModalPortal.close()
-      // this.close()
+    const { ModalPortal } = this
+    if (!ModalPortal) {
+      const error = new Error('ModalWindow:onAction: ModalPortal must be defined')
+      console.error(error) // eslint-disable-line no-console
+      /*DEBUG*/ debugger // eslint-disable-line no-debugger
+      throw error // ???
     }
-    else { // ...Or all `resolveAction` immediatelly
-      // TODO: ModalPortal.resolveResult()
-      // this.resolveAction()
+    const actionId = actionProps.id
+    const { id, open, actionsContextNode, autoClose, closeOnCancelAction } = this.props
+    console.log('ModalWindow:onAction', id, actionId)
+    ModalPortal.setResult(actionId)
+    if (open && (autoClose || (closeOnCancelAction && actionId === 'cancel'))) { // Close and call `resolveResult` when window is closed
+      ModalPortal.close()
+    }
+    else { // ...Or all `resolveResult` immediatelly
+      ModalPortal.resolveResult()
     }
     if (actionsContextNode && typeof actionsContextNode.onAction) {
       actionsContextNode.onAction(actionProps)
     }
   }
 
+  // Provide ModalPortal public methods...
+
+  open = () => this.ModalPortal && this.ModalPortal.open()
+  close = () => this.ModalPortal && this.ModalPortal.close()
+  toggle = () => this.ModalPortal && this.ModalPortal.toggle()
+  isVisible = () => this.ModalPortal && this.ModalPortal.isVisible()
+
   // Handled in ModalPortal: onKeyPress, *OutsideClick*
-  onKeyPress = (event) => {
-    const {
-      id,
-      onEscPressed,
-      closeOnEscPressed,
-      loading,
-    } = this.props
-    if (!loading) {
-      var { keyCode } = event
-      const isEscPressed = (keyCode === 27)
-      const cbProps = { event, id, keyCode }
-      if (isEscPressed) {
-        if (closeOnEscPressed) {
-          this.resolvingAction = selfCloseActionId
-          this.close()
-        }
-        if (typeof onEscPressed === 'function') {
-          onEscPressed(cbProps)
-        }
-      }
-    }
-  }
+  // onKeyPress = (event) => {
+  //   const {
+  //     id,
+  //     onEscPressed,
+  //     closeOnEscPressed,
+  //     loading,
+  //   } = this.props
+  //   if (!loading) {
+  //     var { keyCode } = event
+  //     const isEscPressed = (keyCode === 27)
+  //     const cbProps = { event, id, keyCode }
+  //     if (isEscPressed) {
+  //       if (closeOnEscPressed) {
+  //         if (ModalPortal) {
+  //           ModalPortal.setResult(selfCloseActionId)
+  //           ModalPortal.close()
+  //         }
+  //         else {
+  //           const error = new Error('ModalWindow:onCloseButtonClick: ModalPortal must be defined')
+  //           console.error(error) // eslint-disable-line no-console
+  //           debugger // eslint-disable-line no-debugger
+  //           throw error // ???
+  //         }
+  //       }
+  //       if (typeof onEscPressed === 'function') {
+  //         onEscPressed(cbProps)
+  //       }
+  //     }
+  //   }
+  // }
 
   onCloseButtonClick = () => { // Mouse released on wrapper --> close modal
+    const { ModalPortal } = this
+    if (!ModalPortal) {
+      const error = new Error('ModalWindow:onCloseButtonClick: ModalPortal must be defined')
+      console.error(error) // eslint-disable-line no-console
+      /*DEBUG*/ debugger // eslint-disable-line no-debugger
+      throw error // ???
+    }
     const { id, closeWithCloseButton, onCloseButtonClick } = this.props
-    console.log('Modal: onCloseButtonClick', id)
-    debugger;
+    // console.log('ModalWindow: onCloseButtonClick', id)
+    // debugger;
     if (closeWithCloseButton) {
-      // TODO: ModalPortal.setResult(actionId)
-      // this.resolvingAction = selfCloseActionId
-      // TODO: ModalPortal.close()
-      // this.close()
+      ModalPortal.setResult(selfCloseActionId)
+      ModalPortal.close()
     }
     if (typeof onCloseButtonClick === 'function') {
       onCloseButtonClick({ id })
     }
-  }
-
-  setWindowDomRef = (domNode) => {
-    this.windowDomNode = domNode
-  }
-
-  setWrapperDomRef = (domNode) => {
-    this.wrapperDomNode = domNode
   }
 
   // Render helpers...
@@ -213,7 +218,7 @@ export default class Modal extends React.PureComponent /** @lends @Modal.prototy
     const theme = iconTheme || this.props.theme
     const showIcon = icon || theme && config.ui.defaultIcons[theme]
     return showIcon && (
-      <div key="HeaderIcon" className={cnModal('HeaderIcon', { theme })}>
+      <div key="HeaderIcon" className={cnModalWindow('HeaderIcon', { theme })}>
         <InlineIcon theme={theme} icon={showIcon} />
       </div>
     )
@@ -221,7 +226,7 @@ export default class Modal extends React.PureComponent /** @lends @Modal.prototy
   renderHeaderTitle() {
     const { title } = this.props
     return title && (
-      <div key="HeaderTitle" className={cnModal('HeaderTitle')}>
+      <div key="HeaderTitle" className={cnModalWindow('HeaderTitle')}>
         {title}
       </div>
     )
@@ -229,7 +234,7 @@ export default class Modal extends React.PureComponent /** @lends @Modal.prototy
   renderHeaderCloseButton() {
     const { showCloseButton } = this.props
     return showCloseButton && (
-      <div key="HeaderCloseButton" className={cnModal('HeaderCloseButton')}>
+      <div key="HeaderCloseButton" className={cnModalWindow('HeaderCloseButton')}>
         <FormButton
           icon="faTimes"
           largeIcon
@@ -251,7 +256,7 @@ export default class Modal extends React.PureComponent /** @lends @Modal.prototy
     ].filter(Boolean)
     const hasHeader = !!(content && content.length)
     return hasHeader && (
-      <div className={cnModal('Header', { theme: headerTheme || theme })}>
+      <div className={cnModalWindow('Header', { theme: headerTheme || theme })}>
         {content}
       </div>
     )
@@ -260,7 +265,7 @@ export default class Modal extends React.PureComponent /** @lends @Modal.prototy
   renderLeftContent() {
     const { leftContent } = this.props
     return leftContent && (
-      <div className={cnModal('LeftContent')}>
+      <div className={cnModalWindow('LeftContent')}>
         {leftContent}
       </div>
     )
@@ -268,10 +273,10 @@ export default class Modal extends React.PureComponent /** @lends @Modal.prototy
 
   renderContent() {
     const { children, contentClassName } = this.props
-    // {[> <div className={cnModal('Container')}> <]}
+    // {[> <div className={cnModalWindow('Container')}> <]}
     // {[> </div> <]}
     return children && (
-      <div className={cnModal('Content', [ contentClassName ])}>
+      <div className={cnModalWindow('Content', [ contentClassName ])}>
         {children}
       </div>
     )
@@ -280,7 +285,7 @@ export default class Modal extends React.PureComponent /** @lends @Modal.prototy
   renderActions() {
     const { actions } = this.props
     return actions && (
-      <div className={cnModal('Actions')}>
+      <div className={cnModalWindow('Actions')}>
         <ActionsContextProvider value={this}>
           {actions}
         </ActionsContextProvider>
@@ -288,41 +293,90 @@ export default class Modal extends React.PureComponent /** @lends @Modal.prototy
     )
   }
 
-  renderWindow(portalProps) {
+  renderWindow = (portalProps) => {
     const { ModalPortal } = portalProps
     // console.log(portalProps)
     // debugger
-    this.ModalPortal = ModalPortal // Save ModalPortal handler (TODO)
-    const { width, windowTheme, theme, windowClassName } = this.props
+    if (ModalPortal) { // Save wrapping ModalPortal instance refernce
+      this.ModalPortal = ModalPortal // Save ModalPortal handler (TODO)
+    }
+    // const { width, windowTheme, theme, windowClassName } = this.props
+    // <div
+    //   className={cnModalWindow('Window', { width, theme: windowTheme || theme }, [windowClassName])}
+    //   ref={this.setWindowDomRef}
+    // >
     return (
-      <div
-        className={cnModal('Window', { width, theme: windowTheme || theme }, [windowClassName])}
-        ref={this.setWindowDomRef}
-      >
+      <React.Fragment>
         {this.renderHeader()}
-        <div className={cnModal('Layout')}>
+        <div className={cnModalWindow('Layout')}>
           {this.renderLeftContent()}
-          <div className={cnModal('Main')}>
+          <div className={cnModalWindow('Main')}>
             {this.renderContent()}
             {this.renderActions()}
           </div>
           {/* renderRightContent? */}
         </div>
-      </div>
+      </React.Fragment>
     )
   }
 
   render() {
-    const {
-      open,
-    } = this.state
-    const {
+    // const {
+    //   open,
+    // } = this.state
+    const { // ModalPortal props...
+      id,
+      className,
+      closeOnClickOutside,
+      closeOnEscPressed,
+      handleLoaderCancel,
+      loaderTheme,
       loading,
+      onAction,
+      onActivate,
+      onClickOutside,
+      onClose,
+      onCloseButtonClick,
+      onDeactivate,
+      onEscPressed,
+      onOpen,
+      open,
+      theme,
+      useLoader,
+      windowClassName,
+      windowWidth,
+      wrapperClassName,
+      wrapperTheme,
     } = this.props
-    const modalPortalProps = {
-      open,
+    // console.log('ModalWindow:render', this.props.windowWidth)
+    // debugger
+    // TODO: Other wrapper, window related props?..
+    const modalPortalProps = { // Just pass props throught
+      id,
+      className,
+      closeOnClickOutside,
+      closeOnEscPressed,
+      handleLoaderCancel,
+      loaderTheme,
       loading,
-      // TOTO: Other wrapper, window related props...
+      onAction,
+      onActivate,
+      onClickOutside,
+      onClose,
+      onCloseButtonClick,
+      onDeactivate,
+      onEscPressed,
+      onOpen,
+      open,
+      theme,
+      useLoader,
+      windowClassName,
+      windowWidth,
+      wrapperClassName,
+      wrapperTheme,
+      // Renamed props...
+      // Pass other props...
+      type: 'Window',
     }
     return (
       <ModalPortal {...modalPortalProps}>

@@ -1,5 +1,6 @@
 # CHANGELOG
 
+- 2020.12.26, 23:09 -- PD-3504: ModalPortal: inplemented generic modal wrapper code, layout & styles form original `Modal`, Modal: Renamed Modal to ModalWindow.
 - 2020.12.25, 17:30 -- ModalPortal: Выделение общего (для Modal и Popup) компонента ModalPortal, отвечающего за функционирование интерактивных элементов вне общего dom-дерева приложения.
 - 2020.12.25, 00:56 -- Modal & Loader themes updated.
 - 2020.12.25, 00:33 -- Modal: prevent mouse & keyboard events on loading state.
@@ -54,5 +55,5 @@
 - 2020.10.05, 20:38 -- v.0.0.15: Extracted `demoSupport.jsx` routines, fixture selection from url query (parameter `fixture`), added avaialble fixtures list if fixture to display is not specified, added DemoWrapper & demoTitle exportable ficture parameters for demo rendering.
 
 <!--
- @changed 2020.12.25, 17:30
+ @changed 2020.12.26, 23:13
 -->

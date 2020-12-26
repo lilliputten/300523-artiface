@@ -1,61 +1,55 @@
-/** @module Modal.styles
+/** @module ModalWindow.styles
  *  @desc Basic modal layout styles
  *  @since 2020.12.21, 22:58
  *  @changed 2020.12.24, 02:43
  */
 
-.Modal {
-  &, &-Wrapper {
-    position: fixed;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    overflow: hidden;
-  }
-  &-Wrapper {
-    display: flex;
-    flex-direction: column;
-  }
-
-  &-Window {
-    position: relative;
-    box-sizing: border-box;
-    overflow: hidden;
-    margin: $(modalWindowPadding)px auto; // Auto size & center window horizontally
-    // Center window vertically:
-    top: 50%;
-    transform: translate(0, -50%);
-  }
-
-  // Sizes...
-
-  // Default ('auto') size...
-  &-Window {
-    min-width: $(modalMinWidth)px;
-    @media (max-width: @calc($modalMinWidth + $modalWindowPadding * 2)px) {
-      margin: $(modalWindowPadding)px;
-      min-width: auto;
+.ModalPortal {
+  &_type_Window & {
+    &-Wrapper {
+      display: flex;
+      flex-direction: column;
     }
-  }
-
-  // Window widths (based on `config.css.modalSizes`)...
-  &-Window_width {
-    @each $width $id in $modalSizes {
-      &_$(id) {
+    &-Window {
+      display: flex;
+      flex-direction: column;
+      flex-wrap: nowrap;
+      align-items: stretch;
+      align-content: stretch;
+      position: relative;
+      box-sizing: border-box;
+      overflow: hidden;
+      margin: $(modalWindowPadding)px auto; // Auto size & center window horizontally
+      // Center window vertically:
+      top: 50%;
+      transform: translate(0, -50%);
+      // Default ('auto') size...
+      min-width: $(modalMinWidth)px;
+      @media (max-width: @calc($modalMinWidth + $modalWindowPadding * 2)px) {
         margin: $(modalWindowPadding)px;
-        $extraWidth: @calc($width + $modalWindowPadding * 2)px;
-        @media (min-width: $extraWidth) {
-          margin: $(modalWindowPadding)px auto;
-          width: $(width)px;
+        min-width: auto;
+      }
+      // Window widths (based on `config.css.modalSizes`)...
+      &_width {
+        @each $width $id in $modalSizes {
+          &_$(id) {
+            margin: $(modalWindowPadding)px;
+            $extraWidth: @calc($width + $modalWindowPadding * 2)px;
+            @media (min-width: $extraWidth) {
+              margin: $(modalWindowPadding)px auto;
+              width: $(width)px;
+            }
+          }
         }
       }
     }
   }
+}
 
-  // Layout items: Window, Header, Container, Content, Layout, Main, Actions
+.ModalWindow {
 
-  &-Window,
+  // Layout items: Header, Container, Content, Layout, Main, Actions
+
   &-Header,
   // &-Container,
   &-Content,
@@ -68,11 +62,11 @@
     // align-items: center;
     // align-content: center;
   }
-  &-Window {
-    flex-direction: column;
-    align-content: stretch;
-    // border: 1px solid blue;
-  }
+  // &-Window {
+  //   flex-direction: column;
+  //   align-content: stretch;
+  //   // border: 1px solid blue;
+  // }
   &-Header {
     // border: 1px solid green;
     align-items: center;

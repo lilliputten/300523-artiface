@@ -1,4 +1,4 @@
-/** @module Modal.fixture
+/** @module ModalWindow.fixture
  *  @since 2020.12.21, 22:58
  *  @changed 2020.12.24, 18:19
  */
@@ -6,7 +6,7 @@
 
 import React from 'react'
 
-import Modal from './Modal'
+import ModalWindow from './ModalWindow'
 import FormGroup from 'forms/FormGroup'
 import FormButton from 'forms/FormButton'
 import FormSelect from 'forms/FormSelect'
@@ -15,7 +15,7 @@ import FormSelect from 'forms/FormSelect'
 // Demo styles for cosmos engine
 import 'demo.pcss'
 
-import './Modal.fixture.pcss'
+import './ModalWindow.fixture.pcss'
 
 // export const DemoWrapper = FormGroup // ({ children }) => {
 
@@ -39,7 +39,7 @@ class Interactive extends React.PureComponent /** @lends @PopupsContainer.protot
     //   return { open: !open }
     // })
   }
-  setModalRef = (ref) => {
+  setModalWindowRef = (ref) => {
     this.modalRef = ref
   }
   handleLoaderCancel = () => {
@@ -78,22 +78,22 @@ class Interactive extends React.PureComponent /** @lends @PopupsContainer.protot
     // const isElement = React.isValidElement(actions)
     return (
       <React.Fragment>
-        <Modal
+        <ModalWindow
           id="simple"
           theme="info"
           // icon="faExclamationCircle"
           open={open}
-          className="ModalClass"
+          className="ModalWindowClass"
           windowClassName="WindowClass"
           wrapperClassName="WrapperClass"
           onAction={this.onAction}
           onClose={this.close}
           onOpen={this.open}
           handleOpenState={this.handleOpenState}
-          ref={this.setModalRef}
+          ref={this.setModalWindowRef}
           actions={actions}
-          title="Modal title"
-          width="sm"
+          title="ModalWindow title"
+          windowWidth="sm"
           // leftContent="left" // Left column (with icon visual, eg)
           showCloseButton
           autoClose
@@ -104,7 +104,7 @@ class Interactive extends React.PureComponent /** @lends @PopupsContainer.protot
           <div className="simpleContainer">
             <div className="simpleStub">simpleStub</div>
           </div>
-        </Modal>
+        </ModalWindow>
         <FormButton
           text="Toggle Interactive"
           onClick={this.toggle}
@@ -135,14 +135,12 @@ class WithSelect extends React.PureComponent /** @lends @PopupsContainer.prototy
   close = () => this.setState({ open: false })
   handleOpenState = ({ open }) => this.setState({ open })
   toggle = () => {
-    debugger
     this.modalRef && this.modalRef.toggle()
     // this.setState(({ open }) => {
     //   return { open: !open }
     // })
   }
-  setModalRef = (ref) => {
-    debugger
+  setModalWindowRef = (ref) => {
     this.modalRef = ref
   }
   handleLoaderCancel = () => {
@@ -181,12 +179,12 @@ class WithSelect extends React.PureComponent /** @lends @PopupsContainer.prototy
     // const isElement = React.isValidElement(actions)
     return (
       <React.Fragment>
-        <Modal
+        <ModalWindow
           id="simple"
           theme="info"
           // icon="faExclamationCircle"
           open={open}
-          className="ModalClass"
+          className="ModalWindowClass"
           contentClassName="XXX"
           windowClassName="WindowClass"
           wrapperClassName="WrapperClass"
@@ -194,10 +192,10 @@ class WithSelect extends React.PureComponent /** @lends @PopupsContainer.prototy
           onClose={this.close}
           onOpen={this.open}
           handleOpenState={this.handleOpenState}
-          ref={this.setModalRef}
+          ref={this.setModalWindowRef}
           actions={actions}
-          title="Modal title"
-          width="sm"
+          title="ModalWindow title"
+          windowWidth="sm"
           // leftContent="left" // Left column (with icon visual, eg)
           showCloseButton
           autoClose
@@ -206,13 +204,17 @@ class WithSelect extends React.PureComponent /** @lends @PopupsContainer.prototy
           handleLoaderCancel={this.handleLoaderCancel}
         >
           <div className="simpleContainer">
+            {/*
+            simpleContainer
+            */}
             <FormSelect
+              id="DemoSelect"
               title="Select title"
               text="Select"
               options={demoOptions}
             />
           </div>
-        </Modal>
+        </ModalWindow>
         <FormButton
           text="Toggle WithSelect"
           onClick={this.toggle}
@@ -225,14 +227,14 @@ class WithSelect extends React.PureComponent /** @lends @PopupsContainer.prototy
 const withSelect = <WithSelect />
 
 const simple = (
-  <Modal
+  <ModalWindow
     id="simple"
     // open
   >
     <div className="simpleContainer">
       <div className="simpleStub">simpleStub</div>
     </div>
-  </Modal>
+  </ModalWindow>
 )
 
 export default {
