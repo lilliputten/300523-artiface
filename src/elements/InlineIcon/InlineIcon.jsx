@@ -72,12 +72,12 @@ class InlineIcon extends React.PureComponent /** @lends @InlineIcon.prototype */
     } = this.props
 
     const iconType = typeof icon
-    if (iconType !== 'string') {
-      debugger
-    }
+    // if (iconType !== 'string') {
+    //   debugger
+    // }
 
     // Create fortawesome icon element if passed icon image (svg icon)
-    const iconComponent = (icon && typeof icon === 'string') ? this.getIconComponent(icon) : icon
+    const iconComponent = (icon && iconType === 'string') ? this.getIconComponent(icon) : icon
     const content = (iconComponent && iconComponent.iconName) ? <FontAwesomeIcon className={cnInlineIcon('IconImg')} icon={iconComponent} /> : iconComponent
 
     const renderProps = {
