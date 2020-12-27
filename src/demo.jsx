@@ -13,7 +13,7 @@ import 'react-app-polyfill/stable'
 import React from 'react'
 import { render } from 'react-dom'
 
-import Loader from 'elements/Loader'
+// import Loader from 'elements/Loader'
 
 import * as demoSupport from './demoSupport'
 

@@ -28,24 +28,25 @@ const demoChange = ({ id, checked, value }) => {
   // debugger
 }
 
-let popupNode
-const setPopupNodeRef = (node) => {
-  popupNode = node
-}
-const setScrollableRef = (node) => { // Scroll event handler demo
-  node.addEventListener('scroll', (ev) => {
-    const { scrollTop, scrollHeight, scrollLeft, scrollWidth } = ev.target
-    console.log('FormSelect:fixture:Scroll demo', { scrollTop, scrollHeight, scrollLeft, scrollWidth })
-    if (popupNode) {
-      // console.log('FormSelect:fixture:Scroll demo: popupNode.updateGeometry', { popupNode })
-      if (popupNode.updateGeometry) {
-        // popupNode.updateGeometry()
-      }
-    }
-  })
-}
+/* // Handlers used for `withFixedWrapper`
+ * let popupNode
+ * const setPopupNodeRef = (node) => {
+ *   popupNode = node
+ * }
+ * const setScrollableRef = (node) => { // Scroll event handler demo
+ *   node.addEventListener('scroll', (ev) => {
+ *     const { scrollTop, scrollHeight, scrollLeft, scrollWidth } = ev.target
+ *     console.log('FormSelect:fixture:Scroll demo', { scrollTop, scrollHeight, scrollLeft, scrollWidth })
+ *     if (popupNode) {
+ *       // console.log('FormSelect:fixture:Scroll demo: popupNode.updateGeometry', { popupNode })
+ *       if (popupNode.updateGeometry) {
+ *         // popupNode.updateGeometry()
+ *       }
+ *     }
+ *   })
+ * }
+ */
 
-// TODO: With label
 export default {
   simple: (
     <FormSelect

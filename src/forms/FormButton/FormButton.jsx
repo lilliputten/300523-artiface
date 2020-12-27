@@ -172,7 +172,7 @@ class FormButton extends React.PureComponent /** @lends @FormButton.prototype */
       type,
       title,
       setDomRef, // From FormItemHOC
-      actionsContextNode,
+      // actionsContextNode,
     } = this.props
 
     const iconElem = this.renderIcon() // Icon element
