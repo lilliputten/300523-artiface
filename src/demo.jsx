@@ -58,7 +58,7 @@ const fixtureComponentsList = {
 
   InlineIcon: require('elements/InlineIcon/InlineIcon.fixture'),
   ModalWindow: require('elements/ModalWindow/ModalWindow.fixture'),
-  Popup: require('elements/Popup/Popup.fixture'),
+  ModalPopup: require('elements/ModalPopup/ModalPopup.fixture'),
   Menu: require('elements/Menu/Menu.fixture'),
   MenuItem: require('elements/MenuItem/MenuItem.fixture'),
 

@@ -16,8 +16,8 @@ import FormItemHOC from '../FormItemHOC'
 
 // import FormGroup from 'forms/FormGroup'
 // import FormGroup from '../FormGroup'
-import Popup from 'elements/Popup'
-// import { FormItemPopup } from 'elements/Popup'
+import ModalPopup from 'elements/ModalPopup'
+// import { FormItemPopup } from 'elements/ModalPopup'
 import Menu from 'elements/Menu'
 import FormButton from 'forms/FormButton'
 
@@ -196,7 +196,7 @@ class FormSelect extends React.PureComponent /** @lends @FormSelect.prototype */
     }
 
     return (
-      <Popup {...popupProps} />
+      <ModalPopup {...popupProps} />
     )
 
   }

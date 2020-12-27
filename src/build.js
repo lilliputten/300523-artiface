@@ -17,7 +17,7 @@ export Hello from './demo/Hello'
 // Basic styles
 import './build.pcss'
 
-import PopupsContainer from './elements/PopupsContainer'
+import ModalsContainer from './elements/ModalsContainer'
 
-export const RootComponent = PopupsContainer
+export const RootComponent = ModalsContainer
 

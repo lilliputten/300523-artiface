@@ -103,13 +103,11 @@ export default class ModalWindow extends React.PureComponent /** @lends @ModalWi
 
   // typeId = 'ModalWindow'
 
-  constructor(props) {
-    super(props)
-    // this.state = {
-    //   // open: props.open,
-    // }
-    // config.popups.initPromise.then(this.setPopupsInited)
-  }
+  /* // UNUSED: constructor
+   * constructor(props) {
+   *   super(props)
+   * }
+   */
 
   componentWillUnmount() {
     this.unregisterGlobalHandlers()
@@ -136,8 +134,8 @@ export default class ModalWindow extends React.PureComponent /** @lends @ModalWi
       throw error // ???
     }
     const actionId = actionProps.id
-    const { id, open, actionsContextNode, autoClose, closeOnCancelAction } = this.props
-    console.log('ModalWindow:onAction', id, actionId)
+    const { open, actionsContextNode, autoClose, closeOnCancelAction } = this.props
+    // console.log('ModalWindow:onAction', this.props.id, actionId)
     ModalPortal.setResult(actionId)
     if (open && (autoClose || (closeOnCancelAction && actionId === 'cancel'))) { // Close and call `resolveResult` when window is closed
       ModalPortal.close()

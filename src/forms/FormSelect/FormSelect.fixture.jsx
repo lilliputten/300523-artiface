@@ -108,26 +108,27 @@ export default {
       />
     </FormLabeledGroup>
   ),
-  withFixedWrapper: (
-    <div className="Fixed-Curtain">
-      <div className="Fixed-Wrapper">
-        <div className="Fixed-Scrollable" ref={setScrollableRef}>
-          <div className="Fixed-Container">
-            <FormLabeledGroup id="withLabeledGroup" title="withLabeledGroup" fullWidth flow>
-              <FormSelect
-                title="Select question"
-                placeholder="Select some option"
-                checked={[2]}
-                onChange={demoChange}
-                options={demoOptions}
-                controlButtonTheme="default"
-                fullWidth
-                setPopupNodeRef={setPopupNodeRef}
-              />
-            </FormLabeledGroup>
-          </div>
-        </div>
-      </div>
-    </div>
-  ),
+  /* withFixedWrapper: (
+   *   <div className="Fixed-Curtain">
+   *     <div className="Fixed-Wrapper">
+   *       <div className="Fixed-Scrollable" ref={setScrollableRef}>
+   *         <div className="Fixed-Container">
+   *           <FormLabeledGroup id="withFixedWrapper" title="withFixedWrapper" fullWidth flow>
+   *             <FormSelect
+   *               title="Select question"
+   *               placeholder="Select some option"
+   *               checked={[2]}
+   *               onChange={demoChange}
+   *               options={demoOptions}
+   *               controlButtonTheme="default"
+   *               fullWidth
+   *               setPopupNodeRef={setPopupNodeRef}
+   *             />
+   *           </FormLabeledGroup>
+   *         </div>
+   *       </div>
+   *     </div>
+   *   </div>
+   * ),
+   */
 }

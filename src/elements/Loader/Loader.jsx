@@ -2,7 +2,7 @@
  *  @since 2020.10.27, 00:39
  *  @changed 2020.12.25, 00:29
  *
- *  TODO: Place block (and local?) loaders into `PopupsContainer`?
+ *  TODO: Place block (and local?) loaders into `ModalsContainer`?
  */
 
 import React from 'react'

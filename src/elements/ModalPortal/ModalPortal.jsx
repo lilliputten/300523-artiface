@@ -128,13 +128,13 @@ export default class ModalPortal extends React.PureComponent /** @lends @ModalPo
 
   constructor(props) {
     super(props)
-    // const popupsInited = config.popups.isInited
+    // const popupsInited = config.modals.isInited
     this.state = {
       popupsInited: false,
       activated: false,
       open: false,
     }
-    config.popups.initPromise.then(this.onPopupsInited)
+    config.modals.initPromise.then(this.onPopupsInited)
     this.transitionTime = config.css.modalAnimateTime
     this.modalType = props.type
   }
@@ -177,7 +177,7 @@ export default class ModalPortal extends React.PureComponent /** @lends @ModalPo
     const { activated } = this.state
     if (!activated) {
       // this.resolvingResult = null // Activating in `open` method
-      console.log('ModalPortal:activate', id, activated)
+      // console.log('ModalPortal:activate', id, activated)
       this.setState({ activated: true }, () => {
         if (typeof cb === 'function') {
           cb()
@@ -196,7 +196,7 @@ export default class ModalPortal extends React.PureComponent /** @lends @ModalPo
     const { id, onDeactivate } = this.props
     const { activated } = this.state
     if (activated) {
-      console.log('ModalPortal:deactivate', id)
+      // console.log('ModalPortal:deactivate', id)
       this.resolveResult() // `resolvingResult` must be defined?
       if (typeof onDeactivate === 'function') {
         onDeactivate({ id })
@@ -223,18 +223,16 @@ export default class ModalPortal extends React.PureComponent /** @lends @ModalPo
   }
 
   close = () => { // External method for using in `ModalPortalStack`
-    const { id } = this.props
     const { open: prevOpen } = this.state
-    console.log('ModalPortal:close', id, prevOpen)
+    // console.log('ModalPortal:close', this.props.id, prevOpen)
     if (prevOpen) {
       this.setState({ open: false }, this.updateShowWithState)
     }
   }
 
   open = () => { // External method for using in `ModalPortalStack`
-    const { id } = this.props
     const { open: prevOpen } = this.state
-    console.log('ModalPortal:open', id, prevOpen)
+    // console.log('ModalPortal:open', this.props.id, prevOpen)
     if (!prevOpen) {
       const open = true
       this.resolvingResult = null // Reset resolving action
@@ -398,7 +396,7 @@ export default class ModalPortal extends React.PureComponent /** @lends @ModalPo
     }
   }
 
-  stopOutsideClickWaiting = (ev) => { // Mouse released on window --> cancel waiting for mouse up on wrapper (don't close modal)
+  stopOutsideClickWaiting = (/* ev */) => { // Mouse released on window --> cancel waiting for mouse up on wrapper (don't close modal)
     const { wrapperDomNode, windowDomNode } = this
     if (this.isOutsideClickWaiting && wrapperDomNode && windowDomNode) {
       // console.log('ModalPortal:stopOutsideClickWaiting', ev && ev.type, ev && ev.currentTarget)
@@ -521,7 +519,7 @@ export default class ModalPortal extends React.PureComponent /** @lends @ModalPo
     const { popupsInited, activated } = this.state
     const toDisplay = popupsInited && activated
     return toDisplay && (
-      <Portal node={config.popups.domNode}>
+      <Portal node={config.modals.domNode}>
         {this.renderModalPortal()}
       </Portal>
     )

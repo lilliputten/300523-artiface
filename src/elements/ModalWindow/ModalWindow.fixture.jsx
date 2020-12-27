@@ -20,7 +20,7 @@ import './ModalWindow.fixture.pcss'
 // export const DemoWrapper = FormGroup // ({ children }) => {
 
 // Interactive modal (self-closing)
-class Interactive extends React.PureComponent /** @lends @PopupsContainer.prototype */ {
+class Interactive extends React.PureComponent /** @lends @ModalsContainer.prototype */ {
   constructor(props) {
     super(props)
     this.state = {
@@ -121,7 +121,7 @@ const demoOptions = [
   { val: 2, text: 'Swimming extra long text item name string value' },
 ]
 
-class WithSelect extends React.PureComponent /** @lends @PopupsContainer.prototype */ {
+class WithSelect extends React.PureComponent /** @lends @ModalsContainer.prototype */ {
   constructor(props) {
     super(props)
     this.state = {

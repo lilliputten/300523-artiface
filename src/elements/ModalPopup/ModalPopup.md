@@ -1,10 +1,10 @@
-# Popup
+# ModalPopup
 
 ## Params:
 
 - id
 - show -- Default show state
-- popupControl -- Popup control element (must handle `onClick` method and optional `checked` prop state)
+- popupControl -- ModalPopup control element (must handle `onClick` method and optional `checked` prop state)
 - popupContent -- Displaying popup content (eg, Menu element or other)
 - onControlClick -- Control item click handler
 

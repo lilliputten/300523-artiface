@@ -1,5 +1,5 @@
-/** @module PopupsContainer
- *  @class PopupsContainer
+/** @module ModalsContainer
+ *  @class ModalsContainer
  *  @since 2020.12.21, 23:37
  *  @changed 2020.12.21, 23:37
  */
@@ -15,13 +15,13 @@ import { cn } from 'utils/configure'
 // } from 'react-transition-group'
 import config from 'config'
 
-import './PopupsContainer.pcss'
+import './ModalsContainer.pcss'
 
-const cnPopupsContainer = cn('PopupsContainer')
+const cnModalsContainer = cn('ModalsContainer')
 
 // const doDebug = false // DEBUG!
 
-class PopupsContainer extends React.PureComponent /** @lends @PopupsContainer.prototype */ {
+class ModalsContainer extends React.PureComponent /** @lends @ModalsContainer.prototype */ {
 
   // Lifecycle...
 
@@ -36,15 +36,15 @@ class PopupsContainer extends React.PureComponent /** @lends @PopupsContainer.pr
 
   componentDidMount() {
     // this.registerGlobalHandlers()
-    if (typeof config.popups._initPromiseResolve == 'function') {
-      config.popups._initPromiseResolve()
-      // setTimeout(config.popups._initPromiseResolve, 1000) // Delayed initializing?
+    if (typeof config.modals._initPromiseResolve == 'function') {
+      config.modals._initPromiseResolve()
+      // setTimeout(config.modals._initPromiseResolve, 1000) // Delayed initializing?
     }
-    config.popups.isInited = true
-    config.popups.containerNode = this
+    config.modals.isInited = true
+    config.modals.containerNode = this
     // eslint-disable-next-line react/no-find-dom-node
     const domNode = ReactDOM.findDOMNode(this) // TODO: Find alternate legal method to get dom node? (refs doesn't works due to high-level element (`TransitionGroup`) rendering)
-    config.popups.domNode = domNode
+    config.modals.domNode = domNode
   }
 
   componentWillUnmount() {
@@ -55,37 +55,37 @@ class PopupsContainer extends React.PureComponent /** @lends @PopupsContainer.pr
 
   /* // UNUSED: Using (deprecated!) `findDOMNode` in `componentDidMount` (see above)
    * setDomRef = (domNode) => {
-   *   if (typeof config.popups._initPromiseResolve == 'function') {
-   *     config.popups._initPromiseResolve()
+   *   if (typeof config.modals._initPromiseResolve == 'function') {
+   *     config.modals._initPromiseResolve()
    *   }
-   *   config.popups.isInited = true
-   *   config.popups.containerNode = this
+   *   config.modals.isInited = true
+   *   config.modals.containerNode = this
    *   // eslint-disable-next-line react/no-find-dom-node
    *   const domNode = ReactDOM.findDOMNode(domNode)
    *   debugger
-   *   config.popups.domNode = domNode
+   *   config.modals.domNode = domNode
    * }
    */
 
   // Render...
 
-  renderPopupsContainer() {
-    const { containerId } = config.popups
-    const className = cnPopupsContainer(null, [this.props.className/* , cnPopupsContainer('TransitionGroup') */])
+  renderModalsContainer() {
+    const { containerId } = config.modals
+    const className = cnModalsContainer(null, [this.props.className/* , cnModalsContainer('TransitionGroup') */])
     const renderProps = {
-      key: containerId || 'PopupsContainer',
+      key: containerId || 'ModalsContainer',
       id: containerId,
       className,
       // ref: this.setDomRef, // UNUSED: Using (deprecated!) `findDOMNode` in `componentDidMount` (see above)
       // style: { border: '10px solid blue' }, // DEBUG
     }
     /* // TRY: css-transitions
-     * <TransitionGroup className={cnPopupsContainer('TransitionGroup')}>
+     * <TransitionGroup className={cnModalsContainer('TransitionGroup')}>
      *   <CSSTransition
      *     key={id}
      *     timeout={5000}
      *     // timeout={config.css.animateTime}
-     *     classNames={cnPopupsContainer('Transition')}
+     *     classNames={cnModalsContainer('Transition')}
      *   >
      *     <div {...renderProps}>
      *       {popupContent}
@@ -106,11 +106,11 @@ class PopupsContainer extends React.PureComponent /** @lends @PopupsContainer.pr
     const node = document.body
     return (
       <Portal node={node}>
-        {this.renderPopupsContainer()}
+        {this.renderModalsContainer()}
       </Portal>
     )
   }
 
 }
 
-export default PopupsContainer
+export default ModalsContainer

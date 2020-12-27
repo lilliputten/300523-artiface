@@ -1,4 +1,4 @@
-/** @module Popup.fixture
+/** @module ModalPopup.fixture
  *  @since 2020.10.27, 00:39
  *  @changed 2020.12.18, 01:32
  */
@@ -6,8 +6,8 @@
 
 import React from 'react'
 
-// import { FormItemPopup } from './Popup'
-import Popup from './Popup'
+// import { FormItemModalPopup } from './ModalPopup'
+import ModalPopup from './ModalPopup'
 // import FormGroup from 'forms/FormGroup'
 import FormButton from 'forms/FormButton'
 import Menu from 'elements/Menu'
@@ -15,45 +15,45 @@ import Menu from 'elements/Menu'
 // Demo styles for cosmos engine
 import 'demo.pcss'
 
-import './Popup.fixture.pcss'
+import './ModalPopup.fixture.pcss'
 
 // export const DemoWrapper = FormGroup // ({ children }) => {
 
-const PopupControl = (props) => {
+const ModalPopupControl = (props) => {
   const { onClick } = props
-  // console.log('DemoPopupControl:', props)
+  // console.log('DemoModalPopupControl:', props)
   // debugger
   return (
-    <div className="DemoPopupControl" onClick={onClick}>
-      DemoPopupControl
+    <div className="DemoModalPopupControl" onClick={onClick}>
+      DemoModalPopupControl
     </div>
   )
 }
 
-const PopupContent = () => {
+const ModalPopupContent = () => {
   return (
-    <div className="DemoPopupContent">
-      <div className="DemoPopupContent-Container">
-        DemoPopupContent Extra long text line for wrapping tests
+    <div className="DemoModalPopupContent">
+      <div className="DemoModalPopupContent-Container">
+        DemoModalPopupContent Extra long text line for wrapping tests
       </div>
     </div>
   )
 }
 
-const popupControlEl = <PopupControl />
-const popupContentEl = <PopupContent />
+const popupControlEl = <ModalPopupControl />
+const popupContentEl = <ModalPopupContent />
 
 const menuOnChange = ({ checked, value }) => { // `value` passed only for `singleChoice` mode, `checked` is array
-  console.log('Popup.fixture: menuOnChange', { checked, value })
+  console.log('ModalPopup.fixture: menuOnChange', { checked, value })
   // debugger
 }
 const menuOnClick = ({ value }) => {
-  console.log('Popup.fixture: menuOnClick', { value })
+  console.log('ModalPopup.fixture: menuOnClick', { value })
   // debugger
   // cbHideStopper && cbHideStopper()
 }
 const buttonOnClick = ({ show }) => {
-  console.log('Popup.fixture: buttonOnClick', { show })
+  console.log('ModalPopup.fixture: buttonOnClick', { show })
   // debugger
 }
 
@@ -74,8 +74,10 @@ const demoMenu = (
 
 const simple = (
   <div className="simpleContainer">
+    {/*
     <div className="simpleStub">simpleStub</div>
-    <Popup
+    */}
+    <ModalPopup
       id="simple"
       popupControl={popupControlEl}
       popupContent={popupContentEl}
@@ -84,7 +86,7 @@ const simple = (
 )
 
 const withMenu = (
-  <Popup
+  <ModalPopup
     id="withMenu"
     popupControl={<FormButton icon="faChevronRight" rightIcon theme="primary" variation="popupControl" text="withMenu" />}
     popupContent={demoMenu}
@@ -92,7 +94,7 @@ const withMenu = (
 )
 
 const stayOpenAfterItemClick = (
-  <Popup
+  <ModalPopup
     id="stayOpenAfterItemClick"
     onControlClick={buttonOnClick}
     popupControl={<FormButton icon="faChevronRight" rightIcon theme="primary" variation="popupControl" text="Stay open after item click" />}

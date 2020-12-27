@@ -9,7 +9,7 @@ const config = {
   build: require('./build'),
   constants: require('./constants'),
   css: require('./css'),
-  popups: require('./popups'),
+  modals: require('./modals'),
   ui: require('./ui'),
   userAgent: require('./userAgent'),
 }
