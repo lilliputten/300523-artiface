@@ -108,7 +108,7 @@ export default class ModalWindow extends React.PureComponent /** @lends @ModalWi
     // this.state = {
     //   // open: props.open,
     // }
-    config.popups.initPromise.then(this.setPopupsInited)
+    // config.popups.initPromise.then(this.setPopupsInited)
   }
 
   componentWillUnmount() {
@@ -150,45 +150,6 @@ export default class ModalWindow extends React.PureComponent /** @lends @ModalWi
     }
   }
 
-  // Provide ModalPortal public methods...
-
-  open = () => this.ModalPortal && this.ModalPortal.open()
-  close = () => this.ModalPortal && this.ModalPortal.close()
-  toggle = () => this.ModalPortal && this.ModalPortal.toggle()
-  isVisible = () => this.ModalPortal && this.ModalPortal.isVisible()
-
-  // Handled in ModalPortal: onKeyPress, *OutsideClick*
-  // onKeyPress = (event) => {
-  //   const {
-  //     id,
-  //     onEscPressed,
-  //     closeOnEscPressed,
-  //     loading,
-  //   } = this.props
-  //   if (!loading) {
-  //     var { keyCode } = event
-  //     const isEscPressed = (keyCode === 27)
-  //     const cbProps = { event, id, keyCode }
-  //     if (isEscPressed) {
-  //       if (closeOnEscPressed) {
-  //         if (ModalPortal) {
-  //           ModalPortal.setResult(selfCloseActionId)
-  //           ModalPortal.close()
-  //         }
-  //         else {
-  //           const error = new Error('ModalWindow:onCloseButtonClick: ModalPortal must be defined')
-  //           console.error(error) // eslint-disable-line no-console
-  //           debugger // eslint-disable-line no-debugger
-  //           throw error // ???
-  //         }
-  //       }
-  //       if (typeof onEscPressed === 'function') {
-  //         onEscPressed(cbProps)
-  //       }
-  //     }
-  //   }
-  // }
-
   onCloseButtonClick = () => { // Mouse released on wrapper --> close modal
     const { ModalPortal } = this
     if (!ModalPortal) {
@@ -208,6 +169,13 @@ export default class ModalWindow extends React.PureComponent /** @lends @ModalWi
       onCloseButtonClick({ id })
     }
   }
+
+  // Provide ModalPortal public methods...
+
+  open = () => this.ModalPortal && this.ModalPortal.open()
+  close = () => this.ModalPortal && this.ModalPortal.close()
+  toggle = (open) => this.ModalPortal && this.ModalPortal.toggle(open)
+  isVisible = () => this.ModalPortal && this.ModalPortal.isVisible()
 
   // Render helpers...
 
@@ -348,10 +316,7 @@ export default class ModalWindow extends React.PureComponent /** @lends @ModalWi
       wrapperClassName,
       wrapperTheme,
     } = this.props
-    // console.log('ModalWindow:render', this.props.windowWidth)
-    // debugger
-    // TODO: Other wrapper, window related props?..
-    const modalPortalProps = { // Just pass props throught
+    const portalProps = { // Just pass props throught
       id,
       className,
       closeOnClickOutside,
@@ -374,12 +339,10 @@ export default class ModalWindow extends React.PureComponent /** @lends @ModalWi
       windowWidth,
       wrapperClassName,
       wrapperTheme,
-      // Renamed props...
-      // Pass other props...
-      type: 'Window',
     }
+    portalProps.handleOpenState = this.handleOpenState
     return (
-      <ModalPortal {...modalPortalProps}>
+      <ModalPortal {...portalProps} type="Window">
         {this.renderWindow}
       </ModalPortal>
     )
