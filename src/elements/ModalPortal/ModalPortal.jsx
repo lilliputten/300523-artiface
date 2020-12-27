@@ -47,6 +47,31 @@ const mouseUpEvent = 'mouseup'
 const mouseLeaveEvent = 'mouseleave'
 const globalKeyPressEventName = 'keydown'
 
+export const passModalPortalProps = [
+  'id',
+  'className',
+  'closeOnClickOutside',
+  'closeOnEscPressed',
+  'handleLoaderCancel',
+  'useLoader',
+  'loaderTheme',
+  'loading',
+  'onAction',
+  'onClickOutside',
+  'onCloseButtonClick',
+  'onEscPressed',
+  'onOpen',
+  'onClose',
+  'onActivate',
+  'onDeactivate',
+  'open',
+  'theme',
+  'windowClassName',
+  'windowWidth',
+  'wrapperClassName',
+  'wrapperTheme',
+]
+
 export const selfCloseActionId = '--modal-portal-self-close--'
 export const externalCloseActionId = '--modal-portal-external-close--'
 
@@ -109,8 +134,9 @@ export default class ModalPortal extends React.PureComponent /** @lends @ModalPo
       activated: false,
       open: false,
     }
-    config.popups.initPromise.then(this.setPopupsInited)
+    config.popups.initPromise.then(this.onPopupsInited)
     this.transitionTime = config.css.modalAnimateTime
+    this.modalType = props.type
   }
 
   componentWillUnmount() {
@@ -120,6 +146,10 @@ export default class ModalPortal extends React.PureComponent /** @lends @ModalPo
   componentDidUpdate(prevProps, prevState) {
     const props = this.props
     const state = this.state
+    // console.log('ModalPortal:componentDidUpdate', {
+    //   'props.open': props.open,
+    //   'state.open': state.open,
+    // })
     if (props.open !== prevProps.open && props.open !== state.open) { // New open from props
       if (props.open) {
         this.activate(() => this.setState({ open: true }))
@@ -175,10 +205,15 @@ export default class ModalPortal extends React.PureComponent /** @lends @ModalPo
     }
   }
 
-  toggle = () => { // External method for using in `ModalPortalStack`
-    const { id } = this.props
-    const { open } = this.state
-    console.log('ModalPortal:toggle', id, open)
+  toggle = (open) => { // External method for using in `ModalPortalStack`
+    // const { id } = this.props
+    // console.log('ModalPortal:toggle', this.props.id, open)
+    if (open == null) {
+      open = !this.state.open
+    }
+    else if (open === this.state.open) {
+      return false
+    }
     if (open) {
       this.close()
     }
@@ -188,42 +223,26 @@ export default class ModalPortal extends React.PureComponent /** @lends @ModalPo
   }
 
   close = () => { // External method for using in `ModalPortalStack`
-    const { id, onClose, handleOpenState } = this.props
-    const { open } = this.state
-    console.log('ModalPortal:close', id, open)
-    if (open) {
-      this.setState({ open: false }, (state) => {
-        this.updateShowWithState(state)
-        setTimeout(this.deactivate, this.transitionTime) // TODO?
-      })
-      if (typeof onClose === 'function') {
-        onClose({ id })
-      }
-      if (typeof handleOpenState === 'function') {
-        handleOpenState({ id, open: false })
-      }
+    const { id } = this.props
+    const { open: prevOpen } = this.state
+    console.log('ModalPortal:close', id, prevOpen)
+    if (prevOpen) {
+      this.setState({ open: false }, this.updateShowWithState)
     }
   }
 
   open = () => { // External method for using in `ModalPortalStack`
-    const { id, onOpen, handleOpenState } = this.props
-    const { open } = this.state
-    console.log('ModalPortal:open', id, open)
-    if (!open) {
+    const { id } = this.props
+    const { open: prevOpen } = this.state
+    console.log('ModalPortal:open', id, prevOpen)
+    if (!prevOpen) {
+      const open = true
       this.resolvingResult = null // Reset resolving action
       // First activate portal then enter into opening animation
       this.activate(() => {
-        this.setState({ open: true }, () => {
-          this.updateShowWithState()
-          if (typeof onOpen === 'function') {
-            onOpen({ id })
-          }
-          if (typeof handleOpenState === 'function') {
-            handleOpenState({ id, open: true })
-          }
-        })
+        this.setState({ open }, this.updateShowWithState)
       })
-      this.activate(() => this.setState({ open: true }, this.updateShowWithState))
+      this.activate(() => this.setState({ open }, this.updateShowWithState))
     }
   }
 
@@ -236,7 +255,7 @@ export default class ModalPortal extends React.PureComponent /** @lends @ModalPo
     // const { closeOnClickOutside } = this.props
     if (!this.globalHandlersRegistered) {
       this.globalHandlersRegistered = true // Set flag
-      console.log('ModalPortal: registerGlobalHandlers')
+      // console.log('ModalPortal:registerGlobalHandlers')
       if (!windowDomNode || !wrapperDomNode) {
         const error = new Error('ModalPortal: dom nodes is undefined on registerGlobalHandlers')
         console.error(error) // eslint-disable-line no-console
@@ -264,7 +283,7 @@ export default class ModalPortal extends React.PureComponent /** @lends @ModalPo
     // const { closeOnClickOutside } = this.props
     if (this.globalHandlersRegistered) {
       this.globalHandlersRegistered = false // Reset flag
-      console.log('ModalPortal: unregisterGlobalHandlers')
+      // console.log('ModalPortal:unregisterGlobalHandlers')
       if (!windowDomNode || !wrapperDomNode) {
         const error = new Error('ModalPortal: dom nodes is undefined on unregisterGlobalHandlers')
         console.error(error) // eslint-disable-line no-console
@@ -289,19 +308,31 @@ export default class ModalPortal extends React.PureComponent /** @lends @ModalPo
 
   updateShowWithState = (state) => {
     const { open } = state || this.state
+    const { id, onOpen, onClose, handleOpenState } = this.props
     if (open) {
       this.registerGlobalHandlers()
+      if (typeof onOpen === 'function') {
+        onOpen({ id })
+      }
     }
     else {
       this.unregisterGlobalHandlers()
+      if (typeof onClose === 'function') {
+        onClose({ id })
+      }
+      setTimeout(this.deactivate, this.transitionTime) // TODO?
+    }
+    if (typeof handleOpenState === 'function') {
+      handleOpenState({ id, open })
     }
   }
 
-  setPopupsInited = () => {
+  onPopupsInited = () => {
     this.setState({ popupsInited: true })
     const { open } = this.props
     if (open) { // Immediately open if passed open status
-      this.activate(() => this.setState({ open: true }))
+      // this.activate(() => this.setState({ open: true }))
+      this.activate(() => this.setState({ open: true }), this.updateShowWithState)
     }
   }
 
@@ -332,7 +363,7 @@ export default class ModalPortal extends React.PureComponent /** @lends @ModalPo
     const actionId = actionProps.id
     const { id, actionsContextNode, autoClose, closeOnCancelAction } = this.props
     this.setResult(actionId)
-    console.log('ModalPortal: ModalPortal:onAction', id, actionId)
+    // console.log('ModalPortal:ModalPortal:onAction', id, actionId)
     if (autoClose || (closeOnCancelAction && actionId === 'cancel')) { // Close and call `resolveResult` when window is closed
       this.close()
     }
@@ -370,7 +401,7 @@ export default class ModalPortal extends React.PureComponent /** @lends @ModalPo
   stopOutsideClickWaiting = (ev) => { // Mouse released on window --> cancel waiting for mouse up on wrapper (don't close modal)
     const { wrapperDomNode, windowDomNode } = this
     if (this.isOutsideClickWaiting && wrapperDomNode && windowDomNode) {
-      console.log('ModalPortal: stopOutsideClickWaiting', ev && ev.type, ev && ev.currentTarget)
+      // console.log('ModalPortal:stopOutsideClickWaiting', ev && ev.type, ev && ev.currentTarget)
       wrapperDomNode.removeEventListener(mouseUpEvent, this.onOutsideClickCatched)
       windowDomNode.removeEventListener(mouseLeaveEvent, this.stopOutsideClickWaiting)
       this.isOutsideClickWaiting = false
@@ -380,7 +411,7 @@ export default class ModalPortal extends React.PureComponent /** @lends @ModalPo
     const { loading } = this.props
     if (!loading) {
       const { wrapperDomNode, windowDomNode } = this
-      console.log('ModalPortal: startOutsideClickWaiting')
+      // console.log('ModalPortal:startOutsideClickWaiting')
       if (!this.isOutsideClickWaiting && wrapperDomNode && windowDomNode) { // Start waiting for
         this.isOutsideClickWaiting = true
         wrapperDomNode.addEventListener(mouseUpEvent, this.onOutsideClickCatched)
@@ -390,7 +421,7 @@ export default class ModalPortal extends React.PureComponent /** @lends @ModalPo
   }
   onOutsideClickCatched = () => { // Mouse released on wrapper --> close modal
     const { id, closeOnClickOutside, onClickOutside } = this.props
-    console.log('ModalPortal: onOutsideClickCatched')
+    // console.log('ModalPortal:onOutsideClickCatched')
     this.stopOutsideClickWaiting()
     if (closeOnClickOutside) {
       this.setResult(selfCloseActionId)
@@ -403,7 +434,7 @@ export default class ModalPortal extends React.PureComponent /** @lends @ModalPo
 
   onCloseButtonClick = () => { // Mouse released on wrapper --> close modal
     const { id, closeWithCloseButton, onCloseButtonClick } = this.props
-    console.log('ModalPortal: onCloseButtonClick')
+    // console.log('ModalPortal:onCloseButtonClick')
     if (closeWithCloseButton) {
       this.setResult(selfCloseActionId)
       this.close()
@@ -427,10 +458,13 @@ export default class ModalPortal extends React.PureComponent /** @lends @ModalPo
 
   renderWindow() {
     const { windowWidth, windowTheme, theme, windowClassName, children } = this.props
-    console.log('ModalPortal:renderWindow', this.props.windowWidth)
+    const { windowDomNode, wrapperDomNode } = this
+    // console.log('ModalPortal:renderWindow', { windowWidth })
     // TODO: Pass windowDomNode to children?
     const childrenProps = {
       ModalPortal: this,
+      windowDomNode,
+      wrapperDomNode,
     }
     const isElement = React.isValidElement(children)
     const childrenType = typeof children
@@ -458,7 +492,7 @@ export default class ModalPortal extends React.PureComponent /** @lends @ModalPo
   renderModalPortal() {
     const { type, id, theme, wrapperTheme, className, wrapperClassName, useLoader } = this.props
     const { open } = this.state
-    console.log('ModalPortal:renderModalPortal', { id, open })
+    // console.log('ModalPortal:renderModalPortal', { id, open })
     return (
       <CSSTransition
         key={id}
