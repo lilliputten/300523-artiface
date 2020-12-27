@@ -3,53 +3,49 @@
  *  @changed 2020.12.18, 01:32
  */
 
-/* // DEBUG: Demo for prevent closing underlaying popups. (Can be used for modal windows)
- * #DebugHide {
- *   position: absolute;
- *   top: 0;
- *   left: 0;
- *   bottom: 0;
- *   right: 0;
- *   background: rgba(0,0,0,.5);
- *   display: none;
- * }
- */
-
-.DemoPopupControl {
-  cursor: pointer;
+.Fixture_id_Popup {
+  .simpleContainer {
+    display: inline-block;
+    .simpleStub {
+      // float: left;
+      display: inline-block;
+    }
+  }
+  .PopupControl {
+    display: inline-block;
+  }
+  .DemoPopupControl {
+    cursor: pointer;
+  }
+  .PopupControl_id_simple {
+    // border: 1px solid green;
+    // // DEBUG: Positioning control on vertical and horizontal axis
+    // margin-top: 250px;
+    // margin-left: 100px;
+  }
+  .PopupControl_id_withMenu {
+    // border: 1px solid green;
+    // margin-left: 20px;
+  }
 }
 
-.Popup_id_stayOpenAfterItemClick {
-  // margin-top: 800px; // DEBUG: Check positioning at bottom screen edge
-}
+.PopupsContainer {
+  .Popup_id_stayOpenAfterItemClick {
+    // margin-top: 800px; // DEBUG: Check positioning at bottom screen edge
+  }
 
-.PopupControl_id_simple {
-  border: 1px solid green;
-  float: left; // DEBUG: Suppress full-width mode
-  // // DEBUG: Positioning control on vertical and horizontal axis
-  // margin-top: 250px;
-  // margin-left: 100px;
-}
-.Popup_id_simple {
-  // box-sizing: border-box;
-  // border: 1px solid blue;
-  overflow: auto;
-  // DEBUG: Set content size limit
-  // max-height: 500px;
-  .DemoPopupContent {
+  .Popup_id_simple {
     // box-sizing: border-box;
-    // border: 1px solid orange;
-    // // DEBUG: Set internal content size
-    height: 400px;
-    width: 400px;
+    // border: 1px solid blue;
+    overflow: auto;
+    // DEBUG: Set content size limit
+    // max-height: 500px;
+    .DemoPopupContent {
+      // box-sizing: border-box;
+      // border: 1px solid orange;
+      // // DEBUG: Set internal content size
+      // height: 400px;
+      // width: 400px;
+    }
   }
 }
-.simpleContainer {
-  .simpleStub {
-    float: left;
-  }
-}
-// .PopupControl {
-//   float: left;
-//   display: flex;
-// }

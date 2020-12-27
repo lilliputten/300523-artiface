@@ -21,7 +21,8 @@ import { strings } from 'utils'
 import { debounce } from 'throttle-debounce'
 import FormItemHOC from 'forms/FormItemHOC'
 // import { PortalWithState } from 'react-portal'
-import { Portal } from 'react-portal'
+// import { Portal } from 'react-portal'
+import ModalPortal, { passModalPortalProps } from 'elements/ModalPortal'
 /* UNUSED: Transitions
  * import { // Transitions...
  *   CSSTransition,
@@ -35,7 +36,8 @@ import './Popup.pcss'
 const cnPopup = cn('Popup')
 const cnPopupControl = cn('PopupControl')
 
-const doDebug = false // DEBUG!
+const doDebug = /*DEBUG*/ true && config.build.DEV_DEBUG || // DEBUG!
+  false
 
 // Debounce delay
 const debouncedUpdateGeometryTimeout = /*DEBUG*/ doDebug ? 500 :
@@ -175,42 +177,19 @@ class Popup extends React.PureComponent /** @lends @Popup.prototype */ {
   contentDomNode = null
   geometry = {}
 
+  // From ModalPortal:
+  windowDomNode = null
+  wrapperDomNode = null
+  ModalPortal = null
+
   // Lifecycle...
 
   constructor(props) {
     super(props)
-    const popupsInited = config.popups.isInited
     this.state = {
-      popupsInited,
-      activated: false,
-      open: false,
-    }
-    if (!popupsInited) {
-      config.popups.initPromise.then(this.setPopupsInited)
+      open: null, // null -- uninitialized
     }
     this.updateGeometry = debounce(debouncedUpdateGeometryTimeout, this.updateGeometryInstant)
-    const { open } = props
-    if (open) {
-      this.handlePortalOpen()
-    }
-    // // NOTE: Example of callback register
-    // if (typeof props.registerCallback === 'function') { // External hide canceler (FormSelect: on Menu click etc)
-    //   props.registerCallback(this.someMethod)
-    // }
-    /* // Check for element is Popup
-     * setTimeout(() => {
-     *   const node = this
-     *   const isElement = React.isValidElement(node)
-     *   const isPopup = node instanceof Popup // true for Popup and FormItemPopup
-     *   const isFormItemPopup = node instanceof FormItemPopup // Always false
-     *   console.log('debug', {
-     *     isElement,
-     *     isPopup,
-     *     isFormItemPopup,
-     *   })
-     *   debugger
-     * }, 1000)
-     */
   }
 
   componentWillUnmount() {
@@ -218,10 +197,6 @@ class Popup extends React.PureComponent /** @lends @Popup.prototype */ {
   }
 
   // Helpers...
-
-  setPopupsInited = () => {
-    this.setState({ popupsInited: true })
-  }
 
   getDomNodeGeometry(domNode, id) {
     id = id || 'default'
@@ -245,6 +220,10 @@ class Popup extends React.PureComponent /** @lends @Popup.prototype */ {
       }
       return geometry
     }, {})
+    // if (this.props.id === 'withMenu' && id === 'control') {
+    //   console.log(domNode, rect, domNodeGeometryKeys, geometry)
+    //   debugger
+    // }
     return geometry || {}
   }
 
@@ -272,7 +251,14 @@ class Popup extends React.PureComponent /** @lends @Popup.prototype */ {
   updateContentWidth(geometry, updatedGeometryKeys) { // eslint-disable-line no-unused-vars
     // if (updatedGeometryKeys.includes('controlWidth') || updatedGeometryKeys.includes('contentWidth')) {
     const width = geometry.controlWidth
-    const domNode = this.contentDomNode
+    const domNode = this.windowDomNode // contentDomNode
+    if (!domNode) { // Error?
+      const error = new Error('Popup:updateContentWidth: target dom node is undefined')
+      console.error(error) // eslint-disable-line no-console
+      debugger // eslint-disable-line no-debugger
+      // throw error
+      return
+    }
     const setWidth = width + 'px'
     /* // DEBUG
      * console.log('Popup:updateContentWidth', {
@@ -283,7 +269,7 @@ class Popup extends React.PureComponent /** @lends @Popup.prototype */ {
      * })
      * debugger
      */
-    if (domNode.style.width !== setWidth) {
+    if (domNode && domNode.style.width !== setWidth) {
       geometry.contentWidth = width
       domNode.storedContentWidth = null // Reset stored width
       domNode.style.width = setWidth
@@ -297,8 +283,12 @@ class Popup extends React.PureComponent /** @lends @Popup.prototype */ {
    * @param {String[]} updatedGeometryKeys
    */
   updateOneAxisContentPos(axis, geometry, updatedGeometryKeys) { // eslint-disable-line no-unused-vars
-    const domNode = this.contentDomNode
+    const domNode = this.windowDomNode // contentDomNode
     if (!domNode) { // Error?
+      const error = new Error('Popup:updateOneAxisContentPos: target dom node is undefined')
+      console.error(error) // eslint-disable-line no-console
+      debugger // eslint-disable-line no-debugger
+      // throw error
       return
     }
     const { popupContentGap } = config.css
@@ -396,15 +386,24 @@ class Popup extends React.PureComponent /** @lends @Popup.prototype */ {
   }
 
   updateGeometryInstant = () => { // UNUSED? TODO? Update geometry
-    if (!this.isOpen) { // Do nothing if popup is closed
+    const { open } = this.state
+    if (!open) { // Do nothing if popup is closed
+      console.log('Popup:updateGeometryInstant: SKIPED (closed)')
       return
     }
-    const { fullWidth } = this.props
+    const { id, fullWidth } = this.props
     // TODO: Call `updateGeometryInstant` on content update? How? Use timer?
     const controlGeometry = this.getDomNodeGeometry(this.controlDomNode, 'control')
-    const contentGeometry = this.getDomNodeGeometry(this.contentDomNode, 'content')
+    const contentGeometry = this.getDomNodeGeometry(this.windowDomNode, 'content')
+    // const contentGeometry = this.getDomNodeGeometry(this.contentDomNode, 'content')
+    // const windowGeometry = this.getDomNodeGeometry(this.windowDomNode, 'window')
     const globalGeometry = this.getGlobalGeometry()
-    const geometry = { ...globalGeometry, ...controlGeometry, ...contentGeometry }
+    const geometry = {
+      ...globalGeometry,
+      ...controlGeometry,
+      ...contentGeometry,
+      // ...windowGeometry,
+    }
     /* Sample geometry keys:
      * contentHeight
      * contentLeft
@@ -422,22 +421,26 @@ class Popup extends React.PureComponent /** @lends @Popup.prototype */ {
     const updatedGeometryKeys = this.getUpdatedGeometryKeys(geometry)
     const changedHorizontalKeys = horizontalGeometryKeys.some(key => updatedGeometryKeys.includes(key))
     const changedVerticalKeys = verticalGeometryKeys.some(key => updatedGeometryKeys.includes(key))
-    /* // DEBUG (use doDebug?)...
-     * console.log('Popup:updateGeometryInstant', {
-     *   updatedGeometryKeys,
-     *   changedHorizontalKeys,
-     *   changedVerticalKeys,
-     *   // geometry,
-     *   // 'this.geometry': this.geometry,
-     *   'changed geometry': Object.entries(geometry).reduce((result, [key, val]) => {
-     *     return updatedGeometryKeys.includes(key) ? { ...result, [key]: val } : result
-     *   }, {}),
-     *   'changed this.geometry': Object.entries(this.geometry).reduce((result, [key, val]) => {
-     *     return updatedGeometryKeys.includes(key) ? { ...result, [key]: val } : result
-     *   }, {}),
-     * })
-     */
-    if (!updatedGeometryKeys.length) { // Do nothing if no changes found
+    // DEBUG (use doDebug?)...
+    console.log('Popup:updateGeometryInstant', {
+      controlGeometry,
+      contentGeometry,
+      updatedGeometryKeys,
+      changedHorizontalKeys,
+      changedVerticalKeys,
+      // geometry,
+      // 'this.geometry': this.geometry,
+      'changed geometry': Object.entries(geometry).reduce((result, [key, val]) => {
+        return updatedGeometryKeys.includes(key) ? { ...result, [key]: val } : result
+      }, {}),
+      'changed this.geometry': Object.entries(this.geometry).reduce((result, [key, val]) => {
+        return updatedGeometryKeys.includes(key) ? { ...result, [key]: val } : result
+      }, {}),
+    })
+    // if (id === 'withMenu') {
+    //   debugger
+    // }
+    if (!updatedGeometryKeys.length) { // Do nothing if no changes detected
       return
     }
     if (changedVerticalKeys) {
@@ -478,7 +481,6 @@ class Popup extends React.PureComponent /** @lends @Popup.prototype */ {
 
   getClassName(params) {
     const {
-      isOpen,
       cnCtx,
       className,
     } = params
@@ -486,42 +488,42 @@ class Popup extends React.PureComponent /** @lends @Popup.prototype */ {
       id,
       fullWidth,
     } = this.props
+    const { open } = this.state
     return cnCtx && cnCtx({
       id,
-      open: isOpen,
+      open,
       fullWidth,
     }, [/* this.props. */className])
   }
 
   // External methods...
 
-  isVisible = () => {
-    return this.isOpen
-  }
+  // Provide ModalPortal public methods...
 
-  close = () => { // External method for using in `PopupStack`
-    const { id, onClose } = this.props
-    const { isOpen, closePortal } = this
-    if (isOpen && typeof closePortal === 'function') {
-      closePortal()
-      if (typeof onClose === 'function') {
-        onClose({ id })
-      }
-    }
-  }
-
-  open = () => { // External method for using in `PopupStack`
-    const { id, onOpen } = this.props
-    const { isOpen, openPortal } = this
-    if (!isOpen && typeof openPortal === 'function') {
-      openPortal()
-      if (typeof onOpen === 'function') {
-        onOpen({ id })
-      }
-    }
-  }
+  open = () => this.ModalPortal && this.ModalPortal.open()
+  close = () => this.ModalPortal && this.ModalPortal.close()
+  toggle = (open) => this.ModalPortal && this.ModalPortal.toggle(open)
+  isVisible = () => this.ModalPortal && this.ModalPortal.isVisible()
 
   // Handlers...
+
+  onActivate = () => {
+    console.log('Popup:onActivate')
+    setTimeout(this.updateGeometryInstant, 0)
+  }
+  onDeactivate = () => {
+    console.log('Popup:onDeactivate')
+    this.clearContentGeometry() // Due to content is destroyed when hidden
+  }
+
+  handleOpenState = ({ open }) => {
+    console.log('Popup:handleOpenState', open)
+    this.setState({ open }, this.updateOpenOrCloseWithState) // Update own open state
+    const { id, handleOpenState } = this.props
+    if (typeof handleOpenState === 'function') {
+      handleOpenState({ id, open })
+    }
+  }
 
   setControlRef = (domNode) => {
     this.controlDomNode = domNode
@@ -541,50 +543,41 @@ class Popup extends React.PureComponent /** @lends @Popup.prototype */ {
 
   handlePortalOpen = () => {
     // TODO: Register/unregister popup in `PopupStack`
-    this.updateGeometryInstant()
+    // this.updateGeometry()
     this.registerGlobalHandlers()
-    this.isOpen = true
   }
 
   handlePortalClose = () => {
     // TODO: Register/unregister popup in `PopupStack`
-    this.wasOpen = true
     this.unregisterGlobalHandlers()
-    this.isOpen = false
-    this.clearContentGeometry() // Due to content is destroyed when hidden
+    // this.clearContentGeometry() // Due to content is destroyed when hidden
+  }
+
+  updateOpenOrCloseWithState = () => {
+    if (this.state.open) {
+      this.handlePortalOpen()
+    }
+    else {
+      this.handlePortalClose()
+    }
   }
 
   onControlClick = (/* event */) => {
     const { id } = this.props
-    const { isOpen, openPortal, closePortal } = this
-    console.log('Popup:onControlClick', id, isOpen)
-    const method = isOpen ? closePortal : openPortal
-    if (typeof method === 'function') {
-      // method(event)
-      // setTimeout(method, 0)
-      const fakeEvent = {
-        nativeEvent: {
-          stopImmediatePropagation: () => {},
-        },
-      }
-      setTimeout(() => method(fakeEvent), 0)
-    }
-    // TODO: Notify `PopupStack` when popup opens for closing all other popups from same level (before first modal in popups stack). (Now user can open several popups at the same time.
+    const { open } = this.state
+    const nextOpen = !open
+    console.log('Popup:onControlClick', id, nextOpen, open)
+    this.setState({ open: nextOpen }, this.updateOpenOrCloseWithState) // Update own open state
+    // TODO: Notify `PopupsContainer` when popup opens for closing all other popups from same level (before first modal in popups stack). (Now user can open several popups at the same time.
     const { onControlClick } = this.props
     if (typeof onControlClick === 'function') {
-      onControlClick({ open: !isOpen })
+      onControlClick({ id, open: nextOpen })
     }
   }
 
   // Render...
 
-  renderPopupControl(portalParams) {
-    // const {
-    //   isOpen,
-    //   openPortal,
-    //   closePortal,
-    //   // portal,
-    // } = portalParams || {}
+  renderControl() {
     const {
       id,
       popupControl,
@@ -592,27 +585,16 @@ class Popup extends React.PureComponent /** @lends @Popup.prototype */ {
     } = this.props
     const { open } = this.state
 
-    // this.openPortal = openPortal
-    // this.closePortal = closePortal
-
-    const controlProps = popupControl && popupControl.props
-
-    // TODO: Cache modidied `popupControl` in state?
-    const content = {
-      ...popupControl,
-      props: {
-        ...controlProps,
-        onClick: this.onControlClick,
-        // onClick: isOpen ? closePortal : openPortal,
-        // onClick: [> controlProps.onControlClick || <] this.onControlClick,
-        checked: open,
-        setDomRef: this.setControlRef,
-      },
-    }
+    // TODO: Cache modified `popupControl` in state?
+    const content = React.cloneElement(popupControl, {
+      onClick: this.onControlClick,
+      checked: open,
+      setDomRef: this.setControlRef,
+    })
 
     const renderProps = {
       id,
-      className: this.getClassName({ cnCtx: cnPopupControl, className, ...portalParams }),
+      className: this.getClassName({ cnCtx: cnPopupControl, className }),
       ref: this.setControlRef,
     }
     return (
@@ -622,82 +604,58 @@ class Popup extends React.PureComponent /** @lends @Popup.prototype */ {
     )
   }
 
-  renderPopupContent(portalParams) {
-    // const {
-    //   // isOpen,
-    //   // openPortal,
-    //   // closePortal,
-    //   portal,
-    // } = portalParams || {}
+  renderPortalContent = (portalProps) => {
+    const { ModalPortal, windowDomNode, wrapperDomNode } = portalProps
+    if (ModalPortal) { // Save wrapping ModalPortal instance refernce
+      // console.log('Popup:renderPortalContent: updated ModalPortal')
+      this.ModalPortal = ModalPortal // Save ModalPortal handler (TODO)
+      this.windowDomNode = windowDomNode
+      this.wrapperDomNode = wrapperDomNode
+    }
+    // debugger
     const {
       id,
       popupContent,
       contentClassName: className,
     } = this.props
-    // const { open } = this.state
     const renderProps = {
       id,
-      className: this.getClassName({ cnCtx: cnPopup, className, ...portalParams }),
-      ref: this.setContentRef,
+      className: this.getClassName({ cnCtx: cnPopup, className }),
+      ref: this.setContentRef, // Will be used windowDomNode from ModalPortal
     }
-    /* // TRY: css-transitions
-     * <TransitionGroup className={cnPopup('TransitionGroup')}>
-     *   <CSSTransition
-     *     key={id}
-     *     timeout={5000}
-     *     // timeout={config.css.animateTime}
-     *     classNames={cnPopup('Transition')}
-     *   >
-     *     <div {...renderProps}>
-     *       {popupContent}
-     *     </div>
-     *   </CSSTransition>
-     * </TransitionGroup>
-     */
-    //     node={config.popups.domNode}
     return (
-      <Portal node={config.popups.domNode}>
-        <div {...renderProps}>
-          {popupContent}
-        </div>
-      </Portal>
+      <div {...renderProps}>
+        {popupContent}
+      </div>
     )
-    // return portal(
-    //   <div {...renderProps}>
-    //     {popupContent}
-    //   </div>
-    // )
   }
 
-  renderPopop = (portalParams) => {
+  renderContent() {
+    const portalProps = passModalPortalProps.reduce((data, id) => {
+      return { ...data, [id]: this.props[id] }
+    }, {})
+    if (this.state.open != null) {
+      portalProps.open = this.state.open
+    }
+    Object.assign(portalProps, {
+      handleOpenState: this.handleOpenState,
+      onActivate: this.onActivate,
+      onDeactivate: this.onDeactivate,
+    })
     return (
-      <React.Fragment>
-        {this.renderPopupControl(portalParams)}
-        {this.renderPopupContent(portalParams)}
-      </React.Fragment>
+      <ModalPortal {...portalProps} type="Popup">
+        {this.renderPortalContent}
+      </ModalPortal>
     )
   }
 
   render() {
-    const {
-      closeOnClickOutside,
-      closeOnEscPressed,
-      open,
-    } = this.props
-    const { popupsInited } = this.state
-    return popupsInited && this.renderPopop()
-    // return popupsInited && (
-    //   <PortalWithState
-    //     node={config.popups.domNode}
-    //     onOpen={this.handlePortalOpen}
-    //     onClose={this.handlePortalClose}
-    //     closeOnOutsideClick={closeOnClickOutside}
-    //     closeOnEsc={closeOnEscPressed}
-    //     defaultOpen={open}
-    //   >
-    //     {this.renderPortal}
-    //   </PortalWithState>
-    // )
+    return (
+      <React.Fragment>
+        {this.renderControl()}
+        {this.renderContent()}
+      </React.Fragment>
+    )
   }
 
 }

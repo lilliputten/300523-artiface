@@ -34,7 +34,7 @@ const PopupContent = () => {
   return (
     <div className="DemoPopupContent">
       <div className="DemoPopupContent-Container">
-        DemoPopupContent
+        DemoPopupContent Extra long text line for wrapping tests
       </div>
     </div>
   )
@@ -88,7 +88,6 @@ const withMenu = (
     id="withMenu"
     popupControl={<FormButton icon="faChevronRight" rightIcon theme="primary" variation="popupControl" text="withMenu" />}
     popupContent={demoMenu}
-    open
   />
 )
 
@@ -100,7 +99,6 @@ const stayOpenAfterItemClick = (
     popupContent={demoMenu}
     closeOnClickOutside={true}
     fullWidth
-    open
   />
 )
 
