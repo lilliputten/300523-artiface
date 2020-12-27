@@ -178,7 +178,7 @@ module.exports = (env, argv) => {
   const demoModule = // 'AsyncModal' ||
     env.DEMO_MODULE || 'demo'
 
-  const jsEntryFile = isBuild ? 'build.js' : demoModule + '.jsx' // js source
+  const jsEntryFile = isBuild ? 'build.jsx' : demoModule + '.jsx' // js source
 
   const bundleFile = 'bundle.js'
 

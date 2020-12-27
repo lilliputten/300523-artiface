@@ -1,5 +1,6 @@
 # CHANGELOG
 
+- 2020.12.28, 01:13 -- v.0.1.8: Export default library wrapper (`WebUiCoreRoot`).
 - 2020.12.28, 00:25 -- PD-3504: Popup based on `ModalPortal` (`updateGeometry` and other updates `windowDomNode` passed from `ModalPortal`). (With extra debug logging.)
 - 2020.12.28, 23:00 -- PD-3504: ModalPortal: exported `passModalPortalProps` with list of public props, set `modalType` property with `props.type` (from Modal or Popup). (With debug logging.)
 - 2020.12.26, 23:09 -- PD-3504: ModalPortal: inplemented generic modal wrapper code, layout & styles form original `Modal`, Modal: Renamed Modal to ModalWindow.
@@ -57,5 +58,5 @@
 - 2020.10.05, 20:38 -- v.0.0.15: Extracted `demoSupport.jsx` routines, fixture selection from url query (parameter `fixture`), added avaialble fixtures list if fixture to display is not specified, added DemoWrapper & demoTitle exportable ficture parameters for demo rendering.
 
 <!--
- @changed 2020.12.28, 00:26
+ @changed 2020.12.28, 01:13
 -->

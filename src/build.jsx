@@ -1,8 +1,10 @@
 /** @module build
  *  @desc Library exportable ditributive
  *  @since 2020.05.19, 17:16
- *  @changed 2020.12.24, 19:05
+ *  @changed 2020.12.28, 01:09
  */
+
+import React from 'react'
 
 export config from 'config'
 export * as utils from 'utils'
@@ -19,5 +21,11 @@ import './build.pcss'
 
 import ModalsContainer from './elements/ModalsContainer'
 
-export const RootComponent = ModalsContainer
-
+// TODO: Use WebUiCoreContext?
+const WebUiCoreRoot = ({ children }) => (
+  <React.Fragment>
+    {children}
+    <ModalsContainer />
+  </React.Fragment>
+)
+export default WebUiCoreRoot
