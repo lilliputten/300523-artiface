@@ -18,6 +18,7 @@
 // TODO: Use ModalContext
 
 import React from 'react'
+// import { compose } from 'redux'
 import PropTypes from 'prop-types'
 import { cn } from 'utils/configure'
 import { Portal } from 'react-portal'
@@ -27,6 +28,8 @@ import { // Transitions...
   // TransitionGroup,
 } from 'react-transition-group'
 import config from 'config'
+
+// import { withModalsContext } from 'helpers/ModalsContext'
 
 // import InlineIcon from 'elements/InlineIcon'
 import Loader from 'elements/Loader'
@@ -40,7 +43,8 @@ import './ModalPortal-Transitions.pcss'
 
 const cnModalPortal = cn('ModalPortal')
 
-// const doDebug = false // DEBUG!
+// const doDebug = [>DEBUG<] false && config.build.DEV_DEBUG || // DEBUG!
+//   false
 
 const mouseDownEvent = 'mousedown'
 const mouseUpEvent = 'mouseup'
@@ -75,7 +79,7 @@ export const passModalPortalProps = [
 export const selfCloseActionId = '--modal-portal-self-close--'
 export const externalCloseActionId = '--modal-portal-external-close--'
 
-export default class ModalPortal extends React.PureComponent /** @lends @ModalPortal.prototype */ {
+class ModalPortal extends React.PureComponent /** @lends @ModalPortal.prototype */ {
 
   // Props...
 
@@ -110,7 +114,7 @@ export default class ModalPortal extends React.PureComponent /** @lends @ModalPo
   }
 
   static defaultProps = {
-    loaderTheme: 'Transparent',
+    loaderTheme: 'MediumDark',
   }
 
   // Instance variables...
@@ -137,9 +141,22 @@ export default class ModalPortal extends React.PureComponent /** @lends @ModalPo
     config.modals.initPromise.then(this.onPopupsInited)
     this.transitionTime = config.css.modalAnimateTime
     this.modalType = props.type
+    /* // UNUSED: Failed `ModalsContext` test implementation
+     * const {
+     *   modalsContainerNode, // ModalsContext Provider
+     * } = props
+     * console.log(modalsContainerNode)
+     * debugger
+     */
   }
 
   componentWillUnmount() {
+    if (!this.unregisterGlobalHandlers) {
+      const error = new Error('ModalPortal: unregisterGlobalHandlers method is undefined')
+      console.error(error) // eslint-disable-line no-console
+      /*DEBUG*/ debugger // eslint-disable-line no-debugger
+      throw error // ???
+    }
     this.unregisterGlobalHandlers()
   }
 
@@ -168,9 +185,10 @@ export default class ModalPortal extends React.PureComponent /** @lends @ModalPo
 
   // External methods...
 
-  isVisible = () => {
-    return this.state.open
-  }
+  getId = () => this.props.id
+  getType = () => this.props.type
+
+  isVisible = () => this.state.open
 
   activate = (cb) => {
     const { id, onActivate } = this.props
@@ -186,6 +204,7 @@ export default class ModalPortal extends React.PureComponent /** @lends @ModalPo
           onActivate({ id })
         }
       })
+      config.modals.containerNode.registerModal(this)
     }
     else if (typeof cb === 'function') {
       cb()
@@ -202,6 +221,7 @@ export default class ModalPortal extends React.PureComponent /** @lends @ModalPo
         onDeactivate({ id })
       }
       this.setState({ activated: false })
+      config.modals.containerNode.unregisterModal(this)
     }
   }
 
@@ -215,10 +235,10 @@ export default class ModalPortal extends React.PureComponent /** @lends @ModalPo
       return false
     }
     if (open) {
-      this.close()
+      this.open()
     }
     else {
-      this.open()
+      this.close()
     }
   }
 
@@ -380,16 +400,19 @@ export default class ModalPortal extends React.PureComponent /** @lends @ModalPo
       closeOnEscPressed,
       loading,
     } = this.props
-    if (!loading) {
-      var { keyCode } = event
-      const isEscPressed = (keyCode === 27)
-      const cbProps = { event, id, keyCode }
-      if (isEscPressed) {
+    var { keyCode } = event
+    const isEscPressed = (keyCode === 27)
+    if (isEscPressed && !loading) {
+      const isTopmost = config.modals.containerNode.isModalTopmostVisible(this)
+      // console.log('ModalPortal:onKeyPress', id, isTopmost)
+      if (isTopmost) {
+        // event.stopPropagation()
         if (closeOnEscPressed) {
           this.setResult(selfCloseActionId)
           this.close()
         }
         if (typeof onEscPressed === 'function') {
+          const cbProps = { event, id, keyCode }
           onEscPressed(cbProps)
         }
       }
@@ -488,9 +511,14 @@ export default class ModalPortal extends React.PureComponent /** @lends @ModalPo
   }
 
   renderModalPortal() {
-    const { type, id, theme, wrapperTheme, className, wrapperClassName, useLoader } = this.props
+    const { type, id, theme, wrapperTheme, className, wrapperClassName, useLoader, loading } = this.props
+    if (loading && !useLoader) {
+      const error = new Error('ModalPortal: `useLoader` must be enabled for using `loading` prop')
+      console.error(error) // eslint-disable-line no-console
+      /*DEBUG*/ debugger // eslint-disable-line no-debugger
+      throw error // ???
+    }
     const { open } = this.state
-    // console.log('ModalPortal:renderModalPortal', { id, open })
     return (
       <CSSTransition
         key={id}
@@ -526,3 +554,10 @@ export default class ModalPortal extends React.PureComponent /** @lends @ModalPo
   }
 
 }
+
+export default ModalPortal
+/* // UNUSED: Failed `ModalsContext` test implementation
+ * export default compose(
+ *   withModalsContext,
+ * )(ModalPortal)
+ */

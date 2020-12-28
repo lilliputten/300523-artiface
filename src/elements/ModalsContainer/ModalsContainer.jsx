@@ -9,11 +9,8 @@ import ReactDOM from 'react-dom'
 import { Portal } from 'react-portal'
 // import { cssMapping } from 'utils/configure'
 import { cn } from 'utils/configure'
-// import { // Transitions...
-//   // CSSTransition,
-//   TransitionGroup,
-// } from 'react-transition-group'
 import config from 'config'
+// import { ModalsContextProvider } from 'helpers/ModalsContext'
 
 import './ModalsContainer.pcss'
 
@@ -23,22 +20,23 @@ const cnModalsContainer = cn('ModalsContainer')
 
 class ModalsContainer extends React.PureComponent /** @lends @ModalsContainer.prototype */ {
 
+  modalsStack = []
+
   // Lifecycle...
 
-  /* // UNUSED: constructor
-   * constructor(props) {
-   *   super(props)
-   *   this.ref = React.createRef()
-   *   // this.state = {}
-   *   // const initedPromise = new
-   * }
-   */
-
+  constructor(props) {
+    super(props)
+    // ???
+    // const {
+    //   modalsContainerNode, // ModalsContext Provider
+    // } = props
+    // console.log(modalsContainerNode)
+    // debugger
+  }
   componentDidMount() {
     // this.registerGlobalHandlers()
     if (typeof config.modals._initPromiseResolve == 'function') {
       config.modals._initPromiseResolve()
-      // setTimeout(config.modals._initPromiseResolve, 1000) // Delayed initializing?
     }
     config.modals.isInited = true
     config.modals.containerNode = this
@@ -53,19 +51,38 @@ class ModalsContainer extends React.PureComponent /** @lends @ModalsContainer.pr
 
   // Handlers...
 
-  /* // UNUSED: Using (deprecated!) `findDOMNode` in `componentDidMount` (see above)
-   * setDomRef = (domNode) => {
-   *   if (typeof config.modals._initPromiseResolve == 'function') {
-   *     config.modals._initPromiseResolve()
-   *   }
-   *   config.modals.isInited = true
-   *   config.modals.containerNode = this
-   *   // eslint-disable-next-line react/no-find-dom-node
-   *   const domNode = ReactDOM.findDOMNode(domNode)
-   *   debugger
-   *   config.modals.domNode = domNode
-   * }
-   */
+  // External methods...
+
+  registerModal = (modal) => {
+    // console.log('ModalsContainer:registerModal', modal.props.type, modal.props.id)
+    if (!this.modalsStack.includes(modal)) { // Add to stack if not exist
+      this.modalsStack.push(modal)
+    }
+  }
+
+  unregisterModal = (modal) => {
+    // console.log('ModalsContainer:unregisterModal', modal.props.type, modal.props.id)
+    const idx = this.modalsStack.indexOf(modal)
+    if (idx !== -1) { // Remove if found...
+      this.modalsStack.splice(idx, 1)
+    }
+  }
+
+  getTopmostVisibleModal = () => {
+    // Look for items from last (topmost) to first (bottommost) for first visible
+    for (let n = this.modalsStack.length - 1; n >= 0; n--) {
+      const modal = this.modalsStack[n]
+      const isVisible = modal.isVisible()
+      if (isVisible) {
+        return modal
+      }
+    }
+  }
+
+  isModalTopmostVisible = (modal) => {
+    const topmost = this.getTopmostVisibleModal()
+    return (modal === topmost)
+  }
 
   // Render...
 
@@ -76,34 +93,21 @@ class ModalsContainer extends React.PureComponent /** @lends @ModalsContainer.pr
       key: containerId || 'ModalsContainer',
       id: containerId,
       className,
-      // ref: this.setDomRef, // UNUSED: Using (deprecated!) `findDOMNode` in `componentDidMount` (see above)
-      // style: { border: '10px solid blue' }, // DEBUG
     }
-    /* // TRY: css-transitions
-     * <TransitionGroup className={cnModalsContainer('TransitionGroup')}>
-     *   <CSSTransition
-     *     key={id}
-     *     timeout={5000}
-     *     // timeout={config.css.animateTime}
-     *     classNames={cnModalsContainer('Transition')}
-     *   >
-     *     <div {...renderProps}>
-     *       {popupContent}
-     *     </div>
-     *   </CSSTransition>
-     * </TransitionGroup>
-     * <TransitionGroup {...renderProps}>
-     *   <div>xxx</div>
-     * </TransitionGroup>
+    /* // UNUSED: Failed `ModalsContext` test implementation
+     * return (
+     *   <ModalsContextProvider value={this}>
+     *     <div {...renderProps} />
+     *   </ModalsContextProvider>
+     * )
      */
     return (
       <div {...renderProps} />
-
     )
   }
 
   render() {
-    const node = document.body
+    const node = document.body // Render as new node in top level of dom tree
     return (
       <Portal node={node}>
         {this.renderModalsContainer()}

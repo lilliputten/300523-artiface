@@ -92,11 +92,12 @@ class Interactive extends React.PureComponent /** @lends @ModalsContainer.protot
           handleOpenState={this.handleOpenState}
           ref={this.setModalWindowRef}
           actions={actions}
-          title="ModalWindow title"
+          title="Interactive"
           windowWidth="sm"
           // leftContent="left" // Left column (with icon visual, eg)
           showCloseButton
           autoClose
+          useLoader
           loading={this.state.loading}
           // loaderTheme="Dark"
           handleLoaderCancel={this.handleLoaderCancel}
@@ -126,7 +127,7 @@ class WithSelect extends React.PureComponent /** @lends @ModalsContainer.prototy
     super(props)
     this.state = {
       open: true,
-      // loading: true,
+      loading: true, // Use `useLoader` for ability to controlling Loader
     }
     // setTimeout(this.close, 3000)
     // setInterval(this.toggle, 5000)
@@ -194,11 +195,12 @@ class WithSelect extends React.PureComponent /** @lends @ModalsContainer.prototy
           handleOpenState={this.handleOpenState}
           ref={this.setModalWindowRef}
           actions={actions}
-          title="ModalWindow title"
+          title="WithSelect"
           windowWidth="sm"
           // leftContent="left" // Left column (with icon visual, eg)
           showCloseButton
           autoClose
+          useLoader
           loading={this.state.loading}
           // loaderTheme="Dark"
           handleLoaderCancel={this.handleLoaderCancel}

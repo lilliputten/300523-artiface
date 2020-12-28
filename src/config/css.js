@@ -172,10 +172,6 @@ const cssConfig = { // Common-used css variables...
     xxl: 1200,
   },
 
-  // Typical icons:
-  // error: faExclamationTriangle
-  // error: faExclamationCircle
-
   // Spacings & paddings...
 
   innerPadding: 5,
@@ -187,7 +183,8 @@ const cssConfig = { // Common-used css variables...
 
   transitionTime: defaultTransitionTime, // ms
   animateTime: defaultAnimateTime, // ms
-  modalAnimateTime: defaultTransitionTime, // defaultAnimateTime,
+
+  modalAnimateTime: defaultAnimateTime,
   modalWindowAnimateTime: defaultTransitionTime,
 
   // Parameters...

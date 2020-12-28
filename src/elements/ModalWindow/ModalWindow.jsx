@@ -13,18 +13,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { cn } from 'utils/configure'
-// import { Portal } from 'react-portal'
-// import { // Transitions...
-//   // Transition,
-//   CSSTransition,
-//   // TransitionGroup,
-// } from 'react-transition-group'
 import config from 'config'
 
-import ModalPortal from 'elements/ModalPortal'
+import ModalPortal, { passModalPortalProps } from 'elements/ModalPortal'
 
 import InlineIcon from 'elements/InlineIcon'
-// import Loader from 'elements/Loader'
 import FormButton from 'forms/FormButton'
 
 import { ActionsContextProvider } from 'helpers/ActionsContext'
@@ -35,12 +28,8 @@ import './ModalWindow-Themes.pcss'
 
 const cnModalWindow = cn('ModalWindow')
 
-// const doDebug = false // DEBUG!
-
-// const mouseDownEvent = 'mousedown'
-// const mouseUpEvent = 'mouseup'
-// const mouseLeaveEvent = 'mouseleave'
-// const globalKeyPressEventName = 'keydown'
+// const doDebug = [>DEBUG<] false && config.build.DEV_DEBUG || // DEBUG!
+//   false
 
 export const selfCloseActionId = '--modal-self-close--'
 export const externalCloseActionId = '--modal-external-close--'
@@ -97,21 +86,15 @@ export default class ModalWindow extends React.PureComponent /** @lends @ModalWi
     open: false,
     showCloseButton: false, // Display 'Close button'?
     useLoader: false,
+    wrapperTheme: 'MediumDark',
   }
+
+  // Properties...
+
+  // From ModalPortal:
+  ModalPortal = null
 
   // Lifecycle...
-
-  // typeId = 'ModalWindow'
-
-  /* // UNUSED: constructor
-   * constructor(props) {
-   *   super(props)
-   * }
-   */
-
-  componentWillUnmount() {
-    this.unregisterGlobalHandlers()
-  }
 
   // Helpers...
 
@@ -261,16 +244,7 @@ export default class ModalWindow extends React.PureComponent /** @lends @ModalWi
 
   renderWindow = (portalProps) => {
     const { ModalPortal } = portalProps
-    // console.log(portalProps)
-    // debugger
-    if (ModalPortal) { // Save wrapping ModalPortal instance refernce
-      this.ModalPortal = ModalPortal // Save ModalPortal handler (TODO)
-    }
-    // const { width, windowTheme, theme, windowClassName } = this.props
-    // <div
-    //   className={cnModalWindow('Window', { width, theme: windowTheme || theme }, [windowClassName])}
-    //   ref={this.setWindowDomRef}
-    // >
+    this.ModalPortal = ModalPortal // Save ModalPortal handler
     return (
       <React.Fragment>
         {this.renderHeader()}
@@ -287,58 +261,15 @@ export default class ModalWindow extends React.PureComponent /** @lends @ModalWi
   }
 
   render() {
-    // const {
-    //   open,
-    // } = this.state
-    const { // ModalPortal props...
-      id,
-      className,
-      closeOnClickOutside,
-      closeOnEscPressed,
-      handleLoaderCancel,
-      loaderTheme,
-      loading,
-      onAction,
-      onActivate,
-      onClickOutside,
-      onClose,
-      onCloseButtonClick,
-      onDeactivate,
-      onEscPressed,
-      onOpen,
-      open,
-      theme,
-      useLoader,
-      windowClassName,
-      windowWidth,
-      wrapperClassName,
-      wrapperTheme,
-    } = this.props
-    const portalProps = { // Just pass props throught
-      id,
-      className,
-      closeOnClickOutside,
-      closeOnEscPressed,
-      handleLoaderCancel,
-      loaderTheme,
-      loading,
-      onAction,
-      onActivate,
-      onClickOutside,
-      onClose,
-      onCloseButtonClick,
-      onDeactivate,
-      onEscPressed,
-      onOpen,
-      open,
-      theme,
-      useLoader,
-      windowClassName,
-      windowWidth,
-      wrapperClassName,
-      wrapperTheme,
-    }
-    portalProps.handleOpenState = this.handleOpenState
+    const portalProps = passModalPortalProps.reduce((data, id) => {
+      return { ...data, [id]: this.props[id] }
+    }, {})
+    Object.assign(portalProps, {
+      handleOpenState: this.handleOpenState,
+      // onActivate: this.onActivate,
+      // onDeactivate: this.onDeactivate,
+      // wrapperTheme: 'SubtleDark',
+    })
     return (
       <ModalPortal {...portalProps} type="Window">
         {this.renderWindow}

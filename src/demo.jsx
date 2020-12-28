@@ -1,7 +1,7 @@
 /** @module demo
  *  @desc Demo app entry point
  *  @since 2020.05.19, 17:16
- *  @changed 2020.12.22, 00:32
+ *  @changed 2020.12.28, 01:57
  */
 /* eslint-disable react/jsx-max-depth */
 
@@ -21,7 +21,7 @@ import * as demoSupport from './demoSupport'
 import './demo.pcss'
 
 // import * as build from './build'
-import { RootComponent as WebUiCoreRootComponent } from './build'
+import WebUiCoreRoot from './build'
 
 /* // DEBUG: Check strings module
  * import { strings } from 'utils'
@@ -116,12 +116,11 @@ else { // List all available fixtures to display
 }
 
 const demoContent = (
-  <React.Fragment>
+  <WebUiCoreRoot>
     <div className="demo">
       {content}
     </div>
-    <WebUiCoreRootComponent />
-  </React.Fragment>
+  </WebUiCoreRoot>
 )
 
 render(demoContent, document.getElementById('Root'))

@@ -14,22 +14,21 @@
  * - *-exit-done
  */
 
-$timeout: $(modalAnimateTime)ms;
-$windowTimeout: $(modalWindowAnimateTime)ms;
+$timeout: $(modalAnimateTime)ms; // Total animatin time
+$windowTimeout: $(modalWindowAnimateTime)ms; // Animation time for window component
 
-@define-mixin modal-transition $descent { // Animation transitions...
-  // $descent: 10px;
+@define-mixin modal-transition $descentFrom, $descentTo { // Animation transitions...
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
   .ModalPortal-Window {
     opacity: 0;
-    margin-top: 0;
+    margin-top: $descentTo;
   }
   &-enter {
     visibility: visible;
     .ModalPortal-Window {
-      margin-top: $descent;
+      margin-top: $descentFrom;
     }
   }
   &-enter-active {
@@ -38,7 +37,7 @@ $windowTimeout: $(modalWindowAnimateTime)ms;
     .ModalPortal-Window {
       transition: opacity $windowTimeout, margin-top $windowTimeout;
       opacity: 1;
-      margin-top: 0px;
+      margin-top: $descentTo;
     }
   }
   &-enter-done {
@@ -62,7 +61,7 @@ $windowTimeout: $(modalWindowAnimateTime)ms;
     .ModalPortal-Window {
       transition: opacity $windowTimeout, margin-top $windowTimeout;
       opacity: 0;
-      margin-top: $descent;
+      margin-top: $descentFrom;
     }
   }
   &-exit-done {
@@ -76,11 +75,13 @@ $windowTimeout: $(modalWindowAnimateTime)ms;
 }
 
 .ModalPortal_type_Popup.ModalPortal { // Animation transitions...
-  $descent: 20px;
-  @mixin modal-transition $descent;
+  $descentFrom: 20px;
+  $descentTo: 0px;
+  @mixin modal-transition $descentFrom, $descentTo;
 }
 
 .ModalPortal_type_Window.ModalPortal { // Animation transitions...
-  $descent: -30px;
-  @mixin modal-transition $descent;
+  $descentFrom: @calc($modalWindowPadding - 30)px;
+  $descentTo: @calc($modalWindowPadding)px;
+  @mixin modal-transition $descentFrom, $descentTo;
 }

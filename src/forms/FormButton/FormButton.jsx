@@ -117,7 +117,7 @@ class FormButton extends React.PureComponent /** @lends @FormButton.prototype */
   onClick = (event) => {
     const {
       id,
-      actionsContextNode, // ActionContext Provider
+      actionsContextNode, // ActionsContext Provider
       disabled,
       onClick,
       // clickable,

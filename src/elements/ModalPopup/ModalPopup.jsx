@@ -20,15 +20,7 @@ import { cn } from 'utils/configure'
 import { strings } from 'utils'
 import { debounce } from 'throttle-debounce'
 import FormItemHOC from 'forms/FormItemHOC'
-// import { PortalWithState } from 'react-portal'
-// import { Portal } from 'react-portal'
 import ModalPortal, { passModalPortalProps } from 'elements/ModalPortal'
-/* UNUSED: Transitions
- * import { // Transitions...
- *   CSSTransition,
- *   TransitionGroup,
- * } from 'react-transition-group'
- */
 import config from 'config'
 
 import './ModalPopup.pcss'
@@ -170,6 +162,8 @@ class ModalPopup extends React.PureComponent /** @lends @ModalPopup.prototype */
     closeOnEscPressed: true,
     open: false,
   }
+
+  // Properties...
 
   delayedClickTimerHandler = null
   globalHandlersRegistered = false
@@ -613,7 +607,6 @@ class ModalPopup extends React.PureComponent /** @lends @ModalPopup.prototype */
       this.windowDomNode = windowDomNode
       this.wrapperDomNode = wrapperDomNode
     }
-    // debugger
     const {
       id,
       popupContent,

@@ -9,6 +9,9 @@
     &-Wrapper {
       display: flex;
       flex-direction: column;
+      // align-items: center;
+      // align-content: center;
+      justify-content: center;
     }
     &-Window {
       display: flex;
@@ -21,8 +24,8 @@
       overflow: hidden;
       margin: $(modalWindowPadding)px auto; // Auto size & center window horizontally
       // Center window vertically:
-      top: 50%;
-      transform: translate(0, -50%);
+      // top: 50%;
+      // transform: translate(0, -50%);
       // Default ('auto') size...
       min-width: $(modalMinWidth)px;
       @media (max-width: @calc($modalMinWidth + $modalWindowPadding * 2)px) {
