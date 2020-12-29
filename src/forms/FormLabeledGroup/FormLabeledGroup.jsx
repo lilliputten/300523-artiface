@@ -17,7 +17,7 @@ import FormLabel from '../FormLabel'
 // class FormLabeledGroup extends React.PureComponent [>* @lends @FormLabeledGroup.prototype <] {
 const FormLabeledGroup = (props) => /** @lends @FormLabeledGroup.prototype */ {
   const {
-    // className,
+    className,
     children,
     id,
     fullWidth,
@@ -32,6 +32,7 @@ const FormLabeledGroup = (props) => /** @lends @FormLabeledGroup.prototype */ {
   // const thisClassName = cnFormLabeledGroup({ flow, full })
   return (
     <FormGroup
+      className={className}
       fullWidth={fullWidth}
       innerFlex={innerFlex}
       flow={flow}

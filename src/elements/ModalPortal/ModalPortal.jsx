@@ -1,7 +1,7 @@
 /** @module ModalPortal
  *  @class ModalPortal
  *  @since 2020.12.21, 22:58
- *  @changed 2020.12.26, 23:11
+ *  @changed 2020.12.29, 19:58
  *
  *  External methods (for PopupStack, ModalWindow etc):
  *
@@ -111,6 +111,7 @@ class ModalPortal extends React.PureComponent /** @lends @ModalPortal.prototype 
     windowTheme: PropTypes.string, // Window theme (using `theme` if not specified)
     wrapperTheme: PropTypes.string, // Wrapper (back-curtain) theme (using `theme` if not specified)
     loaderTheme: PropTypes.string, // Loader theme ('MediumDark' is default)
+    setPortalNode: PropTypes.func, // Get reference to `ModalPortal` instance node
   }
 
   static defaultProps = {
@@ -141,6 +142,9 @@ class ModalPortal extends React.PureComponent /** @lends @ModalPortal.prototype 
     config.modals.initPromise.then(this.onPopupsInited)
     this.transitionTime = config.css.modalAnimateTime
     this.modalType = props.type
+    if (typeof props.setPortalNode === 'function') {
+      props.setPortalNode(this)
+    }
     /* // UNUSED: Failed `ModalsContext` test implementation
      * const {
      *   modalsContainerNode, // ModalsContext Provider
@@ -546,8 +550,19 @@ class ModalPortal extends React.PureComponent /** @lends @ModalPortal.prototype 
   render() {
     const { popupsInited, activated } = this.state
     const toDisplay = popupsInited && activated
-    return toDisplay && (
-      <Portal node={config.modals.domNode}>
+    if (!toDisplay) {
+      return null
+    }
+    const node = config.modals.domNode
+    if (!node) {
+      const error = new Error('ModalPortal: config.modals.domNode is undefined. Don\'t forget to use WebUiCoreRoot with autoModalsContainer mode or render ModalsContainer manually.')
+      console.error(error) // eslint-disable-line no-console
+      /*DEBUG*/ debugger // eslint-disable-line no-debugger
+      throw error // ???
+    }
+    // console.log('ModalPortal:render', this.props.children)
+    return (
+      <Portal node={node}>
         {this.renderModalPortal()}
       </Portal>
     )

@@ -1,13 +1,13 @@
 #!/bin/sh
 # @desc Increment version number
-# @changed 2020.10.19, 03:57
+# @changed 2020.12.29, 23:07
 
 VERSION_FILE="build-version.txt"
 BACKUP="$VERSION_FILE.bak"
 
 test -f "$VERSION_FILE" || echo "0.0.0" > "$VERSION_FILE"
 
-echo "Version: `cat $VERSION_FILE`"
+echo "Current version: `cat $VERSION_FILE`"
 
 # Extract patch number
 PATCH_NUMBER=`cat "$VERSION_FILE" | sed "s/^\(.*\)\.\([0-9]\+\)$/\2/"`

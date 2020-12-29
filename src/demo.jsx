@@ -116,7 +116,7 @@ else { // List all available fixtures to display
 }
 
 const demoContent = (
-  <WebUiCoreRoot>
+  <WebUiCoreRoot autoModalsContainer>
     <div className="demo">
       {content}
     </div>

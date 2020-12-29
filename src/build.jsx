@@ -22,11 +22,11 @@ import './build.pcss'
 import ModalsContainer from './elements/ModalsContainer'
 
 // TODO: Use WebUiCoreContext?
-const WebUiCoreRoot = ({ children }) => {
+const WebUiCoreRoot = ({ children, autoModalsContainer }) => {
   return (
     <React.Fragment>
       {children}
-      <ModalsContainer />
+      {autoModalsContainer && <ModalsContainer />}
     </React.Fragment>
   )
 }

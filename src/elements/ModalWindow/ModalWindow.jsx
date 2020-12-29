@@ -1,12 +1,14 @@
 /** @module ModalWindow
  *  @class ModalWindow
  *  @since 2020.12.21, 22:58
- *  @changed 2020.12.25, 15:30
+ *  @changed 2020.12.29, 20:05
  *
  *  External methods (for PopupStack):
  *  - close
  *  - open
  *  - updateGeometry
+ *
+ *  TODO 2020.12.29, 21:51 -- Use level mod (increase margins)
  */
 /* --eslint-disable no-console */
 
@@ -24,6 +26,7 @@ import { ActionsContextProvider } from 'helpers/ActionsContext'
 
 import './ModalWindow-Geometry.pcss'
 import './ModalWindow-Themes.pcss'
+import './ModalWindow-Errors.pcss'
 // import './ModalWindow-Transitions.pcss'
 
 const cnModalWindow = cn('ModalWindow')
@@ -31,8 +34,8 @@ const cnModalWindow = cn('ModalWindow')
 // const doDebug = [>DEBUG<] false && config.build.DEV_DEBUG || // DEBUG!
 //   false
 
-export const selfCloseActionId = '--modal-self-close--'
-export const externalCloseActionId = '--modal-external-close--'
+export const selfCloseActionId = 'modalSelfClose'
+export const externalCloseActionId = 'modalExternalClose'
 
 export default class ModalWindow extends React.PureComponent /** @lends @ModalWindow.prototype */ {
 
@@ -46,11 +49,13 @@ export default class ModalWindow extends React.PureComponent /** @lends @ModalWi
     // setModalNodeRef: PropTypes.func, // ??? Demo?
     width: PropTypes.string, // ModalWindow window width (predefined variants: xs, sm, md, lg, xl, xxl)
     handleLoaderCancel: PropTypes.func, // Loader onCancel event handler
+    error: PropTypes.oneOfType([ PropTypes.string, PropTypes.arrayOf(PropTypes.string) ]), // Error(s) strings to display above content
     actions: PropTypes.oneOfType([ PropTypes.array, PropTypes.object ]), // Actions component(s) (TODO: `ActionsContext` must be used)
     closeOnCancelAction: PropTypes.bool, // Auto-close on `cancel` action event
     closeOnClickOutside: PropTypes.bool, // Close (cancel) modal by click outside modal window (on 'curtain')
     closeOnEscPressed: PropTypes.bool, // Close (cancel) modal on esc key pressed
     closeWithCloseButton: PropTypes.bool, // Close (cancel) modal by click on header 'Close' button
+    showCloseButton: PropTypes.bool, // Display close button in header
     icon: PropTypes.oneOfType([ PropTypes.string, PropTypes.object ]), // Show icon in header
     id: PropTypes.string, // ModalWindow id
     leftContent: PropTypes.oneOfType([ PropTypes.string, PropTypes.object ]), // Content at left of main content and actions (ideal place for large visual icon)
@@ -63,7 +68,6 @@ export default class ModalWindow extends React.PureComponent /** @lends @ModalWi
     onClose: PropTypes.func, // Event fired on modal close
     handleOpenState: PropTypes.func, // Event fired on modal open state change (update external open/close state) ({ open, id } => void)
     open: PropTypes.bool, // Show modal by default
-    showCloseButton: PropTypes.bool, // Display close button in header
     title: PropTypes.string, // ModalWindow title
     className: PropTypes.string, // ModalWindow class name
     contentClassName: PropTypes.string, // Content element class name
@@ -151,6 +155,10 @@ export default class ModalWindow extends React.PureComponent /** @lends @ModalWi
     }
   }
 
+  setPortalNode = (node) => { // Save reference to ModalPortal node
+    this.ModalPortal = node
+  }
+
   // Provide ModalPortal public methods...
 
   open = () => this.ModalPortal && this.ModalPortal.open()
@@ -220,12 +228,40 @@ export default class ModalWindow extends React.PureComponent /** @lends @ModalWi
     )
   }
 
+  renderContentError = (error) => {
+    if (Array.isArray(error)) {
+      return error
+        .map(this.renderContentError)
+        .filter(x => x)
+        .map((str, n) => {
+          const key = 'error' + n
+          return <div key={key} className={cnModalWindow('ErrorItem')}>{str}</div>
+        })
+    }
+    if (!error) {
+      return null
+    }
+    if (error instanceof Error) {
+      return String(error).replace(/^Error:\s*/, '')
+    }
+    if (typeof error !== 'string') {
+      return String(error)
+    }
+    return error
+  }
+
   renderContent() {
-    const { children, contentClassName } = this.props
-    // {[> <div className={cnModalWindow('Container')}> <]}
-    // {[> </div> <]}
+    const {
+      children,
+      contentClassName,
+      error,
+    } = this.props
+    // console.log('ModalWindow:renderContent', children)
+    // debugger
+    const errorContent = error && (<div className={cnModalWindow('Error')}>{this.renderContentError(error)}</div>)
     return children && (
       <div className={cnModalWindow('Content', [ contentClassName ])}>
+        {errorContent}
         {children}
       </div>
     )
@@ -242,9 +278,10 @@ export default class ModalWindow extends React.PureComponent /** @lends @ModalWi
     )
   }
 
-  renderWindow = (portalProps) => {
-    const { ModalPortal } = portalProps
-    this.ModalPortal = ModalPortal // Save ModalPortal handler
+  renderWindow = (/* portalProps */) => {
+    // const { ModalPortal } = portalProps || {} // !!!
+    // this.ModalPortal = ModalPortal // Save ModalPortal handler
+    // console.log('ModalWindow:renderWindow', this.props.children)
     return (
       <React.Fragment>
         {this.renderHeader()}
@@ -270,9 +307,11 @@ export default class ModalWindow extends React.PureComponent /** @lends @ModalWi
       // onDeactivate: this.onDeactivate,
       // wrapperTheme: 'SubtleDark',
     })
+    // console.log('ModalWindow:render', this.props.children)
+    // NOTE: Use arrow function to force update modal content
     return (
-      <ModalPortal {...portalProps} type="Window">
-        {this.renderWindow}
+      <ModalPortal {...portalProps} type="Window" setPortalNode={this.setPortalNode}>
+        {this.renderWindow()}
       </ModalPortal>
     )
   }
