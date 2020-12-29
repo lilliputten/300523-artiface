@@ -1,5 +1,6 @@
 # CHANGELOG
 
+- 2020.12.29, 23:53 -- v.0.1.10, Modal errors, FormGroup: noWrap mode, WebUiCoreRoot: autoModalsContainer parameter, ModalPortal/ModalWindow: setPortalNode interface method, ModalWindow Content element styles, ModalWindow error prop (rendering errors section in Content element), ModalsContainer: `usePortal` prop (render in-place or on dom tree topmost level), FormButton: trigger ActionsContext handler even onClick is not defined.
 - 2020.12.28, 01:13 -- v.0.1.8: Export default library wrapper (`WebUiCoreRoot`).
 - 2020.12.28, 00:25 -- PD-3504: Popup based on `ModalPortal` (`updateGeometry` and other updates `windowDomNode` passed from `ModalPortal`). (With extra debug logging.)
 - 2020.12.28, 23:00 -- PD-3504: ModalPortal: exported `passModalPortalProps` with list of public props, set `modalType` property with `props.type` (from Modal or Popup). (With debug logging.)
@@ -58,5 +59,5 @@
 - 2020.10.05, 20:38 -- v.0.0.15: Extracted `demoSupport.jsx` routines, fixture selection from url query (parameter `fixture`), added avaialble fixtures list if fixture to display is not specified, added DemoWrapper & demoTitle exportable ficture parameters for demo rendering.
 
 <!--
- @changed 2020.12.28, 01:13
+ @changed 2020.12.29, 23:55
 -->
