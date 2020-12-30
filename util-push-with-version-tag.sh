@@ -17,7 +17,7 @@ fi
 
 VERSION=`cat "$VERSIONFILE"`
 
-echo echo "Create/update tag v$VERSION..." \
+echo "Create/update tag v$VERSION..." \
   && git tag -f "v$VERSION" \
   && git push -f --tags \
   && echo "OK"
