@@ -1,6 +1,6 @@
 #!/bin/sh
 # @desc Publish (and make if absent) dist build
-# @changed 2020.12.08, 13:49
+# @changed 2020.12.30, 20:07
 
 # Import config variables (expected variables `$DIST_REPO` and `$PUBLISH_FOLDER`)...
 # DIST_REPO="git@github.com:lilliputten/WebUiCoreDist.git"
@@ -24,10 +24,16 @@ echo "Publishing build ($VERSION, $TIMESTAMP)..."
 
 # TODO: Compare actual and previously published versions? (The git is checking for changes itself anyway.)
 
+COMMIT_TEXT="Build v$VERSION, $TIMESTAMP ($TIMETAG)"
 cd "$PUBLISH_FOLDER" && \
-  git fetch && \
-  git add . -Av && \
-  git commit -am "Build v.$VERSION, $TIMESTAMP ($TIMETAG)" &&
-  git push &&
-  cd .. && \
-  echo OK
+  echo "Fetch..." && git fetch && \
+  echo "Add files..." && git add . -Av && \
+  echo "Commit..." && git commit -am "$COMMIT_TEXT" && \
+  echo "Create/update tag v$VERSION..." && git tag -f -am "$COMMIT_TEXT" "v$VERSION" && \
+  echo "Push..." && git push -f --tags && \
+  echo "Done" && cd ..
+  # echo "Don't forget to update version for target project dependency (package.json, WebUiCore entry)"
+
+  # ( ( ( git tag | grep -q "v$VERSION" ) && echo "Tag exist: update" && git tag -d "v$VERSION" ) || echo "Tag absent: create" ) &&
+  # ( git tag "v$VERSION" || echo "Tag already exists" ) && \
+
