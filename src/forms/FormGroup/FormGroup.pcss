@@ -46,19 +46,25 @@
   &_flow {
     &, &_vertical {
       display: flex;
-      flex-wrap: nowrap;
+      // flex-wrap: wrap;
       & > .FormItem_fill {
         flex: 1;
       }
     }
     &_vertical {
       flex-direction: column;
+      // flex-wrap: nowrap;
     }
     &^&_alignItems {
       &_center {
         justify-content: center;
       }
     }
+  }
+
+  &_noWrap {
+    white-space: nowrap;
+    flex-wrap: nowrap;
   }
 
   & > & {

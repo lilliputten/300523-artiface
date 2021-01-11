@@ -6,6 +6,7 @@
 
 import React from 'react'
 import ReactDOM from 'react-dom'
+import PropTypes from 'prop-types'
 import { Portal } from 'react-portal'
 // import { cssMapping } from 'utils/configure'
 import { cn } from 'utils/configure'
@@ -19,6 +20,12 @@ const cnModalsContainer = cn('ModalsContainer')
 // const doDebug = false // DEBUG!
 
 class ModalsContainer extends React.PureComponent /** @lends @ModalsContainer.prototype */ {
+
+  static propTypes = {
+    usePortal: PropTypes.bool, // Render container at end of dom tree root level
+  }
+
+  // Internal variables...
 
   modalsStack = []
 
@@ -108,11 +115,15 @@ class ModalsContainer extends React.PureComponent /** @lends @ModalsContainer.pr
 
   render() {
     const node = document.body // Render as new node in top level of dom tree
-    return (
-      <Portal node={node}>
-        {this.renderModalsContainer()}
-      </Portal>
-    )
+    const container = this.renderModalsContainer()
+    const { usePortal } = this.props
+    const content = usePortal ? <Portal node={node}>{container}</Portal> : container
+    return content
+    // return (
+    //   <Portal node={node}>
+    //     {this.renderModalsContainer()}
+    //   </Portal>
+    // )
   }
 
 }
