@@ -4,9 +4,9 @@ __TODO:__ Create end-user (app-developer) how-to & manual reference notes.
 
 ## Build info
 
-- Version: 0.1.19
-- Last changes timestamp: 2021.01.11, 13:58
-- Last changes timetag: 210111-1358
+- Version: 0.1.20
+- Last changes timestamp: 2021.01.11, 14:09
+- Last changes timetag: 210111-1409
 
 ## Usage
 

@@ -29,7 +29,7 @@ cd "$PUBLISH_FOLDER" && \
   echo "Fetch..." && git fetch && \
   echo "Add files..." && git add . -Av && \
   echo "Commit..." && git commit -am "$COMMIT_TEXT" && \
-  echo "Create/update tag v$VERSION..." && git tag -f -am "$COMMIT_TEXT" "v$VERSION" && \
+  echo "Create/update tag v.$VERSION..." && git tag -f -am "$COMMIT_TEXT" "v.$VERSION" && \
   echo "Push..." && git push -f --tags && \
   echo "Done" && cd ..
   # echo "Don't forget to update version for target project dependency (package.json, WebUiCore entry)"
