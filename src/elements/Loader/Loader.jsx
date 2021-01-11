@@ -8,6 +8,7 @@
 import React from 'react'
 // import connect from 'react-redux/es/connect/connect'
 import { cn } from 'utils/configure'
+import { getCommonLangText } from 'utils/lang'
 import { // Form items...
   FormButton,
   FormGroup,
@@ -24,13 +25,14 @@ import './Loader-themes.pcss'
 // eslint-disable-next-line react/prefer-stateless-function
 // export default class Loader extends React.PureComponent [>* @lends @Modal.prototype <] {
 
-/** Loader component
+/** Loader component (FC)
  * @param {Boolean} [show]
  * @param {String} [theme] - Component theme (Light, none)
  * @param {Object} commonLang - Mapped language component
  */
 const Loader = (props) => {
   const {
+    lang,
     className/*  = 'preloader' */,
     mode,
     show,
@@ -46,7 +48,7 @@ const Loader = (props) => {
         <FormButton
           plain
           onDark
-          text={cancelText || 'Cancel'}
+          text={cancelText || getCommonLangText('cancelButton', 'Cancel', lang)}
           icon="faTimes"
           onClick={onCancel}
         />
@@ -54,7 +56,7 @@ const Loader = (props) => {
     </div>
   )
   const thisClassName = cnLoader({ mode, theme, show }, [ className, /* showClass */ ])
-  const showText = (text != null) ? text : 'Loading...' // commonLang && commonLang.pleaseWait
+  const showText = (text != null) ? text : getCommonLangText('loading', 'Loading...', lang)
   return (
     <div className={thisClassName}>
       <div className={cnLoader('Container')}>
@@ -65,4 +67,10 @@ const Loader = (props) => {
     </div>
   )
 }
+// const mapStateToProps = store => ({
+//   // user: store.user,
+//   // commonLang: store.language.components.common,
+//   lang: store.language,
+// })
+// export default connect(mapStateToProps)(Loader)
 export default Loader

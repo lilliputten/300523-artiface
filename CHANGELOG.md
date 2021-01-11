@@ -1,5 +1,6 @@
 # CHANGELOG
 
+- 2021.01.11, 21:15 -- PD-3524: Интернационализация из target project (WebUi) внутри компонент библиотеки (WbUiCore).
 - 2021.01.11, 16:06 -- PD-3519: Version tags in format: `v.N.N.N`.
 - 2021.01.11, 13:56 -- v.0.1.19: PD-3519: Updating WebUiCore version in target project' `package.json` file.
 - 2020.12.30, 20:11 -- v.0.1.18, PD-3519: Creating & updating publish version tag for each build/publish iteration. Using version for `WebUiCore` dependency entry in `package.json` for target projects.

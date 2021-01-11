@@ -37,7 +37,7 @@ const cnModalWindow = cn('ModalWindow')
 export const selfCloseActionId = 'modalSelfClose'
 export const externalCloseActionId = 'modalExternalClose'
 
-export default class ModalWindow extends React.PureComponent /** @lends @ModalWindow.prototype */ {
+class ModalWindow extends React.PureComponent /** @lends @ModalWindow.prototype */ {
 
   // Props...
 
@@ -317,3 +317,5 @@ export default class ModalWindow extends React.PureComponent /** @lends @ModalWi
   }
 
 }
+
+export default ModalWindow

@@ -1,7 +1,7 @@
 /** @module demo
  *  @desc Demo app entry point
  *  @since 2020.05.19, 17:16
- *  @changed 2020.12.28, 01:57
+ *  @changed 2021.01.11, 20:14
  */
 /* eslint-disable react/jsx-max-depth */
 
@@ -12,6 +12,16 @@ import 'react-app-polyfill/stable'
 
 import React from 'react'
 import { render } from 'react-dom'
+
+/* // UNUSED: redux
+ * import { Provider } from 'react-redux'
+ * import {
+ *   createStore,
+ *   combineReducers,
+ *   // compose,
+ *   // applyMiddleware, // Not used (see `middlewares`)
+ * } from 'redux'
+ */
 
 // import Loader from 'elements/Loader'
 
@@ -31,6 +41,7 @@ import WebUiCoreRoot from './build'
  * debugger
  */
 
+
 /* DEBUG: Check configure module
  * import { configure } from 'utils'
  * console.log(configure && configure.cssMapping)
@@ -49,6 +60,24 @@ import WebUiCoreRoot from './build'
  *   },
  * })
  */
+
+// DEBUG: Test language internationalizing
+import { utils } from './build'
+const lang = {
+  components: {
+    common: {
+      okButton: 'Lang: Ok',
+      cancelButton: 'Lang: Cancel',
+      loading: 'Lang: Loading',
+    },
+  },
+}
+// Method 1: Using specified `setLang` method
+// utils.lang.setLang(lang)
+// Method 2: Using config options...
+utils.configure.setConfigOptions({
+  lang,
+})
 
 const fixtureComponentsList = {
 
@@ -114,6 +143,33 @@ else { // List all available fixtures to display
     </div>
   )
 }
+
+/* // Demo redux state...
+ * export function demoReducer(state = {}, action) {
+ *   switch (action.type) {
+ *     case 'LOAD_RESPONSE':
+ *       return { ...action.payload }
+ *     default:
+ *       return state
+ *   }
+ * }
+ * const appReducer = combineReducers({
+ *   demo: demoReducer,
+ * })
+ * const rootReducer = (state, action) => {
+ *   if (action.type === 'DESTROY_STORE') {
+ *     state = undefined
+ *   }
+ *   return appReducer(state, action)
+ * }
+ * const store = createStore(
+ *   rootReducer,
+ *   // composeEnhancers(mountedMiddleware [> applyMiddleware(...middlewares) <]),
+ * )
+ * const demoContent = (
+ *   <Provider store={store}>
+ * // ...
+ */
 
 const demoContent = (
   <WebUiCoreRoot autoModalsContainer>
