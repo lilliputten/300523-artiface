@@ -1,5 +1,6 @@
 # CHANGELOG
 
+- 2021.01.11, 16:06 -- PD-3519: Version tags in format: `v.N.N.N`.
 - 2021.01.11, 13:56 -- v.0.1.19: PD-3519: Updating WebUiCore version in target project' `package.json` file.
 - 2020.12.30, 20:11 -- v.0.1.18, PD-3519: Creating & updating publish version tag for each build/publish iteration. Using version for `WebUiCore` dependency entry in `package.json` for target projects.
 - 2020.12.29, 23:53 -- v.0.1.10, Modal errors, FormGroup: noWrap mode, WebUiCoreRoot: autoModalsContainer parameter, ModalPortal/ModalWindow: setPortalNode interface method, ModalWindow Content element styles, ModalWindow error prop (rendering errors section in Content element), ModalsContainer: `usePortal` prop (render in-place or on dom tree topmost level), FormButton: trigger ActionsContext handler even onClick is not defined.
@@ -62,5 +63,5 @@
 - 2020.10.05, 20:38 -- v.0.0.15: Extracted `demoSupport.jsx` routines, fixture selection from url query (parameter `fixture`), added avaialble fixtures list if fixture to display is not specified, added DemoWrapper & demoTitle exportable ficture parameters for demo rendering.
 
 <!--
- @changed 2021.01.11, 13:57
+ @changed 2021.01.11, 16:07
 -->
