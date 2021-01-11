@@ -1,6 +1,6 @@
 # CHANGELOG
 
-- 2021.01.11, 13:56 -- v.0.1.19: PD-3519: Updating WebUiCore versionin target project' `package.json` file.
+- 2021.01.11, 13:56 -- v.0.1.19: PD-3519: Updating WebUiCore version in target project' `package.json` file.
 - 2020.12.30, 20:11 -- v.0.1.18, PD-3519: Creating & updating publish version tag for each build/publish iteration. Using version for `WebUiCore` dependency entry in `package.json` for target projects.
 - 2020.12.29, 23:53 -- v.0.1.10, Modal errors, FormGroup: noWrap mode, WebUiCoreRoot: autoModalsContainer parameter, ModalPortal/ModalWindow: setPortalNode interface method, ModalWindow Content element styles, ModalWindow error prop (rendering errors section in Content element), ModalsContainer: `usePortal` prop (render in-place or on dom tree topmost level), FormButton: trigger ActionsContext handler even onClick is not defined.
 - 2020.12.28, 04:15 -- ModalPortal: uses `config.modals.containerNode` for register/unregister of modals (eg, catching esc key only for topmost visible modal), added theme styless for wrapper, ModalWindow: fixed animations & bugless vertically centering styles, using `WebUiCoreRoot` as root app wrapper (tried to use modals context for entire components tree).
