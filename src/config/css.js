@@ -184,8 +184,16 @@ const cssConfig = { // Common-used css variables...
   transitionTime: defaultTransitionTime, // ms
   animateTime: defaultAnimateTime, // ms
 
+  // Modals parameters...
+
   modalAnimateTime: defaultAnimateTime,
   modalWindowAnimateTime: defaultTransitionTime,
+
+  // NOTE 2021.01.12, 13:54 -- `absolute` required for modal windows, `fixed` required for popups -- ???
+  modalContainerPosition: 'absolute',
+  modalPortalPosition: 'absolute',
+  // modalContainerPosition: 'fixed',
+  // modalPortalPosition: 'fixed',
 
   // Parameters...
 

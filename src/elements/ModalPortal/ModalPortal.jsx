@@ -46,6 +46,7 @@ const cnModalPortal = cn('ModalPortal')
 // const doDebug = [>DEBUG<] false && config.build.DEV_DEBUG || // DEBUG!
 //   false
 
+//
 const mouseDownEvent = 'mousedown'
 const mouseUpEvent = 'mouseup'
 const mouseLeaveEvent = 'mouseleave'
@@ -121,6 +122,7 @@ class ModalPortal extends React.PureComponent /** @lends @ModalPortal.prototype 
   // Instance variables...
   isOutsideClickWaiting = false
   globalHandlersRegistered = false
+  globalDomNode = document
   wrapperDomNode = null
   windowDomNode = null
   transitionTime = 0
@@ -273,12 +275,12 @@ class ModalPortal extends React.PureComponent /** @lends @ModalPortal.prototype 
   // Helpers...
 
   registerGlobalHandlers() {
-    const { windowDomNode, wrapperDomNode } = this
+    const { globalDomNode, windowDomNode } = this
     // const { closeOnClickOutside } = this.props
     if (!this.globalHandlersRegistered) {
       this.globalHandlersRegistered = true // Set flag
       // console.log('ModalPortal:registerGlobalHandlers')
-      if (!windowDomNode || !wrapperDomNode) {
+      if (!windowDomNode || !globalDomNode) {
         const error = new Error('ModalPortal: dom nodes is undefined on registerGlobalHandlers')
         console.error(error) // eslint-disable-line no-console
         /*DEBUG*/ debugger // eslint-disable-line no-debugger
@@ -292,26 +294,26 @@ class ModalPortal extends React.PureComponent /** @lends @ModalPortal.prototype 
        * }
        */
       document.addEventListener(globalKeyPressEventName, this.onKeyPress)
-      if (windowDomNode && wrapperDomNode) {
-        wrapperDomNode.addEventListener(mouseDownEvent, this.startOutsideClickWaiting)
+      if (windowDomNode && globalDomNode) {
+        globalDomNode.addEventListener(mouseDownEvent, this.startOutsideClickWaiting)
         windowDomNode.addEventListener(mouseUpEvent, this.stopOutsideClickWaiting)
       }
     }
   }
 
   unregisterGlobalHandlers() {
-    const { windowDomNode, wrapperDomNode } = this
+    const { globalDomNode, windowDomNode } = this
     // TODO: Check for dom nodes exists during close process
     // const { closeOnClickOutside } = this.props
     if (this.globalHandlersRegistered) {
       this.globalHandlersRegistered = false // Reset flag
       // console.log('ModalPortal:unregisterGlobalHandlers')
-      if (!windowDomNode || !wrapperDomNode) {
-        const error = new Error('ModalPortal: dom nodes is undefined on unregisterGlobalHandlers')
-        console.error(error) // eslint-disable-line no-console
-        /*DEBUG*/ debugger // eslint-disable-line no-debugger
-        throw error // ???
-      }
+      // if (!windowDomNode || !globalDomNode) {
+      //   const error = new Error('ModalPortal: dom nodes is undefined on unregisterGlobalHandlers')
+      //   console.error(error) // eslint-disable-line no-console
+      //   [>DEBUG<] debugger // eslint-disable-line no-debugger
+      //   throw error // ???
+      // }
       /* // Update geometry (UNUSED)
        * document.removeEventListener(globalScrollEventName, this.updateGeometry)
        * window.removeEventListener(globalResizeEventName, this.updateGeometry)
@@ -320,11 +322,11 @@ class ModalPortal extends React.PureComponent /** @lends @ModalPortal.prototype 
        * }
        */
       document.removeEventListener(globalKeyPressEventName, this.onKeyPress)
-      if (windowDomNode && wrapperDomNode) {
-        this.stopOutsideClickWaiting()
-        wrapperDomNode.removeEventListener(mouseDownEvent, this.startOutsideClickWaiting)
-        windowDomNode.removeEventListener(mouseUpEvent, this.stopOutsideClickWaiting)
-      }
+      // if (windowDomNode && globalDomNode) {
+      this.stopOutsideClickWaiting()
+      globalDomNode && globalDomNode.removeEventListener(mouseDownEvent, this.startOutsideClickWaiting)
+      windowDomNode && windowDomNode.removeEventListener(mouseUpEvent, this.stopOutsideClickWaiting)
+      // }
     }
   }
 
@@ -424,22 +426,22 @@ class ModalPortal extends React.PureComponent /** @lends @ModalPortal.prototype 
   }
 
   stopOutsideClickWaiting = (/* ev */) => { // Mouse released on window --> cancel waiting for mouse up on wrapper (don't close modal)
-    const { wrapperDomNode, windowDomNode } = this
-    if (this.isOutsideClickWaiting && wrapperDomNode && windowDomNode) {
+    const { globalDomNode, windowDomNode } = this
+    if (this.isOutsideClickWaiting /* && globalDomNode && windowDomNode */) {
       // console.log('ModalPortal:stopOutsideClickWaiting', ev && ev.type, ev && ev.currentTarget)
-      wrapperDomNode.removeEventListener(mouseUpEvent, this.onOutsideClickCatched)
-      windowDomNode.removeEventListener(mouseLeaveEvent, this.stopOutsideClickWaiting)
+      globalDomNode && globalDomNode.removeEventListener(mouseUpEvent, this.onOutsideClickCatched)
+      windowDomNode && windowDomNode.removeEventListener(mouseLeaveEvent, this.stopOutsideClickWaiting)
       this.isOutsideClickWaiting = false
     }
   }
   startOutsideClickWaiting = () => { // Start waiting for mouse up on wrapper (close modal) or window (continue working)
     const { loading } = this.props
     if (!loading) {
-      const { wrapperDomNode, windowDomNode } = this
+      const { globalDomNode, windowDomNode } = this
       // console.log('ModalPortal:startOutsideClickWaiting')
-      if (!this.isOutsideClickWaiting && wrapperDomNode && windowDomNode) { // Start waiting for
+      if (!this.isOutsideClickWaiting && globalDomNode && windowDomNode) { // Start waiting for
         this.isOutsideClickWaiting = true
-        wrapperDomNode.addEventListener(mouseUpEvent, this.onOutsideClickCatched)
+        globalDomNode.addEventListener(mouseUpEvent, this.onOutsideClickCatched)
         windowDomNode.addEventListener(mouseLeaveEvent, this.stopOutsideClickWaiting)
       }
     }
@@ -483,7 +485,7 @@ class ModalPortal extends React.PureComponent /** @lends @ModalPortal.prototype 
 
   renderWindow() {
     const { windowWidth, windowTheme, theme, windowClassName, children } = this.props
-    const { windowDomNode, wrapperDomNode } = this
+    const { wrapperDomNode, windowDomNode } = this
     // console.log('ModalPortal:renderWindow', { windowWidth })
     // TODO: Pass windowDomNode to children?
     const childrenProps = {

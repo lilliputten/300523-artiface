@@ -1,5 +1,6 @@
 # CHANGELOG
 
+- 2021.01.12, 16:06 -- Fixed (temporarily) ModalPopup, ModalWindow & ModalPortal css styles & geometry updating code.
 - 2021.01.11, 21:15 -- PD-3524: Интернационализация из target project (WebUi) внутри компонент библиотеки (WbUiCore).
 - 2021.01.11, 16:06 -- PD-3519: Version tags in format: `v.N.N.N`.
 - 2021.01.11, 13:56 -- v.0.1.19: PD-3519: Updating WebUiCore version in target project' `package.json` file.
@@ -64,5 +65,5 @@
 - 2020.10.05, 20:38 -- v.0.0.15: Extracted `demoSupport.jsx` routines, fixture selection from url query (parameter `fixture`), added avaialble fixtures list if fixture to display is not specified, added DemoWrapper & demoTitle exportable ficture parameters for demo rendering.
 
 <!--
- @changed 2021.01.11, 16:07
+ @changed 2021.01.12, 16:08
 -->

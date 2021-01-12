@@ -1,7 +1,7 @@
 #!/bin/sh
 # @desc Update publish folder to debug project location (DEBUG_LOCATION)
 # @since 2020.12.08, 20:50
-# @changed 2021.01.11, 14:00
+# @changed 2021.01.12, 15:22
 
 TARGET_LOCATION="../WebUi"
 DEBUG_LOCATION="$TARGET_LOCATION/node_modules/WebUiCore"
@@ -39,6 +39,6 @@ echo "Updating debug installation ($VERSION, $TIMESTAMP)..." && \
   cp -vRfu build/* $DEBUG_LOCATION/ && \
   echo "Updating target project version in 'package.json'..."
   cp -f $PACKAGE_JSON $PACKAGE_JSON_BAK && \
-  sed "s/\(\"WebUiCore\": \".*\)v\.\(.*\)\/WebUiCore-v\.\2/\1v.$VERSION\/WebUiCore-v.$VERSION/g" $PACKAGE_JSON_BAK > $PACKAGE_JSON && \
+  sed "s/\(\"WebUiCore\": \".*\)v\.\(.*\)\/WebUiCoreDist-v\.\2/\1v.$VERSION\/WebUiCoreDist-v.$VERSION/g" $PACKAGE_JSON_BAK > $PACKAGE_JSON && \
   rm -f $PACKAGE_JSON_BAK && \
   echo OK

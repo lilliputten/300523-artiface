@@ -28,7 +28,7 @@ import './ModalPopup.pcss'
 const cnModalPopup = cn('ModalPopup')
 const cnModalPopupControl = cn('ModalPopupControl')
 
-const doDebug = /*DEBUG*/ false && config.build.DEV_DEBUG || // DEBUG!
+const doDebug = /*DEBUG*/ true && config.build.DEV_DEBUG || // DEBUG!
   false
 
 // Debounce delay
@@ -66,33 +66,40 @@ const verticalGeometryKeys = [
   'contentTop',
   'controlHeight',
   'controlTop',
-  'scrollY',
-  'viewHeight',
+  'globalHeight',
+  'globalTop',
+  // 'scrollY',
+  // 'viewHeight',
 ]
 const horizontalGeometryKeys = [
   'contentWidth',
   'contentLeft',
   'controlWidth',
   'controlLeft',
-  'scrollX',
-  'viewWidth',
+  'gloablWidth',
+  'gloablLeft',
+  // 'scrollX',
+  // 'viewWidth',
 ]
 
-const globalGeometryKeys = {
-  viewWidth: { obj: window, key: 'innerWidth' },
-  viewHeight: { obj: window, key: 'innerHeight' },
-  scrollX: { obj: window, key: 'pageXOffset' },
-  scrollY: { obj: window, key: 'pageYOffset' },
-}
+/* // UNUSED: globalGeometryKeys
+ * const globalGeometryKeys = { // See `getGlobalGeometry`
+ *   viewWidth: { obj: window, key: 'innerWidth' },
+ *   viewHeight: { obj: window, key: 'innerHeight' },
+ *   scrollX: { obj: window, key: 'pageXOffset' },
+ *   scrollY: { obj: window, key: 'pageYOffset' },
+ * }
+ */
 
 const axisKeys = { // Used in `updateOneAxisContentPos`
   // Regexp to convert vertical axis keys to horizontal:
   // '<,'>S/top/left/g | '<,'>S/bottom/right/g | '<,'>S/height/width/g | '<,'>S/vertical/horizontal/g
   vertical: {
-    viewSize: 'viewHeight',
+    // viewSize: 'viewHeight',
+    viewSize: 'globalHeight',
+    viewPos: 'globalTop',
     controlPos: 'controlTop',
     controlSize: 'controlHeight',
-    scroll: 'scrollY',
     contentPos: 'contentTop',
     contentSize: 'contentHeight',
     contentStylePos: 'top',
@@ -102,10 +109,11 @@ const axisKeys = { // Used in `updateOneAxisContentPos`
     storedContentSize: 'storedContentHeight', // Stored in dom node
   },
   horizontal: {
-    viewSize: 'viewWidth',
+    // viewSize: 'viewWidth',
+    viewSize: 'globalWidth',
+    viewPos: 'globalLeft',
     controlPos: 'controlLeft',
     controlSize: 'controlWidth',
-    scroll: 'scrollY',
     contentPos: 'contentLeft',
     contentSize: 'contentWidth',
     contentStylePos: 'left',
@@ -222,13 +230,47 @@ class ModalPopup extends React.PureComponent /** @lends @ModalPopup.prototype */
   }
 
   getGlobalGeometry() {
-    const geometry = Object.entries(globalGeometryKeys).reduce((geometry, [id, descr]) => {
-      const obj = descr.obj
-      const key = descr.key || id
-      const val = obj[key]
-      return { ...geometry, [id]: val }
-    }, {})
-    return geometry
+    const domNode = config.modals.domNode // containerNode
+    const globalGeometry = this.getDomNodeGeometry(domNode, 'global')
+    return globalGeometry
+    // TODO!
+    // const rect = domNode && domNode.getBoundingClientRect && domNode.getBoundingClientRect()
+    /* // UNUSED: globalGeometryKeys
+     * const geometry = Object.entries(globalGeometryKeys).reduce((geometry, [id, descr]) => {
+     *   const obj = descr.obj
+     *   const key = descr.key || id
+     *   const val = obj[key]
+     *   return { ...geometry, [id]: val }
+     * }, {})
+     */
+    /*
+     * rect:
+     *
+     * - bottom: 467
+     * - height: 367
+     * - left: 0
+     * - right: 434
+     * - top: 100
+     * - width: 434
+     * - x: 0
+     * - y: 100
+     *
+     * geometry:
+     *
+     * - scrollX: 0
+     * - scrollY: 0
+     * - viewHeight: 667
+     * - viewWidth: 434
+     *
+     * globalGeometry:
+     *
+     * - globalHeight: 367
+     * - globalLeft: 0
+     * - globalTop: 100
+     * - globalWidth: 434
+     *
+     */
+    // console.log('ModalPopup:getGlobalGeometry', { domNode, rect, geometry, globalGeometry })
   }
 
   getUpdatedGeometryKeys(geometry) {
@@ -291,10 +333,10 @@ class ModalPopup extends React.PureComponent /** @lends @ModalPopup.prototype */
     const isVertical = (axis === 'vertical')
 
     // Get coordinates...
-    const viewSize = geometry[keys.viewSize] // viewHeight
+    const viewSize = geometry[keys.viewSize] // globalHeight
+    const viewPos = geometry[keys.viewPos] // globalTop
     const controlPos = geometry[keys.controlPos] // controlTop
     const controlSize = geometry[keys.controlSize] // controlHeight
-    // const scroll = geometry[keys.scroll] // scrollY
     const contentPos = geometry[keys.contentPos] // contentTop
     const contentSize = geometry[keys.contentSize] // contentClientHeight
 
@@ -304,11 +346,12 @@ class ModalPopup extends React.PureComponent /** @lends @ModalPopup.prototype */
       domNode[keys.storedContentSize] = contentSize
     }
 
-    const viewStart = popupContentGap
-    const viewEnd = viewSize - popupContentGap
+    // const viewStart = popupContentGap
+    const viewStart = /* viewPos + */ popupContentGap
+    const viewEnd = viewStart + viewSize - popupContentGap
 
     // Calculate control coordinates...
-    const controlScreenPos = controlPos // - scroll
+    const controlScreenPos = controlPos
     const controlScreenEnd = controlScreenPos + controlSize
     const posNormal = isVertical ? controlScreenEnd + popupContentGap : controlScreenPos
     const posReverted = isVertical ? controlScreenPos - popupContentGap : controlScreenEnd
@@ -338,6 +381,7 @@ class ModalPopup extends React.PureComponent /** @lends @ModalPopup.prototype */
       contentPosValue = posNormal
       // contentPosValue = (controlScreenEnd + popupContentGap)
     }
+    contentPosValue -= viewPos // Relative to global view
     const cssContentPos = contentPosValue + 'px'
     const isContentPosChanged = (contentPosValue !== contentPos) // Is position changed?
 
@@ -351,32 +395,31 @@ class ModalPopup extends React.PureComponent /** @lends @ModalPopup.prototype */
       domNode.style[keys.contentStyleMaxSize] = cssContentStyleMaxSize // Update dom node css style
     }
 
-    /* // DEBUG (use doDebug?)...
-     * console.log('ModalPopup:updateOneAxisContentPos', {
-     *   // Parameters...
-     *   axis,
-     *   placeBefore,
-     *   isntFit,
-     *   // Coordinates...
-     *   fitSize,
-     *   contentPos,
-     *   cssContentPos,
-     *   cssContentStyleMaxSize,
-     *   // controlScreenPos,
-     *   // controlScreenEnd,
-     *   // controlScreenAfter,
-     *   // General...
-     *   updatedGeometryKeys,
-     *   geometry: geometry,
-     *   'this.geometry': this.geometry,
-     *   'changed geometry': Object.entries(geometry).reduce((result, [key, val]) => {
-     *     return updatedGeometryKeys.includes(key) ? { ...result, [key]: val } : result
-     *   }, {}),
-     *   'changed this.geometry': Object.entries(this.geometry).reduce((result, [key, val]) => {
-     *     return updatedGeometryKeys.includes(key) ? { ...result, [key]: val } : result
-     *   }, {}),
-     * })
-     */
+    // DEBUG (use doDebug?)...
+    console.log('ModalPopup:updateOneAxisContentPos', {
+      // Parameters...
+      axis,
+      placeBefore,
+      isntFit,
+      // Coordinates...
+      fitSize,
+      contentPos,
+      cssContentPos,
+      cssContentStyleMaxSize,
+      // controlScreenPos,
+      // controlScreenEnd,
+      // controlScreenAfter,
+      // General...
+      updatedGeometryKeys,
+      geometry: geometry,
+      'this.geometry': this.geometry,
+      'changed geometry': Object.entries(geometry).reduce((result, [key, val]) => {
+        return updatedGeometryKeys.includes(key) ? { ...result, [key]: val } : result
+      }, {}),
+      'changed this.geometry': Object.entries(this.geometry).reduce((result, [key, val]) => {
+        return updatedGeometryKeys.includes(key) ? { ...result, [key]: val } : result
+      }, {}),
+    })
   }
 
   updateGeometryInstant = () => { // UNUSED? TODO? Update geometry
@@ -415,26 +458,26 @@ class ModalPopup extends React.PureComponent /** @lends @ModalPopup.prototype */
     const updatedGeometryKeys = this.getUpdatedGeometryKeys(geometry)
     const changedHorizontalKeys = horizontalGeometryKeys.some(key => updatedGeometryKeys.includes(key))
     const changedVerticalKeys = verticalGeometryKeys.some(key => updatedGeometryKeys.includes(key))
-    /* // DEBUG (use doDebug?)...
-     * console.log('ModalPopup:updateGeometryInstant', {
-     *   controlGeometry,
-     *   contentGeometry,
-     *   updatedGeometryKeys,
-     *   changedHorizontalKeys,
-     *   changedVerticalKeys,
-     *   // geometry,
-     *   // 'this.geometry': this.geometry,
-     *   'changed geometry': Object.entries(geometry).reduce((result, [key, val]) => {
-     *     return updatedGeometryKeys.includes(key) ? { ...result, [key]: val } : result
-     *   }, {}),
-     *   'changed this.geometry': Object.entries(this.geometry).reduce((result, [key, val]) => {
-     *     return updatedGeometryKeys.includes(key) ? { ...result, [key]: val } : result
-     *   }, {}),
-     * })
-     * // if (id === 'withMenu') {
-     * //   debugger
-     * // }
-     */
+    // DEBUG (use doDebug?)...
+    console.log('ModalPopup:updateGeometryInstant', {
+      globalGeometry,
+      controlGeometry,
+      contentGeometry,
+      updatedGeometryKeys,
+      changedHorizontalKeys,
+      changedVerticalKeys,
+      // geometry,
+      // 'this.geometry': this.geometry,
+      'changed geometry': Object.entries(geometry).reduce((result, [key, val]) => {
+        return updatedGeometryKeys.includes(key) ? { ...result, [key]: val } : result
+      }, {}),
+      'changed this.geometry': Object.entries(this.geometry).reduce((result, [key, val]) => {
+        return updatedGeometryKeys.includes(key) ? { ...result, [key]: val } : result
+      }, {}),
+    })
+    // if (id === 'withMenu') {
+    //   debugger
+    // }
     if (!updatedGeometryKeys.length) { // Do nothing if no changes detected
       return
     }
