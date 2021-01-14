@@ -4,12 +4,12 @@
  *  @changed 2020.12.28, 02:07
  */
 
-import React from 'react'
+import React from 'react';
 
-export const ModalsContext = React.createContext()
+export const ModalsContext = React.createContext();
 
-export const ModalsContextProvider = ModalsContext.Provider
-export const ModalsContextConsumer = ModalsContext.Consumer
+export const ModalsContextProvider = ModalsContext.Provider;
+export const ModalsContextConsumer = ModalsContext.Consumer;
 
 export const withModalsContext = (WrappedComponent) => function withModalsContext(props) {
   return (
@@ -17,8 +17,8 @@ export const withModalsContext = (WrappedComponent) => function withModalsContex
       {modalsContainerNode => {
         return (
           <WrappedComponent {...props} modalsContainerNode={modalsContainerNode} />
-        )
+        );
       }}
     </ModalsContextConsumer>
-  )
-}
+  );
+};

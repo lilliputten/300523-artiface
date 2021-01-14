@@ -4,27 +4,27 @@
  *  @changed 2020.10.27, 03:06
  */
 
-import React from 'react'
+import React from 'react';
 // import PropTypes from 'prop-types'
 // import connect from 'react-redux/es/connect/connect'
-import { cn } from 'utils/configure'
+import { cn } from 'utils/configure';
 
-import InlineIcon from 'elements/InlineIcon'
+import InlineIcon from 'elements/InlineIcon';
 
-import FormItemHOC from 'forms/FormItemHOC'
+import FormItemHOC from 'forms/FormItemHOC';
 
-import './MenuItem.pcss'
+import './MenuItem.pcss';
 
-const cnMenuItem = cn('MenuItem')
+const cnMenuItem = cn('MenuItem');
 
 class MenuItem extends React.PureComponent /** @lends @MenuItem.prototype */ {
 
   // Event handlers...
 
   onClick = () => {
-    const { id, val, onClick } = this.props
+    const { id, val, onClick } = this.props;
     if (typeof onClick === 'function') {
-      onClick({ id, val, component: this })
+      onClick({ id, val, component: this });
     }
   }
 
@@ -39,15 +39,15 @@ class MenuItem extends React.PureComponent /** @lends @MenuItem.prototype */ {
       disabled,
       // title,
       // onClick,
-    } = this.props
+    } = this.props;
     const className = cnMenuItem({
       id,
       checkable,
       withIcon,
       checked,
       disabled,
-    }, [this.props.className])
-    return className
+    }, [this.props.className]);
+    return className;
   }
 
   // Render...
@@ -58,10 +58,10 @@ class MenuItem extends React.PureComponent /** @lends @MenuItem.prototype */ {
       checkable,
       checked,
       icon,
-    } = this.props
+    } = this.props;
     if ((withIcon && icon) || (checkable && checked)) {
-      const iconContent = icon || 'faCheck'
-      return iconContent && <InlineIcon icon={iconContent} className={cnMenuItem('Icon')} />
+      const iconContent = icon || 'faCheck';
+      return iconContent && <InlineIcon icon={iconContent} className={cnMenuItem('Icon')} />;
     }
   }
 
@@ -69,12 +69,12 @@ class MenuItem extends React.PureComponent /** @lends @MenuItem.prototype */ {
     const {
       children,
       text,
-    } = this.props
+    } = this.props;
     return (
       <div className={cnMenuItem('Text')}>
         {children || text}
       </div>
-    )
+    );
   }
 
   render() {
@@ -82,7 +82,7 @@ class MenuItem extends React.PureComponent /** @lends @MenuItem.prototype */ {
     const {
       htmlId,
       setDomRef, // From FormItemHOC
-    } = this.props
+    } = this.props;
 
     const renderProps = {
       // id,
@@ -90,10 +90,10 @@ class MenuItem extends React.PureComponent /** @lends @MenuItem.prototype */ {
       className: this.getClassName(),
       onClick: this.onClick,
       ref: setDomRef, // Init ref for FormItemHOC
-    }
+    };
 
-    const iconContent = this.renderIconContent()
-    const textContent = this.renderTextContent()
+    const iconContent = this.renderIconContent();
+    const textContent = this.renderTextContent();
 
     // console.log('MenuItem:render', val)
 
@@ -102,9 +102,9 @@ class MenuItem extends React.PureComponent /** @lends @MenuItem.prototype */ {
         {iconContent}
         {textContent}
       </div>
-    )
+    );
   }
 
 }
 
-export default FormItemHOC({ solid: true, hoverable: true })(MenuItem)
+export default FormItemHOC({ solid: true, hoverable: true })(MenuItem);

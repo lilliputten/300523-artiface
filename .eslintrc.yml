@@ -113,7 +113,7 @@ rules:
       varsIgnorePattern: '^_'
   semi:
     - 'warn'
-    - 'never'
+    - 'always'
   no-trailing-spaces:
     - 2
     -

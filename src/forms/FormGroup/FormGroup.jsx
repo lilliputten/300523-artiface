@@ -5,16 +5,16 @@
  */
 /* eslint-disable react/require-default-props, react/no-unused-prop-types */
 
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from 'react';
+import PropTypes from 'prop-types';
 // import connect from 'react-redux/es/connect/connect'
-import { cn } from 'utils/configure'
+import { cn } from 'utils/configure';
 
-import FormItemHOC from '../FormItemHOC'
+import FormItemHOC from '../FormItemHOC';
 
-import './FormGroup.pcss'
+import './FormGroup.pcss';
 
-const cnFormGroup = cn('FormGroup')
+const cnFormGroup = cn('FormGroup');
 
 class FormGroup extends React.PureComponent /** @lends @FormGroup.prototype */ {
 
@@ -50,20 +50,20 @@ class FormGroup extends React.PureComponent /** @lends @FormGroup.prototype */ {
   ]
 
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
-    }
+    };
   }
 
   getClassName() {
     const mods = FormGroup.classNameModifiers.reduce((mods, id) => {
-      const val = (this.state[id] != null) ? this.state[id] : this.props[id]
+      const val = (this.state[id] != null) ? this.state[id] : this.props[id];
       if (val != null) {
-        return { ...mods, [id]: val }
+        return { ...mods, [id]: val };
       }
-      return mods
-    }, {})
-    return cnFormGroup(mods, [this.props.className])
+      return mods;
+    }, {});
+    return cnFormGroup(mods, [this.props.className]);
   }
 
   // Render...
@@ -75,7 +75,7 @@ class FormGroup extends React.PureComponent /** @lends @FormGroup.prototype */ {
       // disabled,
       children,
       content,
-    } = this.props
+    } = this.props;
 
     // const renderProps = this.getRenderProps()
 
@@ -83,9 +83,9 @@ class FormGroup extends React.PureComponent /** @lends @FormGroup.prototype */ {
       <div id={id} className={this.getClassName()}>
         {content || children}
       </div>
-    )
+    );
   }
 
 }
 
-export default FormItemHOC(FormGroup)
+export default FormItemHOC(FormGroup);

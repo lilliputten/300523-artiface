@@ -9,8 +9,8 @@
  * @return {DOM|undefined} domNode
  */
 export function getDocumentDomNodeByTag(tag) {
-  const result = document.getElementsByTagName(tag.toUpperCase())
-  return result && result[0]
+  const result = document.getElementsByTagName(tag.toUpperCase());
+  return result && result[0];
 }
 
 /** Check for class name
@@ -20,8 +20,8 @@ export function getDocumentDomNodeByTag(tag) {
  */
 export function hasClassName(domNode, className) {
   if (domNode) {
-    const { classList } = domNode
-    return classList.contains(className)
+    const { classList } = domNode;
+    return classList.contains(className);
   }
 }
 
@@ -32,10 +32,10 @@ export function hasClassName(domNode, className) {
  */
 export function addClassName(domNode, className) {
   if (domNode && !hasClassName(domNode, className)) {
-    const { classList } = domNode
-    classList.add(className)
+    const { classList } = domNode;
+    classList.add(className);
   }
-  return domNode
+  return domNode;
 }
 
 /** Remove class name
@@ -45,8 +45,8 @@ export function addClassName(domNode, className) {
  */
 export function removeClassName(domNode, className) {
   if (domNode && hasClassName(domNode, className)) {
-    const { classList } = domNode
-    classList.remove(className)
+    const { classList } = domNode;
+    classList.remove(className);
   }
-  return domNode
+  return domNode;
 }

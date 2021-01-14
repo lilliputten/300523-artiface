@@ -3,10 +3,10 @@
  */
 /* eslint-disable no-console */
 
-/*DEBUG: Test one-string debug */ console.log('One-string debug output')
+/*DEBUG: Test one-string debug */ console.log('One-string debug output');
 
 /*DEBUG-BEGIN: Test multiline debug */
-console.log('Multiline debug output')
+console.log('Multiline debug output');
 // debugger
 /*DEBUG-END*/
 

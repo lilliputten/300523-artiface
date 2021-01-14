@@ -12,6 +12,6 @@ const config = {
   modals: require('./modals'),
   ui: require('./ui'),
   userAgent: require('./userAgent'),
-}
+};
 
-module.exports = config
+module.exports = config;

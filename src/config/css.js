@@ -5,22 +5,22 @@
  */
 
 // Theme...
-const THEME = process.env.THEME
-const theme = require(process.env.THEME_FILE)
+const THEME = process.env.THEME;
+const theme = require(process.env.THEME_FILE);
 
 // Some reusable parameters...
-const defaultFontSize = theme.defaultFontSize || 16
-const textColor = theme.textColor || '#444'
+const defaultFontSize = theme.defaultFontSize || 16;
+const textColor = theme.textColor || '#444';
 
-const defaultTransitionTime = 250
-const defaultAnimateTime = 500
+const defaultTransitionTime = 250;
+const defaultAnimateTime = 500;
 
-const errorColor = theme.errorColor || '#c33'
-const warnColor = theme.warnColor || '#f73' // '#f96'
-const successColor = theme.successColor || '#593' // '#ac9'
-const infoColor = theme.infoColor || theme.primaryColor // '#29a' // '#9bd'
-const confirmColor = theme.confirmColor /* || theme.primaryColor || textColor */ || '#891' // '#07f'
-const selectColor = theme.selectColor || '#05b'
+const errorColor = theme.errorColor || '#c33';
+const warnColor = theme.warnColor || '#f73'; // '#f96'
+const successColor = theme.successColor || '#593'; // '#ac9'
+const infoColor = theme.infoColor || theme.primaryColor; // '#29a' // '#9bd'
+const confirmColor = theme.confirmColor /* || theme.primaryColor || textColor */ || '#891'; // '#07f'
+const selectColor = theme.selectColor || '#05b';
 
 // module.exports = { // Common-used css variables...
 const cssConfig = { // Common-used css variables...
@@ -201,12 +201,12 @@ const cssConfig = { // Common-used css variables...
   // // NOTE: 2019.06.14, 13:14 -- Not used. Using `html.Clippable` dynamically creating selectors.
   // useGlobalClipping: true,
 
-}
+};
 
-const formItemSpacing = 4
-const formItemHeight = 32 // px
-const formItemBorderSize = 1 // px
-const formItemInnerHeight = formItemHeight - formItemBorderSize * 2 // px
+const formItemSpacing = 4;
+const formItemHeight = 32; // px
+const formItemBorderSize = 1; // px
+const formItemInnerHeight = formItemHeight - formItemBorderSize * 2; // px
 
 Object.assign(cssConfig, { // Form properties...
 
@@ -235,6 +235,6 @@ Object.assign(cssConfig, { // Form properties...
 
   popupContentGap: 4,
 
-})
+});
 
-module.exports = cssConfig
+module.exports = cssConfig;

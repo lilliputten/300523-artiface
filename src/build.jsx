@@ -4,22 +4,22 @@
  *  @changed 2020.12.28, 01:09
  */
 
-import React from 'react'
+import React from 'react';
 
-export config from 'config'
-export * as utils from 'utils'
-export * as helpers from 'helpers'
+export config from 'config';
+export * as utils from 'utils';
+export * as helpers from 'helpers';
 
-export * from './elements'
-export * from './forms'
+export * from './elements';
+export * from './forms';
 
 // Demo component
-export Hello from './demo/Hello'
+export Hello from './demo/Hello';
 
 // Basic styles
-import './build.pcss'
+import './build.pcss';
 
-import ModalsContainer from './elements/ModalsContainer'
+import ModalsContainer from './elements/ModalsContainer';
 
 // TODO: Use WebUiCoreContext?
 const WebUiCoreRoot = ({ children, autoModalsContainer }) => {
@@ -28,6 +28,6 @@ const WebUiCoreRoot = ({ children, autoModalsContainer }) => {
       {children}
       {autoModalsContainer && <ModalsContainer />}
     </React.Fragment>
-  )
-}
-export default WebUiCoreRoot
+  );
+};
+export default WebUiCoreRoot;

@@ -2,65 +2,66 @@
  *  @since 2020.05.18, 12:00
  *  @changed 2020.12.10, 18:46
  */
+/* eslint-disable no-console */
 
-const fs = require('fs')
-const path = require('path')
+const fs = require('fs');
+const path = require('path');
 
-const webpack = require('webpack')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
-const WebpackBuildNotifierPlugin = require('webpack-build-notifier') // https://www.npmjs.com/package/webpack-build-notifier
-const CopyWebpackPlugin = require('copy-webpack-plugin')
-const CreateFileWebpack = require('create-file-webpack')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const webpack = require('webpack');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const WebpackBuildNotifierPlugin = require('webpack-build-notifier'); // https://www.npmjs.com/package/webpack-build-notifier
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const CreateFileWebpack = require('create-file-webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 // const UglifyJS = require('uglify-js')
 // const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
-const WebpackFilePreprocessorPlugin = require('webpack-file-preprocessor-plugin')
-const ExtractCssPlugin = require('mini-css-extract-plugin')
+const WebpackFilePreprocessorPlugin = require('webpack-file-preprocessor-plugin');
+const ExtractCssPlugin = require('mini-css-extract-plugin');
 
 module.exports = (env, argv) => {
 
-  const mode = argv.mode || 'production'
-  const isCosmos = (process.env.npm_lifecycle_event === 'cosmos') // Runs under react-cosmos?
-  const isDevServer = isCosmos || !!argv.host // (mode === 'none'); // (none = server) // Alternate method: !!argv.host
-  const hotReload = isDevServer
-  const cssHotReload = hotReload // Hot reload css for dev-server
-  const isStats = !!argv.profile
-  const isWatch = !!argv.watch
-  const isDev = (/* isDevServer || */ mode === 'development')
-  const isProd = !isDev // mode === 'production'
-  const useDevTool = true // && (isDev || isDevServer) // Need server restart
-  const minimizeBundles = false && isProd // To minimize production bundles
-  const preprocessBundles = true && isProd // To minimize production bundles
-  const sourceMaps = true // !preprocessBundles // To minimize production bundles
+  const mode = argv.mode || 'production';
+  const isCosmos = (process.env.npm_lifecycle_event === 'cosmos'); // Runs under react-cosmos?
+  const isDevServer = isCosmos || !!argv.host; // (mode === 'none'); // (none = server) // Alternate method: !!argv.host
+  const hotReload = isDevServer;
+  const cssHotReload = hotReload; // Hot reload css for dev-server
+  const isStats = !!argv.profile;
+  const isWatch = !!argv.watch;
+  const isDev = (/* isDevServer || */ mode === 'development');
+  const isProd = !isDev; // mode === 'production'
+  const useDevTool = true; // && (isDev || isDevServer) // Need server restart
+  const minimizeBundles = false && isProd; // To minimize production bundles
+  const preprocessBundles = true && isProd; // To minimize production bundles
+  const sourceMaps = true; // !preprocessBundles // To minimize production bundles
   // const extemeUglify = false // Use mangling (WARNING: May broke some code! Don't use without testing!)
-  const DEBUG = true && (isDev || isDevServer)
-  const rootPath = path.resolve(__dirname)
-  const srcPath = path.resolve(__dirname, 'src')
+  const DEBUG = true && (isDev || isDevServer);
+  const rootPath = path.resolve(__dirname);
+  const srcPath = path.resolve(__dirname, 'src');
   // const debugDataPath = path.resolve(__dirname, 'debug-data') // Debug-time data stubs
-  const mixinsPath = path.resolve(srcPath, '!mixins')
+  const mixinsPath = path.resolve(srcPath, '!mixins');
 
   // Additional configuration params from `webpack.env.js` and `webpack.env.local.js`
-  const webpackEnvFile = path.resolve(rootPath, 'webpack.env.js')
-  const webpackEnvLocalFile = path.resolve(rootPath,'webpack.env.local.js')
-  const webpackEnv = fs.existsSync(webpackEnvFile) && require(webpackEnvFile)
-  const webpackEnvLocal = fs.existsSync(webpackEnvLocalFile) && require(webpackEnvLocalFile)
+  const webpackEnvFile = path.resolve(rootPath, 'webpack.env.js');
+  const webpackEnvLocalFile = path.resolve(rootPath,'webpack.env.local.js');
+  const webpackEnv = fs.existsSync(webpackEnvFile) && require(webpackEnvFile);
+  const webpackEnvLocal = fs.existsSync(webpackEnvLocalFile) && require(webpackEnvLocalFile);
   // Merge parameters from config files and command line (eg `--env.DEMO=true`)
-  env = Object.assign({}, webpackEnv, webpackEnvLocal, env)
+  env = Object.assign({}, webpackEnv, webpackEnvLocal, env);
 
-  const THEME = env.THEME || 'default'
-  const THEME_FILE = './themes/' + THEME // For including in `src/config/css.js`
+  const THEME = env.THEME || 'default';
+  const THEME_FILE = './themes/' + THEME; // For including in `src/config/css.js`
   // Set process.env variables for using in included below `css` module.
   // Also see passing variables to source code below.
-  process.env.THEME = THEME
-  process.env.THEME_FILE = THEME_FILE
+  process.env.THEME = THEME;
+  process.env.THEME_FILE = THEME_FILE;
 
-  const isBuild = !!env.DIST
-  const isDemo = !isBuild
+  const isBuild = !!env.DIST;
+  const isDemo = !isBuild;
 
   // Project configuration
-  const packageFile = path.resolve(rootPath, 'package')
-  const pkgConfig = require(packageFile)
+  const packageFile = path.resolve(rootPath, 'package');
+  const pkgConfig = require(packageFile);
 
   // Project version, application title
   const {
@@ -68,7 +69,7 @@ module.exports = (env, argv) => {
     version,
     timestamp,
     timetag,
-  } = pkgConfig
+  } = pkgConfig;
 
   // TODO: Load version, timestamp, timetag from generated files
 
@@ -99,17 +100,17 @@ module.exports = (env, argv) => {
         '**/*.orig',
       ],
     },
-  }
+  };
 
   // Only for demo mode
-  const htmlFilename = 'index.html'
+  const htmlFilename = 'index.html';
 
   // Build profile params...
-  const buildType = isDevServer ? 'server' : isBuild ? 'build' : 'demo'
-  const buildMode = isProd ? 'prod' : 'dev'
-  const buildModePostfix = isDev ? '-dev' : ''
-  const buildFolder = buildType + buildModePostfix
-  const buildPath = path.resolve(rootPath, buildFolder)
+  const buildType = isDevServer ? 'server' : isBuild ? 'build' : 'demo';
+  const buildMode = isProd ? 'prod' : 'dev';
+  const buildModePostfix = isDev ? '-dev' : '';
+  const buildFolder = buildType + buildModePostfix;
+  const buildPath = path.resolve(rootPath, buildFolder);
 
   const buildTag = [ // Construct general-purpose build tag
     'v.' + version,
@@ -117,16 +118,16 @@ module.exports = (env, argv) => {
     buildType,
     buildMode,
     THEME,
-  ].join('-')
+  ].join('-');
 
   // NOTE: Dynamically created dist library name from project name
-  const buildLibName = pkgConfig.name + 'Dist' // 'WebUiCoreDist'
+  const buildLibName = pkgConfig.name + 'Dist'; // 'WebUiCoreDist'
 
-  const useHashes = false // NOTE: Not works with pseudo-dynamic bundles loading method (with hardcoded urls)
-  const bundleName = ({ ext, name, dir } = {}) => (dir || 'js/') + (name || '[name]') + (useHashes && !isWatch && !isDevServer ? '-[contenthash:8]' : '') + (ext || '.js')
+  const useHashes = false; // NOTE: Not works with pseudo-dynamic bundles loading method (with hardcoded urls)
+  const bundleName = ({ ext, name, dir } = {}) => (dir || 'js/') + (name || '[name]') + (useHashes && !isWatch && !isDevServer ? '-[contenthash:8]' : '') + (ext || '.js');
 
-  const mirrorStaticFolders = false // NOTE: Mirror static folders structure (eg: `.../bootstrap/distr/...`)
-  const staticFolderUrl = 'assets' // Relative to css folder
+  const mirrorStaticFolders = false; // NOTE: Mirror static folders structure (eg: `.../bootstrap/distr/...`)
+  const staticFolderUrl = 'assets'; // Relative to css folder
 
   const fileLoaderOptions = {
     // limit: 1, // Extract all resources
@@ -136,27 +137,27 @@ module.exports = (env, argv) => {
     // Mirroring static files folders
     // publicPath: '..', // Root relative to 'css' folder
     name: (file) => {
-      let name = file
+      let name = file;
       if (isDevServer /* || isDev */) {
-        name = '[path][name].[ext]'
+        name = '[path][name].[ext]';
       }
       else if (mirrorStaticFolders) {
         if (name.startsWith(rootPath)) {
-          name = name.substr(rootPath.length)
+          name = name.substr(rootPath.length);
         }
         name = staticFolderUrl + name
           .replace(/\\/g, '/')
           // .replace(/^\//, '')
           .replace(/^\/node_modules/, '')
-          .replace(/([^/]+)$/, '[name]-[hash:8].[ext]')
-          // .replace(/([^/]+)$/, '[name].[ext]')
+          .replace(/([^/]+)$/, '[name]-[hash:8].[ext]');
+        // .replace(/([^/]+)$/, '[name].[ext]')
       }
       else {
-        name = staticFolderUrl + '/[name]-[hash:8].[ext]'
+        name = staticFolderUrl + '/[name]-[hash:8].[ext]';
       }
-      return name
+      return name;
     },
-  }
+  };
 
   const preprocessJs = (src) => {
 
@@ -165,47 +166,47 @@ module.exports = (env, argv) => {
       .replace(/(\/\*\s*DEBUG-BEGIN.*?)(\*\/[\s\S]*?\/\*)(.*?DEBUG-END\s*\*\/)/gm, (_match, begin, body, end) => {
         body = body
           .replace(/\/\*/g, '[>')
-          .replace(/\*\//g, '<]')
-        return begin + body + end
+          .replace(/\*\//g, '<]');
+        return begin + body + end;
       })
       .replace(/\/\*\s*DEBUG\b(|[^-].*?)\*\//gm, '//DEBUG$1//') // /*DEBUG...*/
-      .replace(/(\/\*\s*NO-?DEBUG)(\s+)([\s\S]*?)(\s*\*\/)/gm, '$1$4$2$3') // TODO: Babelify code?
+      .replace(/(\/\*\s*NO-?DEBUG)(\s+)([\s\S]*?)(\s*\*\/)/gm, '$1$4$2$3'); // TODO: Babelify code?
 
-    return src
+    return src;
 
-  }
+  };
 
   const demoModule = // 'AsyncModal' ||
-    env.DEMO_MODULE || 'demo'
+    env.DEMO_MODULE || 'demo';
 
-  const jsEntryFile = isBuild ? 'build.jsx' : demoModule + '.jsx' // js source
+  const jsEntryFile = isBuild ? 'build.jsx' : demoModule + '.jsx'; // js source
 
-  const bundleFile = 'bundle.js'
+  const bundleFile = 'bundle.js';
 
   // Create build package file contents
   const getBuildPackageConfig = () => {
-    const buildPkg = { ...pkgConfig }
-    delete buildPkg.unusedDependencies
-    delete buildPkg.unusedDependencies
-    delete buildPkg.devDependencies
+    const buildPkg = { ...pkgConfig };
+    delete buildPkg.unusedDependencies;
+    delete buildPkg.unusedDependencies;
+    delete buildPkg.devDependencies;
     // NOTE: Preserving `peerDependencies`???
     // TDDO 2020.07.20, 15:56 -- Use `bundleDependencies` instead `dependencies`.
-    delete buildPkg.scripts
-    buildPkg.main = bundleFile
-    buildPkg.name = buildLibName
-    return buildPkg
-  }
+    delete buildPkg.scripts;
+    buildPkg.main = bundleFile;
+    buildPkg.name = buildLibName;
+    return buildPkg;
+  };
 
   const libOutput = isBuild ? { // Additional webpack output for library mode
     library: projectName,
     libraryTarget: 'commonjs2',
     filename: bundleFile,
     auxiliaryComment: 'Test Comment', // ???
-  } : {}
+  } : {};
 
   // Common used style variables
-  const cssConfigFile = path.resolve(srcPath, 'config', 'css.js')
-  const cssConfig = fs.existsSync(cssConfigFile) ? require(cssConfigFile) : {}
+  const cssConfigFile = path.resolve(srcPath, 'config', 'css.js');
+  const cssConfig = fs.existsSync(cssConfigFile) ? require(cssConfigFile) : {};
 
   const postcssPlugins = [
     require('postcss-flexbugs-fixes'),
@@ -236,7 +237,7 @@ module.exports = (env, argv) => {
     }),
     minimizeBundles && require('postcss-csso'),
     require('postcss-reporter'),
-  ].filter(Boolean)
+  ].filter(Boolean);
 
   const passParameters = { // Pass parameters to code (to js & pcss)
     rootPath,
@@ -256,7 +257,7 @@ module.exports = (env, argv) => {
     timetag,
     timestamp,
     version,
-  }
+  };
 
   // Stats waiting only json on output...
   const debugModes = [
@@ -278,9 +279,9 @@ module.exports = (env, argv) => {
     // extemeUglify && 'extemeUglify',
     DEBUG && 'DEBUG',
     THEME && 'theme:' + THEME,
-  ].filter(Boolean).join(' ')
+  ].filter(Boolean).join(' ');
   if (!isStats) {
-    console.log('Building:', debugModes) // eslint-disable-line no-console
+    console.log('Building:', debugModes); // eslint-disable-line no-console
   }
 
   const externalModules = isBuild && [
@@ -296,7 +297,7 @@ module.exports = (env, argv) => {
     '@fortawesome/free-solid-svg-icons',
     '@fortawesome/react-fontawesome',
     // TODO...
-  ]
+  ];
 
   return {
     mode,
@@ -323,7 +324,7 @@ module.exports = (env, argv) => {
       ...libOutput
     },
     externals: externalModules && externalModules.reduce((result, module) => {
-      return { ...result, [module]: true }
+      return { ...result, [module]: true };
     }, {}) || {},
     devServer: {
       hot: hotReload,
@@ -388,7 +389,7 @@ module.exports = (env, argv) => {
       }),
       new webpack.DefinePlugin({ // Pass constants to source code
         'process.env': Object.entries(passParameters).reduce((data, [key, val]) => {
-          return { ...data, [key]: JSON.stringify(val) }
+          return { ...data, [key]: JSON.stringify(val) };
         }, {})
       }),
       !isDevServer && new CopyWebpackPlugin({ // Simply copies the files over
@@ -471,5 +472,5 @@ module.exports = (env, argv) => {
       // Nice colored output
       colors: true,
     },
-  }
-}
+  };
+};

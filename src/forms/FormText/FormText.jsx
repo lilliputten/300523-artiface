@@ -5,16 +5,16 @@
  */
 /* eslint-disable react/require-default-props */
 
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from 'react';
+import PropTypes from 'prop-types';
 // import connect from 'react-redux/es/connect/connect'
-import { cn } from 'utils/configure'
+import { cn } from 'utils/configure';
 
-import FormItemHOC from '../FormItemHOC'
+import FormItemHOC from '../FormItemHOC';
 
-import './FormText.pcss'
+import './FormText.pcss';
 
-const cnFormText = cn('FormText')
+const cnFormText = cn('FormText');
 
 class FormText extends React.PureComponent /** @lends @FormText.prototype */ {
 
@@ -25,11 +25,11 @@ class FormText extends React.PureComponent /** @lends @FormText.prototype */ {
   getClassName() {
     const {
       id,
-    } = this.props
+    } = this.props;
     const classList = cnFormText({
       id,
-    }, [this.props.className])
-    return classList
+    }, [this.props.className]);
+    return classList;
   }
 
   // Handlers...
@@ -38,9 +38,9 @@ class FormText extends React.PureComponent /** @lends @FormText.prototype */ {
     const {
       disabled,
       onClick,
-    } = this.props
+    } = this.props;
     if (!disabled && onClick && typeof onClick === 'function') {
-      onClick(event)
+      onClick(event);
     }
   }
 
@@ -54,23 +54,23 @@ class FormText extends React.PureComponent /** @lends @FormText.prototype */ {
       text,
       children,
       title,
-    } = this.props
+    } = this.props;
 
     const renderProps = {
       id,
       className: this.getClassName(),
       disabled,
       title,
-    }
+    };
 
     return (
       <div {...renderProps}>
         {children || text || title}
       </div>
-    )
+    );
 
   }
 
 }
 
-export default FormItemHOC({ hoverable: true })(FormText)
+export default FormItemHOC({ hoverable: true })(FormText);

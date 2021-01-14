@@ -5,11 +5,11 @@
  */
 /* eslint-disable react/require-default-props, react/jsx-max-depth */
 
-import React from 'react'
-import PropTypes from 'prop-types'
-import { cn } from 'utils/configure'
+import React from 'react';
+import PropTypes from 'prop-types';
+import { cn } from 'utils/configure';
 
-const cnFormBooleanHOC = cn('FormBooleanHOC')
+const cnFormBooleanHOC = cn('FormBooleanHOC');
 
 const wrapFormBooleanHOC = (WrappedComponent, params = {}) => class FormBoolean extends React.Component {
 
@@ -29,45 +29,45 @@ const wrapFormBooleanHOC = (WrappedComponent, params = {}) => class FormBoolean 
   // Lifecycle methods...
 
   constructor(props) {
-    super(props)
+    super(props);
     // this.formItemRef = React.createRef()
-    const { value } = this.props
-    this.id = props.id || params.id || props.inputId || props.name
+    const { value } = this.props;
+    this.id = props.id || params.id || props.inputId || props.name;
     this.state = {
       value,
-    }
+    };
   }
 
   componentDidMount() {
     // const { formItemRef: { current } = {} } = this
-    this.afterRender()
+    this.afterRender();
   }
 
   componentDidUpdate(prevProps, prevState) {
-    const prevValue = prevProps.value
-    const propsValue = this.props.value
-    const stateValue = this.state.value
+    const prevValue = prevProps.value;
+    const propsValue = this.props.value;
+    const stateValue = this.state.value;
     if (propsValue !== prevValue && propsValue !== stateValue) { // New value from props
       this.setState({
         value: propsValue,
-      }, this.updateValueWithState)
+      }, this.updateValueWithState);
     }
     else if (stateValue !== prevState.value) { // New value from state
-      this.updateValueWithState(this.state)
+      this.updateValueWithState(this.state);
     }
-    this.afterRender()
+    this.afterRender();
   }
 
   // Helper methods...
 
   getClassName() {
-    const { id } = this
+    const { id } = this;
     // const { id } = this.props
-    const { value } = this.state
-    const checked = !!value
-    const mods = { id, checked }
-    const classList = cnFormBooleanHOC(mods, [this.props.className])
-    return classList
+    const { value } = this.state;
+    const checked = !!value;
+    const mods = { id, checked };
+    const classList = cnFormBooleanHOC(mods, [this.props.className]);
+    return classList;
   }
 
   focus() { // Invoke containing input focus method
@@ -89,10 +89,10 @@ const wrapFormBooleanHOC = (WrappedComponent, params = {}) => class FormBoolean 
   }
 
   updateValueWithState = (state) => {
-    const { onChange, disabled } = this.props
+    const { onChange, disabled } = this.props;
     if (!disabled && typeof onChange === 'function') {
-      const { value } = state
-      onChange({ id: this.id, value })
+      const { value } = state;
+      onChange({ id: this.id, value });
     }
   }
 
@@ -101,10 +101,10 @@ const wrapFormBooleanHOC = (WrappedComponent, params = {}) => class FormBoolean 
   handleChange = ({ value }) => {
     this.setState(({ value: stateValue }) => {
       if (value == null) {
-        value = !stateValue
+        value = !stateValue;
       }
-      return { value }
-    })
+      return { value };
+    });
   }
 
   // Render...
@@ -117,9 +117,9 @@ const wrapFormBooleanHOC = (WrappedComponent, params = {}) => class FormBoolean 
       // disabled,
       setDomRef, // From FormItemHOC
       tabIndex, // focusable
-    } = this.props
-    const { value } = this.state
-    const checked = !!value
+    } = this.props;
+    const { value } = this.state;
+    const checked = !!value;
     const inputProps = {
       type: 'checkbox',
       className: cnFormBooleanHOC('Input'),
@@ -131,18 +131,18 @@ const wrapFormBooleanHOC = (WrappedComponent, params = {}) => class FormBoolean 
       // onBlur={this.handleUnfocused}
       ref: setDomRef,
       tabIndex,
-    }
+    };
     return (
       <input {...inputProps} />
-    )
+    );
   }
 
   render() {
     const {
       id,
       disabled,
-    } = this.props
-    const { value } = this.state
+    } = this.props;
+    const { value } = this.state;
     const renderProps = {
       id,
       className: this.getClassName(),
@@ -152,17 +152,17 @@ const wrapFormBooleanHOC = (WrappedComponent, params = {}) => class FormBoolean 
       // ref: setDomRef, // Init ref for FormItemHOC
       // ref: this.formItemRef,
       // tabIndex,
-    }
+    };
     return (
       <WrappedComponent
         {...this.props}
         {...renderProps}
         // id={id}
       />
-    )
+    );
   }
 
-}
+};
 
 /** Usage:
  * FormBooleanHOC(component)
@@ -170,16 +170,16 @@ const wrapFormBooleanHOC = (WrappedComponent, params = {}) => class FormBoolean 
  */
 const FormBooleanHOC = (params) => {
   if (typeof params === 'string') { // Passed identifier
-    params = { id: params }
+    params = { id: params };
   }
   if (typeof params === 'object') { // Params passed -> metafabric
-    return (component) => wrapFormBooleanHOC(component, params)
+    return (component) => wrapFormBooleanHOC(component, params);
   }
   else { // Component passed -> simple fabric
-    return wrapFormBooleanHOC(params)
+    return wrapFormBooleanHOC(params);
   }
-}
+};
 
 // export default FormItemHOC({ hoverable: true, focusable: true, framed: false })(FormBooleanHOC)
-export default FormBooleanHOC
+export default FormBooleanHOC;
 

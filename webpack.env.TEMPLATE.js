@@ -7,4 +7,4 @@ module.exports = {
   // Theme definition file must exist at `src/config/themes/{THEME}.js`
   THEME: 'default',
 
-}
+};

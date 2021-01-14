@@ -13,31 +13,31 @@
  *  - updateGeometry
  */
 
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from 'react';
+import PropTypes from 'prop-types';
 // import connect from 'react-redux/es/connect/connect'
-import { cn } from 'utils/configure'
-import { strings } from 'utils'
-import { debounce } from 'throttle-debounce'
-import FormItemHOC from 'forms/FormItemHOC'
-import ModalPortal, { passModalPortalProps } from 'elements/ModalPortal'
-import config from 'config'
+import { cn } from 'utils/configure';
+import { strings } from 'utils';
+import { debounce } from 'throttle-debounce';
+import FormItemHOC from 'forms/FormItemHOC';
+import ModalPortal, { passModalPortalProps } from 'elements/ModalPortal';
+import config from 'config';
 
-import './ModalPopup.pcss'
+import './ModalPopup.pcss';
 
-const cnModalPopup = cn('ModalPopup')
-const cnModalPopupControl = cn('ModalPopupControl')
+const cnModalPopup = cn('ModalPopup');
+const cnModalPopupControl = cn('ModalPopupControl');
 
 const doDebug = /*DEBUG*/ true && config.build.DEV_DEBUG || // DEBUG!
-  false
+  false;
 
 // Debounce delay
 const debouncedUpdateGeometryTimeout = /*DEBUG*/ doDebug ? 500 :
-  15
+  15;
 
 // Update by timer (0 - disabled), must be above than debounce delay (`debouncedUpdateGeometryTimeout`, above)
 const updateGeometryTimerDelay = /*DEBUG*/ doDebug ? 0 :
-  50 // 0
+  50; // 0
 
 const domNodeGeometryKeys = [
   /* // controlBouningBox sample:
@@ -60,7 +60,7 @@ const domNodeGeometryKeys = [
    * 'offsetWidth',
    * 'offsetHeight',
    */
-]
+];
 const verticalGeometryKeys = [
   'contentHeight',
   'contentTop',
@@ -70,7 +70,7 @@ const verticalGeometryKeys = [
   'globalTop',
   // 'scrollY',
   // 'viewHeight',
-]
+];
 const horizontalGeometryKeys = [
   'contentWidth',
   'contentLeft',
@@ -80,7 +80,7 @@ const horizontalGeometryKeys = [
   'gloablLeft',
   // 'scrollX',
   // 'viewWidth',
-]
+];
 
 /* // UNUSED: globalGeometryKeys
  * const globalGeometryKeys = { // See `getGlobalGeometry`
@@ -122,12 +122,12 @@ const axisKeys = { // Used in `updateOneAxisContentPos`
     // contentStyleMaxSize: 'max-width',
     storedContentSize: 'storedContentWidth', // Stored in dom node
   },
-}
+};
 
 // const globalClickEventName = 'mousedown'
 // const globalKeyPressEventName = 'keydown'
-const globalScrollEventName = 'scroll'
-const globalResizeEventName = 'resize'
+const globalScrollEventName = 'scroll';
+const globalResizeEventName = 'resize';
 
 /* // DEBUG: Demo for prevent closing underlaying popups. (Can be used for modal windows. See crrsp styles & html layout.)
  * const debugHide = document.getElementById('DebugHide')
@@ -187,22 +187,22 @@ class ModalPopup extends React.PureComponent /** @lends @ModalPopup.prototype */
   // Lifecycle...
 
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       open: null, // null -- uninitialized
-    }
-    this.updateGeometry = debounce(debouncedUpdateGeometryTimeout, this.updateGeometryInstant)
+    };
+    this.updateGeometry = debounce(debouncedUpdateGeometryTimeout, this.updateGeometryInstant);
   }
 
   componentWillUnmount() {
-    this.unregisterGlobalHandlers()
+    this.unregisterGlobalHandlers();
   }
 
   // Helpers...
 
   getDomNodeGeometry(domNode, id) {
-    id = id || 'default'
-    const rect = domNode && domNode.getBoundingClientRect()
+    id = id || 'default';
+    const rect = domNode && domNode.getBoundingClientRect();
     /* // controlBouningBox sample:
      * bottom: 642.8125
      * height: 32
@@ -215,24 +215,24 @@ class ModalPopup extends React.PureComponent /** @lends @ModalPopup.prototype */
      */
     const geometry = rect && domNodeGeometryKeys.reduce((geometry, key) => {
       // const val = domNode && domNode[key]
-      const val = rect && rect[key]
+      const val = rect && rect[key];
       if (val != null) {
-        const resultKey = id + strings.ucFirst(key)
-        geometry[resultKey] = val
+        const resultKey = id + strings.ucFirst(key);
+        geometry[resultKey] = val;
       }
-      return geometry
-    }, {})
+      return geometry;
+    }, {});
     // if (this.props.id === 'withMenu' && id === 'control') {
     //   console.log(domNode, rect, domNodeGeometryKeys, geometry)
     //   debugger
     // }
-    return geometry || {}
+    return geometry || {};
   }
 
   getGlobalGeometry() {
-    const domNode = config.modals.domNode // containerNode
-    const globalGeometry = this.getDomNodeGeometry(domNode, 'global')
-    return globalGeometry
+    const domNode = config.modals.domNode; // containerNode
+    const globalGeometry = this.getDomNodeGeometry(domNode, 'global');
+    return globalGeometry;
     // TODO!
     // const rect = domNode && domNode.getBoundingClientRect && domNode.getBoundingClientRect()
     /* // UNUSED: globalGeometryKeys
@@ -274,28 +274,28 @@ class ModalPopup extends React.PureComponent /** @lends @ModalPopup.prototype */
   }
 
   getUpdatedGeometryKeys(geometry) {
-    const origGeometry = this.geometry
-    const updatedKeys = []
+    const origGeometry = this.geometry;
+    const updatedKeys = [];
     Object.entries(geometry).forEach(([key, val]) => {
       if (val !== origGeometry[key]) {
-        updatedKeys.push(key)
+        updatedKeys.push(key);
       }
-    })
-    return updatedKeys
+    });
+    return updatedKeys;
   }
 
   updateContentWidth(geometry, updatedGeometryKeys) { // eslint-disable-line no-unused-vars
     // if (updatedGeometryKeys.includes('controlWidth') || updatedGeometryKeys.includes('contentWidth')) {
-    const width = geometry.controlWidth
-    const domNode = this.windowDomNode // contentDomNode
+    const width = geometry.controlWidth;
+    const domNode = this.windowDomNode; // contentDomNode
     if (!domNode) { // Error?
-      const error = new Error('ModalPopup:updateContentWidth: target dom node is undefined')
-      console.error(error) // eslint-disable-line no-console
-      debugger // eslint-disable-line no-debugger
+      const error = new Error('ModalPopup:updateContentWidth: target dom node is undefined');
+      console.error(error); // eslint-disable-line no-console
+      debugger; // eslint-disable-line no-debugger
       // throw error
-      return
+      return;
     }
-    const setWidth = width + 'px'
+    const setWidth = width + 'px';
     /* // DEBUG
      * console.log('ModalPopup:updateContentWidth', {
      *   width,
@@ -306,9 +306,9 @@ class ModalPopup extends React.PureComponent /** @lends @ModalPopup.prototype */
      * debugger
      */
     if (domNode && domNode.style.width !== setWidth) {
-      geometry.contentWidth = width
-      domNode.storedContentWidth = null // Reset stored width
-      domNode.style.width = setWidth
+      geometry.contentWidth = width;
+      domNode.storedContentWidth = null; // Reset stored width
+      domNode.style.width = setWidth;
     }
     // }
   }
@@ -319,80 +319,80 @@ class ModalPopup extends React.PureComponent /** @lends @ModalPopup.prototype */
    * @param {String[]} updatedGeometryKeys
    */
   updateOneAxisContentPos(axis, geometry, updatedGeometryKeys) { // eslint-disable-line no-unused-vars
-    const domNode = this.windowDomNode // contentDomNode
+    const domNode = this.windowDomNode; // contentDomNode
     if (!domNode) { // Error?
-      const error = new Error('ModalPopup:updateOneAxisContentPos: target dom node is undefined')
-      console.error(error) // eslint-disable-line no-console
-      debugger // eslint-disable-line no-debugger
+      const error = new Error('ModalPopup:updateOneAxisContentPos: target dom node is undefined');
+      console.error(error); // eslint-disable-line no-console
+      debugger; // eslint-disable-line no-debugger
       // throw error
-      return
+      return;
     }
-    const { popupContentGap } = config.css
+    const { popupContentGap } = config.css;
     // const doubleContentModalPopupGap = popupContentGap * 2 // UNUSED
-    const keys = axisKeys[axis]
-    const isVertical = (axis === 'vertical')
+    const keys = axisKeys[axis];
+    const isVertical = (axis === 'vertical');
 
     // Get coordinates...
-    const viewSize = geometry[keys.viewSize] // globalHeight
-    const viewPos = geometry[keys.viewPos] // globalTop
-    const controlPos = geometry[keys.controlPos] // controlTop
-    const controlSize = geometry[keys.controlSize] // controlHeight
-    const contentPos = geometry[keys.contentPos] // contentTop
-    const contentSize = geometry[keys.contentSize] // contentClientHeight
+    const viewSize = geometry[keys.viewSize]; // globalHeight
+    const viewPos = geometry[keys.viewPos]; // globalTop
+    const controlPos = geometry[keys.controlPos]; // controlTop
+    const controlSize = geometry[keys.controlSize]; // controlHeight
+    const contentPos = geometry[keys.contentPos]; // contentTop
+    const contentSize = geometry[keys.contentSize]; // contentClientHeight
 
-    const storedContentSize = domNode[keys.storedContentSize]
-    const contentMaxSize = storedContentSize || contentSize
+    const storedContentSize = domNode[keys.storedContentSize];
+    const contentMaxSize = storedContentSize || contentSize;
     if (!storedContentSize || contentSize > storedContentSize) { // Save (maximum) height
-      domNode[keys.storedContentSize] = contentSize
+      domNode[keys.storedContentSize] = contentSize;
     }
 
     // const viewStart = popupContentGap
-    const viewStart = /* viewPos + */ popupContentGap
-    const viewEnd = viewStart + viewSize - popupContentGap
+    const viewStart = /* viewPos + */ popupContentGap;
+    const viewEnd = viewStart + viewSize - popupContentGap;
 
     // Calculate control coordinates...
-    const controlScreenPos = controlPos
-    const controlScreenEnd = controlScreenPos + controlSize
-    const posNormal = isVertical ? controlScreenEnd + popupContentGap : controlScreenPos
-    const posReverted = isVertical ? controlScreenPos - popupContentGap : controlScreenEnd
-    const spaceAfter = viewEnd - posNormal
-    const spaceBefore = posReverted - viewStart
+    const controlScreenPos = controlPos;
+    const controlScreenEnd = controlScreenPos + controlSize;
+    const posNormal = isVertical ? controlScreenEnd + popupContentGap : controlScreenPos;
+    const posReverted = isVertical ? controlScreenPos - popupContentGap : controlScreenEnd;
+    const spaceAfter = viewEnd - posNormal;
+    const spaceBefore = posReverted - viewStart;
 
     // Is it better to show content above control?
     // TODO: Alternative calculations for horizontal axis
     // const spaceBefore = isVertical ? controlScreenPos : controlScreenEnd
     // // const spaceEnd = isVertical ? controlScreenAfter : controlScreenPos
     // const spaceAfter = isVertical ? controlScreenAfter : controlScreenPos
-    const isntFitBefore = (contentMaxSize > spaceBefore)
-    const isntFitAfter = (contentMaxSize > spaceAfter)
-    const isMoreSpaceBefore = spaceBefore > spaceAfter
-    const placeBefore = isMoreSpaceBefore && isntFitAfter
-    const isntFit = placeBefore ? isntFitBefore : isntFitAfter
-    const fitSize = (placeBefore ? spaceBefore : spaceAfter) // - doubleContentModalPopupGap
+    const isntFitBefore = (contentMaxSize > spaceBefore);
+    const isntFitAfter = (contentMaxSize > spaceAfter);
+    const isMoreSpaceBefore = spaceBefore > spaceAfter;
+    const placeBefore = isMoreSpaceBefore && isntFitAfter;
+    const isntFit = placeBefore ? isntFitBefore : isntFitAfter;
+    const fitSize = (placeBefore ? spaceBefore : spaceAfter); // - doubleContentModalPopupGap
 
     // Calculate `contentPos`...
-    let contentPosValue
+    let contentPosValue;
     if (placeBefore) { // Down-up position: from control top -> up
-      const fitContentSize = isntFit ? fitSize : contentMaxSize
-      contentPosValue = (posReverted - fitContentSize)
+      const fitContentSize = isntFit ? fitSize : contentMaxSize;
+      contentPosValue = (posReverted - fitContentSize);
       // contentPosValue = (controlScreenPos - fitContentSize - popupContentGap)
     }
     else { // Normal position: from control bottom -> down
-      contentPosValue = posNormal
+      contentPosValue = posNormal;
       // contentPosValue = (controlScreenEnd + popupContentGap)
     }
-    contentPosValue -= viewPos // Relative to global view
-    const cssContentPos = contentPosValue + 'px'
-    const isContentPosChanged = (contentPosValue !== contentPos) // Is position changed?
+    contentPosValue -= viewPos; // Relative to global view
+    const cssContentPos = contentPosValue + 'px';
+    const isContentPosChanged = (contentPosValue !== contentPos); // Is position changed?
 
     // Calculate `contentStyleMaxSize`...
-    const cssContentStyleMaxSize = isntFit ? fitSize + 'px' : '' // New value: pixels or auto (empty)
-    const origContentStyleMaxSize = domNode.style[keys.contentStyleMaxSize] // Old value
-    const isContentStyleMaxSizeChanged = (cssContentStyleMaxSize !== origContentStyleMaxSize) // Is maxsize changed?
+    const cssContentStyleMaxSize = isntFit ? fitSize + 'px' : ''; // New value: pixels or auto (empty)
+    const origContentStyleMaxSize = domNode.style[keys.contentStyleMaxSize]; // Old value
+    const isContentStyleMaxSizeChanged = (cssContentStyleMaxSize !== origContentStyleMaxSize); // Is maxsize changed?
     if (isContentPosChanged || isContentStyleMaxSizeChanged) { // Pos or size changed
-      domNode.style[keys.contentStylePos] = cssContentPos // Update dom node css style
-      geometry[keys.contentPos] = contentPosValue // Update geometry object
-      domNode.style[keys.contentStyleMaxSize] = cssContentStyleMaxSize // Update dom node css style
+      domNode.style[keys.contentStylePos] = cssContentPos; // Update dom node css style
+      geometry[keys.contentPos] = contentPosValue; // Update geometry object
+      domNode.style[keys.contentStyleMaxSize] = cssContentStyleMaxSize; // Update dom node css style
     }
 
     /* // DEBUG (use doDebug?)...
@@ -424,24 +424,24 @@ class ModalPopup extends React.PureComponent /** @lends @ModalPopup.prototype */
   }
 
   updateGeometryInstant = () => { // UNUSED? TODO? Update geometry
-    const { open } = this.state
+    const { open } = this.state;
     if (!open) { // Do nothing if popup is closed
       // console.log('ModalPopup:updateGeometryInstant: SKIPED (closed)')
-      return
+      return;
     }
-    const { /* id, */ fullWidth } = this.props
+    const { /* id, */ fullWidth } = this.props;
     // TODO: Call `updateGeometryInstant` on content update? How? Use timer?
-    const controlGeometry = this.getDomNodeGeometry(this.controlDomNode, 'control')
-    const contentGeometry = this.getDomNodeGeometry(this.windowDomNode, 'content')
+    const controlGeometry = this.getDomNodeGeometry(this.controlDomNode, 'control');
+    const contentGeometry = this.getDomNodeGeometry(this.windowDomNode, 'content');
     // const contentGeometry = this.getDomNodeGeometry(this.contentDomNode, 'content')
     // const windowGeometry = this.getDomNodeGeometry(this.windowDomNode, 'window')
-    const globalGeometry = this.getGlobalGeometry()
+    const globalGeometry = this.getGlobalGeometry();
     const geometry = {
       ...globalGeometry,
       ...controlGeometry,
       ...contentGeometry,
       // ...windowGeometry,
-    }
+    };
     /* Sample geometry keys:
      * contentHeight
      * contentLeft
@@ -456,9 +456,9 @@ class ModalPopup extends React.PureComponent /** @lends @ModalPopup.prototype */
      * viewHeight
      * viewWidth
      */
-    const updatedGeometryKeys = this.getUpdatedGeometryKeys(geometry)
-    const changedHorizontalKeys = horizontalGeometryKeys.some(key => updatedGeometryKeys.includes(key))
-    const changedVerticalKeys = verticalGeometryKeys.some(key => updatedGeometryKeys.includes(key))
+    const updatedGeometryKeys = this.getUpdatedGeometryKeys(geometry);
+    const changedHorizontalKeys = horizontalGeometryKeys.some(key => updatedGeometryKeys.includes(key));
+    const changedVerticalKeys = verticalGeometryKeys.some(key => updatedGeometryKeys.includes(key));
     /* // DEBUG (use doDebug?)...
      * console.log('ModalPopup:updateGeometryInstant', {
      *   globalGeometry,
@@ -478,38 +478,38 @@ class ModalPopup extends React.PureComponent /** @lends @ModalPopup.prototype */
      * })
      */
     if (!updatedGeometryKeys.length) { // Do nothing if no changes detected
-      return
+      return;
     }
     if (changedVerticalKeys) {
-      this.updateOneAxisContentPos('vertical', geometry, updatedGeometryKeys) // Update vertical position & size...
+      this.updateOneAxisContentPos('vertical', geometry, updatedGeometryKeys); // Update vertical position & size...
     }
     if (changedHorizontalKeys) {
       if (fullWidth) { // TODO?
-        this.updateContentWidth(geometry, updatedGeometryKeys)
+        this.updateContentWidth(geometry, updatedGeometryKeys);
       }
-      this.updateOneAxisContentPos('horizontal', geometry, updatedGeometryKeys) // Update horizontal position & size...
+      this.updateOneAxisContentPos('horizontal', geometry, updatedGeometryKeys); // Update horizontal position & size...
     }
-    this.geometry = geometry
+    this.geometry = geometry;
   }
 
   registerGlobalHandlers() {
     if (!this.globalHandlersRegistered) {
-      this.globalHandlersRegistered = true
-      document.addEventListener(globalScrollEventName, this.updateGeometry)
-      window.addEventListener(globalResizeEventName, this.updateGeometry)
+      this.globalHandlersRegistered = true;
+      document.addEventListener(globalScrollEventName, this.updateGeometry);
+      window.addEventListener(globalResizeEventName, this.updateGeometry);
       if (!this.updateGeometryTimer && updateGeometryTimerDelay) {
-        this.updateGeometryTimer = setInterval(this.updateGeometry, updateGeometryTimerDelay)
+        this.updateGeometryTimer = setInterval(this.updateGeometry, updateGeometryTimerDelay);
       }
     }
   }
   unregisterGlobalHandlers() {
     if (this.globalHandlersRegistered) {
-      this.globalHandlersRegistered = false
-      document.removeEventListener(globalScrollEventName, this.updateGeometry)
-      window.removeEventListener(globalResizeEventName, this.updateGeometry)
+      this.globalHandlersRegistered = false;
+      document.removeEventListener(globalScrollEventName, this.updateGeometry);
+      window.removeEventListener(globalResizeEventName, this.updateGeometry);
       if (this.updateGeometryTimer) {
-        clearInterval(this.updateGeometryTimer)
-        this.updateGeometryTimer = null
+        clearInterval(this.updateGeometryTimer);
+        this.updateGeometryTimer = null;
       }
     }
   }
@@ -520,17 +520,17 @@ class ModalPopup extends React.PureComponent /** @lends @ModalPopup.prototype */
     const {
       cnCtx,
       className,
-    } = params
+    } = params;
     const {
       id,
       fullWidth,
-    } = this.props
-    const { open } = this.state
+    } = this.props;
+    const { open } = this.state;
     return cnCtx && cnCtx({
       id,
       open,
       fullWidth,
-    }, [/* this.props. */className])
+    }, [/* this.props. */className]);
   }
 
   // External methods...
@@ -546,69 +546,69 @@ class ModalPopup extends React.PureComponent /** @lends @ModalPopup.prototype */
 
   onActivate = () => {
     // console.log('ModalPopup:onActivate')
-    setTimeout(this.updateGeometryInstant, 0)
+    setTimeout(this.updateGeometryInstant, 0);
   }
   onDeactivate = () => {
     // console.log('ModalPopup:onDeactivate')
-    this.clearContentGeometry() // Due to content is destroyed when hidden
+    this.clearContentGeometry(); // Due to content is destroyed when hidden
   }
 
   handleOpenState = ({ open }) => {
     // console.log('ModalPopup:handleOpenState', open)
-    this.setState({ open }, this.updateOpenOrCloseWithState) // Update own open state
-    const { id, handleOpenState } = this.props
+    this.setState({ open }, this.updateOpenOrCloseWithState); // Update own open state
+    const { id, handleOpenState } = this.props;
     if (typeof handleOpenState === 'function') {
-      handleOpenState({ id, open })
+      handleOpenState({ id, open });
     }
   }
 
   setControlRef = (domNode) => {
-    this.controlDomNode = domNode
+    this.controlDomNode = domNode;
   }
 
   setContentRef = (domNode) => {
-    this.contentDomNode = domNode
+    this.contentDomNode = domNode;
   }
 
   clearContentGeometry() { // UNUSED? Must be used on content update (using registrable callback; see example in constructor).
     Object.keys(this.geometry).forEach(key => {
       if (key.startsWith('content')) {
-        this.geometry[key] = null
+        this.geometry[key] = null;
       }
-    })
+    });
   }
 
   handlePortalOpen = () => {
     // TODO: Register/unregister popup in `ModalPopupStack`
     // this.updateGeometry()
-    this.registerGlobalHandlers()
+    this.registerGlobalHandlers();
   }
 
   handlePortalClose = () => {
     // TODO: Register/unregister popup in `ModalPopupStack`
-    this.unregisterGlobalHandlers()
+    this.unregisterGlobalHandlers();
     // this.clearContentGeometry() // Due to content is destroyed when hidden
   }
 
   updateOpenOrCloseWithState = () => {
     if (this.state.open) {
-      this.handlePortalOpen()
+      this.handlePortalOpen();
     }
     else {
-      this.handlePortalClose()
+      this.handlePortalClose();
     }
   }
 
   onControlClick = (/* event */) => {
-    const { id } = this.props
-    const { open } = this.state
-    const nextOpen = !open
+    const { id } = this.props;
+    const { open } = this.state;
+    const nextOpen = !open;
     // console.log('ModalPopup:onControlClick', id, nextOpen, open)
-    this.setState({ open: nextOpen }, this.updateOpenOrCloseWithState) // Update own open state
+    this.setState({ open: nextOpen }, this.updateOpenOrCloseWithState); // Update own open state
     // TODO: Notify `ModalModalsContainer` when popup opens for closing all other popups from same level (before first modal in popups stack). (Now user can open several popups at the same time.
-    const { onControlClick } = this.props
+    const { onControlClick } = this.props;
     if (typeof onControlClick === 'function') {
-      onControlClick({ id, open: nextOpen })
+      onControlClick({ id, open: nextOpen });
     }
   }
 
@@ -619,71 +619,71 @@ class ModalPopup extends React.PureComponent /** @lends @ModalPopup.prototype */
       id,
       popupControl,
       className,
-    } = this.props
-    const { open } = this.state
+    } = this.props;
+    const { open } = this.state;
 
     // TODO: Cache modified `popupControl` in state?
     const content = React.cloneElement(popupControl, {
       onClick: this.onControlClick,
       checked: open,
       setDomRef: this.setControlRef,
-    })
+    });
 
     const renderProps = {
       id,
       className: this.getClassName({ cnCtx: cnModalPopupControl, className }),
       ref: this.setControlRef,
-    }
+    };
     return (
       <div {...renderProps}>
         {content}
       </div>
-    )
+    );
   }
 
   renderPortalContent = (portalProps) => {
-    const { ModalPortal, windowDomNode, wrapperDomNode } = portalProps
+    const { ModalPortal, windowDomNode, wrapperDomNode } = portalProps;
     if (ModalPortal) { // Save wrapping ModalPortal instance refernce
       // console.log('ModalPopup:renderPortalContent: updated ModalPortal')
-      this.ModalPortal = ModalPortal // Save ModalPortal handler (TODO)
-      this.windowDomNode = windowDomNode
-      this.wrapperDomNode = wrapperDomNode
+      this.ModalPortal = ModalPortal; // Save ModalPortal handler (TODO)
+      this.windowDomNode = windowDomNode;
+      this.wrapperDomNode = wrapperDomNode;
     }
     const {
       id,
       popupContent,
       contentClassName: className,
-    } = this.props
+    } = this.props;
     const renderProps = {
       id,
       className: this.getClassName({ cnCtx: cnModalPopup, className }),
       ref: this.setContentRef, // Will be used windowDomNode from ModalPortal
-    }
+    };
     return (
       <div {...renderProps}>
         {popupContent}
       </div>
-    )
+    );
   }
 
   renderContent() {
     const portalProps = passModalPortalProps.reduce((data, id) => {
-      return { ...data, [id]: this.props[id] }
-    }, {})
+      return { ...data, [id]: this.props[id] };
+    }, {});
     if (this.state.open != null) {
-      portalProps.open = this.state.open
+      portalProps.open = this.state.open;
     }
     Object.assign(portalProps, {
       handleOpenState: this.handleOpenState,
       onActivate: this.onActivate,
       onDeactivate: this.onDeactivate,
       wrapperTheme: 'SubtleDark',
-    })
+    });
     return (
       <ModalPortal {...portalProps} type="Popup">
         {this.renderPortalContent}
       </ModalPortal>
-    )
+    );
   }
 
   render() {
@@ -692,11 +692,11 @@ class ModalPopup extends React.PureComponent /** @lends @ModalPopup.prototype */
         {this.renderControl()}
         {this.renderContent()}
       </React.Fragment>
-    )
+    );
   }
 
 }
 
-export default ModalPopup
+export default ModalPopup;
 
-export const FormItemModalPopup = FormItemHOC(ModalPopup)
+export const FormItemModalPopup = FormItemHOC(ModalPopup);

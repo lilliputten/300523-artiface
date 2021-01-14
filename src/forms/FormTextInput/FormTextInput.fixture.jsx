@@ -3,18 +3,18 @@
  *  @changed 2020.10.29, 23:44
  */
 
-import React from 'react'
-import FormTextInput from './FormTextInput'
-import FormGroup from '../FormGroup'
-import FormLabel from '../FormLabel'
+import React from 'react';
+import FormTextInput from './FormTextInput';
+import FormGroup from '../FormGroup';
+import FormLabel from '../FormLabel';
 
 // Demo styles for cosmos engine
-import 'demo.pcss'
+import 'demo.pcss';
 
-import './FormTextInput.fixture.pcss'
+import './FormTextInput.fixture.pcss';
 
 // export const DemoWrapper = FormGroup // ({ children }) => {
-export const DemoWrapper = <FormGroup stack id="Wrapper" /> // ({ children }) => {
+export const DemoWrapper = <FormGroup stack id="Wrapper" />; // ({ children }) => {
 
 export default {
   default: <FormTextInput
@@ -59,4 +59,4 @@ export default {
       />
     </FormGroup>
   ),
-}
+};

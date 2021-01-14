@@ -11,4 +11,4 @@ export const defaultIcons = {
   info: 'faInfoCircle',
   confirm: 'faQuestionCircle',
   select: 'faListOl',
-}
+};

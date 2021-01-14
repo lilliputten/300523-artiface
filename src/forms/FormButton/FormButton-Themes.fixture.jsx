@@ -3,17 +3,17 @@
  *  @changed 2020.10.21, 22:52
  */
 
-import React from 'react'
-import config from 'config'
-import FormButton from './FormButton'
-import FormGroup from '../FormGroup'
+import React from 'react';
+import config from 'config';
+import FormButton from './FormButton';
+import FormGroup from '../FormGroup';
 
 // Demo styles for cosmos engine
-import 'demo.pcss'
+import 'demo.pcss';
 
-export const DemoWrapper = FormGroup // ({ children }) => {
+export const DemoWrapper = FormGroup; // ({ children }) => {
 
-const defaultIcon = 'faPalette'
+const defaultIcon = 'faPalette';
 const icons = { // Some custom icons
   primary: 'faPlay',
   secondary: 'faPlayCircle',
@@ -23,17 +23,17 @@ const icons = { // Some custom icons
   info: 'faInfoCircle',
   confirm: 'faQuestionCircle',
   select: 'faClipboardCheck',
-}
+};
 
 // Create fixture items per color definitions from `config.css.themeColors`
 const items = Object.keys(config.css.themeColors).reduce((items, name) => {
-  const icon = icons[name] || defaultIcon
-  const text = 'Style: ' + name
-  const item = <FormButton key={name} icon={icon} theme={name} text={text} />
-  return { ...items, [name]: item }
-}, {})
+  const icon = icons[name] || defaultIcon;
+  const text = 'Style: ' + name;
+  const item = <FormButton key={name} icon={icon} theme={name} text={text} />;
+  return { ...items, [name]: item };
+}, {});
 
-export default items
+export default items;
 
 /* // Old (plain fixtures generation method)...
  * export default { // See `config.css.themeColors`

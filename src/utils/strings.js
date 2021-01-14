@@ -4,35 +4,35 @@
  *  @changed 2020.05.29, 13:35
  */
 
-import React from 'react'
+import React from 'react';
 
 /**
  * @param {string} val
  * @return {number}
  */
 export const toNumber = (val) => {
-  return (val && !isNaN(val)) ? Number(val) : 0
-}
+  return (val && !isNaN(val)) ? Number(val) : 0;
+};
 /**
  * @param {string} val
  * @return {String}
  */
 export const toString = (val) => {
-  return val // String(val);
-}
+  return val; // String(val);
+};
 /**
  * @param {string} val
  * @return {boolean}
  */
 export const toBoolean = (val) => {
-  return !!(val && val !== 'false' && val !== '0')
-}
+  return !!(val && val !== 'false' && val !== '0');
+};
 
 export const typeTransforms = {
   toNumber,
   toString,
   toBoolean,
-}
+};
 
 /** Returns length of common parts of two strings
  * @param {String} a
@@ -40,24 +40,24 @@ export const typeTransforms = {
  * @return {Number}
  */
 export const getCommonLength = (a, b) => {
-  var maxLen = Math.min(a.length, b.length)
-  var commonLen = 0
+  var maxLen = Math.min(a.length, b.length);
+  var commonLen = 0;
   for (var len = 1; len < maxLen; len++) {
-    var s = a.substr(0, len)
+    var s = a.substr(0, len);
     if (b.indexOf(s) === 0) {
-      commonLen = len
+      commonLen = len;
     }
   }
-  return commonLen
-}
+  return commonLen;
+};
 
 /** Uppercase first letter of string
  * @param {string} str
  * @return {str}
  */
 export const ucFirst = (str) => {
-  return str.charAt(0).toUpperCase() + str.slice(1) // .toLowerCase();
-}
+  return str.charAt(0).toUpperCase() + str.slice(1); // .toLowerCase();
+};
 
 /** Convert string to desired type
  * @param {string} type
@@ -65,24 +65,24 @@ export const ucFirst = (str) => {
  * @return {*}
  */
 export const toType = (type, val) => {
-  var methodName = 'to' + ucFirst(type)
+  var methodName = 'to' + ucFirst(type);
   if (/* typeTransforms.hasOwnProperty(methodName) && */ typeof typeTransforms[methodName] === 'function') {
-    val = this[methodName](val)
+    val = this[methodName](val);
   }
-  return val
-}
+  return val;
+};
 
 /**
  * @param {Number} length - Target hex string length
  * @return {String}
  */
 export const randomHexString = (length) => {
-  var result = ''
+  var result = '';
   for (var i = 0; i < length; i++) {
-    result += Math.floor((Math.random()) * 0xf).toString(16)
+    result += Math.floor((Math.random()) * 0xf).toString(16);
   }
-  return result
-}
+  return result;
+};
 
 /** Convert (mostly error responses) html to text
  * @param {String} html
@@ -100,21 +100,21 @@ export const html2string = (html) => {
     .replace(/\n{3,}/gm, '\n\n') // Extra newlines
     .replace(/\n(.+):*[ \t\n]+\1\n/gm, '\n$1:\n') // Remove repeating titles
     // .replace(/\n/gm, '\\n') // DEBUG: newlines
-    .trim() // Trim
-}
+    .trim(); // Trim
+};
 
 // TODO: Move to react strings helper?
 export const splitMultiline = (text, opt) => {
-  opt = opt || {}
-  const textClassName = opt.textClassName || 'Text'
-  const lineClassName = opt.lineClassName || 'TextLine'
+  opt = opt || {};
+  const textClassName = opt.textClassName || 'Text';
+  const lineClassName = opt.lineClassName || 'TextLine';
   return text.split('\n\n').map((text, n) => {
     const lines = text.split('\n').map((line, n) => {
-      return React.createElement('div', { key: 'line' + String(n), className: lineClassName }, line)
-    })
-    return React.createElement('div', { key: 'text' + String(n), className: textClassName }, lines)
-  })
-}
+      return React.createElement('div', { key: 'line' + String(n), className: lineClassName }, line);
+    });
+    return React.createElement('div', { key: 'text' + String(n), className: textClassName }, lines);
+  });
+};
 
 // module.exports = strings
 // export default strings

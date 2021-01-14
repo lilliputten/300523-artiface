@@ -4,25 +4,25 @@
  *  @changed 2020.12.29, 20:57
  */
 
-import React from 'react'
-import { compose } from 'redux'
-import PropTypes from 'prop-types'
+import React from 'react';
+import { compose } from 'redux';
+import PropTypes from 'prop-types';
 // import connect from 'react-redux/es/connect/connect'
-import { cn } from 'utils/configure'
+import { cn } from 'utils/configure';
 import {
   withActionsContext,
   // ActionsContextConsumer,
-} from 'helpers/ActionsContext'
+} from 'helpers/ActionsContext';
 
-import FormItemHOC from '../FormItemHOC'
+import FormItemHOC from '../FormItemHOC';
 
-import InlineIcon from 'elements/InlineIcon'
+import InlineIcon from 'elements/InlineIcon';
 
-import './FormButton.pcss'
-import './FormButton-Variations.pcss'
-import './FormButton-Themes.pcss'
+import './FormButton.pcss';
+import './FormButton-Variations.pcss';
+import './FormButton-Themes.pcss';
 
-const cnFormButton = cn('FormButton')
+const cnFormButton = cn('FormButton');
 
 class FormButton extends React.PureComponent /** @lends @FormButton.prototype */ {
 
@@ -52,8 +52,8 @@ class FormButton extends React.PureComponent /** @lends @FormButton.prototype */
   // Helpers...
 
   hasIcon() {
-    const { icon, hasIcon } = this.props
-    return !!(hasIcon || icon)
+    const { icon, hasIcon } = this.props;
+    return !!(hasIcon || icon);
   }
 
   hasText() {
@@ -62,8 +62,8 @@ class FormButton extends React.PureComponent /** @lends @FormButton.prototype */
       onlyIcon,
       children,
       text,
-    } = this.props
-    return !onlyIcon && !!(hasText || text || children)
+    } = this.props;
+    return !onlyIcon && !!(hasText || text || children);
   }
 
   getClassName() {
@@ -83,7 +83,7 @@ class FormButton extends React.PureComponent /** @lends @FormButton.prototype */
       theme,
       type,
       variation,
-    } = this.props
+    } = this.props;
     const mods = {
       // plain,
       checked,
@@ -99,17 +99,17 @@ class FormButton extends React.PureComponent /** @lends @FormButton.prototype */
       theme,
       type,
       variation,
-    }
+    };
     const staticMods = {
       solid: true,
-    }
+    };
     const classList = cnFormButton({
       ...staticMods,
       ...mods,
       hasIcon: this.hasIcon(),
       hasText: this.hasText(),
-    }, [this.props.className])
-    return classList
+    }, [this.props.className]);
+    return classList;
   }
 
   // Handlers...
@@ -121,16 +121,16 @@ class FormButton extends React.PureComponent /** @lends @FormButton.prototype */
       disabled,
       onClick,
       // clickable,
-    } = this.props
+    } = this.props;
     if (!disabled) {
-      const hasOnClick = onClick && typeof onClick === 'function'
-      const result = hasOnClick ? onClick(event) : true
+      const hasOnClick = onClick && typeof onClick === 'function';
+      const result = hasOnClick ? onClick(event) : true;
       if (result !== false && actionsContextNode && typeof actionsContextNode.onAction) {
         Promise.resolve(result).then((result) => {
           if (result !== false) { // Check for non-false value
-            actionsContextNode.onAction({ id, result })
+            actionsContextNode.onAction({ id, result });
           }
-        })
+        });
       }
     }
   }
@@ -138,33 +138,33 @@ class FormButton extends React.PureComponent /** @lends @FormButton.prototype */
   // Render...
 
   renderIcon() {
-    const hasIcon = this.hasIcon()
+    const hasIcon = this.hasIcon();
     if (hasIcon) {
-      const { icon } = this.props
+      const { icon } = this.props;
       if (icon && icon.type === InlineIcon) { // Already InlineIcon
         // Extend with updated `className` props
         const props = {
           ...icon.props,
           className: cnFormButton('Icon', [icon.props.className]),
-        }
-        const newIcon = { ...icon, props }
-        return newIcon
+        };
+        const newIcon = { ...icon, props };
+        return newIcon;
       }
       return (
         <InlineIcon icon={icon} className={cnFormButton('Icon')} />
-      )
+      );
     }
   }
 
   renderText() {
-    const hasText = this.hasText() // !onlyIcon && !!(hasText || text || children
+    const hasText = this.hasText(); // !onlyIcon && !!(hasText || text || children
     if (hasText) {
-      const { text, children } = this.props
+      const { text, children } = this.props;
       return hasText && (
         <span className={cnFormButton('Text')}>
           {text || children}
         </span>
-      )
+      );
     }
   }
 
@@ -178,10 +178,10 @@ class FormButton extends React.PureComponent /** @lends @FormButton.prototype */
       title,
       setDomRef, // From FormItemHOC
       // actionsContextNode,
-    } = this.props
+    } = this.props;
 
-    const iconElem = this.renderIcon() // Icon element
-    const textElem = this.renderText() // Text element
+    const iconElem = this.renderIcon(); // Icon element
+    const textElem = this.renderText(); // Text element
 
     // const basicRenderProps = this.getRenderProps() // Get from props not from overrided `super`
     const renderProps = {
@@ -193,18 +193,18 @@ class FormButton extends React.PureComponent /** @lends @FormButton.prototype */
       type,
       onClick: this.onClick,
       ref: setDomRef, // Init ref for FormItemHOC
-    }
+    };
 
     const content = (
       <React.Fragment>
         {iconElem}
         {textElem}
       </React.Fragment>
-    )
+    );
 
-    const tagName = tag || 'div'
-    const element = React.createElement(tagName, renderProps, content)
-    return element
+    const tagName = tag || 'div';
+    const element = React.createElement(tagName, renderProps, content);
+    return element;
   }
 
 }
@@ -213,4 +213,4 @@ class FormButton extends React.PureComponent /** @lends @FormButton.prototype */
 export default compose(
   withActionsContext,
   FormItemHOC({ solid: true, hoverable: true, framed: true }),
-)(FormButton)
+)(FormButton);

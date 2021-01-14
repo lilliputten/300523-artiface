@@ -3,16 +3,16 @@
  *  @changed 2020.10.06, 23:46
  */
 
-import React from 'react'
-import FormLabel from './FormLabel'
-import FormGroup from '../FormGroup'
-import FormTextInput from '../FormTextInput'
+import React from 'react';
+import FormLabel from './FormLabel';
+import FormGroup from '../FormGroup';
+import FormTextInput from '../FormTextInput';
 
 // Demo styles for cosmos engine
-import 'demo.pcss'
+import 'demo.pcss';
 
 // export const DemoWrapper = FormGroup // ({ children }) => {
-export const DemoWrapper = <FormGroup stack id="Wrapper" /> // ({ children }) => {
+export const DemoWrapper = <FormGroup stack id="Wrapper" />; // ({ children }) => {
 
 export default {
   onlyLabel: (
@@ -34,4 +34,4 @@ export default {
       />
     </FormGroup>
   ),
-}
+};

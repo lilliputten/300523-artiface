@@ -4,30 +4,30 @@
  */
 /* eslint-disable react/jsx-max-depth, react/no-multi-comp, no-console */
 
-import React from 'react'
+import React from 'react';
 
-import ModalWindow from './ModalWindow'
-import FormGroup from 'forms/FormGroup'
-import FormButton from 'forms/FormButton'
-import FormSelect from 'forms/FormSelect'
-import FormTextInput from 'forms/FormTextInput'
+import ModalWindow from './ModalWindow';
+import FormGroup from 'forms/FormGroup';
+import FormButton from 'forms/FormButton';
+import FormSelect from 'forms/FormSelect';
+import FormTextInput from 'forms/FormTextInput';
 // import Menu from 'elements/Menu'
 
 // Demo styles for cosmos engine
-import 'demo.pcss'
+import 'demo.pcss';
 
-import './ModalWindow.fixture.pcss'
+import './ModalWindow.fixture.pcss';
 
 // export const DemoWrapper = FormGroup // ({ children }) => {
 
 // Interactive modal (self-closing)
 class Interactive extends React.PureComponent /** @lends @ModalsContainer.prototype */ {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       // open: true,
       // loading: true,
-    }
+    };
     // setTimeout(this.close, 3000)
     // setInterval(this.toggle, 5000)
   }
@@ -35,17 +35,17 @@ class Interactive extends React.PureComponent /** @lends @ModalsContainer.protot
   close = () => this.setState({ open: false })
   handleOpenState = ({ open }) => this.setState({ open })
   toggle = () => {
-    this.modalRef && this.modalRef.toggle()
+    this.modalRef && this.modalRef.toggle();
     // this.setState(({ open }) => {
     //   return { open: !open }
     // })
   }
   setModalWindowRef = (ref) => {
-    this.modalRef = ref
+    this.modalRef = ref;
   }
   handleLoaderCancel = () => {
-    console.log('handleLoaderCancel')
-    this.setState(({ loading }) => ({ loading: !loading }))
+    console.log('handleLoaderCancel');
+    this.setState(({ loading }) => ({ loading: !loading }));
   }
   renderActions() {
     return (
@@ -68,14 +68,14 @@ class Interactive extends React.PureComponent /** @lends @ModalsContainer.protot
           />
         </FormGroup>
       </FormGroup>
-    )
+    );
   }
   onAction = ({ id }) => {
-    console.log('onAction', id)
+    console.log('onAction', id);
   }
   render() {
-    const { open } = this.state
-    const actions = this.renderActions()
+    const { open } = this.state;
+    const actions = this.renderActions();
     // const isElement = React.isValidElement(actions)
     return (
       <React.Fragment>
@@ -113,23 +113,23 @@ class Interactive extends React.PureComponent /** @lends @ModalsContainer.protot
           inline
         />
       </React.Fragment>
-    )
+    );
   }
 }
-const interactive = <Interactive />
+const interactive = <Interactive />;
 
 const demoOptions = [
   { val: 1, text: 'Ruinning' },
   { val: 2, text: 'Swimming extra long text item name string value' },
-]
+];
 
 class WithSelect extends React.PureComponent /** @lends @ModalsContainer.prototype */ {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       open: true,
       loading: true, // Use `useLoader` for ability to controlling Loader
-    }
+    };
     // setTimeout(this.close, 3000)
     // setInterval(this.toggle, 5000)
   }
@@ -137,17 +137,17 @@ class WithSelect extends React.PureComponent /** @lends @ModalsContainer.prototy
   close = () => this.setState({ open: false })
   handleOpenState = ({ open }) => this.setState({ open })
   toggle = () => {
-    this.modalRef && this.modalRef.toggle()
+    this.modalRef && this.modalRef.toggle();
     // this.setState(({ open }) => {
     //   return { open: !open }
     // })
   }
   setModalWindowRef = (ref) => {
-    this.modalRef = ref
+    this.modalRef = ref;
   }
   handleLoaderCancel = () => {
-    console.log('handleLoaderCancel')
-    this.setState(({ loading }) => ({ loading: !loading }))
+    console.log('handleLoaderCancel');
+    this.setState(({ loading }) => ({ loading: !loading }));
   }
   renderActions() {
     return (
@@ -170,14 +170,14 @@ class WithSelect extends React.PureComponent /** @lends @ModalsContainer.prototy
           />
         </FormGroup>
       </FormGroup>
-    )
+    );
   }
   onAction = ({ id }) => {
-    console.log('onAction', id)
+    console.log('onAction', id);
   }
   render() {
-    const { open } = this.state
-    const actions = this.renderActions()
+    const { open } = this.state;
+    const actions = this.renderActions();
     // const isElement = React.isValidElement(actions)
     return (
       <React.Fragment>
@@ -224,19 +224,19 @@ class WithSelect extends React.PureComponent /** @lends @ModalsContainer.prototy
           inline
         />
       </React.Fragment>
-    )
+    );
   }
 }
-const withSelect = <WithSelect />
+const withSelect = <WithSelect />;
 
 class WithInput extends React.PureComponent /** @lends @ModalsContainer.prototype */ {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       open: true,
       value: '',
       // loading: true, // Use `useLoader` for ability to controlling Loader
-    }
+    };
     // setTimeout(this.close, 3000)
     // setInterval(this.toggle, 5000)
   }
@@ -244,18 +244,18 @@ class WithInput extends React.PureComponent /** @lends @ModalsContainer.prototyp
   close = () => this.setState({ open: false })
   handleOpenState = ({ open }) => this.setState({ open })
   toggle = () => {
-    this.modalRef && this.modalRef.toggle()
+    this.modalRef && this.modalRef.toggle();
   }
   setModalWindowRef = (ref) => {
-    this.modalRef = ref
+    this.modalRef = ref;
   }
   handleLoaderCancel = () => {
-    console.log('handleLoaderCancel')
-    this.setState(({ loading }) => ({ loading: !loading }))
+    console.log('handleLoaderCancel');
+    this.setState(({ loading }) => ({ loading: !loading }));
   }
   onChange = ({ value }) => {
     // console.log('withInput:onChange', value)
-    this.setState({ value })
+    this.setState({ value });
   }
   renderActions() {
     return (
@@ -278,15 +278,15 @@ class WithInput extends React.PureComponent /** @lends @ModalsContainer.prototyp
           />
         </FormGroup>
       </FormGroup>
-    )
+    );
   }
   onAction = ({ id }) => {
-    console.log('onAction', id)
+    console.log('onAction', id);
   }
   render() {
-    const { value, open } = this.state
-    console.log('withInput:render', value)
-    const actions = this.renderActions()
+    const { value, open } = this.state;
+    console.log('withInput:render', value);
+    const actions = this.renderActions();
     // const isElement = React.isValidElement(actions)
     return (
       <React.Fragment>
@@ -323,10 +323,10 @@ class WithInput extends React.PureComponent /** @lends @ModalsContainer.prototyp
           inline
         />
       </React.Fragment>
-    )
+    );
   }
 }
-const withInput = <WithInput />
+const withInput = <WithInput />;
 
 const simple = (
   <ModalWindow
@@ -338,11 +338,11 @@ const simple = (
       <div className="simpleStub">simpleStub</div>
     </div>
   </ModalWindow>
-)
+);
 
 export default {
   simple,
   interactive,
   withSelect,
   withInput,
-}
+};

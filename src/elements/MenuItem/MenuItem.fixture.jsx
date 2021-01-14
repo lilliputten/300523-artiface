@@ -3,8 +3,8 @@
  *  @changed 2020.10.27, 03:06
  */
 
-import React from 'react'
-import MenuItem from './MenuItem'
+import React from 'react';
+import MenuItem from './MenuItem';
 
 // import FormGroup from '../FormGroup'
 
@@ -13,18 +13,18 @@ import MenuItem from './MenuItem'
 // } from '@fortawesome/free-solid-svg-icons'
 
 // Demo styles for cosmos engine
-import 'demo.pcss'
+import 'demo.pcss';
 
 // export const DemoWrapper = FormGroup // ({ children }) => {
 
 const items = [
   { val: 1, content: 'Swimming' },
   { val: 2, content: 'Skiing' },
-]
+];
 export default {
   default: (
     <MenuItem>
       {items}
     </MenuItem>
   ),
-}
+};

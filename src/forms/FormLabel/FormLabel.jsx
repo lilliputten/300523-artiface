@@ -5,16 +5,16 @@
  */
 /* eslint-disable react/require-default-props */
 
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from 'react';
+import PropTypes from 'prop-types';
 // import connect from 'react-redux/es/connect/connect'
-import { cn } from 'utils/configure'
+import { cn } from 'utils/configure';
 
-import FormItemHOC from '../FormItemHOC'
+import FormItemHOC from '../FormItemHOC';
 
-import './FormLabel.pcss'
+import './FormLabel.pcss';
 
-const cnFormLabel = cn('FormLabel')
+const cnFormLabel = cn('FormLabel');
 
 class FormLabel extends React.PureComponent /** @lends @FormLabel.prototype */ {
 
@@ -28,14 +28,14 @@ class FormLabel extends React.PureComponent /** @lends @FormLabel.prototype */ {
       fixed,
       firstInBlock,
       // clickable,
-    } = this.props
+    } = this.props;
     const classList = cnFormLabel({
       id,
       fixed,
       firstInBlock,
       // clickable,
-    }, [this.props.className])
-    return classList
+    }, [this.props.className]);
+    return classList;
   }
 
   // Handlers...
@@ -45,9 +45,9 @@ class FormLabel extends React.PureComponent /** @lends @FormLabel.prototype */ {
       disabled,
       onClick,
       // clickable,
-    } = this.props
+    } = this.props;
     if (/* clickable && */ !disabled && onClick && typeof onClick === 'function') {
-      onClick(event)
+      onClick(event);
     }
   }
 
@@ -63,14 +63,14 @@ class FormLabel extends React.PureComponent /** @lends @FormLabel.prototype */ {
       text,
       children,
       title,
-    } = this.props
+    } = this.props;
 
     const renderProps = {
       id,
       className: this.getClassName(),
       disabled,
       title,
-    }
+    };
 
     return (
       <div {...renderProps}>
@@ -85,9 +85,9 @@ class FormLabel extends React.PureComponent /** @lends @FormLabel.prototype */ {
           {children || text || title}
         </label>
       </div>
-    )
+    );
   }
 
 }
 
-export default FormItemHOC({ hoverable: true, solid: true })(FormLabel)
+export default FormItemHOC({ hoverable: true, solid: true })(FormLabel);

@@ -7,25 +7,25 @@
  */
 /* eslint-disable react/require-default-props */
 
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from 'react';
+import PropTypes from 'prop-types';
 // import connect from 'react-redux/es/connect/connect'
-import { cn } from 'utils/configure'
+import { cn } from 'utils/configure';
 
-import FormItemHOC from '../FormItemHOC'
+import FormItemHOC from '../FormItemHOC';
 
 // import FormGroup from 'forms/FormGroup'
 // import FormGroup from '../FormGroup'
-import ModalPopup from 'elements/ModalPopup'
+import ModalPopup from 'elements/ModalPopup';
 // import { FormItemPopup } from 'elements/ModalPopup'
-import Menu from 'elements/Menu'
-import FormButton from 'forms/FormButton'
+import Menu from 'elements/Menu';
+import FormButton from 'forms/FormButton';
 
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-import './FormSelect.pcss'
+import './FormSelect.pcss';
 
-const cnFormSelect = cn('FormSelect')
+const cnFormSelect = cn('FormSelect');
 
 class FormSelect extends React.PureComponent /** @lends @FormSelect.prototype */ {
 
@@ -46,71 +46,71 @@ class FormSelect extends React.PureComponent /** @lends @FormSelect.prototype */
   // Lifecycle methods...
 
   constructor(props) {
-    super(props)
+    super(props);
     // this.formItemRef = React.createRef()
-    this.id = props.id || props.inputId || props.name
-    const { checked, value } = props
+    this.id = props.id || props.inputId || props.name;
+    const { checked, value } = props;
     this.state = {
       checked: Array.isArray(checked) ? checked : value && [value] || []
-    }
+    };
   }
 
   // Helper methods...
 
   getClassName() {
-    const { id } = this
+    const { id } = this;
     const classList = cnFormSelect({
       id,
-    }, [this.props.className])
-    return classList
+    }, [this.props.className]);
+    return classList;
   }
 
   getItemsText() {
-    const { checked } = this.state
-    const { options } = this.props
+    const { checked } = this.state;
+    const { options } = this.props;
     const text = Array.isArray(options) && Array.isArray(checked) && options.map(({ val, text }) => {
       if (checked.includes(val)) {
-        return text
+        return text;
       }
-    }).filter(Boolean).join(', ')
-    return text
+    }).filter(Boolean).join(', ');
+    return text;
   }
 
   // Handlers...
 
   onControlClick = (params) => {
-    const { onControlClick } = this.props
+    const { onControlClick } = this.props;
     if (typeof onControlClick === 'function') {
-      onControlClick(params)
+      onControlClick(params);
     }
   }
   onMenuItemClick = (params) => {
-    const { closeOnSelect, onMenuItemClick } = this.props
+    const { closeOnSelect, onMenuItemClick } = this.props;
     if (typeof onMenuItemClick === 'function') {
-      onMenuItemClick(params)
+      onMenuItemClick(params);
     }
     if (closeOnSelect && this.popupNode) {
-      this.popupNode.close()
+      this.popupNode.close();
     }
   }
   onMenuChange = (params) => {
-    const { onChange } = this.props
-    const { checked } = params
+    const { onChange } = this.props;
+    const { checked } = params;
     if (typeof onChange === 'function') {
-      const { id, inputId, name, singleChoice } = this.props
-      const value = singleChoice ? checked[0] : checked
-      const setId = id || inputId || name
-      const setParams = { id: setId, checked, value }
-      onChange(setParams)
+      const { id, inputId, name, singleChoice } = this.props;
+      const value = singleChoice ? checked[0] : checked;
+      const setId = id || inputId || name;
+      const setParams = { id: setId, checked, value };
+      onChange(setParams);
     }
-    this.setState({ checked })
+    this.setState({ checked });
   }
 
   setPopupRef = (node) => {
-    const { setPopupNodeRef } = this.props
-    this.popupNode = node
+    const { setPopupNodeRef } = this.props;
+    this.popupNode = node;
     if (setPopupNodeRef && typeof setPopupNodeRef === 'function') {
-      setPopupNodeRef(node)
+      setPopupNodeRef(node);
     }
   }
 
@@ -124,8 +124,8 @@ class FormSelect extends React.PureComponent /** @lends @FormSelect.prototype */
       controlButtonTheme,
       fullWidth,
       disabled,
-    } = this.props
-    const buttonText = this.getItemsText() || placeholder || text
+    } = this.props;
+    const buttonText = this.getItemsText() || placeholder || text;
     return (
       <FormButton
         icon="faChevronDown"
@@ -138,7 +138,7 @@ class FormSelect extends React.PureComponent /** @lends @FormSelect.prototype */
         fullWidth={fullWidth}
         disabled={disabled}
       />
-    )
+    );
   }
 
   renderMenuContent() {
@@ -149,10 +149,10 @@ class FormSelect extends React.PureComponent /** @lends @FormSelect.prototype */
       // value,
       disabled,
       // inputId, // ???
-    } = this.props
+    } = this.props;
     const {
       checked,
-    } = this.state
+    } = this.state;
     return (
       <Menu
         checkable={true}
@@ -165,7 +165,7 @@ class FormSelect extends React.PureComponent /** @lends @FormSelect.prototype */
       >
         {options}
       </Menu>
-    )
+    );
   }
 
   render() {
@@ -176,10 +176,10 @@ class FormSelect extends React.PureComponent /** @lends @FormSelect.prototype */
       title,
       open,
       fullWidth,
-    } = this.props
+    } = this.props;
 
-    const controlContent = this.renderControlContent()
-    const menuContent =  this.renderMenuContent()
+    const controlContent = this.renderControlContent();
+    const menuContent =  this.renderMenuContent();
 
     const popupProps = {
       id,
@@ -193,14 +193,14 @@ class FormSelect extends React.PureComponent /** @lends @FormSelect.prototype */
       onControlClick: this.onControlClick,
       fullWidth,
       ref: this.setPopupRef,
-    }
+    };
 
     return (
       <ModalPopup {...popupProps} />
-    )
+    );
 
   }
 
 }
 
-export default FormItemHOC({ solid: true, hoverable: true })(FormSelect)
+export default FormItemHOC({ solid: true, hoverable: true })(FormSelect);

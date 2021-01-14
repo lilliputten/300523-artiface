@@ -6,25 +6,25 @@
 
 // Form elements...
 
-export FormItemDummy from './FormItemDummy' // DEBUG: Demo element
+export FormItemDummy from './FormItemDummy'; // DEBUG: Demo element
 
-export FormLabel from './FormLabel'
-export FormButton from './FormButton'
-export FormGroup from './FormGroup'
-export FormLabeledGroup from './FormLabeledGroup'
-export FormButtonGroup from './FormButtonGroup'
-export FormInputGroup from './FormInputGroup'
+export FormLabel from './FormLabel';
+export FormButton from './FormButton';
+export FormGroup from './FormGroup';
+export FormLabeledGroup from './FormLabeledGroup';
+export FormButtonGroup from './FormButtonGroup';
+export FormInputGroup from './FormInputGroup';
 
-export FormDelim from './FormDelim'
-export FormSpacer from './FormSpacer'
+export FormDelim from './FormDelim';
+export FormSpacer from './FormSpacer';
 
-export FormText from './FormText'
+export FormText from './FormText';
 
-export FormSelect from './FormSelect'
-export FormTextInput from './FormTextInput'
-export FormPasswordInput from './FormPasswordInput'
+export FormSelect from './FormSelect';
+export FormTextInput from './FormTextInput';
+export FormPasswordInput from './FormPasswordInput';
 
-export FormRadio from './FormRadio'
+export FormRadio from './FormRadio';
 // export FormCheck from './FormCheck'
 // export FormSwitch from './FormSwitch'
 

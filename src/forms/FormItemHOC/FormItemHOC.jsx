@@ -4,12 +4,12 @@
  *  @changed 2020.06.04, 22:58
  */
 
-import React from 'react'
-import { cn } from 'utils/configure'
+import React from 'react';
+import { cn } from 'utils/configure';
 
-import './FormItemHOC.pcss'
+import './FormItemHOC.pcss';
 
-const cnFormItem = cn('FormItem')
+const cnFormItem = cn('FormItem');
 
 const classNameModifiers = [ // Pass props/state params to class modifiers
   // Display-related modifiers...
@@ -28,34 +28,34 @@ const classNameModifiers = [ // Pass props/state params to class modifiers
   'checked',
   'disabled',
   'fill', // (???)
-]
+];
 const classNameExpectedModifierTypes = {
   checked: 'boolean',
-}
+};
 
 const defaultState = { // Default state
   // hoverable: false,
   // focusable: false,
-}
+};
 
 const props2State = [ // Pass props to state
   'hoverable', // Allow hover effects
   'focusable', // Allow hover effects
-]
+];
 
 // Helper functions...
 
 const deriveState = (...sets) => {
   return props2State.reduce((state, id) =>{
     const val = sets.reduce((val, set) => {
-      return (set[id] != null /* && val == null */) ? set[id] : val
-    }, null)
+      return (set[id] != null /* && val == null */) ? set[id] : val;
+    }, null);
     if (val != null) {
-      return { ...state, [id]: val }
+      return { ...state, [id]: val };
     }
-    return state
-  }, defaultState)
-}
+    return state;
+  }, defaultState);
+};
 /* // UNUSED: deriveStateFromProps
  * const deriveStateFromProps = (props, defaultState) => {
  *   return props2State.reduce((state, id) =>{
@@ -69,7 +69,7 @@ const deriveState = (...sets) => {
  */
 
 // Unique id counter
-let uniqIdCount = 1
+let uniqIdCount = 1;
 
 const wrapFormItemHOC = (WrappedComponent, params = {}) => class FormItem extends React.Component {
 
@@ -78,71 +78,71 @@ const wrapFormItemHOC = (WrappedComponent, params = {}) => class FormItem extend
   getStateOrPropOrParam(id) { // Get parameter from state or from props
     let val = (this.state[id] != null) ? this.state[id] :
       (this.props[id] != null) ? this.props[id] :
-        params[id]
+        params[id];
     if (classNameExpectedModifierTypes[id] && typeof val !== classNameExpectedModifierTypes[id]) {
-      val = null
+      val = null;
     }
-    return val
+    return val;
   }
 
   createUniqId() {
-    return 'FormItem' + (uniqIdCount++)
+    return 'FormItem' + (uniqIdCount++);
   }
 
   getId(props) {
-    props = props || this.props
-    return props.id || this.id || (this.id = this.createUniqId())
+    props = props || this.props;
+    return props.id || this.id || (this.id = this.createUniqId());
   }
 
   // Lifecycle methods...
 
   constructor(props) {
-    super(props)
-    this.state = deriveState(defaultState, params, props) // deriveStateFromProps(props, defaultState)
-    this.id = props.id || params.id
+    super(props);
+    this.state = deriveState(defaultState, params, props); // deriveStateFromProps(props, defaultState)
+    this.id = props.id || params.id;
     // this.formItemRef = React.createRef()
   }
 
   static getDerivedStateFromProps(props, state) {
     // TODO: Update event subscriptions if `hoverable` flag changed?
-    return deriveState(params, props, state) // deriveStateFromProps(props, state)
+    return deriveState(params, props, state); // deriveStateFromProps(props, state)
   }
 
   componentDidMount() {
     // const { formItemRef: { current } = {} } = this
-    const { formItemDomRef } = this
+    const { formItemDomRef } = this;
     if (formItemDomRef && formItemDomRef.addEventListener) {
-      const hoverable = this.getStateOrPropOrParam('hoverable')
-      const focusable = this.getStateOrPropOrParam('focusable')
+      const hoverable = this.getStateOrPropOrParam('hoverable');
+      const focusable = this.getStateOrPropOrParam('focusable');
       if (hoverable && !this.hoverableInited) {
-        this.hoverableInited = true
-        formItemDomRef.addEventListener('mouseover', this.handleMouseOver)
-        formItemDomRef.addEventListener('mouseout', this.handleMouseOut)
+        this.hoverableInited = true;
+        formItemDomRef.addEventListener('mouseover', this.handleMouseOver);
+        formItemDomRef.addEventListener('mouseout', this.handleMouseOut);
       }
       if (focusable && !this.focusableInited) {
-        this.focusableInited = true
-        formItemDomRef.addEventListener('focus', this.handleFocus)
-        formItemDomRef.addEventListener('blur', this.handleBlur)
+        this.focusableInited = true;
+        formItemDomRef.addEventListener('focus', this.handleFocus);
+        formItemDomRef.addEventListener('blur', this.handleBlur);
         this.focus = () => { // Focus handler
-          const domRef = this.formItemDomRef
-          domRef && domRef.focus && domRef.focus()
-        }
+          const domRef = this.formItemDomRef;
+          domRef && domRef.focus && domRef.focus();
+        };
       }
     }
   }
 
   componentWillUnmount() {
-    const { formItemDomRef } = this
+    const { formItemDomRef } = this;
     if (formItemDomRef && formItemDomRef.removeEventListener) {
       // const hoverable = this.getStateOrPropOrParam('hoverable')
       // const focusable = this.getStateOrPropOrParam('focusable')
       if (this.hoverableInited) {
-        formItemDomRef.removeEventListener('mouseover', this.handleMouseOver)
-        formItemDomRef.removeEventListener('mouseout', this.handleMouseOut)
+        formItemDomRef.removeEventListener('mouseover', this.handleMouseOver);
+        formItemDomRef.removeEventListener('mouseout', this.handleMouseOut);
       }
       if (this.focusableInited) {
-        formItemDomRef.removeEventListener('focus', this.handleFocus)
-        formItemDomRef.removeEventListener('blur', this.handleBlur)
+        formItemDomRef.removeEventListener('focus', this.handleFocus);
+        formItemDomRef.removeEventListener('blur', this.handleBlur);
       }
     }
   }
@@ -150,13 +150,13 @@ const wrapFormItemHOC = (WrappedComponent, params = {}) => class FormItem extend
   getClassName() {
     // Collect modifier values from state or props
     const mods = classNameModifiers.reduce((mods, id) =>{
-      const val = this.getStateOrPropOrParam(id) // (this.state[id] != null) ? this.state[id] : this.props[id]
+      const val = this.getStateOrPropOrParam(id); // (this.state[id] != null) ? this.state[id] : this.props[id]
       if (val != null) {
-        mods[id] = val
+        mods[id] = val;
       }
-      return mods
-    }, {})
-    return cnFormItem(mods, [this.props.className])
+      return mods;
+    }, {});
+    return cnFormItem(mods, [this.props.className]);
   }
 
   /* // For `focusable` state (TODO?)
@@ -169,40 +169,40 @@ const wrapFormItemHOC = (WrappedComponent, params = {}) => class FormItem extend
    */
 
   handleMouseOver = () => {
-    const disabled = this.getStateOrPropOrParam('disabled')
-    const hoverable = this.getStateOrPropOrParam('hoverable')
+    const disabled = this.getStateOrPropOrParam('disabled');
+    const hoverable = this.getStateOrPropOrParam('hoverable');
     if (hoverable && !disabled) {
-      this.setState({ hovered: true })
+      this.setState({ hovered: true });
     }
   }
   handleMouseOut = () => {
-    const disabled = this.getStateOrPropOrParam('disabled')
-    const hoverable = this.getStateOrPropOrParam('hoverable')
+    const disabled = this.getStateOrPropOrParam('disabled');
+    const hoverable = this.getStateOrPropOrParam('hoverable');
     if (hoverable && !disabled) {
-      this.setState({ hovered: false })
+      this.setState({ hovered: false });
     }
   }
 
   handleFocus = () => {
-    const disabled = this.getStateOrPropOrParam('disabled')
-    const focusable = this.getStateOrPropOrParam('focusable')
+    const disabled = this.getStateOrPropOrParam('disabled');
+    const focusable = this.getStateOrPropOrParam('focusable');
     if (focusable && !disabled) {
-      this.setState({ focused: true })
+      this.setState({ focused: true });
     }
   }
   handleBlur = () => {
-    const disabled = this.getStateOrPropOrParam('disabled')
-    const focusable = this.getStateOrPropOrParam('focusable')
+    const disabled = this.getStateOrPropOrParam('disabled');
+    const focusable = this.getStateOrPropOrParam('focusable');
     if (focusable && !disabled) {
-      this.setState({ focused: false })
+      this.setState({ focused: false });
     }
   }
 
   setDomRef = (domRef) => { // Children dom node receiver
-    const { setDomRef } = this.props
-    this.formItemDomRef = domRef
+    const { setDomRef } = this.props;
+    this.formItemDomRef = domRef;
     if (typeof setDomRef === 'function') {
-      setDomRef(domRef)
+      setDomRef(domRef);
     }
     // domRef && domRef.focus && domRef.focus() // ???
   }
@@ -211,27 +211,27 @@ const wrapFormItemHOC = (WrappedComponent, params = {}) => class FormItem extend
     const {
       hovered,
       focused,
-    } = this.state
+    } = this.state;
     const renderProps = {
       hovered,
       focused,
       className: this.getClassName(),
       setDomRef: this.setDomRef, // Children dom node receiver
       // formItemDomRef: this.formItemDomRef,
-    }
-    const focusable = this.getStateOrPropOrParam('focusable')
+    };
+    const focusable = this.getStateOrPropOrParam('focusable');
     if (focusable) {
-      renderProps.tabIndex = 0
+      renderProps.tabIndex = 0;
     }
     return (
       <WrappedComponent
         {...this.props}
         {...renderProps}
       />
-    )
+    );
   }
 
-}
+};
 
 /** Usage:
  * FormItemHOC(component)
@@ -239,14 +239,14 @@ const wrapFormItemHOC = (WrappedComponent, params = {}) => class FormItem extend
  */
 const FormItemHOC = (params) => {
   if (typeof params === 'string') { // Passed identifier
-    params = { id: params }
+    params = { id: params };
   }
   if (typeof params === 'object') { // Params passed -> metafabric
-    return (component) => wrapFormItemHOC(component, params)
+    return (component) => wrapFormItemHOC(component, params);
   }
   else { // Component passed -> simple fabric
-    return wrapFormItemHOC(params)
+    return wrapFormItemHOC(params);
   }
-}
+};
 
-export default FormItemHOC
+export default FormItemHOC;

@@ -5,8 +5,8 @@
  */
 
 /** Date conversion & presentation templates... */
-export const dateFormat = 'DD.MM.YYYY HH:mm'
-export const timeFormat = 'HH:mm'
+export const dateFormat = 'DD.MM.YYYY HH:mm';
+export const timeFormat = 'HH:mm';
 
 /** App title parts delimiter */
 // export const pageDelim = ' – ' // en-dash

@@ -5,43 +5,43 @@
  */
 /* eslint-disable react/require-default-props */
 
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from 'react';
+import PropTypes from 'prop-types';
 // import connect from 'react-redux/es/connect/connect'
-import { cn } from 'utils/configure'
+import { cn } from 'utils/configure';
 
-import InlineIcon from 'elements/InlineIcon'
-import FormItemHOC from '../FormItemHOC'
+import InlineIcon from 'elements/InlineIcon';
+import FormItemHOC from '../FormItemHOC';
 
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-import './FormTextInput.pcss'
+import './FormTextInput.pcss';
 
-const cnFormTextInput = cn('FormTextInput')
+const cnFormTextInput = cn('FormTextInput');
 
 class FormTextInput extends React.PureComponent /** @lends @FormTextInput.prototype */ {
 
   // Lifecycle...
 
   constructor(props) {
-    super(props)
-    const { value = '' } = this.props
+    super(props);
+    const { value = '' } = this.props;
     this.state = {
       value,
-    }
+    };
   }
 
   componentDidUpdate(prevProps, prevState) {
-    const prevValue = prevProps.value
-    const propsValue = this.props.value
-    const stateValue = this.state.value
+    const prevValue = prevProps.value;
+    const propsValue = this.props.value;
+    const stateValue = this.state.value;
     if (propsValue !== prevValue && propsValue !== stateValue) { // New value from props
       this.setState({
         value: propsValue,
-      }, this.updateValueWithState)
+      }, this.updateValueWithState);
     }
     else if (stateValue !== prevState.value) { // New value from state
-      this.updateValueWithState(this.state)
+      this.updateValueWithState(this.state);
     }
   }
 
@@ -50,8 +50,8 @@ class FormTextInput extends React.PureComponent /** @lends @FormTextInput.protot
   hasValue() {
     const {
       value,
-    } = this.state
-    return value != null && value !== ''
+    } = this.state;
+    return value != null && value !== '';
   }
 
   hasIcon() {
@@ -59,19 +59,19 @@ class FormTextInput extends React.PureComponent /** @lends @FormTextInput.protot
       icon,
       hasIcon,
       hasClear,
-    } = this.props
-    return hasIcon || !!icon || (hasClear && this.hasValue())
+    } = this.props;
+    return hasIcon || !!icon || (hasClear && this.hasValue());
   }
 
   updateValueWithState = (state) => {
-    const { id, inputId, name, onChange, disabled, numericValue } = this.props
+    const { id, inputId, name, onChange, disabled, numericValue } = this.props;
     if (!disabled && typeof onChange === 'function') {
-      let { value } = state
+      let { value } = state;
       if (numericValue && !isNaN(value)) {
-        value = Number(value)
+        value = Number(value);
       }
-      const setId = inputId || id || name
-      onChange({ id: setId, value })
+      const setId = inputId || id || name;
+      onChange({ id: setId, value });
     }
   }
 
@@ -79,57 +79,57 @@ class FormTextInput extends React.PureComponent /** @lends @FormTextInput.protot
     const {
       id,
       hasClear,
-    } = this.props
-    const hasValue = this.hasValue()
-    const hasClearActive = hasClear && hasValue
+    } = this.props;
+    const hasValue = this.hasValue();
+    const hasClearActive = hasClear && hasValue;
     const classList = cnFormTextInput({
       id,
       hasIcon: this.hasIcon(),
       hasValue: this.hasValue(),
       hasClear,
       hasClearActive,
-    }, [this.props.className])
-    return classList
+    }, [this.props.className]);
+    return classList;
   }
 
   // Event handlers...
 
   handleChange = (event) => {
-    const { target } = event
-    const { value } = target
-    this.setState({ value })
+    const { target } = event;
+    const { value } = target;
+    this.setState({ value });
   }
 
   onClearClick = () => {
-    this.setState({ value: '' })
+    this.setState({ value: '' });
   }
 
   onKeyPress = (event) => {
-    var { keyCode } = event
+    var { keyCode } = event;
     const {
       id,
       onKeyPress,
       onEnterPressed,
       // onEscPressed,
-    } = this.props
-    const cbProps = { event, id, keyCode }
-    onKeyPress && onKeyPress(cbProps)
-    onEnterPressed && (keyCode === 13) && onEnterPressed(cbProps) // Enter?
+    } = this.props;
+    const cbProps = { event, id, keyCode };
+    onKeyPress && onKeyPress(cbProps);
+    onEnterPressed && (keyCode === 13) && onEnterPressed(cbProps); // Enter?
     // onEscPressed && (keyCode === 27) && onEscPressed(cbProps) // Esc? Seems to not processing (in chrome at least)
   }
 
   onFocusIn = () => {
-    this.mounted && this.setState({ focused: true })
-    window.addEventListener('keypress', this.onKeyPress)
+    this.mounted && this.setState({ focused: true });
+    window.addEventListener('keypress', this.onKeyPress);
     if (typeof this.props.onFocusIn === 'function') { // Propogate event if handler passed
-      this.props.onFocusIn(event)
+      this.props.onFocusIn(event);
     }
   }
   onFocusOut = (event) => {
-    this.mounted && this.setState({ focused: false })
-    window.removeEventListener('keypress', this.onKeyPress)
+    this.mounted && this.setState({ focused: false });
+    window.removeEventListener('keypress', this.onKeyPress);
     if (typeof this.props.onFocusOut === 'function') { // Propogate event if handler passed
-      this.props.onFocusOut(event)
+      this.props.onFocusOut(event);
     }
   }
 
@@ -138,7 +138,7 @@ class FormTextInput extends React.PureComponent /** @lends @FormTextInput.protot
   renderInput() {
     const {
       value,
-    } = this.state
+    } = this.state;
     const {
       id,
       inputId,
@@ -147,7 +147,7 @@ class FormTextInput extends React.PureComponent /** @lends @FormTextInput.protot
       // onChange,
       placeholder,
       type = 'text',
-    } = this.props
+    } = this.props;
 
     const inputProps = {
       key: 'Input',
@@ -157,17 +157,17 @@ class FormTextInput extends React.PureComponent /** @lends @FormTextInput.protot
       name: name || inputId || id,
       disabled: disabled,
       placeholder: placeholder,
-      ref: (domElem) => { this.inputDomElem = domElem },
+      ref: (domElem) => { this.inputDomElem = domElem; },
       onChange: this.handleChange,
       value,
       // onFocus: this.onFocusIn,
       // onBlur: this.onFocusOut,
-    }
+    };
     return (
       <input
         {...inputProps}
       />
-    )
+    );
   }
 
   renderClearIcon() { // DELETE
@@ -176,9 +176,9 @@ class FormTextInput extends React.PureComponent /** @lends @FormTextInput.protot
       clearIcon,
       clearIconTitle,
       // onClearClick,
-    } = this.props
-    const hasValue = this.hasValue()
-    const hasClearActive = hasClear && hasValue
+    } = this.props;
+    const hasValue = this.hasValue();
+    const hasClearActive = hasClear && hasValue;
     return hasClearActive && (
       <InlineIcon
         icon={clearIcon || 'faTimes'}
@@ -186,7 +186,7 @@ class FormTextInput extends React.PureComponent /** @lends @FormTextInput.protot
         onClick={this.onClearClick}
         title={clearIconTitle || 'Clear content'}
       />
-    )
+    );
   }
 
   renderIcon() { // DELETE
@@ -195,7 +195,7 @@ class FormTextInput extends React.PureComponent /** @lends @FormTextInput.protot
       icon,
       iconTitle,
       onIconClick,
-    } = this.props
+    } = this.props;
 
     return icon && (
       <InlineIcon
@@ -204,7 +204,7 @@ class FormTextInput extends React.PureComponent /** @lends @FormTextInput.protot
         onClick={onIconClick}
         title={iconTitle}
       />
-    )
+    );
   }
 
   render() {
@@ -215,9 +215,9 @@ class FormTextInput extends React.PureComponent /** @lends @FormTextInput.protot
       type = 'text',
       title,
       setDomRef, // For FormItem interactive dom access
-    } = this.props
+    } = this.props;
 
-    const inputElem = this.renderInput()
+    const inputElem = this.renderInput();
 
     const renderProps = {
       id,
@@ -227,14 +227,14 @@ class FormTextInput extends React.PureComponent /** @lends @FormTextInput.protot
       type,
       onClick: this.onClick,
       ref: setDomRef,
-    }
+    };
 
     return (
       <div {...renderProps}>
         {inputElem}
         {this.renderIcon() || this.renderClearIcon()}
       </div>
-    )
+    );
 
   }
 
@@ -244,4 +244,4 @@ class FormTextInput extends React.PureComponent /** @lends @FormTextInput.protot
 
 }
 
-export default FormItemHOC({ solid: true, hoverable: true, framed: true })(FormTextInput)
+export default FormItemHOC({ solid: true, hoverable: true, framed: true })(FormTextInput);

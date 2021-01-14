@@ -3,23 +3,23 @@
  *  @changed 2020.10.21, 23:43
  */
 
-import React from 'react'
-import FormInputGroup from './FormInputGroup'
+import React from 'react';
+import FormInputGroup from './FormInputGroup';
 
-import FormButton from '../FormButton'
-import FormTextInput from '../FormTextInput'
-import FormGroup from '../FormGroup'
+import FormButton from '../FormButton';
+import FormTextInput from '../FormTextInput';
+import FormGroup from '../FormGroup';
 
 import { // Icons (solid)...
   faCheck,
-} from '@fortawesome/free-solid-svg-icons'
+} from '@fortawesome/free-solid-svg-icons';
 
 // Demo styles for cosmos engine
-import 'demo.pcss'
+import 'demo.pcss';
 
 // import './FormInputGroup.fixture.pcss'
 
-export const demoTitle = 'FormInputGroup component'
+export const demoTitle = 'FormInputGroup component';
 
 export default {
   default: (
@@ -36,4 +36,4 @@ export default {
       </FormInputGroup>
     </FormGroup>
   ),
-}
+};

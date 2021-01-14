@@ -3,11 +3,11 @@
  *  @changed 2020.10.05, 20:31
  */
 
-import React from 'react'
-import Hello from './Hello'
+import React from 'react';
+import Hello from './Hello';
 
 // Title for demo rendering
-export const demoTitle = 'Hello example fixture'
+export const demoTitle = 'Hello example fixture';
 
 /* // EXAMPLE: fixture content wrapper
  * export const DemoWrapper = ({ children }) => {
@@ -22,4 +22,4 @@ export const demoTitle = 'Hello example fixture'
 export default {
   // basic: <Hello />,
   aloha: <Hello greeting="Aloha" name="Alexa" />,
-}
+};

@@ -3,15 +3,15 @@
  *  @changed 2020.10.29, 22:42
  */
 
-import React from 'react'
-import FormText from './FormText'
-import FormGroup from '../FormGroup'
-import FormTextInput from '../FormTextInput'
+import React from 'react';
+import FormText from './FormText';
+import FormGroup from '../FormGroup';
+import FormTextInput from '../FormTextInput';
 
 // Demo styles for cosmos engine
-import 'demo.pcss'
+import 'demo.pcss';
 
-export const DemoWrapper = FormGroup // ({ children }) => {
+export const DemoWrapper = FormGroup; // ({ children }) => {
 
 export default {
   simple: <FormText title="Title" text="Text" />,
@@ -28,4 +28,4 @@ export default {
       />
     </FormGroup>
   ),
-}
+};

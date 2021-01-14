@@ -5,22 +5,22 @@
  *  TODO: Place block (and local?) loaders into `ModalsContainer`?
  */
 
-import React from 'react'
+import React from 'react';
 // import connect from 'react-redux/es/connect/connect'
-import { cn } from 'utils/configure'
-import { getCommonLangText } from 'utils/lang'
+import { cn } from 'utils/configure';
+import { getCommonLangText } from 'utils/lang';
 import { // Form items...
   FormButton,
   FormGroup,
   // utils as WebUiCoreUtils, // Moved to root index
-} from 'forms'
+} from 'forms';
 
-const cnLoader = cn('Loader')
+const cnLoader = cn('Loader');
 
-import './Loader.pcss'
-import './Loader-animation.pcss'
-import './Loader-modes.pcss'
-import './Loader-themes.pcss'
+import './Loader.pcss';
+import './Loader-animation.pcss';
+import './Loader-modes.pcss';
+import './Loader-themes.pcss';
 
 // eslint-disable-next-line react/prefer-stateless-function
 // export default class Loader extends React.PureComponent [>* @lends @Modal.prototype <] {
@@ -41,7 +41,7 @@ const Loader = (props) => {
     text,
     onCancel,
     cancelText,
-  } = props
+  } = props;
   const actions = (typeof onCancel === 'function') && (
     <div className={cnLoader('Actions')}>
       <FormGroup flow alignItems="center">
@@ -54,9 +54,9 @@ const Loader = (props) => {
         />
       </FormGroup>
     </div>
-  )
-  const thisClassName = cnLoader({ mode, theme, show }, [ className, /* showClass */ ])
-  const showText = (text != null) ? text : getCommonLangText('loading', 'Loading...', lang)
+  );
+  const thisClassName = cnLoader({ mode, theme, show }, [ className, /* showClass */ ]);
+  const showText = (text != null) ? text : getCommonLangText('loading', 'Loading...', lang);
   return (
     <div className={thisClassName}>
       <div className={cnLoader('Container')}>
@@ -65,12 +65,12 @@ const Loader = (props) => {
         {actions}
       </div>
     </div>
-  )
-}
+  );
+};
 // const mapStateToProps = store => ({
 //   // user: store.user,
 //   // commonLang: store.language.components.common,
 //   lang: store.language,
 // })
 // export default connect(mapStateToProps)(Loader)
-export default Loader
+export default Loader;

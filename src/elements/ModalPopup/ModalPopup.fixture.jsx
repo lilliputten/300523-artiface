@@ -4,31 +4,31 @@
  */
 /* eslint-disable react/no-multi-comp, no-console */
 
-import React from 'react'
+import React from 'react';
 
 // import { FormItemModalPopup } from './ModalPopup'
-import ModalPopup from './ModalPopup'
+import ModalPopup from './ModalPopup';
 // import FormGroup from 'forms/FormGroup'
-import FormButton from 'forms/FormButton'
-import Menu from 'elements/Menu'
+import FormButton from 'forms/FormButton';
+import Menu from 'elements/Menu';
 
 // Demo styles for cosmos engine
-import 'demo.pcss'
+import 'demo.pcss';
 
-import './ModalPopup.fixture.pcss'
+import './ModalPopup.fixture.pcss';
 
 // export const DemoWrapper = FormGroup // ({ children }) => {
 
 const ModalPopupControl = (props) => {
-  const { onClick } = props
+  const { onClick } = props;
   // console.log('DemoModalPopupControl:', props)
   // debugger
   return (
     <div className="DemoModalPopupControl" onClick={onClick}>
       DemoModalPopupControl
     </div>
-  )
-}
+  );
+};
 
 const ModalPopupContent = () => {
   return (
@@ -37,30 +37,30 @@ const ModalPopupContent = () => {
         DemoModalPopupContent Extra long text line for wrapping tests
       </div>
     </div>
-  )
-}
+  );
+};
 
-const popupControlEl = <ModalPopupControl />
-const popupContentEl = <ModalPopupContent />
+const popupControlEl = <ModalPopupControl />;
+const popupContentEl = <ModalPopupContent />;
 
 const menuOnChange = ({ checked, value }) => { // `value` passed only for `singleChoice` mode, `checked` is array
-  console.log('ModalPopup.fixture: menuOnChange', { checked, value })
+  console.log('ModalPopup.fixture: menuOnChange', { checked, value });
   // debugger
-}
+};
 const menuOnClick = ({ value }) => {
-  console.log('ModalPopup.fixture: menuOnClick', { value })
+  console.log('ModalPopup.fixture: menuOnClick', { value });
   // debugger
   // cbHideStopper && cbHideStopper()
-}
+};
 const buttonOnClick = ({ show }) => {
-  console.log('ModalPopup.fixture: buttonOnClick', { show })
+  console.log('ModalPopup.fixture: buttonOnClick', { show });
   // debugger
-}
+};
 
 const demoOptions = [
   { val: 1, text: 'Swimming' },
   { val: 2, text: 'Skiing' },
-]
+];
 const demoMenu = (
   <Menu
     checkable={true}
@@ -70,7 +70,7 @@ const demoMenu = (
   >
     {demoOptions}
   </Menu>
-)
+);
 
 const simple = (
   <div className="simpleContainer">
@@ -83,7 +83,7 @@ const simple = (
       popupContent={popupContentEl}
     />
   </div>
-)
+);
 
 const withMenu = (
   <ModalPopup
@@ -91,7 +91,7 @@ const withMenu = (
     popupControl={<FormButton icon="faChevronRight" rightIcon theme="primary" variation="popupControl" text="withMenu" />}
     popupContent={demoMenu}
   />
-)
+);
 
 const stayOpenAfterItemClick = (
   <ModalPopup
@@ -102,10 +102,10 @@ const stayOpenAfterItemClick = (
     closeOnClickOutside={true}
     fullWidth
   />
-)
+);
 
 export default {
   simple,
   withMenu,
   stayOpenAfterItemClick,
-}
+};

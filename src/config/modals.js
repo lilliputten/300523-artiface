@@ -15,11 +15,11 @@ const modalsConfig = { // Common-used app variables...
 
   isInited: false,
 
-}
+};
 
-modalsConfig._initPromiseResolve = null
+modalsConfig._initPromiseResolve = null;
 modalsConfig.initPromise = new Promise(function(resolve) {
-  modalsConfig._initPromiseResolve = resolve
-})
+  modalsConfig._initPromiseResolve = resolve;
+});
 
-module.exports = modalsConfig
+module.exports = modalsConfig;

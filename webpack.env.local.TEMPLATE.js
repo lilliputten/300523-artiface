@@ -7,4 +7,4 @@ module.exports = {
   DEV_DEBUG: true, // Extra debug level (on developers' machine)
   // LIBRARY: true, // Build library not demo
 
-}
+};

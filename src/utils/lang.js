@@ -4,20 +4,20 @@
  *  @changed 2021.01.11, 20:14
  */
 
-import config from 'config'
+import config from 'config';
 
 export const setLang = (lang) => {
   // console.log('WebUiCore:utils:lang:setLang', lang)
   // debugger
-  config.app.lang = lang
-}
+  config.app.lang = lang;
+};
 export const getLang = () => {
-  return config.app.lang
-}
+  return config.app.lang;
+};
 export const getCommonLangText = (id, defaultText, propsLang) => {
-  const lang = propsLang || getLang()
-  const text = lang && lang.components && lang.components.common && lang.components.common[id]
+  const lang = propsLang || getLang();
+  const text = lang && lang.components && lang.components.common && lang.components.common[id];
   // console.log('WebUiCore:utils:lang:getCommonLangText', id, lang)
   // debugger
-  return (text != null) ? text : (defaultText || id)
-}
+  return (text != null) ? text : (defaultText || id);
+};

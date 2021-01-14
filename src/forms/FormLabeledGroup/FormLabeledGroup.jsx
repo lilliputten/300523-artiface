@@ -4,11 +4,11 @@
  *  @changed 2020.12.10, 16:20
  */
 
-import React from 'react'
+import React from 'react';
 // import { cn } from 'utils/configure'
 
-import FormGroup from '../FormGroup'
-import FormLabel from '../FormLabel'
+import FormGroup from '../FormGroup';
+import FormLabel from '../FormLabel';
 
 // import './FormLabeledGroup.pcss'
 
@@ -28,7 +28,7 @@ const FormLabeledGroup = (props) => /** @lends @FormLabeledGroup.prototype */ {
     text,
     flow,
     // ...props
-  } = props
+  } = props;
   // const thisClassName = cnFormLabeledGroup({ flow, full })
   return (
     <FormGroup
@@ -48,7 +48,7 @@ const FormLabeledGroup = (props) => /** @lends @FormLabeledGroup.prototype */ {
       {children}
     </FormGroup>
 
-  )
-}
+  );
+};
 
-export default FormLabeledGroup
+export default FormLabeledGroup;

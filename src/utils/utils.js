@@ -5,7 +5,7 @@
  */
 
 // export * from './configure'
-export * as configure from './configure'
-export * as domUtils from './domUtils'
-export * as lang from './lang'
-export * as strings from './strings'
+export * as configure from './configure';
+export * as domUtils from './domUtils';
+export * as lang from './lang';
+export * as strings from './strings';

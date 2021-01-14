@@ -4,9 +4,9 @@
  */
 /* eslint-disable no-console */
 
-import React from 'react'
-import Menu from './Menu'
-import MenuItem from '../MenuItem'
+import React from 'react';
+import Menu from './Menu';
+import MenuItem from '../MenuItem';
 
 // import FormButton from 'forms/FormButton'
 // import FormGroup from '../FormGroup'
@@ -16,7 +16,7 @@ import MenuItem from '../MenuItem'
 // } from '@fortawesome/free-solid-svg-icons'
 
 // Demo styles for cosmos engine
-import 'demo.pcss'
+import 'demo.pcss';
 
 // export const DemoWrapper = FormGroup // ({ children }) => {
 
@@ -24,19 +24,19 @@ import 'demo.pcss'
 const items = [
   { val: 1, text: 'Swimming' },
   { val: 2, text: 'Skiing' },
-]
+];
 const itemElems = items.map((props, i) => {
-  return i ? props : React.createElement(MenuItem, { ...props, key: props.val })
-})
+  return i ? props : React.createElement(MenuItem, { ...props, key: props.val });
+});
 
 const onChange = ({ checkedValues }) => {
-  console.log('Menu.fixture: onChange handler', checkedValues)
+  console.log('Menu.fixture: onChange handler', checkedValues);
   // debugger
-}
+};
 const onClick = ({ val }) => {
-  console.log('Menu.fixture: onClick handler', val)
+  console.log('Menu.fixture: onClick handler', val);
   // debugger
-}
+};
 
 export default {
   // simple: (
@@ -59,4 +59,4 @@ export default {
       {itemElems}
     </Menu>
   ),
-}
+};

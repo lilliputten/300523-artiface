@@ -3,14 +3,14 @@
  *  @changed 2020.10.30, 00:03
  */
 
-import React from 'react'
-import FormPasswordInput from './FormPasswordInput'
-import FormGroup from '../FormGroup'
+import React from 'react';
+import FormPasswordInput from './FormPasswordInput';
+import FormGroup from '../FormGroup';
 
 // Demo styles for cosmos engine
-import 'demo.pcss'
+import 'demo.pcss';
 
-export const DemoWrapper = FormGroup // ({ children }) => {
+export const DemoWrapper = FormGroup; // ({ children }) => {
 
 export default {
   default: <FormPasswordInput
@@ -21,4 +21,4 @@ export default {
     placeholder="Password placeholder"
     title="title"
   />,
-}
+};

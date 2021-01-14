@@ -5,13 +5,13 @@
  */
 /* eslint-disable react/jsx-max-depth */
 
-import 'es5-shim/es5-shim'
-import 'es5-shim/es5-sham'
-import 'react-app-polyfill/ie9'
-import 'react-app-polyfill/stable'
+import 'es5-shim/es5-shim';
+import 'es5-shim/es5-sham';
+import 'react-app-polyfill/ie9';
+import 'react-app-polyfill/stable';
 
-import React from 'react'
-import { render } from 'react-dom'
+import React from 'react';
+import { render } from 'react-dom';
 
 /* // UNUSED: redux
  * import { Provider } from 'react-redux'
@@ -25,13 +25,13 @@ import { render } from 'react-dom'
 
 // import Loader from 'elements/Loader'
 
-import * as demoSupport from './demoSupport'
+import * as demoSupport from './demoSupport';
 
 // Demo app styles
-import './demo.pcss'
+import './demo.pcss';
 
 // import * as build from './build'
-import WebUiCoreRoot from './build'
+import WebUiCoreRoot from './build';
 
 /* // DEBUG: Check strings module
  * import { strings } from 'utils'
@@ -62,7 +62,7 @@ import WebUiCoreRoot from './build'
  */
 
 // DEBUG: Test language internationalizing
-import { utils } from './build'
+import { utils } from './build';
 const lang = {
   components: {
     common: {
@@ -71,13 +71,13 @@ const lang = {
       loading: 'Lang: Loading',
     },
   },
-}
+};
 // Method 1: Using specified `setLang` method
 // utils.lang.setLang(lang)
 // Method 2: Using config options...
 utils.configure.setConfigOptions({
   lang,
-})
+});
 
 const fixtureComponentsList = {
 
@@ -110,29 +110,29 @@ const fixtureComponentsList = {
   // FormCheck: require('forms/FormCheck/FormCheck.fixture'),
   // FormSwitch: require('forms/FormSwitch/FormSwitch.fixture'),
 
-}
+};
 
-const findFixture = window.location.search && window.location.search.match(/\bfixture=(([^&:]+)(?::([^&]+))?)/)
+const findFixture = window.location.search && window.location.search.match(/\bfixture=(([^&:]+)(?::([^&]+))?)/);
 // const fullFixtureId = findFixture && findFixture[1]
-const fixtureId = findFixture && findFixture[2]
-const fixtureItemId = findFixture && findFixture[3]
-const fixtureModuleExports = fixtureId && fixtureComponentsList[fixtureId]
+const fixtureId = findFixture && findFixture[2];
+const fixtureItemId = findFixture && findFixture[3];
+const fixtureModuleExports = fixtureId && fixtureComponentsList[fixtureId];
 
-let content
+let content;
 
 if (fixtureModuleExports) { // Found fixture
   const {
     default: fixture,
     demoTitle = 'Demo fixture: ' + fixtureId, // fullFixtureId,
     DemoWrapper,
-  } = fixtureModuleExports
-  content = demoSupport.PlaceFixture({ fixtureId, fixture, fixtureItemId, demoTitle, DemoWrapper })
+  } = fixtureModuleExports;
+  content = demoSupport.PlaceFixture({ fixtureId, fixture, fixtureItemId, demoTitle, DemoWrapper });
 }
 else if (fixtureId) { // Fixture specified but not found!
-  content = 'Fixture for id "' + fixtureId + '" not found!'
+  content = 'Fixture for id "' + fixtureId + '" not found!';
 }
 else { // List all available fixtures to display
-  const fixtures = demoSupport.FixturesContents(fixtureComponentsList)
+  const fixtures = demoSupport.FixturesContents(fixtureComponentsList);
   content = (
     <div className="demoIndex">
       <h3 className="demoIndex-Title">Available fixtures</h3>
@@ -141,7 +141,7 @@ else { // List all available fixtures to display
       (TODO)
       <p className="demoIndex-Comment">TODO: Navigation, styles, hierarchical components structure</p>
     </div>
-  )
+  );
 }
 
 /* // Demo redux state...
@@ -177,6 +177,6 @@ const demoContent = (
       {content}
     </div>
   </WebUiCoreRoot>
-)
+);
 
-render(demoContent, document.getElementById('Root'))
+render(demoContent, document.getElementById('Root'));

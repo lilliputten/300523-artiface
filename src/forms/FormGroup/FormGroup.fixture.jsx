@@ -4,29 +4,29 @@
  */
 /* eslint-disable react/jsx-max-depth */
 
-import React from 'react'
+import React from 'react';
 
-import FormLabeledGroup from '../FormLabeledGroup'
-import FormRadio from '../FormRadio'
-import FormDelim from '../FormDelim'
+import FormLabeledGroup from '../FormLabeledGroup';
+import FormRadio from '../FormRadio';
+import FormDelim from '../FormDelim';
 
-import FormLabel from '../FormLabel'
-import FormButton from '../FormButton'
-import FormTextInput from '../FormTextInput'
-import FormPasswordInput from '../FormPasswordInput'
+import FormLabel from '../FormLabel';
+import FormButton from '../FormButton';
+import FormTextInput from '../FormTextInput';
+import FormPasswordInput from '../FormPasswordInput';
 
-import FormGroup from './FormGroup'
+import FormGroup from './FormGroup';
 
 import { // Icons (solid)...
   faCheck,
-} from '@fortawesome/free-solid-svg-icons'
+} from '@fortawesome/free-solid-svg-icons';
 
 // Demo styles for cosmos engine
-import 'demo.pcss'
+import 'demo.pcss';
 
-import './FormGroup.fixture.pcss'
+import './FormGroup.fixture.pcss';
 
-export const demoTitle = 'FormGroup component'
+export const demoTitle = 'FormGroup component';
 
 export default {
   simple: (
@@ -98,4 +98,4 @@ export default {
       </FormGroup>
     </FormGroup>
   ),
-}
+};

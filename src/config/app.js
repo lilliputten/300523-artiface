@@ -19,4 +19,4 @@ module.exports = { // Common-used app variables...
   lang: null, // i18n language texts provider (from target project) // TODO
   // Mostly using texts from `lang.components.common`
 
-}
+};

@@ -16,4 +16,4 @@ module.exports = {
   secondaryDarkColor: '#ccc',
   secondaryContrastColor: '#000',
 
-}
+};

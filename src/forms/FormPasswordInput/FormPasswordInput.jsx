@@ -4,41 +4,41 @@
  *  @changed 2020.10.30, 00:03
  */
 
-import React from 'react'
+import React from 'react';
 // import PropTypes from 'prop-types'
 // import connect from 'react-redux/es/connect/connect'
-import { cn } from 'utils/configure'
+import { cn } from 'utils/configure';
 
 // import InlineIcon from 'elements/InlineIcon'
 // import FormItemHOC from '../FormItemHOC'
-import FormTextInput from '../FormTextInput'
+import FormTextInput from '../FormTextInput';
 
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-import './FormPasswordInput.pcss'
+import './FormPasswordInput.pcss';
 
-const cnFormPasswordInput = cn('FormPasswordInput')
+const cnFormPasswordInput = cn('FormPasswordInput');
 
 class FormPasswordInput extends React.PureComponent /** @lends @FormPasswordInput.prototype */ {
 
   // Lifecycle...
 
   constructor(props) {
-    super(props)
-    const { type = 'password' } = this.props
+    super(props);
+    const { type = 'password' } = this.props;
     this.state = {
       type,
-    }
+    };
   }
 
   componentDidUpdate(prevProps/* , prevState */) {
-    const prevType = prevProps.type
-    const propsType = this.props.type
-    const stateType = this.state.type
+    const prevType = prevProps.type;
+    const propsType = this.props.type;
+    const stateType = this.state.type;
     if (prevType !== propsType && propsType !== stateType) {
       this.setState({
         type: propsType,
-      })
+      });
     }
     // else if (prevState.type !== stateType) {
     //   this.updateType(this.state)
@@ -50,19 +50,19 @@ class FormPasswordInput extends React.PureComponent /** @lends @FormPasswordInpu
   getClassName() {
     const {
       id,
-    } = this.props
+    } = this.props;
     const classList = cnFormPasswordInput({
       id,
-    }, [this.props.className])
-    return classList
+    }, [this.props.className]);
+    return classList;
   }
 
   // Event handlers...
 
   onTypeIconClick = () => {
-    const { type } = this.state
-    const setType = (type === 'password') ? 'type' : 'password'
-    this.setState({ type: setType })
+    const { type } = this.state;
+    const setType = (type === 'password') ? 'type' : 'password';
+    this.setState({ type: setType });
   }
 
   // Render...
@@ -71,9 +71,9 @@ class FormPasswordInput extends React.PureComponent /** @lends @FormPasswordInpu
 
     const {
       type,
-    } = this.state
+    } = this.state;
 
-    const icon = (type === 'password') ? 'faEyeSlash' : 'faEye'
+    const icon = (type === 'password') ? 'faEyeSlash' : 'faEye';
     return (
       <FormTextInput
         iconTitle="Show/hide password"
@@ -82,7 +82,7 @@ class FormPasswordInput extends React.PureComponent /** @lends @FormPasswordInpu
         type={type}
         icon={icon}
       />
-    )
+    );
 
   }
 
@@ -93,5 +93,5 @@ class FormPasswordInput extends React.PureComponent /** @lends @FormPasswordInpu
  *   id: PropTypes.string,
  * }
  */
-export default /* FormItemHOC({ hoverable: true, framed: true })( */ FormPasswordInput
+export default /* FormItemHOC({ hoverable: true, framed: true })( */ FormPasswordInput;
 

@@ -5,22 +5,22 @@
  *  @changed 2020.07.20, 19:07
  */
 
-import React from 'react'
+import React from 'react';
 // import connect from 'react-redux/es/connect/connect'
-import { cn } from 'utils/configure'
+import { cn } from 'utils/configure';
 
-import FormItemHOC from '../FormItemHOC'
+import FormItemHOC from '../FormItemHOC';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import './FormItemDummy.pcss'
+import './FormItemDummy.pcss';
 
-const cnFormItemDummy = cn('FormItemDummy')
+const cnFormItemDummy = cn('FormItemDummy');
 
 class FormItemDummy extends React.PureComponent /** @lends @FormItemDummy.prototype */ {
 
   constructor(props) {
-    super(props)
+    super(props);
     // const {
     //   hoverable,
     //   clickable,
@@ -33,7 +33,7 @@ class FormItemDummy extends React.PureComponent /** @lends @FormItemDummy.protot
       // clickable: (clickable != null) ? clickable : true,
       // checked,
       // framed: true,
-    }
+    };
   }
 
   static getDerivedStateFromProps(props/* , state */) { // ???
@@ -49,14 +49,14 @@ class FormItemDummy extends React.PureComponent /** @lends @FormItemDummy.protot
       // hoverable,
       // clickable,
       // checked,
-    } = props
+    } = props;
     return {
       // hoverable: (hoverable != null) ? hoverable : true,
       // clickable: (clickable != null) ? clickable : true,
       // checked,
       hasIcon: !!(hasIcon || icon),
       hasText: !onlyIcon && !!(hasText || text || children),
-    }
+    };
   }
 
   getClassName() {
@@ -71,11 +71,11 @@ class FormItemDummy extends React.PureComponent /** @lends @FormItemDummy.protot
       // checked,
       type,
       // plain,
-    } = this.props
+    } = this.props;
     const {
       hasIcon,
       hasText,
-    } = this.state
+    } = this.state;
     const classList = cnFormItemDummy({
       id,
       theme,
@@ -89,8 +89,8 @@ class FormItemDummy extends React.PureComponent /** @lends @FormItemDummy.protot
       rightIcon,
       type,
       solid: true,
-    }, [this.props.className])
-    return classList
+    }, [this.props.className]);
+    return classList;
   }
 
   // Handlers...
@@ -100,9 +100,9 @@ class FormItemDummy extends React.PureComponent /** @lends @FormItemDummy.protot
       disabled,
       onClick,
       clickable,
-    } = this.props
+    } = this.props;
     if (clickable && !disabled && onClick && typeof onClick === 'function') {
-      onClick(event)
+      onClick(event);
     }
   }
 
@@ -124,26 +124,26 @@ class FormItemDummy extends React.PureComponent /** @lends @FormItemDummy.protot
       // hasIcon,
       // hasText,
       // onClick,
-    } = this.props
+    } = this.props;
     const {
       hasIcon,
       hasText,
-    } = this.state
+    } = this.state;
 
     // Create fortawesome icon element if passed icon image (svg icon)
-    const iconImg = (icon && icon.iconName) ? <FontAwesomeIcon className={cnFormItemDummy('IconImg')} icon={icon} /> : icon
+    const iconImg = (icon && icon.iconName) ? <FontAwesomeIcon className={cnFormItemDummy('IconImg')} icon={icon} /> : icon;
     const iconElem = hasIcon && (
       <span key="Icon" className={cnFormItemDummy('Icon')}>
         {iconImg}
       </span>
-    )
+    );
 
     // Text element
     const textElem = hasText && (
       <span key="Text" className={cnFormItemDummy('Text')}>
         {text || children}
       </span>
-    )
+    );
 
     // const basicRenderProps = this.getRenderProps() // Get from props not from overrided `super`
     const renderProps = {
@@ -154,15 +154,15 @@ class FormItemDummy extends React.PureComponent /** @lends @FormItemDummy.protot
       type,
       onClick: this.onClick,
       ref: setDomRef,
-    }
+    };
 
-    const content = [ iconElem, textElem ] // children || text
+    const content = [ iconElem, textElem ]; // children || text
 
-    const tagName = tag || 'div'
-    const element = React.createElement(tagName, renderProps, content)
-    return element
+    const tagName = tag || 'div';
+    const element = React.createElement(tagName, renderProps, content);
+    return element;
   }
 
 }
 
-export default FormItemHOC(FormItemDummy)
+export default FormItemHOC(FormItemDummy);

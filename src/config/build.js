@@ -4,8 +4,8 @@
  *  @changed 2019.09.10, 14:25
  */
 
-const DEBUG = process.env.DEBUG
-const DEV_DEBUG = process.env.DEV_DEBUG
+const DEBUG = process.env.DEBUG;
+const DEV_DEBUG = process.env.DEV_DEBUG;
 
 module.exports = { // Common-used build variables...
 
@@ -18,4 +18,4 @@ module.exports = { // Common-used build variables...
   timetag: process.env.timetag,
   version: process.env.version,
 
-}
+};

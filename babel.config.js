@@ -4,7 +4,7 @@
  *  @changed 2020.05.19, 19:09
  */
 
-const srcPath = './src'
+const srcPath = './src';
 
 const srcFolders = [
   'demo',
@@ -15,7 +15,7 @@ const srcFolders = [
   'helpers',
   // 'lib',
   // 'tests',
-]
+];
 
 module.exports = {
   presets: [
@@ -38,9 +38,9 @@ module.exports = {
     ['module-resolver', { // https://github.com/tleunen/babel-plugin-module-resolver
       root: [srcPath],
       alias: srcFolders.reduce((aliases, dir) => {
-        return { ...aliases, [dir]: [srcPath + '/' + dir] }
+        return { ...aliases, [dir]: [srcPath + '/' + dir] };
       }, {}),
     }],
     ['directory-resolver', { moduleFileExtensions: ['js', 'jsx'] }], // https://github.com/mgcrea/babel-plugin-directory-resolver
   ],
-}
+};

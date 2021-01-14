@@ -4,29 +4,29 @@
  */
 /* eslint-disable react/jsx-max-depth, no-console */
 
-import React from 'react'
-import FormSelect from './FormSelect'
-import FormGroup from '../FormGroup'
-import FormLabeledGroup from '../FormLabeledGroup'
-import FormLabel from '../FormLabel'
+import React from 'react';
+import FormSelect from './FormSelect';
+import FormGroup from '../FormGroup';
+import FormLabeledGroup from '../FormLabeledGroup';
+import FormLabel from '../FormLabel';
 
 // Demo styles for cosmos engine
-import 'demo.pcss'
+import 'demo.pcss';
 
-import './FormSelect.fixture.pcss'
+import './FormSelect.fixture.pcss';
 
 // export const DemoWrapper = FormGroup // ({ children }) => {
-export const DemoWrapper = <FormGroup stack id="Wrapper" /> // ({ children }) => {
+export const DemoWrapper = <FormGroup stack id="Wrapper" />; // ({ children }) => {
 
 const demoOptions = [
   { val: 1, text: 'Ruinning' },
   { val: 2, text: 'Swimming extra long text item name string value' },
-]
+];
 
 const demoChange = ({ id, checked, value }) => {
-  console.log('demoChange', { id, checked, value })
+  console.log('demoChange', { id, checked, value });
   // debugger
-}
+};
 
 /* // Handlers used for `withFixedWrapper`
  * let popupNode
@@ -132,4 +132,4 @@ export default {
    *   </div>
    * ),
    */
-}
+};

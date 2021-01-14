@@ -5,15 +5,15 @@
  */
 /* eslint-disable react/require-default-props */
 
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from 'react';
+import PropTypes from 'prop-types';
 // import connect from 'react-redux/es/connect/connect'
-import { cn } from 'utils/configure'
+import { cn } from 'utils/configure';
 
-import FormItemHOC from '../FormItemHOC'
-import FormGroup from '../FormGroup'
+import FormItemHOC from '../FormItemHOC';
+import FormGroup from '../FormGroup';
 
-import './FormInputGroup.pcss'
+import './FormInputGroup.pcss';
 
 const classNameModifiers = [
   // Basic element properties
@@ -24,9 +24,9 @@ const classNameModifiers = [
   // 'background',
   // 'flow',
   // 'fullWidth',
-]
+];
 
-const cnFormInputGroup = cn('FormInputGroup')
+const cnFormInputGroup = cn('FormInputGroup');
 
 class FormInputGroup extends React.PureComponent /** @lends @FormInputGroup.prototype */ {
 
@@ -40,13 +40,13 @@ class FormInputGroup extends React.PureComponent /** @lends @FormInputGroup.prot
 
   getClassName() {
     const mods = classNameModifiers.reduce((mods, id) => {
-      const val = this.props[id]
+      const val = this.props[id];
       if (val != null) {
-        return { ...mods, [id]: val }
+        return { ...mods, [id]: val };
       }
-      return mods
-    }, {})
-    return cnFormInputGroup(mods, [this.props.className])
+      return mods;
+    }, {});
+    return cnFormInputGroup(mods, [this.props.className]);
   }
 
   // Render...
@@ -54,9 +54,9 @@ class FormInputGroup extends React.PureComponent /** @lends @FormInputGroup.prot
   render() {
     return (
       <FormGroup {...this.props} className={this.getClassName()} />
-    )
+    );
   }
 
 }
 
-export default FormItemHOC(FormInputGroup)
+export default FormItemHOC(FormInputGroup);
