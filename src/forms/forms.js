@@ -6,6 +6,8 @@
 
 // Form elements...
 
+export FormItemHOC from './FormItemHOC';
+
 export FormItemDummy from './FormItemDummy'; // DEBUG: Demo element
 
 export FormLabel from './FormLabel';
