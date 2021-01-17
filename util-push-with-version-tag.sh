@@ -20,5 +20,5 @@ VERSION=`cat "$VERSIONFILE"`
 echo "Create/update tag v.$VERSION..." \
   && git tag -f "v.$VERSION" \
   && git push origin -f --tags \
-  && git push github.com -f --tags \
+  && git push github -f --tags \
   && echo "OK"
