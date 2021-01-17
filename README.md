@@ -2,9 +2,9 @@
 
 ## Build info (auto-generated)
 
-- Version: 0.1.23
-- Last changes timestamp: 2021.01.15, 20:46
-- Last changes timetag: 210115-2046
+- Version: 0.2.3
+- Last changes timestamp: 2021.01.17, 20:20
+- Last changes timetag: 210117-2020
 
 ## Documents
 
@@ -44,7 +44,7 @@ The npm requirements using in final (builded) library code, contained in `depend
 - `build` (auto-generated; see `build` npm script) -- Production build.
 - `build-dev` (auto-generated; see `build-dev` npm script) -- Development build (debug & tesing only).
 - `demo-html` -- Demo html template folder.
-- `publish` (auto-initialized with publish submodule; see `publish` and `postinstall-publish-submodule` npm scripts) -- Folder for syncing with 'dist' repository (specified in `util-config*`).
+- `publish` (auto-initialized with publish submodule; see `publish` and `postinstall-publish-submodule` npm scripts) -- Folder for syncing with 'dist' branch/repository (specified in `util-config*`).
 - `src` -- Source files
 - `static-build-files` -- Static files added to the build.
 
@@ -103,31 +103,18 @@ TODO: To use external automation scripts? To use crossplatform replacements for 
 
 ### Add npm dependency:
 
-From command line:
-
-```shell
-npm i -S git+{{DIST_REPO_ADDR}} DistName
-```
-
-For example:
-
-```shell
-npm i -S http://gitlab.local/lilliputten/WebUiCoreDist/-/archive/master/WebUiCoreDist-master.tar.gz
-```
-
-Or specify directly in `package.json`:
+Specify directly in `package.json`:
 
 ```json
   "dependencies": {
-    "DistName": "git+{{DIST_REPO_ADDR}}",
+    "DistName": "{{DIST_REPO_LINK}}",
     ...
 ```
 
 For example:
 
 ```json
-    "WebUiCore": "git+ssh://git@github.com/lilliputten/WebUiCoreDist.git",
-    "WebUiCore": "http://gitlab.local/lilliputten/WebUiCoreDist/-/archive/master/WebUiCoreDist-master.tar.gz",
+    "WebUiCore": "http://192.168.10.206/lilliputten/WebUiCore/-/archive/dist.0.2.2/WebUiCore-dist.0.2.2.tar.gz",
 ```
 
 ### Update distributive to latest build using:
@@ -136,15 +123,26 @@ For example:
 npm update -S DistName
 ```
 
-### Use in js code with imports:
+### Use in js code with imports (for example):
 
 ```javascript
-import * as DistName from 'DistName' // Import code bundle
-import 'DistName/styles.css' // Import styles
-const { Hello } = DistName // Destruct specific components
-render(<Hello />, document.getElementById('root')) // Minimalistic render sample
+import WebUiCoreRoot, {
+  ModalsContainer,
+  utils as WebUiCoreUtils,
+} from 'WebUiCore';
+import webUiCoreCssMappings from 'WebUiCore/styles.css';
+WebUiCoreUtils.configure.setConfigOptions({ useCssModules: true, cssMappings: webUiCoreCssMappings });
+const App = () => (
+  <WebUiCoreRoot autoModalsContainer={false}>
+    <div className="App">
+      <PageLayout />
+      <ModalsContainer />
+    </div>
+  </WebUiCoreRoot>
+);
+render(<App />, document.getElementById('root'));
 ```
 
 <!--
- @changed 2020.11.05, 11:56
+ @changed 2021.01.17, 19:59
 -->

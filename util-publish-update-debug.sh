@@ -39,6 +39,6 @@ echo "Updating debug installation ($VERSION, $TIMESTAMP)..." && \
   cp -vRfu build/* $DEBUG_LOCATION/ && \
   echo "Updating target project version in 'package.json'..."
   cp -f $PACKAGE_JSON $PACKAGE_JSON_BAK && \
-  sed "s/\(\"WebUiCore\": \".*\)v\.\(.*\)\/WebUiCoreDist-v\.\2/\1v.$VERSION\/WebUiCoreDist-v.$VERSION/g" $PACKAGE_JSON_BAK > $PACKAGE_JSON && \
+  sed "s/\(\"WebUiCore\": \".*\)dist\.\(.*\)\/WebUiCore-dist\.\2/\1dist.$VERSION\/WebUiCore-dist.$VERSION/g" $PACKAGE_JSON_BAK > $PACKAGE_JSON && \
   rm -f $PACKAGE_JSON_BAK && \
   echo OK

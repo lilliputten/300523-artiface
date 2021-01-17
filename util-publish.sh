@@ -1,6 +1,6 @@
 #!/bin/sh
 # @desc Publish (and make if absent) dist build
-# @changed 2020.12.30, 20:07
+# @changed 2021.01.17, 20:09
 
 # Import config variables (expected variables `$DIST_REPO` and `$PUBLISH_FOLDER`)...
 # DIST_REPO="git@github.com:lilliputten/WebUiCoreDist.git"
@@ -24,13 +24,14 @@ echo "Publishing build ($VERSION, $TIMESTAMP)..."
 
 # TODO: Compare actual and previously published versions? (The git is checking for changes itself anyway.)
 
-COMMIT_TEXT="Build v$VERSION, $TIMESTAMP ($TIMETAG)"
+COMMIT_TEXT="Build dist.$VERSION, $TIMESTAMP ($TIMETAG)"
 cd "$PUBLISH_FOLDER" && \
   echo "Fetch..." && git fetch && \
   echo "Add files..." && git add . -Av && \
   echo "Commit..." && git commit -am "$COMMIT_TEXT" && \
-  echo "Create/update tag v.$VERSION..." && git tag -f -am "$COMMIT_TEXT" "v.$VERSION" && \
-  echo "Push..." && git push -f --tags && \
+  echo "Push basic branch..." && git push && \
+  echo "Create/update tag dist.$VERSION..." && git tag -f -am "$COMMIT_TEXT" "dist.$VERSION" && \
+  echo "Push tagged branch..." && git push -f --tags && \
   echo "Done" && cd ..
   # echo "Don't forget to update version for target project dependency (package.json, WebUiCore entry)"
 

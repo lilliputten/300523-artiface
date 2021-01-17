@@ -1,6 +1,6 @@
 #!/bin/sh
 # @desc Initialize publish syncing repository
-# @changed 2020.10.06, 01:52
+# @changed 2021.01.17, 19:53
 
 # NOTE: For uninstall/reinitialize publish submodule, use:
 # ```shell
@@ -23,8 +23,14 @@ if [ -d "$PUBLISH_FOLDER" ]; then
   # rm -Rf "$PUBLISH_FOLDER" .gitmodules
 fi
 
-echo "Init publish submodule with repo: $DIST_REPO ..."
+echo "Init publish submodule with $DIST_REPO ..."
 touch .gitmodules && \
   git submodule add -f "$DIST_REPO" "$PUBLISH_FOLDER" && \
   git rm --cached -f "$PUBLISH_FOLDER" .gitmodules && \
+  test ! -z "$DIST_BRANCH" && ( \
+    echo "Switch to branch '$DIST_BRANCH' ..." && \
+    cd "$PUBLISH_FOLDER" && \
+    git checkout "$DIST_BRANCH" && \
+    cd .. \
+  ) && \
   echo OK
