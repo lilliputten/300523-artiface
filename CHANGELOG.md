@@ -1,0 +1,71 @@
+# CHANGELOG
+
+- 2021.01.16, 02:59 -- Modal elements styles & input text control styles fixup.
+- 2021.01.14, 13:59 -- Globally fixed eslint rule for semicolons (required).
+- 2021.01.12, 16:06 -- Fixed (temporarily) ModalPopup, ModalWindow & ModalPortal css styles & geometry updating code.
+- 2021.01.11, 21:15 -- PD-3524: Интернационализация из target project (WebUi) внутри компонент библиотеки (WbUiCore).
+- 2021.01.11, 16:06 -- PD-3519: Version tags in format: `v.N.N.N`.
+- 2021.01.11, 13:56 -- v.0.1.19: PD-3519: Updating WebUiCore version in target project' `package.json` file.
+- 2020.12.30, 20:11 -- v.0.1.18, PD-3519: Creating & updating publish version tag for each build/publish iteration. Using version for `WebUiCore` dependency entry in `package.json` for target projects.
+- 2020.12.29, 23:53 -- v.0.1.10, Modal errors, FormGroup: noWrap mode, WebUiCoreRoot: autoModalsContainer parameter, ModalPortal/ModalWindow: setPortalNode interface method, ModalWindow Content element styles, ModalWindow error prop (rendering errors section in Content element), ModalsContainer: `usePortal` prop (render in-place or on dom tree topmost level), FormButton: trigger ActionsContext handler even onClick is not defined.
+- 2020.12.28, 04:15 -- ModalPortal: uses `config.modals.containerNode` for register/unregister of modals (eg, catching esc key only for topmost visible modal), added theme styless for wrapper, ModalWindow: fixed animations & bugless vertically centering styles, using `WebUiCoreRoot` as root app wrapper (tried to use modals context for entire components tree).
+- 2020.12.28, 01:13 -- v.0.1.8: Export default library wrapper (`WebUiCoreRoot`).
+- 2020.12.28, 00:25 -- PD-3504: Popup based on `ModalPortal` (`updateGeometry` and other updates `windowDomNode` passed from `ModalPortal`). (With extra debug logging.)
+- 2020.12.28, 23:00 -- PD-3504: ModalPortal: exported `passModalPortalProps` with list of public props, set `modalType` property with `props.type` (from Modal or Popup). (With debug logging.)
+- 2020.12.26, 23:09 -- PD-3504: ModalPortal: inplemented generic modal wrapper code, layout & styles form original `Modal`, Modal: Renamed Modal to ModalWindow.
+- 2020.12.25, 17:30 -- ModalPortal: Выделение общего (для Modal и Popup) компонента ModalPortal, отвечающего за функционирование интерактивных элементов вне общего dom-дерева приложения.
+- 2020.12.25, 00:56 -- Modal & Loader themes updated.
+- 2020.12.25, 00:33 -- Modal: prevent mouse & keyboard events on loading state.
+- 2020.12.24, 23:54 -- Added `Loader` element.
+- 2020.12.24, 21:25 -- v.0.1.7
+- 2020.12.24, 21:13 -- (DONE TODO from 2020.12.24, 04:23) Modal: Using `autoClose` prop (self-close on any action), calling `onAction` handlers on modal deactivating.
+- 2020.12.24, 20:45 -- (DONE TODO from 2020.12.24, 04:18) ActionsContext + Catching actions events from child of `actions` sub-component in Modals.
+- 2020.12.24, 19:00 -- Added ActionsContext module (provides actions context for throwing up actions event throught components tree)
+- 2020.12.24, 18:21 -- Predefined modal sizes (based on `config.css.modalSizes`: xs, sm, md, lg, xl, xxl, using prop `width`).
+- 2020.12.24, 04:31 -- Lift PopupsContainer to topmost level with `z-index`.
+- 2020.12.24, 04:17 -- PD-3504: Modal: window layout (Window, Header, Container, Content, Layout, LayoutMain, Actions), styles, blurry-less window geometry (flex-based), improved click-outside processing (catch mouseleave to cancel click waiting), correct activating on popupInited event in show:true state, firing `onCancel` event on close by click-outside, esc-press, close-button, extra logging disabled; InclineIcon theming (via `config.css.themeColors`), FormButton mods: plain, largeIcon, onlyIcon.
+- 2020.12.23, 00:43 -- PD-3504: Modals: Close-on-click-outside mechanism (closeOnClickOutside prop), close-on-esc (closeOnEscPressed prop), rendering witch active (portal activated) and show (animation triggered) states, global & internal dom events registration, generic modal/popup interface (isVisible, close, open), improved demo fixture, basic wrapper/window & animations styles. Other minor changes (FormButton inline mod, updated PropTypes, WebUiCore RootComponent).
+- 2020.12.22, 04:54 -- PD-3504: PopupsContainer dynamic container + integrated popups/modals manager + init promise & other properties (in config.popups), Modal component + show/hide animations (in progress).
+- 2020.12.21, 19:02 -- PD-3503: Using utils modules (strings, domUtils) from WebUiCore.
+- 2020.12.19, 04:20 -- FormGroup alignItems prop added.
+- 2020.12.19, 01:23 -- Added browserlist (for autoprefixer), ixed ie11 styles (PD-3500), Menu: prevent uncheck checked items for `singleChoice=forced`, FormSelect: restored popup closing for `closeOnSelect`, Popup: adjust content width for control width if fullWidth enabled, other minor changes.
+- 2020.12.18, 16:57 -- Popup: Fixed css prop names for IE11, demo for uncloseable underlaying popups.
+- 2020.12.18, 02:40 -- Popup: Updated props types list, removed state & unused methods, cleaned up code, added external methods `close`, `open` (for using in future `PopupStack`), added (restored) `onControlClick` handler processing.
+- 2020.12.18, 01:33 -- Implemented smart popup positioning algorithm (some tests required).
+- 2020.12.18, 01:33 -- Done (from TODO): 2020.12.17, 01:52 -- FormSelect/Popup: confilct between visible popup content and shrinkable control. See example `withLabeledGroup` -- Popup can be adaptive for available space only if `overflow: hidden` is specified in css; then content is clipped out and unvisible.
+- 2020.12.17, 17:28 -- Refactoring select based on portals (in progress, stage 1). See `https://github.com/tajo/react-portal`.
+- 2020.12.16, 23:50 -- Added test dependencies (jest, enzyme), fixed all linting errors/warnings.
+- 2020.12.16, 20:23 -- Menu: Updated checked items processing algorithm.
+- 2020.12.16, 16:39 -- Popup: checks for case when content must be shown above control element (unused).
+- 2020.12.15, 22:05 -- Popup: added geometry analize basic methods (in porogress), fixed click inside/outside handlers. FormItemHOC: passed `setDomRed` handlers valls up to parents.
+- 2020.12.15, 21:59 -- Added `utils/strings` module, added `utils/configure` as 'atomic' module (previously, it was only presented as spreaded module).
+- 2020.12.14, 20:14 -- FormLabel, FormItemHOC, FormGroup: Component styles & props.
+- 2020.12.14, 20:12 -- FormTextInput, FormBooleanHOC: Using combo id (from `inputId`, `id`, `name` props) for editable components.
+- 2020.12.14, 20:06 -- utils:configure: cssMapping processing classnames absent in css mappings. Eg: if not found `XXX_id_*`, but found `XXX` (mapped to `YYY`), then producing `YYY_id_*`. Same for `XXX-*`.
+- 2020.12.14, 20:05 -- InlineIcon: Use icon id prefix (in form `prefix:id`) for choose icons library (eg, `regular` for `@fortawesome/free-regular-svg-icons` etc).
+- 2020.12.11, 01:16 -- PD-3481, v.0.1.6: Using generative themes based on `config.css.themeColors` list (plus `primary`, `secondary` etc).
+- 2020.12.11, 01:16 -- Replace `style` prop with `theme` for form elements.
+- 2020.12.10, 18:45 -- Migrated FormDelim, FormSpacer, FormInputGroup, FormLabeledGroup uikit modules.
+- 2020.12.10, 18:44 -- README.migrate-from-uikit.md -- Minimal instructions fro migrating old-style `uikit` modules (in progress).
+- 2020.12.10, 18:43 -- Added FormRadio component.
+- 2020.12.10, 18:42 -- FormItemHOC: focusable modifier & dom node events.
+- 2020.12.09, 23:08 -- v.0.1.5
+- 2020.12.08, 22:15 -- PD-3476, v.0.1.4: Css-modules class name transformations. Using wrapper for `@bem-react/classname/cn()` in `utils/configure/cn()` -- `import { cn } from 'utils'`). In target project must be set configuration options: `WebUiCore.utils.setConfigOptions({ useCssModules: true, cssMappings })` where `cssMappings` is import result of `WebUiCore` webpacked css file (`import cssMappings from 'WebUiCore/styles.css'`). In progress, TODO: Replace all `cn` invokes with `cn` from `utils` submodule.
+- 2020.12.08, 13:38 -- PD-3474, v.0.1.2: Dark & plain button styles. Eslint configuration (from current `WebUi` project).
+- 2020.10.30, 00:04 -- Added `FormPasswordInput` component.
+- 2020.10.29, 22:41 -- FormTextInput: icon property, hasClear feature. Added components: `FormText`. FormItem: clickable mod, minor changes.
+- 2020.10.29, 03:14 -- `FormSelect` component, advanced `Popup`, popup-adapted `FormButton` (variation:popupControl).
+- 2020.10.27, 21:28 -- Checkable menu (multiple, single, single-mandatory modes), onClick & onChange event handlers. MenuItem: checkable,checked, withIcon, icon props.
+- 2020.10.27, 05:58 -- Menu, MenuItems: basic functional.
+- 2020.10.27, 01:00 -- Popup: basic functional.
+- 2020.10.22, 00:15 -- FormInputGroup.
+- 2020.10.21, 23:45 -- FormButtonGroup.
+- 2020.10.21, 20:45 -- FormButton styles (theme & raw colors).
+- 2020.10.20, 01:12 -- FormTextInput, FormLabel, FormGroup, FormItem: demo fixtures, fullWidth property.
+- 2020.10.07, 15:36 -- `FormTextInput`: done in general.
+- 2020.10.06, 13:39 -- v.0.1.1: Scaffolded repos on `gitlab.local` (with tag).
+- 2020.10.05, 20:38 -- v.0.0.15: Extracted `demoSupport.jsx` routines, fixture selection from url query (parameter `fixture`), added avaialble fixtures list if fixture to display is not specified, added DemoWrapper & demoTitle exportable ficture parameters for demo rendering.
+
+<!--
+ @changed 2021.01.16, 02:59
+-->
