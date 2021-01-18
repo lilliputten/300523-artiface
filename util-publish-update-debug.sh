@@ -3,7 +3,12 @@
 # @since 2020.12.08, 20:50
 # @changed 2021.01.12, 15:22
 
-TARGET_LOCATION="../WebUi"
+# TARGET_LOCATION="../WebUi"
+TARGET_LOCATION="../WebUiCoreDemo"
+if [ ! -z "$1" ]; then
+  TARGET_LOCATION="$1"
+fi
+echo "TARGET_LOCATION: $TARGET_LOCATION"
 DEBUG_LOCATION="$TARGET_LOCATION/node_modules/WebUiCore"
 PACKAGE_JSON="$TARGET_LOCATION/package.json"
 PACKAGE_JSON_BAK="${PACKAGE_JSON}.bak"
@@ -37,7 +42,7 @@ VERSION=`cat build-version.txt`
 
 echo "Updating debug installation ($VERSION, $TIMESTAMP)..." && \
   cp -vRfu build/* $DEBUG_LOCATION/ && \
-  echo "Updating target project version in 'package.json'..."
+  echo "Updating target project version in '$PACKAGE_JSON'..."
   cp -f $PACKAGE_JSON $PACKAGE_JSON_BAK && \
   sed "s/\(\"WebUiCore\": \".*\)dist\.\(.*\)\/WebUiCore-dist\.\2/\1dist.$VERSION\/WebUiCore-dist.$VERSION/g" $PACKAGE_JSON_BAK > $PACKAGE_JSON && \
   rm -f $PACKAGE_JSON_BAK && \
