@@ -156,6 +156,10 @@ class ModalPortal extends React.PureComponent /** @lends @ModalPortal.prototype 
      */
   }
 
+  componentDidMount() {
+    this.mounted = true;
+  }
+
   componentWillUnmount() {
     if (!this.unregisterGlobalHandlers) {
       const error = new Error('ModalPortal: unregisterGlobalHandlers method is undefined');
@@ -164,6 +168,7 @@ class ModalPortal extends React.PureComponent /** @lends @ModalPortal.prototype 
       throw error; // ???
     }
     this.unregisterGlobalHandlers();
+    this.mounted = false;
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -223,10 +228,12 @@ class ModalPortal extends React.PureComponent /** @lends @ModalPortal.prototype 
     if (activated) {
       // console.log('ModalPortal:deactivate', id)
       this.resolveResult(); // `resolvingResult` must be defined?
+      if (this.mounted) {
+        this.setState({ activated: false });
+      }
       if (typeof onDeactivate === 'function') {
         onDeactivate({ id });
       }
-      this.setState({ activated: false });
       config.modals.containerNode.unregisterModal(this);
     }
   }
