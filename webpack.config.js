@@ -1,6 +1,6 @@
 /** @desc Webpack configuration
  *  @since 2020.05.18, 12:00
- *  @changed 2020.12.10, 18:46
+ *  @changed 2021.01.18, 23:54
  */
 /* eslint-disable no-console */
 
@@ -32,7 +32,7 @@ module.exports = (env, argv) => {
   const isProd = !isDev; // mode === 'production'
   const useDevTool = true; // && (isDev || isDevServer) // Need server restart
   const minimizeBundles = false && isProd; // To minimize production bundles
-  const preprocessBundles = true && isProd; // To minimize production bundles
+  const preprocessBundles = false && isProd; // To minimize production bundles
   const sourceMaps = true; // !preprocessBundles // To minimize production bundles
   // const extemeUglify = false // Use mangling (WARNING: May broke some code! Don't use without testing!)
   const DEBUG = true && (isDev || isDevServer);
@@ -108,7 +108,7 @@ module.exports = (env, argv) => {
   // Build profile params...
   const buildType = isDevServer ? 'server' : isBuild ? 'build' : 'demo';
   const buildMode = isProd ? 'prod' : 'dev';
-  const buildModePostfix = isDev ? '-dev' : '';
+  const buildModePostfix = ''; // isDev ? '-dev' : '';
   const buildFolder = buildType + buildModePostfix;
   const buildPath = path.resolve(rootPath, buildFolder);
 
@@ -262,6 +262,7 @@ module.exports = (env, argv) => {
   // Stats waiting only json on output...
   const debugModes = [
     buildTag,
+    'mode:' + mode,
     // mode,
     // 'ip:' + myIP,
     isBuild && 'Dist',
@@ -284,24 +285,21 @@ module.exports = (env, argv) => {
     console.log('Building:', debugModes); // eslint-disable-line no-console
   }
 
-  const externalModules = isBuild && [
-    'react',
-    'react-dom',
-    '@bem-react/classname',
-    'es5-shim',
-    'react-app-polyfill',
-    '@fortawesome/fontawesome-free',
-    '@fortawesome/fontawesome-svg-core',
-    '@fortawesome/free-brands-svg-icons',
-    '@fortawesome/free-regular-svg-icons',
-    '@fortawesome/free-solid-svg-icons',
-    '@fortawesome/react-fontawesome',
-    // TODO...
-  ];
+  // Load external modules list from `package.json` `dependencies` entry?
+  const externalModules = isBuild && Object.keys(pkgConfig.dependencies);
+
+  const devtoolMode =
+    // 'inline-source-map'
+    // 'eval-source-map' // debugging -- 2021.01.18, 20:55 -- got error for `module.exports = require("react");`
+    'source-map' // default
+    // 'module-source-map' // ??? causes errors for `require`
+    // false // disable
+  ;
 
   return {
     mode,
-    devtool: useDevTool && 'source-map', // 'cheap-module-source-map',
+    // TODO: Use extra source-map for debug build, 'source-map` for dev-server
+    devtool: useDevTool && devtoolMode,
     entry: path.resolve(srcPath, jsEntryFile),
     performance: { hints: false },
     watch: isWatch,
@@ -341,6 +339,8 @@ module.exports = (env, argv) => {
         loader: 'babel-loader',
         options: {
           // sourceRoot: '/',
+          inputSourceMap: true,
+          sourceMaps: true,
           retainLines: true,
           cacheDirectory: true,
         },

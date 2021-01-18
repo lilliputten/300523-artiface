@@ -15,8 +15,11 @@ const cnHello = cn('Hello');
 
 const Hello = ({ greeting = 'Greeting', name = 'Name' }) => {
   const className = cnHello();
+  const str = 'Hello:DEBUG';
+  console.log(str, greeting, name);
+  debugger;
   return (
-    <div className={className}>
+    <div className={className} title={str}>
       <h1 className={cnHello('Title')}>{greeting}, {name}!</h1>
       <div className={cnHello('Image')}>
         <img src={Image} />
