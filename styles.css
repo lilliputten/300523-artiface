@@ -3699,7 +3699,7 @@ input.FormTextInput-Control:-webkit-autofill { /* Emulate input frame (hidden by
     }
       }
 
-/* Window widths (based on `config.css.modalSizes`)...*/
+/* Window widths (based on `config.css.modalSizes`: xs, sm, md, ...)...*/
 
 .ModalPortal_type_Window .ModalPortal-Window_width_xs {
             margin: 20px;
