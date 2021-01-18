@@ -356,9 +356,9 @@ module.exports = { // Common-used build variables...
   DEV_DEBUG: DEV_DEBUG,
 
   THEME: "default",
-  buildTag: "v.0.2.3-210117-2020-build-prod-default",
-  timestamp: "2021.01.17, 20:20",
-  timetag: "210117-2020",
+  buildTag: "v.0.2.3-210118-1612-build-prod-default",
+  timestamp: "2021.01.18, 16:12",
+  timetag: "210118-1612",
   version: "0.2.3" };
 
 /***/ }),
@@ -4811,6 +4811,11 @@ ModalPortal_ModalPortal = /*#__PURE__*/function (_React$PureComponent) {inherits
 
 
 
+
+
+
+
+
     function () {return _this.props.id;});defineProperty_default()(assertThisInitialized_default()(_this), "getType",
     function () {return _this.props.type;});defineProperty_default()(assertThisInitialized_default()(_this), "isVisible",
 
@@ -4843,10 +4848,12 @@ ModalPortal_ModalPortal = /*#__PURE__*/function (_React$PureComponent) {inherits
       if (activated) {
         // console.log('ModalPortal:deactivate', id)
         _this.resolveResult(); // `resolvingResult` must be defined?
+        if (_this.mounted) {
+          _this.setState({ activated: false });
+        }
         if (typeof onDeactivate === 'function') {
           onDeactivate({ id: id });
         }
-        _this.setState({ activated: false });
         config_default.a.modals.containerNode.unregisterModal(assertThisInitialized_default()(_this));
       }
     });defineProperty_default()(assertThisInitialized_default()(_this), "toggle",
@@ -5103,10 +5110,10 @@ ModalPortal_ModalPortal = /*#__PURE__*/function (_React$PureComponent) {inherits
                                                                                                                                                                                                                                                                                                                        * } = props
                                                                                                                                                                                                                                                                                                                        * console.log(modalsContainerNode)
                                                                                                                                                                                                                                                                                                                        * debugger
-                                                                                                                                                                                                                                                                                                                       */return _this;}var _proto = ModalPortal.prototype;_proto.componentWillUnmount = function componentWillUnmount() {if (!this.unregisterGlobalHandlers) {var error = new Error('ModalPortal: unregisterGlobalHandlers method is undefined');console.error(error); // eslint-disable-line no-console
+                                                                                                                                                                                                                                                                                                                       */return _this;}var _proto = ModalPortal.prototype;_proto.componentDidMount = function componentDidMount() {this.mounted = true;};_proto.componentWillUnmount = function componentWillUnmount() {if (!this.unregisterGlobalHandlers) {var error = new Error('ModalPortal: unregisterGlobalHandlers method is undefined');console.error(error); // eslint-disable-line no-console
       //DEBUG//debugger; // eslint-disable-line no-debugger
       throw error; // ???
-    }this.unregisterGlobalHandlers();};_proto.componentDidUpdate = function componentDidUpdate(prevProps, prevState) {var _this2 = this;var props = this.props;var state = this.state; // console.log('ModalPortal:componentDidUpdate', {
+    }this.unregisterGlobalHandlers();this.mounted = false;};_proto.componentDidUpdate = function componentDidUpdate(prevProps, prevState) {var _this2 = this;var props = this.props;var state = this.state; // console.log('ModalPortal:componentDidUpdate', {
     //   'props.open': props.open,
     //   'state.open': state.open,
     // })
