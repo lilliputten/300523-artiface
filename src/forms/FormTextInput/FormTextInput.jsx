@@ -8,18 +8,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
-// import connect from 'react-redux/es/connect/connect';
 import { cn } from 'utils/configure';
 
 import InlineIcon from 'elements/InlineIcon';
 import FormItemHOC from '../FormItemHOC';
 
-import {
-  withFormContext,
-  // FormContextConsumer,
-} from 'helpers/FormContext';
-
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+// import { withFormContext } from 'helpers/FormContext';
+import FormInteractiveItemHOC from 'forms/FormInteractiveItemHOC';
 
 import './FormTextInput.pcss';
 
@@ -36,6 +31,16 @@ class FormTextInput extends React.PureComponent /** @lends @FormTextInput.protot
       value,
     };
   }
+
+  /* // UNUSED: componentDidMount
+   * componentDidMount() {
+   *   const { registerKeyPressHandler } = this.props;
+   *   if (typeof registerKeyPressHandler === 'function') { // From `FormInteractiveItemHOC`
+   *     // Register callback with `FormInteractiveItemHOC`
+   *     this.interactiveKeyPressHandler && registerKeyPressHandler(this.interactiveKeyPressHandler);
+   *   }
+   * }
+   */
 
   componentDidUpdate(prevProps, prevState) {
     const prevValue = prevProps.value;
@@ -110,34 +115,59 @@ class FormTextInput extends React.PureComponent /** @lends @FormTextInput.protot
     this.setState({ value: '' });
   }
 
-  onKeyPress = (event) => {
-    var {
-      key,
-      keyCode,
-      charCode,
-    } = event;
-    const {
-      id,
-      onKeyPress,
-      onEnterPressed,
-      // onEscPressed,
-      formContextNode, // FormContext Provider
-    } = this.props;
-    const cbProps = { event, id, key, keyCode, charCode };
-    onKeyPress && onKeyPress(cbProps);
-    // @see https://keycode.info/
-    const isEnterPressed = (key === 'Enter'); // (keyCode === 13); // Enter?
-    // const isEscPressed = (key === 'Escape'); // (keyCode === 27); // Esc?
-    // console.log('FormTextInput:onKeyPress', cbProps);
-    if (isEnterPressed) {
-      if (onEnterPressed) {
-        onEnterPressed(cbProps);
-      }
-      if (formContextNode && formContextNode.onInputEnterPressed) {
-        formContextNode.onInputEnterPressed(cbProps);
-      }
-    }
-  }
+  /* // UNUSED: interactiveKeyPressHandler
+   * interactiveKeyPressHandler = (params) => {
+   *   const { isEnterPressed } = params;
+   *   const {
+   *     // id,
+   *     // onKeyPress,
+   *     onEnterPressed,
+   *     // onEscPressed,
+   *     // formContextNode, // FormContext Provider
+   *   } = this.props;
+   *   debugger;
+   *   if (isEnterPressed) {
+   *     if (onEnterPressed) {
+   *       onEnterPressed(params);
+   *     }
+   *     // if (formContextNode && formContextNode.onInputEnterPressed) {
+   *     //   formContextNode.onInputEnterPressed(params);
+   *     // }
+   *   }
+   * }
+   */
+
+  /* // UNUSED: onKeyPress -- see FormInteractiveItemHOC
+   * onKeyPress = (event) => {
+   *   var {
+   *     key,
+   *     keyCode,
+   *     charCode,
+   *   } = event;
+   *   const {
+   *     id,
+   *     onKeyPress,
+   *     onEnterPressed,
+   *     // onEscPressed,
+   *     formContextNode, // FormContext Provider
+   *   } = this.props;
+   *   const cbProps = { event, id, key, keyCode, charCode };
+   *   onKeyPress && onKeyPress(cbProps);
+   *   // @see https://keycode.info/
+   *   const isEnterPressed = (key === 'Enter'); // (keyCode === 13); // Enter?
+   *   // const isEscPressed = (key === 'Escape'); // (keyCode === 27); // Esc?
+   *   // console.log('FormTextInput:onKeyPress', cbProps);
+   *   // debugger;
+   *   if (isEnterPressed) {
+   *     if (onEnterPressed) {
+   *       onEnterPressed(cbProps);
+   *     }
+   *     if (formContextNode && formContextNode.onInputEnterPressed) {
+   *       formContextNode.onInputEnterPressed(cbProps);
+   *     }
+   *   }
+   * }
+   */
 
   onFocusIn = () => {
     this.mounted && this.setState({ focused: true });
@@ -268,7 +298,8 @@ class FormTextInput extends React.PureComponent /** @lends @FormTextInput.protot
 
 // export default FormItemHOC({ solid: true, hoverable: true, framed: true })(FormTextInput);
 export default compose(
-  withFormContext,
-  FormItemHOC({ solid: true, hoverable: true, framed: true }),
+  // withFormContext,
+  FormInteractiveItemHOC,
+  FormItemHOC({ solid: true, hoverable: true, focusable: true, framed: true }),
 )(FormTextInput);
 

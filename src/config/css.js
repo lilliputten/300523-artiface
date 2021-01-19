@@ -218,6 +218,8 @@ Object.assign(cssConfig, { // Form properties...
   formItemInnerHeight, // px
 
   formItemBorderRadius: 3, // px
+  formItemOuterGlow: 4, // px
+  formItemGlowColor: cssConfig.primaryColor, // cssConfig.neutralColor,
   formItemBorderColor: cssConfig.neutralColor,
   formItemActorColor: cssConfig.neutralDarkColor,
   formItemBgColor: '#fff',

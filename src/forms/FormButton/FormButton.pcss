@@ -6,18 +6,15 @@
 
 .FormButton {
 
-  // border: 1px solid transparent; // Hide default css frame for `button` tags (if applied)
+  // &:focus { // DEBUG
+  //   border: 2px solid red !important;
+  // }
+
+  outline: 0;
+
   padding: 0 $(formItemInnerPaddingH)px;
 
   max-width: 100%; // ??? Fit in container?
-
-  // @mixin FormItemFramed;
-  // border-width: 1px;
-  // border-style: solid;
-  // border-color: transparent;
-  // border-radius: @calc($formItemBorderRadius)px;
-
-  // @mixin debug;
 
   &, &-Text, &-Icon {
     white-space: nowrap;
@@ -41,10 +38,8 @@
   }
   &-Text {
     display: block; // ???
-    // @mixin debug green;
     overflow: hidden;
     text-overflow: ellipsis;
-    // // max-width: 100%;
   }
 
   &_hasIcon {

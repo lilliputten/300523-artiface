@@ -9,10 +9,8 @@ import { compose } from 'redux';
 import PropTypes from 'prop-types';
 // import connect from 'react-redux/es/connect/connect';
 import { cn } from 'utils/configure';
-import {
-  withActionsContext,
-  // ActionsContextConsumer,
-} from 'helpers/ActionsContext';
+import { withActionsContext } from 'helpers/ActionsContext';
+import config from 'config';
 
 import FormItemHOC from '../FormItemHOC';
 
@@ -46,8 +44,17 @@ class FormButton extends React.PureComponent /** @lends @FormButton.prototype */
     theme: PropTypes.string, // Button style (plain, default, primary, secondary, error, warn, success, info, etc -- some are in progress -- see styles file)
   }
 
-  // static defaultProps = {
-  // }
+  // Lifecycle...
+
+  constructor(props) {
+    super(props);
+    this.state = {};
+    this.mounted = true;
+  }
+
+  componentWillUnmount() {
+    this.mounted = false;
+  }
 
   // Helpers...
 
@@ -84,6 +91,7 @@ class FormButton extends React.PureComponent /** @lends @FormButton.prototype */
       type,
       variation,
     } = this.props;
+    const { active } = this.state;
     const mods = {
       // plain,
       checked,
@@ -99,6 +107,8 @@ class FormButton extends React.PureComponent /** @lends @FormButton.prototype */
       theme,
       type,
       variation,
+      // State..
+      active,
     };
     const staticMods = {
       solid: true,
@@ -132,6 +142,12 @@ class FormButton extends React.PureComponent /** @lends @FormButton.prototype */
           }
         });
       }
+      this.setState({ active: true });
+      setTimeout(() => {
+        if (this.mounted) {
+          this.setState({ active: false });
+        }
+      }, config.css.transitionTime);
     }
   }
 
@@ -193,6 +209,7 @@ class FormButton extends React.PureComponent /** @lends @FormButton.prototype */
       type,
       onClick: this.onClick,
       ref: setDomRef, // Init ref for FormItemHOC
+      tabIndex: -1,
     };
 
     const content = (

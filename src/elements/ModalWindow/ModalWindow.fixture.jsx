@@ -127,7 +127,7 @@ class WithSelect extends React.PureComponent /** @lends @ModalsContainer.prototy
   constructor(props) {
     super(props);
     this.state = {
-      open: true,
+      open: false,
       loading: true, // Use `useLoader` for ability to controlling Loader
     };
     // setTimeout(this.close, 3000)
@@ -233,7 +233,7 @@ class WithInput extends React.PureComponent /** @lends @ModalsContainer.prototyp
   constructor(props) {
     super(props);
     this.state = {
-      open: true,
+      open: false,
       value: '',
       // loading: true, // Use `useLoader` for ability to controlling Loader
     };
@@ -332,7 +332,7 @@ const simple = (
   <ModalWindow
     error={['error 1', 'error2']}
     id="simple"
-    open
+    // open
   >
     <div className="simpleContainer">
       <div className="simpleStub">simpleStub</div>

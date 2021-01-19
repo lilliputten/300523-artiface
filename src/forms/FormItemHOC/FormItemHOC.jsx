@@ -121,11 +121,14 @@ const wrapFormItemHOC = (WrappedComponent, params = {}) => class FormItem extend
       }
       if (focusable && !this.focusableInited) {
         this.focusableInited = true;
-        formItemDomRef.addEventListener('focus', this.handleFocus);
-        formItemDomRef.addEventListener('blur', this.handleBlur);
+        // formItemDomRef.addEventListener('focus', this.handleFocusIn);
+        formItemDomRef.addEventListener('focus', this.handleFocusIn);
+        formItemDomRef.addEventListener('blur', this.handleFocusOut);
+        formItemDomRef.addEventListener('focusin', this.handleFocusIn);
+        formItemDomRef.addEventListener('focusout', this.handleFocusOut);
+        // console.log('FormItemHOC:componentDidMount: focus event handlers added');
         this.focus = () => { // Focus handler
-          const domRef = this.formItemDomRef;
-          domRef && domRef.focus && domRef.focus();
+          formItemDomRef && formItemDomRef.focus && formItemDomRef.focus();
         };
       }
     }
@@ -141,8 +144,10 @@ const wrapFormItemHOC = (WrappedComponent, params = {}) => class FormItem extend
         formItemDomRef.removeEventListener('mouseout', this.handleMouseOut);
       }
       if (this.focusableInited) {
-        formItemDomRef.removeEventListener('focus', this.handleFocus);
-        formItemDomRef.removeEventListener('blur', this.handleBlur);
+        formItemDomRef.removeEventListener('focus', this.handleFocusIn);
+        formItemDomRef.removeEventListener('blur', this.handleFocusOut);
+        formItemDomRef.removeEventListener('focusin', this.handleFocusIn);
+        formItemDomRef.removeEventListener('focusout', this.handleFocusOut);
       }
     }
   }
@@ -159,18 +164,10 @@ const wrapFormItemHOC = (WrappedComponent, params = {}) => class FormItem extend
     return cnFormItem(mods, [this.props.className]);
   }
 
-  /* // For `focusable` state (TODO?)
-   * handleFocus() {
-   *   this.setState({ focused: true })
-   * }
-   * handleBlur() {
-   *   this.setState({ focused: false })
-   * }
-   */
-
   handleMouseOver = () => {
     const disabled = this.getStateOrPropOrParam('disabled');
     const hoverable = this.getStateOrPropOrParam('hoverable');
+    // console.log('FormItemHOC:handleMouseOver');
     if (hoverable && !disabled) {
       this.setState({ hovered: true });
     }
@@ -178,22 +175,25 @@ const wrapFormItemHOC = (WrappedComponent, params = {}) => class FormItem extend
   handleMouseOut = () => {
     const disabled = this.getStateOrPropOrParam('disabled');
     const hoverable = this.getStateOrPropOrParam('hoverable');
+    // console.log('FormItemHOC:handleMouseOut');
     if (hoverable && !disabled) {
       this.setState({ hovered: false });
     }
   }
 
-  handleFocus = () => {
+  handleFocusIn = () => {
     const disabled = this.getStateOrPropOrParam('disabled');
     const focusable = this.getStateOrPropOrParam('focusable');
     if (focusable && !disabled) {
+      // console.log('FormItemHOC:handleFocusIn');
       this.setState({ focused: true });
     }
   }
-  handleBlur = () => {
+  handleFocusOut = () => {
     const disabled = this.getStateOrPropOrParam('disabled');
     const focusable = this.getStateOrPropOrParam('focusable');
     if (focusable && !disabled) {
+      // console.log('FormItemHOC:handleFocusOut');
       this.setState({ focused: false });
     }
   }

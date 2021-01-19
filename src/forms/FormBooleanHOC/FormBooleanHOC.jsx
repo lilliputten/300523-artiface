@@ -1,7 +1,7 @@
 /** @module FormBooleanHOC
  *  @class FormBooleanHOC
  *  @since 2020.12.10, 22:17
- *  @changed 2020.12.10, 22:17
+ *  @changed 2021.01.19, 20:27
  */
 /* eslint-disable react/require-default-props, react/jsx-max-depth */
 
@@ -41,6 +41,11 @@ const wrapFormBooleanHOC = (WrappedComponent, params = {}) => class FormBoolean 
   componentDidMount() {
     // const { formItemRef: { current } = {} } = this
     this.afterRender();
+    const { registerKeyPressHandler } = this.props;
+    if (typeof registerKeyPressHandler === 'function') { // From `FormInteractiveItemHOC`
+      // Register callback with `FormInteractiveItemHOC`
+      registerKeyPressHandler(this.interactiveKeyPressHandler);
+    }
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -98,8 +103,18 @@ const wrapFormBooleanHOC = (WrappedComponent, params = {}) => class FormBoolean 
 
   // Events...
 
-  handleChange = ({ value }) => {
+  interactiveKeyPressHandler = (params) => {
+    const { isSpacePressed } = params;
+    if (isSpacePressed) { // Toggle state if space pressed
+      // // NOTE: State changed automatically by html input control. This code is redundant.
+      // this.handleChange();
+      // To return false for cancel furher actions processing?
+    }
+  }
+
+  handleChange = (params) => {
     this.setState(({ value: stateValue }) => {
+      let value = params && params.value;
       if (value == null) {
         value = !stateValue;
       }
@@ -109,33 +124,35 @@ const wrapFormBooleanHOC = (WrappedComponent, params = {}) => class FormBoolean 
 
   // Render...
 
-  renderInput() {
-    const {
-      id,
-      inputId,
-      name,
-      // disabled,
-      setDomRef, // From FormItemHOC
-      tabIndex, // focusable
-    } = this.props;
-    const { value } = this.state;
-    const checked = !!value;
-    const inputProps = {
-      type: 'checkbox',
-      className: cnFormBooleanHOC('Input'),
-      id: inputId || id || name,
-      name: name || inputId || id,
-      checked,
-      onChange: this.handleChange,
-      // onFocus={this.handleFocused}
-      // onBlur={this.handleUnfocused}
-      ref: setDomRef,
-      tabIndex,
-    };
-    return (
-      <input {...inputProps} />
-    );
-  }
+  /* // UNUSED: renderInput
+   * renderInput() {
+   *   const {
+   *     id,
+   *     inputId,
+   *     name,
+   *     // disabled,
+   *     setDomRef, // From FormItemHOC
+   *     tabIndex, // focusable
+   *   } = this.props;
+   *   const { value } = this.state;
+   *   const checked = !!value;
+   *   const inputProps = {
+   *     type: 'checkbox',
+   *     className: cnFormBooleanHOC('Input'),
+   *     id: inputId || id || name,
+   *     name: name || inputId || id,
+   *     checked,
+   *     onChange: this.handleChange,
+   *     // onFocus={this.handleFocused}
+   *     // onBlur={this.handleUnfocused}
+   *     ref: setDomRef,
+   *     tabIndex,
+   *   };
+   *   return (
+   *     <input {...inputProps} />
+   *   );
+   * }
+   */
 
   render() {
     const {

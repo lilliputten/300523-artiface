@@ -20,7 +20,7 @@ export const DemoWrapper = <FormGroup stack id="Wrapper" />; // ({ children }) =
 
 class WithFormContext extends React.PureComponent /** @lends @ModalsContainer.prototype */ {
   onInputEnterPressed = ({ id }) => {
-    console.log('onInputEnterPressed', id);
+    console.log('FormTextInput.fixture:onInputEnterPressed', id);
     debugger;
   }
   render() {
@@ -38,7 +38,6 @@ class WithFormContext extends React.PureComponent /** @lends @ModalsContainer.pr
     );
   }
 }
-// const WrappedWithFormContext = withFormContext(WithFormContext);
 const wrappedWithFormContext = <WithFormContext />;
 
 const simple = (

@@ -7,6 +7,8 @@ import React from 'react';
 import FormRadio from './FormRadio';
 import FormGroup from '../FormGroup';
 
+import { FormContextProvider } from 'helpers/FormContext';
+
 // Demo styles for cosmos engine
 import 'demo.pcss';
 
@@ -38,8 +40,30 @@ class DemoFormRadio extends React.PureComponent /** @lends @FormRadio.prototype 
   }
 }
 
+class WithFormContext extends React.PureComponent /** @lends @ModalsContainer.prototype */ {
+  onInputEnterPressed = ({ id }) => {
+    console.log('FormRadio.fixture:onInputEnterPressed', id);
+    debugger;
+  }
+  render() {
+    return (
+      <FormContextProvider value={this}>
+        <FormRadio
+          className="WithFormContext"
+          id="WithFormContext"
+          // onChange={this.handleChange}
+          // value={value}
+          // ref={this.setRef}
+        />
+      </FormContextProvider>
+    );
+  }
+}
+const wrappedWithFormContext = <WithFormContext />;
+
 export default {
-  default: <FormRadio className="extraButtonClass" />,
+  simple: <FormRadio className="extraButtonClass" />,
   primaryChecked: <FormRadio value={true} theme="primary" />,
   demoWithState: <DemoFormRadio />,
+  wrappedWithFormContext,
 };
