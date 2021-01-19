@@ -1,17 +1,23 @@
 /** @module FormTextInput
  *  @class FormTextInput
  *  @since 2020.10.07, 00:20
- *  @changed 2020.10.29, 23:44
+ *  @changed 2021.01.19, 16:08
  */
 /* eslint-disable react/require-default-props */
 
 import React from 'react';
 import PropTypes from 'prop-types';
-// import connect from 'react-redux/es/connect/connect'
+import { compose } from 'redux';
+// import connect from 'react-redux/es/connect/connect';
 import { cn } from 'utils/configure';
 
 import InlineIcon from 'elements/InlineIcon';
 import FormItemHOC from '../FormItemHOC';
+
+import {
+  withFormContext,
+  // FormContextConsumer,
+} from 'helpers/FormContext';
 
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
@@ -105,29 +111,44 @@ class FormTextInput extends React.PureComponent /** @lends @FormTextInput.protot
   }
 
   onKeyPress = (event) => {
-    var { keyCode } = event;
+    var {
+      key,
+      keyCode,
+      charCode,
+    } = event;
     const {
       id,
       onKeyPress,
       onEnterPressed,
       // onEscPressed,
+      formContextNode, // FormContext Provider
     } = this.props;
-    const cbProps = { event, id, keyCode };
+    const cbProps = { event, id, key, keyCode, charCode };
     onKeyPress && onKeyPress(cbProps);
-    onEnterPressed && (keyCode === 13) && onEnterPressed(cbProps); // Enter?
-    // onEscPressed && (keyCode === 27) && onEscPressed(cbProps) // Esc? Seems to not processing (in chrome at least)
+    // @see https://keycode.info/
+    const isEnterPressed = (key === 'Enter'); // (keyCode === 13); // Enter?
+    // const isEscPressed = (key === 'Escape'); // (keyCode === 27); // Esc?
+    // console.log('FormTextInput:onKeyPress', cbProps);
+    if (isEnterPressed) {
+      if (onEnterPressed) {
+        onEnterPressed(cbProps);
+      }
+      if (formContextNode && formContextNode.onInputEnterPressed) {
+        formContextNode.onInputEnterPressed(cbProps);
+      }
+    }
   }
 
   onFocusIn = () => {
     this.mounted && this.setState({ focused: true });
-    window.addEventListener('keypress', this.onKeyPress);
+    // window.addEventListener('keypress', this.onKeyPress);
     if (typeof this.props.onFocusIn === 'function') { // Propogate event if handler passed
       this.props.onFocusIn(event);
     }
   }
   onFocusOut = (event) => {
     this.mounted && this.setState({ focused: false });
-    window.removeEventListener('keypress', this.onKeyPress);
+    // window.removeEventListener('keypress', this.onKeyPress);
     if (typeof this.props.onFocusOut === 'function') { // Propogate event if handler passed
       this.props.onFocusOut(event);
     }
@@ -159,6 +180,7 @@ class FormTextInput extends React.PureComponent /** @lends @FormTextInput.protot
       placeholder: placeholder,
       ref: (domElem) => { this.inputDomElem = domElem; },
       onChange: this.handleChange,
+      onKeyPress: this.onKeyPress,
       value,
       // onFocus: this.onFocusIn,
       // onBlur: this.onFocusOut,
@@ -244,4 +266,9 @@ class FormTextInput extends React.PureComponent /** @lends @FormTextInput.protot
 
 }
 
-export default FormItemHOC({ solid: true, hoverable: true, framed: true })(FormTextInput);
+// export default FormItemHOC({ solid: true, hoverable: true, framed: true })(FormTextInput);
+export default compose(
+  withFormContext,
+  FormItemHOC({ solid: true, hoverable: true, framed: true }),
+)(FormTextInput);
+

@@ -407,14 +407,21 @@ class ModalPortal extends React.PureComponent /** @lends @ModalPortal.prototype 
   }
 
   onKeyPress = (event) => {
+    var {
+      key,
+      keyCode,
+      charCode,
+    } = event;
     const {
       id,
       onEscPressed,
       closeOnEscPressed,
       loading,
     } = this.props;
-    var { keyCode } = event;
-    const isEscPressed = (keyCode === 27);
+    // @see https://keycode.info/
+    const isEscPressed = (key === 'Escape'); // (keyCode === 27);
+    const cbProps = { event, id, key, keyCode, charCode };
+    // console.log('ModalPortal:onKeyPress', cbProps);
     if (isEscPressed && !loading) {
       const isTopmost = config.modals.containerNode.isModalTopmostVisible(this);
       // console.log('ModalPortal:onKeyPress', id, isTopmost)
@@ -425,7 +432,6 @@ class ModalPortal extends React.PureComponent /** @lends @ModalPortal.prototype 
           this.close();
         }
         if (typeof onEscPressed === 'function') {
-          const cbProps = { event, id, keyCode };
           onEscPressed(cbProps);
         }
       }

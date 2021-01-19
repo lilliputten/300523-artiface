@@ -1,6 +1,6 @@
 /** @module FormTextInput.fixture
  *  @since 2020.10.07, 00:20
- *  @changed 2020.10.29, 23:44
+ *  @changed 2021.01.19, 16:08
  */
 
 import React from 'react';
@@ -13,50 +13,87 @@ import 'demo.pcss';
 
 import './FormTextInput.fixture.pcss';
 
+import { FormContextProvider } from 'helpers/FormContext';
+
 // export const DemoWrapper = FormGroup // ({ children }) => {
 export const DemoWrapper = <FormGroup stack id="Wrapper" />; // ({ children }) => {
 
-export default {
-  default: <FormTextInput
+class WithFormContext extends React.PureComponent /** @lends @ModalsContainer.prototype */ {
+  onInputEnterPressed = ({ id }) => {
+    console.log('onInputEnterPressed', id);
+    debugger;
+  }
+  render() {
+    return (
+      <FormContextProvider value={this}>
+        <FormTextInput
+          className="WithFormContext"
+          type="text"
+          id="WithFormContext"
+          value="With Form Context"
+          placeholder="placeholder"
+          title="title"
+        />
+      </FormContextProvider>
+    );
+  }
+}
+// const WrappedWithFormContext = withFormContext(WithFormContext);
+const wrappedWithFormContext = <WithFormContext />;
+
+const simple = (
+  <FormTextInput
     className="addClassName"
     type="text"
     name="name"
-    id="defaultInput"
-    inputId="defaultInputControl"
+    id="simpleInput"
+    inputId="simpleInputControl"
     value="text value"
     placeholder="placeholder"
     title="title"
     hasClear
     fullWidth
     /*
-    defaultValue="defaultValue"
+    simpleValue="simpleValue"
     onChange={this.onLimitChange}
     onFocusOut={this.validateValues}
     disabled={false}
     */
-  />,
-  withIcon: <FormTextInput
+  />
+);
+const withIcon = (
+  <FormTextInput
     icon="faEye"
     iconTitle="Show value"
-  />,
-  fullWidth: <FormTextInput
+  />
+);
+const fullWidth = (
+  <FormTextInput
     type="text"
     name="name"
     id="fullWidthInput"
     fullWidth
-  />,
-  withLabel: (
-    <FormGroup flow fullWidth>
-      <FormLabel htmlFor="testId" title="Label title">Label</FormLabel>
-      <FormTextInput
-        className="addClassName"
-        type="text"
-        name="testName"
-        inputId="testId"
-        placeholder="Input placeholder"
-        title="Input title"
-        fullWidth
-      />
-    </FormGroup>
-  ),
+  />
+);
+const withLabel = (
+  <FormGroup flow fullWidth>
+    <FormLabel htmlFor="testId" title="Label title">Label</FormLabel>
+    <FormTextInput
+      className="addClassName"
+      type="text"
+      name="testName"
+      inputId="testId"
+      placeholder="Input placeholder"
+      title="Input title"
+      fullWidth
+    />
+  </FormGroup>
+);
+
+export default {
+  simple,
+  withIcon,
+  fullWidth,
+  withLabel,
+  wrappedWithFormContext,
 };

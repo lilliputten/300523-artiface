@@ -1,5 +1,6 @@
 # CHANGELOG
 
+- 2021.01.19, 16:21 -- v.0.2.5: PD-3536: Through-out enter key processing in input forms using `FormContext`.
 - 2021.01.17, 20:26 -- v.0.2.3: Using dist branch instead separated repository.
 - 2021.01.16, 02:59 -- Modal elements styles & input text control styles fixup.
 - 2021.01.14, 13:59 -- Globally fixed eslint rule for semicolons (required).
@@ -68,5 +69,5 @@
 - 2020.10.05, 20:38 -- v.0.0.15: Extracted `demoSupport.jsx` routines, fixture selection from url query (parameter `fixture`), added avaialble fixtures list if fixture to display is not specified, added DemoWrapper & demoTitle exportable ficture parameters for demo rendering.
 
 <!--
- @changed 2021.01.17, 20:28
+ @changed 2021.01.19, 16:26
 -->

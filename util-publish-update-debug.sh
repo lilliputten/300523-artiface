@@ -3,8 +3,8 @@
 # @since 2020.12.08, 20:50
 # @changed 2021.01.12, 15:22
 
-# TARGET_LOCATION="../WebUi"
-TARGET_LOCATION="../WebUiCoreDemo"
+TARGET_LOCATION="../WebUi"
+# TARGET_LOCATION="../WebUiCoreDemo"
 if [ ! -z "$1" ]; then
   TARGET_LOCATION="$1"
 fi
