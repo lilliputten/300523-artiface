@@ -5,7 +5,8 @@
   &_solid {
     height: $(formItemHeight)px;
     line-height: $(formItemHeight)px;
-    overflow: hidden;
+    /* overflow: hidden; */
+    max-width: 100%;
     text-overflow: ellipsis;
     white-space: nowrap;
   }

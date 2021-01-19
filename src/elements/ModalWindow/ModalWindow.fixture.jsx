@@ -127,8 +127,8 @@ class WithSelect extends React.PureComponent /** @lends @ModalsContainer.prototy
   constructor(props) {
     super(props);
     this.state = {
-      open: false,
-      loading: true, // Use `useLoader` for ability to controlling Loader
+      open: true,
+      loading: false, // Use `useLoader` for ability to controlling Loader
     };
     // setTimeout(this.close, 3000)
     // setInterval(this.toggle, 5000)
@@ -207,14 +207,13 @@ class WithSelect extends React.PureComponent /** @lends @ModalsContainer.prototy
           handleLoaderCancel={this.handleLoaderCancel}
         >
           <div className="simpleContainer">
-            {/*
-            simpleContainer
-            */}
             <FormSelect
               id="DemoSelect"
               title="Select title"
               text="Select"
               options={demoOptions}
+              // closeOnSelect
+              // open
             />
           </div>
         </ModalWindow>
@@ -285,7 +284,7 @@ class WithInput extends React.PureComponent /** @lends @ModalsContainer.prototyp
   }
   render() {
     const { value, open } = this.state;
-    console.log('withInput:render', value);
+    // console.log('withInput:render', value);
     const actions = this.renderActions();
     // const isElement = React.isValidElement(actions)
     return (

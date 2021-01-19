@@ -265,7 +265,7 @@ class ModalPortal extends React.PureComponent /** @lends @ModalPortal.prototype 
 
   open = () => { // External method for using in `ModalPortalStack`
     const { open: prevOpen } = this.state;
-    // console.log('ModalPortal:open', this.props.id, prevOpen)
+    // console.log('ModalPortal:open', this.props.id, prevOpen);
     if (!prevOpen) {
       const open = true;
       this.resolvingResult = null; // Reset resolving action
@@ -449,7 +449,8 @@ class ModalPortal extends React.PureComponent /** @lends @ModalPortal.prototype 
   }
   startOutsideClickWaiting = () => { // Start waiting for mouse up on wrapper (close modal) or window (continue working)
     const { loading } = this.props;
-    if (!loading) {
+    const isTopmost = config.modals.containerNode.isModalTopmostVisible(this);
+    if (!loading && isTopmost) {
       const { globalDomNode, windowDomNode } = this;
       // console.log('ModalPortal:startOutsideClickWaiting')
       if (!this.isOutsideClickWaiting && globalDomNode && windowDomNode) { // Start waiting for
@@ -461,7 +462,7 @@ class ModalPortal extends React.PureComponent /** @lends @ModalPortal.prototype 
   }
   onOutsideClickCatched = () => { // Mouse released on wrapper --> close modal
     const { id, closeOnClickOutside, onClickOutside } = this.props;
-    // console.log('ModalPortal:onOutsideClickCatched')
+    // console.log('ModalPortal:onOutsideClickCatched', id);
     this.stopOutsideClickWaiting();
     if (closeOnClickOutside) {
       this.setResult(selfCloseActionId);

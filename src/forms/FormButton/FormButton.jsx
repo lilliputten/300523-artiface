@@ -42,6 +42,8 @@ class FormButton extends React.PureComponent /** @lends @FormButton.prototype */
     rightIcon: PropTypes.bool, // Icon placed at right side
     text: PropTypes.string, // Text content (may be passed as node children)
     theme: PropTypes.string, // Button style (plain, default, primary, secondary, error, warn, success, info, etc -- some are in progress -- see styles file)
+    // setDomRef: PropTypes.func,
+    // setNodeRef: PropTypes.func,
   }
 
   // Lifecycle...
@@ -50,6 +52,9 @@ class FormButton extends React.PureComponent /** @lends @FormButton.prototype */
     super(props);
     this.state = {};
     this.mounted = true;
+    if (props.setNodeRef) {
+      props.setNodeRef(this);
+    }
   }
 
   componentWillUnmount() {
@@ -123,6 +128,19 @@ class FormButton extends React.PureComponent /** @lends @FormButton.prototype */
   }
 
   // Handlers...
+
+  focus = () => {
+    const { formItemNode } = this.props;
+    // console.log('FormButton:focus');
+    // debugger;
+    formItemNode && formItemNode.focus && formItemNode.focus();
+  }
+  blur = () => {
+    const { formItemNode } = this.props;
+    // console.log('FormButton:focus');
+    // debugger;
+    formItemNode && formItemNode.focus && formItemNode.focus();
+  }
 
   onClick = (event) => {
     const {

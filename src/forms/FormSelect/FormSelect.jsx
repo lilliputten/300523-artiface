@@ -41,6 +41,8 @@ class FormSelect extends React.PureComponent /** @lends @FormSelect.prototype */
     placeholder: PropTypes.string,
     text: PropTypes.string,
     value: PropTypes.oneOfType([ PropTypes.string, PropTypes.number ]),
+    setDomRef: PropTypes.func,
+    // setNodeRef: PropTypes.func,
   }
 
   // Lifecycle methods...
@@ -53,6 +55,9 @@ class FormSelect extends React.PureComponent /** @lends @FormSelect.prototype */
     this.state = {
       checked: Array.isArray(checked) ? checked : value && [value] || []
     };
+    // if (props.setNodeRef) {
+    //   props.setNodeRef(this);
+    // }
   }
 
   // Helper methods...
@@ -122,7 +127,7 @@ class FormSelect extends React.PureComponent /** @lends @FormSelect.prototype */
       placeholder,
       title,
       controlButtonTheme,
-      fullWidth,
+      fullWidth = true,
       disabled,
     } = this.props;
     const buttonText = this.getItemsText() || placeholder || text;
@@ -176,6 +181,7 @@ class FormSelect extends React.PureComponent /** @lends @FormSelect.prototype */
       title,
       open,
       fullWidth,
+      setDomRef,
     } = this.props;
 
     const controlContent = this.renderControlContent();
@@ -193,6 +199,7 @@ class FormSelect extends React.PureComponent /** @lends @FormSelect.prototype */
       onControlClick: this.onControlClick,
       fullWidth,
       ref: this.setPopupRef,
+      setDomRef,
     };
 
     return (

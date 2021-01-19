@@ -173,16 +173,17 @@ class ModalPopup extends React.PureComponent /** @lends @ModalPopup.prototype */
 
   // Properties...
 
-  delayedClickTimerHandler = null
-  globalHandlersRegistered = false
-  controlDomNode = null
-  contentDomNode = null
-  geometry = {}
+  delayedClickTimerHandler = null;
+  globalHandlersRegistered = false;
+  controlNode = null;
+  controlDomNode = null;
+  contentDomNode = null;
+  geometry = {};
 
   // From ModalPortal:
-  windowDomNode = null
-  wrapperDomNode = null
-  ModalPortal = null
+  windowDomNode = null;
+  wrapperDomNode = null;
+  ModalPortal = null;
 
   // Lifecycle...
 
@@ -554,7 +555,7 @@ class ModalPopup extends React.PureComponent /** @lends @ModalPopup.prototype */
   }
 
   handleOpenState = ({ open }) => {
-    // console.log('ModalPopup:handleOpenState', open)
+    // console.log('ModalPopup:handleOpenState', open);
     this.setState({ open }, this.updateOpenOrCloseWithState); // Update own open state
     const { id, handleOpenState } = this.props;
     if (typeof handleOpenState === 'function') {
@@ -562,11 +563,13 @@ class ModalPopup extends React.PureComponent /** @lends @ModalPopup.prototype */
     }
   }
 
-  setControlRef = (domNode) => {
+  setControlNodeRef = (node) => {
+    this.controlNode = node;
+  }
+  setControlDomRef = (domNode) => {
     this.controlDomNode = domNode;
   }
-
-  setContentRef = (domNode) => {
+  setContentDomRef = (domNode) => {
     this.contentDomNode = domNode;
   }
 
@@ -579,6 +582,7 @@ class ModalPopup extends React.PureComponent /** @lends @ModalPopup.prototype */
   }
 
   handlePortalOpen = () => {
+    // console.log('ModalPopup:handlePortalOpen');
     // TODO: Register/unregister popup in `ModalPopupStack`
     // this.updateGeometry()
     this.registerGlobalHandlers();
@@ -603,7 +607,17 @@ class ModalPopup extends React.PureComponent /** @lends @ModalPopup.prototype */
     const { id } = this.props;
     const { open } = this.state;
     const nextOpen = !open;
-    // console.log('ModalPopup:onControlClick', id, nextOpen, open)
+    // console.log('ModalPopup:onControlClick', id, nextOpen, open);
+    if (nextOpen) {
+      if (this.controlNode) { // Move focus out of control element...
+        // this.controlNode.focus && this.controlNode.focus(); // Ensure focus isnt on other element (eg, selects' inner button).
+        this.controlNode.blur && this.controlNode.blur();
+      }
+      if (this.controlDomNode) { // Move focus out of control element...
+        // this.controlDomNode.focus && this.controlDomNode.focus(); // Ensure focus isnt on other element (eg, selects' inner button).
+        this.controlDomNode.blur && this.controlDomNode.blur();
+      }
+    }
     this.setState({ open: nextOpen }, this.updateOpenOrCloseWithState); // Update own open state
     // TODO: Notify `ModalModalsContainer` when popup opens for closing all other popups from same level (before first modal in popups stack). (Now user can open several popups at the same time.
     const { onControlClick } = this.props;
@@ -626,13 +640,15 @@ class ModalPopup extends React.PureComponent /** @lends @ModalPopup.prototype */
     const content = React.cloneElement(popupControl, {
       onClick: this.onControlClick,
       checked: open,
-      setDomRef: this.setControlRef,
+      // setDomRef: this.setControlDomRef,
+      // ref: this.setControlNodeRef,
+      setNodeRef: this.setControlNodeRef,
     });
 
     const renderProps = {
       id,
       className: this.getClassName({ cnCtx: cnModalPopupControl, className }),
-      ref: this.setControlRef,
+      ref: this.setControlDomRef,
     };
     return (
       <div {...renderProps}>
@@ -657,7 +673,7 @@ class ModalPopup extends React.PureComponent /** @lends @ModalPopup.prototype */
     const renderProps = {
       id,
       className: this.getClassName({ cnCtx: cnModalPopup, className }),
-      ref: this.setContentRef, // Will be used windowDomNode from ModalPortal
+      ref: this.setContentDomRef, // Will be used windowDomNode from ModalPortal
     };
     return (
       <div {...renderProps}>

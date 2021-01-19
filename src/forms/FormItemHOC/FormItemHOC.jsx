@@ -164,6 +164,21 @@ const wrapFormItemHOC = (WrappedComponent, params = {}) => class FormItem extend
     return cnFormItem(mods, [this.props.className]);
   }
 
+  // Handlers...
+
+  focus = () => {
+    const { formItemDomRef } = this;
+    // console.log('FormItem:focus');
+    // debugger;
+    formItemDomRef && formItemDomRef.focus && formItemDomRef.focus();
+  }
+  blur = () => {
+    const { formItemDomRef } = this;
+    // console.log('FormItem:focus');
+    // debugger;
+    formItemDomRef && formItemDomRef.focus && formItemDomRef.focus();
+  }
+
   handleMouseOver = () => {
     const disabled = this.getStateOrPropOrParam('disabled');
     const hoverable = this.getStateOrPropOrParam('hoverable');
@@ -215,6 +230,7 @@ const wrapFormItemHOC = (WrappedComponent, params = {}) => class FormItem extend
     const renderProps = {
       hovered,
       focused,
+      formItemNode: this,
       className: this.getClassName(),
       setDomRef: this.setDomRef, // Children dom node receiver
       // formItemDomRef: this.formItemDomRef,
