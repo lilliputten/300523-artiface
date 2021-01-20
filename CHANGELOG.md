@@ -1,6 +1,6 @@
 # CHANGELOG
 
-- 2021.01.20, 23:28 -- Interactive styles for FormRadio (and FormInteractiveItem).
+- 2021.01.20, 23:28 -- PD-3327: Interactive styles for FormRadio (and FormInteractiveItem).
 - 2021.01.20, 22:05 -- Fixed FormGroup layouting styles.
 - 2021.01.20, 20:00 -- (from TODO 2021.01.20, 00:37) FormButton: default/plain theme interactive styles.
 - 2021.01.20, 00:37 -- InputSelect: deactivate popup control element on open. Through-out blur/focus handlers. Popup: outside click handles only for topmost popups (using global `containerNode`). Demo fixtures.

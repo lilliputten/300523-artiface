@@ -430,6 +430,15 @@ label.FormLabel-Control[for] {
 
 .FormButton {
 
+  /* Override standard html button styles*/
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  border: none;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 16px;
+  font-weight: normal;
+  line-height: 1.6;
+
   /* &:focus { // DEBUG*/
   /*   border: 2px solid red !important;*/
   /* }*/
