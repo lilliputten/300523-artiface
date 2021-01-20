@@ -1,7 +1,7 @@
 /** @module FormRadio
  *  @class FormRadio
  *  @since 2020.04.02, 14:53
- *  @changed 2020.04.02, 14:53
+ *  @changed 2021.01.20, 23:28
  */
 /* eslint-disable react/require-default-props, react/jsx-max-depth */
 
@@ -16,6 +16,7 @@ import FormBooleanHOC from '../FormBooleanHOC';
 
 // import { withFormContext } from 'helpers/FormContext';
 import FormInteractiveItemHOC from 'forms/FormInteractiveItemHOC';
+// import FormFocusableItemHOC from 'forms/FormFocusableItemHOC';
 
 import './FormRadio.pcss';
 import './FormRadio-Themes.pcss';
@@ -38,66 +39,29 @@ class FormRadio extends React.PureComponent /** @lends @FormRadio.prototype */ {
 
   // Lifecycle
 
-  /* // UNUSED: componentDidMount
-   * componentDidMount() {
-   *   const { registerKeyPressHandler } = this.props;
-   *   if (typeof registerKeyPressHandler === 'function') { // From `FormInteractiveItemHOC`
-   *     // Register callback with `FormInteractiveItemHOC`
-   *     this.interactiveKeyPressHandler && registerKeyPressHandler(this.interactiveKeyPressHandler);
-   *   }
-   * }
-   */
-
   // Helper methods...
 
   getClassName() {
-    const { id, value, theme } = this.props;
+    const {
+      id,
+      value,
+      theme,
+      disabled,
+      active,
+      // focusesd,
+    } = this.props;
     const checked = !!value;
-    const mods = { id, checked, theme };
+    const mods = {
+      id,
+      checked,
+      theme,
+      disabled,
+      active,
+      // focused,
+    };
     const classList = cnFormRadio(mods, [this.props.className]);
     return classList;
   }
-
-  // Handlers...
-
-  /* // UNUSED? interactiveKeyPressHandler
-   * interactiveKeyPressHandler = (params) => {
-   *   console.log('FormRadio:interactiveKeyPressHandler', params);
-   *   debugger;
-   * }
-   */
-
-  /* // UNUSED: onKeyPress (see FormInteractiveItemHOC)
-   * onKeyPress = (event) => {
-   *   var {
-   *     key,
-   *     keyCode,
-   *     charCode,
-   *   } = event;
-   *   const {
-   *     id,
-   *     onKeyPress,
-   *     onEnterPressed,
-   *     // onEscPressed,
-   *     formContextNode, // FormContext Provider
-   *   } = this.props;
-   *   const cbProps = { event, id, key, keyCode, charCode };
-   *   onKeyPress && onKeyPress(cbProps);
-   *   // @see https://keycode.info/
-   *   const isEnterPressed = (key === 'Enter'); // (keyCode === 13); // Enter?
-   *   // const isEscPressed = (key === 'Escape'); // (keyCode === 27); // Esc?
-   *   // console.log('FormRadio:onKeyPress', cbProps);
-   *   // debugger;
-   *   if (isEnterPressed) {
-   *     if (onEnterPressed) {
-   *       onEnterPressed(cbProps);
-   *     }
-   *     if (formContextNode && formContextNode.onInputEnterPressed) {
-   *       formContextNode.onInputEnterPressed(cbProps);
-   *     }
-   *   }
-   * }
-   */
 
   // Render...
 
@@ -106,10 +70,11 @@ class FormRadio extends React.PureComponent /** @lends @FormRadio.prototype */ {
       id,
       inputId,
       name,
-      setDomRef, // From FormItemHOC
-      tabIndex, // focusable
+      // tabIndex, // focusable
       handleChange,
       value,
+      setDomRef, // From FormItemHOC
+      // setInputDomRef,
     } = this.props;
     const checked = !!value;
     const inputProps = {
@@ -120,7 +85,8 @@ class FormRadio extends React.PureComponent /** @lends @FormRadio.prototype */ {
       checked,
       onChange: handleChange,
       ref: setDomRef,
-      tabIndex,
+      // ref: setInputDomRef,
+      // tabIndex,
     };
     return (
       <input {...inputProps} />
@@ -131,6 +97,7 @@ class FormRadio extends React.PureComponent /** @lends @FormRadio.prototype */ {
     const {
       id,
       disabled,
+      // focusable,
       // setDomRef, // See input control rendering above
     } = this.props;
     const renderProps = {
@@ -161,6 +128,7 @@ class FormRadio extends React.PureComponent /** @lends @FormRadio.prototype */ {
 export default compose(
   // withFormContext,
   FormInteractiveItemHOC,
+  // FormFocusableItemHOC,
   FormItemHOC({ hoverable: true, focusable: true, framed: false }),
   FormBooleanHOC,
 )(FormRadio);

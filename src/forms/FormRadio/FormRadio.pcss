@@ -1,7 +1,7 @@
 /** @module FormRadio.styles
  *  @class FormRadio
  *  @since 2020.04.02, 14:53
- *  @changed 2020.04.02, 14:53
+ *  @changed 2021.01.20, 23:28
  */
 
 .FormRadio { // Basic geometry. For styles look for `FormRadio-Styles.pcss`
@@ -42,7 +42,7 @@
       opacity: .9;
     }
   }
-  &-Input {
+  &-Input { // Invisible control
     opacity: 0;
     cursor: pointer;
     height: $(formItemHeight)px;
@@ -51,8 +51,8 @@
     // left: 0;
     border: 0;
     margin: 0;
-    &:focus {
-      // outline: 0;
+    &:focus { // Invisible: isn't required.
+      outline: 0;
     }
   }
 }

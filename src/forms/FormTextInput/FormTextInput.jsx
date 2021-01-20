@@ -115,60 +115,6 @@ class FormTextInput extends React.PureComponent /** @lends @FormTextInput.protot
     this.setState({ value: '' });
   }
 
-  /* // UNUSED: interactiveKeyPressHandler
-   * interactiveKeyPressHandler = (params) => {
-   *   const { isEnterPressed } = params;
-   *   const {
-   *     // id,
-   *     // onKeyPress,
-   *     onEnterPressed,
-   *     // onEscPressed,
-   *     // formContextNode, // FormContext Provider
-   *   } = this.props;
-   *   debugger;
-   *   if (isEnterPressed) {
-   *     if (onEnterPressed) {
-   *       onEnterPressed(params);
-   *     }
-   *     // if (formContextNode && formContextNode.onInputEnterPressed) {
-   *     //   formContextNode.onInputEnterPressed(params);
-   *     // }
-   *   }
-   * }
-   */
-
-  /* // UNUSED: onKeyPress -- see FormInteractiveItemHOC
-   * onKeyPress = (event) => {
-   *   var {
-   *     key,
-   *     keyCode,
-   *     charCode,
-   *   } = event;
-   *   const {
-   *     id,
-   *     onKeyPress,
-   *     onEnterPressed,
-   *     // onEscPressed,
-   *     formContextNode, // FormContext Provider
-   *   } = this.props;
-   *   const cbProps = { event, id, key, keyCode, charCode };
-   *   onKeyPress && onKeyPress(cbProps);
-   *   // @see https://keycode.info/
-   *   const isEnterPressed = (key === 'Enter'); // (keyCode === 13); // Enter?
-   *   // const isEscPressed = (key === 'Escape'); // (keyCode === 27); // Esc?
-   *   // console.log('FormTextInput:onKeyPress', cbProps);
-   *   // debugger;
-   *   if (isEnterPressed) {
-   *     if (onEnterPressed) {
-   *       onEnterPressed(cbProps);
-   *     }
-   *     if (formContextNode && formContextNode.onInputEnterPressed) {
-   *       formContextNode.onInputEnterPressed(cbProps);
-   *     }
-   *   }
-   * }
-   */
-
   onFocusIn = () => {
     this.mounted && this.setState({ focused: true });
     // window.addEventListener('keypress', this.onKeyPress);

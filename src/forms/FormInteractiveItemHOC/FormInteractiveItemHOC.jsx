@@ -1,7 +1,9 @@
 /** @module FormInteractiveItemHOC
  *  @class FormInteractiveItemHOC
- *  @since 2021.01.19, 18:21
- *  @changed 2021.01.19, 20:27
+ *  @since 2021.01.20, 23:30
+ *  @changed 2021.01.20, 23:30
+ *
+ *  NOTE: Unused (functional is present in `FormFocusableItemHOC` and `FormItemHOC`.
  */
 /* eslint-disable react/require-default-props, react/jsx-max-depth, react/require-optimization */
 

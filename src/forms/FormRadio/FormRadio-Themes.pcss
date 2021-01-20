@@ -1,7 +1,7 @@
 /** @module FormRadio.styles
  *  @class FormRadio
  *  @since 2020.04.02, 14:53
- *  @changed 2020.04.02, 14:53
+ *  @changed 2021.01.20, 23:28
  */
 
 .FormRadio { // Styles. For basic geometry look for `FormRadio.pcss`
@@ -10,6 +10,7 @@
   $frameWidth: 2px;
   $hoveredFrameWidth: @calc($frameWidth + 1px);
   $focusedFrameWidth: @calc($frameWidth + 1px);
+  $activeFrameWidth: @calc($frameWidth + 2px);
 
   // Basic colors:
   $innerColor: #fff; // 'Background' color
@@ -27,7 +28,7 @@
     }
     .FormItem_hovered& {
       .FormRadio-Frame {
-        box-shadow: 0 0 0 $hoveredFrameWidth $hoveredColor;
+        box-shadow: 0 0 2px $hoveredFrameWidth $hoveredColor;
       }
       .FormRadio-Actor {
         background-color: $hoveredColor;
@@ -35,7 +36,7 @@
     }
     .FormItem_focused& {
       .FormRadio-Frame {
-        box-shadow: 0 0 0 $focusedFrameWidth $hoveredColor;
+        box-shadow: 0 0 3px $focusedFrameWidth $hoveredColor;
       }
       .FormRadio-Actor {
         background-color: $hoveredColor;
@@ -43,10 +44,17 @@
     }
     .FormItem_hovered.FormItem_focused& {
       .FormRadio-Frame {
-        box-shadow: 0 0 0 $focusedFrameWidth $focusedColor;
+        box-shadow: 0 0 3px $focusedFrameWidth $focusedColor;
       }
       .FormRadio-Actor {
         background-color: $focusedColor;
+      }
+    }
+    .FormRadio_active& {
+      &, &.FormItem_focused {
+        .FormRadio-Frame {
+          box-shadow: 0 0 3px $activeFrameWidth $hoveredColor;
+        }
       }
     }
   }

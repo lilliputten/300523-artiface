@@ -214,8 +214,8 @@ const wrapFormItemHOC = (WrappedComponent, params = {}) => class FormItem extend
   }
 
   setDomRef = (domRef) => { // Children dom node receiver
-    const { setDomRef } = this.props;
     this.formItemDomRef = domRef;
+    const { setDomRef } = this.props;
     if (typeof setDomRef === 'function') {
       setDomRef(domRef);
     }

@@ -1,15 +1,16 @@
 /** @module FormBooleanHOC
  *  @class FormBooleanHOC
  *  @since 2020.12.10, 22:17
- *  @changed 2021.01.19, 20:27
+ *  @changed 2021.01.20, 23:28
  */
 /* eslint-disable react/require-default-props, react/jsx-max-depth */
 
 import React from 'react';
 import PropTypes from 'prop-types';
 import { cn } from 'utils/configure';
+import config from 'config';
 
-const cnFormBooleanHOC = cn('FormBooleanHOC');
+const cnFormBooleanHOC = cn('FormBoolean');
 
 const wrapFormBooleanHOC = (WrappedComponent, params = {}) => class FormBoolean extends React.Component {
 
@@ -35,17 +36,26 @@ const wrapFormBooleanHOC = (WrappedComponent, params = {}) => class FormBoolean 
     this.id = props.id || params.id || props.inputId || props.name;
     this.state = {
       value,
+      active: false,
     };
   }
 
   componentDidMount() {
-    // const { formItemRef: { current } = {} } = this
-    this.afterRender();
-    const { registerKeyPressHandler } = this.props;
-    if (typeof registerKeyPressHandler === 'function') { // From `FormInteractiveItemHOC`
-      // Register callback with `FormInteractiveItemHOC`
-      registerKeyPressHandler(this.interactiveKeyPressHandler);
-    }
+    this.mounted = true;
+    // this.afterUpdate();
+    /* // UNUSED: interactiveKeyPressHandler
+     * const { registerKeyPressHandler } = this.props;
+     * if (typeof registerKeyPressHandler === 'function') { // From `FormInteractiveItemHOC`
+     *   // Register callback with `FormInteractiveItemHOC`
+     *   registerKeyPressHandler(this.interactiveKeyPressHandler);
+     * }
+     */
+    // this.addEventListeners();
+  }
+
+  componentWillUnmount() {
+    // this.removeEventListeners();
+    this.mounted = false;
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -60,7 +70,7 @@ const wrapFormBooleanHOC = (WrappedComponent, params = {}) => class FormBoolean 
     else if (stateValue !== prevState.value) { // New value from state
       this.updateValueWithState(this.state);
     }
-    this.afterRender();
+    // this.afterUpdate(); // ???
   }
 
   // Helper methods...
@@ -75,23 +85,18 @@ const wrapFormBooleanHOC = (WrappedComponent, params = {}) => class FormBoolean 
     return classList;
   }
 
-  focus() { // Invoke containing input focus method
-    // if (this.inputDomElem && typeof this.inputDomElem.focus == 'function') {
-    //   this.inputDomElem.focus()
-    // }
-  }
-
-  afterRender() { // Calling after each (including first) render
-    // // TODO: Move `focus` and `select` forwarding to `FormItem` (for `focusable` variant)?
-    // if (this.formItemRef && this.formItemRef.current) {
-    //   if (!this.formItemRef.current.focus && this.focus) {
-    //     this.formItemRef.current.focus = this.focus.bind(this)
-    //   }
-    //   if (!this.formItemRef.current.select && this.select) {
-    //     this.formItemRef.current.select = this.select.bind(this)
-    //   }
-    // }
-  }
+  /* // focus, blur -- ???
+   * focus() { // Invoke containing input focus method
+   *   if (this.inputDomElem && typeof this.inputDomElem.focus == 'function') {
+   *     this.inputDomElem.focus()
+   *   }
+   * }
+   * blur() { // Invoke containing input blur method
+   *   if (this.inputDomElem && typeof this.inputDomElem.blur == 'function') {
+   *     this.inputDomElem.blur()
+   *   }
+   * }
+   */
 
   updateValueWithState = (state) => {
     const { onChange, disabled } = this.props;
@@ -103,14 +108,15 @@ const wrapFormBooleanHOC = (WrappedComponent, params = {}) => class FormBoolean 
 
   // Events...
 
-  interactiveKeyPressHandler = (params) => {
-    const { isSpacePressed } = params;
-    if (isSpacePressed) { // Toggle state if space pressed
-      // // NOTE: State changed automatically by html input control. This code is redundant.
-      // this.handleChange();
-      // To return false for cancel furher actions processing?
-    }
-  }
+  /* // UNUSED: interactiveKeyPressHandler
+   * interactiveKeyPressHandler = (params) => { // NOTE: State changed automatically by html input control. This code is redundant.
+   *   const { isSpacePressed } = params;
+   *   if (isSpacePressed) { // Toggle state if space pressed
+   *     // this.handleChange();
+   *     // To return false for cancel furher actions processing?
+   *   }
+   * }
+   */
 
   handleChange = (params) => {
     this.setState(({ value: stateValue }) => {
@@ -118,57 +124,38 @@ const wrapFormBooleanHOC = (WrappedComponent, params = {}) => class FormBoolean 
       if (value == null) {
         value = !stateValue;
       }
-      return { value };
+      return { active: true, value };
     });
+    setTimeout(() => {
+      this.setState({ active: false });
+    }, config.css.transitionTime);
+  }
+
+  setDomRef = (inputDomElem) => {
+    this.inputDomElem = inputDomElem;
+    const { setDomRef } = this.props;
+    if (typeof setDomRef === 'function') {
+      setDomRef(inputDomElem);
+    }
   }
 
   // Render...
-
-  /* // UNUSED: renderInput
-   * renderInput() {
-   *   const {
-   *     id,
-   *     inputId,
-   *     name,
-   *     // disabled,
-   *     setDomRef, // From FormItemHOC
-   *     tabIndex, // focusable
-   *   } = this.props;
-   *   const { value } = this.state;
-   *   const checked = !!value;
-   *   const inputProps = {
-   *     type: 'checkbox',
-   *     className: cnFormBooleanHOC('Input'),
-   *     id: inputId || id || name,
-   *     name: name || inputId || id,
-   *     checked,
-   *     onChange: this.handleChange,
-   *     // onFocus={this.handleFocused}
-   *     // onBlur={this.handleUnfocused}
-   *     ref: setDomRef,
-   *     tabIndex,
-   *   };
-   *   return (
-   *     <input {...inputProps} />
-   *   );
-   * }
-   */
 
   render() {
     const {
       id,
       disabled,
     } = this.props;
-    const { value } = this.state;
+    const { active, value } = this.state;
     const renderProps = {
       id,
       className: this.getClassName(),
       disabled,
       value,
+      active,
       handleChange: this.handleChange,
-      // ref: setDomRef, // Init ref for FormItemHOC
-      // ref: this.formItemRef,
-      // tabIndex,
+      setDomRef: this.setDomRef,
+      setInputDomRef: this.setInputDomRef,
     };
     return (
       <WrappedComponent
