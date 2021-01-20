@@ -71,7 +71,8 @@
  */
 
 .FormItem {
-  display: block;
+  /* display: block; */
+  display: inline-block;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
 }
@@ -79,7 +80,8 @@
 .FormItem_solid {
     height: 32px;
     line-height: 32px;
-    overflow: hidden;
+    /* overflow: hidden; */
+    max-width: 100%;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
@@ -90,17 +92,20 @@
     cursor: pointer;
   }
 
+/* NOTE: Theming styles (especially for frame) must be specified in FormItem users (eg FormButton, FormTextInput, FormRadio etc).*/
+
 .FormItem_framed {
-    border-width: 1px;
-    border-style: solid;
+    /* @mixin FormItemFramed transparent;*/
+    /* border-width: $(formItemBorderSize)px; */
+    /* border-style: solid; */
     border-radius: 3px;
     /* border-color: $formItemBorderColor; */
     /* border-color: transparent; */
-    border-color: transparent;
-    /* @mixin FormItemFramed;*/
     /* border-color: $formItemBorderColor;*/
     /* box-shadow: inset 0 0 0 1px $formItemBorderColor;*/
   }
+
+/* border-color: $color; */
 
 .FormItem_framed .FormItem-Control {
     border-radius: 2px;
@@ -109,7 +114,7 @@
 /* background-color: $formItemBgColor;*/
 
 .FormItem_framed.FormItem_hovered {
-      border-color: rgb(184, 184, 184);
+      /* border-color: color($formItemBorderColor shade(10%));*/
       /* box-shadow: inset 0 0 0 1px color($formItemBorderColor shade(10%));*/
       /* 0 0 2px 1px color($formItemBorderColor alpha(50%)); // Outer shadow (not using due to clipping issues)*/
     }
@@ -117,7 +122,7 @@
 /* focusable:*/
 
 .FormItem_framed.FormItem_focused {
-      border-color: rgb(163, 163, 163);
+      /* border-color: color($formItemBorderColor shade(20%));*/
       /* box-shadow: inset 0 0 1px 1px color($formItemBorderColor shade(20%));*/
       /* 0 0 2px 2px color($formItemBorderColor alpha(70%)); // Outer shadow (not using due to clipping issues)*/
     }
@@ -146,7 +151,9 @@
 
 .FormItemDummy {
 
-  display: block;
+  /* display: block; */
+
+  display: inline-block;
 
   -webkit-box-sizing: border-box;
 
@@ -177,7 +184,8 @@
 .FormItemDummy_solid {
     height: 32px;
     line-height: 32px;
-    overflow: hidden;
+    /* overflow: hidden; */
+    max-width: 100%;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
@@ -422,22 +430,26 @@ label.FormLabel-Control[for] {
 
 .FormButton {
 
-  /* border: 1px solid transparent; // Hide default css frame for `button` tags (if applied)*/
+  /* &:focus { // DEBUG*/
+  /*   border: 2px solid red !important;*/
+  /* }*/
+
+  outline: 0;
+  /* overflow: hidden;*/
+
   padding: 0 8px;
 
   max-width: 100%;
 
 }
 
-/* @mixin debug;*/
+/* ??? Fit in container?*/
 
 .FormButton, .FormButton-Text, .FormButton-Icon {
     white-space: nowrap;
     position: relative;
     line-height: 30px;
   }
-
-/* border-radius: @calc($formItemBorderRadius)px;*/
 
 .FormButton-Text, .FormButton-Icon {
     display: inline-block;
@@ -451,35 +463,23 @@ label.FormLabel-Control[for] {
 
 }
 
-/* border-color: transparent;*/
-
 .FormButton.FormItem_hoverable:not(.FormItem_disabled) {
     cursor: pointer;
   }
-
-/* border-style: solid;*/
 
 .FormButton-Icon {
     color: #ccc; /* Default icon color*/
   }
 
-/* border-width: 1px;*/
-
 .FormButton-Text {
     display: block; /* ???*/
-    /* @mixin debug green;*/
     overflow: hidden;
     text-overflow: ellipsis;
-    /* // max-width: 100%;*/
   }
-
-/* @mixin FormItemFramed;*/
 
 .FormButton_hasIcon {
     min-width: 32px;
   }
-
-/* ??? Fit in container?*/
 
 .FormButton_hasText.FormButton_hasIcon .FormButton-Icon {
       position: absolute;
@@ -507,7 +507,8 @@ label.FormLabel-Control[for] {
   }
 
 .FormButton.FormItem_hovered {
-    z-index: 10; /* Lift active item up (m.b. used in button-groups? Don't forget to lift modals, popups etc.)*/
+    /* z-index: 10; // Lift active item up (m.b. used in button-groups? Don't forget to lift modals, popups etc.)*/
+    /* NOTE: Cause bug for FormSelect controller button: It displaying over ModalPopupCurtain*/
   }
 
 /** @module FormButton-Styles.styles
@@ -617,99 +618,116 @@ label.FormLabel-Control[for] {
 
 .FormButton {
 
+  -webkit-transition: background 250ms, -webkit-box-shadow 250ms;
+
+  transition: background 250ms, -webkit-box-shadow 250ms;
+
+  transition: box-shadow 250ms, background 250ms;
+
+  transition: box-shadow 250ms, background 250ms, -webkit-box-shadow 250ms;
+  /* .FormButton-Text { // Crispy animation text...*/
+  /*   transition: color $(transitionTime)ms, opacity $(transitionTime)ms;*/
+  /*   // -webkit-font-smoothing: antialised;*/
+
   /* TODO: States: `clicked`, `rightIcon`, `onlyIcon`, `largeIcon` (+large button), large sizes (`xl`, `xxl`?)*/
 
 }
 
-/* @mixin buttonStyle $bgColor, $borderColor, $iconColor, $textColor;*/
-
-.FormButton_plain .FormButton-Text,
-    .FormButton_plain .FormButton-Icon {
-      color: #000;
-    }
-
-/* $neutralDarkColor;*/
-
-.FormButton_plain .FormButton-Text {
-      opacity: .5;
-    }
-
-/* $borderColor: transparent; // $formItemBorderColor;*/
-
-.FormButton_plain .FormButton-Icon {
-      opacity: .3;
-    }
-
-/* $bgColor: transparent; // color($neutralLightColor tint(10));*/
-
-.FormButton_plain.FormItem_hovered {
-      border-color: transparent;
-    }
-
-.FormButton_plain.FormItem_hovered .FormButton-Text {
-        opacity: .8;
-      }
-
-.FormButton_plain.FormItem_hovered .FormButton-Icon {
-        opacity: .5;
-      }
-
-/* $neutralDarkColor;*/
-
-.FormButton_plain.FormButton_onDark .FormButton-Icon,
-      .FormButton_plain.FormButton_onDark .FormButton-Text {
-        color: #fff;
-      }
-
-.FormButton_theme {
-
-    /* &_error { @mixin styledButton $errorColor }*/
-    /* &_warn { @mixin styledButton $warnColor }*/
-    /* &_success { @mixin styledButton $successColor }*/
-    /* &_info { @mixin styledButton $infoColor }*/
-    /* &_confirm { @mixin styledButton $confirmColor }*/
-    /* &_select { @mixin styledButton $selectColor }*/
-    /**/
-    /* // Custom colors (see https://developer.mozilla.org/en-US/docs/Web/CSS/color_value)*/
-    /**/
-    /* // &_red { @mixin styledButton #c33 }*/
-    /* // &_orange { @mixin styledButton #f73 }*/
-    /* // &_green { @mixin styledButton #593 }*/
-    /* // &_grassGreen { @mixin styledButton #891 }*/
-    /* // &_Blue { @mixin styledButton #05b }*/
-    /* // &_lightBue { @mixin styledButton #29a }*/
-    /**/
-    /* &_maroon { @mixin styledButton #800000 }*/
-    /* &_red { @mixin styledButton #ff0000 }*/
-    /* &_purple { @mixin styledButton #800080 }*/
-    /* &_fuchsia { @mixin styledButton #ff00ff }*/
-    /* &_green { @mixin styledButton #008000 }*/
-    /* // &_lime { @mixin styledButton #00ff00 }*/
-    /* &_olive { @mixin styledButton #808000 }*/
-    /* // &_yellow { @mixin styledButton #ffff00 }*/
-    /* &_navy { @mixin styledButton #000080 }*/
-    /* &_blue { @mixin styledButton #0000ff }*/
-    /* &_teal { @mixin styledButton #008080 }*/
-    /* // &_aqua { @mixin styledButton #00ffff }*/
-    /* &_orange { @mixin styledButton #ffa500 }*/
-    /**/
-    /* &_blueviolet { @mixin styledButton #8a2be2 }*/
-    /* &_brown { @mixin styledButton #a52a2a }*/
-    /* &_cadetblue { @mixin styledButton #5f9ea0 }*/
-    /* &_darkblue { @mixin styledButton #00008b }*/
-    /* &_darkcyan { @mixin styledButton #008b8b }*/
-    /* &_darkgoldenrod { @mixin styledButton #b8860b }*/
-    /* &_darkorange { @mixin styledButton #ff8c00 }*/
-    /* &_darkorchid { @mixin styledButton #9932cc }*/
-    /* &_darkred { @mixin styledButton #8b0000 }*/
-    /* &_darkslateblue { @mixin styledButton #483d8b }*/
-    /* &_darkslategray { @mixin styledButton #2f4f4f }*/
+.FormButton .FormButton-Text,
+  .FormButton .FormButton-Icon {
+    /* transition: color $(transitionTime)ms, opacity $(transitionTime)ms;*/
+    color: #000;
+    opacity: .8;
   }
+
+.FormButton .FormButton-Icon {
+    -webkit-transition: color 250ms, opacity 250ms;
+    transition: color 250ms, opacity 250ms;
+    opacity: .4;
+  }
+
+/* }*/
+
+.FormButton.FormButton_active .FormButton-Text, .FormButton.FormItem_focused .FormButton-Text, .FormButton.FormItem_hovered .FormButton-Text {
+      opacity: 1;
+    }
+
+.FormButton.FormButton_active .FormButton-Icon, .FormButton.FormItem_focused .FormButton-Icon, .FormButton.FormItem_hovered .FormButton-Icon {
+      opacity: .6;
+    }
+
+/*   // -webkit-font-smoothing: subpixel-antialiased;*/
+
+/* $neutralDarkColor;*/
+
+.FormButton.FormButton_onDark .FormButton-Icon,
+    .FormButton.FormButton_onDark .FormButton-Text {
+      color: #fff;
+    }
+
+/*   transform: translateZ(0);*/
+
+/* color($glowColor alpha(1) shade(10));*/
+
+.FormButton_plain.FormButton_active,
+    .FormButton_plain.FormItem_focused,
+    .FormButton_plain.FormItem_hovered {
+      -webkit-box-shadow: inset 0 0 1px 1px rgb(184, 184, 184),
+    0 0 4px 1px rgba(209, 209, 209, 0.5);
+              box-shadow: inset 0 0 1px 1px rgb(184, 184, 184),
+    0 0 4px 1px rgba(209, 209, 209, 0.5);
+    }
+
+/* color($glowColor alpha(1));*/
+
+.FormButton_plain.FormButton_active,
+    .FormButton_plain.FormItem_focused {
+      -webkit-box-shadow: inset 0 0 2px 1px rgb(173, 173, 173),
+    0 0 1px 2px rgb(193, 193, 193);
+              box-shadow: inset 0 0 2px 1px rgb(173, 173, 173),
+    0 0 1px 2px rgb(193, 193, 193); /* @calc($formItemOuterGlow - 2)px;*/
+    }
+
+/* $formItemGlowColor;*/
+
+.FormButton_plain.FormButton_onDark {
+      /* $color: #fff; // $neutralDarkColor;*/
+      /* .FormButton-Icon,*/
+      /* .FormButton-Text {*/
+    }
+
+/* }*/
+
+.FormButton_plain.FormButton_onDark.FormButton_active,
+      .FormButton_plain.FormButton_onDark.FormItem_focused,
+      .FormButton_plain.FormButton_onDark.FormItem_hovered {
+        -webkit-box-shadow: inset 0 0 1px 1px rgba(184, 184, 184, 0.5),
+    0 0 4px 1px rgba(209, 209, 209, 0.2);
+                box-shadow: inset 0 0 1px 1px rgba(184, 184, 184, 0.5),
+    0 0 4px 1px rgba(209, 209, 209, 0.2);
+      }
+
+/*   color: $color;*/
+
+.FormButton_plain.FormButton_onDark.FormButton_active,
+      .FormButton_plain.FormButton_onDark.FormItem_focused {
+        -webkit-box-shadow: inset 0 0 2px 1px rgb(173, 173, 173),
+    0 0 1px 2px rgba(193, 193, 193, 0.2);
+                box-shadow: inset 0 0 2px 1px rgb(173, 173, 173),
+    0 0 1px 2px rgba(193, 193, 193, 0.2); /* @calc($formItemOuterGlow - 2)px;*/
+      }
+
+/*   // backface-visibility: hidden;*/
 
 /* ... ???*/
 
 .FormButton_theme_default {
-      border-color: #ccc;
+      /* $iconColor: $neutralTintedDarkColor;*/
+      /* border-color: $borderColor;*/
+      -webkit-box-shadow: inset 0 0 0 1px #ccc,
+    0 0 0 0 transparent;
+              box-shadow: inset 0 0 0 1px #ccc,
+    0 0 0 0 transparent;
       background-color: rgb(227, 227, 227);
     }
 
@@ -720,27 +738,46 @@ label.FormLabel-Control[for] {
       }
 
 .FormButton_theme_default .FormButton-Icon {
-        color: #aaa;
+        color: #000;
       }
 
-.FormButton_theme_default.FormItem_hovered {
-        border-color: rgb(184, 184, 184);
-        background-color: rgb(211, 211, 211);
-        /* box-shadow: inset 0 0 0 1px $hoveredBorderColor, 0 0 2px 2px color($borderColor alpha(50%));*/
-        /* .FormButton-Icon {*/
-        /*   // color: color($iconColor shade(10));*/
+/* color($glowColor alpha(1) shade(10));*/
+
+.FormButton_theme_default.FormButton_active,
+      .FormButton_theme_default.FormItem_focused,
+      .FormButton_theme_default.FormItem_hovered {
+        /* border-color: $hoveredBorderColor;*/
+        -webkit-box-shadow: inset 0 0 1px 1px rgb(184, 184, 184),
+    0 0 4px 1px rgb(209, 209, 209);
+                box-shadow: inset 0 0 1px 1px rgb(184, 184, 184),
+    0 0 4px 1px rgb(209, 209, 209);
+        background-color: rgb(209, 209, 209);
+        /* .FormButton-Icon, .FormButton-Text {*/
+        /*   opacity: .9;*/
         /* }*/
       }
 
-/* ^^^&-Icon, ^^^&-Text {*/
+/* color($glowColor alpha(1));*/
 
-.FormButton_theme_default.FormItem_hovered .FormButton-Icon, .FormButton_theme_default.FormItem_hovered .FormButton-Text {
-          opacity: .9;
-        }
+.FormButton_theme_default.FormButton_active,
+      .FormButton_theme_default.FormItem_focused {
+        -webkit-box-shadow: inset 0 0 2px 1px rgb(173, 173, 173),
+    0 0 1px 2px rgb(193, 193, 193);
+                box-shadow: inset 0 0 2px 1px rgb(173, 173, 173),
+    0 0 1px 2px rgb(193, 193, 193); /* @calc($formItemOuterGlow - 2)px;*/
+        background-color: rgb(193, 193, 193);
+      }
+
+/* $formItemGlowColor;*/
 
 .FormButton_theme_default.FormButton_onDark {
-        border-color: rgba(204, 204, 204, 0.2);
+        /* border-color: $borderColor;*/
+        -webkit-box-shadow: inset 0 0 0 1px rgba(204, 204, 204, 0.2),
+    0 0 0 0 transparent;
+                box-shadow: inset 0 0 0 1px rgba(204, 204, 204, 0.2),
+    0 0 0 0 transparent;
         background-color: rgba(227, 227, 227, 0.2);
+        /* $formItemGlowColor;*/
       }
 
 /* box-shadow: inset 0 0 0 1px $borderColor;*/
@@ -750,27 +787,41 @@ label.FormLabel-Control[for] {
       }
 
 .FormButton_theme_default.FormButton_onDark .FormButton-Icon {
-        color: #aaa;
+        color: #fff;
       }
 
-.FormButton_theme_default.FormButton_onDark.FormItem_hovered {
-        border-color: rgba(184, 184, 184, 0.2);
-        background-color: rgba(211, 211, 211, 0.2);
-        /* box-shadow: inset 0 0 0 1px $hoveredBorderColor, 0 0 2px 2px color($borderColor alpha(50%));*/
-        /* .FormButton-Icon {*/
-        /*   // color: color($iconColor shade(10));*/
+/* color($glowColor alpha(1) shade(10));*/
+
+.FormButton_theme_default.FormButton_onDark.FormButton_active,
+      .FormButton_theme_default.FormButton_onDark.FormItem_focused,
+      .FormButton_theme_default.FormButton_onDark.FormItem_hovered {
+        /* border-color: $hoveredBorderColor;*/
+        -webkit-box-shadow: inset 0 0 1px 1px rgba(184, 184, 184, 0.2),
+    0 0 4px 1px rgba(209, 209, 209, 0.2);
+                box-shadow: inset 0 0 1px 1px rgba(184, 184, 184, 0.2),
+    0 0 4px 1px rgba(209, 209, 209, 0.2);
+        background-color: rgba(209, 209, 209, 0.2);
+        /* .FormButton-Icon, .FormButton-Text {*/
+        /*   opacity: .9;*/
         /* }*/
       }
 
-/* ^^^&-Icon, ^^^&-Text {*/
+/* color($glowColor alpha(1));*/
 
-.FormButton_theme_default.FormButton_onDark.FormItem_hovered .FormButton-Icon, .FormButton_theme_default.FormButton_onDark.FormItem_hovered .FormButton-Text {
-          opacity: .9;
-        }
+.FormButton_theme_default.FormButton_onDark.FormButton_active,
+      .FormButton_theme_default.FormButton_onDark.FormItem_focused {
+        -webkit-box-shadow: inset 0 0 2px 1px rgba(173, 173, 173, 0.2),
+    0 0 1px 2px rgba(193, 193, 193, 0.2);
+                box-shadow: inset 0 0 2px 1px rgba(173, 173, 173, 0.2),
+    0 0 1px 2px rgba(193, 193, 193, 0.2); /* @calc($formItemOuterGlow - 2)px;*/
+        background-color: rgba(193, 193, 193, 0.2);
+      }
 
 /* Theme colors*/
 
-.FormButton_theme_primary { /* $bgColor: $secondaryColor;*/ /* $formItemBorderColor;*/ /* $textColor: $secondaryContrastColor;*/ border-color: rgb(0, 107, 230); background-color: #07f;}
+.FormButton_theme_primary { /* $formItemBorderColor;*/ /* color($textColor alpha(.5));*/ /* border-color: $borderColor;*/ -webkit-box-shadow: inset 0 0 0 1px rgb(0, 107, 230),
+    0 0 0 0 transparent; box-shadow: inset 0 0 0 1px rgb(0, 107, 230),
+    0 0 0 0 transparent; background-color: #07f; /* $formItemGlowColor;*/}
 
 /* box-shadow: inset 0 0 0 1px $borderColor;*/
 
@@ -779,27 +830,41 @@ label.FormLabel-Control[for] {
       }
 
 .FormButton_theme_primary .FormButton-Icon {
-        color: rgba(255, 255, 255, 0.5);
+        color: #fff;
       }
 
-.FormButton_theme_primary.FormItem_hovered {
-        border-color: rgb(0, 96, 207);
-        background-color: rgb(0, 111, 237);
-        /* box-shadow: inset 0 0 0 1px $hoveredBorderColor, 0 0 2px 2px color($borderColor alpha(50%));*/
-        /* .FormButton-Icon {*/
-        /*   // color: color($iconColor shade(10));*/
+/* color($glowColor alpha(1) shade(10));*/
+
+.FormButton_theme_primary.FormButton_active,
+      .FormButton_theme_primary.FormItem_focused,
+      .FormButton_theme_primary.FormItem_hovered {
+        /* border-color: $hoveredBorderColor;*/
+        -webkit-box-shadow: inset 0 0 1px 1px rgb(0, 96, 207),
+    0 0 4px 1px rgb(0, 109, 235);
+                box-shadow: inset 0 0 1px 1px rgb(0, 96, 207),
+    0 0 4px 1px rgb(0, 109, 235);
+        background-color: rgb(0, 109, 235);
+        /* .FormButton-Icon, .FormButton-Text {*/
+        /*   opacity: .9;*/
         /* }*/
       }
 
-/* ^^^&-Icon, ^^^&-Text {*/
+/* color($glowColor alpha(1));*/
 
-.FormButton_theme_primary.FormItem_hovered .FormButton-Icon, .FormButton_theme_primary.FormItem_hovered .FormButton-Text {
-          opacity: .9;
-        }
+.FormButton_theme_primary.FormButton_active,
+      .FormButton_theme_primary.FormItem_focused {
+        -webkit-box-shadow: inset 0 0 2px 1px rgb(0, 91, 196),
+    0 0 1px 2px rgb(0, 101, 217);
+                box-shadow: inset 0 0 2px 1px rgb(0, 91, 196),
+    0 0 1px 2px rgb(0, 101, 217); /* @calc($formItemOuterGlow - 2)px;*/
+        background-color: rgb(0, 101, 217);
+      }
 
-/* }*/
+/* @define-mixin styledDarkButton $bgColor, $textColor: $specialContrastColor {*/
 
-.FormButton_theme_secondary { /* $bgColor: $secondaryColor;*/ /* $formItemBorderColor;*/ /* $textColor: $secondaryContrastColor;*/ border-color: rgb(92, 107, 107); background-color: #677;}
+.FormButton_theme_secondary { /* $formItemBorderColor;*/ /* color($textColor alpha(.5));*/ /* border-color: $borderColor;*/ -webkit-box-shadow: inset 0 0 0 1px rgb(92, 107, 107),
+    0 0 0 0 transparent; box-shadow: inset 0 0 0 1px rgb(92, 107, 107),
+    0 0 0 0 transparent; background-color: #677; /* $formItemGlowColor;*/}
 
 /* box-shadow: inset 0 0 0 1px $borderColor;*/
 
@@ -808,27 +873,41 @@ label.FormLabel-Control[for] {
       }
 
 .FormButton_theme_secondary .FormButton-Icon {
-        color: rgba(255, 255, 255, 0.5);
+        color: #fff;
       }
 
-.FormButton_theme_secondary.FormItem_hovered {
-        border-color: rgb(83, 96, 96);
-        background-color: rgb(95, 111, 111);
-        /* box-shadow: inset 0 0 0 1px $hoveredBorderColor, 0 0 2px 2px color($borderColor alpha(50%));*/
-        /* .FormButton-Icon {*/
-        /*   // color: color($iconColor shade(10));*/
+/* color($glowColor alpha(1) shade(10));*/
+
+.FormButton_theme_secondary.FormButton_active,
+      .FormButton_theme_secondary.FormItem_focused,
+      .FormButton_theme_secondary.FormItem_hovered {
+        /* border-color: $hoveredBorderColor;*/
+        -webkit-box-shadow: inset 0 0 1px 1px rgb(83, 96, 96),
+    0 0 4px 1px rgb(94, 109, 109);
+                box-shadow: inset 0 0 1px 1px rgb(83, 96, 96),
+    0 0 4px 1px rgb(94, 109, 109);
+        background-color: rgb(94, 109, 109);
+        /* .FormButton-Icon, .FormButton-Text {*/
+        /*   opacity: .9;*/
         /* }*/
       }
 
-/* ^^^&-Icon, ^^^&-Text {*/
+/* color($glowColor alpha(1));*/
 
-.FormButton_theme_secondary.FormItem_hovered .FormButton-Icon, .FormButton_theme_secondary.FormItem_hovered .FormButton-Text {
-          opacity: .9;
-        }
+.FormButton_theme_secondary.FormButton_active,
+      .FormButton_theme_secondary.FormItem_focused {
+        -webkit-box-shadow: inset 0 0 2px 1px rgb(78, 91, 91),
+    0 0 1px 2px rgb(87, 101, 101);
+                box-shadow: inset 0 0 2px 1px rgb(78, 91, 91),
+    0 0 1px 2px rgb(87, 101, 101); /* @calc($formItemOuterGlow - 2)px;*/
+        background-color: rgb(87, 101, 101);
+      }
 
 /* Theme colors...*/
 
-.FormButton_theme_error { /* $bgColor: $secondaryColor;*/ /* $formItemBorderColor;*/ /* $textColor: $secondaryContrastColor;*/ border-color: rgb(184, 46, 46); background-color: #c33;}
+.FormButton_theme_error { /* $formItemBorderColor;*/ /* color($textColor alpha(.5));*/ /* border-color: $borderColor;*/ -webkit-box-shadow: inset 0 0 0 1px rgb(184, 46, 46),
+    0 0 0 0 transparent; box-shadow: inset 0 0 0 1px rgb(184, 46, 46),
+    0 0 0 0 transparent; background-color: #c33; /* $formItemGlowColor;*/}
 
 /* box-shadow: inset 0 0 0 1px $borderColor;*/
 
@@ -837,27 +916,41 @@ label.FormLabel-Control[for] {
       }
 
 .FormButton_theme_error .FormButton-Icon {
-        color: rgba(255, 255, 255, 0.5);
+        color: #fff;
       }
 
-.FormButton_theme_error.FormItem_hovered {
-        border-color: rgb(166, 41, 41);
-        background-color: rgb(190, 47, 47);
-        /* box-shadow: inset 0 0 0 1px $hoveredBorderColor, 0 0 2px 2px color($borderColor alpha(50%));*/
-        /* .FormButton-Icon {*/
-        /*   // color: color($iconColor shade(10));*/
+/* color($glowColor alpha(1) shade(10));*/
+
+.FormButton_theme_error.FormButton_active,
+      .FormButton_theme_error.FormItem_focused,
+      .FormButton_theme_error.FormItem_hovered {
+        /* border-color: $hoveredBorderColor;*/
+        -webkit-box-shadow: inset 0 0 1px 1px rgb(166, 41, 41),
+    0 0 4px 1px rgb(188, 47, 47);
+                box-shadow: inset 0 0 1px 1px rgb(166, 41, 41),
+    0 0 4px 1px rgb(188, 47, 47);
+        background-color: rgb(188, 47, 47);
+        /* .FormButton-Icon, .FormButton-Text {*/
+        /*   opacity: .9;*/
         /* }*/
       }
 
-/* ^^^&-Icon, ^^^&-Text {*/
+/* color($glowColor alpha(1));*/
 
-.FormButton_theme_error.FormItem_hovered .FormButton-Icon, .FormButton_theme_error.FormItem_hovered .FormButton-Text {
-          opacity: .9;
-        }
+.FormButton_theme_error.FormButton_active,
+      .FormButton_theme_error.FormItem_focused {
+        -webkit-box-shadow: inset 0 0 2px 1px rgb(156, 39, 39),
+    0 0 1px 2px rgb(173, 43, 43);
+                box-shadow: inset 0 0 2px 1px rgb(156, 39, 39),
+    0 0 1px 2px rgb(173, 43, 43); /* @calc($formItemOuterGlow - 2)px;*/
+        background-color: rgb(173, 43, 43);
+      }
 
-/*   @mixin buttonStyle $bgColor, $borderColor, $iconColor, $textColor;*/
+/* Mixin params: $bgColor, $borderColor, $iconColor, $textColor*/
 
-.FormButton_theme_warn { /* $bgColor: $secondaryColor;*/ /* $formItemBorderColor;*/ /* $textColor: $secondaryContrastColor;*/ border-color: rgb(230, 107, 46); background-color: #f73;}
+.FormButton_theme_warn { /* $formItemBorderColor;*/ /* color($textColor alpha(.5));*/ /* border-color: $borderColor;*/ -webkit-box-shadow: inset 0 0 0 1px rgb(230, 107, 46),
+    0 0 0 0 transparent; box-shadow: inset 0 0 0 1px rgb(230, 107, 46),
+    0 0 0 0 transparent; background-color: #f73; /* $formItemGlowColor;*/}
 
 /* box-shadow: inset 0 0 0 1px $borderColor;*/
 
@@ -866,27 +959,41 @@ label.FormLabel-Control[for] {
       }
 
 .FormButton_theme_warn .FormButton-Icon {
-        color: rgba(255, 255, 255, 0.5);
+        color: #fff;
       }
 
-.FormButton_theme_warn.FormItem_hovered {
-        border-color: rgb(207, 96, 41);
-        background-color: rgb(237, 111, 47);
-        /* box-shadow: inset 0 0 0 1px $hoveredBorderColor, 0 0 2px 2px color($borderColor alpha(50%));*/
-        /* .FormButton-Icon {*/
-        /*   // color: color($iconColor shade(10));*/
+/* color($glowColor alpha(1) shade(10));*/
+
+.FormButton_theme_warn.FormButton_active,
+      .FormButton_theme_warn.FormItem_focused,
+      .FormButton_theme_warn.FormItem_hovered {
+        /* border-color: $hoveredBorderColor;*/
+        -webkit-box-shadow: inset 0 0 1px 1px rgb(207, 96, 41),
+    0 0 4px 1px rgb(235, 109, 47);
+                box-shadow: inset 0 0 1px 1px rgb(207, 96, 41),
+    0 0 4px 1px rgb(235, 109, 47);
+        background-color: rgb(235, 109, 47);
+        /* .FormButton-Icon, .FormButton-Text {*/
+        /*   opacity: .9;*/
         /* }*/
       }
 
-/* ^^^&-Icon, ^^^&-Text {*/
+/* color($glowColor alpha(1));*/
 
-.FormButton_theme_warn.FormItem_hovered .FormButton-Icon, .FormButton_theme_warn.FormItem_hovered .FormButton-Text {
-          opacity: .9;
-        }
+.FormButton_theme_warn.FormButton_active,
+      .FormButton_theme_warn.FormItem_focused {
+        -webkit-box-shadow: inset 0 0 2px 1px rgb(196, 91, 39),
+    0 0 1px 2px rgb(217, 101, 43);
+                box-shadow: inset 0 0 2px 1px rgb(196, 91, 39),
+    0 0 1px 2px rgb(217, 101, 43); /* @calc($formItemOuterGlow - 2)px;*/
+        background-color: rgb(217, 101, 43);
+      }
 
-/*   $textColor: #000;*/
+/* Button themes...*/
 
-.FormButton_theme_success { /* $bgColor: $secondaryColor;*/ /* $formItemBorderColor;*/ /* $textColor: $secondaryContrastColor;*/ border-color: rgb(77, 138, 46); background-color: #593;}
+.FormButton_theme_success { /* $formItemBorderColor;*/ /* color($textColor alpha(.5));*/ /* border-color: $borderColor;*/ -webkit-box-shadow: inset 0 0 0 1px rgb(77, 138, 46),
+    0 0 0 0 transparent; box-shadow: inset 0 0 0 1px rgb(77, 138, 46),
+    0 0 0 0 transparent; background-color: #593; /* $formItemGlowColor;*/}
 
 /* box-shadow: inset 0 0 0 1px $borderColor;*/
 
@@ -895,27 +1002,39 @@ label.FormLabel-Control[for] {
       }
 
 .FormButton_theme_success .FormButton-Icon {
-        color: rgba(255, 255, 255, 0.5);
+        color: #fff;
       }
 
-.FormButton_theme_success.FormItem_hovered {
-        border-color: rgb(69, 124, 41);
-        background-color: rgb(79, 142, 47);
-        /* box-shadow: inset 0 0 0 1px $hoveredBorderColor, 0 0 2px 2px color($borderColor alpha(50%));*/
-        /* .FormButton-Icon {*/
-        /*   // color: color($iconColor shade(10));*/
+/* color($glowColor alpha(1) shade(10));*/
+
+.FormButton_theme_success.FormButton_active,
+      .FormButton_theme_success.FormItem_focused,
+      .FormButton_theme_success.FormItem_hovered {
+        /* border-color: $hoveredBorderColor;*/
+        -webkit-box-shadow: inset 0 0 1px 1px rgb(69, 124, 41),
+    0 0 4px 1px rgb(78, 141, 47);
+                box-shadow: inset 0 0 1px 1px rgb(69, 124, 41),
+    0 0 4px 1px rgb(78, 141, 47);
+        background-color: rgb(78, 141, 47);
+        /* .FormButton-Icon, .FormButton-Text {*/
+        /*   opacity: .9;*/
         /* }*/
       }
 
-/* ^^^&-Icon, ^^^&-Text {*/
+/* color($glowColor alpha(1));*/
 
-.FormButton_theme_success.FormItem_hovered .FormButton-Icon, .FormButton_theme_success.FormItem_hovered .FormButton-Text {
-          opacity: .9;
-        }
+.FormButton_theme_success.FormButton_active,
+      .FormButton_theme_success.FormItem_focused {
+        -webkit-box-shadow: inset 0 0 2px 1px rgb(65, 117, 39),
+    0 0 1px 2px rgb(72, 130, 43);
+                box-shadow: inset 0 0 2px 1px rgb(65, 117, 39),
+    0 0 1px 2px rgb(72, 130, 43); /* @calc($formItemOuterGlow - 2)px;*/
+        background-color: rgb(72, 130, 43);
+      }
 
-/*   $iconColor: $neutralTintedDarkColor;*/
-
-.FormButton_theme_info { /* $bgColor: $secondaryColor;*/ /* $formItemBorderColor;*/ /* $textColor: $secondaryContrastColor;*/ border-color: rgb(0, 107, 230); background-color: #07f;}
+.FormButton_theme_info { /* $formItemBorderColor;*/ /* color($textColor alpha(.5));*/ /* border-color: $borderColor;*/ -webkit-box-shadow: inset 0 0 0 1px rgb(0, 107, 230),
+    0 0 0 0 transparent; box-shadow: inset 0 0 0 1px rgb(0, 107, 230),
+    0 0 0 0 transparent; background-color: #07f; /* $formItemGlowColor;*/}
 
 /* box-shadow: inset 0 0 0 1px $borderColor;*/
 
@@ -924,27 +1043,39 @@ label.FormLabel-Control[for] {
       }
 
 .FormButton_theme_info .FormButton-Icon {
-        color: rgba(255, 255, 255, 0.5);
+        color: #fff;
       }
 
-.FormButton_theme_info.FormItem_hovered {
-        border-color: rgb(0, 96, 207);
-        background-color: rgb(0, 111, 237);
-        /* box-shadow: inset 0 0 0 1px $hoveredBorderColor, 0 0 2px 2px color($borderColor alpha(50%));*/
-        /* .FormButton-Icon {*/
-        /*   // color: color($iconColor shade(10));*/
+/* color($glowColor alpha(1) shade(10));*/
+
+.FormButton_theme_info.FormButton_active,
+      .FormButton_theme_info.FormItem_focused,
+      .FormButton_theme_info.FormItem_hovered {
+        /* border-color: $hoveredBorderColor;*/
+        -webkit-box-shadow: inset 0 0 1px 1px rgb(0, 96, 207),
+    0 0 4px 1px rgb(0, 109, 235);
+                box-shadow: inset 0 0 1px 1px rgb(0, 96, 207),
+    0 0 4px 1px rgb(0, 109, 235);
+        background-color: rgb(0, 109, 235);
+        /* .FormButton-Icon, .FormButton-Text {*/
+        /*   opacity: .9;*/
         /* }*/
       }
 
-/* ^^^&-Icon, ^^^&-Text {*/
+/* color($glowColor alpha(1));*/
 
-.FormButton_theme_info.FormItem_hovered .FormButton-Icon, .FormButton_theme_info.FormItem_hovered .FormButton-Text {
-          opacity: .9;
-        }
+.FormButton_theme_info.FormButton_active,
+      .FormButton_theme_info.FormItem_focused {
+        -webkit-box-shadow: inset 0 0 2px 1px rgb(0, 91, 196),
+    0 0 1px 2px rgb(0, 101, 217);
+                box-shadow: inset 0 0 2px 1px rgb(0, 91, 196),
+    0 0 1px 2px rgb(0, 101, 217); /* @calc($formItemOuterGlow - 2)px;*/
+        background-color: rgb(0, 101, 217);
+      }
 
-/*   $borderColor: $formItemBorderColor;*/
-
-.FormButton_theme_confirm { /* $bgColor: $secondaryColor;*/ /* $formItemBorderColor;*/ /* $textColor: $secondaryContrastColor;*/ border-color: rgb(122, 138, 15); background-color: #891;}
+.FormButton_theme_confirm { /* $formItemBorderColor;*/ /* color($textColor alpha(.5));*/ /* border-color: $borderColor;*/ -webkit-box-shadow: inset 0 0 0 1px rgb(122, 138, 15),
+    0 0 0 0 transparent; box-shadow: inset 0 0 0 1px rgb(122, 138, 15),
+    0 0 0 0 transparent; background-color: #891; /* $formItemGlowColor;*/}
 
 /* box-shadow: inset 0 0 0 1px $borderColor;*/
 
@@ -953,27 +1084,39 @@ label.FormLabel-Control[for] {
       }
 
 .FormButton_theme_confirm .FormButton-Icon {
-        color: rgba(255, 255, 255, 0.5);
+        color: #fff;
       }
 
-.FormButton_theme_confirm.FormItem_hovered {
-        border-color: rgb(110, 124, 14);
-        background-color: rgb(126, 142, 16);
-        /* box-shadow: inset 0 0 0 1px $hoveredBorderColor, 0 0 2px 2px color($borderColor alpha(50%));*/
-        /* .FormButton-Icon {*/
-        /*   // color: color($iconColor shade(10));*/
+/* color($glowColor alpha(1) shade(10));*/
+
+.FormButton_theme_confirm.FormButton_active,
+      .FormButton_theme_confirm.FormItem_focused,
+      .FormButton_theme_confirm.FormItem_hovered {
+        /* border-color: $hoveredBorderColor;*/
+        -webkit-box-shadow: inset 0 0 1px 1px rgb(110, 124, 14),
+    0 0 4px 1px rgb(125, 141, 16);
+                box-shadow: inset 0 0 1px 1px rgb(110, 124, 14),
+    0 0 4px 1px rgb(125, 141, 16);
+        background-color: rgb(125, 141, 16);
+        /* .FormButton-Icon, .FormButton-Text {*/
+        /*   opacity: .9;*/
         /* }*/
       }
 
-/* ^^^&-Icon, ^^^&-Text {*/
+/* color($glowColor alpha(1));*/
 
-.FormButton_theme_confirm.FormItem_hovered .FormButton-Icon, .FormButton_theme_confirm.FormItem_hovered .FormButton-Text {
-          opacity: .9;
-        }
+.FormButton_theme_confirm.FormButton_active,
+      .FormButton_theme_confirm.FormItem_focused {
+        -webkit-box-shadow: inset 0 0 2px 1px rgb(104, 117, 13),
+    0 0 1px 2px rgb(116, 130, 14);
+                box-shadow: inset 0 0 2px 1px rgb(104, 117, 13),
+    0 0 1px 2px rgb(116, 130, 14); /* @calc($formItemOuterGlow - 2)px;*/
+        background-color: rgb(116, 130, 14);
+      }
 
-/*   $bgColor: color($neutralExtraDarkColor tint(10));*/
-
-.FormButton_theme_select { /* $bgColor: $secondaryColor;*/ /* $formItemBorderColor;*/ /* $textColor: $secondaryContrastColor;*/ border-color: rgb(0, 77, 168); background-color: #05b;}
+.FormButton_theme_select { /* $formItemBorderColor;*/ /* color($textColor alpha(.5));*/ /* border-color: $borderColor;*/ -webkit-box-shadow: inset 0 0 0 1px rgb(0, 77, 168),
+    0 0 0 0 transparent; box-shadow: inset 0 0 0 1px rgb(0, 77, 168),
+    0 0 0 0 transparent; background-color: #05b; /* $formItemGlowColor;*/}
 
 /* box-shadow: inset 0 0 0 1px $borderColor;*/
 
@@ -982,27 +1125,39 @@ label.FormLabel-Control[for] {
       }
 
 .FormButton_theme_select .FormButton-Icon {
-        color: rgba(255, 255, 255, 0.5);
+        color: #fff;
       }
 
-.FormButton_theme_select.FormItem_hovered {
-        border-color: rgb(0, 69, 151);
-        background-color: rgb(0, 79, 174);
-        /* box-shadow: inset 0 0 0 1px $hoveredBorderColor, 0 0 2px 2px color($borderColor alpha(50%));*/
-        /* .FormButton-Icon {*/
-        /*   // color: color($iconColor shade(10));*/
+/* color($glowColor alpha(1) shade(10));*/
+
+.FormButton_theme_select.FormButton_active,
+      .FormButton_theme_select.FormItem_focused,
+      .FormButton_theme_select.FormItem_hovered {
+        /* border-color: $hoveredBorderColor;*/
+        -webkit-box-shadow: inset 0 0 1px 1px rgb(0, 69, 151),
+    0 0 4px 1px rgb(0, 78, 172);
+                box-shadow: inset 0 0 1px 1px rgb(0, 69, 151),
+    0 0 4px 1px rgb(0, 78, 172);
+        background-color: rgb(0, 78, 172);
+        /* .FormButton-Icon, .FormButton-Text {*/
+        /*   opacity: .9;*/
         /* }*/
       }
 
-/* ^^^&-Icon, ^^^&-Text {*/
+/* color($glowColor alpha(1));*/
 
-.FormButton_theme_select.FormItem_hovered .FormButton-Icon, .FormButton_theme_select.FormItem_hovered .FormButton-Text {
-          opacity: .9;
-        }
+.FormButton_theme_select.FormButton_active,
+      .FormButton_theme_select.FormItem_focused {
+        -webkit-box-shadow: inset 0 0 2px 1px rgb(0, 65, 143),
+    0 0 1px 2px rgb(0, 72, 159);
+                box-shadow: inset 0 0 2px 1px rgb(0, 65, 143),
+    0 0 1px 2px rgb(0, 72, 159); /* @calc($formItemOuterGlow - 2)px;*/
+        background-color: rgb(0, 72, 159);
+      }
 
-/* &_default^&_onDark {*/
-
-.FormButton_theme_maroon { /* $bgColor: $secondaryColor;*/ /* $formItemBorderColor;*/ /* $textColor: $secondaryContrastColor;*/ border-color: rgb(115, 0, 0); background-color: #800000;}
+.FormButton_theme_maroon { /* $formItemBorderColor;*/ /* color($textColor alpha(.5));*/ /* border-color: $borderColor;*/ -webkit-box-shadow: inset 0 0 0 1px rgb(115, 0, 0),
+    0 0 0 0 transparent; box-shadow: inset 0 0 0 1px rgb(115, 0, 0),
+    0 0 0 0 transparent; background-color: #800000; /* $formItemGlowColor;*/}
 
 /* box-shadow: inset 0 0 0 1px $borderColor;*/
 
@@ -1011,27 +1166,39 @@ label.FormLabel-Control[for] {
       }
 
 .FormButton_theme_maroon .FormButton-Icon {
-        color: rgba(255, 255, 255, 0.5);
+        color: #fff;
       }
 
-.FormButton_theme_maroon.FormItem_hovered {
-        border-color: rgb(104, 0, 0);
-        background-color: rgb(119, 0, 0);
-        /* box-shadow: inset 0 0 0 1px $hoveredBorderColor, 0 0 2px 2px color($borderColor alpha(50%));*/
-        /* .FormButton-Icon {*/
-        /*   // color: color($iconColor shade(10));*/
+/* color($glowColor alpha(1) shade(10));*/
+
+.FormButton_theme_maroon.FormButton_active,
+      .FormButton_theme_maroon.FormItem_focused,
+      .FormButton_theme_maroon.FormItem_hovered {
+        /* border-color: $hoveredBorderColor;*/
+        -webkit-box-shadow: inset 0 0 1px 1px rgb(104, 0, 0),
+    0 0 4px 1px rgb(118, 0, 0);
+                box-shadow: inset 0 0 1px 1px rgb(104, 0, 0),
+    0 0 4px 1px rgb(118, 0, 0);
+        background-color: rgb(118, 0, 0);
+        /* .FormButton-Icon, .FormButton-Text {*/
+        /*   opacity: .9;*/
         /* }*/
       }
 
-/* ^^^&-Icon, ^^^&-Text {*/
+/* color($glowColor alpha(1));*/
 
-.FormButton_theme_maroon.FormItem_hovered .FormButton-Icon, .FormButton_theme_maroon.FormItem_hovered .FormButton-Text {
-          opacity: .9;
-        }
+.FormButton_theme_maroon.FormButton_active,
+      .FormButton_theme_maroon.FormItem_focused {
+        -webkit-box-shadow: inset 0 0 2px 1px rgb(98, 0, 0),
+    0 0 1px 2px rgb(109, 0, 0);
+                box-shadow: inset 0 0 2px 1px rgb(98, 0, 0),
+    0 0 1px 2px rgb(109, 0, 0); /* @calc($formItemOuterGlow - 2)px;*/
+        background-color: rgb(109, 0, 0);
+      }
 
-/* @define-mixin styledDarkButton $bgColor, $textColor: $specialContrastColor {*/
-
-.FormButton_theme_red { /* $bgColor: $secondaryColor;*/ /* $formItemBorderColor;*/ /* $textColor: $secondaryContrastColor;*/ border-color: rgb(230, 0, 0); background-color: #ff0000;}
+.FormButton_theme_red { /* $formItemBorderColor;*/ /* color($textColor alpha(.5));*/ /* border-color: $borderColor;*/ -webkit-box-shadow: inset 0 0 0 1px rgb(230, 0, 0),
+    0 0 0 0 transparent; box-shadow: inset 0 0 0 1px rgb(230, 0, 0),
+    0 0 0 0 transparent; background-color: #ff0000; /* $formItemGlowColor;*/}
 
 /* box-shadow: inset 0 0 0 1px $borderColor;*/
 
@@ -1040,27 +1207,39 @@ label.FormLabel-Control[for] {
       }
 
 .FormButton_theme_red .FormButton-Icon {
-        color: rgba(255, 255, 255, 0.5);
+        color: #fff;
       }
 
-.FormButton_theme_red.FormItem_hovered {
-        border-color: rgb(207, 0, 0);
-        background-color: rgb(237, 0, 0);
-        /* box-shadow: inset 0 0 0 1px $hoveredBorderColor, 0 0 2px 2px color($borderColor alpha(50%));*/
-        /* .FormButton-Icon {*/
-        /*   // color: color($iconColor shade(10));*/
+/* color($glowColor alpha(1) shade(10));*/
+
+.FormButton_theme_red.FormButton_active,
+      .FormButton_theme_red.FormItem_focused,
+      .FormButton_theme_red.FormItem_hovered {
+        /* border-color: $hoveredBorderColor;*/
+        -webkit-box-shadow: inset 0 0 1px 1px rgb(207, 0, 0),
+    0 0 4px 1px rgb(235, 0, 0);
+                box-shadow: inset 0 0 1px 1px rgb(207, 0, 0),
+    0 0 4px 1px rgb(235, 0, 0);
+        background-color: rgb(235, 0, 0);
+        /* .FormButton-Icon, .FormButton-Text {*/
+        /*   opacity: .9;*/
         /* }*/
       }
 
-/* ^^^&-Icon, ^^^&-Text {*/
+/* color($glowColor alpha(1));*/
 
-.FormButton_theme_red.FormItem_hovered .FormButton-Icon, .FormButton_theme_red.FormItem_hovered .FormButton-Text {
-          opacity: .9;
-        }
+.FormButton_theme_red.FormButton_active,
+      .FormButton_theme_red.FormItem_focused {
+        -webkit-box-shadow: inset 0 0 2px 1px rgb(196, 0, 0),
+    0 0 1px 2px rgb(217, 0, 0);
+                box-shadow: inset 0 0 2px 1px rgb(196, 0, 0),
+    0 0 1px 2px rgb(217, 0, 0); /* @calc($formItemOuterGlow - 2)px;*/
+        background-color: rgb(217, 0, 0);
+      }
 
-/* Mixin params: $bgColor, $borderColor, $iconColor, $textColor*/
-
-.FormButton_theme_purple { /* $bgColor: $secondaryColor;*/ /* $formItemBorderColor;*/ /* $textColor: $secondaryContrastColor;*/ border-color: rgb(115, 0, 115); background-color: #800080;}
+.FormButton_theme_purple { /* $formItemBorderColor;*/ /* color($textColor alpha(.5));*/ /* border-color: $borderColor;*/ -webkit-box-shadow: inset 0 0 0 1px rgb(115, 0, 115),
+    0 0 0 0 transparent; box-shadow: inset 0 0 0 1px rgb(115, 0, 115),
+    0 0 0 0 transparent; background-color: #800080; /* $formItemGlowColor;*/}
 
 /* box-shadow: inset 0 0 0 1px $borderColor;*/
 
@@ -1069,27 +1248,39 @@ label.FormLabel-Control[for] {
       }
 
 .FormButton_theme_purple .FormButton-Icon {
-        color: rgba(255, 255, 255, 0.5);
+        color: #fff;
       }
 
-.FormButton_theme_purple.FormItem_hovered {
-        border-color: rgb(104, 0, 104);
-        background-color: rgb(119, 0, 119);
-        /* box-shadow: inset 0 0 0 1px $hoveredBorderColor, 0 0 2px 2px color($borderColor alpha(50%));*/
-        /* .FormButton-Icon {*/
-        /*   // color: color($iconColor shade(10));*/
+/* color($glowColor alpha(1) shade(10));*/
+
+.FormButton_theme_purple.FormButton_active,
+      .FormButton_theme_purple.FormItem_focused,
+      .FormButton_theme_purple.FormItem_hovered {
+        /* border-color: $hoveredBorderColor;*/
+        -webkit-box-shadow: inset 0 0 1px 1px rgb(104, 0, 104),
+    0 0 4px 1px rgb(118, 0, 118);
+                box-shadow: inset 0 0 1px 1px rgb(104, 0, 104),
+    0 0 4px 1px rgb(118, 0, 118);
+        background-color: rgb(118, 0, 118);
+        /* .FormButton-Icon, .FormButton-Text {*/
+        /*   opacity: .9;*/
         /* }*/
       }
 
-/* ^^^&-Icon, ^^^&-Text {*/
+/* color($glowColor alpha(1));*/
 
-.FormButton_theme_purple.FormItem_hovered .FormButton-Icon, .FormButton_theme_purple.FormItem_hovered .FormButton-Text {
-          opacity: .9;
-        }
+.FormButton_theme_purple.FormButton_active,
+      .FormButton_theme_purple.FormItem_focused {
+        -webkit-box-shadow: inset 0 0 2px 1px rgb(98, 0, 98),
+    0 0 1px 2px rgb(109, 0, 109);
+                box-shadow: inset 0 0 2px 1px rgb(98, 0, 98),
+    0 0 1px 2px rgb(109, 0, 109); /* @calc($formItemOuterGlow - 2)px;*/
+        background-color: rgb(109, 0, 109);
+      }
 
-/* Button themes...*/
-
-.FormButton_theme_fuchsia { /* $bgColor: $secondaryColor;*/ /* $formItemBorderColor;*/ /* $textColor: $secondaryContrastColor;*/ border-color: rgb(230, 0, 230); background-color: #ff00ff;}
+.FormButton_theme_fuchsia { /* $formItemBorderColor;*/ /* color($textColor alpha(.5));*/ /* border-color: $borderColor;*/ -webkit-box-shadow: inset 0 0 0 1px rgb(230, 0, 230),
+    0 0 0 0 transparent; box-shadow: inset 0 0 0 1px rgb(230, 0, 230),
+    0 0 0 0 transparent; background-color: #ff00ff; /* $formItemGlowColor;*/}
 
 /* box-shadow: inset 0 0 0 1px $borderColor;*/
 
@@ -1098,25 +1289,39 @@ label.FormLabel-Control[for] {
       }
 
 .FormButton_theme_fuchsia .FormButton-Icon {
-        color: rgba(255, 255, 255, 0.5);
+        color: #fff;
       }
 
-.FormButton_theme_fuchsia.FormItem_hovered {
-        border-color: rgb(207, 0, 207);
-        background-color: rgb(237, 0, 237);
-        /* box-shadow: inset 0 0 0 1px $hoveredBorderColor, 0 0 2px 2px color($borderColor alpha(50%));*/
-        /* .FormButton-Icon {*/
-        /*   // color: color($iconColor shade(10));*/
+/* color($glowColor alpha(1) shade(10));*/
+
+.FormButton_theme_fuchsia.FormButton_active,
+      .FormButton_theme_fuchsia.FormItem_focused,
+      .FormButton_theme_fuchsia.FormItem_hovered {
+        /* border-color: $hoveredBorderColor;*/
+        -webkit-box-shadow: inset 0 0 1px 1px rgb(207, 0, 207),
+    0 0 4px 1px rgb(235, 0, 235);
+                box-shadow: inset 0 0 1px 1px rgb(207, 0, 207),
+    0 0 4px 1px rgb(235, 0, 235);
+        background-color: rgb(235, 0, 235);
+        /* .FormButton-Icon, .FormButton-Text {*/
+        /*   opacity: .9;*/
         /* }*/
       }
 
-/* ^^^&-Icon, ^^^&-Text {*/
+/* color($glowColor alpha(1));*/
 
-.FormButton_theme_fuchsia.FormItem_hovered .FormButton-Icon, .FormButton_theme_fuchsia.FormItem_hovered .FormButton-Text {
-          opacity: .9;
-        }
+.FormButton_theme_fuchsia.FormButton_active,
+      .FormButton_theme_fuchsia.FormItem_focused {
+        -webkit-box-shadow: inset 0 0 2px 1px rgb(196, 0, 196),
+    0 0 1px 2px rgb(217, 0, 217);
+                box-shadow: inset 0 0 2px 1px rgb(196, 0, 196),
+    0 0 1px 2px rgb(217, 0, 217); /* @calc($formItemOuterGlow - 2)px;*/
+        background-color: rgb(217, 0, 217);
+      }
 
-.FormButton_theme_green { /* $bgColor: $secondaryColor;*/ /* $formItemBorderColor;*/ /* $textColor: $secondaryContrastColor;*/ border-color: rgb(0, 115, 0); background-color: #008000;}
+.FormButton_theme_green { /* $formItemBorderColor;*/ /* color($textColor alpha(.5));*/ /* border-color: $borderColor;*/ -webkit-box-shadow: inset 0 0 0 1px rgb(0, 115, 0),
+    0 0 0 0 transparent; box-shadow: inset 0 0 0 1px rgb(0, 115, 0),
+    0 0 0 0 transparent; background-color: #008000; /* $formItemGlowColor;*/}
 
 /* box-shadow: inset 0 0 0 1px $borderColor;*/
 
@@ -1125,25 +1330,39 @@ label.FormLabel-Control[for] {
       }
 
 .FormButton_theme_green .FormButton-Icon {
-        color: rgba(255, 255, 255, 0.5);
+        color: #fff;
       }
 
-.FormButton_theme_green.FormItem_hovered {
-        border-color: rgb(0, 104, 0);
-        background-color: rgb(0, 119, 0);
-        /* box-shadow: inset 0 0 0 1px $hoveredBorderColor, 0 0 2px 2px color($borderColor alpha(50%));*/
-        /* .FormButton-Icon {*/
-        /*   // color: color($iconColor shade(10));*/
+/* color($glowColor alpha(1) shade(10));*/
+
+.FormButton_theme_green.FormButton_active,
+      .FormButton_theme_green.FormItem_focused,
+      .FormButton_theme_green.FormItem_hovered {
+        /* border-color: $hoveredBorderColor;*/
+        -webkit-box-shadow: inset 0 0 1px 1px rgb(0, 104, 0),
+    0 0 4px 1px rgb(0, 118, 0);
+                box-shadow: inset 0 0 1px 1px rgb(0, 104, 0),
+    0 0 4px 1px rgb(0, 118, 0);
+        background-color: rgb(0, 118, 0);
+        /* .FormButton-Icon, .FormButton-Text {*/
+        /*   opacity: .9;*/
         /* }*/
       }
 
-/* ^^^&-Icon, ^^^&-Text {*/
+/* color($glowColor alpha(1));*/
 
-.FormButton_theme_green.FormItem_hovered .FormButton-Icon, .FormButton_theme_green.FormItem_hovered .FormButton-Text {
-          opacity: .9;
-        }
+.FormButton_theme_green.FormButton_active,
+      .FormButton_theme_green.FormItem_focused {
+        -webkit-box-shadow: inset 0 0 2px 1px rgb(0, 98, 0),
+    0 0 1px 2px rgb(0, 109, 0);
+                box-shadow: inset 0 0 2px 1px rgb(0, 98, 0),
+    0 0 1px 2px rgb(0, 109, 0); /* @calc($formItemOuterGlow - 2)px;*/
+        background-color: rgb(0, 109, 0);
+      }
 
-.FormButton_theme_olive { /* $bgColor: $secondaryColor;*/ /* $formItemBorderColor;*/ /* $textColor: $secondaryContrastColor;*/ border-color: rgb(115, 115, 0); background-color: #808000;}
+.FormButton_theme_olive { /* $formItemBorderColor;*/ /* color($textColor alpha(.5));*/ /* border-color: $borderColor;*/ -webkit-box-shadow: inset 0 0 0 1px rgb(115, 115, 0),
+    0 0 0 0 transparent; box-shadow: inset 0 0 0 1px rgb(115, 115, 0),
+    0 0 0 0 transparent; background-color: #808000; /* $formItemGlowColor;*/}
 
 /* box-shadow: inset 0 0 0 1px $borderColor;*/
 
@@ -1152,25 +1371,39 @@ label.FormLabel-Control[for] {
       }
 
 .FormButton_theme_olive .FormButton-Icon {
-        color: rgba(255, 255, 255, 0.5);
+        color: #fff;
       }
 
-.FormButton_theme_olive.FormItem_hovered {
-        border-color: rgb(104, 104, 0);
-        background-color: rgb(119, 119, 0);
-        /* box-shadow: inset 0 0 0 1px $hoveredBorderColor, 0 0 2px 2px color($borderColor alpha(50%));*/
-        /* .FormButton-Icon {*/
-        /*   // color: color($iconColor shade(10));*/
+/* color($glowColor alpha(1) shade(10));*/
+
+.FormButton_theme_olive.FormButton_active,
+      .FormButton_theme_olive.FormItem_focused,
+      .FormButton_theme_olive.FormItem_hovered {
+        /* border-color: $hoveredBorderColor;*/
+        -webkit-box-shadow: inset 0 0 1px 1px rgb(104, 104, 0),
+    0 0 4px 1px rgb(118, 118, 0);
+                box-shadow: inset 0 0 1px 1px rgb(104, 104, 0),
+    0 0 4px 1px rgb(118, 118, 0);
+        background-color: rgb(118, 118, 0);
+        /* .FormButton-Icon, .FormButton-Text {*/
+        /*   opacity: .9;*/
         /* }*/
       }
 
-/* ^^^&-Icon, ^^^&-Text {*/
+/* color($glowColor alpha(1));*/
 
-.FormButton_theme_olive.FormItem_hovered .FormButton-Icon, .FormButton_theme_olive.FormItem_hovered .FormButton-Text {
-          opacity: .9;
-        }
+.FormButton_theme_olive.FormButton_active,
+      .FormButton_theme_olive.FormItem_focused {
+        -webkit-box-shadow: inset 0 0 2px 1px rgb(98, 98, 0),
+    0 0 1px 2px rgb(109, 109, 0);
+                box-shadow: inset 0 0 2px 1px rgb(98, 98, 0),
+    0 0 1px 2px rgb(109, 109, 0); /* @calc($formItemOuterGlow - 2)px;*/
+        background-color: rgb(109, 109, 0);
+      }
 
-.FormButton_theme_navy { /* $bgColor: $secondaryColor;*/ /* $formItemBorderColor;*/ /* $textColor: $secondaryContrastColor;*/ border-color: rgb(0, 0, 115); background-color: #000080;}
+.FormButton_theme_navy { /* $formItemBorderColor;*/ /* color($textColor alpha(.5));*/ /* border-color: $borderColor;*/ -webkit-box-shadow: inset 0 0 0 1px rgb(0, 0, 115),
+    0 0 0 0 transparent; box-shadow: inset 0 0 0 1px rgb(0, 0, 115),
+    0 0 0 0 transparent; background-color: #000080; /* $formItemGlowColor;*/}
 
 /* box-shadow: inset 0 0 0 1px $borderColor;*/
 
@@ -1179,25 +1412,39 @@ label.FormLabel-Control[for] {
       }
 
 .FormButton_theme_navy .FormButton-Icon {
-        color: rgba(255, 255, 255, 0.5);
+        color: #fff;
       }
 
-.FormButton_theme_navy.FormItem_hovered {
-        border-color: rgb(0, 0, 104);
-        background-color: rgb(0, 0, 119);
-        /* box-shadow: inset 0 0 0 1px $hoveredBorderColor, 0 0 2px 2px color($borderColor alpha(50%));*/
-        /* .FormButton-Icon {*/
-        /*   // color: color($iconColor shade(10));*/
+/* color($glowColor alpha(1) shade(10));*/
+
+.FormButton_theme_navy.FormButton_active,
+      .FormButton_theme_navy.FormItem_focused,
+      .FormButton_theme_navy.FormItem_hovered {
+        /* border-color: $hoveredBorderColor;*/
+        -webkit-box-shadow: inset 0 0 1px 1px rgb(0, 0, 104),
+    0 0 4px 1px rgb(0, 0, 118);
+                box-shadow: inset 0 0 1px 1px rgb(0, 0, 104),
+    0 0 4px 1px rgb(0, 0, 118);
+        background-color: rgb(0, 0, 118);
+        /* .FormButton-Icon, .FormButton-Text {*/
+        /*   opacity: .9;*/
         /* }*/
       }
 
-/* ^^^&-Icon, ^^^&-Text {*/
+/* color($glowColor alpha(1));*/
 
-.FormButton_theme_navy.FormItem_hovered .FormButton-Icon, .FormButton_theme_navy.FormItem_hovered .FormButton-Text {
-          opacity: .9;
-        }
+.FormButton_theme_navy.FormButton_active,
+      .FormButton_theme_navy.FormItem_focused {
+        -webkit-box-shadow: inset 0 0 2px 1px rgb(0, 0, 98),
+    0 0 1px 2px rgb(0, 0, 109);
+                box-shadow: inset 0 0 2px 1px rgb(0, 0, 98),
+    0 0 1px 2px rgb(0, 0, 109); /* @calc($formItemOuterGlow - 2)px;*/
+        background-color: rgb(0, 0, 109);
+      }
 
-.FormButton_theme_blue { /* $bgColor: $secondaryColor;*/ /* $formItemBorderColor;*/ /* $textColor: $secondaryContrastColor;*/ border-color: rgb(0, 0, 230); background-color: #0000ff;}
+.FormButton_theme_blue { /* $formItemBorderColor;*/ /* color($textColor alpha(.5));*/ /* border-color: $borderColor;*/ -webkit-box-shadow: inset 0 0 0 1px rgb(0, 0, 230),
+    0 0 0 0 transparent; box-shadow: inset 0 0 0 1px rgb(0, 0, 230),
+    0 0 0 0 transparent; background-color: #0000ff; /* $formItemGlowColor;*/}
 
 /* box-shadow: inset 0 0 0 1px $borderColor;*/
 
@@ -1206,25 +1453,39 @@ label.FormLabel-Control[for] {
       }
 
 .FormButton_theme_blue .FormButton-Icon {
-        color: rgba(255, 255, 255, 0.5);
+        color: #fff;
       }
 
-.FormButton_theme_blue.FormItem_hovered {
-        border-color: rgb(0, 0, 207);
-        background-color: rgb(0, 0, 237);
-        /* box-shadow: inset 0 0 0 1px $hoveredBorderColor, 0 0 2px 2px color($borderColor alpha(50%));*/
-        /* .FormButton-Icon {*/
-        /*   // color: color($iconColor shade(10));*/
+/* color($glowColor alpha(1) shade(10));*/
+
+.FormButton_theme_blue.FormButton_active,
+      .FormButton_theme_blue.FormItem_focused,
+      .FormButton_theme_blue.FormItem_hovered {
+        /* border-color: $hoveredBorderColor;*/
+        -webkit-box-shadow: inset 0 0 1px 1px rgb(0, 0, 207),
+    0 0 4px 1px rgb(0, 0, 235);
+                box-shadow: inset 0 0 1px 1px rgb(0, 0, 207),
+    0 0 4px 1px rgb(0, 0, 235);
+        background-color: rgb(0, 0, 235);
+        /* .FormButton-Icon, .FormButton-Text {*/
+        /*   opacity: .9;*/
         /* }*/
       }
 
-/* ^^^&-Icon, ^^^&-Text {*/
+/* color($glowColor alpha(1));*/
 
-.FormButton_theme_blue.FormItem_hovered .FormButton-Icon, .FormButton_theme_blue.FormItem_hovered .FormButton-Text {
-          opacity: .9;
-        }
+.FormButton_theme_blue.FormButton_active,
+      .FormButton_theme_blue.FormItem_focused {
+        -webkit-box-shadow: inset 0 0 2px 1px rgb(0, 0, 196),
+    0 0 1px 2px rgb(0, 0, 217);
+                box-shadow: inset 0 0 2px 1px rgb(0, 0, 196),
+    0 0 1px 2px rgb(0, 0, 217); /* @calc($formItemOuterGlow - 2)px;*/
+        background-color: rgb(0, 0, 217);
+      }
 
-.FormButton_theme_teal { /* $bgColor: $secondaryColor;*/ /* $formItemBorderColor;*/ /* $textColor: $secondaryContrastColor;*/ border-color: rgb(0, 115, 115); background-color: #008080;}
+.FormButton_theme_teal { /* $formItemBorderColor;*/ /* color($textColor alpha(.5));*/ /* border-color: $borderColor;*/ -webkit-box-shadow: inset 0 0 0 1px rgb(0, 115, 115),
+    0 0 0 0 transparent; box-shadow: inset 0 0 0 1px rgb(0, 115, 115),
+    0 0 0 0 transparent; background-color: #008080; /* $formItemGlowColor;*/}
 
 /* box-shadow: inset 0 0 0 1px $borderColor;*/
 
@@ -1233,25 +1494,39 @@ label.FormLabel-Control[for] {
       }
 
 .FormButton_theme_teal .FormButton-Icon {
-        color: rgba(255, 255, 255, 0.5);
+        color: #fff;
       }
 
-.FormButton_theme_teal.FormItem_hovered {
-        border-color: rgb(0, 104, 104);
-        background-color: rgb(0, 119, 119);
-        /* box-shadow: inset 0 0 0 1px $hoveredBorderColor, 0 0 2px 2px color($borderColor alpha(50%));*/
-        /* .FormButton-Icon {*/
-        /*   // color: color($iconColor shade(10));*/
+/* color($glowColor alpha(1) shade(10));*/
+
+.FormButton_theme_teal.FormButton_active,
+      .FormButton_theme_teal.FormItem_focused,
+      .FormButton_theme_teal.FormItem_hovered {
+        /* border-color: $hoveredBorderColor;*/
+        -webkit-box-shadow: inset 0 0 1px 1px rgb(0, 104, 104),
+    0 0 4px 1px rgb(0, 118, 118);
+                box-shadow: inset 0 0 1px 1px rgb(0, 104, 104),
+    0 0 4px 1px rgb(0, 118, 118);
+        background-color: rgb(0, 118, 118);
+        /* .FormButton-Icon, .FormButton-Text {*/
+        /*   opacity: .9;*/
         /* }*/
       }
 
-/* ^^^&-Icon, ^^^&-Text {*/
+/* color($glowColor alpha(1));*/
 
-.FormButton_theme_teal.FormItem_hovered .FormButton-Icon, .FormButton_theme_teal.FormItem_hovered .FormButton-Text {
-          opacity: .9;
-        }
+.FormButton_theme_teal.FormButton_active,
+      .FormButton_theme_teal.FormItem_focused {
+        -webkit-box-shadow: inset 0 0 2px 1px rgb(0, 98, 98),
+    0 0 1px 2px rgb(0, 109, 109);
+                box-shadow: inset 0 0 2px 1px rgb(0, 98, 98),
+    0 0 1px 2px rgb(0, 109, 109); /* @calc($formItemOuterGlow - 2)px;*/
+        background-color: rgb(0, 109, 109);
+      }
 
-.FormButton_theme_orange { /* $bgColor: $secondaryColor;*/ /* $formItemBorderColor;*/ /* $textColor: $secondaryContrastColor;*/ border-color: rgb(230, 149, 0); background-color: #ffa500;}
+.FormButton_theme_orange { /* $formItemBorderColor;*/ /* color($textColor alpha(.5));*/ /* border-color: $borderColor;*/ -webkit-box-shadow: inset 0 0 0 1px rgb(230, 149, 0),
+    0 0 0 0 transparent; box-shadow: inset 0 0 0 1px rgb(230, 149, 0),
+    0 0 0 0 transparent; background-color: #ffa500; /* $formItemGlowColor;*/}
 
 /* box-shadow: inset 0 0 0 1px $borderColor;*/
 
@@ -1260,25 +1535,39 @@ label.FormLabel-Control[for] {
       }
 
 .FormButton_theme_orange .FormButton-Icon {
-        color: rgba(255, 255, 255, 0.5);
+        color: #fff;
       }
 
-.FormButton_theme_orange.FormItem_hovered {
-        border-color: rgb(207, 134, 0);
-        background-color: rgb(237, 153, 0);
-        /* box-shadow: inset 0 0 0 1px $hoveredBorderColor, 0 0 2px 2px color($borderColor alpha(50%));*/
-        /* .FormButton-Icon {*/
-        /*   // color: color($iconColor shade(10));*/
+/* color($glowColor alpha(1) shade(10));*/
+
+.FormButton_theme_orange.FormButton_active,
+      .FormButton_theme_orange.FormItem_focused,
+      .FormButton_theme_orange.FormItem_hovered {
+        /* border-color: $hoveredBorderColor;*/
+        -webkit-box-shadow: inset 0 0 1px 1px rgb(207, 134, 0),
+    0 0 4px 1px rgb(235, 152, 0);
+                box-shadow: inset 0 0 1px 1px rgb(207, 134, 0),
+    0 0 4px 1px rgb(235, 152, 0);
+        background-color: rgb(235, 152, 0);
+        /* .FormButton-Icon, .FormButton-Text {*/
+        /*   opacity: .9;*/
         /* }*/
       }
 
-/* ^^^&-Icon, ^^^&-Text {*/
+/* color($glowColor alpha(1));*/
 
-.FormButton_theme_orange.FormItem_hovered .FormButton-Icon, .FormButton_theme_orange.FormItem_hovered .FormButton-Text {
-          opacity: .9;
-        }
+.FormButton_theme_orange.FormButton_active,
+      .FormButton_theme_orange.FormItem_focused {
+        -webkit-box-shadow: inset 0 0 2px 1px rgb(196, 127, 0),
+    0 0 1px 2px rgb(217, 140, 0);
+                box-shadow: inset 0 0 2px 1px rgb(196, 127, 0),
+    0 0 1px 2px rgb(217, 140, 0); /* @calc($formItemOuterGlow - 2)px;*/
+        background-color: rgb(217, 140, 0);
+      }
 
-.FormButton_theme_blueviolet { /* $bgColor: $secondaryColor;*/ /* $formItemBorderColor;*/ /* $textColor: $secondaryContrastColor;*/ border-color: rgb(124, 39, 203); background-color: #8a2be2;}
+.FormButton_theme_blueviolet { /* $formItemBorderColor;*/ /* color($textColor alpha(.5));*/ /* border-color: $borderColor;*/ -webkit-box-shadow: inset 0 0 0 1px rgb(124, 39, 203),
+    0 0 0 0 transparent; box-shadow: inset 0 0 0 1px rgb(124, 39, 203),
+    0 0 0 0 transparent; background-color: #8a2be2; /* $formItemGlowColor;*/}
 
 /* box-shadow: inset 0 0 0 1px $borderColor;*/
 
@@ -1287,25 +1576,39 @@ label.FormLabel-Control[for] {
       }
 
 .FormButton_theme_blueviolet .FormButton-Icon {
-        color: rgba(255, 255, 255, 0.5);
+        color: #fff;
       }
 
-.FormButton_theme_blueviolet.FormItem_hovered {
-        border-color: rgb(112, 35, 183);
-        background-color: rgb(128, 40, 210);
-        /* box-shadow: inset 0 0 0 1px $hoveredBorderColor, 0 0 2px 2px color($borderColor alpha(50%));*/
-        /* .FormButton-Icon {*/
-        /*   // color: color($iconColor shade(10));*/
+/* color($glowColor alpha(1) shade(10));*/
+
+.FormButton_theme_blueviolet.FormButton_active,
+      .FormButton_theme_blueviolet.FormItem_focused,
+      .FormButton_theme_blueviolet.FormItem_hovered {
+        /* border-color: $hoveredBorderColor;*/
+        -webkit-box-shadow: inset 0 0 1px 1px rgb(112, 35, 183),
+    0 0 4px 1px rgb(127, 40, 208);
+                box-shadow: inset 0 0 1px 1px rgb(112, 35, 183),
+    0 0 4px 1px rgb(127, 40, 208);
+        background-color: rgb(127, 40, 208);
+        /* .FormButton-Icon, .FormButton-Text {*/
+        /*   opacity: .9;*/
         /* }*/
       }
 
-/* ^^^&-Icon, ^^^&-Text {*/
+/* color($glowColor alpha(1));*/
 
-.FormButton_theme_blueviolet.FormItem_hovered .FormButton-Icon, .FormButton_theme_blueviolet.FormItem_hovered .FormButton-Text {
-          opacity: .9;
-        }
+.FormButton_theme_blueviolet.FormButton_active,
+      .FormButton_theme_blueviolet.FormItem_focused {
+        -webkit-box-shadow: inset 0 0 2px 1px rgb(105, 33, 173),
+    0 0 1px 2px rgb(117, 37, 192);
+                box-shadow: inset 0 0 2px 1px rgb(105, 33, 173),
+    0 0 1px 2px rgb(117, 37, 192); /* @calc($formItemOuterGlow - 2)px;*/
+        background-color: rgb(117, 37, 192);
+      }
 
-.FormButton_theme_brown { /* $bgColor: $secondaryColor;*/ /* $formItemBorderColor;*/ /* $textColor: $secondaryContrastColor;*/ border-color: rgb(149, 38, 38); background-color: #a52a2a;}
+.FormButton_theme_brown { /* $formItemBorderColor;*/ /* color($textColor alpha(.5));*/ /* border-color: $borderColor;*/ -webkit-box-shadow: inset 0 0 0 1px rgb(149, 38, 38),
+    0 0 0 0 transparent; box-shadow: inset 0 0 0 1px rgb(149, 38, 38),
+    0 0 0 0 transparent; background-color: #a52a2a; /* $formItemGlowColor;*/}
 
 /* box-shadow: inset 0 0 0 1px $borderColor;*/
 
@@ -1314,25 +1617,39 @@ label.FormLabel-Control[for] {
       }
 
 .FormButton_theme_brown .FormButton-Icon {
-        color: rgba(255, 255, 255, 0.5);
+        color: #fff;
       }
 
-.FormButton_theme_brown.FormItem_hovered {
-        border-color: rgb(134, 34, 34);
-        background-color: rgb(153, 39, 39);
-        /* box-shadow: inset 0 0 0 1px $hoveredBorderColor, 0 0 2px 2px color($borderColor alpha(50%));*/
-        /* .FormButton-Icon {*/
-        /*   // color: color($iconColor shade(10));*/
+/* color($glowColor alpha(1) shade(10));*/
+
+.FormButton_theme_brown.FormButton_active,
+      .FormButton_theme_brown.FormItem_focused,
+      .FormButton_theme_brown.FormItem_hovered {
+        /* border-color: $hoveredBorderColor;*/
+        -webkit-box-shadow: inset 0 0 1px 1px rgb(134, 34, 34),
+    0 0 4px 1px rgb(152, 39, 39);
+                box-shadow: inset 0 0 1px 1px rgb(134, 34, 34),
+    0 0 4px 1px rgb(152, 39, 39);
+        background-color: rgb(152, 39, 39);
+        /* .FormButton-Icon, .FormButton-Text {*/
+        /*   opacity: .9;*/
         /* }*/
       }
 
-/* ^^^&-Icon, ^^^&-Text {*/
+/* color($glowColor alpha(1));*/
 
-.FormButton_theme_brown.FormItem_hovered .FormButton-Icon, .FormButton_theme_brown.FormItem_hovered .FormButton-Text {
-          opacity: .9;
-        }
+.FormButton_theme_brown.FormButton_active,
+      .FormButton_theme_brown.FormItem_focused {
+        -webkit-box-shadow: inset 0 0 2px 1px rgb(127, 32, 32),
+    0 0 1px 2px rgb(140, 36, 36);
+                box-shadow: inset 0 0 2px 1px rgb(127, 32, 32),
+    0 0 1px 2px rgb(140, 36, 36); /* @calc($formItemOuterGlow - 2)px;*/
+        background-color: rgb(140, 36, 36);
+      }
 
-.FormButton_theme_cadetblue { /* $bgColor: $secondaryColor;*/ /* $formItemBorderColor;*/ /* $textColor: $secondaryContrastColor;*/ border-color: rgb(86, 142, 144); background-color: #5f9ea0;}
+.FormButton_theme_cadetblue { /* $formItemBorderColor;*/ /* color($textColor alpha(.5));*/ /* border-color: $borderColor;*/ -webkit-box-shadow: inset 0 0 0 1px rgb(86, 142, 144),
+    0 0 0 0 transparent; box-shadow: inset 0 0 0 1px rgb(86, 142, 144),
+    0 0 0 0 transparent; background-color: #5f9ea0; /* $formItemGlowColor;*/}
 
 /* box-shadow: inset 0 0 0 1px $borderColor;*/
 
@@ -1341,25 +1658,39 @@ label.FormLabel-Control[for] {
       }
 
 .FormButton_theme_cadetblue .FormButton-Icon {
-        color: rgba(255, 255, 255, 0.5);
+        color: #fff;
       }
 
-.FormButton_theme_cadetblue.FormItem_hovered {
-        border-color: rgb(77, 128, 130);
-        background-color: rgb(88, 147, 149);
-        /* box-shadow: inset 0 0 0 1px $hoveredBorderColor, 0 0 2px 2px color($borderColor alpha(50%));*/
-        /* .FormButton-Icon {*/
-        /*   // color: color($iconColor shade(10));*/
+/* color($glowColor alpha(1) shade(10));*/
+
+.FormButton_theme_cadetblue.FormButton_active,
+      .FormButton_theme_cadetblue.FormItem_focused,
+      .FormButton_theme_cadetblue.FormItem_hovered {
+        /* border-color: $hoveredBorderColor;*/
+        -webkit-box-shadow: inset 0 0 1px 1px rgb(77, 128, 130),
+    0 0 4px 1px rgb(87, 145, 147);
+                box-shadow: inset 0 0 1px 1px rgb(77, 128, 130),
+    0 0 4px 1px rgb(87, 145, 147);
+        background-color: rgb(87, 145, 147);
+        /* .FormButton-Icon, .FormButton-Text {*/
+        /*   opacity: .9;*/
         /* }*/
       }
 
-/* ^^^&-Icon, ^^^&-Text {*/
+/* color($glowColor alpha(1));*/
 
-.FormButton_theme_cadetblue.FormItem_hovered .FormButton-Icon, .FormButton_theme_cadetblue.FormItem_hovered .FormButton-Text {
-          opacity: .9;
-        }
+.FormButton_theme_cadetblue.FormButton_active,
+      .FormButton_theme_cadetblue.FormItem_focused {
+        -webkit-box-shadow: inset 0 0 2px 1px rgb(73, 121, 122),
+    0 0 1px 2px rgb(81, 134, 136);
+                box-shadow: inset 0 0 2px 1px rgb(73, 121, 122),
+    0 0 1px 2px rgb(81, 134, 136); /* @calc($formItemOuterGlow - 2)px;*/
+        background-color: rgb(81, 134, 136);
+      }
 
-.FormButton_theme_darkblue { /* $bgColor: $secondaryColor;*/ /* $formItemBorderColor;*/ /* $textColor: $secondaryContrastColor;*/ border-color: rgb(0, 0, 125); background-color: #00008b;}
+.FormButton_theme_darkblue { /* $formItemBorderColor;*/ /* color($textColor alpha(.5));*/ /* border-color: $borderColor;*/ -webkit-box-shadow: inset 0 0 0 1px rgb(0, 0, 125),
+    0 0 0 0 transparent; box-shadow: inset 0 0 0 1px rgb(0, 0, 125),
+    0 0 0 0 transparent; background-color: #00008b; /* $formItemGlowColor;*/}
 
 /* box-shadow: inset 0 0 0 1px $borderColor;*/
 
@@ -1368,25 +1699,39 @@ label.FormLabel-Control[for] {
       }
 
 .FormButton_theme_darkblue .FormButton-Icon {
-        color: rgba(255, 255, 255, 0.5);
+        color: #fff;
       }
 
-.FormButton_theme_darkblue.FormItem_hovered {
-        border-color: rgb(0, 0, 113);
-        background-color: rgb(0, 0, 129);
-        /* box-shadow: inset 0 0 0 1px $hoveredBorderColor, 0 0 2px 2px color($borderColor alpha(50%));*/
-        /* .FormButton-Icon {*/
-        /*   // color: color($iconColor shade(10));*/
+/* color($glowColor alpha(1) shade(10));*/
+
+.FormButton_theme_darkblue.FormButton_active,
+      .FormButton_theme_darkblue.FormItem_focused,
+      .FormButton_theme_darkblue.FormItem_hovered {
+        /* border-color: $hoveredBorderColor;*/
+        -webkit-box-shadow: inset 0 0 1px 1px rgb(0, 0, 113),
+    0 0 4px 1px rgb(0, 0, 128);
+                box-shadow: inset 0 0 1px 1px rgb(0, 0, 113),
+    0 0 4px 1px rgb(0, 0, 128);
+        background-color: rgb(0, 0, 128);
+        /* .FormButton-Icon, .FormButton-Text {*/
+        /*   opacity: .9;*/
         /* }*/
       }
 
-/* ^^^&-Icon, ^^^&-Text {*/
+/* color($glowColor alpha(1));*/
 
-.FormButton_theme_darkblue.FormItem_hovered .FormButton-Icon, .FormButton_theme_darkblue.FormItem_hovered .FormButton-Text {
-          opacity: .9;
-        }
+.FormButton_theme_darkblue.FormButton_active,
+      .FormButton_theme_darkblue.FormItem_focused {
+        -webkit-box-shadow: inset 0 0 2px 1px rgb(0, 0, 106),
+    0 0 1px 2px rgb(0, 0, 118);
+                box-shadow: inset 0 0 2px 1px rgb(0, 0, 106),
+    0 0 1px 2px rgb(0, 0, 118); /* @calc($formItemOuterGlow - 2)px;*/
+        background-color: rgb(0, 0, 118);
+      }
 
-.FormButton_theme_darkcyan { /* $bgColor: $secondaryColor;*/ /* $formItemBorderColor;*/ /* $textColor: $secondaryContrastColor;*/ border-color: rgb(0, 125, 125); background-color: #008b8b;}
+.FormButton_theme_darkcyan { /* $formItemBorderColor;*/ /* color($textColor alpha(.5));*/ /* border-color: $borderColor;*/ -webkit-box-shadow: inset 0 0 0 1px rgb(0, 125, 125),
+    0 0 0 0 transparent; box-shadow: inset 0 0 0 1px rgb(0, 125, 125),
+    0 0 0 0 transparent; background-color: #008b8b; /* $formItemGlowColor;*/}
 
 /* box-shadow: inset 0 0 0 1px $borderColor;*/
 
@@ -1395,25 +1740,39 @@ label.FormLabel-Control[for] {
       }
 
 .FormButton_theme_darkcyan .FormButton-Icon {
-        color: rgba(255, 255, 255, 0.5);
+        color: #fff;
       }
 
-.FormButton_theme_darkcyan.FormItem_hovered {
-        border-color: rgb(0, 113, 113);
-        background-color: rgb(0, 129, 129);
-        /* box-shadow: inset 0 0 0 1px $hoveredBorderColor, 0 0 2px 2px color($borderColor alpha(50%));*/
-        /* .FormButton-Icon {*/
-        /*   // color: color($iconColor shade(10));*/
+/* color($glowColor alpha(1) shade(10));*/
+
+.FormButton_theme_darkcyan.FormButton_active,
+      .FormButton_theme_darkcyan.FormItem_focused,
+      .FormButton_theme_darkcyan.FormItem_hovered {
+        /* border-color: $hoveredBorderColor;*/
+        -webkit-box-shadow: inset 0 0 1px 1px rgb(0, 113, 113),
+    0 0 4px 1px rgb(0, 128, 128);
+                box-shadow: inset 0 0 1px 1px rgb(0, 113, 113),
+    0 0 4px 1px rgb(0, 128, 128);
+        background-color: rgb(0, 128, 128);
+        /* .FormButton-Icon, .FormButton-Text {*/
+        /*   opacity: .9;*/
         /* }*/
       }
 
-/* ^^^&-Icon, ^^^&-Text {*/
+/* color($glowColor alpha(1));*/
 
-.FormButton_theme_darkcyan.FormItem_hovered .FormButton-Icon, .FormButton_theme_darkcyan.FormItem_hovered .FormButton-Text {
-          opacity: .9;
-        }
+.FormButton_theme_darkcyan.FormButton_active,
+      .FormButton_theme_darkcyan.FormItem_focused {
+        -webkit-box-shadow: inset 0 0 2px 1px rgb(0, 106, 106),
+    0 0 1px 2px rgb(0, 118, 118);
+                box-shadow: inset 0 0 2px 1px rgb(0, 106, 106),
+    0 0 1px 2px rgb(0, 118, 118); /* @calc($formItemOuterGlow - 2)px;*/
+        background-color: rgb(0, 118, 118);
+      }
 
-.FormButton_theme_darkgoldenrod { /* $bgColor: $secondaryColor;*/ /* $formItemBorderColor;*/ /* $textColor: $secondaryContrastColor;*/ border-color: rgb(166, 121, 10); background-color: #b8860b;}
+.FormButton_theme_darkgoldenrod { /* $formItemBorderColor;*/ /* color($textColor alpha(.5));*/ /* border-color: $borderColor;*/ -webkit-box-shadow: inset 0 0 0 1px rgb(166, 121, 10),
+    0 0 0 0 transparent; box-shadow: inset 0 0 0 1px rgb(166, 121, 10),
+    0 0 0 0 transparent; background-color: #b8860b; /* $formItemGlowColor;*/}
 
 /* box-shadow: inset 0 0 0 1px $borderColor;*/
 
@@ -1422,25 +1781,39 @@ label.FormLabel-Control[for] {
       }
 
 .FormButton_theme_darkgoldenrod .FormButton-Icon {
-        color: rgba(255, 255, 255, 0.5);
+        color: #fff;
       }
 
-.FormButton_theme_darkgoldenrod.FormItem_hovered {
-        border-color: rgb(149, 109, 9);
-        background-color: rgb(171, 125, 10);
-        /* box-shadow: inset 0 0 0 1px $hoveredBorderColor, 0 0 2px 2px color($borderColor alpha(50%));*/
-        /* .FormButton-Icon {*/
-        /*   // color: color($iconColor shade(10));*/
+/* color($glowColor alpha(1) shade(10));*/
+
+.FormButton_theme_darkgoldenrod.FormButton_active,
+      .FormButton_theme_darkgoldenrod.FormItem_focused,
+      .FormButton_theme_darkgoldenrod.FormItem_hovered {
+        /* border-color: $hoveredBorderColor;*/
+        -webkit-box-shadow: inset 0 0 1px 1px rgb(149, 109, 9),
+    0 0 4px 1px rgb(169, 123, 10);
+                box-shadow: inset 0 0 1px 1px rgb(149, 109, 9),
+    0 0 4px 1px rgb(169, 123, 10);
+        background-color: rgb(169, 123, 10);
+        /* .FormButton-Icon, .FormButton-Text {*/
+        /*   opacity: .9;*/
         /* }*/
       }
 
-/* ^^^&-Icon, ^^^&-Text {*/
+/* color($glowColor alpha(1));*/
 
-.FormButton_theme_darkgoldenrod.FormItem_hovered .FormButton-Icon, .FormButton_theme_darkgoldenrod.FormItem_hovered .FormButton-Text {
-          opacity: .9;
-        }
+.FormButton_theme_darkgoldenrod.FormButton_active,
+      .FormButton_theme_darkgoldenrod.FormItem_focused {
+        -webkit-box-shadow: inset 0 0 2px 1px rgb(141, 103, 9),
+    0 0 1px 2px rgb(156, 114, 9);
+                box-shadow: inset 0 0 2px 1px rgb(141, 103, 9),
+    0 0 1px 2px rgb(156, 114, 9); /* @calc($formItemOuterGlow - 2)px;*/
+        background-color: rgb(156, 114, 9);
+      }
 
-.FormButton_theme_darkorange { /* $bgColor: $secondaryColor;*/ /* $formItemBorderColor;*/ /* $textColor: $secondaryContrastColor;*/ border-color: rgb(230, 126, 0); background-color: #ff8c00;}
+.FormButton_theme_darkorange { /* $formItemBorderColor;*/ /* color($textColor alpha(.5));*/ /* border-color: $borderColor;*/ -webkit-box-shadow: inset 0 0 0 1px rgb(230, 126, 0),
+    0 0 0 0 transparent; box-shadow: inset 0 0 0 1px rgb(230, 126, 0),
+    0 0 0 0 transparent; background-color: #ff8c00; /* $formItemGlowColor;*/}
 
 /* box-shadow: inset 0 0 0 1px $borderColor;*/
 
@@ -1449,25 +1822,39 @@ label.FormLabel-Control[for] {
       }
 
 .FormButton_theme_darkorange .FormButton-Icon {
-        color: rgba(255, 255, 255, 0.5);
+        color: #fff;
       }
 
-.FormButton_theme_darkorange.FormItem_hovered {
-        border-color: rgb(207, 113, 0);
-        background-color: rgb(237, 130, 0);
-        /* box-shadow: inset 0 0 0 1px $hoveredBorderColor, 0 0 2px 2px color($borderColor alpha(50%));*/
-        /* .FormButton-Icon {*/
-        /*   // color: color($iconColor shade(10));*/
+/* color($glowColor alpha(1) shade(10));*/
+
+.FormButton_theme_darkorange.FormButton_active,
+      .FormButton_theme_darkorange.FormItem_focused,
+      .FormButton_theme_darkorange.FormItem_hovered {
+        /* border-color: $hoveredBorderColor;*/
+        -webkit-box-shadow: inset 0 0 1px 1px rgb(207, 113, 0),
+    0 0 4px 1px rgb(235, 129, 0);
+                box-shadow: inset 0 0 1px 1px rgb(207, 113, 0),
+    0 0 4px 1px rgb(235, 129, 0);
+        background-color: rgb(235, 129, 0);
+        /* .FormButton-Icon, .FormButton-Text {*/
+        /*   opacity: .9;*/
         /* }*/
       }
 
-/* ^^^&-Icon, ^^^&-Text {*/
+/* color($glowColor alpha(1));*/
 
-.FormButton_theme_darkorange.FormItem_hovered .FormButton-Icon, .FormButton_theme_darkorange.FormItem_hovered .FormButton-Text {
-          opacity: .9;
-        }
+.FormButton_theme_darkorange.FormButton_active,
+      .FormButton_theme_darkorange.FormItem_focused {
+        -webkit-box-shadow: inset 0 0 2px 1px rgb(196, 107, 0),
+    0 0 1px 2px rgb(217, 119, 0);
+                box-shadow: inset 0 0 2px 1px rgb(196, 107, 0),
+    0 0 1px 2px rgb(217, 119, 0); /* @calc($formItemOuterGlow - 2)px;*/
+        background-color: rgb(217, 119, 0);
+      }
 
-.FormButton_theme_darkorchid { /* $bgColor: $secondaryColor;*/ /* $formItemBorderColor;*/ /* $textColor: $secondaryContrastColor;*/ border-color: rgb(138, 45, 184); background-color: #9932cc;}
+.FormButton_theme_darkorchid { /* $formItemBorderColor;*/ /* color($textColor alpha(.5));*/ /* border-color: $borderColor;*/ -webkit-box-shadow: inset 0 0 0 1px rgb(138, 45, 184),
+    0 0 0 0 transparent; box-shadow: inset 0 0 0 1px rgb(138, 45, 184),
+    0 0 0 0 transparent; background-color: #9932cc; /* $formItemGlowColor;*/}
 
 /* box-shadow: inset 0 0 0 1px $borderColor;*/
 
@@ -1476,25 +1863,39 @@ label.FormLabel-Control[for] {
       }
 
 .FormButton_theme_darkorchid .FormButton-Icon {
-        color: rgba(255, 255, 255, 0.5);
+        color: #fff;
       }
 
-.FormButton_theme_darkorchid.FormItem_hovered {
-        border-color: rgb(124, 41, 166);
-        background-color: rgb(142, 47, 190);
-        /* box-shadow: inset 0 0 0 1px $hoveredBorderColor, 0 0 2px 2px color($borderColor alpha(50%));*/
-        /* .FormButton-Icon {*/
-        /*   // color: color($iconColor shade(10));*/
+/* color($glowColor alpha(1) shade(10));*/
+
+.FormButton_theme_darkorchid.FormButton_active,
+      .FormButton_theme_darkorchid.FormItem_focused,
+      .FormButton_theme_darkorchid.FormItem_hovered {
+        /* border-color: $hoveredBorderColor;*/
+        -webkit-box-shadow: inset 0 0 1px 1px rgb(124, 41, 166),
+    0 0 4px 1px rgb(141, 46, 188);
+                box-shadow: inset 0 0 1px 1px rgb(124, 41, 166),
+    0 0 4px 1px rgb(141, 46, 188);
+        background-color: rgb(141, 46, 188);
+        /* .FormButton-Icon, .FormButton-Text {*/
+        /*   opacity: .9;*/
         /* }*/
       }
 
-/* ^^^&-Icon, ^^^&-Text {*/
+/* color($glowColor alpha(1));*/
 
-.FormButton_theme_darkorchid.FormItem_hovered .FormButton-Icon, .FormButton_theme_darkorchid.FormItem_hovered .FormButton-Text {
-          opacity: .9;
-        }
+.FormButton_theme_darkorchid.FormButton_active,
+      .FormButton_theme_darkorchid.FormItem_focused {
+        -webkit-box-shadow: inset 0 0 2px 1px rgb(117, 38, 156),
+    0 0 1px 2px rgb(130, 43, 173);
+                box-shadow: inset 0 0 2px 1px rgb(117, 38, 156),
+    0 0 1px 2px rgb(130, 43, 173); /* @calc($formItemOuterGlow - 2)px;*/
+        background-color: rgb(130, 43, 173);
+      }
 
-.FormButton_theme_darkred { /* $bgColor: $secondaryColor;*/ /* $formItemBorderColor;*/ /* $textColor: $secondaryContrastColor;*/ border-color: rgb(125, 0, 0); background-color: #8b0000;}
+.FormButton_theme_darkred { /* $formItemBorderColor;*/ /* color($textColor alpha(.5));*/ /* border-color: $borderColor;*/ -webkit-box-shadow: inset 0 0 0 1px rgb(125, 0, 0),
+    0 0 0 0 transparent; box-shadow: inset 0 0 0 1px rgb(125, 0, 0),
+    0 0 0 0 transparent; background-color: #8b0000; /* $formItemGlowColor;*/}
 
 /* box-shadow: inset 0 0 0 1px $borderColor;*/
 
@@ -1503,25 +1904,39 @@ label.FormLabel-Control[for] {
       }
 
 .FormButton_theme_darkred .FormButton-Icon {
-        color: rgba(255, 255, 255, 0.5);
+        color: #fff;
       }
 
-.FormButton_theme_darkred.FormItem_hovered {
-        border-color: rgb(113, 0, 0);
-        background-color: rgb(129, 0, 0);
-        /* box-shadow: inset 0 0 0 1px $hoveredBorderColor, 0 0 2px 2px color($borderColor alpha(50%));*/
-        /* .FormButton-Icon {*/
-        /*   // color: color($iconColor shade(10));*/
+/* color($glowColor alpha(1) shade(10));*/
+
+.FormButton_theme_darkred.FormButton_active,
+      .FormButton_theme_darkred.FormItem_focused,
+      .FormButton_theme_darkred.FormItem_hovered {
+        /* border-color: $hoveredBorderColor;*/
+        -webkit-box-shadow: inset 0 0 1px 1px rgb(113, 0, 0),
+    0 0 4px 1px rgb(128, 0, 0);
+                box-shadow: inset 0 0 1px 1px rgb(113, 0, 0),
+    0 0 4px 1px rgb(128, 0, 0);
+        background-color: rgb(128, 0, 0);
+        /* .FormButton-Icon, .FormButton-Text {*/
+        /*   opacity: .9;*/
         /* }*/
       }
 
-/* ^^^&-Icon, ^^^&-Text {*/
+/* color($glowColor alpha(1));*/
 
-.FormButton_theme_darkred.FormItem_hovered .FormButton-Icon, .FormButton_theme_darkred.FormItem_hovered .FormButton-Text {
-          opacity: .9;
-        }
+.FormButton_theme_darkred.FormButton_active,
+      .FormButton_theme_darkred.FormItem_focused {
+        -webkit-box-shadow: inset 0 0 2px 1px rgb(106, 0, 0),
+    0 0 1px 2px rgb(118, 0, 0);
+                box-shadow: inset 0 0 2px 1px rgb(106, 0, 0),
+    0 0 1px 2px rgb(118, 0, 0); /* @calc($formItemOuterGlow - 2)px;*/
+        background-color: rgb(118, 0, 0);
+      }
 
-.FormButton_theme_darkslateblue { /* $bgColor: $secondaryColor;*/ /* $formItemBorderColor;*/ /* $textColor: $secondaryContrastColor;*/ border-color: rgb(65, 55, 125); background-color: #483d8b;}
+.FormButton_theme_darkslateblue { /* $formItemBorderColor;*/ /* color($textColor alpha(.5));*/ /* border-color: $borderColor;*/ -webkit-box-shadow: inset 0 0 0 1px rgb(65, 55, 125),
+    0 0 0 0 transparent; box-shadow: inset 0 0 0 1px rgb(65, 55, 125),
+    0 0 0 0 transparent; background-color: #483d8b; /* $formItemGlowColor;*/}
 
 /* box-shadow: inset 0 0 0 1px $borderColor;*/
 
@@ -1530,25 +1945,39 @@ label.FormLabel-Control[for] {
       }
 
 .FormButton_theme_darkslateblue .FormButton-Icon {
-        color: rgba(255, 255, 255, 0.5);
+        color: #fff;
       }
 
-.FormButton_theme_darkslateblue.FormItem_hovered {
-        border-color: rgb(59, 50, 113);
-        background-color: rgb(67, 57, 129);
-        /* box-shadow: inset 0 0 0 1px $hoveredBorderColor, 0 0 2px 2px color($borderColor alpha(50%));*/
-        /* .FormButton-Icon {*/
-        /*   // color: color($iconColor shade(10));*/
+/* color($glowColor alpha(1) shade(10));*/
+
+.FormButton_theme_darkslateblue.FormButton_active,
+      .FormButton_theme_darkslateblue.FormItem_focused,
+      .FormButton_theme_darkslateblue.FormItem_hovered {
+        /* border-color: $hoveredBorderColor;*/
+        -webkit-box-shadow: inset 0 0 1px 1px rgb(59, 50, 113),
+    0 0 4px 1px rgb(66, 56, 128);
+                box-shadow: inset 0 0 1px 1px rgb(59, 50, 113),
+    0 0 4px 1px rgb(66, 56, 128);
+        background-color: rgb(66, 56, 128);
+        /* .FormButton-Icon, .FormButton-Text {*/
+        /*   opacity: .9;*/
         /* }*/
       }
 
-/* ^^^&-Icon, ^^^&-Text {*/
+/* color($glowColor alpha(1));*/
 
-.FormButton_theme_darkslateblue.FormItem_hovered .FormButton-Icon, .FormButton_theme_darkslateblue.FormItem_hovered .FormButton-Text {
-          opacity: .9;
-        }
+.FormButton_theme_darkslateblue.FormButton_active,
+      .FormButton_theme_darkslateblue.FormItem_focused {
+        -webkit-box-shadow: inset 0 0 2px 1px rgb(55, 47, 106),
+    0 0 1px 2px rgb(61, 52, 118);
+                box-shadow: inset 0 0 2px 1px rgb(55, 47, 106),
+    0 0 1px 2px rgb(61, 52, 118); /* @calc($formItemOuterGlow - 2)px;*/
+        background-color: rgb(61, 52, 118);
+      }
 
-.FormButton_theme_darkslategray { /* $bgColor: $secondaryColor;*/ /* $formItemBorderColor;*/ /* $textColor: $secondaryContrastColor;*/ border-color: rgb(42, 71, 71); background-color: #2f4f4f;}
+.FormButton_theme_darkslategray { /* $formItemBorderColor;*/ /* color($textColor alpha(.5));*/ /* border-color: $borderColor;*/ -webkit-box-shadow: inset 0 0 0 1px rgb(42, 71, 71),
+    0 0 0 0 transparent; box-shadow: inset 0 0 0 1px rgb(42, 71, 71),
+    0 0 0 0 transparent; background-color: #2f4f4f; /* $formItemGlowColor;*/}
 
 /* box-shadow: inset 0 0 0 1px $borderColor;*/
 
@@ -1557,28 +1986,40 @@ label.FormLabel-Control[for] {
       }
 
 .FormButton_theme_darkslategray .FormButton-Icon {
-        color: rgba(255, 255, 255, 0.5);
+        color: #fff;
       }
 
-.FormButton_theme_darkslategray.FormItem_hovered {
-        border-color: rgb(38, 64, 64);
-        background-color: rgb(44, 73, 73);
-        /* box-shadow: inset 0 0 0 1px $hoveredBorderColor, 0 0 2px 2px color($borderColor alpha(50%));*/
-        /* .FormButton-Icon {*/
-        /*   // color: color($iconColor shade(10));*/
+/* color($glowColor alpha(1) shade(10));*/
+
+.FormButton_theme_darkslategray.FormButton_active,
+      .FormButton_theme_darkslategray.FormItem_focused,
+      .FormButton_theme_darkslategray.FormItem_hovered {
+        /* border-color: $hoveredBorderColor;*/
+        -webkit-box-shadow: inset 0 0 1px 1px rgb(38, 64, 64),
+    0 0 4px 1px rgb(43, 73, 73);
+                box-shadow: inset 0 0 1px 1px rgb(38, 64, 64),
+    0 0 4px 1px rgb(43, 73, 73);
+        background-color: rgb(43, 73, 73);
+        /* .FormButton-Icon, .FormButton-Text {*/
+        /*   opacity: .9;*/
         /* }*/
       }
 
-/* ^^^&-Icon, ^^^&-Text {*/
+/* color($glowColor alpha(1));*/
 
-.FormButton_theme_darkslategray.FormItem_hovered .FormButton-Icon, .FormButton_theme_darkslategray.FormItem_hovered .FormButton-Text {
-          opacity: .9;
-        }
+.FormButton_theme_darkslategray.FormButton_active,
+      .FormButton_theme_darkslategray.FormItem_focused {
+        -webkit-box-shadow: inset 0 0 2px 1px rgb(36, 60, 60),
+    0 0 1px 2px rgb(40, 67, 67);
+                box-shadow: inset 0 0 2px 1px rgb(36, 60, 60),
+    0 0 1px 2px rgb(40, 67, 67); /* @calc($formItemOuterGlow - 2)px;*/
+        background-color: rgb(40, 67, 67);
+      }
 
 /** @module FormGroup.styles
  *  @class FormGroup
  *  @since 2020.07.20, 19:24
- *  @changed 2020.07.20, 19:24
+ *  @changed 2021.01.20, 22:00
  */
 
 .FormGroup {
@@ -1605,43 +2046,32 @@ label.FormLabel-Control[for] {
       background-color: #f0f0f0;
     }
 
-/* border: 1px solid blue; // DEBUG*/
-
-.FormGroup_stack, .FormGroup_stack_horizontal {
-      display: -ms-flexbox;
-      display: flex;
-      -ms-flex-wrap: nowrap;
-          flex-wrap: nowrap;
-      -ms-flex-align: stretch;
-          align-items: stretch;
-    }
-
 .FormGroup_stack {
-      -ms-flex-direction: column;
-          flex-direction: column;
-    }
+    /* border: 1px solid blue; // DEBUG*/
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: nowrap;
+        flex-wrap: nowrap;
+    -ms-flex-align: stretch;
+        align-items: stretch;
+    -ms-flex-direction: column;
+        flex-direction: column;
+  }
 
-.FormGroup_stack_horizontal {
-      -ms-flex-direction: row;
-          flex-direction: row;
-    }
-
-.FormGroup_flow, .FormGroup_flow_vertical {
-      display: -ms-flexbox;
-      display: flex;
-    }
+.FormGroup_flow {
+    display: -ms-flexbox;
+    display: flex;
+  }
 
 /* flex-wrap: wrap;*/
 
-.FormGroup_flow > .FormItem_fill, .FormGroup_flow_vertical > .FormItem_fill {
-        -ms-flex: 1 1;
-            flex: 1 1;
-      }
+.FormGroup_flow > .FormItem {
+      min-width: 32px; /* Hint for limiting the maximum width (overflow causes cropping items outer glow on ubteractive control events).*/
+    }
 
-.FormGroup_flow_vertical {
-      -ms-flex-direction: column;
-          flex-direction: column;
-      /* flex-wrap: nowrap;*/
+.FormGroup_flow > .FormItem_fill {
+      -ms-flex: 1 1;
+          flex: 1 1;
     }
 
 .FormGroup_flow.FormGroup_alignItems_center {
@@ -1778,6 +2208,8 @@ label.FormLabel-Control[for] {
  */
 
 .ModalPortal, .ModalPortal-Wrapper {
+    width: 100%;
+    height: 100%;
     /* position: fixed;*/
     position: absolute;
     left: 0;
@@ -2037,6 +2469,11 @@ label.FormLabel-Control[for] {
     cursor: pointer;
   }
 
+.MenuItem {
+  -webkit-transition: background 250ms;
+  transition: background 250ms;
+}
+
 .MenuItem.FormItem_hovered {
       /* TODO: Use themes (via `themeColors`)?*/
       background-color: #07f;
@@ -2191,6 +2628,42 @@ input.FormTextInput-Control:-webkit-autofill { /* Emulate input frame (hidden by
         opacity: .75;
       }
 
+.FormTextInput {
+
+  background-color: #fff;
+
+  -webkit-transition: -webkit-box-shadow 250ms;
+
+  transition: -webkit-box-shadow 250ms;
+
+  transition: box-shadow 250ms;
+
+  transition: box-shadow 250ms, -webkit-box-shadow 250ms;
+  -webkit-box-shadow: inset 0 0 0 1px #ccc,
+    0 0 0 0 transparent;
+          box-shadow: inset 0 0 0 1px #ccc,
+    0 0 0 0 transparent;
+}
+
+/* color($glowColor shade(10));*/
+
+.FormTextInput.FormItem_focused,
+  .FormTextInput.FormItem_hovered {
+    -webkit-box-shadow: inset 0 0 2px 1px rgb(184, 184, 184),
+    0 0 4px 1px rgb(204, 204, 204);
+            box-shadow: inset 0 0 2px 1px rgb(184, 184, 184),
+    0 0 4px 1px rgb(204, 204, 204);
+  }
+
+/* Frame...*/
+
+.FormTextInput.FormItem_focused {
+    -webkit-box-shadow: inset 0 0 2px 1px rgb(0, 101, 217),
+    0 0 5px 0px rgba(0, 119, 255, 0.8);
+            box-shadow: inset 0 0 2px 1px rgb(0, 101, 217),
+    0 0 5px 0px rgba(0, 119, 255, 0.8); /* , 2px, 1px; // @calc($formItemOuterGlow - 2)px;*/
+  }
+
 
 /** @module FormPasswordInput.styles
  *  @since 2020.10.29, 23:50
@@ -2204,7 +2677,7 @@ input.FormTextInput-Control:-webkit-autofill { /* Emulate input frame (hidden by
 /** @module FormRadio.styles
  *  @class FormRadio
  *  @since 2020.04.02, 14:53
- *  @changed 2020.04.02, 14:53
+ *  @changed 2021.01.20, 23:28
  */
 
 .FormRadio { /* Basic geometry. For styles look for `FormRadio-Styles.pcss`*/
@@ -2268,7 +2741,7 @@ input.FormTextInput-Control:-webkit-autofill { /* Emulate input frame (hidden by
       opacity: .9;
     }
 
-.FormRadio-Input {
+.FormRadio-Input { /* Invisible control*/
     opacity: 0;
     cursor: pointer;
     height: 32px;
@@ -2279,14 +2752,14 @@ input.FormTextInput-Control:-webkit-autofill { /* Emulate input frame (hidden by
     margin: 0;
   }
 
-.FormRadio-Input:focus {
-      /* outline: 0;*/
+.FormRadio-Input:focus { /* Invisible: isn't required.*/
+      outline: 0;
     }
 
 /** @module FormRadio.styles
  *  @class FormRadio
  *  @since 2020.04.02, 14:53
- *  @changed 2020.04.02, 14:53
+ *  @changed 2021.01.20, 23:28
  */
 
 /* $focusedColor: color($defaultColor shade(20));*/
@@ -2302,8 +2775,8 @@ input.FormTextInput-Control:-webkit-autofill { /* Emulate input frame (hidden by
     }
 
 .FormItem_hovered.FormRadio .FormRadio-Frame, .FormItem_hovered.FormRadio_theme_default .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 0 3px rgb(184, 184, 184);
-                box-shadow: 0 0 0 3px rgb(184, 184, 184);
+        -webkit-box-shadow: 0 0 2px 3px rgb(184, 184, 184);
+                box-shadow: 0 0 2px 3px rgb(184, 184, 184);
       }
 
 .FormItem_hovered.FormRadio .FormRadio-Actor, .FormItem_hovered.FormRadio_theme_default .FormRadio-Actor {
@@ -2311,8 +2784,8 @@ input.FormTextInput-Control:-webkit-autofill { /* Emulate input frame (hidden by
       }
 
 .FormItem_focused.FormRadio .FormRadio-Frame, .FormItem_focused.FormRadio_theme_default .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 0 3px rgb(184, 184, 184);
-                box-shadow: 0 0 0 3px rgb(184, 184, 184);
+        -webkit-box-shadow: 0 0 3px 3px rgb(184, 184, 184);
+                box-shadow: 0 0 3px 3px rgb(184, 184, 184);
       }
 
 .FormItem_focused.FormRadio .FormRadio-Actor, .FormItem_focused.FormRadio_theme_default .FormRadio-Actor {
@@ -2320,13 +2793,18 @@ input.FormTextInput-Control:-webkit-autofill { /* Emulate input frame (hidden by
       }
 
 .FormItem_hovered.FormItem_focused.FormRadio .FormRadio-Frame, .FormItem_hovered.FormItem_focused.FormRadio_theme_default .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 0 3px rgb(163, 163, 163);
-                box-shadow: 0 0 0 3px rgb(163, 163, 163);
+        -webkit-box-shadow: 0 0 3px 3px rgb(163, 163, 163);
+                box-shadow: 0 0 3px 3px rgb(163, 163, 163);
       }
 
 .FormItem_hovered.FormItem_focused.FormRadio .FormRadio-Actor, .FormItem_hovered.FormItem_focused.FormRadio_theme_default .FormRadio-Actor {
         background-color: rgb(163, 163, 163);
       }
+
+.FormRadio_active.FormRadio .FormRadio-Frame, .FormRadio_active.FormRadio.FormItem_focused .FormRadio-Frame, .FormRadio_active.FormRadio_theme_default .FormRadio-Frame, .FormRadio_active.FormRadio_theme_default.FormItem_focused .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 4px rgb(184, 184, 184);
+                  box-shadow: 0 0 3px 4px rgb(184, 184, 184);
+        }
 
 /* $hoveredColor: color($defaultColor shade(10));*/
 
@@ -2341,8 +2819,8 @@ input.FormTextInput-Control:-webkit-autofill { /* Emulate input frame (hidden by
     }
 
 .FormItem_hovered.FormRadio_theme_primary .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 0 3px rgb(0, 107, 230);
-                box-shadow: 0 0 0 3px rgb(0, 107, 230);
+        -webkit-box-shadow: 0 0 2px 3px rgb(0, 107, 230);
+                box-shadow: 0 0 2px 3px rgb(0, 107, 230);
       }
 
 .FormItem_hovered.FormRadio_theme_primary .FormRadio-Actor {
@@ -2350,8 +2828,8 @@ input.FormTextInput-Control:-webkit-autofill { /* Emulate input frame (hidden by
       }
 
 .FormItem_focused.FormRadio_theme_primary .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 0 3px rgb(0, 107, 230);
-                box-shadow: 0 0 0 3px rgb(0, 107, 230);
+        -webkit-box-shadow: 0 0 3px 3px rgb(0, 107, 230);
+                box-shadow: 0 0 3px 3px rgb(0, 107, 230);
       }
 
 .FormItem_focused.FormRadio_theme_primary .FormRadio-Actor {
@@ -2359,13 +2837,18 @@ input.FormTextInput-Control:-webkit-autofill { /* Emulate input frame (hidden by
       }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_primary .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 0 3px rgb(0, 95, 204);
-                box-shadow: 0 0 0 3px rgb(0, 95, 204);
+        -webkit-box-shadow: 0 0 3px 3px rgb(0, 95, 204);
+                box-shadow: 0 0 3px 3px rgb(0, 95, 204);
       }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_primary .FormRadio-Actor {
         background-color: rgb(0, 95, 204);
       }
+
+.FormRadio_active.FormRadio_theme_primary .FormRadio-Frame, .FormRadio_active.FormRadio_theme_primary.FormItem_focused .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 4px rgb(0, 107, 230);
+                  box-shadow: 0 0 3px 4px rgb(0, 107, 230);
+        }
 
 /* 'Background' color*/
 
@@ -2380,8 +2863,8 @@ input.FormTextInput-Control:-webkit-autofill { /* Emulate input frame (hidden by
     }
 
 .FormItem_hovered.FormRadio_theme_secondary .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 0 3px rgb(92, 107, 107);
-                box-shadow: 0 0 0 3px rgb(92, 107, 107);
+        -webkit-box-shadow: 0 0 2px 3px rgb(92, 107, 107);
+                box-shadow: 0 0 2px 3px rgb(92, 107, 107);
       }
 
 .FormItem_hovered.FormRadio_theme_secondary .FormRadio-Actor {
@@ -2389,8 +2872,8 @@ input.FormTextInput-Control:-webkit-autofill { /* Emulate input frame (hidden by
       }
 
 .FormItem_focused.FormRadio_theme_secondary .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 0 3px rgb(92, 107, 107);
-                box-shadow: 0 0 0 3px rgb(92, 107, 107);
+        -webkit-box-shadow: 0 0 3px 3px rgb(92, 107, 107);
+                box-shadow: 0 0 3px 3px rgb(92, 107, 107);
       }
 
 .FormItem_focused.FormRadio_theme_secondary .FormRadio-Actor {
@@ -2398,13 +2881,18 @@ input.FormTextInput-Control:-webkit-autofill { /* Emulate input frame (hidden by
       }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_secondary .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 0 3px rgb(82, 95, 95);
-                box-shadow: 0 0 0 3px rgb(82, 95, 95);
+        -webkit-box-shadow: 0 0 3px 3px rgb(82, 95, 95);
+                box-shadow: 0 0 3px 3px rgb(82, 95, 95);
       }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_secondary .FormRadio-Actor {
         background-color: rgb(82, 95, 95);
       }
+
+.FormRadio_active.FormRadio_theme_secondary .FormRadio-Frame, .FormRadio_active.FormRadio_theme_secondary.FormItem_focused .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 4px rgb(92, 107, 107);
+                  box-shadow: 0 0 3px 4px rgb(92, 107, 107);
+        }
 
 /* Generate theme colors...*/
 
@@ -2419,8 +2907,8 @@ input.FormTextInput-Control:-webkit-autofill { /* Emulate input frame (hidden by
     }
 
 .FormItem_hovered.FormRadio_theme_error .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 0 3px rgb(184, 46, 46);
-                box-shadow: 0 0 0 3px rgb(184, 46, 46);
+        -webkit-box-shadow: 0 0 2px 3px rgb(184, 46, 46);
+                box-shadow: 0 0 2px 3px rgb(184, 46, 46);
       }
 
 .FormItem_hovered.FormRadio_theme_error .FormRadio-Actor {
@@ -2428,8 +2916,8 @@ input.FormTextInput-Control:-webkit-autofill { /* Emulate input frame (hidden by
       }
 
 .FormItem_focused.FormRadio_theme_error .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 0 3px rgb(184, 46, 46);
-                box-shadow: 0 0 0 3px rgb(184, 46, 46);
+        -webkit-box-shadow: 0 0 3px 3px rgb(184, 46, 46);
+                box-shadow: 0 0 3px 3px rgb(184, 46, 46);
       }
 
 .FormItem_focused.FormRadio_theme_error .FormRadio-Actor {
@@ -2437,13 +2925,18 @@ input.FormTextInput-Control:-webkit-autofill { /* Emulate input frame (hidden by
       }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_error .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 0 3px rgb(163, 41, 41);
-                box-shadow: 0 0 0 3px rgb(163, 41, 41);
+        -webkit-box-shadow: 0 0 3px 3px rgb(163, 41, 41);
+                box-shadow: 0 0 3px 3px rgb(163, 41, 41);
       }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_error .FormRadio-Actor {
         background-color: rgb(163, 41, 41);
       }
+
+.FormRadio_active.FormRadio_theme_error .FormRadio-Frame, .FormRadio_active.FormRadio_theme_error.FormItem_focused .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 4px rgb(184, 46, 46);
+                  box-shadow: 0 0 3px 4px rgb(184, 46, 46);
+        }
 
 /* Basic colors:*/
 
@@ -2458,8 +2951,8 @@ input.FormTextInput-Control:-webkit-autofill { /* Emulate input frame (hidden by
     }
 
 .FormItem_hovered.FormRadio_theme_warn .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 0 3px rgb(230, 107, 46);
-                box-shadow: 0 0 0 3px rgb(230, 107, 46);
+        -webkit-box-shadow: 0 0 2px 3px rgb(230, 107, 46);
+                box-shadow: 0 0 2px 3px rgb(230, 107, 46);
       }
 
 .FormItem_hovered.FormRadio_theme_warn .FormRadio-Actor {
@@ -2467,8 +2960,8 @@ input.FormTextInput-Control:-webkit-autofill { /* Emulate input frame (hidden by
       }
 
 .FormItem_focused.FormRadio_theme_warn .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 0 3px rgb(230, 107, 46);
-                box-shadow: 0 0 0 3px rgb(230, 107, 46);
+        -webkit-box-shadow: 0 0 3px 3px rgb(230, 107, 46);
+                box-shadow: 0 0 3px 3px rgb(230, 107, 46);
       }
 
 .FormItem_focused.FormRadio_theme_warn .FormRadio-Actor {
@@ -2476,13 +2969,18 @@ input.FormTextInput-Control:-webkit-autofill { /* Emulate input frame (hidden by
       }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_warn .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 0 3px rgb(204, 95, 41);
-                box-shadow: 0 0 0 3px rgb(204, 95, 41);
+        -webkit-box-shadow: 0 0 3px 3px rgb(204, 95, 41);
+                box-shadow: 0 0 3px 3px rgb(204, 95, 41);
       }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_warn .FormRadio-Actor {
         background-color: rgb(204, 95, 41);
       }
+
+.FormRadio_active.FormRadio_theme_warn .FormRadio-Frame, .FormRadio_active.FormRadio_theme_warn.FormItem_focused .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 4px rgb(230, 107, 46);
+                  box-shadow: 0 0 3px 4px rgb(230, 107, 46);
+        }
 
 /* Sizes...*/
 
@@ -2497,8 +2995,8 @@ input.FormTextInput-Control:-webkit-autofill { /* Emulate input frame (hidden by
     }
 
 .FormItem_hovered.FormRadio_theme_success .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 0 3px rgb(77, 138, 46);
-                box-shadow: 0 0 0 3px rgb(77, 138, 46);
+        -webkit-box-shadow: 0 0 2px 3px rgb(77, 138, 46);
+                box-shadow: 0 0 2px 3px rgb(77, 138, 46);
       }
 
 .FormItem_hovered.FormRadio_theme_success .FormRadio-Actor {
@@ -2506,8 +3004,8 @@ input.FormTextInput-Control:-webkit-autofill { /* Emulate input frame (hidden by
       }
 
 .FormItem_focused.FormRadio_theme_success .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 0 3px rgb(77, 138, 46);
-                box-shadow: 0 0 0 3px rgb(77, 138, 46);
+        -webkit-box-shadow: 0 0 3px 3px rgb(77, 138, 46);
+                box-shadow: 0 0 3px 3px rgb(77, 138, 46);
       }
 
 .FormItem_focused.FormRadio_theme_success .FormRadio-Actor {
@@ -2515,13 +3013,18 @@ input.FormTextInput-Control:-webkit-autofill { /* Emulate input frame (hidden by
       }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_success .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 0 3px rgb(68, 122, 41);
-                box-shadow: 0 0 0 3px rgb(68, 122, 41);
+        -webkit-box-shadow: 0 0 3px 3px rgb(68, 122, 41);
+                box-shadow: 0 0 3px 3px rgb(68, 122, 41);
       }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_success .FormRadio-Actor {
         background-color: rgb(68, 122, 41);
       }
+
+.FormRadio_active.FormRadio_theme_success .FormRadio-Frame, .FormRadio_active.FormRadio_theme_success.FormItem_focused .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 4px rgb(77, 138, 46);
+                  box-shadow: 0 0 3px 4px rgb(77, 138, 46);
+        }
 
 /* Styles. For basic geometry look for `FormRadio.pcss`*/
 
@@ -2536,8 +3039,8 @@ input.FormTextInput-Control:-webkit-autofill { /* Emulate input frame (hidden by
     }
 
 .FormItem_hovered.FormRadio_theme_info .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 0 3px rgb(0, 107, 230);
-                box-shadow: 0 0 0 3px rgb(0, 107, 230);
+        -webkit-box-shadow: 0 0 2px 3px rgb(0, 107, 230);
+                box-shadow: 0 0 2px 3px rgb(0, 107, 230);
       }
 
 .FormItem_hovered.FormRadio_theme_info .FormRadio-Actor {
@@ -2545,8 +3048,8 @@ input.FormTextInput-Control:-webkit-autofill { /* Emulate input frame (hidden by
       }
 
 .FormItem_focused.FormRadio_theme_info .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 0 3px rgb(0, 107, 230);
-                box-shadow: 0 0 0 3px rgb(0, 107, 230);
+        -webkit-box-shadow: 0 0 3px 3px rgb(0, 107, 230);
+                box-shadow: 0 0 3px 3px rgb(0, 107, 230);
       }
 
 .FormItem_focused.FormRadio_theme_info .FormRadio-Actor {
@@ -2554,13 +3057,18 @@ input.FormTextInput-Control:-webkit-autofill { /* Emulate input frame (hidden by
       }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_info .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 0 3px rgb(0, 95, 204);
-                box-shadow: 0 0 0 3px rgb(0, 95, 204);
+        -webkit-box-shadow: 0 0 3px 3px rgb(0, 95, 204);
+                box-shadow: 0 0 3px 3px rgb(0, 95, 204);
       }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_info .FormRadio-Actor {
         background-color: rgb(0, 95, 204);
       }
+
+.FormRadio_active.FormRadio_theme_info .FormRadio-Frame, .FormRadio_active.FormRadio_theme_info.FormItem_focused .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 4px rgb(0, 107, 230);
+                  box-shadow: 0 0 3px 4px rgb(0, 107, 230);
+        }
 
 .FormRadio_theme_confirm .FormRadio-Frame {
       -webkit-box-shadow: 0 0 0 2px #891;
@@ -2573,8 +3081,8 @@ input.FormTextInput-Control:-webkit-autofill { /* Emulate input frame (hidden by
     }
 
 .FormItem_hovered.FormRadio_theme_confirm .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 0 3px rgb(122, 138, 15);
-                box-shadow: 0 0 0 3px rgb(122, 138, 15);
+        -webkit-box-shadow: 0 0 2px 3px rgb(122, 138, 15);
+                box-shadow: 0 0 2px 3px rgb(122, 138, 15);
       }
 
 .FormItem_hovered.FormRadio_theme_confirm .FormRadio-Actor {
@@ -2582,8 +3090,8 @@ input.FormTextInput-Control:-webkit-autofill { /* Emulate input frame (hidden by
       }
 
 .FormItem_focused.FormRadio_theme_confirm .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 0 3px rgb(122, 138, 15);
-                box-shadow: 0 0 0 3px rgb(122, 138, 15);
+        -webkit-box-shadow: 0 0 3px 3px rgb(122, 138, 15);
+                box-shadow: 0 0 3px 3px rgb(122, 138, 15);
       }
 
 .FormItem_focused.FormRadio_theme_confirm .FormRadio-Actor {
@@ -2591,13 +3099,18 @@ input.FormTextInput-Control:-webkit-autofill { /* Emulate input frame (hidden by
       }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_confirm .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 0 3px rgb(109, 122, 14);
-                box-shadow: 0 0 0 3px rgb(109, 122, 14);
+        -webkit-box-shadow: 0 0 3px 3px rgb(109, 122, 14);
+                box-shadow: 0 0 3px 3px rgb(109, 122, 14);
       }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_confirm .FormRadio-Actor {
         background-color: rgb(109, 122, 14);
       }
+
+.FormRadio_active.FormRadio_theme_confirm .FormRadio-Frame, .FormRadio_active.FormRadio_theme_confirm.FormItem_focused .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 4px rgb(122, 138, 15);
+                  box-shadow: 0 0 3px 4px rgb(122, 138, 15);
+        }
 
 .FormRadio_theme_select .FormRadio-Frame {
       -webkit-box-shadow: 0 0 0 2px #05b;
@@ -2610,8 +3123,8 @@ input.FormTextInput-Control:-webkit-autofill { /* Emulate input frame (hidden by
     }
 
 .FormItem_hovered.FormRadio_theme_select .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 0 3px rgb(0, 77, 168);
-                box-shadow: 0 0 0 3px rgb(0, 77, 168);
+        -webkit-box-shadow: 0 0 2px 3px rgb(0, 77, 168);
+                box-shadow: 0 0 2px 3px rgb(0, 77, 168);
       }
 
 .FormItem_hovered.FormRadio_theme_select .FormRadio-Actor {
@@ -2619,8 +3132,8 @@ input.FormTextInput-Control:-webkit-autofill { /* Emulate input frame (hidden by
       }
 
 .FormItem_focused.FormRadio_theme_select .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 0 3px rgb(0, 77, 168);
-                box-shadow: 0 0 0 3px rgb(0, 77, 168);
+        -webkit-box-shadow: 0 0 3px 3px rgb(0, 77, 168);
+                box-shadow: 0 0 3px 3px rgb(0, 77, 168);
       }
 
 .FormItem_focused.FormRadio_theme_select .FormRadio-Actor {
@@ -2628,13 +3141,18 @@ input.FormTextInput-Control:-webkit-autofill { /* Emulate input frame (hidden by
       }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_select .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 0 3px rgb(0, 68, 150);
-                box-shadow: 0 0 0 3px rgb(0, 68, 150);
+        -webkit-box-shadow: 0 0 3px 3px rgb(0, 68, 150);
+                box-shadow: 0 0 3px 3px rgb(0, 68, 150);
       }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_select .FormRadio-Actor {
         background-color: rgb(0, 68, 150);
       }
+
+.FormRadio_active.FormRadio_theme_select .FormRadio-Frame, .FormRadio_active.FormRadio_theme_select.FormItem_focused .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 4px rgb(0, 77, 168);
+                  box-shadow: 0 0 3px 4px rgb(0, 77, 168);
+        }
 
 .FormRadio_theme_maroon .FormRadio-Frame {
       -webkit-box-shadow: 0 0 0 2px #800000;
@@ -2647,8 +3165,8 @@ input.FormTextInput-Control:-webkit-autofill { /* Emulate input frame (hidden by
     }
 
 .FormItem_hovered.FormRadio_theme_maroon .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 0 3px rgb(115, 0, 0);
-                box-shadow: 0 0 0 3px rgb(115, 0, 0);
+        -webkit-box-shadow: 0 0 2px 3px rgb(115, 0, 0);
+                box-shadow: 0 0 2px 3px rgb(115, 0, 0);
       }
 
 .FormItem_hovered.FormRadio_theme_maroon .FormRadio-Actor {
@@ -2656,8 +3174,8 @@ input.FormTextInput-Control:-webkit-autofill { /* Emulate input frame (hidden by
       }
 
 .FormItem_focused.FormRadio_theme_maroon .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 0 3px rgb(115, 0, 0);
-                box-shadow: 0 0 0 3px rgb(115, 0, 0);
+        -webkit-box-shadow: 0 0 3px 3px rgb(115, 0, 0);
+                box-shadow: 0 0 3px 3px rgb(115, 0, 0);
       }
 
 .FormItem_focused.FormRadio_theme_maroon .FormRadio-Actor {
@@ -2665,13 +3183,18 @@ input.FormTextInput-Control:-webkit-autofill { /* Emulate input frame (hidden by
       }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_maroon .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 0 3px rgb(102, 0, 0);
-                box-shadow: 0 0 0 3px rgb(102, 0, 0);
+        -webkit-box-shadow: 0 0 3px 3px rgb(102, 0, 0);
+                box-shadow: 0 0 3px 3px rgb(102, 0, 0);
       }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_maroon .FormRadio-Actor {
         background-color: rgb(102, 0, 0);
       }
+
+.FormRadio_active.FormRadio_theme_maroon .FormRadio-Frame, .FormRadio_active.FormRadio_theme_maroon.FormItem_focused .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 4px rgb(115, 0, 0);
+                  box-shadow: 0 0 3px 4px rgb(115, 0, 0);
+        }
 
 .FormRadio_theme_red .FormRadio-Frame {
       -webkit-box-shadow: 0 0 0 2px #ff0000;
@@ -2684,8 +3207,8 @@ input.FormTextInput-Control:-webkit-autofill { /* Emulate input frame (hidden by
     }
 
 .FormItem_hovered.FormRadio_theme_red .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 0 3px rgb(230, 0, 0);
-                box-shadow: 0 0 0 3px rgb(230, 0, 0);
+        -webkit-box-shadow: 0 0 2px 3px rgb(230, 0, 0);
+                box-shadow: 0 0 2px 3px rgb(230, 0, 0);
       }
 
 .FormItem_hovered.FormRadio_theme_red .FormRadio-Actor {
@@ -2693,8 +3216,8 @@ input.FormTextInput-Control:-webkit-autofill { /* Emulate input frame (hidden by
       }
 
 .FormItem_focused.FormRadio_theme_red .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 0 3px rgb(230, 0, 0);
-                box-shadow: 0 0 0 3px rgb(230, 0, 0);
+        -webkit-box-shadow: 0 0 3px 3px rgb(230, 0, 0);
+                box-shadow: 0 0 3px 3px rgb(230, 0, 0);
       }
 
 .FormItem_focused.FormRadio_theme_red .FormRadio-Actor {
@@ -2702,13 +3225,18 @@ input.FormTextInput-Control:-webkit-autofill { /* Emulate input frame (hidden by
       }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_red .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 0 3px rgb(204, 0, 0);
-                box-shadow: 0 0 0 3px rgb(204, 0, 0);
+        -webkit-box-shadow: 0 0 3px 3px rgb(204, 0, 0);
+                box-shadow: 0 0 3px 3px rgb(204, 0, 0);
       }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_red .FormRadio-Actor {
         background-color: rgb(204, 0, 0);
       }
+
+.FormRadio_active.FormRadio_theme_red .FormRadio-Frame, .FormRadio_active.FormRadio_theme_red.FormItem_focused .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 4px rgb(230, 0, 0);
+                  box-shadow: 0 0 3px 4px rgb(230, 0, 0);
+        }
 
 .FormRadio_theme_purple .FormRadio-Frame {
       -webkit-box-shadow: 0 0 0 2px #800080;
@@ -2721,8 +3249,8 @@ input.FormTextInput-Control:-webkit-autofill { /* Emulate input frame (hidden by
     }
 
 .FormItem_hovered.FormRadio_theme_purple .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 0 3px rgb(115, 0, 115);
-                box-shadow: 0 0 0 3px rgb(115, 0, 115);
+        -webkit-box-shadow: 0 0 2px 3px rgb(115, 0, 115);
+                box-shadow: 0 0 2px 3px rgb(115, 0, 115);
       }
 
 .FormItem_hovered.FormRadio_theme_purple .FormRadio-Actor {
@@ -2730,8 +3258,8 @@ input.FormTextInput-Control:-webkit-autofill { /* Emulate input frame (hidden by
       }
 
 .FormItem_focused.FormRadio_theme_purple .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 0 3px rgb(115, 0, 115);
-                box-shadow: 0 0 0 3px rgb(115, 0, 115);
+        -webkit-box-shadow: 0 0 3px 3px rgb(115, 0, 115);
+                box-shadow: 0 0 3px 3px rgb(115, 0, 115);
       }
 
 .FormItem_focused.FormRadio_theme_purple .FormRadio-Actor {
@@ -2739,13 +3267,18 @@ input.FormTextInput-Control:-webkit-autofill { /* Emulate input frame (hidden by
       }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_purple .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 0 3px rgb(102, 0, 102);
-                box-shadow: 0 0 0 3px rgb(102, 0, 102);
+        -webkit-box-shadow: 0 0 3px 3px rgb(102, 0, 102);
+                box-shadow: 0 0 3px 3px rgb(102, 0, 102);
       }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_purple .FormRadio-Actor {
         background-color: rgb(102, 0, 102);
       }
+
+.FormRadio_active.FormRadio_theme_purple .FormRadio-Frame, .FormRadio_active.FormRadio_theme_purple.FormItem_focused .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 4px rgb(115, 0, 115);
+                  box-shadow: 0 0 3px 4px rgb(115, 0, 115);
+        }
 
 .FormRadio_theme_fuchsia .FormRadio-Frame {
       -webkit-box-shadow: 0 0 0 2px #ff00ff;
@@ -2758,8 +3291,8 @@ input.FormTextInput-Control:-webkit-autofill { /* Emulate input frame (hidden by
     }
 
 .FormItem_hovered.FormRadio_theme_fuchsia .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 0 3px rgb(230, 0, 230);
-                box-shadow: 0 0 0 3px rgb(230, 0, 230);
+        -webkit-box-shadow: 0 0 2px 3px rgb(230, 0, 230);
+                box-shadow: 0 0 2px 3px rgb(230, 0, 230);
       }
 
 .FormItem_hovered.FormRadio_theme_fuchsia .FormRadio-Actor {
@@ -2767,8 +3300,8 @@ input.FormTextInput-Control:-webkit-autofill { /* Emulate input frame (hidden by
       }
 
 .FormItem_focused.FormRadio_theme_fuchsia .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 0 3px rgb(230, 0, 230);
-                box-shadow: 0 0 0 3px rgb(230, 0, 230);
+        -webkit-box-shadow: 0 0 3px 3px rgb(230, 0, 230);
+                box-shadow: 0 0 3px 3px rgb(230, 0, 230);
       }
 
 .FormItem_focused.FormRadio_theme_fuchsia .FormRadio-Actor {
@@ -2776,13 +3309,18 @@ input.FormTextInput-Control:-webkit-autofill { /* Emulate input frame (hidden by
       }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_fuchsia .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 0 3px rgb(204, 0, 204);
-                box-shadow: 0 0 0 3px rgb(204, 0, 204);
+        -webkit-box-shadow: 0 0 3px 3px rgb(204, 0, 204);
+                box-shadow: 0 0 3px 3px rgb(204, 0, 204);
       }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_fuchsia .FormRadio-Actor {
         background-color: rgb(204, 0, 204);
       }
+
+.FormRadio_active.FormRadio_theme_fuchsia .FormRadio-Frame, .FormRadio_active.FormRadio_theme_fuchsia.FormItem_focused .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 4px rgb(230, 0, 230);
+                  box-shadow: 0 0 3px 4px rgb(230, 0, 230);
+        }
 
 .FormRadio_theme_green .FormRadio-Frame {
       -webkit-box-shadow: 0 0 0 2px #008000;
@@ -2795,8 +3333,8 @@ input.FormTextInput-Control:-webkit-autofill { /* Emulate input frame (hidden by
     }
 
 .FormItem_hovered.FormRadio_theme_green .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 0 3px rgb(0, 115, 0);
-                box-shadow: 0 0 0 3px rgb(0, 115, 0);
+        -webkit-box-shadow: 0 0 2px 3px rgb(0, 115, 0);
+                box-shadow: 0 0 2px 3px rgb(0, 115, 0);
       }
 
 .FormItem_hovered.FormRadio_theme_green .FormRadio-Actor {
@@ -2804,8 +3342,8 @@ input.FormTextInput-Control:-webkit-autofill { /* Emulate input frame (hidden by
       }
 
 .FormItem_focused.FormRadio_theme_green .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 0 3px rgb(0, 115, 0);
-                box-shadow: 0 0 0 3px rgb(0, 115, 0);
+        -webkit-box-shadow: 0 0 3px 3px rgb(0, 115, 0);
+                box-shadow: 0 0 3px 3px rgb(0, 115, 0);
       }
 
 .FormItem_focused.FormRadio_theme_green .FormRadio-Actor {
@@ -2813,13 +3351,18 @@ input.FormTextInput-Control:-webkit-autofill { /* Emulate input frame (hidden by
       }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_green .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 0 3px rgb(0, 102, 0);
-                box-shadow: 0 0 0 3px rgb(0, 102, 0);
+        -webkit-box-shadow: 0 0 3px 3px rgb(0, 102, 0);
+                box-shadow: 0 0 3px 3px rgb(0, 102, 0);
       }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_green .FormRadio-Actor {
         background-color: rgb(0, 102, 0);
       }
+
+.FormRadio_active.FormRadio_theme_green .FormRadio-Frame, .FormRadio_active.FormRadio_theme_green.FormItem_focused .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 4px rgb(0, 115, 0);
+                  box-shadow: 0 0 3px 4px rgb(0, 115, 0);
+        }
 
 .FormRadio_theme_olive .FormRadio-Frame {
       -webkit-box-shadow: 0 0 0 2px #808000;
@@ -2832,8 +3375,8 @@ input.FormTextInput-Control:-webkit-autofill { /* Emulate input frame (hidden by
     }
 
 .FormItem_hovered.FormRadio_theme_olive .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 0 3px rgb(115, 115, 0);
-                box-shadow: 0 0 0 3px rgb(115, 115, 0);
+        -webkit-box-shadow: 0 0 2px 3px rgb(115, 115, 0);
+                box-shadow: 0 0 2px 3px rgb(115, 115, 0);
       }
 
 .FormItem_hovered.FormRadio_theme_olive .FormRadio-Actor {
@@ -2841,8 +3384,8 @@ input.FormTextInput-Control:-webkit-autofill { /* Emulate input frame (hidden by
       }
 
 .FormItem_focused.FormRadio_theme_olive .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 0 3px rgb(115, 115, 0);
-                box-shadow: 0 0 0 3px rgb(115, 115, 0);
+        -webkit-box-shadow: 0 0 3px 3px rgb(115, 115, 0);
+                box-shadow: 0 0 3px 3px rgb(115, 115, 0);
       }
 
 .FormItem_focused.FormRadio_theme_olive .FormRadio-Actor {
@@ -2850,13 +3393,18 @@ input.FormTextInput-Control:-webkit-autofill { /* Emulate input frame (hidden by
       }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_olive .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 0 3px rgb(102, 102, 0);
-                box-shadow: 0 0 0 3px rgb(102, 102, 0);
+        -webkit-box-shadow: 0 0 3px 3px rgb(102, 102, 0);
+                box-shadow: 0 0 3px 3px rgb(102, 102, 0);
       }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_olive .FormRadio-Actor {
         background-color: rgb(102, 102, 0);
       }
+
+.FormRadio_active.FormRadio_theme_olive .FormRadio-Frame, .FormRadio_active.FormRadio_theme_olive.FormItem_focused .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 4px rgb(115, 115, 0);
+                  box-shadow: 0 0 3px 4px rgb(115, 115, 0);
+        }
 
 .FormRadio_theme_navy .FormRadio-Frame {
       -webkit-box-shadow: 0 0 0 2px #000080;
@@ -2869,8 +3417,8 @@ input.FormTextInput-Control:-webkit-autofill { /* Emulate input frame (hidden by
     }
 
 .FormItem_hovered.FormRadio_theme_navy .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 0 3px rgb(0, 0, 115);
-                box-shadow: 0 0 0 3px rgb(0, 0, 115);
+        -webkit-box-shadow: 0 0 2px 3px rgb(0, 0, 115);
+                box-shadow: 0 0 2px 3px rgb(0, 0, 115);
       }
 
 .FormItem_hovered.FormRadio_theme_navy .FormRadio-Actor {
@@ -2878,8 +3426,8 @@ input.FormTextInput-Control:-webkit-autofill { /* Emulate input frame (hidden by
       }
 
 .FormItem_focused.FormRadio_theme_navy .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 0 3px rgb(0, 0, 115);
-                box-shadow: 0 0 0 3px rgb(0, 0, 115);
+        -webkit-box-shadow: 0 0 3px 3px rgb(0, 0, 115);
+                box-shadow: 0 0 3px 3px rgb(0, 0, 115);
       }
 
 .FormItem_focused.FormRadio_theme_navy .FormRadio-Actor {
@@ -2887,13 +3435,18 @@ input.FormTextInput-Control:-webkit-autofill { /* Emulate input frame (hidden by
       }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_navy .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 0 3px rgb(0, 0, 102);
-                box-shadow: 0 0 0 3px rgb(0, 0, 102);
+        -webkit-box-shadow: 0 0 3px 3px rgb(0, 0, 102);
+                box-shadow: 0 0 3px 3px rgb(0, 0, 102);
       }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_navy .FormRadio-Actor {
         background-color: rgb(0, 0, 102);
       }
+
+.FormRadio_active.FormRadio_theme_navy .FormRadio-Frame, .FormRadio_active.FormRadio_theme_navy.FormItem_focused .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 4px rgb(0, 0, 115);
+                  box-shadow: 0 0 3px 4px rgb(0, 0, 115);
+        }
 
 .FormRadio_theme_blue .FormRadio-Frame {
       -webkit-box-shadow: 0 0 0 2px #0000ff;
@@ -2906,8 +3459,8 @@ input.FormTextInput-Control:-webkit-autofill { /* Emulate input frame (hidden by
     }
 
 .FormItem_hovered.FormRadio_theme_blue .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 0 3px rgb(0, 0, 230);
-                box-shadow: 0 0 0 3px rgb(0, 0, 230);
+        -webkit-box-shadow: 0 0 2px 3px rgb(0, 0, 230);
+                box-shadow: 0 0 2px 3px rgb(0, 0, 230);
       }
 
 .FormItem_hovered.FormRadio_theme_blue .FormRadio-Actor {
@@ -2915,8 +3468,8 @@ input.FormTextInput-Control:-webkit-autofill { /* Emulate input frame (hidden by
       }
 
 .FormItem_focused.FormRadio_theme_blue .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 0 3px rgb(0, 0, 230);
-                box-shadow: 0 0 0 3px rgb(0, 0, 230);
+        -webkit-box-shadow: 0 0 3px 3px rgb(0, 0, 230);
+                box-shadow: 0 0 3px 3px rgb(0, 0, 230);
       }
 
 .FormItem_focused.FormRadio_theme_blue .FormRadio-Actor {
@@ -2924,13 +3477,18 @@ input.FormTextInput-Control:-webkit-autofill { /* Emulate input frame (hidden by
       }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_blue .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 0 3px rgb(0, 0, 204);
-                box-shadow: 0 0 0 3px rgb(0, 0, 204);
+        -webkit-box-shadow: 0 0 3px 3px rgb(0, 0, 204);
+                box-shadow: 0 0 3px 3px rgb(0, 0, 204);
       }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_blue .FormRadio-Actor {
         background-color: rgb(0, 0, 204);
       }
+
+.FormRadio_active.FormRadio_theme_blue .FormRadio-Frame, .FormRadio_active.FormRadio_theme_blue.FormItem_focused .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 4px rgb(0, 0, 230);
+                  box-shadow: 0 0 3px 4px rgb(0, 0, 230);
+        }
 
 .FormRadio_theme_teal .FormRadio-Frame {
       -webkit-box-shadow: 0 0 0 2px #008080;
@@ -2943,8 +3501,8 @@ input.FormTextInput-Control:-webkit-autofill { /* Emulate input frame (hidden by
     }
 
 .FormItem_hovered.FormRadio_theme_teal .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 0 3px rgb(0, 115, 115);
-                box-shadow: 0 0 0 3px rgb(0, 115, 115);
+        -webkit-box-shadow: 0 0 2px 3px rgb(0, 115, 115);
+                box-shadow: 0 0 2px 3px rgb(0, 115, 115);
       }
 
 .FormItem_hovered.FormRadio_theme_teal .FormRadio-Actor {
@@ -2952,8 +3510,8 @@ input.FormTextInput-Control:-webkit-autofill { /* Emulate input frame (hidden by
       }
 
 .FormItem_focused.FormRadio_theme_teal .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 0 3px rgb(0, 115, 115);
-                box-shadow: 0 0 0 3px rgb(0, 115, 115);
+        -webkit-box-shadow: 0 0 3px 3px rgb(0, 115, 115);
+                box-shadow: 0 0 3px 3px rgb(0, 115, 115);
       }
 
 .FormItem_focused.FormRadio_theme_teal .FormRadio-Actor {
@@ -2961,13 +3519,18 @@ input.FormTextInput-Control:-webkit-autofill { /* Emulate input frame (hidden by
       }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_teal .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 0 3px rgb(0, 102, 102);
-                box-shadow: 0 0 0 3px rgb(0, 102, 102);
+        -webkit-box-shadow: 0 0 3px 3px rgb(0, 102, 102);
+                box-shadow: 0 0 3px 3px rgb(0, 102, 102);
       }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_teal .FormRadio-Actor {
         background-color: rgb(0, 102, 102);
       }
+
+.FormRadio_active.FormRadio_theme_teal .FormRadio-Frame, .FormRadio_active.FormRadio_theme_teal.FormItem_focused .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 4px rgb(0, 115, 115);
+                  box-shadow: 0 0 3px 4px rgb(0, 115, 115);
+        }
 
 .FormRadio_theme_orange .FormRadio-Frame {
       -webkit-box-shadow: 0 0 0 2px #ffa500;
@@ -2980,8 +3543,8 @@ input.FormTextInput-Control:-webkit-autofill { /* Emulate input frame (hidden by
     }
 
 .FormItem_hovered.FormRadio_theme_orange .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 0 3px rgb(230, 149, 0);
-                box-shadow: 0 0 0 3px rgb(230, 149, 0);
+        -webkit-box-shadow: 0 0 2px 3px rgb(230, 149, 0);
+                box-shadow: 0 0 2px 3px rgb(230, 149, 0);
       }
 
 .FormItem_hovered.FormRadio_theme_orange .FormRadio-Actor {
@@ -2989,8 +3552,8 @@ input.FormTextInput-Control:-webkit-autofill { /* Emulate input frame (hidden by
       }
 
 .FormItem_focused.FormRadio_theme_orange .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 0 3px rgb(230, 149, 0);
-                box-shadow: 0 0 0 3px rgb(230, 149, 0);
+        -webkit-box-shadow: 0 0 3px 3px rgb(230, 149, 0);
+                box-shadow: 0 0 3px 3px rgb(230, 149, 0);
       }
 
 .FormItem_focused.FormRadio_theme_orange .FormRadio-Actor {
@@ -2998,13 +3561,18 @@ input.FormTextInput-Control:-webkit-autofill { /* Emulate input frame (hidden by
       }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_orange .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 0 3px rgb(204, 132, 0);
-                box-shadow: 0 0 0 3px rgb(204, 132, 0);
+        -webkit-box-shadow: 0 0 3px 3px rgb(204, 132, 0);
+                box-shadow: 0 0 3px 3px rgb(204, 132, 0);
       }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_orange .FormRadio-Actor {
         background-color: rgb(204, 132, 0);
       }
+
+.FormRadio_active.FormRadio_theme_orange .FormRadio-Frame, .FormRadio_active.FormRadio_theme_orange.FormItem_focused .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 4px rgb(230, 149, 0);
+                  box-shadow: 0 0 3px 4px rgb(230, 149, 0);
+        }
 
 .FormRadio_theme_blueviolet .FormRadio-Frame {
       -webkit-box-shadow: 0 0 0 2px #8a2be2;
@@ -3017,8 +3585,8 @@ input.FormTextInput-Control:-webkit-autofill { /* Emulate input frame (hidden by
     }
 
 .FormItem_hovered.FormRadio_theme_blueviolet .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 0 3px rgb(124, 39, 203);
-                box-shadow: 0 0 0 3px rgb(124, 39, 203);
+        -webkit-box-shadow: 0 0 2px 3px rgb(124, 39, 203);
+                box-shadow: 0 0 2px 3px rgb(124, 39, 203);
       }
 
 .FormItem_hovered.FormRadio_theme_blueviolet .FormRadio-Actor {
@@ -3026,8 +3594,8 @@ input.FormTextInput-Control:-webkit-autofill { /* Emulate input frame (hidden by
       }
 
 .FormItem_focused.FormRadio_theme_blueviolet .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 0 3px rgb(124, 39, 203);
-                box-shadow: 0 0 0 3px rgb(124, 39, 203);
+        -webkit-box-shadow: 0 0 3px 3px rgb(124, 39, 203);
+                box-shadow: 0 0 3px 3px rgb(124, 39, 203);
       }
 
 .FormItem_focused.FormRadio_theme_blueviolet .FormRadio-Actor {
@@ -3035,13 +3603,18 @@ input.FormTextInput-Control:-webkit-autofill { /* Emulate input frame (hidden by
       }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_blueviolet .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 0 3px rgb(110, 34, 181);
-                box-shadow: 0 0 0 3px rgb(110, 34, 181);
+        -webkit-box-shadow: 0 0 3px 3px rgb(110, 34, 181);
+                box-shadow: 0 0 3px 3px rgb(110, 34, 181);
       }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_blueviolet .FormRadio-Actor {
         background-color: rgb(110, 34, 181);
       }
+
+.FormRadio_active.FormRadio_theme_blueviolet .FormRadio-Frame, .FormRadio_active.FormRadio_theme_blueviolet.FormItem_focused .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 4px rgb(124, 39, 203);
+                  box-shadow: 0 0 3px 4px rgb(124, 39, 203);
+        }
 
 .FormRadio_theme_brown .FormRadio-Frame {
       -webkit-box-shadow: 0 0 0 2px #a52a2a;
@@ -3054,8 +3627,8 @@ input.FormTextInput-Control:-webkit-autofill { /* Emulate input frame (hidden by
     }
 
 .FormItem_hovered.FormRadio_theme_brown .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 0 3px rgb(149, 38, 38);
-                box-shadow: 0 0 0 3px rgb(149, 38, 38);
+        -webkit-box-shadow: 0 0 2px 3px rgb(149, 38, 38);
+                box-shadow: 0 0 2px 3px rgb(149, 38, 38);
       }
 
 .FormItem_hovered.FormRadio_theme_brown .FormRadio-Actor {
@@ -3063,8 +3636,8 @@ input.FormTextInput-Control:-webkit-autofill { /* Emulate input frame (hidden by
       }
 
 .FormItem_focused.FormRadio_theme_brown .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 0 3px rgb(149, 38, 38);
-                box-shadow: 0 0 0 3px rgb(149, 38, 38);
+        -webkit-box-shadow: 0 0 3px 3px rgb(149, 38, 38);
+                box-shadow: 0 0 3px 3px rgb(149, 38, 38);
       }
 
 .FormItem_focused.FormRadio_theme_brown .FormRadio-Actor {
@@ -3072,13 +3645,18 @@ input.FormTextInput-Control:-webkit-autofill { /* Emulate input frame (hidden by
       }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_brown .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 0 3px rgb(132, 34, 34);
-                box-shadow: 0 0 0 3px rgb(132, 34, 34);
+        -webkit-box-shadow: 0 0 3px 3px rgb(132, 34, 34);
+                box-shadow: 0 0 3px 3px rgb(132, 34, 34);
       }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_brown .FormRadio-Actor {
         background-color: rgb(132, 34, 34);
       }
+
+.FormRadio_active.FormRadio_theme_brown .FormRadio-Frame, .FormRadio_active.FormRadio_theme_brown.FormItem_focused .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 4px rgb(149, 38, 38);
+                  box-shadow: 0 0 3px 4px rgb(149, 38, 38);
+        }
 
 .FormRadio_theme_cadetblue .FormRadio-Frame {
       -webkit-box-shadow: 0 0 0 2px #5f9ea0;
@@ -3091,8 +3669,8 @@ input.FormTextInput-Control:-webkit-autofill { /* Emulate input frame (hidden by
     }
 
 .FormItem_hovered.FormRadio_theme_cadetblue .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 0 3px rgb(86, 142, 144);
-                box-shadow: 0 0 0 3px rgb(86, 142, 144);
+        -webkit-box-shadow: 0 0 2px 3px rgb(86, 142, 144);
+                box-shadow: 0 0 2px 3px rgb(86, 142, 144);
       }
 
 .FormItem_hovered.FormRadio_theme_cadetblue .FormRadio-Actor {
@@ -3100,8 +3678,8 @@ input.FormTextInput-Control:-webkit-autofill { /* Emulate input frame (hidden by
       }
 
 .FormItem_focused.FormRadio_theme_cadetblue .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 0 3px rgb(86, 142, 144);
-                box-shadow: 0 0 0 3px rgb(86, 142, 144);
+        -webkit-box-shadow: 0 0 3px 3px rgb(86, 142, 144);
+                box-shadow: 0 0 3px 3px rgb(86, 142, 144);
       }
 
 .FormItem_focused.FormRadio_theme_cadetblue .FormRadio-Actor {
@@ -3109,13 +3687,18 @@ input.FormTextInput-Control:-webkit-autofill { /* Emulate input frame (hidden by
       }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_cadetblue .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 0 3px rgb(76, 126, 128);
-                box-shadow: 0 0 0 3px rgb(76, 126, 128);
+        -webkit-box-shadow: 0 0 3px 3px rgb(76, 126, 128);
+                box-shadow: 0 0 3px 3px rgb(76, 126, 128);
       }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_cadetblue .FormRadio-Actor {
         background-color: rgb(76, 126, 128);
       }
+
+.FormRadio_active.FormRadio_theme_cadetblue .FormRadio-Frame, .FormRadio_active.FormRadio_theme_cadetblue.FormItem_focused .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 4px rgb(86, 142, 144);
+                  box-shadow: 0 0 3px 4px rgb(86, 142, 144);
+        }
 
 .FormRadio_theme_darkblue .FormRadio-Frame {
       -webkit-box-shadow: 0 0 0 2px #00008b;
@@ -3128,8 +3711,8 @@ input.FormTextInput-Control:-webkit-autofill { /* Emulate input frame (hidden by
     }
 
 .FormItem_hovered.FormRadio_theme_darkblue .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 0 3px rgb(0, 0, 125);
-                box-shadow: 0 0 0 3px rgb(0, 0, 125);
+        -webkit-box-shadow: 0 0 2px 3px rgb(0, 0, 125);
+                box-shadow: 0 0 2px 3px rgb(0, 0, 125);
       }
 
 .FormItem_hovered.FormRadio_theme_darkblue .FormRadio-Actor {
@@ -3137,8 +3720,8 @@ input.FormTextInput-Control:-webkit-autofill { /* Emulate input frame (hidden by
       }
 
 .FormItem_focused.FormRadio_theme_darkblue .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 0 3px rgb(0, 0, 125);
-                box-shadow: 0 0 0 3px rgb(0, 0, 125);
+        -webkit-box-shadow: 0 0 3px 3px rgb(0, 0, 125);
+                box-shadow: 0 0 3px 3px rgb(0, 0, 125);
       }
 
 .FormItem_focused.FormRadio_theme_darkblue .FormRadio-Actor {
@@ -3146,13 +3729,18 @@ input.FormTextInput-Control:-webkit-autofill { /* Emulate input frame (hidden by
       }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_darkblue .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 0 3px rgb(0, 0, 111);
-                box-shadow: 0 0 0 3px rgb(0, 0, 111);
+        -webkit-box-shadow: 0 0 3px 3px rgb(0, 0, 111);
+                box-shadow: 0 0 3px 3px rgb(0, 0, 111);
       }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_darkblue .FormRadio-Actor {
         background-color: rgb(0, 0, 111);
       }
+
+.FormRadio_active.FormRadio_theme_darkblue .FormRadio-Frame, .FormRadio_active.FormRadio_theme_darkblue.FormItem_focused .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 4px rgb(0, 0, 125);
+                  box-shadow: 0 0 3px 4px rgb(0, 0, 125);
+        }
 
 .FormRadio_theme_darkcyan .FormRadio-Frame {
       -webkit-box-shadow: 0 0 0 2px #008b8b;
@@ -3165,8 +3753,8 @@ input.FormTextInput-Control:-webkit-autofill { /* Emulate input frame (hidden by
     }
 
 .FormItem_hovered.FormRadio_theme_darkcyan .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 0 3px rgb(0, 125, 125);
-                box-shadow: 0 0 0 3px rgb(0, 125, 125);
+        -webkit-box-shadow: 0 0 2px 3px rgb(0, 125, 125);
+                box-shadow: 0 0 2px 3px rgb(0, 125, 125);
       }
 
 .FormItem_hovered.FormRadio_theme_darkcyan .FormRadio-Actor {
@@ -3174,8 +3762,8 @@ input.FormTextInput-Control:-webkit-autofill { /* Emulate input frame (hidden by
       }
 
 .FormItem_focused.FormRadio_theme_darkcyan .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 0 3px rgb(0, 125, 125);
-                box-shadow: 0 0 0 3px rgb(0, 125, 125);
+        -webkit-box-shadow: 0 0 3px 3px rgb(0, 125, 125);
+                box-shadow: 0 0 3px 3px rgb(0, 125, 125);
       }
 
 .FormItem_focused.FormRadio_theme_darkcyan .FormRadio-Actor {
@@ -3183,13 +3771,18 @@ input.FormTextInput-Control:-webkit-autofill { /* Emulate input frame (hidden by
       }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_darkcyan .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 0 3px rgb(0, 111, 111);
-                box-shadow: 0 0 0 3px rgb(0, 111, 111);
+        -webkit-box-shadow: 0 0 3px 3px rgb(0, 111, 111);
+                box-shadow: 0 0 3px 3px rgb(0, 111, 111);
       }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_darkcyan .FormRadio-Actor {
         background-color: rgb(0, 111, 111);
       }
+
+.FormRadio_active.FormRadio_theme_darkcyan .FormRadio-Frame, .FormRadio_active.FormRadio_theme_darkcyan.FormItem_focused .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 4px rgb(0, 125, 125);
+                  box-shadow: 0 0 3px 4px rgb(0, 125, 125);
+        }
 
 .FormRadio_theme_darkgoldenrod .FormRadio-Frame {
       -webkit-box-shadow: 0 0 0 2px #b8860b;
@@ -3202,8 +3795,8 @@ input.FormTextInput-Control:-webkit-autofill { /* Emulate input frame (hidden by
     }
 
 .FormItem_hovered.FormRadio_theme_darkgoldenrod .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 0 3px rgb(166, 121, 10);
-                box-shadow: 0 0 0 3px rgb(166, 121, 10);
+        -webkit-box-shadow: 0 0 2px 3px rgb(166, 121, 10);
+                box-shadow: 0 0 2px 3px rgb(166, 121, 10);
       }
 
 .FormItem_hovered.FormRadio_theme_darkgoldenrod .FormRadio-Actor {
@@ -3211,8 +3804,8 @@ input.FormTextInput-Control:-webkit-autofill { /* Emulate input frame (hidden by
       }
 
 .FormItem_focused.FormRadio_theme_darkgoldenrod .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 0 3px rgb(166, 121, 10);
-                box-shadow: 0 0 0 3px rgb(166, 121, 10);
+        -webkit-box-shadow: 0 0 3px 3px rgb(166, 121, 10);
+                box-shadow: 0 0 3px 3px rgb(166, 121, 10);
       }
 
 .FormItem_focused.FormRadio_theme_darkgoldenrod .FormRadio-Actor {
@@ -3220,13 +3813,18 @@ input.FormTextInput-Control:-webkit-autofill { /* Emulate input frame (hidden by
       }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_darkgoldenrod .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 0 3px rgb(147, 107, 9);
-                box-shadow: 0 0 0 3px rgb(147, 107, 9);
+        -webkit-box-shadow: 0 0 3px 3px rgb(147, 107, 9);
+                box-shadow: 0 0 3px 3px rgb(147, 107, 9);
       }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_darkgoldenrod .FormRadio-Actor {
         background-color: rgb(147, 107, 9);
       }
+
+.FormRadio_active.FormRadio_theme_darkgoldenrod .FormRadio-Frame, .FormRadio_active.FormRadio_theme_darkgoldenrod.FormItem_focused .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 4px rgb(166, 121, 10);
+                  box-shadow: 0 0 3px 4px rgb(166, 121, 10);
+        }
 
 .FormRadio_theme_darkorange .FormRadio-Frame {
       -webkit-box-shadow: 0 0 0 2px #ff8c00;
@@ -3239,8 +3837,8 @@ input.FormTextInput-Control:-webkit-autofill { /* Emulate input frame (hidden by
     }
 
 .FormItem_hovered.FormRadio_theme_darkorange .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 0 3px rgb(230, 126, 0);
-                box-shadow: 0 0 0 3px rgb(230, 126, 0);
+        -webkit-box-shadow: 0 0 2px 3px rgb(230, 126, 0);
+                box-shadow: 0 0 2px 3px rgb(230, 126, 0);
       }
 
 .FormItem_hovered.FormRadio_theme_darkorange .FormRadio-Actor {
@@ -3248,8 +3846,8 @@ input.FormTextInput-Control:-webkit-autofill { /* Emulate input frame (hidden by
       }
 
 .FormItem_focused.FormRadio_theme_darkorange .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 0 3px rgb(230, 126, 0);
-                box-shadow: 0 0 0 3px rgb(230, 126, 0);
+        -webkit-box-shadow: 0 0 3px 3px rgb(230, 126, 0);
+                box-shadow: 0 0 3px 3px rgb(230, 126, 0);
       }
 
 .FormItem_focused.FormRadio_theme_darkorange .FormRadio-Actor {
@@ -3257,13 +3855,18 @@ input.FormTextInput-Control:-webkit-autofill { /* Emulate input frame (hidden by
       }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_darkorange .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 0 3px rgb(204, 112, 0);
-                box-shadow: 0 0 0 3px rgb(204, 112, 0);
+        -webkit-box-shadow: 0 0 3px 3px rgb(204, 112, 0);
+                box-shadow: 0 0 3px 3px rgb(204, 112, 0);
       }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_darkorange .FormRadio-Actor {
         background-color: rgb(204, 112, 0);
       }
+
+.FormRadio_active.FormRadio_theme_darkorange .FormRadio-Frame, .FormRadio_active.FormRadio_theme_darkorange.FormItem_focused .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 4px rgb(230, 126, 0);
+                  box-shadow: 0 0 3px 4px rgb(230, 126, 0);
+        }
 
 .FormRadio_theme_darkorchid .FormRadio-Frame {
       -webkit-box-shadow: 0 0 0 2px #9932cc;
@@ -3276,8 +3879,8 @@ input.FormTextInput-Control:-webkit-autofill { /* Emulate input frame (hidden by
     }
 
 .FormItem_hovered.FormRadio_theme_darkorchid .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 0 3px rgb(138, 45, 184);
-                box-shadow: 0 0 0 3px rgb(138, 45, 184);
+        -webkit-box-shadow: 0 0 2px 3px rgb(138, 45, 184);
+                box-shadow: 0 0 2px 3px rgb(138, 45, 184);
       }
 
 .FormItem_hovered.FormRadio_theme_darkorchid .FormRadio-Actor {
@@ -3285,8 +3888,8 @@ input.FormTextInput-Control:-webkit-autofill { /* Emulate input frame (hidden by
       }
 
 .FormItem_focused.FormRadio_theme_darkorchid .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 0 3px rgb(138, 45, 184);
-                box-shadow: 0 0 0 3px rgb(138, 45, 184);
+        -webkit-box-shadow: 0 0 3px 3px rgb(138, 45, 184);
+                box-shadow: 0 0 3px 3px rgb(138, 45, 184);
       }
 
 .FormItem_focused.FormRadio_theme_darkorchid .FormRadio-Actor {
@@ -3294,13 +3897,18 @@ input.FormTextInput-Control:-webkit-autofill { /* Emulate input frame (hidden by
       }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_darkorchid .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 0 3px rgb(122, 40, 163);
-                box-shadow: 0 0 0 3px rgb(122, 40, 163);
+        -webkit-box-shadow: 0 0 3px 3px rgb(122, 40, 163);
+                box-shadow: 0 0 3px 3px rgb(122, 40, 163);
       }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_darkorchid .FormRadio-Actor {
         background-color: rgb(122, 40, 163);
       }
+
+.FormRadio_active.FormRadio_theme_darkorchid .FormRadio-Frame, .FormRadio_active.FormRadio_theme_darkorchid.FormItem_focused .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 4px rgb(138, 45, 184);
+                  box-shadow: 0 0 3px 4px rgb(138, 45, 184);
+        }
 
 .FormRadio_theme_darkred .FormRadio-Frame {
       -webkit-box-shadow: 0 0 0 2px #8b0000;
@@ -3313,8 +3921,8 @@ input.FormTextInput-Control:-webkit-autofill { /* Emulate input frame (hidden by
     }
 
 .FormItem_hovered.FormRadio_theme_darkred .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 0 3px rgb(125, 0, 0);
-                box-shadow: 0 0 0 3px rgb(125, 0, 0);
+        -webkit-box-shadow: 0 0 2px 3px rgb(125, 0, 0);
+                box-shadow: 0 0 2px 3px rgb(125, 0, 0);
       }
 
 .FormItem_hovered.FormRadio_theme_darkred .FormRadio-Actor {
@@ -3322,8 +3930,8 @@ input.FormTextInput-Control:-webkit-autofill { /* Emulate input frame (hidden by
       }
 
 .FormItem_focused.FormRadio_theme_darkred .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 0 3px rgb(125, 0, 0);
-                box-shadow: 0 0 0 3px rgb(125, 0, 0);
+        -webkit-box-shadow: 0 0 3px 3px rgb(125, 0, 0);
+                box-shadow: 0 0 3px 3px rgb(125, 0, 0);
       }
 
 .FormItem_focused.FormRadio_theme_darkred .FormRadio-Actor {
@@ -3331,13 +3939,18 @@ input.FormTextInput-Control:-webkit-autofill { /* Emulate input frame (hidden by
       }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_darkred .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 0 3px rgb(111, 0, 0);
-                box-shadow: 0 0 0 3px rgb(111, 0, 0);
+        -webkit-box-shadow: 0 0 3px 3px rgb(111, 0, 0);
+                box-shadow: 0 0 3px 3px rgb(111, 0, 0);
       }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_darkred .FormRadio-Actor {
         background-color: rgb(111, 0, 0);
       }
+
+.FormRadio_active.FormRadio_theme_darkred .FormRadio-Frame, .FormRadio_active.FormRadio_theme_darkred.FormItem_focused .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 4px rgb(125, 0, 0);
+                  box-shadow: 0 0 3px 4px rgb(125, 0, 0);
+        }
 
 .FormRadio_theme_darkslateblue .FormRadio-Frame {
       -webkit-box-shadow: 0 0 0 2px #483d8b;
@@ -3350,8 +3963,8 @@ input.FormTextInput-Control:-webkit-autofill { /* Emulate input frame (hidden by
     }
 
 .FormItem_hovered.FormRadio_theme_darkslateblue .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 0 3px rgb(65, 55, 125);
-                box-shadow: 0 0 0 3px rgb(65, 55, 125);
+        -webkit-box-shadow: 0 0 2px 3px rgb(65, 55, 125);
+                box-shadow: 0 0 2px 3px rgb(65, 55, 125);
       }
 
 .FormItem_hovered.FormRadio_theme_darkslateblue .FormRadio-Actor {
@@ -3359,8 +3972,8 @@ input.FormTextInput-Control:-webkit-autofill { /* Emulate input frame (hidden by
       }
 
 .FormItem_focused.FormRadio_theme_darkslateblue .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 0 3px rgb(65, 55, 125);
-                box-shadow: 0 0 0 3px rgb(65, 55, 125);
+        -webkit-box-shadow: 0 0 3px 3px rgb(65, 55, 125);
+                box-shadow: 0 0 3px 3px rgb(65, 55, 125);
       }
 
 .FormItem_focused.FormRadio_theme_darkslateblue .FormRadio-Actor {
@@ -3368,13 +3981,18 @@ input.FormTextInput-Control:-webkit-autofill { /* Emulate input frame (hidden by
       }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_darkslateblue .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 0 3px rgb(58, 49, 111);
-                box-shadow: 0 0 0 3px rgb(58, 49, 111);
+        -webkit-box-shadow: 0 0 3px 3px rgb(58, 49, 111);
+                box-shadow: 0 0 3px 3px rgb(58, 49, 111);
       }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_darkslateblue .FormRadio-Actor {
         background-color: rgb(58, 49, 111);
       }
+
+.FormRadio_active.FormRadio_theme_darkslateblue .FormRadio-Frame, .FormRadio_active.FormRadio_theme_darkslateblue.FormItem_focused .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 4px rgb(65, 55, 125);
+                  box-shadow: 0 0 3px 4px rgb(65, 55, 125);
+        }
 
 .FormRadio_theme_darkslategray .FormRadio-Frame {
       -webkit-box-shadow: 0 0 0 2px #2f4f4f;
@@ -3387,8 +4005,8 @@ input.FormTextInput-Control:-webkit-autofill { /* Emulate input frame (hidden by
     }
 
 .FormItem_hovered.FormRadio_theme_darkslategray .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 0 3px rgb(42, 71, 71);
-                box-shadow: 0 0 0 3px rgb(42, 71, 71);
+        -webkit-box-shadow: 0 0 2px 3px rgb(42, 71, 71);
+                box-shadow: 0 0 2px 3px rgb(42, 71, 71);
       }
 
 .FormItem_hovered.FormRadio_theme_darkslategray .FormRadio-Actor {
@@ -3396,8 +4014,8 @@ input.FormTextInput-Control:-webkit-autofill { /* Emulate input frame (hidden by
       }
 
 .FormItem_focused.FormRadio_theme_darkslategray .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 0 3px rgb(42, 71, 71);
-                box-shadow: 0 0 0 3px rgb(42, 71, 71);
+        -webkit-box-shadow: 0 0 3px 3px rgb(42, 71, 71);
+                box-shadow: 0 0 3px 3px rgb(42, 71, 71);
       }
 
 .FormItem_focused.FormRadio_theme_darkslategray .FormRadio-Actor {
@@ -3405,13 +4023,18 @@ input.FormTextInput-Control:-webkit-autofill { /* Emulate input frame (hidden by
       }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_darkslategray .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 0 3px rgb(38, 63, 63);
-                box-shadow: 0 0 0 3px rgb(38, 63, 63);
+        -webkit-box-shadow: 0 0 3px 3px rgb(38, 63, 63);
+                box-shadow: 0 0 3px 3px rgb(38, 63, 63);
       }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_darkslategray .FormRadio-Actor {
         background-color: rgb(38, 63, 63);
       }
+
+.FormRadio_active.FormRadio_theme_darkslategray .FormRadio-Frame, .FormRadio_active.FormRadio_theme_darkslategray.FormItem_focused .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 4px rgb(42, 71, 71);
+                  box-shadow: 0 0 3px 4px rgb(42, 71, 71);
+        }
 
 /** @module Loader.pcss
  *  @since 2020.12.24, 22:38

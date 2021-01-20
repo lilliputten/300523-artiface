@@ -1,1 +1,1 @@
-v.0.2.4-210118-2356-build-dev-default
+v.0.2.6-210120-2329-build-dev-default

@@ -1456,10 +1456,10 @@ module.exports = { // Common-used build variables...
   DEV_DEBUG: DEV_DEBUG,
 
   THEME: "default",
-  buildTag: "v.0.2.4-210118-2356-build-dev-default",
-  timestamp: "2021.01.18, 23:56",
-  timetag: "210118-2356",
-  version: "0.2.4" };
+  buildTag: "v.0.2.6-210120-2329-build-dev-default",
+  timestamp: "2021.01.20, 23:29",
+  timetag: "210120-2329",
+  version: "0.2.6" };
 
 /***/ }),
 
@@ -1743,6 +1743,8 @@ Object.assign(cssConfig, { // Form properties...
   formItemInnerHeight: formItemInnerHeight, // px
 
   formItemBorderRadius: 3, // px
+  formItemOuterGlow: 4, // px
+  formItemGlowColor: cssConfig.primaryColor, // cssConfig.neutralColor,
   formItemBorderColor: cssConfig.neutralColor,
   formItemActorColor: cssConfig.neutralDarkColor,
   formItemBgColor: '#fff',
@@ -2933,6 +2935,7 @@ ModalPopup = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helper
 
 
 
+
   // From ModalPortal:
 
 
@@ -2941,7 +2944,7 @@ ModalPopup = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helper
   // Lifecycle...
 
   function ModalPopup(props) {var _this;
-    _this = _React$PureComponent.call(this, props) || this;_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1___default()(_this), "delayedClickTimerHandler", null);_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1___default()(_this), "globalHandlersRegistered", false);_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1___default()(_this), "controlDomNode", null);_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1___default()(_this), "contentDomNode", null);_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1___default()(_this), "geometry", {});_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1___default()(_this), "windowDomNode", null);_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1___default()(_this), "wrapperDomNode", null);_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1___default()(_this), "ModalPortal", null);_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1___default()(_this), "updateGeometryInstant",
+    _this = _React$PureComponent.call(this, props) || this;_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1___default()(_this), "delayedClickTimerHandler", null);_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1___default()(_this), "globalHandlersRegistered", false);_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1___default()(_this), "controlNode", null);_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1___default()(_this), "controlDomNode", null);_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1___default()(_this), "contentDomNode", null);_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1___default()(_this), "geometry", {});_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1___default()(_this), "windowDomNode", null);_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1___default()(_this), "wrapperDomNode", null);_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1___default()(_this), "ModalPortal", null);_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1___default()(_this), "updateGeometryInstant",
 
 
 
@@ -3308,18 +3311,20 @@ ModalPopup = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helper
     });_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1___default()(_this), "handleOpenState",
 
     function (_ref) {var open = _ref.open;
-      // console.log('ModalPopup:handleOpenState', open)
+      // console.log('ModalPopup:handleOpenState', open);
       _this.setState({ open: open }, _this.updateOpenOrCloseWithState); // Update own open state
       var _this$props = _this.props,id = _this$props.id,handleOpenState = _this$props.handleOpenState;
       if (typeof handleOpenState === 'function') {
         handleOpenState({ id: id, open: open });
       }
-    });_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1___default()(_this), "setControlRef",
+    });_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1___default()(_this), "setControlNodeRef",
 
+    function (node) {
+      _this.controlNode = node;
+    });_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1___default()(_this), "setControlDomRef",
     function (domNode) {
       _this.controlDomNode = domNode;
-    });_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1___default()(_this), "setContentRef",
-
+    });_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1___default()(_this), "setContentDomRef",
     function (domNode) {
       _this.contentDomNode = domNode;
     });_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1___default()(_this), "handlePortalOpen",
@@ -3333,6 +3338,7 @@ ModalPopup = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helper
 
 
     function () {
+      // console.log('ModalPopup:handlePortalOpen');
       // TODO: Register/unregister popup in `ModalPopupStack`
       // this.updateGeometry()
       _this.registerGlobalHandlers();
@@ -3357,7 +3363,17 @@ ModalPopup = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helper
       id = _this.props.id;var
       open = _this.state.open;
       var nextOpen = !open;
-      // console.log('ModalPopup:onControlClick', id, nextOpen, open)
+      // console.log('ModalPopup:onControlClick', id, nextOpen, open);
+      if (nextOpen) {
+        if (_this.controlNode) {// Move focus out of control element...
+          // this.controlNode.focus && this.controlNode.focus(); // Ensure focus isnt on other element (eg, selects' inner button).
+          _this.controlNode.blur && _this.controlNode.blur();
+        }
+        if (_this.controlDomNode) {// Move focus out of control element...
+          // this.controlDomNode.focus && this.controlDomNode.focus(); // Ensure focus isnt on other element (eg, selects' inner button).
+          _this.controlDomNode.blur && _this.controlDomNode.blur();
+        }
+      }
       _this.setState({ open: nextOpen }, _this.updateOpenOrCloseWithState); // Update own open state
       // TODO: Notify `ModalModalsContainer` when popup opens for closing all other popups from same level (before first modal in popups stack). (Now user can open several popups at the same time.
       var onControlClick = _this.props.onControlClick;
@@ -3365,6 +3381,8 @@ ModalPopup = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helper
         onControlClick({ id: id, open: nextOpen });
       }
     });_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1___default()(_this), "renderPortalContent",
+
+
 
 
 
@@ -3411,7 +3429,7 @@ ModalPopup = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helper
       var renderProps = {
         id: id,
         className: _this.getClassName({ cnCtx: cnModalPopup, className: className }),
-        ref: _this.setContentRef // Will be used windowDomNode from ModalPortal
+        ref: _this.setContentDomRef // Will be used windowDomNode from ModalPortal
       };
       return /*#__PURE__*/(
         react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement("div", renderProps,
@@ -3561,7 +3579,9 @@ ModalPopup = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helper
   ;_proto.clearContentGeometry = function clearContentGeometry() {var _this2 = this; // UNUSED? Must be used on content update (using registrable callback; see example in constructor).
     Object.keys(this.geometry).forEach(function (key) {if (key.startsWith('content')) {_this2.geometry[key] = null;}});}; // Render...
   _proto.renderControl = function renderControl() {var _this$props4 = this.props,id = _this$props4.id,popupControl = _this$props4.popupControl,className = _this$props4.className;var open = this.state.open; // TODO: Cache modified `popupControl` in state?
-    var content = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default.a.cloneElement(popupControl, { onClick: this.onControlClick, checked: open, setDomRef: this.setControlRef });var renderProps = { id: id, className: this.getClassName({ cnCtx: cnModalPopupControl, className: className }), ref: this.setControlRef };return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement("div", renderProps, content);};_proto.renderContent = function renderContent() {var _this3 = this;var portalProps = _ModalPortal_ModalPortal__WEBPACK_IMPORTED_MODULE_10__["passModalPortalProps"].reduce(function (data, id) {var _extends2;return _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0___default()({}, data, (_extends2 = {}, _extends2[id] = _this3.props[id], _extends2));}, {});if (this.state.open != null) {portalProps.open = this.state.open;}Object.assign(portalProps, { handleOpenState: this.handleOpenState, onActivate: this.onActivate, onDeactivate: this.onDeactivate, wrapperTheme: 'SubtleDark' });return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(_ModalPortal_ModalPortal__WEBPACK_IMPORTED_MODULE_10__["default"], _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0___default()({}, portalProps, { type: "Popup" }), this.renderPortalContent);};_proto.render = function render() {return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_4___default.a.Fragment, null, this.renderControl(), this.renderContent());};return ModalPopup;}(react__WEBPACK_IMPORTED_MODULE_4___default.a.PureComponent /** @lends @ModalPopup.prototype */);_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3___default()(ModalPopup, "propTypes", { // onEscPressed: PropTypes.func,
+    var content = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default.a.cloneElement(popupControl, { onClick: this.onControlClick, checked: open, // setDomRef: this.setControlDomRef,
+      // ref: this.setControlNodeRef,
+      setNodeRef: this.setControlNodeRef });var renderProps = { id: id, className: this.getClassName({ cnCtx: cnModalPopupControl, className: className }), ref: this.setControlDomRef };return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement("div", renderProps, content);};_proto.renderContent = function renderContent() {var _this3 = this;var portalProps = _ModalPortal_ModalPortal__WEBPACK_IMPORTED_MODULE_10__["passModalPortalProps"].reduce(function (data, id) {var _extends2;return _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0___default()({}, data, (_extends2 = {}, _extends2[id] = _this3.props[id], _extends2));}, {});if (this.state.open != null) {portalProps.open = this.state.open;}Object.assign(portalProps, { handleOpenState: this.handleOpenState, onActivate: this.onActivate, onDeactivate: this.onDeactivate, wrapperTheme: 'SubtleDark' });return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(_ModalPortal_ModalPortal__WEBPACK_IMPORTED_MODULE_10__["default"], _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0___default()({}, portalProps, { type: "Popup" }), this.renderPortalContent);};_proto.render = function render() {return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_4___default.a.Fragment, null, this.renderControl(), this.renderContent());};return ModalPopup;}(react__WEBPACK_IMPORTED_MODULE_4___default.a.PureComponent /** @lends @ModalPopup.prototype */);_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3___default()(ModalPopup, "propTypes", { // onEscPressed: PropTypes.func,
   // onKeyPress: PropTypes.func,
   // registerCallback: PropTypes.func, // registerCallback(handler = this.someMethod) -- handler stored by parent component and called when detected click on pulldown menu -- prevents popup content closing
   className: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.string, closeOnClickOutside: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.bool, closeOnEscPressed: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.bool, id: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.string, onControlClick: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.func, open: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.bool, popupContent: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.func, prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.object]).isRequired, popupControl: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.func, prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.object]).isRequired, setModalPopupNodeRef: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.func });_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3___default()(ModalPopup, "defaultProps", { // onEscPressed: null,
@@ -3918,7 +3938,7 @@ ModalPortal = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helpe
 
     function () {// External method for using in `ModalPortalStack`
       var prevOpen = _this.state.open;
-      // console.log('ModalPortal:open', this.props.id, prevOpen)
+      // console.log('ModalPortal:open', this.props.id, prevOpen);
       if (!prevOpen) {
         var open = true;
         _this.resolvingResult = null; // Reset resolving action
@@ -4059,15 +4079,22 @@ ModalPortal = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helpe
       }
     });_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1___default()(_this), "onKeyPress",
 
-    function (event) {var _this$props5 =
+    function (event) {var
+
+      key =
+
+
+      event.key,keyCode = event.keyCode,charCode = event.charCode;var _this$props5 =
 
 
 
 
 
-      _this.props,id = _this$props5.id,onEscPressed = _this$props5.onEscPressed,closeOnEscPressed = _this$props5.closeOnEscPressed,loading = _this$props5.loading;var
-      keyCode = event.keyCode;
-      var isEscPressed = keyCode === 27;
+      _this.props,id = _this$props5.id,onEscPressed = _this$props5.onEscPressed,closeOnEscPressed = _this$props5.closeOnEscPressed,loading = _this$props5.loading;
+      // @see https://keycode.info/
+      var isEscPressed = key === 'Escape'; // (keyCode === 27);
+      var cbProps = { event: event, id: id, key: key, keyCode: keyCode, charCode: charCode };
+      // console.log('ModalPortal:onKeyPress', cbProps);
       if (isEscPressed && !loading) {
         var isTopmost = _config_config__WEBPACK_IMPORTED_MODULE_9___default.a.modals.containerNode.isModalTopmostVisible(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1___default()(_this));
         // console.log('ModalPortal:onKeyPress', id, isTopmost)
@@ -4078,7 +4105,6 @@ ModalPortal = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helpe
             _this.close();
           }
           if (typeof onEscPressed === 'function') {
-            var cbProps = { event: event, id: id, keyCode: keyCode };
             onEscPressed(cbProps);
           }
         }
@@ -4096,7 +4122,8 @@ ModalPortal = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helpe
     });_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1___default()(_this), "startOutsideClickWaiting",
     function () {// Start waiting for mouse up on wrapper (close modal) or window (continue working)
       var loading = _this.props.loading;
-      if (!loading) {var _assertThisInitialize2 = _babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1___default()(_this),
+      var isTopmost = _config_config__WEBPACK_IMPORTED_MODULE_9___default.a.modals.containerNode.isModalTopmostVisible(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1___default()(_this));
+      if (!loading && isTopmost) {var _assertThisInitialize2 = _babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1___default()(_this),
         globalDomNode = _assertThisInitialize2.globalDomNode,windowDomNode = _assertThisInitialize2.windowDomNode;
         // console.log('ModalPortal:startOutsideClickWaiting')
         if (!_this.isOutsideClickWaiting && globalDomNode && windowDomNode) {// Start waiting for
@@ -4108,7 +4135,7 @@ ModalPortal = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helpe
     });_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1___default()(_this), "onOutsideClickCatched",
     function () {// Mouse released on wrapper --> close modal
       var _this$props6 = _this.props,id = _this$props6.id,closeOnClickOutside = _this$props6.closeOnClickOutside,onClickOutside = _this$props6.onClickOutside;
-      // console.log('ModalPortal:onOutsideClickCatched')
+      // console.log('ModalPortal:onOutsideClickCatched', id);
       _this.stopOutsideClickWaiting();
       if (closeOnClickOutside) {
         _this.setResult(selfCloseActionId);
@@ -4929,10 +4956,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _utils_configure__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../utils/configure */ "./src/utils/configure.js");
+/* harmony import */ var _config_config__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../config/config */ "./src/config/config.js");
+/* harmony import */ var _config_config__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_config_config__WEBPACK_IMPORTED_MODULE_7__);
  /** @module FormBooleanHOC
                                                                                                                                                                                                                                                                                 *  @class FormBooleanHOC
                                                                                                                                                                                                                                                                                 *  @since 2020.12.10, 22:17
-                                                                                                                                                                                                                                                                                *  @changed 2020.12.10, 22:17
+                                                                                                                                                                                                                                                                                *  @changed 2021.01.20, 23:28
                                                                                                                                                                                                                                                                                 */
 /* eslint-disable react/require-default-props, react/jsx-max-depth */
 
@@ -4940,7 +4969,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var cnFormBooleanHOC = Object(_utils_configure__WEBPACK_IMPORTED_MODULE_6__["cn"])('FormBooleanHOC');
+
+var cnFormBooleanHOC = Object(_utils_configure__WEBPACK_IMPORTED_MODULE_6__["cn"])('FormBoolean');
 
 var wrapFormBooleanHOC = function wrapFormBooleanHOC(WrappedComponent, params) {var _class, _temp;if (params === void 0) {params = {};}return _temp = _class = /*#__PURE__*/function (_React$Component) {_babel_runtime_helpers_inheritsLoose__WEBPACK_IMPORTED_MODULE_2___default()(FormBoolean, _React$Component);
 
@@ -5019,6 +5049,15 @@ var wrapFormBooleanHOC = function wrapFormBooleanHOC(WrappedComponent, params) {
 
 
 
+
+
+
+
+
+
+
+
+
       function (state) {var _this$props =
         _this.props,onChange = _this$props.onChange,disabled = _this$props.disabled;
         if (!disabled && typeof onChange === 'function') {var
@@ -5029,68 +5068,62 @@ var wrapFormBooleanHOC = function wrapFormBooleanHOC(WrappedComponent, params) {
 
 
 
-      function (_ref) {var value = _ref.value;
-        _this.setState(function (_ref2) {var stateValue = _ref2.value;
+
+
+
+
+
+
+
+
+
+
+      function (params) {
+        _this.setState(function (_ref) {var stateValue = _ref.value;
+          var value = params && params.value;
           if (value == null) {
             value = !stateValue;
           }
-          return { value: value };
+          return { active: true, value: value };
         });
-      });var _value = _this.props.value;_this.id = props.id || params.id || props.inputId || props.name;_this.state = { value: _value };return _this;}var _proto = FormBoolean.prototype;_proto.componentDidMount = function componentDidMount() {// const { formItemRef: { current } = {} } = this
-      this.afterRender();};_proto.componentDidUpdate = function componentDidUpdate(prevProps, prevState) {var prevValue = prevProps.value;var propsValue = this.props.value;var stateValue = this.state.value;if (propsValue !== prevValue && propsValue !== stateValue) {// New value from props
+        setTimeout(function () {
+          _this.setState({ active: false });
+        }, _config_config__WEBPACK_IMPORTED_MODULE_7___default.a.css.transitionTime);
+      });_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1___default()(_this), "setDomRef",
+
+      function (inputDomElem) {
+        _this.inputDomElem = inputDomElem;var
+        setDomRef = _this.props.setDomRef;
+        if (typeof setDomRef === 'function') {
+          setDomRef(inputDomElem);
+        }
+      });var _value = _this.props.value;_this.id = props.id || params.id || props.inputId || props.name;_this.state = { value: _value, active: false };return _this;}var _proto = FormBoolean.prototype;_proto.componentDidMount = function componentDidMount() {this.mounted = true; // this.afterUpdate();
+      /* // UNUSED: interactiveKeyPressHandler
+       * const { registerKeyPressHandler } = this.props;
+       * if (typeof registerKeyPressHandler === 'function') { // From `FormInteractiveItemHOC`
+       *   // Register callback with `FormInteractiveItemHOC`
+       *   registerKeyPressHandler(this.interactiveKeyPressHandler);
+       * }
+       */ // this.addEventListeners();
+    };_proto.componentWillUnmount = function componentWillUnmount() {// this.removeEventListeners();
+      this.mounted = false;};_proto.componentDidUpdate = function componentDidUpdate(prevProps, prevState) {var prevValue = prevProps.value;var propsValue = this.props.value;var stateValue = this.state.value;if (propsValue !== prevValue && propsValue !== stateValue) {// New value from props
         this.setState({ value: propsValue }, this.updateValueWithState);} else if (stateValue !== prevState.value) {// New value from state
-        this.updateValueWithState(this.state);}this.afterRender();} // Helper methods...
+        this.updateValueWithState(this.state);} // this.afterUpdate(); // ???
+    } // Helper methods...
     ;_proto.getClassName = function getClassName() {var id = this.id; // const { id } = this.props
-      var value = this.state.value;var checked = !!value;var mods = { id: id, checked: checked };var classList = cnFormBooleanHOC(mods, [this.props.className]);return classList;};_proto.focus = function focus() {// Invoke containing input focus method
-      // if (this.inputDomElem && typeof this.inputDomElem.focus == 'function') {
-      //   this.inputDomElem.focus()
-      // }
-    };_proto.afterRender = function afterRender() {// Calling after each (including first) render
-      // // TODO: Move `focus` and `select` forwarding to `FormItem` (for `focusable` variant)?
-      // if (this.formItemRef && this.formItemRef.current) {
-      //   if (!this.formItemRef.current.focus && this.focus) {
-      //     this.formItemRef.current.focus = this.focus.bind(this)
-      //   }
-      //   if (!this.formItemRef.current.select && this.select) {
-      //     this.formItemRef.current.select = this.select.bind(this)
-      //   }
-      // }
-    }; // Render...
-    _proto.renderInput = function renderInput() {var _this$props2 = this.props,id = _this$props2.id,inputId = _this$props2.inputId,name = _this$props2.name,setDomRef = _this$props2.setDomRef,tabIndex = _this$props2.tabIndex;var value = this.state.value;var checked = !!value;var inputProps = { type: 'checkbox', className: cnFormBooleanHOC('Input'), id: inputId || id || name, name: name || inputId || id, checked: checked,
-        onChange: this.handleChange,
-        // onFocus={this.handleFocused}
-        // onBlur={this.handleUnfocused}
-        ref: setDomRef,
-        tabIndex: tabIndex };
-
-      return /*#__PURE__*/(
-        react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement("input", inputProps));
-
-    };_proto.
-
-    render = function render() {var _this$props3 =
-
-
-
-      this.props,id = _this$props3.id,disabled = _this$props3.disabled;var
-      value = this.state.value;
-      var renderProps = {
-        id: id,
-        className: this.getClassName(),
-        disabled: disabled,
-        value: value,
-        handleChange: this.handleChange
-        // ref: setDomRef, // Init ref for FormItemHOC
-        // ref: this.formItemRef,
-        // tabIndex,
-      };
-      return /*#__PURE__*/(
-        react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(WrappedComponent, _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0___default()({},
-        this.props,
-        renderProps)));
-
-
-
+      var value = this.state.value;var checked = !!value;var mods = { id: id, checked: checked };var classList = cnFormBooleanHOC(mods, [this.props.className]);return classList;} /* // focus, blur -- ???
+                                                                                                                                                                                    * focus() { // Invoke containing input focus method
+                                                                                                                                                                                    *   if (this.inputDomElem && typeof this.inputDomElem.focus == 'function') {
+                                                                                                                                                                                    *     this.inputDomElem.focus()
+                                                                                                                                                                                    *   }
+                                                                                                                                                                                    * }
+                                                                                                                                                                                    * blur() { // Invoke containing input blur method
+                                                                                                                                                                                    *   if (this.inputDomElem && typeof this.inputDomElem.blur == 'function') {
+                                                                                                                                                                                    *     this.inputDomElem.blur()
+                                                                                                                                                                                    *   }
+                                                                                                                                                                                    * }
+                                                                                                                                                                                    */; // Render...
+    _proto.render = function render() {var _this$props2 = this.props,id = _this$props2.id,disabled = _this$props2.disabled;var _this$state = this.state,active = _this$state.active,value = _this$state.value;var renderProps = { id: id, className: this.getClassName(), disabled: disabled, value: value, active: active, handleChange: this.handleChange, setDomRef: this.setDomRef, setInputDomRef: this.setInputDomRef };return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(WrappedComponent, _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0___default()({}, this.props, renderProps));
     };return FormBoolean;}(react__WEBPACK_IMPORTED_MODULE_4___default.a.Component), _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3___default()(_class, "propTypes", { id: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.string, name: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.string, value: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.bool, disabled: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.bool, onChange: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.func }), _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3___default()(_class, "defaultProps", { id: params.id, value: false }), _temp;};
 
 
@@ -5163,14 +5196,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var _utils_configure__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../utils/configure */ "./src/utils/configure.js");
 /* harmony import */ var _helpers_ActionsContext__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../helpers/ActionsContext */ "./src/helpers/ActionsContext.jsx");
-/* harmony import */ var _FormItemHOC_FormItemHOC__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../FormItemHOC/FormItemHOC */ "./src/forms/FormItemHOC/FormItemHOC.jsx");
-/* harmony import */ var _elements_InlineIcon_InlineIcon__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../elements/InlineIcon/InlineIcon */ "./src/elements/InlineIcon/InlineIcon.jsx");
-/* harmony import */ var _FormButton_pcss__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./FormButton.pcss */ "./src/forms/FormButton/FormButton.pcss");
-/* harmony import */ var _FormButton_pcss__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_FormButton_pcss__WEBPACK_IMPORTED_MODULE_11__);
-/* harmony import */ var _FormButton_Variations_pcss__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./FormButton-Variations.pcss */ "./src/forms/FormButton/FormButton-Variations.pcss");
-/* harmony import */ var _FormButton_Variations_pcss__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(_FormButton_Variations_pcss__WEBPACK_IMPORTED_MODULE_12__);
-/* harmony import */ var _FormButton_Themes_pcss__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./FormButton-Themes.pcss */ "./src/forms/FormButton/FormButton-Themes.pcss");
-/* harmony import */ var _FormButton_Themes_pcss__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(_FormButton_Themes_pcss__WEBPACK_IMPORTED_MODULE_13__);
+/* harmony import */ var _config_config__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../config/config */ "./src/config/config.js");
+/* harmony import */ var _config_config__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_config_config__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _FormItemHOC_FormItemHOC__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../FormItemHOC/FormItemHOC */ "./src/forms/FormItemHOC/FormItemHOC.jsx");
+/* harmony import */ var _elements_InlineIcon_InlineIcon__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../elements/InlineIcon/InlineIcon */ "./src/elements/InlineIcon/InlineIcon.jsx");
+/* harmony import */ var _FormButton_pcss__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./FormButton.pcss */ "./src/forms/FormButton/FormButton.pcss");
+/* harmony import */ var _FormButton_pcss__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(_FormButton_pcss__WEBPACK_IMPORTED_MODULE_12__);
+/* harmony import */ var _FormButton_Variations_pcss__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./FormButton-Variations.pcss */ "./src/forms/FormButton/FormButton-Variations.pcss");
+/* harmony import */ var _FormButton_Variations_pcss__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(_FormButton_Variations_pcss__WEBPACK_IMPORTED_MODULE_13__);
+/* harmony import */ var _FormButton_Themes_pcss__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./FormButton-Themes.pcss */ "./src/forms/FormButton/FormButton-Themes.pcss");
+/* harmony import */ var _FormButton_Themes_pcss__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(_FormButton_Themes_pcss__WEBPACK_IMPORTED_MODULE_14__);
  /** @module FormButton
                                                                                                                                                                                                                                                                                 *  @class FormButton
                                                                                                                                                                                                                                                                                 *  @since 2020.07.20, 19:07
@@ -5180,7 +5215,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-// import connect from 'react-redux/es/connect/connect'
+// import connect from 'react-redux/es/connect/connect';
+
 
 
 
@@ -5194,7 +5230,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var cnFormButton = Object(_utils_configure__WEBPACK_IMPORTED_MODULE_7__["cn"])('FormButton');var
 
-FormButton = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helpers_inheritsLoose__WEBPACK_IMPORTED_MODULE_2___default()(FormButton, _React$PureComponent);function FormButton() {var _this;for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {args[_key] = arguments[_key];}_this = _React$PureComponent.call.apply(_React$PureComponent, [this].concat(args)) || this;_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1___default()(_this), "onClick",
+FormButton = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helpers_inheritsLoose__WEBPACK_IMPORTED_MODULE_2___default()(FormButton, _React$PureComponent);
 
 
 
@@ -5218,7 +5254,10 @@ FormButton = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helper
 
 
 
+  // Lifecycle...
 
+  function FormButton(props) {var _this;
+    _this = _React$PureComponent.call(this, props) || this;_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1___default()(_this), "focus",
 
 
 
@@ -5283,6 +5322,33 @@ FormButton = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helper
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    function () {var
+      formItemNode = _this.props.formItemNode;
+      // console.log('FormButton:focus');
+      // debugger;
+      formItemNode && formItemNode.focus && formItemNode.focus();
+    });_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1___default()(_this), "blur",
+    function () {var
+      formItemNode = _this.props.formItemNode;
+      // console.log('FormButton:focus');
+      // debugger;
+      formItemNode && formItemNode.focus && formItemNode.focus();
+    });_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1___default()(_this), "onClick",
 
     function (event) {var _this$props =
 
@@ -5302,16 +5368,22 @@ FormButton = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helper
             }
           });
         }
+        _this.setState({ active: true });
+        setTimeout(function () {
+          if (_this.mounted) {
+            _this.setState({ active: false });
+          }
+        }, _config_config__WEBPACK_IMPORTED_MODULE_9___default.a.css.transitionTime);
       }
-    });return _this;}var _proto = FormButton.prototype; // static defaultProps = {
-  // }
-  // Helpers...
-  _proto.hasIcon = function hasIcon() {var _this$props2 = this.props,icon = _this$props2.icon,hasIcon = _this$props2.hasIcon;return !!(hasIcon || icon);};_proto.hasText = function hasText() {var _this$props3 = this.props,hasText = _this$props3.hasText,onlyIcon = _this$props3.onlyIcon,children = _this$props3.children,text = _this$props3.text;return !onlyIcon && !!(hasText || text || children);};_proto.getClassName = function getClassName() {// TODO: Refactor properties!
-    var _this$props4 = this.props,checked = _this$props4.checked,fullWidth = _this$props4.fullWidth,id = _this$props4.id,inline = _this$props4.inline,largeIcon = _this$props4.largeIcon,onDark = _this$props4.onDark,onlyIcon = _this$props4.onlyIcon,plain = _this$props4.plain,rightIcon = _this$props4.rightIcon,rotatedIcon = _this$props4.rotatedIcon,theme = _this$props4.theme,type = _this$props4.type,variation = _this$props4.variation;var mods = { // plain,
-      checked: checked, fullWidth: fullWidth, id: id, inline: inline, largeIcon: largeIcon, onDark: onDark, onlyIcon: onlyIcon, plain: plain, rightIcon: rightIcon, rotatedIcon: rotatedIcon, theme: theme, type: type, variation: variation };var staticMods = { solid: true };var classList = cnFormButton(_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0___default()({}, staticMods, mods, { hasIcon: this.hasIcon(), hasText: this.hasText() }), [this.props.className]);return classList;} // Handlers...
+    });_this.state = {};_this.mounted = true;if (props.setNodeRef) {props.setNodeRef(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1___default()(_this));}return _this;}var _proto = FormButton.prototype;_proto.componentWillUnmount = function componentWillUnmount() {this.mounted = false;} // Helpers...
+  ;_proto.hasIcon = function hasIcon() {var _this$props2 = this.props,icon = _this$props2.icon,hasIcon = _this$props2.hasIcon;return !!(hasIcon || icon);};_proto.hasText = function hasText() {var _this$props3 = this.props,hasText = _this$props3.hasText,onlyIcon = _this$props3.onlyIcon,children = _this$props3.children,text = _this$props3.text;return !onlyIcon && !!(hasText || text || children);};_proto.getClassName = function getClassName() {// TODO: Refactor properties!
+    var _this$props4 = this.props,checked = _this$props4.checked,fullWidth = _this$props4.fullWidth,id = _this$props4.id,inline = _this$props4.inline,largeIcon = _this$props4.largeIcon,onDark = _this$props4.onDark,onlyIcon = _this$props4.onlyIcon,plain = _this$props4.plain,rightIcon = _this$props4.rightIcon,rotatedIcon = _this$props4.rotatedIcon,theme = _this$props4.theme,type = _this$props4.type,variation = _this$props4.variation;var active = this.state.active;var mods = { // plain,
+      checked: checked, fullWidth: fullWidth, id: id, inline: inline, largeIcon: largeIcon, onDark: onDark, onlyIcon: onlyIcon, plain: plain, rightIcon: rightIcon, rotatedIcon: rotatedIcon, theme: theme, type: type, variation: variation, // State..
+      active: active };var staticMods = { solid: true };var classList = cnFormButton(_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0___default()({}, staticMods, mods, { hasIcon: this.hasIcon(), hasText: this.hasText() }), [this.props.className]);return classList;} // Handlers...
   ; // Render...
-  _proto.renderIcon = function renderIcon() {var hasIcon = this.hasIcon();if (hasIcon) {var icon = this.props.icon;
-      if (icon && icon.type === _elements_InlineIcon_InlineIcon__WEBPACK_IMPORTED_MODULE_10__["default"]) {// Already InlineIcon
+  _proto.renderIcon = function renderIcon() {var hasIcon = this.hasIcon();if (hasIcon) {var
+      icon = this.props.icon;
+      if (icon && icon.type === _elements_InlineIcon_InlineIcon__WEBPACK_IMPORTED_MODULE_11__["default"]) {// Already InlineIcon
         // Extend with updated `className` props
         var props = _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0___default()({},
         icon.props, {
@@ -5321,7 +5393,7 @@ FormButton = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helper
         return newIcon;
       }
       return /*#__PURE__*/(
-        react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(_elements_InlineIcon_InlineIcon__WEBPACK_IMPORTED_MODULE_10__["default"], { icon: icon, className: cnFormButton('Icon') }));
+        react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(_elements_InlineIcon_InlineIcon__WEBPACK_IMPORTED_MODULE_11__["default"], { icon: icon, className: cnFormButton('Icon') }));
 
     }
   };_proto.
@@ -5362,8 +5434,9 @@ FormButton = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helper
       title: title,
       type: type,
       onClick: this.onClick,
-      ref: setDomRef // Init ref for FormItemHOC
-    };
+      ref: setDomRef, // Init ref for FormItemHOC
+      tabIndex: -1 };
+
 
     var content = /*#__PURE__*/
     react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_4___default.a.Fragment, null,
@@ -5394,7 +5467,9 @@ _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3___default()(For
   rightIcon: prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.bool, // Icon placed at right side
   text: prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.string, // Text content (may be passed as node children)
   theme: prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.string // Button style (plain, default, primary, secondary, error, warn, success, info, etc -- some are in progress -- see styles file)
-});/* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_5__["compose"])(_helpers_ActionsContext__WEBPACK_IMPORTED_MODULE_8__["withActionsContext"], Object(_FormItemHOC_FormItemHOC__WEBPACK_IMPORTED_MODULE_9__["default"])({ solid: true, hoverable: true, framed: true }))(FormButton));
+  // setDomRef: PropTypes.func,
+  // setNodeRef: PropTypes.func,
+});/* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_5__["compose"])(_helpers_ActionsContext__WEBPACK_IMPORTED_MODULE_8__["withActionsContext"], Object(_FormItemHOC_FormItemHOC__WEBPACK_IMPORTED_MODULE_10__["default"])({ solid: true, hoverable: true, framed: true }))(FormButton));
 
 /***/ }),
 
@@ -5792,6 +5867,212 @@ FormInputGroup = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_he
 
 /***/ }),
 
+/***/ "./src/forms/FormInteractiveItemHOC/FormInteractiveItemHOC.jsx":
+/*!*********************************************************************!*\
+  !*** ./src/forms/FormInteractiveItemHOC/FormInteractiveItemHOC.jsx ***!
+  \*********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/extends */ "./node_modules/@babel/runtime/helpers/extends.js");
+/* harmony import */ var _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/assertThisInitialized */ "./node_modules/@babel/runtime/helpers/assertThisInitialized.js");
+/* harmony import */ var _babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _babel_runtime_helpers_inheritsLoose__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime/helpers/inheritsLoose */ "./node_modules/@babel/runtime/helpers/inheritsLoose.js");
+/* harmony import */ var _babel_runtime_helpers_inheritsLoose__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_inheritsLoose__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/defineProperty.js");
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _helpers_FormContext__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../helpers/FormContext */ "./src/helpers/FormContext.jsx");
+ /** @module FormInteractiveItemHOC
+                                                                                                                                                                                                                                                                                *  @class FormInteractiveItemHOC
+                                                                                                                                                                                                                                                                                *  @since 2021.01.19, 18:21
+                                                                                                                                                                                                                                                                                *  @changed 2021.01.19, 20:27
+                                                                                                                                                                                                                                                                                */
+/* eslint-disable react/require-default-props, react/jsx-max-depth, react/require-optimization */
+
+
+// import { compose } from 'redux';
+
+// import { cn } from 'utils/configure';
+
+
+var wrapFormInteractiveItemHOC = function wrapFormInteractiveItemHOC(WrappedComponent, params) {if (params === void 0) {params = {};}var
+  FormInteractiveItem = /*#__PURE__*/function (_React$Component) {_babel_runtime_helpers_inheritsLoose__WEBPACK_IMPORTED_MODULE_2___default()(FormInteractiveItem, _React$Component);function FormInteractiveItem() {var _this;for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {args[_key] = arguments[_key];}_this = _React$Component.call.apply(_React$Component, [this].concat(args)) || this;_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1___default()(_this), "registeredKeyPressHandlers",
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      []);_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1___default()(_this), "onKeyPress",
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      function (event) {var
+
+        key =
+
+
+
+        event.key,code = event.code,keyCode = event.keyCode,charCode = event.charCode;var _this$props =
+
+
+
+
+
+
+
+        _this.props,id = _this$props.id,onKeyPress = _this$props.onKeyPress,onEnterPressed = _this$props.onEnterPressed,onEscPressed = _this$props.onEscPressed,onSpacePressed = _this$props.onSpacePressed,formContextNode = _this$props.formContextNode;
+        // @see https://keycode.info/
+        var isEnterPressed = code === 'Enter'; // (keyCode === 13); // Enter?
+        var isEscPressed = code === 'Escape'; // (keyCode === 27); // Esc?
+        var isSpacePressed = code === 'Space'; // (keyCode === 27); // Space?
+        var cbProps = {
+          event: event,
+          id: id,
+          key: key,
+          code: code,
+          keyCode: keyCode,
+          charCode: charCode,
+          isEnterPressed: isEnterPressed,
+          isEscPressed: isEscPressed,
+          isSpacePressed: isSpacePressed,
+          domNode: _this.domNode };
+
+        // console.log('FormInteractiveItemHOC:onKeyPress', cbProps);
+        // debugger;
+        // Process registered callback handlers...
+        if (_this.registeredKeyPressHandlers.length) {
+          var result = _this.registeredKeyPressHandlers.reduce(function (result, cb) {
+            return typeof cb === 'function' && cb(cbProps) === false ? false : result;
+          }, undefined);
+          // Don't process other handlers and return `false` value if one of registered handlers rerurned `false`.
+          if (result === false) {
+            // TODO: Stop event propagation?
+            // event.stopImmediatePropagation();
+            event.stopPropagation();
+            return false;
+          }
+        }
+        if (typeof onKeyPress === 'function') {
+          onKeyPress(cbProps);
+        }
+        if (isEnterPressed) {
+          if (typeof onEnterPressed === 'function') {
+            onEnterPressed(cbProps);
+          }
+          if (formContextNode && typeof formContextNode.onInputEnterPressed === 'function') {
+            formContextNode.onInputEnterPressed(cbProps);
+          }
+        }
+        if (isEscPressed && typeof onEscPressed === 'function') {
+          onEscPressed(cbProps);
+        }
+        if (isSpacePressed && typeof onSpacePressed === 'function') {
+          onSpacePressed(cbProps);
+        }
+      });_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1___default()(_this), "registerKeyPressHandler",
+
+      function (handler) {
+        _this.registeredKeyPressHandlers.push(handler);
+      });_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1___default()(_this), "setDomRef",
+
+      function (domNode) {var
+        setDomRef = _this.props.setDomRef;
+        _this.domNode = domNode;
+        // console.log('FormInteractiveItemHOC:setDomRef', {
+        //   domNode,
+        // });
+        _this.addEventListeners();
+        if (typeof setDomRef === 'function') {// Pass to parent if callback specified
+          setDomRef(domNode);
+        }
+      });return _this;}var _proto = FormInteractiveItem.prototype; // Registered keypress callback handlers list...
+    // Lifecycle methods...
+    _proto.componentWillUnmount = function componentWillUnmount() {this.removeEventListeners();} // Helper methods...
+    // focus, blur?
+    ;_proto.addEventListeners = function addEventListeners() {if (!this.addedEventListeners && this.domNode) {this.addedEventListeners = true;this.domNode.addEventListener('keypress', this.onKeyPress);}};_proto.removeEventListeners = function removeEventListeners() {if (this.addedEventListeners && this.domNode) {this.addedEventListeners = false;this.domNode.removeEventListener('keypress', this.onKeyPress);}} // Events...
+    ; // Render...
+    _proto.render = function render() {var renderProps = { setDomRef: this.setDomRef,
+        registerKeyPressHandler: this.registerKeyPressHandler };
+
+      return /*#__PURE__*/(
+        react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(WrappedComponent, _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0___default()({},
+        this.props,
+        renderProps)));
+
+
+
+    };return FormInteractiveItem;}(react__WEBPACK_IMPORTED_MODULE_4___default.a.Component);_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3___default()(FormInteractiveItem, "propTypes", { id: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.string, // name: PropTypes.string,
+    // value: PropTypes.bool,
+    // disabled: PropTypes.bool,
+    setDomRef: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.func, onKeyPress: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.func, onEnterPressed: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.func, onEscPressed: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.func, onSpacePressed: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.func, // FormContext Provider
+    formContextNode: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.shape({ onInputEnterPressed: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.func }) });_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3___default()(FormInteractiveItem, "defaultProps", { id: params.id });return Object(_helpers_FormContext__WEBPACK_IMPORTED_MODULE_6__["withFormContext"])(FormInteractiveItem);};
+
+/** Usage:
+                                                                                                                                                                                                         * FormInteractiveItemHOC(component)
+                                                                                                                                                                                                         * FormInteractiveItemHOC(params)(component)
+                                                                                                                                                                                                         */
+var FormInteractiveItemHOC = function FormInteractiveItemHOC(params) {
+  if (typeof params === 'string') {// Passed identifier
+    params = { id: params };
+  }
+  if (typeof params === 'object') {// Params passed -> metafabric
+    return function (component) {return wrapFormInteractiveItemHOC(component, params);};
+  } else
+  {// Component passed -> simple fabric
+    return wrapFormInteractiveItemHOC(params);
+  }
+};
+
+// export default FormItemHOC({ hoverable: true, focusable: true, framed: false })(FormInteractiveItemHOC)
+/* harmony default export */ __webpack_exports__["default"] = (FormInteractiveItemHOC);
+
+/***/ }),
+
 /***/ "./src/forms/FormItemDummy/FormItemDummy.jsx":
 /*!***************************************************!*\
   !*** ./src/forms/FormItemDummy/FormItemDummy.jsx ***!
@@ -6118,7 +6399,7 @@ var wrapFormItemHOC = function wrapFormItemHOC(WrappedComponent, params) {var _t
     // Lifecycle methods...
     ;
     function FormItem(props) {var _this;
-      _this = _React$Component.call(this, props) || this;_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_0___default()(_this), "handleMouseOver",
+      _this = _React$Component.call(this, props) || this;_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_0___default()(_this), "focus",
 
 
 
@@ -6187,11 +6468,23 @@ var wrapFormItemHOC = function wrapFormItemHOC(WrappedComponent, params) {var _t
 
 
 
-
+      function () {var _assertThisInitialize = _babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_0___default()(_this),
+        formItemDomRef = _assertThisInitialize.formItemDomRef;
+        // console.log('FormItem:focus');
+        // debugger;
+        formItemDomRef && formItemDomRef.focus && formItemDomRef.focus();
+      });_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_0___default()(_this), "blur",
+      function () {var _assertThisInitialize2 = _babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_0___default()(_this),
+        formItemDomRef = _assertThisInitialize2.formItemDomRef;
+        // console.log('FormItem:focus');
+        // debugger;
+        formItemDomRef && formItemDomRef.focus && formItemDomRef.focus();
+      });_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_0___default()(_this), "handleMouseOver",
 
       function () {
         var disabled = _this.getStateOrPropOrParam('disabled');
         var hoverable = _this.getStateOrPropOrParam('hoverable');
+        // console.log('FormItemHOC:handleMouseOver');
         if (hoverable && !disabled) {
           _this.setState({ hovered: true });
         }
@@ -6199,29 +6492,32 @@ var wrapFormItemHOC = function wrapFormItemHOC(WrappedComponent, params) {var _t
       function () {
         var disabled = _this.getStateOrPropOrParam('disabled');
         var hoverable = _this.getStateOrPropOrParam('hoverable');
+        // console.log('FormItemHOC:handleMouseOut');
         if (hoverable && !disabled) {
           _this.setState({ hovered: false });
         }
-      });_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_0___default()(_this), "handleFocus",
+      });_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_0___default()(_this), "handleFocusIn",
 
       function () {
         var disabled = _this.getStateOrPropOrParam('disabled');
         var focusable = _this.getStateOrPropOrParam('focusable');
         if (focusable && !disabled) {
+          // console.log('FormItemHOC:handleFocusIn');
           _this.setState({ focused: true });
         }
-      });_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_0___default()(_this), "handleBlur",
+      });_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_0___default()(_this), "handleFocusOut",
       function () {
         var disabled = _this.getStateOrPropOrParam('disabled');
         var focusable = _this.getStateOrPropOrParam('focusable');
         if (focusable && !disabled) {
+          // console.log('FormItemHOC:handleFocusOut');
           _this.setState({ focused: false });
         }
       });_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_0___default()(_this), "setDomRef",
 
       function (domRef) {// Children dom node receiver
-        var setDomRef = _this.props.setDomRef;
-        _this.formItemDomRef = domRef;
+        _this.formItemDomRef = domRef;var
+        setDomRef = _this.props.setDomRef;
         if (typeof setDomRef === 'function') {
           setDomRef(domRef);
         }
@@ -6230,24 +6526,25 @@ var wrapFormItemHOC = function wrapFormItemHOC(WrappedComponent, params) {var _t
       _this.id = props.id || params.id; // this.formItemRef = React.createRef()
       return _this;}FormItem.getDerivedStateFromProps = function getDerivedStateFromProps(props, state) {// TODO: Update event subscriptions if `hoverable` flag changed?
       return deriveState(params, props, state); // deriveStateFromProps(props, state)
-    };_proto.componentDidMount = function componentDidMount() {var _this2 = this; // const { formItemRef: { current } = {} } = this
-      var formItemDomRef = this.formItemDomRef;if (formItemDomRef && formItemDomRef.addEventListener) {var hoverable = this.getStateOrPropOrParam('hoverable');var focusable = this.getStateOrPropOrParam('focusable');if (hoverable && !this.hoverableInited) {this.hoverableInited = true;formItemDomRef.addEventListener('mouseover', this.handleMouseOver);formItemDomRef.addEventListener('mouseout', this.handleMouseOut);}if (focusable && !this.focusableInited) {this.focusableInited = true;formItemDomRef.addEventListener('focus', this.handleFocus);formItemDomRef.addEventListener('blur', this.handleBlur);this.focus = function () {// Focus handler
-            var domRef = _this2.formItemDomRef;domRef && domRef.focus && domRef.focus();};}}};_proto.componentWillUnmount = function componentWillUnmount() {var formItemDomRef = this.formItemDomRef;if (formItemDomRef && formItemDomRef.removeEventListener) {// const hoverable = this.getStateOrPropOrParam('hoverable')
+    };_proto.componentDidMount = function componentDidMount() {// const { formItemRef: { current } = {} } = this
+      var formItemDomRef = this.formItemDomRef;if (formItemDomRef && formItemDomRef.addEventListener) {var hoverable = this.getStateOrPropOrParam('hoverable');var focusable = this.getStateOrPropOrParam('focusable');if (hoverable && !this.hoverableInited) {this.hoverableInited = true;formItemDomRef.addEventListener('mouseover', this.handleMouseOver);formItemDomRef.addEventListener('mouseout', this.handleMouseOut);}if (focusable && !this.focusableInited) {this.focusableInited = true; // formItemDomRef.addEventListener('focus', this.handleFocusIn);
+          formItemDomRef.addEventListener('focus', this.handleFocusIn);formItemDomRef.addEventListener('blur', this.handleFocusOut);formItemDomRef.addEventListener('focusin', this.handleFocusIn);formItemDomRef.addEventListener('focusout', this.handleFocusOut); // console.log('FormItemHOC:componentDidMount: focus event handlers added');
+          this.focus = function () {// Focus handler
+            formItemDomRef && formItemDomRef.focus && formItemDomRef.focus();};}}};_proto.componentWillUnmount = function componentWillUnmount() {var formItemDomRef = this.formItemDomRef;if (formItemDomRef && formItemDomRef.removeEventListener) {// const hoverable = this.getStateOrPropOrParam('hoverable')
         // const focusable = this.getStateOrPropOrParam('focusable')
-        if (this.hoverableInited) {formItemDomRef.removeEventListener('mouseover', this.handleMouseOver);formItemDomRef.removeEventListener('mouseout', this.handleMouseOut);}if (this.focusableInited) {formItemDomRef.removeEventListener('focus', this.handleFocus);formItemDomRef.removeEventListener('blur', this.handleBlur);}}};_proto.getClassName = function getClassName() {var _this3 = this; // Collect modifier values from state or props
-      var mods = classNameModifiers.reduce(function (mods, id) {var val = _this3.getStateOrPropOrParam(id); // (this.state[id] != null) ? this.state[id] : this.props[id]
-        if (val != null) {mods[id] = val;}return mods;}, {});return cnFormItem(mods, [this.props.className]);} /* // For `focusable` state (TODO?)
-                                                                                                                * handleFocus() {
-                                                                                                                *   this.setState({ focused: true })
-                                                                                                                * }
-                                                                                                                * handleBlur() {
-                                                                                                                *   this.setState({ focused: false })
-                                                                                                                * }
-                                                                                                                */;_proto.render = function render() {var _this$state = this.state,hovered = _this$state.hovered,focused = _this$state.focused;var renderProps = { hovered: hovered, focused: focused, className: this.getClassName(), setDomRef: this.setDomRef // Children dom node receiver
+        if (this.hoverableInited) {formItemDomRef.removeEventListener('mouseover', this.handleMouseOver);formItemDomRef.removeEventListener('mouseout', this.handleMouseOut);}if (this.focusableInited) {formItemDomRef.removeEventListener('focus', this.handleFocusIn);formItemDomRef.removeEventListener('blur', this.handleFocusOut);formItemDomRef.removeEventListener('focusin', this.handleFocusIn);formItemDomRef.removeEventListener('focusout', this.handleFocusOut);}}};_proto.getClassName = function getClassName() {var _this2 = this; // Collect modifier values from state or props
+      var mods = classNameModifiers.reduce(function (mods, id) {var val = _this2.getStateOrPropOrParam(id); // (this.state[id] != null) ? this.state[id] : this.props[id]
+        if (val != null) {mods[id] = val;}return mods;}, {});return cnFormItem(mods, [this.props.className]);} // Handlers...
+    ;_proto.render = function render() {var _this$state = this.state,hovered = _this$state.hovered,focused = _this$state.focused;var renderProps = { hovered: hovered, focused: focused, formItemNode: this, className: this.getClassName(), setDomRef: this.setDomRef // Children dom node receiver
         // formItemDomRef: this.formItemDomRef,
-      };var focusable = this.getStateOrPropOrParam('focusable');if (focusable) {renderProps.tabIndex = 0;}return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(WrappedComponent, _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_3___default()({},
-      this.props,
-      renderProps));
+      };var focusable = this.getStateOrPropOrParam('focusable');
+      if (focusable) {
+        renderProps.tabIndex = 0;
+      }
+      return /*#__PURE__*/(
+        react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(WrappedComponent, _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_3___default()({},
+        this.props,
+        renderProps)));
 
 
     };return FormItem;}(react__WEBPACK_IMPORTED_MODULE_4___default.a.Component), _temp;};
@@ -6444,7 +6741,6 @@ __webpack_require__.r(__webpack_exports__);
 
 // const cnFormLabeledGroup = cn('FormLabeledGroup')
 
-// class FormLabeledGroup extends React.PureComponent [>* @lends @FormLabeledGroup.prototype <] {
 var FormLabeledGroup = function FormLabeledGroup(props) /** @lends @FormLabeledGroup.prototype */{var
 
   className =
@@ -6651,14 +6947,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(redux__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _FormItemHOC_FormItemHOC__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../FormItemHOC/FormItemHOC */ "./src/forms/FormItemHOC/FormItemHOC.jsx");
 /* harmony import */ var _FormBooleanHOC_FormBooleanHOC__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../FormBooleanHOC/FormBooleanHOC */ "./src/forms/FormBooleanHOC/FormBooleanHOC.jsx");
-/* harmony import */ var _FormRadio_pcss__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./FormRadio.pcss */ "./src/forms/FormRadio/FormRadio.pcss");
-/* harmony import */ var _FormRadio_pcss__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_FormRadio_pcss__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var _FormRadio_Themes_pcss__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./FormRadio-Themes.pcss */ "./src/forms/FormRadio/FormRadio-Themes.pcss");
-/* harmony import */ var _FormRadio_Themes_pcss__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_FormRadio_Themes_pcss__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _FormInteractiveItemHOC_FormInteractiveItemHOC__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../FormInteractiveItemHOC/FormInteractiveItemHOC */ "./src/forms/FormInteractiveItemHOC/FormInteractiveItemHOC.jsx");
+/* harmony import */ var _FormRadio_pcss__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./FormRadio.pcss */ "./src/forms/FormRadio/FormRadio.pcss");
+/* harmony import */ var _FormRadio_pcss__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_FormRadio_pcss__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _FormRadio_Themes_pcss__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./FormRadio-Themes.pcss */ "./src/forms/FormRadio/FormRadio-Themes.pcss");
+/* harmony import */ var _FormRadio_Themes_pcss__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_FormRadio_Themes_pcss__WEBPACK_IMPORTED_MODULE_10__);
  /** @module FormRadio
                                                                                                                                         *  @class FormRadio
                                                                                                                                         *  @since 2020.04.02, 14:53
-                                                                                                                                        *  @changed 2020.04.02, 14:53
+                                                                                                                                        *  @changed 2021.01.20, 23:28
                                                                                                                                         */
 /* eslint-disable react/require-default-props, react/jsx-max-depth */
 
@@ -6670,6 +6967,10 @@ __webpack_require__.r(__webpack_exports__);
 // import FormItem from '../FormItem'
 
 
+
+// import { withFormContext } from 'helpers/FormContext';
+
+// import FormFocusableItemHOC from 'forms/FormFocusableItemHOC';
 
 
 
@@ -6690,12 +6991,28 @@ FormRadio = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helpers
 
 
 
+  // Lifecycle
+
   // Helper methods...
   _proto.
   getClassName = function getClassName() {var _this$props =
-    this.props,id = _this$props.id,value = _this$props.value,theme = _this$props.theme;
+
+
+
+
+
+
+
+    this.props,id = _this$props.id,value = _this$props.value,theme = _this$props.theme,disabled = _this$props.disabled,active = _this$props.active;
     var checked = !!value;
-    var mods = { id: id, checked: checked, theme: theme };
+    var mods = {
+      id: id,
+      checked: checked,
+      theme: theme,
+      disabled: disabled,
+      active: active
+      // focused,
+    };
     var classList = cnFormRadio(mods, [this.props.className]);
     return classList;
   }
@@ -6711,7 +7028,8 @@ FormRadio = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helpers
 
 
 
-    this.props,id = _this$props2.id,inputId = _this$props2.inputId,name = _this$props2.name,setDomRef = _this$props2.setDomRef,tabIndex = _this$props2.tabIndex,handleChange = _this$props2.handleChange,value = _this$props2.value;
+
+    this.props,id = _this$props2.id,inputId = _this$props2.inputId,name = _this$props2.name,handleChange = _this$props2.handleChange,value = _this$props2.value,setDomRef = _this$props2.setDomRef;
     var checked = !!value;
     var inputProps = {
       type: 'checkbox',
@@ -6720,9 +7038,10 @@ FormRadio = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helpers
       name: name || inputId || id,
       checked: checked,
       onChange: handleChange,
-      ref: setDomRef,
-      tabIndex: tabIndex };
-
+      ref: setDomRef
+      // ref: setInputDomRef,
+      // tabIndex,
+    };
     return /*#__PURE__*/(
       react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("input", inputProps));
 
@@ -6732,12 +7051,16 @@ FormRadio = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helpers
 
 
 
+
+
     this.props,id = _this$props3.id,disabled = _this$props3.disabled;
     var renderProps = {
       id: id,
       className: this.getClassName(),
-      disabled: disabled };
-
+      disabled: disabled,
+      onKeyPress: this.onKeyPress
+      // ref: setDomRef,
+    };
     return /*#__PURE__*/(
       react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", renderProps, /*#__PURE__*/
       react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
@@ -6757,6 +7080,9 @@ FormRadio = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helpers
 
 // export default FormItemHOC({ hoverable: true, focusable: true, framed: false })(FormRadio)
 _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1___default()(FormRadio, "propTypes", { id: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.string, name: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.string, value: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.bool, disabled: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.bool, onChange: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func });_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1___default()(FormRadio, "defaultProps", { value: false });/* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_5__["compose"])(
+// withFormContext,
+_FormInteractiveItemHOC_FormInteractiveItemHOC__WEBPACK_IMPORTED_MODULE_8__["default"],
+// FormFocusableItemHOC,
 Object(_FormItemHOC_FormItemHOC__WEBPACK_IMPORTED_MODULE_6__["default"])({ hoverable: true, focusable: true, framed: false }),
 _FormBooleanHOC_FormBooleanHOC__WEBPACK_IMPORTED_MODULE_7__["default"])(
 FormRadio));
@@ -6845,12 +7171,17 @@ FormSelect = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helper
 
 
 
+
+
   // Lifecycle methods...
 
   function FormSelect(props) {var _this;
     _this = _React$PureComponent.call(this, props) || this;
     // this.formItemRef = React.createRef()
     _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_0___default()(_this), "onControlClick",
+
+
+
 
 
 
@@ -6914,19 +7245,19 @@ FormSelect = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helper
       if (setPopupNodeRef && typeof setPopupNodeRef === 'function') {
         setPopupNodeRef(node);
       }
-    });_this.id = props.id || props.inputId || props.name;var _checked = props.checked,_value = props.value;_this.state = { checked: Array.isArray(_checked) ? _checked : _value && [_value] || [] };return _this;} // Helper methods...
+    });_this.id = props.id || props.inputId || props.name;var _checked = props.checked,_value = props.value;_this.state = { checked: Array.isArray(_checked) ? _checked : _value && [_value] || [] }; // if (props.setNodeRef) {
+    //   props.setNodeRef(this);
+    // }
+    return _this;} // Helper methods...
   var _proto = FormSelect.prototype;_proto.getClassName = function getClassName() {var id = this.id;var classList = cnFormSelect({ id: id }, [this.props.className]);return classList;};_proto.getItemsText = function getItemsText() {var checked = this.state.checked;var options = this.props.options;var text = Array.isArray(options) && Array.isArray(checked) && options.map(function (_ref) {var val = _ref.val,text = _ref.text;if (checked.includes(val)) {return text;}}).filter(Boolean).join(', ');return text;} // Handlers...
   ; // Render...
-  _proto.
-  renderControlContent = function renderControlContent() {var _this$props3 =
+  _proto.renderControlContent = function renderControlContent() {var _this$props3 =
 
 
 
 
 
-
-
-    this.props,text = _this$props3.text,placeholder = _this$props3.placeholder,title = _this$props3.title,controlButtonTheme = _this$props3.controlButtonTheme,fullWidth = _this$props3.fullWidth,disabled = _this$props3.disabled;
+    this.props,text = _this$props3.text,placeholder = _this$props3.placeholder,title = _this$props3.title,controlButtonTheme = _this$props3.controlButtonTheme,_this$props3$fullWidt = _this$props3.fullWidth,fullWidth = _this$props3$fullWidt === void 0 ? true : _this$props3$fullWidt,disabled = _this$props3.disabled;
     var buttonText = this.getItemsText() || placeholder || text;
     return /*#__PURE__*/(
       react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_FormButton_FormButton__WEBPACK_IMPORTED_MODULE_9__["default"], {
@@ -6978,7 +7309,8 @@ FormSelect = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helper
 
 
 
-    this.props,id = _this$props5.id,disabled = _this$props5.disabled,title = _this$props5.title,open = _this$props5.open,fullWidth = _this$props5.fullWidth;
+
+    this.props,id = _this$props5.id,disabled = _this$props5.disabled,title = _this$props5.title,open = _this$props5.open,fullWidth = _this$props5.fullWidth,setDomRef = _this$props5.setDomRef;
 
     var controlContent = this.renderControlContent();
     var menuContent = this.renderMenuContent();
@@ -6994,7 +7326,8 @@ FormSelect = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helper
       popupContent: menuContent,
       onControlClick: this.onControlClick,
       fullWidth: fullWidth,
-      ref: this.setPopupRef };
+      ref: this.setPopupRef,
+      setDomRef: setDomRef };
 
 
     return /*#__PURE__*/(
@@ -7002,8 +7335,8 @@ FormSelect = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helper
 
 
   };return FormSelect;}(react__WEBPACK_IMPORTED_MODULE_3___default.a.PureComponent /** @lends @FormSelect.prototype */);_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2___default()(FormSelect, "propTypes", { // value: PropTypes.oneOfType([ PropTypes.string, PropTypes.number, PropTypes.arrayOf(PropTypes.oneOfType([ PropTypes.string, PropTypes.number ])) ]),
-  checked: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.arrayOf(prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string, prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.number])), disabled: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool, fullWidth: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool, id: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string, onChange: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func, open: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool, options: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.arrayOf(prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.shape({ val: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string, prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.number]), text: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string })), placeholder: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string, text: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string, value: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string, prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.number]) });
-
+  checked: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.arrayOf(prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string, prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.number])), disabled: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool, fullWidth: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool, id: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string, onChange: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func, open: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool, options: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.arrayOf(prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.shape({ val: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string, prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.number]), text: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string })), placeholder: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string, text: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string, value: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string, prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.number]), setDomRef: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func // setNodeRef: PropTypes.func,
+});
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(_FormItemHOC_FormItemHOC__WEBPACK_IMPORTED_MODULE_6__["default"])({ solid: true, hoverable: true })(FormSelect));
 
@@ -7200,31 +7533,35 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _utils_configure__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../utils/configure */ "./src/utils/configure.js");
-/* harmony import */ var _elements_InlineIcon_InlineIcon__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../elements/InlineIcon/InlineIcon */ "./src/elements/InlineIcon/InlineIcon.jsx");
-/* harmony import */ var _FormItemHOC_FormItemHOC__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../FormItemHOC/FormItemHOC */ "./src/forms/FormItemHOC/FormItemHOC.jsx");
-/* harmony import */ var _FormTextInput_pcss__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./FormTextInput.pcss */ "./src/forms/FormTextInput/FormTextInput.pcss");
-/* harmony import */ var _FormTextInput_pcss__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_FormTextInput_pcss__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! redux */ "redux");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(redux__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _utils_configure__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../utils/configure */ "./src/utils/configure.js");
+/* harmony import */ var _elements_InlineIcon_InlineIcon__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../elements/InlineIcon/InlineIcon */ "./src/elements/InlineIcon/InlineIcon.jsx");
+/* harmony import */ var _FormItemHOC_FormItemHOC__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../FormItemHOC/FormItemHOC */ "./src/forms/FormItemHOC/FormItemHOC.jsx");
+/* harmony import */ var _FormInteractiveItemHOC_FormInteractiveItemHOC__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../FormInteractiveItemHOC/FormInteractiveItemHOC */ "./src/forms/FormInteractiveItemHOC/FormInteractiveItemHOC.jsx");
+/* harmony import */ var _FormTextInput_pcss__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./FormTextInput.pcss */ "./src/forms/FormTextInput/FormTextInput.pcss");
+/* harmony import */ var _FormTextInput_pcss__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_FormTextInput_pcss__WEBPACK_IMPORTED_MODULE_10__);
  /** @module FormTextInput
                                                                                                                                                                                                                           *  @class FormTextInput
                                                                                                                                                                                                                           *  @since 2020.10.07, 00:20
-                                                                                                                                                                                                                          *  @changed 2020.10.29, 23:44
+                                                                                                                                                                                                                          *  @changed 2021.01.19, 16:08
                                                                                                                                                                                                                           */
 /* eslint-disable react/require-default-props */
 
 
 
-// import connect from 'react-redux/es/connect/connect'
 
 
 
 
 
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
+// import { withFormContext } from 'helpers/FormContext';
 
 
 
-var cnFormTextInput = Object(_utils_configure__WEBPACK_IMPORTED_MODULE_5__["cn"])('FormTextInput');var
+
+var cnFormTextInput = Object(_utils_configure__WEBPACK_IMPORTED_MODULE_6__["cn"])('FormTextInput');var
 
 FormTextInput = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helpers_inheritsLoose__WEBPACK_IMPORTED_MODULE_1___default()(FormTextInput, _React$PureComponent);
 
@@ -7232,6 +7569,16 @@ FormTextInput = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_hel
 
   function FormTextInput(props) {var _this;
     _this = _React$PureComponent.call(this, props) || this;_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_0___default()(_this), "updateValueWithState",
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -7309,52 +7656,38 @@ FormTextInput = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_hel
 
     function () {
       _this.setState({ value: '' });
-    });_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_0___default()(_this), "onKeyPress",
-
-    function (event) {var
-      keyCode = event.keyCode;var _this$props2 =
-
-
-
-
-
-      _this.props,id = _this$props2.id,onKeyPress = _this$props2.onKeyPress,onEnterPressed = _this$props2.onEnterPressed;
-      var cbProps = { event: event, id: id, keyCode: keyCode };
-      onKeyPress && onKeyPress(cbProps);
-      onEnterPressed && keyCode === 13 && onEnterPressed(cbProps); // Enter?
-      // onEscPressed && (keyCode === 27) && onEscPressed(cbProps) // Esc? Seems to not processing (in chrome at least)
     });_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_0___default()(_this), "onFocusIn",
 
     function () {
       _this.mounted && _this.setState({ focused: true });
-      window.addEventListener('keypress', _this.onKeyPress);
+      // window.addEventListener('keypress', this.onKeyPress);
       if (typeof _this.props.onFocusIn === 'function') {// Propogate event if handler passed
         _this.props.onFocusIn(event);
       }
     });_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_0___default()(_this), "onFocusOut",
     function (event) {
       _this.mounted && _this.setState({ focused: false });
-      window.removeEventListener('keypress', _this.onKeyPress);
+      // window.removeEventListener('keypress', this.onKeyPress);
       if (typeof _this.props.onFocusOut === 'function') {// Propogate event if handler passed
         _this.props.onFocusOut(event);
       }
-    });var _this$props$value = _this.props.value,_value = _this$props$value === void 0 ? '' : _this$props$value;_this.state = { value: _value };return _this;}var _proto = FormTextInput.prototype;_proto.componentDidUpdate = function componentDidUpdate(prevProps, prevState) {var prevValue = prevProps.value;var propsValue = this.props.value;var stateValue = this.state.value;if (propsValue !== prevValue && propsValue !== stateValue) {// New value from props
+    });var _this$props$value = _this.props.value,_value = _this$props$value === void 0 ? '' : _this$props$value;_this.state = { value: _value };return _this;} /* // UNUSED: componentDidMount
+                                                                                                                                                                * componentDidMount() {
+                                                                                                                                                                *   const { registerKeyPressHandler } = this.props;
+                                                                                                                                                                *   if (typeof registerKeyPressHandler === 'function') { // From `FormInteractiveItemHOC`
+                                                                                                                                                                *     // Register callback with `FormInteractiveItemHOC`
+                                                                                                                                                                *     this.interactiveKeyPressHandler && registerKeyPressHandler(this.interactiveKeyPressHandler);
+                                                                                                                                                                *   }
+                                                                                                                                                                * }
+                                                                                                                                                                */var _proto = FormTextInput.prototype;_proto.componentDidUpdate = function componentDidUpdate(prevProps, prevState) {var prevValue = prevProps.value;var propsValue = this.props.value;var stateValue = this.state.value;if (propsValue !== prevValue && propsValue !== stateValue) {// New value from props
       this.setState({ value: propsValue }, this.updateValueWithState);} else if (stateValue !== prevState.value) {// New value from state
       this.updateValueWithState(this.state);}} // Helper methods...
-  ;_proto.hasValue = function hasValue() {var value = this.state.value;return value != null && value !== '';};_proto.hasIcon = function hasIcon() {var _this$props3 = this.props,icon = _this$props3.icon,hasIcon = _this$props3.hasIcon,hasClear = _this$props3.hasClear;return hasIcon || !!icon || hasClear && this.hasValue();};_proto.getClassName = function getClassName() {var _this$props4 = this.props,id = _this$props4.id,hasClear = _this$props4.hasClear;var hasValue = this.hasValue();var hasClearActive = hasClear && hasValue;var classList = cnFormTextInput({ id: id, hasIcon: this.hasIcon(), hasValue: this.hasValue(), hasClear: hasClear, hasClearActive: hasClearActive }, [this.props.className]);return classList;} // Event handlers...
+  ;_proto.hasValue = function hasValue() {var value = this.state.value;return value != null && value !== '';};_proto.hasIcon = function hasIcon() {var _this$props2 = this.props,icon = _this$props2.icon,hasIcon = _this$props2.hasIcon,hasClear = _this$props2.hasClear;return hasIcon || !!icon || hasClear && this.hasValue();};_proto.getClassName = function getClassName() {var _this$props3 = this.props,id = _this$props3.id,hasClear = _this$props3.hasClear;var hasValue = this.hasValue();var hasClearActive = hasClear && hasValue;var classList = cnFormTextInput({ id: id, hasIcon: this.hasIcon(), hasValue: this.hasValue(), hasClear: hasClear, hasClearActive: hasClearActive }, [this.props.className]);return classList;} // Event handlers...
   ; // Render...
-  _proto.renderInput = function renderInput() {var _this2 = this;var
-    value =
-    this.state.value;var _this$props5 =
+  _proto.renderInput = function renderInput() {var _this2 = this;var value = this.state.value;var _this$props4 =
 
 
-
-
-
-
-
-
-    this.props,id = _this$props5.id,inputId = _this$props5.inputId,name = _this$props5.name,disabled = _this$props5.disabled,placeholder = _this$props5.placeholder,_this$props5$type = _this$props5.type,type = _this$props5$type === void 0 ? 'text' : _this$props5$type;
+    this.props,id = _this$props4.id,inputId = _this$props4.inputId,name = _this$props4.name,disabled = _this$props4.disabled,placeholder = _this$props4.placeholder,_this$props4$type = _this$props4.type,type = _this$props4$type === void 0 ? 'text' : _this$props4$type;
 
     var inputProps = {
       key: 'Input',
@@ -7366,6 +7699,7 @@ FormTextInput = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_hel
       placeholder: placeholder,
       ref: function ref(domElem) {_this2.inputDomElem = domElem;},
       onChange: this.handleChange,
+      onKeyPress: this.onKeyPress,
       value: value
       // onFocus: this.onFocusIn,
       // onBlur: this.onFocusOut,
@@ -7378,16 +7712,16 @@ FormTextInput = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_hel
   };_proto.
 
   renderClearIcon = function renderClearIcon() {// DELETE
-    var _this$props6 =
+    var _this$props5 =
 
 
 
 
-    this.props,hasClear = _this$props6.hasClear,clearIcon = _this$props6.clearIcon,clearIconTitle = _this$props6.clearIconTitle;
+    this.props,hasClear = _this$props5.hasClear,clearIcon = _this$props5.clearIcon,clearIconTitle = _this$props5.clearIconTitle;
     var hasValue = this.hasValue();
     var hasClearActive = hasClear && hasValue;
     return hasClearActive && /*#__PURE__*/
-    react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_elements_InlineIcon_InlineIcon__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_elements_InlineIcon_InlineIcon__WEBPACK_IMPORTED_MODULE_7__["default"], {
       icon: clearIcon || 'faTimes',
       className: cnFormTextInput('Icon', { mode: 'Clear' }),
       onClick: this.onClearClick,
@@ -7397,15 +7731,15 @@ FormTextInput = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_hel
   };_proto.
 
   renderIcon = function renderIcon() {// DELETE
-    var _this$props7 =
+    var _this$props6 =
 
 
 
 
-    this.props,icon = _this$props7.icon,iconTitle = _this$props7.iconTitle,onIconClick = _this$props7.onIconClick;
+    this.props,icon = _this$props6.icon,iconTitle = _this$props6.iconTitle,onIconClick = _this$props6.onIconClick;
 
     return icon && /*#__PURE__*/
-    react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_elements_InlineIcon_InlineIcon__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_elements_InlineIcon_InlineIcon__WEBPACK_IMPORTED_MODULE_7__["default"], {
       icon: icon,
       className: cnFormTextInput('Icon'),
       onClick: onIconClick,
@@ -7414,7 +7748,7 @@ FormTextInput = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_hel
 
   };_proto.
 
-  render = function render() {var _this$props8 =
+  render = function render() {var _this$props7 =
 
 
 
@@ -7422,7 +7756,7 @@ FormTextInput = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_hel
 
 
 
-    this.props,id = _this$props8.id,disabled = _this$props8.disabled,_this$props8$type = _this$props8.type,type = _this$props8$type === void 0 ? 'text' : _this$props8$type,title = _this$props8.title,setDomRef = _this$props8.setDomRef;
+    this.props,id = _this$props7.id,disabled = _this$props7.disabled,_this$props7$type = _this$props7.type,type = _this$props7$type === void 0 ? 'text' : _this$props7$type,title = _this$props7.title,setDomRef = _this$props7.setDomRef;
 
     var inputElem = this.renderInput();
 
@@ -7443,15 +7777,20 @@ FormTextInput = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_hel
 
 
 
-  };return FormTextInput;}(react__WEBPACK_IMPORTED_MODULE_3___default.a.PureComponent /** @lends @FormTextInput.prototype */);_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2___default()(FormTextInput, "propTypes",
-
-{
-  id: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string });
+  };return FormTextInput;}(react__WEBPACK_IMPORTED_MODULE_3___default.a.PureComponent /** @lends @FormTextInput.prototype */);
 
 
 
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(_FormItemHOC_FormItemHOC__WEBPACK_IMPORTED_MODULE_7__["default"])({ solid: true, hoverable: true, framed: true })(FormTextInput));
+
+
+
+// export default FormItemHOC({ solid: true, hoverable: true, framed: true })(FormTextInput);
+_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2___default()(FormTextInput, "propTypes", { id: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string });/* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_5__["compose"])(
+// withFormContext,
+_FormInteractiveItemHOC_FormInteractiveItemHOC__WEBPACK_IMPORTED_MODULE_9__["default"],
+Object(_FormItemHOC_FormItemHOC__WEBPACK_IMPORTED_MODULE_8__["default"])({ solid: true, hoverable: true, focusable: true, framed: true }))(
+FormTextInput));
 
 /***/ }),
 
@@ -7585,22 +7924,70 @@ var withActionsContext = function withActionsContext(WrappedComponent) {return f
 
 /***/ }),
 
+/***/ "./src/helpers/FormContext.jsx":
+/*!*************************************!*\
+  !*** ./src/helpers/FormContext.jsx ***!
+  \*************************************/
+/*! exports provided: FormContext, FormContextProvider, FormContextConsumer, withFormContext */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FormContext", function() { return FormContext; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FormContextProvider", function() { return FormContextProvider; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FormContextConsumer", function() { return FormContextConsumer; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "withFormContext", function() { return withFormContext; });
+/* harmony import */ var _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/extends */ "./node_modules/@babel/runtime/helpers/extends.js");
+/* harmony import */ var _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+ /** @module FormContext
+                                                        *  @class FormContext
+                                                        *  @since 2021.01.19, 15:23
+                                                        *  @changed 2021.01.19, 16:08
+                                                        */
+
+
+
+var FormContext = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createContext();
+
+var FormContextProvider = FormContext.Provider;
+var FormContextConsumer = FormContext.Consumer;
+
+var withFormContext = function withFormContext(WrappedComponent) {return function withFormContext(props) {
+    return /*#__PURE__*/(
+      react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(FormContextConsumer, null,
+      function (form) {
+        return /*#__PURE__*/(
+          react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(WrappedComponent, _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0___default()({}, props, { formContextNode: form })));
+
+      }));
+
+
+  };};
+
+/***/ }),
+
 /***/ "./src/helpers/helpers.js":
 /*!********************************!*\
   !*** ./src/helpers/helpers.js ***!
   \********************************/
-/*! exports provided: ActionsContext */
+/*! exports provided: ActionsContext, FormContext */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ActionsContext__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ActionsContext */ "./src/helpers/ActionsContext.jsx");
 /* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "ActionsContext", function() { return _ActionsContext__WEBPACK_IMPORTED_MODULE_0__; });
+/* harmony import */ var _FormContext__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./FormContext */ "./src/helpers/FormContext.jsx");
+/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "FormContext", function() { return _FormContext__WEBPACK_IMPORTED_MODULE_1__; });
 /** @module helpers
  *  @desc Library helpers
  *  @since 2020.12.24, 19:06
- *  @changed 2020.12.24, 19:06
+ *  @changed 2021.01.19, 16:20
  */
+// export * as ModalsContext from './ModalsContext'; // UNUSED
+
 
 /***/ }),
 
