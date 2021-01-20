@@ -5,41 +5,84 @@
 
 .FormButton {
 
-  &_plain {
-    // $bgColor: transparent; // color($neutralLightColor tint(10));
-    // $borderColor: transparent; // $formItemBorderColor;
-    $color: #000; // $neutralDarkColor;
-    $textColor: #000;
-    // @mixin buttonStyle $bgColor, $borderColor, $iconColor, $textColor;
-    .FormButton-Text,
-    .FormButton-Icon {
-      color: $color;
-    }
+  transition: box-shadow $(transitionTime)ms, background $(transitionTime)ms;
+
+  .FormButton-Text,
+  .FormButton-Icon {
+    // transition: color $(transitionTime)ms, opacity $(transitionTime)ms;
+    color: #000;
+    opacity: .8;
+  }
+  .FormButton-Icon {
+    transition: color $(transitionTime)ms, opacity $(transitionTime)ms;
+    opacity: .4;
+  }
+  // .FormButton-Text { // Crispy animation text...
+  //   transition: color $(transitionTime)ms, opacity $(transitionTime)ms;
+  //   // -webkit-font-smoothing: antialised;
+  //   // backface-visibility: hidden;
+  //   transform: translateZ(0);
+  //   // -webkit-font-smoothing: subpixel-antialiased;
+  // }
+  &.FormButton_active,
+  &.FormItem_focused,
+  &.FormItem_hovered {
     .FormButton-Text {
-      opacity: .5;
+      opacity: 1;
     }
     .FormButton-Icon {
-      opacity: .3;
-    }
-    &.FormItem_hovered {
-      // border-color: transparent;
-      .FormButton-Text {
-        opacity: .8;
-      }
-      .FormButton-Icon {
-        opacity: .5;
-      }
-    }
-    &.FormButton_onDark {
-      $color: #fff; // $neutralDarkColor;
-      .FormButton-Icon,
-      .FormButton-Text {
-        color: $color;
-      }
+      opacity: .6;
     }
   }
 
-  transition: box-shadow $(transitionTime)ms, background $(transitionTime)ms;
+  &.FormButton_onDark {
+    $color: #fff; // $neutralDarkColor;
+    .FormButton-Icon,
+    .FormButton-Text {
+      color: $color;
+    }
+  }
+
+  &_plain {
+    $bgColor: color($neutralLightColor tint(10));
+    $borderColor: $formItemBorderColor;
+    $hoveredBorderColor: color($borderColor shade(10));
+    $activeBorderColor: color($borderColor shade(15));
+    $hoveredBgColor: color($bgColor shade(8));
+    $activeBgColor: color($bgColor shade(15));
+    $glowColor: $borderColor; // $formItemGlowColor;
+    $hoveredGlowColor: color($hoveredBgColor alpha(.5)); // color($glowColor alpha(1));
+    $activeGlowColor: $activeBgColor; // color($glowColor alpha(1) shade(10));
+    &.FormButton_active,
+    &.FormItem_focused,
+    &.FormItem_hovered {
+      @mixin FormItemFrame $hoveredBorderColor, $(formItemBorderSize)px, 1px, $hoveredGlowColor, 1px, $(formItemOuterGlow)px;
+    }
+    &.FormButton_active,
+    &.FormItem_focused {
+      @mixin FormItemFrame $activeBorderColor, $(formItemBorderSize)px, 2px, $activeGlowColor, 2px, 1px; // @calc($formItemOuterGlow - 2)px;
+    }
+    &.FormButton_onDark {
+      // $color: #fff; // $neutralDarkColor;
+      // .FormButton-Icon,
+      // .FormButton-Text {
+      //   color: $color;
+      // }
+      $hoveredBorderColor: color($borderColor shade(10) alpha(.5));
+      $activeBorderColor: color($borderColor shade(15));
+      $hoveredGlowColor: color($hoveredBgColor alpha(.2));
+      $activeGlowColor: color($activeBgColor alpha(.2));
+      &.FormButton_active,
+      &.FormItem_focused,
+      &.FormItem_hovered {
+        @mixin FormItemFrame $hoveredBorderColor, $(formItemBorderSize)px, 1px, $hoveredGlowColor, 1px, $(formItemOuterGlow)px;
+      }
+      &.FormButton_active,
+      &.FormItem_focused {
+        @mixin FormItemFrame $activeBorderColor, $(formItemBorderSize)px, 2px, $activeGlowColor, 2px, 1px; // @calc($formItemOuterGlow - 2)px;
+      }
+    }
+  }
 
   &_theme { // Button themes...
 
@@ -68,9 +111,9 @@
         // border-color: $hoveredBorderColor;
         @mixin FormItemFrame $hoveredBorderColor, $(formItemBorderSize)px, 1px, $hoveredGlowColor, 1px, $(formItemOuterGlow)px;
         background-color: $hoveredBgColor;
-        .FormButton-Icon, .FormButton-Text {
-          opacity: .9;
-        }
+        // .FormButton-Icon, .FormButton-Text {
+        //   opacity: .9;
+        // }
       }
       &.FormButton_active,
       &.FormItem_focused {
@@ -78,12 +121,9 @@
         background-color: $activeBgColor;
       }
     }
-
     @define-mixin styledButton $bgColor, $textColor: $specialContrastColor {
-      // $bgColor: $secondaryColor;
       $borderColor: color($bgColor shade(10)); // $formItemBorderColor;
-      // $textColor: $secondaryContrastColor;
-      $iconColor: color($textColor alpha(.5));
+      $iconColor: $textColor; // color($textColor alpha(.5));
       @mixin buttonStyle $bgColor, $borderColor, $iconColor, $textColor;
     }
     // @define-mixin styledDarkButton $bgColor, $textColor: $specialContrastColor {
@@ -92,24 +132,16 @@
     &_default {
       $bgColor: color($neutralLightColor tint(10));
       $borderColor: $formItemBorderColor;
-      $iconColor: $neutralTintedDarkColor;
       $textColor: #000;
-      @mixin buttonStyle $bgColor, $borderColor, $iconColor, $textColor;
+      // $iconColor: $neutralTintedDarkColor;
+      @mixin buttonStyle $bgColor, $borderColor, $textColor, $textColor;
       &^^&_onDark {
         $darkBgColor: color($bgColor alpha(.2));
         $darkBorderColor: color($borderColor alpha(.2));
         $darkTextColor: #fff;
-        @mixin buttonStyle $darkBgColor, $darkBorderColor, $iconColor, $darkTextColor;
+        @mixin buttonStyle $darkBgColor, $darkBorderColor, $darkTextColor, $darkTextColor;
       }
     }
-
-    // &_default^&_onDark {
-    //   $bgColor: color($neutralExtraDarkColor tint(10));
-    //   $borderColor: $formItemBorderColor;
-    //   $iconColor: $neutralTintedDarkColor;
-    //   $textColor: #000;
-    //   @mixin buttonStyle $bgColor, $borderColor, $iconColor, $textColor;
-    // }
 
     // Theme colors
 
@@ -121,47 +153,6 @@
       &_$(name) { @mixin styledButton $color }
     }
 
-    // &_error { @mixin styledButton $errorColor }
-    // &_warn { @mixin styledButton $warnColor }
-    // &_success { @mixin styledButton $successColor }
-    // &_info { @mixin styledButton $infoColor }
-    // &_confirm { @mixin styledButton $confirmColor }
-    // &_select { @mixin styledButton $selectColor }
-    //
-    // // Custom colors (see https://developer.mozilla.org/en-US/docs/Web/CSS/color_value)
-    //
-    // // &_red { @mixin styledButton #c33 }
-    // // &_orange { @mixin styledButton #f73 }
-    // // &_green { @mixin styledButton #593 }
-    // // &_grassGreen { @mixin styledButton #891 }
-    // // &_Blue { @mixin styledButton #05b }
-    // // &_lightBue { @mixin styledButton #29a }
-    //
-    // &_maroon { @mixin styledButton #800000 }
-    // &_red { @mixin styledButton #ff0000 }
-    // &_purple { @mixin styledButton #800080 }
-    // &_fuchsia { @mixin styledButton #ff00ff }
-    // &_green { @mixin styledButton #008000 }
-    // // &_lime { @mixin styledButton #00ff00 }
-    // &_olive { @mixin styledButton #808000 }
-    // // &_yellow { @mixin styledButton #ffff00 }
-    // &_navy { @mixin styledButton #000080 }
-    // &_blue { @mixin styledButton #0000ff }
-    // &_teal { @mixin styledButton #008080 }
-    // // &_aqua { @mixin styledButton #00ffff }
-    // &_orange { @mixin styledButton #ffa500 }
-    //
-    // &_blueviolet { @mixin styledButton #8a2be2 }
-    // &_brown { @mixin styledButton #a52a2a }
-    // &_cadetblue { @mixin styledButton #5f9ea0 }
-    // &_darkblue { @mixin styledButton #00008b }
-    // &_darkcyan { @mixin styledButton #008b8b }
-    // &_darkgoldenrod { @mixin styledButton #b8860b }
-    // &_darkorange { @mixin styledButton #ff8c00 }
-    // &_darkorchid { @mixin styledButton #9932cc }
-    // &_darkred { @mixin styledButton #8b0000 }
-    // &_darkslateblue { @mixin styledButton #483d8b }
-    // &_darkslategray { @mixin styledButton #2f4f4f }
   }
 
   // TODO: States: `clicked`, `rightIcon`, `onlyIcon`, `largeIcon` (+large button), large sizes (`xl`, `xxl`?)

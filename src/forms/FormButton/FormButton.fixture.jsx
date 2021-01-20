@@ -35,7 +35,8 @@ export default {
   withInlineIcon: <FormButton icon={inlineIcon} theme="default" text="With inline icon" />,
   withIconAsComponent: <FormButton icon={faCheck} theme="default" text="With icon as string" />,
   withIconAsString: <FormButton icon="faCheck" theme="default" text="With icon as text" />,
-  plain: <FormButton icon={inlineIcon} theme="plain" text="Style: plain with icon" />,
+  plain: <FormButton icon={inlineIcon} plain text="Style: plain with icon" />,
+  // plain: <FormButton icon={inlineIcon} theme="plain" text="Style: plain with icon" />,
 
   /* // TODO:
    * - onlyIcon
