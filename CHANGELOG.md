@@ -1,5 +1,7 @@
 # CHANGELOG
 
+- 2021.01.20, 22:05 -- Fixed FormGroup layouting styles.
+- 2021.01.20, 20:00 -- (from TODO 2021.01.20, 00:37) FormButton: default/plain theme interactive styles.
 - 2021.01.20, 00:37 -- InputSelect: deactivate popup control element on open. Through-out blur/focus handlers. Popup: outside click handles only for topmost popups (using global `containerNode`). Demo fixtures.
 - 2021.01.19, 16:21 -- v.0.2.5: PD-3536: Through-out enter key processing in input forms using `FormContext`.
 - 2021.01.17, 20:26 -- v.0.2.3: Using dist branch instead separated repository.
@@ -70,5 +72,5 @@
 - 2020.10.05, 20:38 -- v.0.0.15: Extracted `demoSupport.jsx` routines, fixture selection from url query (parameter `fixture`), added avaialble fixtures list if fixture to display is not specified, added DemoWrapper & demoTitle exportable ficture parameters for demo rendering.
 
 <!--
- @changed 2021.01.19, 16:26
+ @changed 2021.01.20, 22:06
 -->

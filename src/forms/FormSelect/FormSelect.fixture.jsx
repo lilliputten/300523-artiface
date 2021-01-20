@@ -72,7 +72,7 @@ export default {
       placeholder="Select some option"
       singleChoice="forced"
       _value={1}
-      checked={[1]}
+      checked={[1,2]}
       onChange={demoChange}
       options={demoOptions}
       closeOnSelect
@@ -109,7 +109,7 @@ export default {
       />
     </FormLabeledGroup>
   ),
-  /* withFixedWrapper: (
+  /* withFixedWrapper: ( // Used for debug popups in fixed positioned containers
    *   <div className="Fixed-Curtain">
    *     <div className="Fixed-Wrapper">
    *       <div className="Fixed-Scrollable" ref={setScrollableRef}>

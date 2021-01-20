@@ -14,7 +14,6 @@ import FormLabel from '../FormLabel';
 
 // const cnFormLabeledGroup = cn('FormLabeledGroup')
 
-// class FormLabeledGroup extends React.PureComponent [>* @lends @FormLabeledGroup.prototype <] {
 const FormLabeledGroup = (props) => /** @lends @FormLabeledGroup.prototype */ {
   const {
     className,

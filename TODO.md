@@ -1,7 +1,5 @@
 # TODO
 
-- 2021.01.20, 00:37 -- FormButton: default/plain theme interactive styles.
-- 2020.12.24, 22:49 -- Pass target app owned and render-controlling in library parameters (like LANG i18n object)?
 - 2020.12.19, 03:35 -- Popup: Use nearest scrollable container ancestor as popup base? Or clip to it bounds? Or hide popup if control is (partially) out of this bounds?
 - 2020.12.18, 02:15 -- Popup: Use static `PopupStack` component and close same-level (from stack end to first `Modal` or stack begin) popups
 - 2020.12.18, 01:50 -- Popup: Reset both `storedContentSize` if content changed (use registrable handler)?

@@ -1,7 +1,7 @@
 /** @module FormGroup.styles
  *  @class FormGroup
  *  @since 2020.07.20, 19:24
- *  @changed 2020.07.20, 19:24
+ *  @changed 2021.01.20, 22:00
  */
 
 .FormGroup {
@@ -31,29 +31,19 @@
 
   &_stack {
     // border: 1px solid blue; // DEBUG
-    &, &_horizontal {
-      display: flex;
-      flex-wrap: nowrap;
-      align-items: stretch;
-    }
-    & {
-      flex-direction: column;
-    }
-    &_horizontal {
-      flex-direction: row;
-    }
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    flex-direction: column;
   }
   &_flow {
-    &, &_vertical {
-      display: flex;
-      // flex-wrap: wrap;
-      & > .FormItem_fill {
-        flex: 1;
-      }
+    display: flex;
+    // flex-wrap: wrap;
+    & > .FormItem {
+      min-width: $(formItemHeight)px; // Hint for limiting the maximum width (overflow causes cropping items outer glow on ubteractive control events).
     }
-    &_vertical {
-      flex-direction: column;
-      // flex-wrap: nowrap;
+    & > .FormItem_fill {
+      flex: 1;
     }
     &^&_alignItems {
       &_center {
