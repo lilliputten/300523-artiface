@@ -2560,6 +2560,7 @@ input.FormTextInput-Control {
     color: #444;
     overflow: hidden;
     /* padding: 0;*/
+    /* margin: 0;*/
   }
 
 input.FormTextInput-Control::-webkit-input-placeholder {
@@ -2593,26 +2594,21 @@ input.FormTextInput-Control::-ms-reveal,
 
 /* outline: none;*/
 
-input.FormTextInput-Control:-internal-autofill-selected,
+input.FormTextInput-Control:-internal-autofill-previewed,
+    input.FormTextInput-Control:-internal-autofill-selected,
     input.FormTextInput-Control:-webkit-autofill:active,
     input.FormTextInput-Control:-webkit-autofill:hover,
     input.FormTextInput-Control:-webkit-autofill:focus,
-    input.FormTextInput-Control:-internal-autofill-previewed,
     input.FormTextInput-Control:-webkit-autofill {
       /* TODO -- 2020.05.06, 03:03 Override autofill font-size styles?*/
+      -webkit-background-clip: text !important;
+      -webkit-box-shadow: 0 0 0 1000px #fff inset;
+      -webkit-text-fill-color: #444;
+      background: none; /* ???*/
+      border: none;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
       font-size: 16px !important;
       outline: none;
-      -webkit-text-fill-color: #444;
-    }
-
-/* margin: 0;*/
-
-input.FormTextInput-Control:-webkit-autofill { /* Emulate input frame (hidden by autofill background)*/
-      -webkit-box-shadow: 0 0 0 1000px #fff inset; /* NOTE: Attention to box-shadow frame!*/
-      background: none; /* ???*/
-      border: none;
-      -webkit-background-clip: text !important;
     }
 
 .FormTextInput_hasIcon { /* ???*/
