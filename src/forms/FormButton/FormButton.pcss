@@ -1,14 +1,16 @@
 /** @module FormButton.styles
  *  @desc Only basic elements geometry
  *  @since 2020.07.20, 19:24
- *  @changed 2020.12.24, 04:30
+ *  @changed 2021.01.21, 00:15
  */
 
 .FormButton {
 
-  // &:focus { // DEBUG
-  //   border: 2px solid red !important;
-  // }
+  // Override standard html button styles
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  border: none;
+  @mixin defaultFont;
 
   outline: 0;
   // overflow: hidden;

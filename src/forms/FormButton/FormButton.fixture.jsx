@@ -19,6 +19,16 @@ export const DemoWrapper = FormGroup; // ({ children }) => {
 
 const inlineIcon = <InlineIcon icon={faCheck} className="extraIconClass" />;
 
+const submitButton = (
+  <FormButton
+    text="Style: plain with icon"
+    icon={inlineIcon}
+    plain
+    tag="button"
+    type="submit"
+  />
+);
+
 export default {
   /* // Old cosmos-classic format example...
    * default: {
@@ -36,6 +46,7 @@ export default {
   withIconAsComponent: <FormButton icon={faCheck} theme="default" text="With icon as string" />,
   withIconAsString: <FormButton icon="faCheck" theme="default" text="With icon as text" />,
   plain: <FormButton icon={inlineIcon} plain text="Style: plain with icon" />,
+  submitButton,
   // plain: <FormButton icon={inlineIcon} theme="plain" text="Style: plain with icon" />,
 
   /* // TODO:

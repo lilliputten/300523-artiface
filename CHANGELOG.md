@@ -1,5 +1,6 @@
 # CHANGELOG
 
+- 2021.01.21, 00:14 -- PD-3327: Fixed overridings for standard html button tag styles (in FormButton).
 - 2021.01.20, 23:28 -- PD-3327: Interactive styles for FormRadio (and FormInteractiveItem).
 - 2021.01.20, 22:05 -- Fixed FormGroup layouting styles.
 - 2021.01.20, 20:00 -- (from TODO 2021.01.20, 00:37) FormButton: default/plain theme interactive styles.
@@ -73,5 +74,5 @@
 - 2020.10.05, 20:38 -- v.0.0.15: Extracted `demoSupport.jsx` routines, fixture selection from url query (parameter `fixture`), added avaialble fixtures list if fixture to display is not specified, added DemoWrapper & demoTitle exportable ficture parameters for demo rendering.
 
 <!--
- @changed 2021.01.20, 22:06
+ @changed 2021.01.21, 00:15
 -->
