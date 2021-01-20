@@ -1456,9 +1456,9 @@ module.exports = { // Common-used build variables...
   DEV_DEBUG: DEV_DEBUG,
 
   THEME: "default",
-  buildTag: "v.0.2.6-210121-0013-build-dev-default",
-  timestamp: "2021.01.21, 00:13",
-  timetag: "210121-0013",
+  buildTag: "v.0.2.6-210121-0117-build-dev-default",
+  timestamp: "2021.01.21, 01:17",
+  timetag: "210121-0117",
   version: "0.2.6" };
 
 /***/ }),
@@ -7661,7 +7661,12 @@ FormTextInput = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_hel
     });_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_0___default()(_this), "onFocusIn",
 
     function () {
-      _this.mounted && _this.setState({ focused: true });
+      if (_this.mounted) {
+        if (_this.inputDomElem) {
+          _this.inputDomElem.style.backgroundColor = '#fff'; // Try to override standard html autofill styles
+        }
+        _this.setState({ focused: true });
+      }
       // window.addEventListener('keypress', this.onKeyPress);
       if (typeof _this.props.onFocusIn === 'function') {// Propogate event if handler passed
         _this.props.onFocusIn(event);
@@ -7672,6 +7677,13 @@ FormTextInput = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_hel
       // window.removeEventListener('keypress', this.onKeyPress);
       if (typeof _this.props.onFocusOut === 'function') {// Propogate event if handler passed
         _this.props.onFocusOut(event);
+      }
+    });_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_0___default()(_this), "setInputDomRef",
+
+    function (inputDomElem) {
+      _this.inputDomElem = inputDomElem;
+      if (typeof _this.props.setInputDomRef === 'function') {
+        _this.props.setInputDomRef(inputDomElem);
       }
     });var _this$props$value = _this.props.value,_value = _this$props$value === void 0 ? '' : _this$props$value;_this.state = { value: _value };return _this;} /* // UNUSED: componentDidMount
                                                                                                                                                                 * componentDidMount() {
@@ -7686,44 +7698,8 @@ FormTextInput = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_hel
       this.updateValueWithState(this.state);}} // Helper methods...
   ;_proto.hasValue = function hasValue() {var value = this.state.value;return value != null && value !== '';};_proto.hasIcon = function hasIcon() {var _this$props2 = this.props,icon = _this$props2.icon,hasIcon = _this$props2.hasIcon,hasClear = _this$props2.hasClear;return hasIcon || !!icon || hasClear && this.hasValue();};_proto.getClassName = function getClassName() {var _this$props3 = this.props,id = _this$props3.id,hasClear = _this$props3.hasClear;var hasValue = this.hasValue();var hasClearActive = hasClear && hasValue;var classList = cnFormTextInput({ id: id, hasIcon: this.hasIcon(), hasValue: this.hasValue(), hasClear: hasClear, hasClearActive: hasClearActive }, [this.props.className]);return classList;} // Event handlers...
   ; // Render...
-  _proto.renderInput = function renderInput() {var _this2 = this;var value = this.state.value;var _this$props4 =
-
-
-    this.props,id = _this$props4.id,inputId = _this$props4.inputId,name = _this$props4.name,disabled = _this$props4.disabled,placeholder = _this$props4.placeholder,_this$props4$type = _this$props4.type,type = _this$props4$type === void 0 ? 'text' : _this$props4$type;
-
-    var inputProps = {
-      key: 'Input',
-      type: type,
-      className: cnFormTextInput('Control', ['FormItem-Control']),
-      id: inputId || id || name,
-      name: name || inputId || id,
-      disabled: disabled,
-      placeholder: placeholder,
-      ref: function ref(domElem) {_this2.inputDomElem = domElem;},
-      onChange: this.handleChange,
-      onKeyPress: this.onKeyPress,
-      value: value
-      // onFocus: this.onFocusIn,
-      // onBlur: this.onFocusOut,
-    };
-    return /*#__PURE__*/(
-      react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("input",
-      inputProps));
-
-
-  };_proto.
-
-  renderClearIcon = function renderClearIcon() {// DELETE
-    var _this$props5 =
-
-
-
-
-    this.props,hasClear = _this$props5.hasClear,clearIcon = _this$props5.clearIcon,clearIconTitle = _this$props5.clearIconTitle;
-    var hasValue = this.hasValue();
-    var hasClearActive = hasClear && hasValue;
-    return hasClearActive && /*#__PURE__*/
-    react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_elements_InlineIcon_InlineIcon__WEBPACK_IMPORTED_MODULE_7__["default"], {
+  _proto.renderClearIcon = function renderClearIcon() {// DELETE
+    var _this$props4 = this.props,hasClear = _this$props4.hasClear,clearIcon = _this$props4.clearIcon,clearIconTitle = _this$props4.clearIconTitle;var hasValue = this.hasValue();var hasClearActive = hasClear && hasValue;return hasClearActive && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_elements_InlineIcon_InlineIcon__WEBPACK_IMPORTED_MODULE_7__["default"], {
       icon: clearIcon || 'faTimes',
       className: cnFormTextInput('Icon', { mode: 'Clear' }),
       onClick: this.onClearClick,
@@ -7733,12 +7709,12 @@ FormTextInput = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_hel
   };_proto.
 
   renderIcon = function renderIcon() {// DELETE
-    var _this$props6 =
+    var _this$props5 =
 
 
 
 
-    this.props,icon = _this$props6.icon,iconTitle = _this$props6.iconTitle,onIconClick = _this$props6.onIconClick;
+    this.props,icon = _this$props5.icon,iconTitle = _this$props5.iconTitle,onIconClick = _this$props5.onIconClick;
 
     return icon && /*#__PURE__*/
     react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_elements_InlineIcon_InlineIcon__WEBPACK_IMPORTED_MODULE_7__["default"], {
@@ -7746,6 +7722,42 @@ FormTextInput = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_hel
       className: cnFormTextInput('Icon'),
       onClick: onIconClick,
       title: iconTitle });
+
+
+  };_proto.
+
+  renderInput = function renderInput() {var
+
+    value =
+    this.state.value;var _this$props6 =
+
+
+
+
+
+
+
+
+    this.props,id = _this$props6.id,inputId = _this$props6.inputId,name = _this$props6.name,disabled = _this$props6.disabled,placeholder = _this$props6.placeholder,_this$props6$type = _this$props6.type,type = _this$props6$type === void 0 ? 'text' : _this$props6$type;
+
+    var inputProps = {
+      key: 'Input',
+      type: type,
+      className: cnFormTextInput('Control', ['FormItem-Control']),
+      id: inputId || id || name,
+      name: name || inputId || id,
+      disabled: disabled,
+      placeholder: placeholder,
+      ref: this.setInputDomRef,
+      onChange: this.handleChange,
+      onKeyPress: this.onKeyPress,
+      value: value
+      // onFocus: this.onFocusIn,
+      // onBlur: this.onFocusOut,
+    };
+    return /*#__PURE__*/(
+      react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("input",
+      inputProps));
 
 
   };_proto.

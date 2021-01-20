@@ -425,7 +425,7 @@ label.FormLabel-Control[for] {
 /** @module FormButton.styles
  *  @desc Only basic elements geometry
  *  @since 2020.07.20, 19:24
- *  @changed 2020.12.24, 04:30
+ *  @changed 2021.01.21, 00:15
  */
 
 .FormButton {
@@ -438,10 +438,6 @@ label.FormLabel-Control[for] {
   font-size: 16px;
   font-weight: normal;
   line-height: 1.6;
-
-  /* &:focus { // DEBUG*/
-  /*   border: 2px solid red !important;*/
-  /* }*/
 
   outline: 0;
   /* overflow: hidden;*/
@@ -2607,14 +2603,16 @@ input.FormTextInput-Control:-internal-autofill-selected,
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
       font-size: 16px !important;
       outline: none;
+      -webkit-text-fill-color: #444;
     }
 
 /* margin: 0;*/
 
 input.FormTextInput-Control:-webkit-autofill { /* Emulate input frame (hidden by autofill background)*/
-      /* border: 1px solid $neutralColor;*/
+      -webkit-box-shadow: 0 0 0 1000px #fff inset; /* NOTE: Attention to box-shadow frame!*/
       background: none; /* ???*/
-      border: 0;
+      border: none;
+      -webkit-background-clip: text !important;
     }
 
 .FormTextInput_hasIcon { /* ???*/
