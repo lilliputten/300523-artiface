@@ -116,7 +116,12 @@ class FormTextInput extends React.PureComponent /** @lends @FormTextInput.protot
   }
 
   onFocusIn = () => {
-    this.mounted && this.setState({ focused: true });
+    if (this.mounted) {
+      if (this.inputDomElem) {
+        this.inputDomElem.style.backgroundColor = '#fff'; // Try to override standard html autofill styles
+      }
+      this.setState({ focused: true });
+    }
     // window.addEventListener('keypress', this.onKeyPress);
     if (typeof this.props.onFocusIn === 'function') { // Propogate event if handler passed
       this.props.onFocusIn(event);
@@ -130,43 +135,14 @@ class FormTextInput extends React.PureComponent /** @lends @FormTextInput.protot
     }
   }
 
-  // Render...
-
-  renderInput() {
-    const {
-      value,
-    } = this.state;
-    const {
-      id,
-      inputId,
-      name,
-      disabled,
-      // onChange,
-      placeholder,
-      type = 'text',
-    } = this.props;
-
-    const inputProps = {
-      key: 'Input',
-      type,
-      className: cnFormTextInput('Control', ['FormItem-Control']),
-      id: inputId || id || name,
-      name: name || inputId || id,
-      disabled: disabled,
-      placeholder: placeholder,
-      ref: (domElem) => { this.inputDomElem = domElem; },
-      onChange: this.handleChange,
-      onKeyPress: this.onKeyPress,
-      value,
-      // onFocus: this.onFocusIn,
-      // onBlur: this.onFocusOut,
-    };
-    return (
-      <input
-        {...inputProps}
-      />
-    );
+  setInputDomRef = (inputDomElem) => {
+    this.inputDomElem = inputDomElem;
+    if (typeof this.props.setInputDomRef === 'function') {
+      this.props.setInputDomRef(inputDomElem);
+    }
   }
+
+  // Render...
 
   renderClearIcon() { // DELETE
     const {
@@ -201,6 +177,42 @@ class FormTextInput extends React.PureComponent /** @lends @FormTextInput.protot
         className={cnFormTextInput('Icon')}
         onClick={onIconClick}
         title={iconTitle}
+      />
+    );
+  }
+
+  renderInput() {
+    const {
+      value,
+    } = this.state;
+    const {
+      id,
+      inputId,
+      name,
+      disabled,
+      // onChange,
+      placeholder,
+      type = 'text',
+    } = this.props;
+
+    const inputProps = {
+      key: 'Input',
+      type,
+      className: cnFormTextInput('Control', ['FormItem-Control']),
+      id: inputId || id || name,
+      name: name || inputId || id,
+      disabled: disabled,
+      placeholder: placeholder,
+      ref: this.setInputDomRef,
+      onChange: this.handleChange,
+      onKeyPress: this.onKeyPress,
+      value,
+      // onFocus: this.onFocusIn,
+      // onBlur: this.onFocusOut,
+    };
+    return (
+      <input
+        {...inputProps}
       />
     );
   }

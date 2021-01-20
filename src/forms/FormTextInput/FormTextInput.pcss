@@ -33,21 +33,22 @@
     // padding: 0;
     // margin: 0;
     // outline: none;
+    &:-internal-autofill-previewed,
     &:-internal-autofill-selected,
     &:-webkit-autofill:active,
     &:-webkit-autofill:hover,
     &:-webkit-autofill:focus,
-    &:-internal-autofill-previewed,
     &:-webkit-autofill {
-      // TODO -- 2020.05.06, 03:03 Override autofill font-size styles?
+      // Override autofill font-size styles?
+      outline: none;
+      overflow: hidden;
+      border: none;
       font-family: $defaultFont !important;
       font-size: $(defaultFontSize)px !important;
-      outline: none;
-    }
-    &:-webkit-autofill { // Emulate input frame (hidden by autofill background)
-      // border: 1px solid $neutralColor;
+      -webkit-text-fill-color: $formItemTextColor;
       background: none; // ???
-      border: 0;
+      -webkit-box-shadow: 0 0 0px 1000px transparent inset;
+      -webkit-background-clip: text !important;
     }
   }
   &_hasIcon { // ???
