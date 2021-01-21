@@ -425,7 +425,7 @@ label.FormLabel-Control[for] {
 /** @module FormButton.styles
  *  @desc Only basic elements geometry
  *  @since 2020.07.20, 19:24
- *  @changed 2021.01.21, 00:15
+ *  @changed 2021.01.21, 13:45
  */
 
 .FormButton {
@@ -462,8 +462,11 @@ label.FormLabel-Control[for] {
     display: inline-block;
     position: relative;
     vertical-align: bottom;
-    margin-top: 1px; /* Compensate visual difference between button & regular tag (Attention! To test!)*/
   }
+
+.FormButton:not(button) .FormButton-Text, .FormButton:not(button) .FormButton-Icon {
+      margin-top: 1px; /* Compensate visual difference between button & regular tag (Attention! To test!)*/
+    }
 
 .FormButton {
 
