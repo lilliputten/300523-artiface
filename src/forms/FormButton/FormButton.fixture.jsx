@@ -26,7 +26,7 @@ const submitButton = (
     icon={inlineIcon}
     tag="button"
     type="submit"
-    // theme="default"
+    theme="default"
     plain
   />
 );
@@ -34,7 +34,7 @@ const plain = (
   <FormButton
     icon={inlineIcon}
     text="Style: plain with icon"
-    // theme="default"
+    theme="default"
     plain
   />
 );
@@ -51,10 +51,10 @@ export default {
    * },
    */
 
-  // simple: <FormButton theme="default" text="Style: default" className="extraButtonClass" />,
-  // withInlineIcon: <FormButton icon={inlineIcon} theme="default" text="With inline icon" />,
-  // withIconAsComponent: <FormButton icon={faCheck} theme="default" text="With icon as string" />,
-  // withIconAsString: <FormButton icon="faCheck" theme="default" text="With icon as text" />,
+  simple: <FormButton theme="default" text="Style: default" className="extraButtonClass" />,
+  withInlineIcon: <FormButton icon={inlineIcon} theme="default" text="With inline icon" />,
+  withIconAsComponent: <FormButton icon={faCheck} theme="default" text="With icon as string" />,
+  withIconAsString: <FormButton icon="faCheck" theme="default" text="With icon as text" />,
   submitButton,
   plain,
 
