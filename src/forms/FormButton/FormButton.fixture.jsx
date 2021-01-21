@@ -15,17 +15,27 @@ import { // Icons (solid)...
 // Demo styles for cosmos engine
 import 'demo.pcss';
 
-export const DemoWrapper = FormGroup; // ({ children }) => {
+// export const DemoWrapper = FormGroup; // ({ children }) => {
+export const DemoWrapper = <FormGroup />; // ({ children }) => {
 
 const inlineIcon = <InlineIcon icon={faCheck} className="extraIconClass" />;
 
 const submitButton = (
   <FormButton
-    text="Style: plain with icon"
+    text="Submit button"
     icon={inlineIcon}
-    plain
     tag="button"
     type="submit"
+    // theme="default"
+    plain
+  />
+);
+const plain = (
+  <FormButton
+    icon={inlineIcon}
+    text="Style: plain with icon"
+    // theme="default"
+    plain
   />
 );
 
@@ -41,13 +51,12 @@ export default {
    * },
    */
 
-  default: <FormButton theme="default" text="Style: default" className="extraButtonClass" />,
-  withInlineIcon: <FormButton icon={inlineIcon} theme="default" text="With inline icon" />,
-  withIconAsComponent: <FormButton icon={faCheck} theme="default" text="With icon as string" />,
-  withIconAsString: <FormButton icon="faCheck" theme="default" text="With icon as text" />,
-  plain: <FormButton icon={inlineIcon} plain text="Style: plain with icon" />,
+  // simple: <FormButton theme="default" text="Style: default" className="extraButtonClass" />,
+  // withInlineIcon: <FormButton icon={inlineIcon} theme="default" text="With inline icon" />,
+  // withIconAsComponent: <FormButton icon={faCheck} theme="default" text="With icon as string" />,
+  // withIconAsString: <FormButton icon="faCheck" theme="default" text="With icon as text" />,
   submitButton,
-  // plain: <FormButton icon={inlineIcon} theme="plain" text="Style: plain with icon" />,
+  plain,
 
   /* // TODO:
    * - onlyIcon
