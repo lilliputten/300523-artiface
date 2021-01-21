@@ -462,6 +462,7 @@ label.FormLabel-Control[for] {
     display: inline-block;
     position: relative;
     vertical-align: bottom;
+    margin-top: 1px; /* Compensate visual difference between button & regular tag (Attention! To test!)*/
   }
 
 .FormButton {
