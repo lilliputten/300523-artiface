@@ -10,62 +10,64 @@
   $frameWidth: 2px;
   $hoveredFrameWidth: @calc($frameWidth + 1px);
   $focusedFrameWidth: @calc($frameWidth + 1px);
-  $activeFrameWidth: @calc($frameWidth + 2px);
+  $hoveredFocusedFrameWidth: @calc($frameWidth + 2px);
+  $activeFrameWidth: @calc($frameWidth + 1px);
+  $activeHoveredFrameWidth: @calc($frameWidth + 2px);
+  $activeFocusedFrameWidth: @calc($frameWidth + 2px);
+  $activeHoveredFocusedFrameWidth: @calc($frameWidth + 3px);
 
   // Basic colors:
-  $innerColor: #fff; // 'Background' color
-  $defaultColor: $neutralColor;
-  // $hoveredColor: color($defaultColor shade(10));
-  // $focusedColor: color($defaultColor shade(20));
+  $innerColor: #fff; // 'Background' color // TODO: `onDark` mode?
+  $defaultAccentColor: $formItemBorderColor; // $neutralColor;
 
-  @define-mixin colorStyle $defaultColor, $hoveredColor, $focusedColor, $innerColor = $innerColor {
-    .FormRadio-Frame {
-      box-shadow: 0 0 0 $frameWidth $defaultColor;
-      background-color: $innerColor; // Actor outer frame ('background' color). Used?
-    }
-    .FormRadio-Actor {
-      background-color: $defaultColor;
-    }
-    .FormItem_hovered& {
+  .FormRadio-Frame {
+    background-color: $innerColor; // Actor outer frame ('background' color). Used?
+  }
+
+  @define-mixin colorStyle $accentColor {
+    $baseColor: $formItemBorderColor;
+    $baseHoveredColor: color($baseColor shade(15));
+    $baseFocusedColor: color($baseColor shade(20));
+    $accentHoveredColor: color($accentColor shade(15));
+    $accentFocusedColor: color($accentColor shade(20));
+    @define-mixin radioFrameAndActor
+      $baseColor, $accentColor,
+      $frameWidth: $frameWidth, $glowWidth: 0,
+      $activeFrameWidth: 0, $activeGlowWidth: 0
+    {
       .FormRadio-Frame {
-        box-shadow: 0 0 2px $hoveredFrameWidth $hoveredColor;
-      }
-      .FormRadio-Actor {
-        background-color: $hoveredColor;
-      }
-    }
-    .FormItem_focused& {
-      .FormRadio-Frame {
-        box-shadow: 0 0 3px $focusedFrameWidth $hoveredColor;
-      }
-      .FormRadio-Actor {
-        background-color: $hoveredColor;
-      }
-    }
-    .FormItem_hovered.FormItem_focused& {
-      .FormRadio-Frame {
-        box-shadow: 0 0 3px $focusedFrameWidth $focusedColor;
-      }
-      .FormRadio-Actor {
-        background-color: $focusedColor;
-      }
-    }
-    .FormRadio_active& {
-      &, &.FormItem_focused {
-        .FormRadio-Frame {
-          box-shadow: 0 0 3px $activeFrameWidth $hoveredColor;
+        box-shadow: 0 0 $glowWidth $frameWidth $baseColor;
+        .FormBoolean_checked& {
+          box-shadow: 0 0 $glowWidth $frameWidth $accentColor;
+        }
+        @if $activeFrameWidth != 0 {
+          .FormRadio_active& {
+            // border: 1px solid red;
+            box-shadow: 0 0 $activeGlowWidth $activeFrameWidth $accentColor;
+          }
         }
       }
+      .FormRadio-Actor {
+        background-color: $accentColor;
+      }
+    }
+    @mixin radioFrameAndActor $baseColor, $accentColor, $frameWidth, 0, $activeFrameWidth, 4px;
+    .FormItem_hovered& {
+      @mixin radioFrameAndActor $baseHoveredColor, $accentHoveredColor, $hoveredFrameWidth, 3px, $activeHoveredFrameWidth, 4px;
+    }
+    .FormItem_focused& {
+      @mixin radioFrameAndActor $baseHoveredColor, $accentFocusedColor, $focusedFrameWidth, 3px, $activeFocusedFrameWidth, 4px;
+    }
+    .FormItem_hovered.FormItem_focused& {
+      @mixin radioFrameAndActor $baseHoveredColor, $accentFocusedColor, $hoveredFocusedFrameWidth, 3px, $activeHoveredFocusedFrameWidth, 4px;
     }
   }
-  @define-mixin shadedColorStyle $defaultColor, $innerColor = $innerColor {
-    $hoveredColor: color($defaultColor shade(10));
-    $focusedColor: color($defaultColor shade(20));
-    @mixin colorStyle $defaultColor, $hoveredColor, $focusedColor, $innerColor;
+  @define-mixin shadedColorStyle $accentColor {
+    @mixin colorStyle $accentColor;
   }
 
   &, &_theme_default {
-    @mixin shadedColorStyle $defaultColor, $innerColor;
+    @mixin shadedColorStyle $defaultAccentColor;
   }
 
   &_theme_primary { @mixin shadedColorStyle $primaryColor }

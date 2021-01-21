@@ -221,6 +221,7 @@ module.exports = (env, argv) => {
       variables: cssConfig,
     }),
     require('postcss-simple-vars'), // https://github.com/postcss/postcss-simple-vars
+    require('postcss-conditionals'), // https://github.com/andyjansson/postcss-conditionals
     require('postcss-color-function'), // https://github.com/postcss/postcss-color-function
     require('postcss-calc')({ mediaQueries: true, selectors: true }), // https://github.com/postcss/postcss-calc
     require('postcss-nested-ancestors'), // https://github.com/toomuchdesign/postcss-nested-ancestors
