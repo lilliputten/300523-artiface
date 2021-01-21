@@ -81,6 +81,7 @@
     "postcss-advanced-variables": "^3.0.0",
     "postcss-calc": "^7.0.1",
     "postcss-color-function": "^4.1.0",
+    "postcss-conditionals": "^2.1.0",
     "postcss-csso": "^3.0.0",
     "postcss-each": "^0.10.0",
     "postcss-flexbugs-fixes": "^4.2.1",
