@@ -2766,1279 +2766,2421 @@ input.FormTextInput-Control:-internal-autofill-previewed,
  *  @changed 2021.01.20, 23:28
  */
 
-/* $focusedColor: color($defaultColor shade(20));*/
+/* $neutralColor;*/
+
+.FormRadio .FormRadio-Frame {
+    background-color: #fff; /* Actor outer frame ('background' color). Used?*/
+  }
+
+/* 'Background' color // TODO: `onDark` mode?*/
 
 .FormRadio .FormRadio-Frame, .FormRadio_theme_default .FormRadio-Frame {
-      -webkit-box-shadow: 0 0 0 2px #ccc;
-              box-shadow: 0 0 0 2px #ccc;
-      background-color: #fff; /* Actor outer frame ('background' color). Used?*/
-    }
-
-.FormRadio .FormRadio-Actor, .FormRadio_theme_default .FormRadio-Actor {
-      background-color: #ccc;
-    }
-
-.FormItem_hovered.FormRadio .FormRadio-Frame, .FormItem_hovered.FormRadio_theme_default .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 2px 3px rgb(184, 184, 184);
-                box-shadow: 0 0 2px 3px rgb(184, 184, 184);
+        -webkit-box-shadow: 0 0 0 2px #ccc;
+                box-shadow: 0 0 0 2px #ccc;
       }
 
+.FormBoolean_checked.FormRadio .FormRadio-Frame, .FormBoolean_checked.FormRadio_theme_default .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 0 2px #ccc;
+                  box-shadow: 0 0 0 2px #ccc;
+        }
+
+.FormRadio_active.FormRadio .FormRadio-Frame, .FormRadio_active.FormRadio_theme_default .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 3px #ccc;
+                    box-shadow: 0 0 4px 3px #ccc;
+          }
+
+.FormRadio .FormRadio-Actor, .FormRadio_theme_default .FormRadio-Actor {
+        background-color: #ccc;
+      }
+
+.FormItem_hovered.FormRadio .FormRadio-Frame, .FormItem_hovered.FormRadio_theme_default .FormRadio-Frame {
+        -webkit-box-shadow: 0 0 3px 3px rgb(173, 173, 173);
+                box-shadow: 0 0 3px 3px rgb(173, 173, 173);
+      }
+
+.FormBoolean_checked.FormItem_hovered.FormRadio .FormRadio-Frame, .FormBoolean_checked.FormItem_hovered.FormRadio_theme_default .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 3px rgb(173, 173, 173);
+                  box-shadow: 0 0 3px 3px rgb(173, 173, 173);
+        }
+
+.FormRadio_active.FormItem_hovered.FormRadio .FormRadio-Frame, .FormRadio_active.FormItem_hovered.FormRadio_theme_default .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 4px rgb(173, 173, 173);
+                    box-shadow: 0 0 4px 4px rgb(173, 173, 173);
+          }
+
 .FormItem_hovered.FormRadio .FormRadio-Actor, .FormItem_hovered.FormRadio_theme_default .FormRadio-Actor {
-        background-color: rgb(184, 184, 184);
+        background-color: rgb(173, 173, 173);
       }
 
 .FormItem_focused.FormRadio .FormRadio-Frame, .FormItem_focused.FormRadio_theme_default .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 3px 3px rgb(184, 184, 184);
-                box-shadow: 0 0 3px 3px rgb(184, 184, 184);
+        -webkit-box-shadow: 0 0 3px 3px rgb(173, 173, 173);
+                box-shadow: 0 0 3px 3px rgb(173, 173, 173);
       }
 
+.FormBoolean_checked.FormItem_focused.FormRadio .FormRadio-Frame, .FormBoolean_checked.FormItem_focused.FormRadio_theme_default .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 3px rgb(163, 163, 163);
+                  box-shadow: 0 0 3px 3px rgb(163, 163, 163);
+        }
+
+.FormRadio_active.FormItem_focused.FormRadio .FormRadio-Frame, .FormRadio_active.FormItem_focused.FormRadio_theme_default .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 4px rgb(163, 163, 163);
+                    box-shadow: 0 0 4px 4px rgb(163, 163, 163);
+          }
+
 .FormItem_focused.FormRadio .FormRadio-Actor, .FormItem_focused.FormRadio_theme_default .FormRadio-Actor {
-        background-color: rgb(184, 184, 184);
+        background-color: rgb(163, 163, 163);
       }
 
 .FormItem_hovered.FormItem_focused.FormRadio .FormRadio-Frame, .FormItem_hovered.FormItem_focused.FormRadio_theme_default .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 3px 3px rgb(163, 163, 163);
-                box-shadow: 0 0 3px 3px rgb(163, 163, 163);
+        -webkit-box-shadow: 0 0 3px 4px rgb(173, 173, 173);
+                box-shadow: 0 0 3px 4px rgb(173, 173, 173);
       }
+
+.FormBoolean_checked.FormItem_hovered.FormItem_focused.FormRadio .FormRadio-Frame, .FormBoolean_checked.FormItem_hovered.FormItem_focused.FormRadio_theme_default .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 4px rgb(163, 163, 163);
+                  box-shadow: 0 0 3px 4px rgb(163, 163, 163);
+        }
+
+.FormRadio_active.FormItem_hovered.FormItem_focused.FormRadio .FormRadio-Frame, .FormRadio_active.FormItem_hovered.FormItem_focused.FormRadio_theme_default .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 5px rgb(163, 163, 163);
+                    box-shadow: 0 0 4px 5px rgb(163, 163, 163);
+          }
 
 .FormItem_hovered.FormItem_focused.FormRadio .FormRadio-Actor, .FormItem_hovered.FormItem_focused.FormRadio_theme_default .FormRadio-Actor {
         background-color: rgb(163, 163, 163);
       }
 
-.FormRadio_active.FormRadio .FormRadio-Frame, .FormRadio_active.FormRadio.FormItem_focused .FormRadio-Frame, .FormRadio_active.FormRadio_theme_default .FormRadio-Frame, .FormRadio_active.FormRadio_theme_default.FormItem_focused .FormRadio-Frame {
-          -webkit-box-shadow: 0 0 3px 4px rgb(184, 184, 184);
-                  box-shadow: 0 0 3px 4px rgb(184, 184, 184);
-        }
-
-/* $hoveredColor: color($defaultColor shade(10));*/
+/* Basic colors:*/
 
 .FormRadio_theme_primary .FormRadio-Frame {
-      -webkit-box-shadow: 0 0 0 2px #07f;
-              box-shadow: 0 0 0 2px #07f;
-      background-color: #fff; /* Actor outer frame ('background' color). Used?*/
-    }
-
-.FormRadio_theme_primary .FormRadio-Actor {
-      background-color: #07f;
-    }
-
-.FormItem_hovered.FormRadio_theme_primary .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 2px 3px rgb(0, 107, 230);
-                box-shadow: 0 0 2px 3px rgb(0, 107, 230);
+        -webkit-box-shadow: 0 0 0 2px #ccc;
+                box-shadow: 0 0 0 2px #ccc;
       }
 
+.FormBoolean_checked.FormRadio_theme_primary .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 0 2px #07f;
+                  box-shadow: 0 0 0 2px #07f;
+        }
+
+.FormRadio_active.FormRadio_theme_primary .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 3px #07f;
+                    box-shadow: 0 0 4px 3px #07f;
+          }
+
+.FormRadio_theme_primary .FormRadio-Actor {
+        background-color: #07f;
+      }
+
+.FormItem_hovered.FormRadio_theme_primary .FormRadio-Frame {
+        -webkit-box-shadow: 0 0 3px 3px rgb(173, 173, 173);
+                box-shadow: 0 0 3px 3px rgb(173, 173, 173);
+      }
+
+.FormBoolean_checked.FormItem_hovered.FormRadio_theme_primary .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 3px rgb(0, 101, 217);
+                  box-shadow: 0 0 3px 3px rgb(0, 101, 217);
+        }
+
+.FormRadio_active.FormItem_hovered.FormRadio_theme_primary .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 4px rgb(0, 101, 217);
+                    box-shadow: 0 0 4px 4px rgb(0, 101, 217);
+          }
+
 .FormItem_hovered.FormRadio_theme_primary .FormRadio-Actor {
-        background-color: rgb(0, 107, 230);
+        background-color: rgb(0, 101, 217);
       }
 
 .FormItem_focused.FormRadio_theme_primary .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 3px 3px rgb(0, 107, 230);
-                box-shadow: 0 0 3px 3px rgb(0, 107, 230);
+        -webkit-box-shadow: 0 0 3px 3px rgb(173, 173, 173);
+                box-shadow: 0 0 3px 3px rgb(173, 173, 173);
       }
 
+.FormBoolean_checked.FormItem_focused.FormRadio_theme_primary .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 3px rgb(0, 95, 204);
+                  box-shadow: 0 0 3px 3px rgb(0, 95, 204);
+        }
+
+.FormRadio_active.FormItem_focused.FormRadio_theme_primary .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 4px rgb(0, 95, 204);
+                    box-shadow: 0 0 4px 4px rgb(0, 95, 204);
+          }
+
 .FormItem_focused.FormRadio_theme_primary .FormRadio-Actor {
-        background-color: rgb(0, 107, 230);
+        background-color: rgb(0, 95, 204);
       }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_primary .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 3px 3px rgb(0, 95, 204);
-                box-shadow: 0 0 3px 3px rgb(0, 95, 204);
+        -webkit-box-shadow: 0 0 3px 4px rgb(173, 173, 173);
+                box-shadow: 0 0 3px 4px rgb(173, 173, 173);
       }
+
+.FormBoolean_checked.FormItem_hovered.FormItem_focused.FormRadio_theme_primary .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 4px rgb(0, 95, 204);
+                  box-shadow: 0 0 3px 4px rgb(0, 95, 204);
+        }
+
+.FormRadio_active.FormItem_hovered.FormItem_focused.FormRadio_theme_primary .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 5px rgb(0, 95, 204);
+                    box-shadow: 0 0 4px 5px rgb(0, 95, 204);
+          }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_primary .FormRadio-Actor {
         background-color: rgb(0, 95, 204);
       }
 
-.FormRadio_active.FormRadio_theme_primary .FormRadio-Frame, .FormRadio_active.FormRadio_theme_primary.FormItem_focused .FormRadio-Frame {
-          -webkit-box-shadow: 0 0 3px 4px rgb(0, 107, 230);
-                  box-shadow: 0 0 3px 4px rgb(0, 107, 230);
-        }
-
-/* 'Background' color*/
+/* Sizes...*/
 
 .FormRadio_theme_secondary .FormRadio-Frame {
-      -webkit-box-shadow: 0 0 0 2px #677;
-              box-shadow: 0 0 0 2px #677;
-      background-color: #fff; /* Actor outer frame ('background' color). Used?*/
-    }
-
-.FormRadio_theme_secondary .FormRadio-Actor {
-      background-color: #677;
-    }
-
-.FormItem_hovered.FormRadio_theme_secondary .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 2px 3px rgb(92, 107, 107);
-                box-shadow: 0 0 2px 3px rgb(92, 107, 107);
+        -webkit-box-shadow: 0 0 0 2px #ccc;
+                box-shadow: 0 0 0 2px #ccc;
       }
 
+.FormBoolean_checked.FormRadio_theme_secondary .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 0 2px #677;
+                  box-shadow: 0 0 0 2px #677;
+        }
+
+.FormRadio_active.FormRadio_theme_secondary .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 3px #677;
+                    box-shadow: 0 0 4px 3px #677;
+          }
+
+.FormRadio_theme_secondary .FormRadio-Actor {
+        background-color: #677;
+      }
+
+.FormItem_hovered.FormRadio_theme_secondary .FormRadio-Frame {
+        -webkit-box-shadow: 0 0 3px 3px rgb(173, 173, 173);
+                box-shadow: 0 0 3px 3px rgb(173, 173, 173);
+      }
+
+.FormBoolean_checked.FormItem_hovered.FormRadio_theme_secondary .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 3px rgb(87, 101, 101);
+                  box-shadow: 0 0 3px 3px rgb(87, 101, 101);
+        }
+
+.FormRadio_active.FormItem_hovered.FormRadio_theme_secondary .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 4px rgb(87, 101, 101);
+                    box-shadow: 0 0 4px 4px rgb(87, 101, 101);
+          }
+
 .FormItem_hovered.FormRadio_theme_secondary .FormRadio-Actor {
-        background-color: rgb(92, 107, 107);
+        background-color: rgb(87, 101, 101);
       }
 
 .FormItem_focused.FormRadio_theme_secondary .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 3px 3px rgb(92, 107, 107);
-                box-shadow: 0 0 3px 3px rgb(92, 107, 107);
+        -webkit-box-shadow: 0 0 3px 3px rgb(173, 173, 173);
+                box-shadow: 0 0 3px 3px rgb(173, 173, 173);
       }
 
+.FormBoolean_checked.FormItem_focused.FormRadio_theme_secondary .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 3px rgb(82, 95, 95);
+                  box-shadow: 0 0 3px 3px rgb(82, 95, 95);
+        }
+
+.FormRadio_active.FormItem_focused.FormRadio_theme_secondary .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 4px rgb(82, 95, 95);
+                    box-shadow: 0 0 4px 4px rgb(82, 95, 95);
+          }
+
 .FormItem_focused.FormRadio_theme_secondary .FormRadio-Actor {
-        background-color: rgb(92, 107, 107);
+        background-color: rgb(82, 95, 95);
       }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_secondary .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 3px 3px rgb(82, 95, 95);
-                box-shadow: 0 0 3px 3px rgb(82, 95, 95);
+        -webkit-box-shadow: 0 0 3px 4px rgb(173, 173, 173);
+                box-shadow: 0 0 3px 4px rgb(173, 173, 173);
       }
+
+.FormBoolean_checked.FormItem_hovered.FormItem_focused.FormRadio_theme_secondary .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 4px rgb(82, 95, 95);
+                  box-shadow: 0 0 3px 4px rgb(82, 95, 95);
+        }
+
+.FormRadio_active.FormItem_hovered.FormItem_focused.FormRadio_theme_secondary .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 5px rgb(82, 95, 95);
+                    box-shadow: 0 0 4px 5px rgb(82, 95, 95);
+          }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_secondary .FormRadio-Actor {
         background-color: rgb(82, 95, 95);
       }
 
-.FormRadio_active.FormRadio_theme_secondary .FormRadio-Frame, .FormRadio_active.FormRadio_theme_secondary.FormItem_focused .FormRadio-Frame {
-          -webkit-box-shadow: 0 0 3px 4px rgb(92, 107, 107);
-                  box-shadow: 0 0 3px 4px rgb(92, 107, 107);
-        }
-
 /* Generate theme colors...*/
 
 .FormRadio_theme_error .FormRadio-Frame {
-      -webkit-box-shadow: 0 0 0 2px #c33;
-              box-shadow: 0 0 0 2px #c33;
-      background-color: #fff; /* Actor outer frame ('background' color). Used?*/
-    }
-
-.FormRadio_theme_error .FormRadio-Actor {
-      background-color: #c33;
-    }
-
-.FormItem_hovered.FormRadio_theme_error .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 2px 3px rgb(184, 46, 46);
-                box-shadow: 0 0 2px 3px rgb(184, 46, 46);
+        -webkit-box-shadow: 0 0 0 2px #ccc;
+                box-shadow: 0 0 0 2px #ccc;
       }
 
+.FormBoolean_checked.FormRadio_theme_error .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 0 2px #c33;
+                  box-shadow: 0 0 0 2px #c33;
+        }
+
+.FormRadio_active.FormRadio_theme_error .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 3px #c33;
+                    box-shadow: 0 0 4px 3px #c33;
+          }
+
+.FormRadio_theme_error .FormRadio-Actor {
+        background-color: #c33;
+      }
+
+.FormItem_hovered.FormRadio_theme_error .FormRadio-Frame {
+        -webkit-box-shadow: 0 0 3px 3px rgb(173, 173, 173);
+                box-shadow: 0 0 3px 3px rgb(173, 173, 173);
+      }
+
+.FormBoolean_checked.FormItem_hovered.FormRadio_theme_error .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 3px rgb(173, 43, 43);
+                  box-shadow: 0 0 3px 3px rgb(173, 43, 43);
+        }
+
+.FormRadio_active.FormItem_hovered.FormRadio_theme_error .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 4px rgb(173, 43, 43);
+                    box-shadow: 0 0 4px 4px rgb(173, 43, 43);
+          }
+
 .FormItem_hovered.FormRadio_theme_error .FormRadio-Actor {
-        background-color: rgb(184, 46, 46);
+        background-color: rgb(173, 43, 43);
       }
 
 .FormItem_focused.FormRadio_theme_error .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 3px 3px rgb(184, 46, 46);
-                box-shadow: 0 0 3px 3px rgb(184, 46, 46);
+        -webkit-box-shadow: 0 0 3px 3px rgb(173, 173, 173);
+                box-shadow: 0 0 3px 3px rgb(173, 173, 173);
       }
 
+.FormBoolean_checked.FormItem_focused.FormRadio_theme_error .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 3px rgb(163, 41, 41);
+                  box-shadow: 0 0 3px 3px rgb(163, 41, 41);
+        }
+
+.FormRadio_active.FormItem_focused.FormRadio_theme_error .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 4px rgb(163, 41, 41);
+                    box-shadow: 0 0 4px 4px rgb(163, 41, 41);
+          }
+
 .FormItem_focused.FormRadio_theme_error .FormRadio-Actor {
-        background-color: rgb(184, 46, 46);
+        background-color: rgb(163, 41, 41);
       }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_error .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 3px 3px rgb(163, 41, 41);
-                box-shadow: 0 0 3px 3px rgb(163, 41, 41);
+        -webkit-box-shadow: 0 0 3px 4px rgb(173, 173, 173);
+                box-shadow: 0 0 3px 4px rgb(173, 173, 173);
       }
+
+.FormBoolean_checked.FormItem_hovered.FormItem_focused.FormRadio_theme_error .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 4px rgb(163, 41, 41);
+                  box-shadow: 0 0 3px 4px rgb(163, 41, 41);
+        }
+
+.FormRadio_active.FormItem_hovered.FormItem_focused.FormRadio_theme_error .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 5px rgb(163, 41, 41);
+                    box-shadow: 0 0 4px 5px rgb(163, 41, 41);
+          }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_error .FormRadio-Actor {
         background-color: rgb(163, 41, 41);
       }
 
-.FormRadio_active.FormRadio_theme_error .FormRadio-Frame, .FormRadio_active.FormRadio_theme_error.FormItem_focused .FormRadio-Frame {
-          -webkit-box-shadow: 0 0 3px 4px rgb(184, 46, 46);
-                  box-shadow: 0 0 3px 4px rgb(184, 46, 46);
-        }
-
-/* Basic colors:*/
+/* Styles. For basic geometry look for `FormRadio.pcss`*/
 
 .FormRadio_theme_warn .FormRadio-Frame {
-      -webkit-box-shadow: 0 0 0 2px #f73;
-              box-shadow: 0 0 0 2px #f73;
-      background-color: #fff; /* Actor outer frame ('background' color). Used?*/
-    }
-
-.FormRadio_theme_warn .FormRadio-Actor {
-      background-color: #f73;
-    }
-
-.FormItem_hovered.FormRadio_theme_warn .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 2px 3px rgb(230, 107, 46);
-                box-shadow: 0 0 2px 3px rgb(230, 107, 46);
+        -webkit-box-shadow: 0 0 0 2px #ccc;
+                box-shadow: 0 0 0 2px #ccc;
       }
 
+.FormBoolean_checked.FormRadio_theme_warn .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 0 2px #f73;
+                  box-shadow: 0 0 0 2px #f73;
+        }
+
+.FormRadio_active.FormRadio_theme_warn .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 3px #f73;
+                    box-shadow: 0 0 4px 3px #f73;
+          }
+
+.FormRadio_theme_warn .FormRadio-Actor {
+        background-color: #f73;
+      }
+
+.FormItem_hovered.FormRadio_theme_warn .FormRadio-Frame {
+        -webkit-box-shadow: 0 0 3px 3px rgb(173, 173, 173);
+                box-shadow: 0 0 3px 3px rgb(173, 173, 173);
+      }
+
+.FormBoolean_checked.FormItem_hovered.FormRadio_theme_warn .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 3px rgb(217, 101, 43);
+                  box-shadow: 0 0 3px 3px rgb(217, 101, 43);
+        }
+
+.FormRadio_active.FormItem_hovered.FormRadio_theme_warn .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 4px rgb(217, 101, 43);
+                    box-shadow: 0 0 4px 4px rgb(217, 101, 43);
+          }
+
 .FormItem_hovered.FormRadio_theme_warn .FormRadio-Actor {
-        background-color: rgb(230, 107, 46);
+        background-color: rgb(217, 101, 43);
       }
 
 .FormItem_focused.FormRadio_theme_warn .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 3px 3px rgb(230, 107, 46);
-                box-shadow: 0 0 3px 3px rgb(230, 107, 46);
+        -webkit-box-shadow: 0 0 3px 3px rgb(173, 173, 173);
+                box-shadow: 0 0 3px 3px rgb(173, 173, 173);
       }
 
+.FormBoolean_checked.FormItem_focused.FormRadio_theme_warn .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 3px rgb(204, 95, 41);
+                  box-shadow: 0 0 3px 3px rgb(204, 95, 41);
+        }
+
+.FormRadio_active.FormItem_focused.FormRadio_theme_warn .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 4px rgb(204, 95, 41);
+                    box-shadow: 0 0 4px 4px rgb(204, 95, 41);
+          }
+
 .FormItem_focused.FormRadio_theme_warn .FormRadio-Actor {
-        background-color: rgb(230, 107, 46);
+        background-color: rgb(204, 95, 41);
       }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_warn .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 3px 3px rgb(204, 95, 41);
-                box-shadow: 0 0 3px 3px rgb(204, 95, 41);
+        -webkit-box-shadow: 0 0 3px 4px rgb(173, 173, 173);
+                box-shadow: 0 0 3px 4px rgb(173, 173, 173);
       }
+
+.FormBoolean_checked.FormItem_hovered.FormItem_focused.FormRadio_theme_warn .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 4px rgb(204, 95, 41);
+                  box-shadow: 0 0 3px 4px rgb(204, 95, 41);
+        }
+
+.FormRadio_active.FormItem_hovered.FormItem_focused.FormRadio_theme_warn .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 5px rgb(204, 95, 41);
+                    box-shadow: 0 0 4px 5px rgb(204, 95, 41);
+          }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_warn .FormRadio-Actor {
         background-color: rgb(204, 95, 41);
       }
 
-.FormRadio_active.FormRadio_theme_warn .FormRadio-Frame, .FormRadio_active.FormRadio_theme_warn.FormItem_focused .FormRadio-Frame {
-          -webkit-box-shadow: 0 0 3px 4px rgb(230, 107, 46);
-                  box-shadow: 0 0 3px 4px rgb(230, 107, 46);
-        }
-
-/* Sizes...*/
-
 .FormRadio_theme_success .FormRadio-Frame {
-      -webkit-box-shadow: 0 0 0 2px #593;
-              box-shadow: 0 0 0 2px #593;
-      background-color: #fff; /* Actor outer frame ('background' color). Used?*/
-    }
-
-.FormRadio_theme_success .FormRadio-Actor {
-      background-color: #593;
-    }
-
-.FormItem_hovered.FormRadio_theme_success .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 2px 3px rgb(77, 138, 46);
-                box-shadow: 0 0 2px 3px rgb(77, 138, 46);
+        -webkit-box-shadow: 0 0 0 2px #ccc;
+                box-shadow: 0 0 0 2px #ccc;
       }
 
+.FormBoolean_checked.FormRadio_theme_success .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 0 2px #593;
+                  box-shadow: 0 0 0 2px #593;
+        }
+
+.FormRadio_active.FormRadio_theme_success .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 3px #593;
+                    box-shadow: 0 0 4px 3px #593;
+          }
+
+.FormRadio_theme_success .FormRadio-Actor {
+        background-color: #593;
+      }
+
+.FormItem_hovered.FormRadio_theme_success .FormRadio-Frame {
+        -webkit-box-shadow: 0 0 3px 3px rgb(173, 173, 173);
+                box-shadow: 0 0 3px 3px rgb(173, 173, 173);
+      }
+
+.FormBoolean_checked.FormItem_hovered.FormRadio_theme_success .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 3px rgb(72, 130, 43);
+                  box-shadow: 0 0 3px 3px rgb(72, 130, 43);
+        }
+
+.FormRadio_active.FormItem_hovered.FormRadio_theme_success .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 4px rgb(72, 130, 43);
+                    box-shadow: 0 0 4px 4px rgb(72, 130, 43);
+          }
+
 .FormItem_hovered.FormRadio_theme_success .FormRadio-Actor {
-        background-color: rgb(77, 138, 46);
+        background-color: rgb(72, 130, 43);
       }
 
 .FormItem_focused.FormRadio_theme_success .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 3px 3px rgb(77, 138, 46);
-                box-shadow: 0 0 3px 3px rgb(77, 138, 46);
+        -webkit-box-shadow: 0 0 3px 3px rgb(173, 173, 173);
+                box-shadow: 0 0 3px 3px rgb(173, 173, 173);
       }
 
+.FormBoolean_checked.FormItem_focused.FormRadio_theme_success .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 3px rgb(68, 122, 41);
+                  box-shadow: 0 0 3px 3px rgb(68, 122, 41);
+        }
+
+.FormRadio_active.FormItem_focused.FormRadio_theme_success .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 4px rgb(68, 122, 41);
+                    box-shadow: 0 0 4px 4px rgb(68, 122, 41);
+          }
+
 .FormItem_focused.FormRadio_theme_success .FormRadio-Actor {
-        background-color: rgb(77, 138, 46);
+        background-color: rgb(68, 122, 41);
       }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_success .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 3px 3px rgb(68, 122, 41);
-                box-shadow: 0 0 3px 3px rgb(68, 122, 41);
+        -webkit-box-shadow: 0 0 3px 4px rgb(173, 173, 173);
+                box-shadow: 0 0 3px 4px rgb(173, 173, 173);
       }
+
+.FormBoolean_checked.FormItem_hovered.FormItem_focused.FormRadio_theme_success .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 4px rgb(68, 122, 41);
+                  box-shadow: 0 0 3px 4px rgb(68, 122, 41);
+        }
+
+.FormRadio_active.FormItem_hovered.FormItem_focused.FormRadio_theme_success .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 5px rgb(68, 122, 41);
+                    box-shadow: 0 0 4px 5px rgb(68, 122, 41);
+          }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_success .FormRadio-Actor {
         background-color: rgb(68, 122, 41);
       }
 
-.FormRadio_active.FormRadio_theme_success .FormRadio-Frame, .FormRadio_active.FormRadio_theme_success.FormItem_focused .FormRadio-Frame {
-          -webkit-box-shadow: 0 0 3px 4px rgb(77, 138, 46);
-                  box-shadow: 0 0 3px 4px rgb(77, 138, 46);
-        }
-
-/* Styles. For basic geometry look for `FormRadio.pcss`*/
-
 .FormRadio_theme_info .FormRadio-Frame {
-      -webkit-box-shadow: 0 0 0 2px #07f;
-              box-shadow: 0 0 0 2px #07f;
-      background-color: #fff; /* Actor outer frame ('background' color). Used?*/
-    }
-
-.FormRadio_theme_info .FormRadio-Actor {
-      background-color: #07f;
-    }
-
-.FormItem_hovered.FormRadio_theme_info .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 2px 3px rgb(0, 107, 230);
-                box-shadow: 0 0 2px 3px rgb(0, 107, 230);
+        -webkit-box-shadow: 0 0 0 2px #ccc;
+                box-shadow: 0 0 0 2px #ccc;
       }
 
+.FormBoolean_checked.FormRadio_theme_info .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 0 2px #07f;
+                  box-shadow: 0 0 0 2px #07f;
+        }
+
+.FormRadio_active.FormRadio_theme_info .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 3px #07f;
+                    box-shadow: 0 0 4px 3px #07f;
+          }
+
+.FormRadio_theme_info .FormRadio-Actor {
+        background-color: #07f;
+      }
+
+.FormItem_hovered.FormRadio_theme_info .FormRadio-Frame {
+        -webkit-box-shadow: 0 0 3px 3px rgb(173, 173, 173);
+                box-shadow: 0 0 3px 3px rgb(173, 173, 173);
+      }
+
+.FormBoolean_checked.FormItem_hovered.FormRadio_theme_info .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 3px rgb(0, 101, 217);
+                  box-shadow: 0 0 3px 3px rgb(0, 101, 217);
+        }
+
+.FormRadio_active.FormItem_hovered.FormRadio_theme_info .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 4px rgb(0, 101, 217);
+                    box-shadow: 0 0 4px 4px rgb(0, 101, 217);
+          }
+
 .FormItem_hovered.FormRadio_theme_info .FormRadio-Actor {
-        background-color: rgb(0, 107, 230);
+        background-color: rgb(0, 101, 217);
       }
 
 .FormItem_focused.FormRadio_theme_info .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 3px 3px rgb(0, 107, 230);
-                box-shadow: 0 0 3px 3px rgb(0, 107, 230);
+        -webkit-box-shadow: 0 0 3px 3px rgb(173, 173, 173);
+                box-shadow: 0 0 3px 3px rgb(173, 173, 173);
       }
 
+.FormBoolean_checked.FormItem_focused.FormRadio_theme_info .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 3px rgb(0, 95, 204);
+                  box-shadow: 0 0 3px 3px rgb(0, 95, 204);
+        }
+
+.FormRadio_active.FormItem_focused.FormRadio_theme_info .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 4px rgb(0, 95, 204);
+                    box-shadow: 0 0 4px 4px rgb(0, 95, 204);
+          }
+
 .FormItem_focused.FormRadio_theme_info .FormRadio-Actor {
-        background-color: rgb(0, 107, 230);
+        background-color: rgb(0, 95, 204);
       }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_info .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 3px 3px rgb(0, 95, 204);
-                box-shadow: 0 0 3px 3px rgb(0, 95, 204);
+        -webkit-box-shadow: 0 0 3px 4px rgb(173, 173, 173);
+                box-shadow: 0 0 3px 4px rgb(173, 173, 173);
       }
+
+.FormBoolean_checked.FormItem_hovered.FormItem_focused.FormRadio_theme_info .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 4px rgb(0, 95, 204);
+                  box-shadow: 0 0 3px 4px rgb(0, 95, 204);
+        }
+
+.FormRadio_active.FormItem_hovered.FormItem_focused.FormRadio_theme_info .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 5px rgb(0, 95, 204);
+                    box-shadow: 0 0 4px 5px rgb(0, 95, 204);
+          }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_info .FormRadio-Actor {
         background-color: rgb(0, 95, 204);
       }
 
-.FormRadio_active.FormRadio_theme_info .FormRadio-Frame, .FormRadio_active.FormRadio_theme_info.FormItem_focused .FormRadio-Frame {
-          -webkit-box-shadow: 0 0 3px 4px rgb(0, 107, 230);
-                  box-shadow: 0 0 3px 4px rgb(0, 107, 230);
-        }
-
 .FormRadio_theme_confirm .FormRadio-Frame {
-      -webkit-box-shadow: 0 0 0 2px #891;
-              box-shadow: 0 0 0 2px #891;
-      background-color: #fff; /* Actor outer frame ('background' color). Used?*/
-    }
-
-.FormRadio_theme_confirm .FormRadio-Actor {
-      background-color: #891;
-    }
-
-.FormItem_hovered.FormRadio_theme_confirm .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 2px 3px rgb(122, 138, 15);
-                box-shadow: 0 0 2px 3px rgb(122, 138, 15);
+        -webkit-box-shadow: 0 0 0 2px #ccc;
+                box-shadow: 0 0 0 2px #ccc;
       }
 
+.FormBoolean_checked.FormRadio_theme_confirm .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 0 2px #891;
+                  box-shadow: 0 0 0 2px #891;
+        }
+
+.FormRadio_active.FormRadio_theme_confirm .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 3px #891;
+                    box-shadow: 0 0 4px 3px #891;
+          }
+
+.FormRadio_theme_confirm .FormRadio-Actor {
+        background-color: #891;
+      }
+
+.FormItem_hovered.FormRadio_theme_confirm .FormRadio-Frame {
+        -webkit-box-shadow: 0 0 3px 3px rgb(173, 173, 173);
+                box-shadow: 0 0 3px 3px rgb(173, 173, 173);
+      }
+
+.FormBoolean_checked.FormItem_hovered.FormRadio_theme_confirm .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 3px rgb(116, 130, 14);
+                  box-shadow: 0 0 3px 3px rgb(116, 130, 14);
+        }
+
+.FormRadio_active.FormItem_hovered.FormRadio_theme_confirm .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 4px rgb(116, 130, 14);
+                    box-shadow: 0 0 4px 4px rgb(116, 130, 14);
+          }
+
 .FormItem_hovered.FormRadio_theme_confirm .FormRadio-Actor {
-        background-color: rgb(122, 138, 15);
+        background-color: rgb(116, 130, 14);
       }
 
 .FormItem_focused.FormRadio_theme_confirm .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 3px 3px rgb(122, 138, 15);
-                box-shadow: 0 0 3px 3px rgb(122, 138, 15);
+        -webkit-box-shadow: 0 0 3px 3px rgb(173, 173, 173);
+                box-shadow: 0 0 3px 3px rgb(173, 173, 173);
       }
 
+.FormBoolean_checked.FormItem_focused.FormRadio_theme_confirm .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 3px rgb(109, 122, 14);
+                  box-shadow: 0 0 3px 3px rgb(109, 122, 14);
+        }
+
+.FormRadio_active.FormItem_focused.FormRadio_theme_confirm .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 4px rgb(109, 122, 14);
+                    box-shadow: 0 0 4px 4px rgb(109, 122, 14);
+          }
+
 .FormItem_focused.FormRadio_theme_confirm .FormRadio-Actor {
-        background-color: rgb(122, 138, 15);
+        background-color: rgb(109, 122, 14);
       }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_confirm .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 3px 3px rgb(109, 122, 14);
-                box-shadow: 0 0 3px 3px rgb(109, 122, 14);
+        -webkit-box-shadow: 0 0 3px 4px rgb(173, 173, 173);
+                box-shadow: 0 0 3px 4px rgb(173, 173, 173);
       }
+
+.FormBoolean_checked.FormItem_hovered.FormItem_focused.FormRadio_theme_confirm .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 4px rgb(109, 122, 14);
+                  box-shadow: 0 0 3px 4px rgb(109, 122, 14);
+        }
+
+.FormRadio_active.FormItem_hovered.FormItem_focused.FormRadio_theme_confirm .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 5px rgb(109, 122, 14);
+                    box-shadow: 0 0 4px 5px rgb(109, 122, 14);
+          }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_confirm .FormRadio-Actor {
         background-color: rgb(109, 122, 14);
       }
 
-.FormRadio_active.FormRadio_theme_confirm .FormRadio-Frame, .FormRadio_active.FormRadio_theme_confirm.FormItem_focused .FormRadio-Frame {
-          -webkit-box-shadow: 0 0 3px 4px rgb(122, 138, 15);
-                  box-shadow: 0 0 3px 4px rgb(122, 138, 15);
-        }
-
 .FormRadio_theme_select .FormRadio-Frame {
-      -webkit-box-shadow: 0 0 0 2px #05b;
-              box-shadow: 0 0 0 2px #05b;
-      background-color: #fff; /* Actor outer frame ('background' color). Used?*/
-    }
-
-.FormRadio_theme_select .FormRadio-Actor {
-      background-color: #05b;
-    }
-
-.FormItem_hovered.FormRadio_theme_select .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 2px 3px rgb(0, 77, 168);
-                box-shadow: 0 0 2px 3px rgb(0, 77, 168);
+        -webkit-box-shadow: 0 0 0 2px #ccc;
+                box-shadow: 0 0 0 2px #ccc;
       }
 
+.FormBoolean_checked.FormRadio_theme_select .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 0 2px #05b;
+                  box-shadow: 0 0 0 2px #05b;
+        }
+
+.FormRadio_active.FormRadio_theme_select .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 3px #05b;
+                    box-shadow: 0 0 4px 3px #05b;
+          }
+
+.FormRadio_theme_select .FormRadio-Actor {
+        background-color: #05b;
+      }
+
+.FormItem_hovered.FormRadio_theme_select .FormRadio-Frame {
+        -webkit-box-shadow: 0 0 3px 3px rgb(173, 173, 173);
+                box-shadow: 0 0 3px 3px rgb(173, 173, 173);
+      }
+
+.FormBoolean_checked.FormItem_hovered.FormRadio_theme_select .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 3px rgb(0, 72, 159);
+                  box-shadow: 0 0 3px 3px rgb(0, 72, 159);
+        }
+
+.FormRadio_active.FormItem_hovered.FormRadio_theme_select .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 4px rgb(0, 72, 159);
+                    box-shadow: 0 0 4px 4px rgb(0, 72, 159);
+          }
+
 .FormItem_hovered.FormRadio_theme_select .FormRadio-Actor {
-        background-color: rgb(0, 77, 168);
+        background-color: rgb(0, 72, 159);
       }
 
 .FormItem_focused.FormRadio_theme_select .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 3px 3px rgb(0, 77, 168);
-                box-shadow: 0 0 3px 3px rgb(0, 77, 168);
+        -webkit-box-shadow: 0 0 3px 3px rgb(173, 173, 173);
+                box-shadow: 0 0 3px 3px rgb(173, 173, 173);
       }
 
+.FormBoolean_checked.FormItem_focused.FormRadio_theme_select .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 3px rgb(0, 68, 150);
+                  box-shadow: 0 0 3px 3px rgb(0, 68, 150);
+        }
+
+.FormRadio_active.FormItem_focused.FormRadio_theme_select .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 4px rgb(0, 68, 150);
+                    box-shadow: 0 0 4px 4px rgb(0, 68, 150);
+          }
+
 .FormItem_focused.FormRadio_theme_select .FormRadio-Actor {
-        background-color: rgb(0, 77, 168);
+        background-color: rgb(0, 68, 150);
       }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_select .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 3px 3px rgb(0, 68, 150);
-                box-shadow: 0 0 3px 3px rgb(0, 68, 150);
+        -webkit-box-shadow: 0 0 3px 4px rgb(173, 173, 173);
+                box-shadow: 0 0 3px 4px rgb(173, 173, 173);
       }
+
+.FormBoolean_checked.FormItem_hovered.FormItem_focused.FormRadio_theme_select .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 4px rgb(0, 68, 150);
+                  box-shadow: 0 0 3px 4px rgb(0, 68, 150);
+        }
+
+.FormRadio_active.FormItem_hovered.FormItem_focused.FormRadio_theme_select .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 5px rgb(0, 68, 150);
+                    box-shadow: 0 0 4px 5px rgb(0, 68, 150);
+          }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_select .FormRadio-Actor {
         background-color: rgb(0, 68, 150);
       }
 
-.FormRadio_active.FormRadio_theme_select .FormRadio-Frame, .FormRadio_active.FormRadio_theme_select.FormItem_focused .FormRadio-Frame {
-          -webkit-box-shadow: 0 0 3px 4px rgb(0, 77, 168);
-                  box-shadow: 0 0 3px 4px rgb(0, 77, 168);
-        }
-
 .FormRadio_theme_maroon .FormRadio-Frame {
-      -webkit-box-shadow: 0 0 0 2px #800000;
-              box-shadow: 0 0 0 2px #800000;
-      background-color: #fff; /* Actor outer frame ('background' color). Used?*/
-    }
-
-.FormRadio_theme_maroon .FormRadio-Actor {
-      background-color: #800000;
-    }
-
-.FormItem_hovered.FormRadio_theme_maroon .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 2px 3px rgb(115, 0, 0);
-                box-shadow: 0 0 2px 3px rgb(115, 0, 0);
+        -webkit-box-shadow: 0 0 0 2px #ccc;
+                box-shadow: 0 0 0 2px #ccc;
       }
 
+.FormBoolean_checked.FormRadio_theme_maroon .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 0 2px #800000;
+                  box-shadow: 0 0 0 2px #800000;
+        }
+
+.FormRadio_active.FormRadio_theme_maroon .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 3px #800000;
+                    box-shadow: 0 0 4px 3px #800000;
+          }
+
+.FormRadio_theme_maroon .FormRadio-Actor {
+        background-color: #800000;
+      }
+
+.FormItem_hovered.FormRadio_theme_maroon .FormRadio-Frame {
+        -webkit-box-shadow: 0 0 3px 3px rgb(173, 173, 173);
+                box-shadow: 0 0 3px 3px rgb(173, 173, 173);
+      }
+
+.FormBoolean_checked.FormItem_hovered.FormRadio_theme_maroon .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 3px rgb(109, 0, 0);
+                  box-shadow: 0 0 3px 3px rgb(109, 0, 0);
+        }
+
+.FormRadio_active.FormItem_hovered.FormRadio_theme_maroon .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 4px rgb(109, 0, 0);
+                    box-shadow: 0 0 4px 4px rgb(109, 0, 0);
+          }
+
 .FormItem_hovered.FormRadio_theme_maroon .FormRadio-Actor {
-        background-color: rgb(115, 0, 0);
+        background-color: rgb(109, 0, 0);
       }
 
 .FormItem_focused.FormRadio_theme_maroon .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 3px 3px rgb(115, 0, 0);
-                box-shadow: 0 0 3px 3px rgb(115, 0, 0);
+        -webkit-box-shadow: 0 0 3px 3px rgb(173, 173, 173);
+                box-shadow: 0 0 3px 3px rgb(173, 173, 173);
       }
 
+.FormBoolean_checked.FormItem_focused.FormRadio_theme_maroon .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 3px rgb(102, 0, 0);
+                  box-shadow: 0 0 3px 3px rgb(102, 0, 0);
+        }
+
+.FormRadio_active.FormItem_focused.FormRadio_theme_maroon .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 4px rgb(102, 0, 0);
+                    box-shadow: 0 0 4px 4px rgb(102, 0, 0);
+          }
+
 .FormItem_focused.FormRadio_theme_maroon .FormRadio-Actor {
-        background-color: rgb(115, 0, 0);
+        background-color: rgb(102, 0, 0);
       }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_maroon .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 3px 3px rgb(102, 0, 0);
-                box-shadow: 0 0 3px 3px rgb(102, 0, 0);
+        -webkit-box-shadow: 0 0 3px 4px rgb(173, 173, 173);
+                box-shadow: 0 0 3px 4px rgb(173, 173, 173);
       }
+
+.FormBoolean_checked.FormItem_hovered.FormItem_focused.FormRadio_theme_maroon .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 4px rgb(102, 0, 0);
+                  box-shadow: 0 0 3px 4px rgb(102, 0, 0);
+        }
+
+.FormRadio_active.FormItem_hovered.FormItem_focused.FormRadio_theme_maroon .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 5px rgb(102, 0, 0);
+                    box-shadow: 0 0 4px 5px rgb(102, 0, 0);
+          }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_maroon .FormRadio-Actor {
         background-color: rgb(102, 0, 0);
       }
 
-.FormRadio_active.FormRadio_theme_maroon .FormRadio-Frame, .FormRadio_active.FormRadio_theme_maroon.FormItem_focused .FormRadio-Frame {
-          -webkit-box-shadow: 0 0 3px 4px rgb(115, 0, 0);
-                  box-shadow: 0 0 3px 4px rgb(115, 0, 0);
-        }
-
 .FormRadio_theme_red .FormRadio-Frame {
-      -webkit-box-shadow: 0 0 0 2px #ff0000;
-              box-shadow: 0 0 0 2px #ff0000;
-      background-color: #fff; /* Actor outer frame ('background' color). Used?*/
-    }
-
-.FormRadio_theme_red .FormRadio-Actor {
-      background-color: #ff0000;
-    }
-
-.FormItem_hovered.FormRadio_theme_red .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 2px 3px rgb(230, 0, 0);
-                box-shadow: 0 0 2px 3px rgb(230, 0, 0);
+        -webkit-box-shadow: 0 0 0 2px #ccc;
+                box-shadow: 0 0 0 2px #ccc;
       }
 
+.FormBoolean_checked.FormRadio_theme_red .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 0 2px #ff0000;
+                  box-shadow: 0 0 0 2px #ff0000;
+        }
+
+.FormRadio_active.FormRadio_theme_red .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 3px #ff0000;
+                    box-shadow: 0 0 4px 3px #ff0000;
+          }
+
+.FormRadio_theme_red .FormRadio-Actor {
+        background-color: #ff0000;
+      }
+
+.FormItem_hovered.FormRadio_theme_red .FormRadio-Frame {
+        -webkit-box-shadow: 0 0 3px 3px rgb(173, 173, 173);
+                box-shadow: 0 0 3px 3px rgb(173, 173, 173);
+      }
+
+.FormBoolean_checked.FormItem_hovered.FormRadio_theme_red .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 3px rgb(217, 0, 0);
+                  box-shadow: 0 0 3px 3px rgb(217, 0, 0);
+        }
+
+.FormRadio_active.FormItem_hovered.FormRadio_theme_red .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 4px rgb(217, 0, 0);
+                    box-shadow: 0 0 4px 4px rgb(217, 0, 0);
+          }
+
 .FormItem_hovered.FormRadio_theme_red .FormRadio-Actor {
-        background-color: rgb(230, 0, 0);
+        background-color: rgb(217, 0, 0);
       }
 
 .FormItem_focused.FormRadio_theme_red .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 3px 3px rgb(230, 0, 0);
-                box-shadow: 0 0 3px 3px rgb(230, 0, 0);
+        -webkit-box-shadow: 0 0 3px 3px rgb(173, 173, 173);
+                box-shadow: 0 0 3px 3px rgb(173, 173, 173);
       }
 
+.FormBoolean_checked.FormItem_focused.FormRadio_theme_red .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 3px rgb(204, 0, 0);
+                  box-shadow: 0 0 3px 3px rgb(204, 0, 0);
+        }
+
+.FormRadio_active.FormItem_focused.FormRadio_theme_red .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 4px rgb(204, 0, 0);
+                    box-shadow: 0 0 4px 4px rgb(204, 0, 0);
+          }
+
 .FormItem_focused.FormRadio_theme_red .FormRadio-Actor {
-        background-color: rgb(230, 0, 0);
+        background-color: rgb(204, 0, 0);
       }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_red .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 3px 3px rgb(204, 0, 0);
-                box-shadow: 0 0 3px 3px rgb(204, 0, 0);
+        -webkit-box-shadow: 0 0 3px 4px rgb(173, 173, 173);
+                box-shadow: 0 0 3px 4px rgb(173, 173, 173);
       }
+
+.FormBoolean_checked.FormItem_hovered.FormItem_focused.FormRadio_theme_red .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 4px rgb(204, 0, 0);
+                  box-shadow: 0 0 3px 4px rgb(204, 0, 0);
+        }
+
+.FormRadio_active.FormItem_hovered.FormItem_focused.FormRadio_theme_red .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 5px rgb(204, 0, 0);
+                    box-shadow: 0 0 4px 5px rgb(204, 0, 0);
+          }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_red .FormRadio-Actor {
         background-color: rgb(204, 0, 0);
       }
 
-.FormRadio_active.FormRadio_theme_red .FormRadio-Frame, .FormRadio_active.FormRadio_theme_red.FormItem_focused .FormRadio-Frame {
-          -webkit-box-shadow: 0 0 3px 4px rgb(230, 0, 0);
-                  box-shadow: 0 0 3px 4px rgb(230, 0, 0);
-        }
-
 .FormRadio_theme_purple .FormRadio-Frame {
-      -webkit-box-shadow: 0 0 0 2px #800080;
-              box-shadow: 0 0 0 2px #800080;
-      background-color: #fff; /* Actor outer frame ('background' color). Used?*/
-    }
-
-.FormRadio_theme_purple .FormRadio-Actor {
-      background-color: #800080;
-    }
-
-.FormItem_hovered.FormRadio_theme_purple .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 2px 3px rgb(115, 0, 115);
-                box-shadow: 0 0 2px 3px rgb(115, 0, 115);
+        -webkit-box-shadow: 0 0 0 2px #ccc;
+                box-shadow: 0 0 0 2px #ccc;
       }
 
+.FormBoolean_checked.FormRadio_theme_purple .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 0 2px #800080;
+                  box-shadow: 0 0 0 2px #800080;
+        }
+
+.FormRadio_active.FormRadio_theme_purple .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 3px #800080;
+                    box-shadow: 0 0 4px 3px #800080;
+          }
+
+.FormRadio_theme_purple .FormRadio-Actor {
+        background-color: #800080;
+      }
+
+.FormItem_hovered.FormRadio_theme_purple .FormRadio-Frame {
+        -webkit-box-shadow: 0 0 3px 3px rgb(173, 173, 173);
+                box-shadow: 0 0 3px 3px rgb(173, 173, 173);
+      }
+
+.FormBoolean_checked.FormItem_hovered.FormRadio_theme_purple .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 3px rgb(109, 0, 109);
+                  box-shadow: 0 0 3px 3px rgb(109, 0, 109);
+        }
+
+.FormRadio_active.FormItem_hovered.FormRadio_theme_purple .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 4px rgb(109, 0, 109);
+                    box-shadow: 0 0 4px 4px rgb(109, 0, 109);
+          }
+
 .FormItem_hovered.FormRadio_theme_purple .FormRadio-Actor {
-        background-color: rgb(115, 0, 115);
+        background-color: rgb(109, 0, 109);
       }
 
 .FormItem_focused.FormRadio_theme_purple .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 3px 3px rgb(115, 0, 115);
-                box-shadow: 0 0 3px 3px rgb(115, 0, 115);
+        -webkit-box-shadow: 0 0 3px 3px rgb(173, 173, 173);
+                box-shadow: 0 0 3px 3px rgb(173, 173, 173);
       }
 
+.FormBoolean_checked.FormItem_focused.FormRadio_theme_purple .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 3px rgb(102, 0, 102);
+                  box-shadow: 0 0 3px 3px rgb(102, 0, 102);
+        }
+
+.FormRadio_active.FormItem_focused.FormRadio_theme_purple .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 4px rgb(102, 0, 102);
+                    box-shadow: 0 0 4px 4px rgb(102, 0, 102);
+          }
+
 .FormItem_focused.FormRadio_theme_purple .FormRadio-Actor {
-        background-color: rgb(115, 0, 115);
+        background-color: rgb(102, 0, 102);
       }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_purple .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 3px 3px rgb(102, 0, 102);
-                box-shadow: 0 0 3px 3px rgb(102, 0, 102);
+        -webkit-box-shadow: 0 0 3px 4px rgb(173, 173, 173);
+                box-shadow: 0 0 3px 4px rgb(173, 173, 173);
       }
+
+.FormBoolean_checked.FormItem_hovered.FormItem_focused.FormRadio_theme_purple .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 4px rgb(102, 0, 102);
+                  box-shadow: 0 0 3px 4px rgb(102, 0, 102);
+        }
+
+.FormRadio_active.FormItem_hovered.FormItem_focused.FormRadio_theme_purple .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 5px rgb(102, 0, 102);
+                    box-shadow: 0 0 4px 5px rgb(102, 0, 102);
+          }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_purple .FormRadio-Actor {
         background-color: rgb(102, 0, 102);
       }
 
-.FormRadio_active.FormRadio_theme_purple .FormRadio-Frame, .FormRadio_active.FormRadio_theme_purple.FormItem_focused .FormRadio-Frame {
-          -webkit-box-shadow: 0 0 3px 4px rgb(115, 0, 115);
-                  box-shadow: 0 0 3px 4px rgb(115, 0, 115);
-        }
-
 .FormRadio_theme_fuchsia .FormRadio-Frame {
-      -webkit-box-shadow: 0 0 0 2px #ff00ff;
-              box-shadow: 0 0 0 2px #ff00ff;
-      background-color: #fff; /* Actor outer frame ('background' color). Used?*/
-    }
-
-.FormRadio_theme_fuchsia .FormRadio-Actor {
-      background-color: #ff00ff;
-    }
-
-.FormItem_hovered.FormRadio_theme_fuchsia .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 2px 3px rgb(230, 0, 230);
-                box-shadow: 0 0 2px 3px rgb(230, 0, 230);
+        -webkit-box-shadow: 0 0 0 2px #ccc;
+                box-shadow: 0 0 0 2px #ccc;
       }
 
+.FormBoolean_checked.FormRadio_theme_fuchsia .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 0 2px #ff00ff;
+                  box-shadow: 0 0 0 2px #ff00ff;
+        }
+
+.FormRadio_active.FormRadio_theme_fuchsia .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 3px #ff00ff;
+                    box-shadow: 0 0 4px 3px #ff00ff;
+          }
+
+.FormRadio_theme_fuchsia .FormRadio-Actor {
+        background-color: #ff00ff;
+      }
+
+.FormItem_hovered.FormRadio_theme_fuchsia .FormRadio-Frame {
+        -webkit-box-shadow: 0 0 3px 3px rgb(173, 173, 173);
+                box-shadow: 0 0 3px 3px rgb(173, 173, 173);
+      }
+
+.FormBoolean_checked.FormItem_hovered.FormRadio_theme_fuchsia .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 3px rgb(217, 0, 217);
+                  box-shadow: 0 0 3px 3px rgb(217, 0, 217);
+        }
+
+.FormRadio_active.FormItem_hovered.FormRadio_theme_fuchsia .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 4px rgb(217, 0, 217);
+                    box-shadow: 0 0 4px 4px rgb(217, 0, 217);
+          }
+
 .FormItem_hovered.FormRadio_theme_fuchsia .FormRadio-Actor {
-        background-color: rgb(230, 0, 230);
+        background-color: rgb(217, 0, 217);
       }
 
 .FormItem_focused.FormRadio_theme_fuchsia .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 3px 3px rgb(230, 0, 230);
-                box-shadow: 0 0 3px 3px rgb(230, 0, 230);
+        -webkit-box-shadow: 0 0 3px 3px rgb(173, 173, 173);
+                box-shadow: 0 0 3px 3px rgb(173, 173, 173);
       }
 
+.FormBoolean_checked.FormItem_focused.FormRadio_theme_fuchsia .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 3px rgb(204, 0, 204);
+                  box-shadow: 0 0 3px 3px rgb(204, 0, 204);
+        }
+
+.FormRadio_active.FormItem_focused.FormRadio_theme_fuchsia .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 4px rgb(204, 0, 204);
+                    box-shadow: 0 0 4px 4px rgb(204, 0, 204);
+          }
+
 .FormItem_focused.FormRadio_theme_fuchsia .FormRadio-Actor {
-        background-color: rgb(230, 0, 230);
+        background-color: rgb(204, 0, 204);
       }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_fuchsia .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 3px 3px rgb(204, 0, 204);
-                box-shadow: 0 0 3px 3px rgb(204, 0, 204);
+        -webkit-box-shadow: 0 0 3px 4px rgb(173, 173, 173);
+                box-shadow: 0 0 3px 4px rgb(173, 173, 173);
       }
+
+.FormBoolean_checked.FormItem_hovered.FormItem_focused.FormRadio_theme_fuchsia .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 4px rgb(204, 0, 204);
+                  box-shadow: 0 0 3px 4px rgb(204, 0, 204);
+        }
+
+.FormRadio_active.FormItem_hovered.FormItem_focused.FormRadio_theme_fuchsia .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 5px rgb(204, 0, 204);
+                    box-shadow: 0 0 4px 5px rgb(204, 0, 204);
+          }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_fuchsia .FormRadio-Actor {
         background-color: rgb(204, 0, 204);
       }
 
-.FormRadio_active.FormRadio_theme_fuchsia .FormRadio-Frame, .FormRadio_active.FormRadio_theme_fuchsia.FormItem_focused .FormRadio-Frame {
-          -webkit-box-shadow: 0 0 3px 4px rgb(230, 0, 230);
-                  box-shadow: 0 0 3px 4px rgb(230, 0, 230);
-        }
-
 .FormRadio_theme_green .FormRadio-Frame {
-      -webkit-box-shadow: 0 0 0 2px #008000;
-              box-shadow: 0 0 0 2px #008000;
-      background-color: #fff; /* Actor outer frame ('background' color). Used?*/
-    }
-
-.FormRadio_theme_green .FormRadio-Actor {
-      background-color: #008000;
-    }
-
-.FormItem_hovered.FormRadio_theme_green .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 2px 3px rgb(0, 115, 0);
-                box-shadow: 0 0 2px 3px rgb(0, 115, 0);
+        -webkit-box-shadow: 0 0 0 2px #ccc;
+                box-shadow: 0 0 0 2px #ccc;
       }
 
+.FormBoolean_checked.FormRadio_theme_green .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 0 2px #008000;
+                  box-shadow: 0 0 0 2px #008000;
+        }
+
+.FormRadio_active.FormRadio_theme_green .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 3px #008000;
+                    box-shadow: 0 0 4px 3px #008000;
+          }
+
+.FormRadio_theme_green .FormRadio-Actor {
+        background-color: #008000;
+      }
+
+.FormItem_hovered.FormRadio_theme_green .FormRadio-Frame {
+        -webkit-box-shadow: 0 0 3px 3px rgb(173, 173, 173);
+                box-shadow: 0 0 3px 3px rgb(173, 173, 173);
+      }
+
+.FormBoolean_checked.FormItem_hovered.FormRadio_theme_green .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 3px rgb(0, 109, 0);
+                  box-shadow: 0 0 3px 3px rgb(0, 109, 0);
+        }
+
+.FormRadio_active.FormItem_hovered.FormRadio_theme_green .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 4px rgb(0, 109, 0);
+                    box-shadow: 0 0 4px 4px rgb(0, 109, 0);
+          }
+
 .FormItem_hovered.FormRadio_theme_green .FormRadio-Actor {
-        background-color: rgb(0, 115, 0);
+        background-color: rgb(0, 109, 0);
       }
 
 .FormItem_focused.FormRadio_theme_green .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 3px 3px rgb(0, 115, 0);
-                box-shadow: 0 0 3px 3px rgb(0, 115, 0);
+        -webkit-box-shadow: 0 0 3px 3px rgb(173, 173, 173);
+                box-shadow: 0 0 3px 3px rgb(173, 173, 173);
       }
 
+.FormBoolean_checked.FormItem_focused.FormRadio_theme_green .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 3px rgb(0, 102, 0);
+                  box-shadow: 0 0 3px 3px rgb(0, 102, 0);
+        }
+
+.FormRadio_active.FormItem_focused.FormRadio_theme_green .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 4px rgb(0, 102, 0);
+                    box-shadow: 0 0 4px 4px rgb(0, 102, 0);
+          }
+
 .FormItem_focused.FormRadio_theme_green .FormRadio-Actor {
-        background-color: rgb(0, 115, 0);
+        background-color: rgb(0, 102, 0);
       }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_green .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 3px 3px rgb(0, 102, 0);
-                box-shadow: 0 0 3px 3px rgb(0, 102, 0);
+        -webkit-box-shadow: 0 0 3px 4px rgb(173, 173, 173);
+                box-shadow: 0 0 3px 4px rgb(173, 173, 173);
       }
+
+.FormBoolean_checked.FormItem_hovered.FormItem_focused.FormRadio_theme_green .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 4px rgb(0, 102, 0);
+                  box-shadow: 0 0 3px 4px rgb(0, 102, 0);
+        }
+
+.FormRadio_active.FormItem_hovered.FormItem_focused.FormRadio_theme_green .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 5px rgb(0, 102, 0);
+                    box-shadow: 0 0 4px 5px rgb(0, 102, 0);
+          }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_green .FormRadio-Actor {
         background-color: rgb(0, 102, 0);
       }
 
-.FormRadio_active.FormRadio_theme_green .FormRadio-Frame, .FormRadio_active.FormRadio_theme_green.FormItem_focused .FormRadio-Frame {
-          -webkit-box-shadow: 0 0 3px 4px rgb(0, 115, 0);
-                  box-shadow: 0 0 3px 4px rgb(0, 115, 0);
-        }
-
 .FormRadio_theme_olive .FormRadio-Frame {
-      -webkit-box-shadow: 0 0 0 2px #808000;
-              box-shadow: 0 0 0 2px #808000;
-      background-color: #fff; /* Actor outer frame ('background' color). Used?*/
-    }
-
-.FormRadio_theme_olive .FormRadio-Actor {
-      background-color: #808000;
-    }
-
-.FormItem_hovered.FormRadio_theme_olive .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 2px 3px rgb(115, 115, 0);
-                box-shadow: 0 0 2px 3px rgb(115, 115, 0);
+        -webkit-box-shadow: 0 0 0 2px #ccc;
+                box-shadow: 0 0 0 2px #ccc;
       }
 
+.FormBoolean_checked.FormRadio_theme_olive .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 0 2px #808000;
+                  box-shadow: 0 0 0 2px #808000;
+        }
+
+.FormRadio_active.FormRadio_theme_olive .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 3px #808000;
+                    box-shadow: 0 0 4px 3px #808000;
+          }
+
+.FormRadio_theme_olive .FormRadio-Actor {
+        background-color: #808000;
+      }
+
+.FormItem_hovered.FormRadio_theme_olive .FormRadio-Frame {
+        -webkit-box-shadow: 0 0 3px 3px rgb(173, 173, 173);
+                box-shadow: 0 0 3px 3px rgb(173, 173, 173);
+      }
+
+.FormBoolean_checked.FormItem_hovered.FormRadio_theme_olive .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 3px rgb(109, 109, 0);
+                  box-shadow: 0 0 3px 3px rgb(109, 109, 0);
+        }
+
+.FormRadio_active.FormItem_hovered.FormRadio_theme_olive .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 4px rgb(109, 109, 0);
+                    box-shadow: 0 0 4px 4px rgb(109, 109, 0);
+          }
+
 .FormItem_hovered.FormRadio_theme_olive .FormRadio-Actor {
-        background-color: rgb(115, 115, 0);
+        background-color: rgb(109, 109, 0);
       }
 
 .FormItem_focused.FormRadio_theme_olive .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 3px 3px rgb(115, 115, 0);
-                box-shadow: 0 0 3px 3px rgb(115, 115, 0);
+        -webkit-box-shadow: 0 0 3px 3px rgb(173, 173, 173);
+                box-shadow: 0 0 3px 3px rgb(173, 173, 173);
       }
 
+.FormBoolean_checked.FormItem_focused.FormRadio_theme_olive .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 3px rgb(102, 102, 0);
+                  box-shadow: 0 0 3px 3px rgb(102, 102, 0);
+        }
+
+.FormRadio_active.FormItem_focused.FormRadio_theme_olive .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 4px rgb(102, 102, 0);
+                    box-shadow: 0 0 4px 4px rgb(102, 102, 0);
+          }
+
 .FormItem_focused.FormRadio_theme_olive .FormRadio-Actor {
-        background-color: rgb(115, 115, 0);
+        background-color: rgb(102, 102, 0);
       }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_olive .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 3px 3px rgb(102, 102, 0);
-                box-shadow: 0 0 3px 3px rgb(102, 102, 0);
+        -webkit-box-shadow: 0 0 3px 4px rgb(173, 173, 173);
+                box-shadow: 0 0 3px 4px rgb(173, 173, 173);
       }
+
+.FormBoolean_checked.FormItem_hovered.FormItem_focused.FormRadio_theme_olive .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 4px rgb(102, 102, 0);
+                  box-shadow: 0 0 3px 4px rgb(102, 102, 0);
+        }
+
+.FormRadio_active.FormItem_hovered.FormItem_focused.FormRadio_theme_olive .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 5px rgb(102, 102, 0);
+                    box-shadow: 0 0 4px 5px rgb(102, 102, 0);
+          }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_olive .FormRadio-Actor {
         background-color: rgb(102, 102, 0);
       }
 
-.FormRadio_active.FormRadio_theme_olive .FormRadio-Frame, .FormRadio_active.FormRadio_theme_olive.FormItem_focused .FormRadio-Frame {
-          -webkit-box-shadow: 0 0 3px 4px rgb(115, 115, 0);
-                  box-shadow: 0 0 3px 4px rgb(115, 115, 0);
-        }
-
 .FormRadio_theme_navy .FormRadio-Frame {
-      -webkit-box-shadow: 0 0 0 2px #000080;
-              box-shadow: 0 0 0 2px #000080;
-      background-color: #fff; /* Actor outer frame ('background' color). Used?*/
-    }
-
-.FormRadio_theme_navy .FormRadio-Actor {
-      background-color: #000080;
-    }
-
-.FormItem_hovered.FormRadio_theme_navy .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 2px 3px rgb(0, 0, 115);
-                box-shadow: 0 0 2px 3px rgb(0, 0, 115);
+        -webkit-box-shadow: 0 0 0 2px #ccc;
+                box-shadow: 0 0 0 2px #ccc;
       }
 
+.FormBoolean_checked.FormRadio_theme_navy .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 0 2px #000080;
+                  box-shadow: 0 0 0 2px #000080;
+        }
+
+.FormRadio_active.FormRadio_theme_navy .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 3px #000080;
+                    box-shadow: 0 0 4px 3px #000080;
+          }
+
+.FormRadio_theme_navy .FormRadio-Actor {
+        background-color: #000080;
+      }
+
+.FormItem_hovered.FormRadio_theme_navy .FormRadio-Frame {
+        -webkit-box-shadow: 0 0 3px 3px rgb(173, 173, 173);
+                box-shadow: 0 0 3px 3px rgb(173, 173, 173);
+      }
+
+.FormBoolean_checked.FormItem_hovered.FormRadio_theme_navy .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 3px rgb(0, 0, 109);
+                  box-shadow: 0 0 3px 3px rgb(0, 0, 109);
+        }
+
+.FormRadio_active.FormItem_hovered.FormRadio_theme_navy .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 4px rgb(0, 0, 109);
+                    box-shadow: 0 0 4px 4px rgb(0, 0, 109);
+          }
+
 .FormItem_hovered.FormRadio_theme_navy .FormRadio-Actor {
-        background-color: rgb(0, 0, 115);
+        background-color: rgb(0, 0, 109);
       }
 
 .FormItem_focused.FormRadio_theme_navy .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 3px 3px rgb(0, 0, 115);
-                box-shadow: 0 0 3px 3px rgb(0, 0, 115);
+        -webkit-box-shadow: 0 0 3px 3px rgb(173, 173, 173);
+                box-shadow: 0 0 3px 3px rgb(173, 173, 173);
       }
 
+.FormBoolean_checked.FormItem_focused.FormRadio_theme_navy .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 3px rgb(0, 0, 102);
+                  box-shadow: 0 0 3px 3px rgb(0, 0, 102);
+        }
+
+.FormRadio_active.FormItem_focused.FormRadio_theme_navy .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 4px rgb(0, 0, 102);
+                    box-shadow: 0 0 4px 4px rgb(0, 0, 102);
+          }
+
 .FormItem_focused.FormRadio_theme_navy .FormRadio-Actor {
-        background-color: rgb(0, 0, 115);
+        background-color: rgb(0, 0, 102);
       }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_navy .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 3px 3px rgb(0, 0, 102);
-                box-shadow: 0 0 3px 3px rgb(0, 0, 102);
+        -webkit-box-shadow: 0 0 3px 4px rgb(173, 173, 173);
+                box-shadow: 0 0 3px 4px rgb(173, 173, 173);
       }
+
+.FormBoolean_checked.FormItem_hovered.FormItem_focused.FormRadio_theme_navy .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 4px rgb(0, 0, 102);
+                  box-shadow: 0 0 3px 4px rgb(0, 0, 102);
+        }
+
+.FormRadio_active.FormItem_hovered.FormItem_focused.FormRadio_theme_navy .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 5px rgb(0, 0, 102);
+                    box-shadow: 0 0 4px 5px rgb(0, 0, 102);
+          }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_navy .FormRadio-Actor {
         background-color: rgb(0, 0, 102);
       }
 
-.FormRadio_active.FormRadio_theme_navy .FormRadio-Frame, .FormRadio_active.FormRadio_theme_navy.FormItem_focused .FormRadio-Frame {
-          -webkit-box-shadow: 0 0 3px 4px rgb(0, 0, 115);
-                  box-shadow: 0 0 3px 4px rgb(0, 0, 115);
-        }
-
 .FormRadio_theme_blue .FormRadio-Frame {
-      -webkit-box-shadow: 0 0 0 2px #0000ff;
-              box-shadow: 0 0 0 2px #0000ff;
-      background-color: #fff; /* Actor outer frame ('background' color). Used?*/
-    }
-
-.FormRadio_theme_blue .FormRadio-Actor {
-      background-color: #0000ff;
-    }
-
-.FormItem_hovered.FormRadio_theme_blue .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 2px 3px rgb(0, 0, 230);
-                box-shadow: 0 0 2px 3px rgb(0, 0, 230);
+        -webkit-box-shadow: 0 0 0 2px #ccc;
+                box-shadow: 0 0 0 2px #ccc;
       }
 
+.FormBoolean_checked.FormRadio_theme_blue .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 0 2px #0000ff;
+                  box-shadow: 0 0 0 2px #0000ff;
+        }
+
+.FormRadio_active.FormRadio_theme_blue .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 3px #0000ff;
+                    box-shadow: 0 0 4px 3px #0000ff;
+          }
+
+.FormRadio_theme_blue .FormRadio-Actor {
+        background-color: #0000ff;
+      }
+
+.FormItem_hovered.FormRadio_theme_blue .FormRadio-Frame {
+        -webkit-box-shadow: 0 0 3px 3px rgb(173, 173, 173);
+                box-shadow: 0 0 3px 3px rgb(173, 173, 173);
+      }
+
+.FormBoolean_checked.FormItem_hovered.FormRadio_theme_blue .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 3px rgb(0, 0, 217);
+                  box-shadow: 0 0 3px 3px rgb(0, 0, 217);
+        }
+
+.FormRadio_active.FormItem_hovered.FormRadio_theme_blue .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 4px rgb(0, 0, 217);
+                    box-shadow: 0 0 4px 4px rgb(0, 0, 217);
+          }
+
 .FormItem_hovered.FormRadio_theme_blue .FormRadio-Actor {
-        background-color: rgb(0, 0, 230);
+        background-color: rgb(0, 0, 217);
       }
 
 .FormItem_focused.FormRadio_theme_blue .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 3px 3px rgb(0, 0, 230);
-                box-shadow: 0 0 3px 3px rgb(0, 0, 230);
+        -webkit-box-shadow: 0 0 3px 3px rgb(173, 173, 173);
+                box-shadow: 0 0 3px 3px rgb(173, 173, 173);
       }
 
+.FormBoolean_checked.FormItem_focused.FormRadio_theme_blue .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 3px rgb(0, 0, 204);
+                  box-shadow: 0 0 3px 3px rgb(0, 0, 204);
+        }
+
+.FormRadio_active.FormItem_focused.FormRadio_theme_blue .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 4px rgb(0, 0, 204);
+                    box-shadow: 0 0 4px 4px rgb(0, 0, 204);
+          }
+
 .FormItem_focused.FormRadio_theme_blue .FormRadio-Actor {
-        background-color: rgb(0, 0, 230);
+        background-color: rgb(0, 0, 204);
       }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_blue .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 3px 3px rgb(0, 0, 204);
-                box-shadow: 0 0 3px 3px rgb(0, 0, 204);
+        -webkit-box-shadow: 0 0 3px 4px rgb(173, 173, 173);
+                box-shadow: 0 0 3px 4px rgb(173, 173, 173);
       }
+
+.FormBoolean_checked.FormItem_hovered.FormItem_focused.FormRadio_theme_blue .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 4px rgb(0, 0, 204);
+                  box-shadow: 0 0 3px 4px rgb(0, 0, 204);
+        }
+
+.FormRadio_active.FormItem_hovered.FormItem_focused.FormRadio_theme_blue .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 5px rgb(0, 0, 204);
+                    box-shadow: 0 0 4px 5px rgb(0, 0, 204);
+          }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_blue .FormRadio-Actor {
         background-color: rgb(0, 0, 204);
       }
 
-.FormRadio_active.FormRadio_theme_blue .FormRadio-Frame, .FormRadio_active.FormRadio_theme_blue.FormItem_focused .FormRadio-Frame {
-          -webkit-box-shadow: 0 0 3px 4px rgb(0, 0, 230);
-                  box-shadow: 0 0 3px 4px rgb(0, 0, 230);
-        }
-
 .FormRadio_theme_teal .FormRadio-Frame {
-      -webkit-box-shadow: 0 0 0 2px #008080;
-              box-shadow: 0 0 0 2px #008080;
-      background-color: #fff; /* Actor outer frame ('background' color). Used?*/
-    }
-
-.FormRadio_theme_teal .FormRadio-Actor {
-      background-color: #008080;
-    }
-
-.FormItem_hovered.FormRadio_theme_teal .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 2px 3px rgb(0, 115, 115);
-                box-shadow: 0 0 2px 3px rgb(0, 115, 115);
+        -webkit-box-shadow: 0 0 0 2px #ccc;
+                box-shadow: 0 0 0 2px #ccc;
       }
 
+.FormBoolean_checked.FormRadio_theme_teal .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 0 2px #008080;
+                  box-shadow: 0 0 0 2px #008080;
+        }
+
+.FormRadio_active.FormRadio_theme_teal .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 3px #008080;
+                    box-shadow: 0 0 4px 3px #008080;
+          }
+
+.FormRadio_theme_teal .FormRadio-Actor {
+        background-color: #008080;
+      }
+
+.FormItem_hovered.FormRadio_theme_teal .FormRadio-Frame {
+        -webkit-box-shadow: 0 0 3px 3px rgb(173, 173, 173);
+                box-shadow: 0 0 3px 3px rgb(173, 173, 173);
+      }
+
+.FormBoolean_checked.FormItem_hovered.FormRadio_theme_teal .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 3px rgb(0, 109, 109);
+                  box-shadow: 0 0 3px 3px rgb(0, 109, 109);
+        }
+
+.FormRadio_active.FormItem_hovered.FormRadio_theme_teal .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 4px rgb(0, 109, 109);
+                    box-shadow: 0 0 4px 4px rgb(0, 109, 109);
+          }
+
 .FormItem_hovered.FormRadio_theme_teal .FormRadio-Actor {
-        background-color: rgb(0, 115, 115);
+        background-color: rgb(0, 109, 109);
       }
 
 .FormItem_focused.FormRadio_theme_teal .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 3px 3px rgb(0, 115, 115);
-                box-shadow: 0 0 3px 3px rgb(0, 115, 115);
+        -webkit-box-shadow: 0 0 3px 3px rgb(173, 173, 173);
+                box-shadow: 0 0 3px 3px rgb(173, 173, 173);
       }
 
+.FormBoolean_checked.FormItem_focused.FormRadio_theme_teal .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 3px rgb(0, 102, 102);
+                  box-shadow: 0 0 3px 3px rgb(0, 102, 102);
+        }
+
+.FormRadio_active.FormItem_focused.FormRadio_theme_teal .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 4px rgb(0, 102, 102);
+                    box-shadow: 0 0 4px 4px rgb(0, 102, 102);
+          }
+
 .FormItem_focused.FormRadio_theme_teal .FormRadio-Actor {
-        background-color: rgb(0, 115, 115);
+        background-color: rgb(0, 102, 102);
       }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_teal .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 3px 3px rgb(0, 102, 102);
-                box-shadow: 0 0 3px 3px rgb(0, 102, 102);
+        -webkit-box-shadow: 0 0 3px 4px rgb(173, 173, 173);
+                box-shadow: 0 0 3px 4px rgb(173, 173, 173);
       }
+
+.FormBoolean_checked.FormItem_hovered.FormItem_focused.FormRadio_theme_teal .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 4px rgb(0, 102, 102);
+                  box-shadow: 0 0 3px 4px rgb(0, 102, 102);
+        }
+
+.FormRadio_active.FormItem_hovered.FormItem_focused.FormRadio_theme_teal .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 5px rgb(0, 102, 102);
+                    box-shadow: 0 0 4px 5px rgb(0, 102, 102);
+          }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_teal .FormRadio-Actor {
         background-color: rgb(0, 102, 102);
       }
 
-.FormRadio_active.FormRadio_theme_teal .FormRadio-Frame, .FormRadio_active.FormRadio_theme_teal.FormItem_focused .FormRadio-Frame {
-          -webkit-box-shadow: 0 0 3px 4px rgb(0, 115, 115);
-                  box-shadow: 0 0 3px 4px rgb(0, 115, 115);
-        }
-
 .FormRadio_theme_orange .FormRadio-Frame {
-      -webkit-box-shadow: 0 0 0 2px #ffa500;
-              box-shadow: 0 0 0 2px #ffa500;
-      background-color: #fff; /* Actor outer frame ('background' color). Used?*/
-    }
-
-.FormRadio_theme_orange .FormRadio-Actor {
-      background-color: #ffa500;
-    }
-
-.FormItem_hovered.FormRadio_theme_orange .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 2px 3px rgb(230, 149, 0);
-                box-shadow: 0 0 2px 3px rgb(230, 149, 0);
+        -webkit-box-shadow: 0 0 0 2px #ccc;
+                box-shadow: 0 0 0 2px #ccc;
       }
 
+.FormBoolean_checked.FormRadio_theme_orange .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 0 2px #ffa500;
+                  box-shadow: 0 0 0 2px #ffa500;
+        }
+
+.FormRadio_active.FormRadio_theme_orange .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 3px #ffa500;
+                    box-shadow: 0 0 4px 3px #ffa500;
+          }
+
+.FormRadio_theme_orange .FormRadio-Actor {
+        background-color: #ffa500;
+      }
+
+.FormItem_hovered.FormRadio_theme_orange .FormRadio-Frame {
+        -webkit-box-shadow: 0 0 3px 3px rgb(173, 173, 173);
+                box-shadow: 0 0 3px 3px rgb(173, 173, 173);
+      }
+
+.FormBoolean_checked.FormItem_hovered.FormRadio_theme_orange .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 3px rgb(217, 140, 0);
+                  box-shadow: 0 0 3px 3px rgb(217, 140, 0);
+        }
+
+.FormRadio_active.FormItem_hovered.FormRadio_theme_orange .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 4px rgb(217, 140, 0);
+                    box-shadow: 0 0 4px 4px rgb(217, 140, 0);
+          }
+
 .FormItem_hovered.FormRadio_theme_orange .FormRadio-Actor {
-        background-color: rgb(230, 149, 0);
+        background-color: rgb(217, 140, 0);
       }
 
 .FormItem_focused.FormRadio_theme_orange .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 3px 3px rgb(230, 149, 0);
-                box-shadow: 0 0 3px 3px rgb(230, 149, 0);
+        -webkit-box-shadow: 0 0 3px 3px rgb(173, 173, 173);
+                box-shadow: 0 0 3px 3px rgb(173, 173, 173);
       }
 
+.FormBoolean_checked.FormItem_focused.FormRadio_theme_orange .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 3px rgb(204, 132, 0);
+                  box-shadow: 0 0 3px 3px rgb(204, 132, 0);
+        }
+
+.FormRadio_active.FormItem_focused.FormRadio_theme_orange .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 4px rgb(204, 132, 0);
+                    box-shadow: 0 0 4px 4px rgb(204, 132, 0);
+          }
+
 .FormItem_focused.FormRadio_theme_orange .FormRadio-Actor {
-        background-color: rgb(230, 149, 0);
+        background-color: rgb(204, 132, 0);
       }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_orange .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 3px 3px rgb(204, 132, 0);
-                box-shadow: 0 0 3px 3px rgb(204, 132, 0);
+        -webkit-box-shadow: 0 0 3px 4px rgb(173, 173, 173);
+                box-shadow: 0 0 3px 4px rgb(173, 173, 173);
       }
+
+.FormBoolean_checked.FormItem_hovered.FormItem_focused.FormRadio_theme_orange .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 4px rgb(204, 132, 0);
+                  box-shadow: 0 0 3px 4px rgb(204, 132, 0);
+        }
+
+.FormRadio_active.FormItem_hovered.FormItem_focused.FormRadio_theme_orange .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 5px rgb(204, 132, 0);
+                    box-shadow: 0 0 4px 5px rgb(204, 132, 0);
+          }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_orange .FormRadio-Actor {
         background-color: rgb(204, 132, 0);
       }
 
-.FormRadio_active.FormRadio_theme_orange .FormRadio-Frame, .FormRadio_active.FormRadio_theme_orange.FormItem_focused .FormRadio-Frame {
-          -webkit-box-shadow: 0 0 3px 4px rgb(230, 149, 0);
-                  box-shadow: 0 0 3px 4px rgb(230, 149, 0);
-        }
-
 .FormRadio_theme_blueviolet .FormRadio-Frame {
-      -webkit-box-shadow: 0 0 0 2px #8a2be2;
-              box-shadow: 0 0 0 2px #8a2be2;
-      background-color: #fff; /* Actor outer frame ('background' color). Used?*/
-    }
-
-.FormRadio_theme_blueviolet .FormRadio-Actor {
-      background-color: #8a2be2;
-    }
-
-.FormItem_hovered.FormRadio_theme_blueviolet .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 2px 3px rgb(124, 39, 203);
-                box-shadow: 0 0 2px 3px rgb(124, 39, 203);
+        -webkit-box-shadow: 0 0 0 2px #ccc;
+                box-shadow: 0 0 0 2px #ccc;
       }
 
+.FormBoolean_checked.FormRadio_theme_blueviolet .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 0 2px #8a2be2;
+                  box-shadow: 0 0 0 2px #8a2be2;
+        }
+
+.FormRadio_active.FormRadio_theme_blueviolet .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 3px #8a2be2;
+                    box-shadow: 0 0 4px 3px #8a2be2;
+          }
+
+.FormRadio_theme_blueviolet .FormRadio-Actor {
+        background-color: #8a2be2;
+      }
+
+.FormItem_hovered.FormRadio_theme_blueviolet .FormRadio-Frame {
+        -webkit-box-shadow: 0 0 3px 3px rgb(173, 173, 173);
+                box-shadow: 0 0 3px 3px rgb(173, 173, 173);
+      }
+
+.FormBoolean_checked.FormItem_hovered.FormRadio_theme_blueviolet .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 3px rgb(117, 37, 192);
+                  box-shadow: 0 0 3px 3px rgb(117, 37, 192);
+        }
+
+.FormRadio_active.FormItem_hovered.FormRadio_theme_blueviolet .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 4px rgb(117, 37, 192);
+                    box-shadow: 0 0 4px 4px rgb(117, 37, 192);
+          }
+
 .FormItem_hovered.FormRadio_theme_blueviolet .FormRadio-Actor {
-        background-color: rgb(124, 39, 203);
+        background-color: rgb(117, 37, 192);
       }
 
 .FormItem_focused.FormRadio_theme_blueviolet .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 3px 3px rgb(124, 39, 203);
-                box-shadow: 0 0 3px 3px rgb(124, 39, 203);
+        -webkit-box-shadow: 0 0 3px 3px rgb(173, 173, 173);
+                box-shadow: 0 0 3px 3px rgb(173, 173, 173);
       }
 
+.FormBoolean_checked.FormItem_focused.FormRadio_theme_blueviolet .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 3px rgb(110, 34, 181);
+                  box-shadow: 0 0 3px 3px rgb(110, 34, 181);
+        }
+
+.FormRadio_active.FormItem_focused.FormRadio_theme_blueviolet .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 4px rgb(110, 34, 181);
+                    box-shadow: 0 0 4px 4px rgb(110, 34, 181);
+          }
+
 .FormItem_focused.FormRadio_theme_blueviolet .FormRadio-Actor {
-        background-color: rgb(124, 39, 203);
+        background-color: rgb(110, 34, 181);
       }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_blueviolet .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 3px 3px rgb(110, 34, 181);
-                box-shadow: 0 0 3px 3px rgb(110, 34, 181);
+        -webkit-box-shadow: 0 0 3px 4px rgb(173, 173, 173);
+                box-shadow: 0 0 3px 4px rgb(173, 173, 173);
       }
+
+.FormBoolean_checked.FormItem_hovered.FormItem_focused.FormRadio_theme_blueviolet .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 4px rgb(110, 34, 181);
+                  box-shadow: 0 0 3px 4px rgb(110, 34, 181);
+        }
+
+.FormRadio_active.FormItem_hovered.FormItem_focused.FormRadio_theme_blueviolet .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 5px rgb(110, 34, 181);
+                    box-shadow: 0 0 4px 5px rgb(110, 34, 181);
+          }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_blueviolet .FormRadio-Actor {
         background-color: rgb(110, 34, 181);
       }
 
-.FormRadio_active.FormRadio_theme_blueviolet .FormRadio-Frame, .FormRadio_active.FormRadio_theme_blueviolet.FormItem_focused .FormRadio-Frame {
-          -webkit-box-shadow: 0 0 3px 4px rgb(124, 39, 203);
-                  box-shadow: 0 0 3px 4px rgb(124, 39, 203);
-        }
-
 .FormRadio_theme_brown .FormRadio-Frame {
-      -webkit-box-shadow: 0 0 0 2px #a52a2a;
-              box-shadow: 0 0 0 2px #a52a2a;
-      background-color: #fff; /* Actor outer frame ('background' color). Used?*/
-    }
-
-.FormRadio_theme_brown .FormRadio-Actor {
-      background-color: #a52a2a;
-    }
-
-.FormItem_hovered.FormRadio_theme_brown .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 2px 3px rgb(149, 38, 38);
-                box-shadow: 0 0 2px 3px rgb(149, 38, 38);
+        -webkit-box-shadow: 0 0 0 2px #ccc;
+                box-shadow: 0 0 0 2px #ccc;
       }
 
+.FormBoolean_checked.FormRadio_theme_brown .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 0 2px #a52a2a;
+                  box-shadow: 0 0 0 2px #a52a2a;
+        }
+
+.FormRadio_active.FormRadio_theme_brown .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 3px #a52a2a;
+                    box-shadow: 0 0 4px 3px #a52a2a;
+          }
+
+.FormRadio_theme_brown .FormRadio-Actor {
+        background-color: #a52a2a;
+      }
+
+.FormItem_hovered.FormRadio_theme_brown .FormRadio-Frame {
+        -webkit-box-shadow: 0 0 3px 3px rgb(173, 173, 173);
+                box-shadow: 0 0 3px 3px rgb(173, 173, 173);
+      }
+
+.FormBoolean_checked.FormItem_hovered.FormRadio_theme_brown .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 3px rgb(140, 36, 36);
+                  box-shadow: 0 0 3px 3px rgb(140, 36, 36);
+        }
+
+.FormRadio_active.FormItem_hovered.FormRadio_theme_brown .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 4px rgb(140, 36, 36);
+                    box-shadow: 0 0 4px 4px rgb(140, 36, 36);
+          }
+
 .FormItem_hovered.FormRadio_theme_brown .FormRadio-Actor {
-        background-color: rgb(149, 38, 38);
+        background-color: rgb(140, 36, 36);
       }
 
 .FormItem_focused.FormRadio_theme_brown .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 3px 3px rgb(149, 38, 38);
-                box-shadow: 0 0 3px 3px rgb(149, 38, 38);
+        -webkit-box-shadow: 0 0 3px 3px rgb(173, 173, 173);
+                box-shadow: 0 0 3px 3px rgb(173, 173, 173);
       }
 
+.FormBoolean_checked.FormItem_focused.FormRadio_theme_brown .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 3px rgb(132, 34, 34);
+                  box-shadow: 0 0 3px 3px rgb(132, 34, 34);
+        }
+
+.FormRadio_active.FormItem_focused.FormRadio_theme_brown .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 4px rgb(132, 34, 34);
+                    box-shadow: 0 0 4px 4px rgb(132, 34, 34);
+          }
+
 .FormItem_focused.FormRadio_theme_brown .FormRadio-Actor {
-        background-color: rgb(149, 38, 38);
+        background-color: rgb(132, 34, 34);
       }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_brown .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 3px 3px rgb(132, 34, 34);
-                box-shadow: 0 0 3px 3px rgb(132, 34, 34);
+        -webkit-box-shadow: 0 0 3px 4px rgb(173, 173, 173);
+                box-shadow: 0 0 3px 4px rgb(173, 173, 173);
       }
+
+.FormBoolean_checked.FormItem_hovered.FormItem_focused.FormRadio_theme_brown .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 4px rgb(132, 34, 34);
+                  box-shadow: 0 0 3px 4px rgb(132, 34, 34);
+        }
+
+.FormRadio_active.FormItem_hovered.FormItem_focused.FormRadio_theme_brown .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 5px rgb(132, 34, 34);
+                    box-shadow: 0 0 4px 5px rgb(132, 34, 34);
+          }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_brown .FormRadio-Actor {
         background-color: rgb(132, 34, 34);
       }
 
-.FormRadio_active.FormRadio_theme_brown .FormRadio-Frame, .FormRadio_active.FormRadio_theme_brown.FormItem_focused .FormRadio-Frame {
-          -webkit-box-shadow: 0 0 3px 4px rgb(149, 38, 38);
-                  box-shadow: 0 0 3px 4px rgb(149, 38, 38);
-        }
-
 .FormRadio_theme_cadetblue .FormRadio-Frame {
-      -webkit-box-shadow: 0 0 0 2px #5f9ea0;
-              box-shadow: 0 0 0 2px #5f9ea0;
-      background-color: #fff; /* Actor outer frame ('background' color). Used?*/
-    }
-
-.FormRadio_theme_cadetblue .FormRadio-Actor {
-      background-color: #5f9ea0;
-    }
-
-.FormItem_hovered.FormRadio_theme_cadetblue .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 2px 3px rgb(86, 142, 144);
-                box-shadow: 0 0 2px 3px rgb(86, 142, 144);
+        -webkit-box-shadow: 0 0 0 2px #ccc;
+                box-shadow: 0 0 0 2px #ccc;
       }
 
+.FormBoolean_checked.FormRadio_theme_cadetblue .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 0 2px #5f9ea0;
+                  box-shadow: 0 0 0 2px #5f9ea0;
+        }
+
+.FormRadio_active.FormRadio_theme_cadetblue .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 3px #5f9ea0;
+                    box-shadow: 0 0 4px 3px #5f9ea0;
+          }
+
+.FormRadio_theme_cadetblue .FormRadio-Actor {
+        background-color: #5f9ea0;
+      }
+
+.FormItem_hovered.FormRadio_theme_cadetblue .FormRadio-Frame {
+        -webkit-box-shadow: 0 0 3px 3px rgb(173, 173, 173);
+                box-shadow: 0 0 3px 3px rgb(173, 173, 173);
+      }
+
+.FormBoolean_checked.FormItem_hovered.FormRadio_theme_cadetblue .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 3px rgb(81, 134, 136);
+                  box-shadow: 0 0 3px 3px rgb(81, 134, 136);
+        }
+
+.FormRadio_active.FormItem_hovered.FormRadio_theme_cadetblue .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 4px rgb(81, 134, 136);
+                    box-shadow: 0 0 4px 4px rgb(81, 134, 136);
+          }
+
 .FormItem_hovered.FormRadio_theme_cadetblue .FormRadio-Actor {
-        background-color: rgb(86, 142, 144);
+        background-color: rgb(81, 134, 136);
       }
 
 .FormItem_focused.FormRadio_theme_cadetblue .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 3px 3px rgb(86, 142, 144);
-                box-shadow: 0 0 3px 3px rgb(86, 142, 144);
+        -webkit-box-shadow: 0 0 3px 3px rgb(173, 173, 173);
+                box-shadow: 0 0 3px 3px rgb(173, 173, 173);
       }
 
+.FormBoolean_checked.FormItem_focused.FormRadio_theme_cadetblue .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 3px rgb(76, 126, 128);
+                  box-shadow: 0 0 3px 3px rgb(76, 126, 128);
+        }
+
+.FormRadio_active.FormItem_focused.FormRadio_theme_cadetblue .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 4px rgb(76, 126, 128);
+                    box-shadow: 0 0 4px 4px rgb(76, 126, 128);
+          }
+
 .FormItem_focused.FormRadio_theme_cadetblue .FormRadio-Actor {
-        background-color: rgb(86, 142, 144);
+        background-color: rgb(76, 126, 128);
       }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_cadetblue .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 3px 3px rgb(76, 126, 128);
-                box-shadow: 0 0 3px 3px rgb(76, 126, 128);
+        -webkit-box-shadow: 0 0 3px 4px rgb(173, 173, 173);
+                box-shadow: 0 0 3px 4px rgb(173, 173, 173);
       }
+
+.FormBoolean_checked.FormItem_hovered.FormItem_focused.FormRadio_theme_cadetblue .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 4px rgb(76, 126, 128);
+                  box-shadow: 0 0 3px 4px rgb(76, 126, 128);
+        }
+
+.FormRadio_active.FormItem_hovered.FormItem_focused.FormRadio_theme_cadetblue .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 5px rgb(76, 126, 128);
+                    box-shadow: 0 0 4px 5px rgb(76, 126, 128);
+          }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_cadetblue .FormRadio-Actor {
         background-color: rgb(76, 126, 128);
       }
 
-.FormRadio_active.FormRadio_theme_cadetblue .FormRadio-Frame, .FormRadio_active.FormRadio_theme_cadetblue.FormItem_focused .FormRadio-Frame {
-          -webkit-box-shadow: 0 0 3px 4px rgb(86, 142, 144);
-                  box-shadow: 0 0 3px 4px rgb(86, 142, 144);
-        }
-
 .FormRadio_theme_darkblue .FormRadio-Frame {
-      -webkit-box-shadow: 0 0 0 2px #00008b;
-              box-shadow: 0 0 0 2px #00008b;
-      background-color: #fff; /* Actor outer frame ('background' color). Used?*/
-    }
-
-.FormRadio_theme_darkblue .FormRadio-Actor {
-      background-color: #00008b;
-    }
-
-.FormItem_hovered.FormRadio_theme_darkblue .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 2px 3px rgb(0, 0, 125);
-                box-shadow: 0 0 2px 3px rgb(0, 0, 125);
+        -webkit-box-shadow: 0 0 0 2px #ccc;
+                box-shadow: 0 0 0 2px #ccc;
       }
 
+.FormBoolean_checked.FormRadio_theme_darkblue .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 0 2px #00008b;
+                  box-shadow: 0 0 0 2px #00008b;
+        }
+
+.FormRadio_active.FormRadio_theme_darkblue .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 3px #00008b;
+                    box-shadow: 0 0 4px 3px #00008b;
+          }
+
+.FormRadio_theme_darkblue .FormRadio-Actor {
+        background-color: #00008b;
+      }
+
+.FormItem_hovered.FormRadio_theme_darkblue .FormRadio-Frame {
+        -webkit-box-shadow: 0 0 3px 3px rgb(173, 173, 173);
+                box-shadow: 0 0 3px 3px rgb(173, 173, 173);
+      }
+
+.FormBoolean_checked.FormItem_hovered.FormRadio_theme_darkblue .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 3px rgb(0, 0, 118);
+                  box-shadow: 0 0 3px 3px rgb(0, 0, 118);
+        }
+
+.FormRadio_active.FormItem_hovered.FormRadio_theme_darkblue .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 4px rgb(0, 0, 118);
+                    box-shadow: 0 0 4px 4px rgb(0, 0, 118);
+          }
+
 .FormItem_hovered.FormRadio_theme_darkblue .FormRadio-Actor {
-        background-color: rgb(0, 0, 125);
+        background-color: rgb(0, 0, 118);
       }
 
 .FormItem_focused.FormRadio_theme_darkblue .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 3px 3px rgb(0, 0, 125);
-                box-shadow: 0 0 3px 3px rgb(0, 0, 125);
+        -webkit-box-shadow: 0 0 3px 3px rgb(173, 173, 173);
+                box-shadow: 0 0 3px 3px rgb(173, 173, 173);
       }
 
+.FormBoolean_checked.FormItem_focused.FormRadio_theme_darkblue .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 3px rgb(0, 0, 111);
+                  box-shadow: 0 0 3px 3px rgb(0, 0, 111);
+        }
+
+.FormRadio_active.FormItem_focused.FormRadio_theme_darkblue .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 4px rgb(0, 0, 111);
+                    box-shadow: 0 0 4px 4px rgb(0, 0, 111);
+          }
+
 .FormItem_focused.FormRadio_theme_darkblue .FormRadio-Actor {
-        background-color: rgb(0, 0, 125);
+        background-color: rgb(0, 0, 111);
       }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_darkblue .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 3px 3px rgb(0, 0, 111);
-                box-shadow: 0 0 3px 3px rgb(0, 0, 111);
+        -webkit-box-shadow: 0 0 3px 4px rgb(173, 173, 173);
+                box-shadow: 0 0 3px 4px rgb(173, 173, 173);
       }
+
+.FormBoolean_checked.FormItem_hovered.FormItem_focused.FormRadio_theme_darkblue .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 4px rgb(0, 0, 111);
+                  box-shadow: 0 0 3px 4px rgb(0, 0, 111);
+        }
+
+.FormRadio_active.FormItem_hovered.FormItem_focused.FormRadio_theme_darkblue .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 5px rgb(0, 0, 111);
+                    box-shadow: 0 0 4px 5px rgb(0, 0, 111);
+          }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_darkblue .FormRadio-Actor {
         background-color: rgb(0, 0, 111);
       }
 
-.FormRadio_active.FormRadio_theme_darkblue .FormRadio-Frame, .FormRadio_active.FormRadio_theme_darkblue.FormItem_focused .FormRadio-Frame {
-          -webkit-box-shadow: 0 0 3px 4px rgb(0, 0, 125);
-                  box-shadow: 0 0 3px 4px rgb(0, 0, 125);
-        }
-
 .FormRadio_theme_darkcyan .FormRadio-Frame {
-      -webkit-box-shadow: 0 0 0 2px #008b8b;
-              box-shadow: 0 0 0 2px #008b8b;
-      background-color: #fff; /* Actor outer frame ('background' color). Used?*/
-    }
-
-.FormRadio_theme_darkcyan .FormRadio-Actor {
-      background-color: #008b8b;
-    }
-
-.FormItem_hovered.FormRadio_theme_darkcyan .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 2px 3px rgb(0, 125, 125);
-                box-shadow: 0 0 2px 3px rgb(0, 125, 125);
+        -webkit-box-shadow: 0 0 0 2px #ccc;
+                box-shadow: 0 0 0 2px #ccc;
       }
 
+.FormBoolean_checked.FormRadio_theme_darkcyan .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 0 2px #008b8b;
+                  box-shadow: 0 0 0 2px #008b8b;
+        }
+
+.FormRadio_active.FormRadio_theme_darkcyan .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 3px #008b8b;
+                    box-shadow: 0 0 4px 3px #008b8b;
+          }
+
+.FormRadio_theme_darkcyan .FormRadio-Actor {
+        background-color: #008b8b;
+      }
+
+.FormItem_hovered.FormRadio_theme_darkcyan .FormRadio-Frame {
+        -webkit-box-shadow: 0 0 3px 3px rgb(173, 173, 173);
+                box-shadow: 0 0 3px 3px rgb(173, 173, 173);
+      }
+
+.FormBoolean_checked.FormItem_hovered.FormRadio_theme_darkcyan .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 3px rgb(0, 118, 118);
+                  box-shadow: 0 0 3px 3px rgb(0, 118, 118);
+        }
+
+.FormRadio_active.FormItem_hovered.FormRadio_theme_darkcyan .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 4px rgb(0, 118, 118);
+                    box-shadow: 0 0 4px 4px rgb(0, 118, 118);
+          }
+
 .FormItem_hovered.FormRadio_theme_darkcyan .FormRadio-Actor {
-        background-color: rgb(0, 125, 125);
+        background-color: rgb(0, 118, 118);
       }
 
 .FormItem_focused.FormRadio_theme_darkcyan .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 3px 3px rgb(0, 125, 125);
-                box-shadow: 0 0 3px 3px rgb(0, 125, 125);
+        -webkit-box-shadow: 0 0 3px 3px rgb(173, 173, 173);
+                box-shadow: 0 0 3px 3px rgb(173, 173, 173);
       }
 
+.FormBoolean_checked.FormItem_focused.FormRadio_theme_darkcyan .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 3px rgb(0, 111, 111);
+                  box-shadow: 0 0 3px 3px rgb(0, 111, 111);
+        }
+
+.FormRadio_active.FormItem_focused.FormRadio_theme_darkcyan .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 4px rgb(0, 111, 111);
+                    box-shadow: 0 0 4px 4px rgb(0, 111, 111);
+          }
+
 .FormItem_focused.FormRadio_theme_darkcyan .FormRadio-Actor {
-        background-color: rgb(0, 125, 125);
+        background-color: rgb(0, 111, 111);
       }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_darkcyan .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 3px 3px rgb(0, 111, 111);
-                box-shadow: 0 0 3px 3px rgb(0, 111, 111);
+        -webkit-box-shadow: 0 0 3px 4px rgb(173, 173, 173);
+                box-shadow: 0 0 3px 4px rgb(173, 173, 173);
       }
+
+.FormBoolean_checked.FormItem_hovered.FormItem_focused.FormRadio_theme_darkcyan .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 4px rgb(0, 111, 111);
+                  box-shadow: 0 0 3px 4px rgb(0, 111, 111);
+        }
+
+.FormRadio_active.FormItem_hovered.FormItem_focused.FormRadio_theme_darkcyan .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 5px rgb(0, 111, 111);
+                    box-shadow: 0 0 4px 5px rgb(0, 111, 111);
+          }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_darkcyan .FormRadio-Actor {
         background-color: rgb(0, 111, 111);
       }
 
-.FormRadio_active.FormRadio_theme_darkcyan .FormRadio-Frame, .FormRadio_active.FormRadio_theme_darkcyan.FormItem_focused .FormRadio-Frame {
-          -webkit-box-shadow: 0 0 3px 4px rgb(0, 125, 125);
-                  box-shadow: 0 0 3px 4px rgb(0, 125, 125);
-        }
-
 .FormRadio_theme_darkgoldenrod .FormRadio-Frame {
-      -webkit-box-shadow: 0 0 0 2px #b8860b;
-              box-shadow: 0 0 0 2px #b8860b;
-      background-color: #fff; /* Actor outer frame ('background' color). Used?*/
-    }
-
-.FormRadio_theme_darkgoldenrod .FormRadio-Actor {
-      background-color: #b8860b;
-    }
-
-.FormItem_hovered.FormRadio_theme_darkgoldenrod .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 2px 3px rgb(166, 121, 10);
-                box-shadow: 0 0 2px 3px rgb(166, 121, 10);
+        -webkit-box-shadow: 0 0 0 2px #ccc;
+                box-shadow: 0 0 0 2px #ccc;
       }
 
+.FormBoolean_checked.FormRadio_theme_darkgoldenrod .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 0 2px #b8860b;
+                  box-shadow: 0 0 0 2px #b8860b;
+        }
+
+.FormRadio_active.FormRadio_theme_darkgoldenrod .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 3px #b8860b;
+                    box-shadow: 0 0 4px 3px #b8860b;
+          }
+
+.FormRadio_theme_darkgoldenrod .FormRadio-Actor {
+        background-color: #b8860b;
+      }
+
+.FormItem_hovered.FormRadio_theme_darkgoldenrod .FormRadio-Frame {
+        -webkit-box-shadow: 0 0 3px 3px rgb(173, 173, 173);
+                box-shadow: 0 0 3px 3px rgb(173, 173, 173);
+      }
+
+.FormBoolean_checked.FormItem_hovered.FormRadio_theme_darkgoldenrod .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 3px rgb(156, 114, 9);
+                  box-shadow: 0 0 3px 3px rgb(156, 114, 9);
+        }
+
+.FormRadio_active.FormItem_hovered.FormRadio_theme_darkgoldenrod .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 4px rgb(156, 114, 9);
+                    box-shadow: 0 0 4px 4px rgb(156, 114, 9);
+          }
+
 .FormItem_hovered.FormRadio_theme_darkgoldenrod .FormRadio-Actor {
-        background-color: rgb(166, 121, 10);
+        background-color: rgb(156, 114, 9);
       }
 
 .FormItem_focused.FormRadio_theme_darkgoldenrod .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 3px 3px rgb(166, 121, 10);
-                box-shadow: 0 0 3px 3px rgb(166, 121, 10);
+        -webkit-box-shadow: 0 0 3px 3px rgb(173, 173, 173);
+                box-shadow: 0 0 3px 3px rgb(173, 173, 173);
       }
 
+.FormBoolean_checked.FormItem_focused.FormRadio_theme_darkgoldenrod .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 3px rgb(147, 107, 9);
+                  box-shadow: 0 0 3px 3px rgb(147, 107, 9);
+        }
+
+.FormRadio_active.FormItem_focused.FormRadio_theme_darkgoldenrod .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 4px rgb(147, 107, 9);
+                    box-shadow: 0 0 4px 4px rgb(147, 107, 9);
+          }
+
 .FormItem_focused.FormRadio_theme_darkgoldenrod .FormRadio-Actor {
-        background-color: rgb(166, 121, 10);
+        background-color: rgb(147, 107, 9);
       }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_darkgoldenrod .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 3px 3px rgb(147, 107, 9);
-                box-shadow: 0 0 3px 3px rgb(147, 107, 9);
+        -webkit-box-shadow: 0 0 3px 4px rgb(173, 173, 173);
+                box-shadow: 0 0 3px 4px rgb(173, 173, 173);
       }
+
+.FormBoolean_checked.FormItem_hovered.FormItem_focused.FormRadio_theme_darkgoldenrod .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 4px rgb(147, 107, 9);
+                  box-shadow: 0 0 3px 4px rgb(147, 107, 9);
+        }
+
+.FormRadio_active.FormItem_hovered.FormItem_focused.FormRadio_theme_darkgoldenrod .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 5px rgb(147, 107, 9);
+                    box-shadow: 0 0 4px 5px rgb(147, 107, 9);
+          }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_darkgoldenrod .FormRadio-Actor {
         background-color: rgb(147, 107, 9);
       }
 
-.FormRadio_active.FormRadio_theme_darkgoldenrod .FormRadio-Frame, .FormRadio_active.FormRadio_theme_darkgoldenrod.FormItem_focused .FormRadio-Frame {
-          -webkit-box-shadow: 0 0 3px 4px rgb(166, 121, 10);
-                  box-shadow: 0 0 3px 4px rgb(166, 121, 10);
-        }
-
 .FormRadio_theme_darkorange .FormRadio-Frame {
-      -webkit-box-shadow: 0 0 0 2px #ff8c00;
-              box-shadow: 0 0 0 2px #ff8c00;
-      background-color: #fff; /* Actor outer frame ('background' color). Used?*/
-    }
-
-.FormRadio_theme_darkorange .FormRadio-Actor {
-      background-color: #ff8c00;
-    }
-
-.FormItem_hovered.FormRadio_theme_darkorange .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 2px 3px rgb(230, 126, 0);
-                box-shadow: 0 0 2px 3px rgb(230, 126, 0);
+        -webkit-box-shadow: 0 0 0 2px #ccc;
+                box-shadow: 0 0 0 2px #ccc;
       }
 
+.FormBoolean_checked.FormRadio_theme_darkorange .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 0 2px #ff8c00;
+                  box-shadow: 0 0 0 2px #ff8c00;
+        }
+
+.FormRadio_active.FormRadio_theme_darkorange .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 3px #ff8c00;
+                    box-shadow: 0 0 4px 3px #ff8c00;
+          }
+
+.FormRadio_theme_darkorange .FormRadio-Actor {
+        background-color: #ff8c00;
+      }
+
+.FormItem_hovered.FormRadio_theme_darkorange .FormRadio-Frame {
+        -webkit-box-shadow: 0 0 3px 3px rgb(173, 173, 173);
+                box-shadow: 0 0 3px 3px rgb(173, 173, 173);
+      }
+
+.FormBoolean_checked.FormItem_hovered.FormRadio_theme_darkorange .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 3px rgb(217, 119, 0);
+                  box-shadow: 0 0 3px 3px rgb(217, 119, 0);
+        }
+
+.FormRadio_active.FormItem_hovered.FormRadio_theme_darkorange .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 4px rgb(217, 119, 0);
+                    box-shadow: 0 0 4px 4px rgb(217, 119, 0);
+          }
+
 .FormItem_hovered.FormRadio_theme_darkorange .FormRadio-Actor {
-        background-color: rgb(230, 126, 0);
+        background-color: rgb(217, 119, 0);
       }
 
 .FormItem_focused.FormRadio_theme_darkorange .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 3px 3px rgb(230, 126, 0);
-                box-shadow: 0 0 3px 3px rgb(230, 126, 0);
+        -webkit-box-shadow: 0 0 3px 3px rgb(173, 173, 173);
+                box-shadow: 0 0 3px 3px rgb(173, 173, 173);
       }
 
+.FormBoolean_checked.FormItem_focused.FormRadio_theme_darkorange .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 3px rgb(204, 112, 0);
+                  box-shadow: 0 0 3px 3px rgb(204, 112, 0);
+        }
+
+.FormRadio_active.FormItem_focused.FormRadio_theme_darkorange .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 4px rgb(204, 112, 0);
+                    box-shadow: 0 0 4px 4px rgb(204, 112, 0);
+          }
+
 .FormItem_focused.FormRadio_theme_darkorange .FormRadio-Actor {
-        background-color: rgb(230, 126, 0);
+        background-color: rgb(204, 112, 0);
       }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_darkorange .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 3px 3px rgb(204, 112, 0);
-                box-shadow: 0 0 3px 3px rgb(204, 112, 0);
+        -webkit-box-shadow: 0 0 3px 4px rgb(173, 173, 173);
+                box-shadow: 0 0 3px 4px rgb(173, 173, 173);
       }
+
+.FormBoolean_checked.FormItem_hovered.FormItem_focused.FormRadio_theme_darkorange .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 4px rgb(204, 112, 0);
+                  box-shadow: 0 0 3px 4px rgb(204, 112, 0);
+        }
+
+.FormRadio_active.FormItem_hovered.FormItem_focused.FormRadio_theme_darkorange .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 5px rgb(204, 112, 0);
+                    box-shadow: 0 0 4px 5px rgb(204, 112, 0);
+          }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_darkorange .FormRadio-Actor {
         background-color: rgb(204, 112, 0);
       }
 
-.FormRadio_active.FormRadio_theme_darkorange .FormRadio-Frame, .FormRadio_active.FormRadio_theme_darkorange.FormItem_focused .FormRadio-Frame {
-          -webkit-box-shadow: 0 0 3px 4px rgb(230, 126, 0);
-                  box-shadow: 0 0 3px 4px rgb(230, 126, 0);
-        }
-
 .FormRadio_theme_darkorchid .FormRadio-Frame {
-      -webkit-box-shadow: 0 0 0 2px #9932cc;
-              box-shadow: 0 0 0 2px #9932cc;
-      background-color: #fff; /* Actor outer frame ('background' color). Used?*/
-    }
-
-.FormRadio_theme_darkorchid .FormRadio-Actor {
-      background-color: #9932cc;
-    }
-
-.FormItem_hovered.FormRadio_theme_darkorchid .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 2px 3px rgb(138, 45, 184);
-                box-shadow: 0 0 2px 3px rgb(138, 45, 184);
+        -webkit-box-shadow: 0 0 0 2px #ccc;
+                box-shadow: 0 0 0 2px #ccc;
       }
 
+.FormBoolean_checked.FormRadio_theme_darkorchid .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 0 2px #9932cc;
+                  box-shadow: 0 0 0 2px #9932cc;
+        }
+
+.FormRadio_active.FormRadio_theme_darkorchid .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 3px #9932cc;
+                    box-shadow: 0 0 4px 3px #9932cc;
+          }
+
+.FormRadio_theme_darkorchid .FormRadio-Actor {
+        background-color: #9932cc;
+      }
+
+.FormItem_hovered.FormRadio_theme_darkorchid .FormRadio-Frame {
+        -webkit-box-shadow: 0 0 3px 3px rgb(173, 173, 173);
+                box-shadow: 0 0 3px 3px rgb(173, 173, 173);
+      }
+
+.FormBoolean_checked.FormItem_hovered.FormRadio_theme_darkorchid .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 3px rgb(130, 43, 173);
+                  box-shadow: 0 0 3px 3px rgb(130, 43, 173);
+        }
+
+.FormRadio_active.FormItem_hovered.FormRadio_theme_darkorchid .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 4px rgb(130, 43, 173);
+                    box-shadow: 0 0 4px 4px rgb(130, 43, 173);
+          }
+
 .FormItem_hovered.FormRadio_theme_darkorchid .FormRadio-Actor {
-        background-color: rgb(138, 45, 184);
+        background-color: rgb(130, 43, 173);
       }
 
 .FormItem_focused.FormRadio_theme_darkorchid .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 3px 3px rgb(138, 45, 184);
-                box-shadow: 0 0 3px 3px rgb(138, 45, 184);
+        -webkit-box-shadow: 0 0 3px 3px rgb(173, 173, 173);
+                box-shadow: 0 0 3px 3px rgb(173, 173, 173);
       }
 
+.FormBoolean_checked.FormItem_focused.FormRadio_theme_darkorchid .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 3px rgb(122, 40, 163);
+                  box-shadow: 0 0 3px 3px rgb(122, 40, 163);
+        }
+
+.FormRadio_active.FormItem_focused.FormRadio_theme_darkorchid .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 4px rgb(122, 40, 163);
+                    box-shadow: 0 0 4px 4px rgb(122, 40, 163);
+          }
+
 .FormItem_focused.FormRadio_theme_darkorchid .FormRadio-Actor {
-        background-color: rgb(138, 45, 184);
+        background-color: rgb(122, 40, 163);
       }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_darkorchid .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 3px 3px rgb(122, 40, 163);
-                box-shadow: 0 0 3px 3px rgb(122, 40, 163);
+        -webkit-box-shadow: 0 0 3px 4px rgb(173, 173, 173);
+                box-shadow: 0 0 3px 4px rgb(173, 173, 173);
       }
+
+.FormBoolean_checked.FormItem_hovered.FormItem_focused.FormRadio_theme_darkorchid .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 4px rgb(122, 40, 163);
+                  box-shadow: 0 0 3px 4px rgb(122, 40, 163);
+        }
+
+.FormRadio_active.FormItem_hovered.FormItem_focused.FormRadio_theme_darkorchid .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 5px rgb(122, 40, 163);
+                    box-shadow: 0 0 4px 5px rgb(122, 40, 163);
+          }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_darkorchid .FormRadio-Actor {
         background-color: rgb(122, 40, 163);
       }
 
-.FormRadio_active.FormRadio_theme_darkorchid .FormRadio-Frame, .FormRadio_active.FormRadio_theme_darkorchid.FormItem_focused .FormRadio-Frame {
-          -webkit-box-shadow: 0 0 3px 4px rgb(138, 45, 184);
-                  box-shadow: 0 0 3px 4px rgb(138, 45, 184);
-        }
-
 .FormRadio_theme_darkred .FormRadio-Frame {
-      -webkit-box-shadow: 0 0 0 2px #8b0000;
-              box-shadow: 0 0 0 2px #8b0000;
-      background-color: #fff; /* Actor outer frame ('background' color). Used?*/
-    }
-
-.FormRadio_theme_darkred .FormRadio-Actor {
-      background-color: #8b0000;
-    }
-
-.FormItem_hovered.FormRadio_theme_darkred .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 2px 3px rgb(125, 0, 0);
-                box-shadow: 0 0 2px 3px rgb(125, 0, 0);
+        -webkit-box-shadow: 0 0 0 2px #ccc;
+                box-shadow: 0 0 0 2px #ccc;
       }
 
+.FormBoolean_checked.FormRadio_theme_darkred .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 0 2px #8b0000;
+                  box-shadow: 0 0 0 2px #8b0000;
+        }
+
+.FormRadio_active.FormRadio_theme_darkred .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 3px #8b0000;
+                    box-shadow: 0 0 4px 3px #8b0000;
+          }
+
+.FormRadio_theme_darkred .FormRadio-Actor {
+        background-color: #8b0000;
+      }
+
+.FormItem_hovered.FormRadio_theme_darkred .FormRadio-Frame {
+        -webkit-box-shadow: 0 0 3px 3px rgb(173, 173, 173);
+                box-shadow: 0 0 3px 3px rgb(173, 173, 173);
+      }
+
+.FormBoolean_checked.FormItem_hovered.FormRadio_theme_darkred .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 3px rgb(118, 0, 0);
+                  box-shadow: 0 0 3px 3px rgb(118, 0, 0);
+        }
+
+.FormRadio_active.FormItem_hovered.FormRadio_theme_darkred .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 4px rgb(118, 0, 0);
+                    box-shadow: 0 0 4px 4px rgb(118, 0, 0);
+          }
+
 .FormItem_hovered.FormRadio_theme_darkred .FormRadio-Actor {
-        background-color: rgb(125, 0, 0);
+        background-color: rgb(118, 0, 0);
       }
 
 .FormItem_focused.FormRadio_theme_darkred .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 3px 3px rgb(125, 0, 0);
-                box-shadow: 0 0 3px 3px rgb(125, 0, 0);
+        -webkit-box-shadow: 0 0 3px 3px rgb(173, 173, 173);
+                box-shadow: 0 0 3px 3px rgb(173, 173, 173);
       }
 
+.FormBoolean_checked.FormItem_focused.FormRadio_theme_darkred .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 3px rgb(111, 0, 0);
+                  box-shadow: 0 0 3px 3px rgb(111, 0, 0);
+        }
+
+.FormRadio_active.FormItem_focused.FormRadio_theme_darkred .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 4px rgb(111, 0, 0);
+                    box-shadow: 0 0 4px 4px rgb(111, 0, 0);
+          }
+
 .FormItem_focused.FormRadio_theme_darkred .FormRadio-Actor {
-        background-color: rgb(125, 0, 0);
+        background-color: rgb(111, 0, 0);
       }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_darkred .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 3px 3px rgb(111, 0, 0);
-                box-shadow: 0 0 3px 3px rgb(111, 0, 0);
+        -webkit-box-shadow: 0 0 3px 4px rgb(173, 173, 173);
+                box-shadow: 0 0 3px 4px rgb(173, 173, 173);
       }
+
+.FormBoolean_checked.FormItem_hovered.FormItem_focused.FormRadio_theme_darkred .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 4px rgb(111, 0, 0);
+                  box-shadow: 0 0 3px 4px rgb(111, 0, 0);
+        }
+
+.FormRadio_active.FormItem_hovered.FormItem_focused.FormRadio_theme_darkred .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 5px rgb(111, 0, 0);
+                    box-shadow: 0 0 4px 5px rgb(111, 0, 0);
+          }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_darkred .FormRadio-Actor {
         background-color: rgb(111, 0, 0);
       }
 
-.FormRadio_active.FormRadio_theme_darkred .FormRadio-Frame, .FormRadio_active.FormRadio_theme_darkred.FormItem_focused .FormRadio-Frame {
-          -webkit-box-shadow: 0 0 3px 4px rgb(125, 0, 0);
-                  box-shadow: 0 0 3px 4px rgb(125, 0, 0);
-        }
-
 .FormRadio_theme_darkslateblue .FormRadio-Frame {
-      -webkit-box-shadow: 0 0 0 2px #483d8b;
-              box-shadow: 0 0 0 2px #483d8b;
-      background-color: #fff; /* Actor outer frame ('background' color). Used?*/
-    }
-
-.FormRadio_theme_darkslateblue .FormRadio-Actor {
-      background-color: #483d8b;
-    }
-
-.FormItem_hovered.FormRadio_theme_darkslateblue .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 2px 3px rgb(65, 55, 125);
-                box-shadow: 0 0 2px 3px rgb(65, 55, 125);
+        -webkit-box-shadow: 0 0 0 2px #ccc;
+                box-shadow: 0 0 0 2px #ccc;
       }
 
+.FormBoolean_checked.FormRadio_theme_darkslateblue .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 0 2px #483d8b;
+                  box-shadow: 0 0 0 2px #483d8b;
+        }
+
+.FormRadio_active.FormRadio_theme_darkslateblue .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 3px #483d8b;
+                    box-shadow: 0 0 4px 3px #483d8b;
+          }
+
+.FormRadio_theme_darkslateblue .FormRadio-Actor {
+        background-color: #483d8b;
+      }
+
+.FormItem_hovered.FormRadio_theme_darkslateblue .FormRadio-Frame {
+        -webkit-box-shadow: 0 0 3px 3px rgb(173, 173, 173);
+                box-shadow: 0 0 3px 3px rgb(173, 173, 173);
+      }
+
+.FormBoolean_checked.FormItem_hovered.FormRadio_theme_darkslateblue .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 3px rgb(61, 52, 118);
+                  box-shadow: 0 0 3px 3px rgb(61, 52, 118);
+        }
+
+.FormRadio_active.FormItem_hovered.FormRadio_theme_darkslateblue .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 4px rgb(61, 52, 118);
+                    box-shadow: 0 0 4px 4px rgb(61, 52, 118);
+          }
+
 .FormItem_hovered.FormRadio_theme_darkslateblue .FormRadio-Actor {
-        background-color: rgb(65, 55, 125);
+        background-color: rgb(61, 52, 118);
       }
 
 .FormItem_focused.FormRadio_theme_darkslateblue .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 3px 3px rgb(65, 55, 125);
-                box-shadow: 0 0 3px 3px rgb(65, 55, 125);
+        -webkit-box-shadow: 0 0 3px 3px rgb(173, 173, 173);
+                box-shadow: 0 0 3px 3px rgb(173, 173, 173);
       }
 
+.FormBoolean_checked.FormItem_focused.FormRadio_theme_darkslateblue .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 3px rgb(58, 49, 111);
+                  box-shadow: 0 0 3px 3px rgb(58, 49, 111);
+        }
+
+.FormRadio_active.FormItem_focused.FormRadio_theme_darkslateblue .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 4px rgb(58, 49, 111);
+                    box-shadow: 0 0 4px 4px rgb(58, 49, 111);
+          }
+
 .FormItem_focused.FormRadio_theme_darkslateblue .FormRadio-Actor {
-        background-color: rgb(65, 55, 125);
+        background-color: rgb(58, 49, 111);
       }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_darkslateblue .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 3px 3px rgb(58, 49, 111);
-                box-shadow: 0 0 3px 3px rgb(58, 49, 111);
+        -webkit-box-shadow: 0 0 3px 4px rgb(173, 173, 173);
+                box-shadow: 0 0 3px 4px rgb(173, 173, 173);
       }
+
+.FormBoolean_checked.FormItem_hovered.FormItem_focused.FormRadio_theme_darkslateblue .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 4px rgb(58, 49, 111);
+                  box-shadow: 0 0 3px 4px rgb(58, 49, 111);
+        }
+
+.FormRadio_active.FormItem_hovered.FormItem_focused.FormRadio_theme_darkslateblue .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 5px rgb(58, 49, 111);
+                    box-shadow: 0 0 4px 5px rgb(58, 49, 111);
+          }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_darkslateblue .FormRadio-Actor {
         background-color: rgb(58, 49, 111);
       }
 
-.FormRadio_active.FormRadio_theme_darkslateblue .FormRadio-Frame, .FormRadio_active.FormRadio_theme_darkslateblue.FormItem_focused .FormRadio-Frame {
-          -webkit-box-shadow: 0 0 3px 4px rgb(65, 55, 125);
-                  box-shadow: 0 0 3px 4px rgb(65, 55, 125);
-        }
-
 .FormRadio_theme_darkslategray .FormRadio-Frame {
-      -webkit-box-shadow: 0 0 0 2px #2f4f4f;
-              box-shadow: 0 0 0 2px #2f4f4f;
-      background-color: #fff; /* Actor outer frame ('background' color). Used?*/
-    }
-
-.FormRadio_theme_darkslategray .FormRadio-Actor {
-      background-color: #2f4f4f;
-    }
-
-.FormItem_hovered.FormRadio_theme_darkslategray .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 2px 3px rgb(42, 71, 71);
-                box-shadow: 0 0 2px 3px rgb(42, 71, 71);
+        -webkit-box-shadow: 0 0 0 2px #ccc;
+                box-shadow: 0 0 0 2px #ccc;
       }
 
+.FormBoolean_checked.FormRadio_theme_darkslategray .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 0 2px #2f4f4f;
+                  box-shadow: 0 0 0 2px #2f4f4f;
+        }
+
+.FormRadio_active.FormRadio_theme_darkslategray .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 3px #2f4f4f;
+                    box-shadow: 0 0 4px 3px #2f4f4f;
+          }
+
+.FormRadio_theme_darkslategray .FormRadio-Actor {
+        background-color: #2f4f4f;
+      }
+
+.FormItem_hovered.FormRadio_theme_darkslategray .FormRadio-Frame {
+        -webkit-box-shadow: 0 0 3px 3px rgb(173, 173, 173);
+                box-shadow: 0 0 3px 3px rgb(173, 173, 173);
+      }
+
+.FormBoolean_checked.FormItem_hovered.FormRadio_theme_darkslategray .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 3px rgb(40, 67, 67);
+                  box-shadow: 0 0 3px 3px rgb(40, 67, 67);
+        }
+
+.FormRadio_active.FormItem_hovered.FormRadio_theme_darkslategray .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 4px rgb(40, 67, 67);
+                    box-shadow: 0 0 4px 4px rgb(40, 67, 67);
+          }
+
 .FormItem_hovered.FormRadio_theme_darkslategray .FormRadio-Actor {
-        background-color: rgb(42, 71, 71);
+        background-color: rgb(40, 67, 67);
       }
 
 .FormItem_focused.FormRadio_theme_darkslategray .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 3px 3px rgb(42, 71, 71);
-                box-shadow: 0 0 3px 3px rgb(42, 71, 71);
+        -webkit-box-shadow: 0 0 3px 3px rgb(173, 173, 173);
+                box-shadow: 0 0 3px 3px rgb(173, 173, 173);
       }
 
+.FormBoolean_checked.FormItem_focused.FormRadio_theme_darkslategray .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 3px rgb(38, 63, 63);
+                  box-shadow: 0 0 3px 3px rgb(38, 63, 63);
+        }
+
+.FormRadio_active.FormItem_focused.FormRadio_theme_darkslategray .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 4px rgb(38, 63, 63);
+                    box-shadow: 0 0 4px 4px rgb(38, 63, 63);
+          }
+
 .FormItem_focused.FormRadio_theme_darkslategray .FormRadio-Actor {
-        background-color: rgb(42, 71, 71);
+        background-color: rgb(38, 63, 63);
       }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_darkslategray .FormRadio-Frame {
-        -webkit-box-shadow: 0 0 3px 3px rgb(38, 63, 63);
-                box-shadow: 0 0 3px 3px rgb(38, 63, 63);
+        -webkit-box-shadow: 0 0 3px 4px rgb(173, 173, 173);
+                box-shadow: 0 0 3px 4px rgb(173, 173, 173);
       }
+
+.FormBoolean_checked.FormItem_hovered.FormItem_focused.FormRadio_theme_darkslategray .FormRadio-Frame {
+          -webkit-box-shadow: 0 0 3px 4px rgb(38, 63, 63);
+                  box-shadow: 0 0 3px 4px rgb(38, 63, 63);
+        }
+
+.FormRadio_active.FormItem_hovered.FormItem_focused.FormRadio_theme_darkslategray .FormRadio-Frame {
+            /* border: 1px solid red;*/
+            -webkit-box-shadow: 0 0 4px 5px rgb(38, 63, 63);
+                    box-shadow: 0 0 4px 5px rgb(38, 63, 63);
+          }
 
 .FormItem_hovered.FormItem_focused.FormRadio_theme_darkslategray .FormRadio-Actor {
         background-color: rgb(38, 63, 63);
       }
-
-.FormRadio_active.FormRadio_theme_darkslategray .FormRadio-Frame, .FormRadio_active.FormRadio_theme_darkslategray.FormItem_focused .FormRadio-Frame {
-          -webkit-box-shadow: 0 0 3px 4px rgb(42, 71, 71);
-                  box-shadow: 0 0 3px 4px rgb(42, 71, 71);
-        }
 
 /** @module Loader.pcss
  *  @since 2020.12.24, 22:38
