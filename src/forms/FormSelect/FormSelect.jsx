@@ -190,7 +190,7 @@ class FormSelect extends React.PureComponent /** @lends @FormSelect.prototype */
     const popupProps = {
       id,
       className: this.getClassName(),
-      contentClassName: 'XXX',
+      // contentClassName: 'XXX', // ???
       disabled,
       title,
       open,

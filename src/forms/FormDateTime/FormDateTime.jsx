@@ -126,6 +126,10 @@ class FormDateTime extends React.PureComponent /** @lends @FormDateTime.prototyp
     }
   }
 
+  handleOpenState = ({ open }) => {
+    this.setState({ open });
+  }
+
   // Render...
 
   renderControlContent() {
@@ -137,10 +141,14 @@ class FormDateTime extends React.PureComponent /** @lends @FormDateTime.prototyp
       fullWidth = true,
       disabled,
     } = this.props;
+    const {
+      open,
+    } = this.state;
+    const icon = open ? 'faCalendarCheck' : 'regular:faCalendar';
     const buttonText = this.getItemsText() || placeholder || text;
     return (
       <FormButton
-        icon="faCalendar"
+        icon={icon}
         rightIcon
         theme={controlButtonTheme || 'default'}
         variation="popupControl"
@@ -189,7 +197,7 @@ class FormDateTime extends React.PureComponent /** @lends @FormDateTime.prototyp
     const popupProps = {
       id,
       className: this.getClassName(),
-      contentClassName: 'XXX',
+      // contentClassName: 'XXX', // ???
       disabled,
       title,
       open,
@@ -199,6 +207,7 @@ class FormDateTime extends React.PureComponent /** @lends @FormDateTime.prototyp
       fullWidth,
       ref: this.setPopupRef,
       setDomRef,
+      handleOpenState: this.handleOpenState,
     };
 
     return (
