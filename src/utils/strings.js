@@ -1,5 +1,5 @@
 /** @module strings
- *  @description Objects utilities
+ *  @description Strings utilities
  *  @since 2019.04.03, 14:38
  *  @changed 2020.05.29, 13:35
  */

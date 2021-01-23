@@ -27,12 +27,12 @@ export FormTextInput from './FormTextInput';
 export FormPasswordInput from './FormPasswordInput';
 
 export FormRadio from './FormRadio';
-// export FormCheck from './FormCheck'
-// export FormSwitch from './FormSwitch'
+// export FormCheck from './FormCheck';
+// export FormSwitch from './FormSwitch';
+
+export FormDateTime from './FormDateTime';
+// export FormDateRange from './FormDateRange';
 
 // TODO...
 
-// export FormDateRange from './FormDateRange'
-// export FormDateTime from './FormDateTime'
-//
-// export FormPager from './FormPager'
+// export FormPager from './FormPager';

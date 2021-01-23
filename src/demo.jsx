@@ -41,7 +41,6 @@ import WebUiCoreRoot from './build';
  * debugger
  */
 
-
 /* DEBUG: Check configure module
  * import { configure } from 'utils'
  * console.log(configure && configure.cssMapping)
@@ -109,6 +108,9 @@ const fixtureComponentsList = {
   FormRadioThemes: require('forms/FormRadio/FormRadio-Themes.fixture'),
   // FormCheck: require('forms/FormCheck/FormCheck.fixture'),
   // FormSwitch: require('forms/FormSwitch/FormSwitch.fixture'),
+
+  FormDateTime: require('forms/FormDateTime/FormDateTime.fixture'),
+  // FormDateRange: require('forms/FormDateRange/FormDateRange.fixture'),
 
 };
 
