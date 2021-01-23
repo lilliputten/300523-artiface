@@ -11,7 +11,7 @@
   .FormButton-Icon {
     // transition: color $(transitionTime)ms, opacity $(transitionTime)ms;
     color: #000;
-    opacity: .8;
+    opacity: .9;
   }
   .FormButton-Icon {
     transition: color $(transitionTime)ms, opacity $(transitionTime)ms;
@@ -31,7 +31,7 @@
       opacity: 1;
     }
     .FormButton-Icon {
-      opacity: .6;
+      opacity: .5;
     }
   }
 
@@ -56,6 +56,7 @@
     &.FormButton_active,
     &.FormItem_focused,
     &.FormItem_hovered {
+      // $borderColor, $innerSize, $innerGlowSize, $outerGlowColor, $outerSize, $outerGlowSize
       @mixin FormItemFrame $hoveredBorderColor, $(formItemBorderSize)px, 1px, $hoveredGlowColor, 1px, $(formItemOuterGlow)px;
     }
     &.FormButton_active,
@@ -63,15 +64,14 @@
       @mixin FormItemFrame $activeBorderColor, $(formItemBorderSize)px, 2px, $activeGlowColor, 2px, 1px; // @calc($formItemOuterGlow - 2)px;
     }
     &.FormButton_onDark {
-      // $color: #fff; // $neutralDarkColor;
-      // .FormButton-Icon,
-      // .FormButton-Text {
-      //   color: $color;
-      // }
       $hoveredBorderColor: color($borderColor shade(10) alpha(.5));
       $activeBorderColor: color($borderColor shade(15));
       $hoveredGlowColor: color($hoveredBgColor alpha(.2));
       $activeGlowColor: color($activeBgColor alpha(.2));
+      // $hoveredBorderColor: color($primaryColor shade(0) alpha(1));
+      // $activeBorderColor: color($primaryColor shade(0));
+      // $hoveredGlowColor: color($primaryColor alpha(.2));
+      // $activeGlowColor: color($primaryColor alpha(.2));
       &.FormButton_active,
       &.FormItem_focused,
       &.FormItem_hovered {
@@ -87,7 +87,7 @@
   &_theme { // Button themes...
 
     // Mixin params: $bgColor, $borderColor, $iconColor, $textColor
-    @define-mixin buttonStyle $bgColor, $borderColor: $formItemBorderColor, $iconColor: $neutralShadedColor, $textColor: $formItemTextColor {
+    @define-mixin buttonStyle $bgColor, $borderColor: $formItemBorderColor, $iconColor: $neutralShadedColor, $textColor: $formItemTextColor, $hoverColor, $activeColor {
       // border-color: $borderColor;
       @mixin FormItemFrame $borderColor, $(formItemBorderSize)px, 0;
       background-color: $bgColor;
@@ -98,13 +98,15 @@
       .FormButton-Icon {
         color: $iconColor;
       }
-      $hoveredBorderColor: color($borderColor shade(10));
-      $activeBorderColor: color($borderColor shade(15));
-      $hoveredBgColor: color($bgColor shade(8));
-      $activeBgColor: color($bgColor shade(15));
+      // $hoveredBorderColor: color($borderColor shade(5));
+      // $activeBorderColor: color($hoveredBorderColor shade(10));
+      $hoveredBorderColor: color($hoverColor shade(5));
+      $activeBorderColor: color($hoverColor shade(10));
+      $hoveredBgColor: color($bgColor shade(5));
+      $activeBgColor: color($hoveredBgColor shade(10));
       $glowColor: $borderColor; // $formItemGlowColor;
-      $hoveredGlowColor: $hoveredBgColor; // color($glowColor alpha(1));
-      $activeGlowColor: $activeBgColor; // color($glowColor alpha(1) shade(10));
+      $hoveredGlowColor: $activeColor; // color($glowColor alpha(1));
+      $activeGlowColor: $activeColor; // color($glowColor alpha(1) shade(10));
       &.FormButton_active,
       &.FormItem_focused,
       &.FormItem_hovered {
@@ -124,7 +126,9 @@
     @define-mixin styledButton $bgColor, $textColor: $specialContrastColor {
       $borderColor: color($bgColor shade(10)); // $formItemBorderColor;
       $iconColor: $textColor; // color($textColor alpha(.5));
-      @mixin buttonStyle $bgColor, $borderColor, $iconColor, $textColor;
+      $hoverColor: color($borderColor shade(5));
+      $activeColor: color($borderColor shade(5));
+      @mixin buttonStyle $bgColor, $borderColor, $iconColor, $textColor, $hoverColor, $activeColor;
     }
     // @define-mixin styledDarkButton $bgColor, $textColor: $specialContrastColor {
     // ... ???
@@ -134,12 +138,17 @@
       $borderColor: $formItemBorderColor;
       $textColor: #000;
       // $iconColor: $neutralTintedDarkColor;
-      @mixin buttonStyle $bgColor, $borderColor, $textColor, $textColor;
+      // $activeColor: color($primaryColor shade(0));
+      $hoverColor: color($primaryColor);
+      $activeColor: color($primaryColor alpha(.5));
+      @mixin buttonStyle $bgColor, $borderColor, $textColor, $textColor, $hoverColor, $activeColor;
       &^^&_onDark {
         $darkBgColor: color($bgColor alpha(.2));
         $darkBorderColor: color($borderColor alpha(.2));
         $darkTextColor: #fff;
-        @mixin buttonStyle $darkBgColor, $darkBorderColor, $darkTextColor, $darkTextColor;
+        $darkHoverColor: color($borderColor);
+        $darkActiveColor: color($borderColor shade(5));
+        @mixin buttonStyle $darkBgColor, $darkBorderColor, $darkTextColor, $darkTextColor, $darkHoverColor, $darkActiveColor;
       }
     }
 
