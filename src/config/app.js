@@ -1,7 +1,7 @@
 /** @module config.app
  *  @description Core app config
  *  @since 2019.09.10, 14:25
- *  @changed 2020.12.22, 00:32
+ *  @changed 2021.01.24, 21:42
  */
 
 module.exports = { // Common-used app variables...
@@ -19,4 +19,5 @@ module.exports = { // Common-used app variables...
   lang: null, // i18n language texts provider (from target project) // TODO
   // Mostly using texts from `lang.components.common`
 
+  defaultLocale: 'ru-RU', // One of: 'ru-RU', 'en-US'
 };

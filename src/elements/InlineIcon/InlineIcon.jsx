@@ -1,7 +1,7 @@
 /** @module InlineIcon
  *  @class InlineIcon
  *  @since 2020.10.07, 02:08
- *  @changed 2020.12.24, 04:06
+ *  @changed 2021.01.25, 03:35
  */
 
 import React from 'react';
@@ -12,10 +12,12 @@ import { cn } from 'utils/configure';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as solidIcons from '@fortawesome/free-solid-svg-icons';
 import * as regularIcons from '@fortawesome/free-regular-svg-icons';
+import * as brandsIcons from '@fortawesome/free-brands-svg-icons';
 
 const iconGroups = {
   solid: solidIcons,
   regular: regularIcons,
+  brands: brandsIcons,
 };
 
 import './InlineIcon.pcss';

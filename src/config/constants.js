@@ -12,6 +12,7 @@
 export const dateFormat = 'dd.MM.yyyy';
 export const timeFormat = 'HH:mm';
 export const dateTimeFormat = dateFormat + ' ' + timeFormat;
+export const dateRangeDelim = '-';
 
 // dateStringFormat: 'yyyy.mm.dd HH:MM:ss',
 // dateTagFormat: 'yymmdd-HHMM',

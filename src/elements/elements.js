@@ -4,6 +4,7 @@
  *  @changed 2020.12.24, 23:52
  */
 
+export DateTimeSelector from './DateTimeSelector';
 export InlineIcon from './InlineIcon';
 export Loader from './Loader';
 export Menu from './Menu';

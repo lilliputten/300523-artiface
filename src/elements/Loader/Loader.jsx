@@ -67,10 +67,4 @@ const Loader = (props) => {
     </div>
   );
 };
-// const mapStateToProps = store => ({
-//   // user: store.user,
-//   // commonLang: store.language.components.common,
-//   lang: store.language,
-// })
-// export default connect(mapStateToProps)(Loader)
 export default Loader;

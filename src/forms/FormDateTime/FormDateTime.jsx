@@ -12,22 +12,27 @@ import PropTypes from 'prop-types';
 // import connect from 'react-redux/es/connect/connect'
 import { cn } from 'utils/configure';
 
+import config from 'config';
+
 import FormItemHOC from '../FormItemHOC';
 
-// import FormGroup from 'forms/FormGroup'
-// import FormGroup from '../FormGroup'
 import ModalPopup from 'elements/ModalPopup';
-// import { FormItemPopup } from 'elements/ModalPopup'
-// import DatePicker from 'elements/DatePicker';
 import FormButton from 'forms/FormButton';
 
-import DatePicker from 'react-datepicker';
+import DateTimeSelector from 'elements/DateTimeSelector';
 
-import 'react-datepicker/dist/react-datepicker.css';
+// import * as langUtils from 'utils/lang';
+// // getCommonLangText('cancelButton', 'Cancel', lang)}
+
+// import DatePicker from 'react-datepicker';
+// import { ru } from 'date-fns/esm/locale';
+// import { registerLocale } from 'react-datepicker';
 
 import * as dateUtils from 'utils/dates';
 
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCalendarCheck } from '@fortawesome/free-solid-svg-icons';
+import { faCalendar } from '@fortawesome/free-regular-svg-icons';
 
 import './FormDateTime.pcss';
 
@@ -38,34 +43,38 @@ const defaultDateType = 'number';
 class FormDateTime extends React.PureComponent /** @lends @FormDateTime.prototype */ {
 
   static propTypes = {
-    // value: PropTypes.oneOfType([ PropTypes.string, PropTypes.number, PropTypes.arrayOf(PropTypes.oneOfType([ PropTypes.string, PropTypes.number ])) ]),
+    calendarClassName: PropTypes.string,
     disabled: PropTypes.bool,
     fullWidth: PropTypes.bool,
     id: PropTypes.string,
     onChange: PropTypes.func,
     open: PropTypes.bool,
-    // options: PropTypes.arrayOf(PropTypes.shape({ val: PropTypes.oneOfType([ PropTypes.string, PropTypes.number ]), text: PropTypes.string })),
     placeholder: PropTypes.string,
-    text: PropTypes.string,
-    value: PropTypes.oneOfType([ PropTypes.string, PropTypes.number ]),
+    selectsEnd: PropTypes.bool,
+    selectsStart: PropTypes.bool,
     setDomRef: PropTypes.func,
-    // setNodeRef: PropTypes.func,
+    value: PropTypes.oneOfType([ PropTypes.string, PropTypes.number, PropTypes.instanceOf(Date) ]),
+    // startDate: PropTypes.oneOfType([ PropTypes.string, PropTypes.number, PropTypes.instanceOf(Date) ]),
+    // endDate: PropTypes.oneOfType([ PropTypes.string, PropTypes.number, PropTypes.instanceOf(Date) ]),
   }
 
   // Lifecycle methods...
 
   constructor(props) {
     super(props);
-    // this.formItemRef = React.createRef()
+    const {
+      value,
+      startDate,
+      endDate,
+      // selectsRange,
+    } = props;
     this.id = props.id || props.inputId || props.name;
-    const dateType = props.dateType || dateUtils.detectDateValueType(props.value) || defaultDateType;
-    const value = dateUtils.convertToDateObject(props.value);
-    const displayValue = dateUtils.formatDateTimeToString(value); // TODO: showTime option
+    const dateType = props.dateType || dateUtils.detectDateValueType(value || startDate || endDate) || defaultDateType;
     this.state = {
       dateType,
-      value,
-      displayValue,
+      value: value && dateUtils.convertToDateObject(value),
     };
+    this.state.displayValue = this.getDisplayValue(this.state);
   }
 
   // Helper methods...
@@ -91,30 +100,66 @@ class FormDateTime extends React.PureComponent /** @lends @FormDateTime.prototyp
       onControlClick(params);
     }
   }
-  /* // onDatePickerItemClick ???
-   * onDatePickerItemClick = (params) => {
-   *   console.log('FormDateTime:onDatePickerItemClick', params);
-   *   debugger;
-   *   const { closeOnSelect, onDatePickerItemClick } = this.props;
-   *   if (typeof onDatePickerItemClick === 'function') {
-   *     onDatePickerItemClick(params);
-   *   }
-   *   if (closeOnSelect && this.popupNode) {
-   *     this.popupNode.close();
-   *   }
-   * }
-   */
-  onDatePickerChange = (value) => {
-    const { onChange } = this.props;
-    const { id, inputId, name/* , singleChoice */ } = this.props;
-    const displayValue = dateUtils.formatDateTimeToString(value); // TODO: showTime option
-    // console.log('FormDateTime:onDatePickerChange', { id, inputId, value, displayValue });
+
+  getDisplayValue(params) {
+    params = params || this.state;
+    const {
+      value,
+      // startDate,
+      // endDate,
+    } = params;
+    const {
+      showTime,
+      // selectsRange,
+    } = this.props;
+    const dateFormat = showTime ? config.constants.dateTimeFormat : config.constants.dateFormat;
+    // if (selectsRange) {
+    //   return [
+    //     startDate && dateUtils.formatDateTimeToString(startDate, dateFormat),
+    //     endDate && dateUtils.formatDateTimeToString(endDate, dateFormat),
+    //   ].filter(Boolean).join(config.constants.dateRangeDelim);
+    // }
+    return dateUtils.formatDateToString(value, dateFormat);
+  }
+
+  onChange = ({ value }) => {
+    const {
+      // showTime,
+      // selectsRange,
+      onChange,
+      // id,
+      // inputId,
+      // name
+      closeOnSelect,
+    } = this.props;
+    const { dateType } = this.state;
+    let setParams = { id: this.id, value };
+    // if (selectsRange) {
+    //   const [ startDate, endDate ] = value;
+    //   const isEndDate = (startDate && !endDate);
+    //   setParams = {
+    //     id: this.id,
+    //     startDate, // : startDate || this.state.startDate,
+    //     endDate, // : endDate || this.state.endDate,
+    //     selectsStart: !isEndDate,
+    //     selectsEnd: isEndDate,
+    //   };
+    // }
+    setParams.displayValue = this.getDisplayValue(setParams); // dateUtils.formatDateTimeToString(value); // TODO: showTime option
+    console.log('FormDateTime:onChange', value, setParams);
     // debugger;
-    this.setState({ value, displayValue });
+    this.setState(setParams);
     if (typeof onChange === 'function') {
-      const setId = id || inputId || name;
-      const setParams = { id: setId, value };
-      onChange(setParams);
+      const cbParams = { ...setParams }; // Convert date values to target date type...
+      [ 'value', 'startDate', 'endDate' ].forEach(id => {
+        if (cbParams[id]) {
+          cbParams[id] = dateUtils.convertDateToType(cbParams[id], dateType);
+        }
+      });
+      onChange(cbParams);
+    }
+    if (closeOnSelect && this.popupNode) {
+      this.popupNode.close();
     }
   }
 
@@ -134,7 +179,7 @@ class FormDateTime extends React.PureComponent /** @lends @FormDateTime.prototyp
 
   renderControlContent() {
     const {
-      text,
+      // text,
       placeholder,
       title,
       controlButtonTheme,
@@ -144,8 +189,9 @@ class FormDateTime extends React.PureComponent /** @lends @FormDateTime.prototyp
     const {
       open,
     } = this.state;
-    const icon = open ? 'faCalendarCheck' : 'regular:faCalendar';
-    const buttonText = this.getItemsText() || placeholder || text;
+    // const icon = open ? 'faCalendarCheck' : 'regular:faCalendar';
+    const icon = open ? faCalendarCheck : faCalendar;
+    const buttonText = this.getItemsText() || placeholder; // || text;
     return (
       <FormButton
         icon={icon}
@@ -162,21 +208,31 @@ class FormDateTime extends React.PureComponent /** @lends @FormDateTime.prototyp
 
   renderDatePickerContent() {
     const {
-      disabled,
-      // inputId, // ???
-    } = this.props;
-    const {
       value,
     } = this.state;
+    const {
+      showTime,
+      selectsRange,
+      calendarClassName,
+      // startDate,
+      // endDate,
+    } = this.props;
+    // const lang = langUtils.getLang();
+    // const locale = lang && lang.components && lang.components.lang || config.app.defaultLocale; // TODO?
+    const dateSelectorProps = {
+      inline: true,
+      calendarClassName,
+      onChange: this.onChange,
+      value,
+      // startDate,
+      // endDate,
+      showTime,
+      selectsRange,
+      // startDate,
+      // endDate,
+    };
     return (
-      <DatePicker
-        checkable={true}
-        onChange={this.onDatePickerChange}
-        onClick={this.onDatePickerItemClick}
-        value={value}
-        disabled={disabled}
-        inline
-      />
+      <DateTimeSelector {...dateSelectorProps} />
     );
   }
 
@@ -192,7 +248,7 @@ class FormDateTime extends React.PureComponent /** @lends @FormDateTime.prototyp
     } = this.props;
 
     const controlContent = this.renderControlContent();
-    const datePickerContent =  this.renderDatePickerContent();
+    const dateSelectorContent =  this.renderDatePickerContent();
 
     const popupProps = {
       id,
@@ -202,7 +258,7 @@ class FormDateTime extends React.PureComponent /** @lends @FormDateTime.prototyp
       title,
       open,
       popupControl: controlContent,
-      popupContent: datePickerContent,
+      popupContent: dateSelectorContent,
       onControlClick: this.onControlClick,
       fullWidth,
       ref: this.setPopupRef,

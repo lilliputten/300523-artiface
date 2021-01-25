@@ -6,18 +6,18 @@
 
 import config from 'config';
 
-export const setLang = (lang) => {
+export function setLang(lang) {
   // console.log('WebUiCore:utils:lang:setLang', lang)
   // debugger
   config.app.lang = lang;
-};
-export const getLang = () => {
+}
+export function getLang() {
   return config.app.lang;
-};
-export const getCommonLangText = (id, defaultText, propsLang) => {
+}
+export function getCommonLangText(id, defaultText, propsLang) {
   const lang = propsLang || getLang();
   const text = lang && lang.components && lang.components.common && lang.components.common[id];
   // console.log('WebUiCore:utils:lang:getCommonLangText', id, lang)
   // debugger
   return (text != null) ? text : (defaultText || id);
-};
+}

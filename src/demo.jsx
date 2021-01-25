@@ -64,10 +64,21 @@ import WebUiCoreRoot from './build';
 import { utils } from './build';
 const lang = {
   components: {
+    // lang: 'en-US',
+    lang: 'ru-RU',
+    // lang: 'en',
+    // lang: 'ru',
     common: {
       okButton: 'Lang: Ok',
       cancelButton: 'Lang: Cancel',
       loading: 'Lang: Loading',
+    },
+    calendar: {
+      timeCaption: 'Время',
+      previousYearButtonLabel: 'Пред.год',
+      nextYearButtonLabel: 'След.год',
+      previousMonthButtonLabel: 'Пред.месяц',
+      nextMonthButtonLabel: 'След.месяц',
     },
   },
 };
@@ -84,6 +95,7 @@ const fixtureComponentsList = {
 
   Loader: require('elements/Loader/Loader.fixture'),
 
+  DateTimeSelector: require('elements/DateTimeSelector/DateTimeSelector.fixture'),
   InlineIcon: require('elements/InlineIcon/InlineIcon.fixture'),
   ModalWindow: require('elements/ModalWindow/ModalWindow.fixture'),
   ModalPopup: require('elements/ModalPopup/ModalPopup.fixture'),
