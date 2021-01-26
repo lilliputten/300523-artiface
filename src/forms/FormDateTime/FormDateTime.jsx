@@ -50,8 +50,6 @@ class FormDateTime extends React.PureComponent /** @lends @FormDateTime.prototyp
     selectsStart: PropTypes.bool,
     setDomRef: PropTypes.func,
     value: PropTypes.oneOfType([ PropTypes.string, PropTypes.number, PropTypes.instanceOf(Date) ]),
-    // startDate: PropTypes.oneOfType([ PropTypes.string, PropTypes.number, PropTypes.instanceOf(Date) ]),
-    // endDate: PropTypes.oneOfType([ PropTypes.string, PropTypes.number, PropTypes.instanceOf(Date) ]),
   }
 
   // Lifecycle methods...
@@ -60,15 +58,10 @@ class FormDateTime extends React.PureComponent /** @lends @FormDateTime.prototyp
     super(props);
     const {
       value,
-      // startDate,
-      // endDate,
-      // selectsRange,
     } = props;
     this.id = props.id || props.inputId || props.name;
-    // const dateType = props.dateType || dateUtils.detectDateValueType(value || startDate || endDate) || defaultDateType;
     this.state = {
-      // dateType,
-      value, // : value && dateUtils.convertToDateObject(value),
+      value,
     };
     this.state.displayValue = this.getDisplayValue(this.state);
   }
@@ -101,20 +94,11 @@ class FormDateTime extends React.PureComponent /** @lends @FormDateTime.prototyp
     params = params || this.state;
     const {
       value,
-      // startDate,
-      // endDate,
     } = params;
     const {
       showTime,
-      // selectsRange,
     } = this.props;
     const dateFormat = showTime ? config.constants.dateTimeFormat : config.constants.dateFormat;
-    // if (selectsRange) {
-    //   return [
-    //     startDate && dateUtils.formatDateTimeToString(startDate, dateFormat),
-    //     endDate && dateUtils.formatDateTimeToString(endDate, dateFormat),
-    //   ].filter(Boolean).join(config.constants.dateRangeDelim);
-    // }
     return dateUtils.formatDateToString(value, dateFormat);
   }
 
@@ -124,9 +108,8 @@ class FormDateTime extends React.PureComponent /** @lends @FormDateTime.prototyp
       closeOnSelect,
     } = this.props;
     let setParams = { id: this.id, value, valueObj };
-    setParams.displayValue = this.getDisplayValue(setParams); // dateUtils.formatDateTimeToString(value); // TODO: showTime option
-    console.log('FormDateTime:onChange', setParams);
-    // debugger;
+    setParams.displayValue = this.getDisplayValue(setParams); // dateUtils.formatDateToString(value); // TODO: showTime option
+    // console.log('FormDateTime:onChange', setParams);
     this.setState(setParams);
     if (typeof onChange === 'function') {
       onChange(setParams);
@@ -152,7 +135,6 @@ class FormDateTime extends React.PureComponent /** @lends @FormDateTime.prototyp
 
   renderControlContent() {
     const {
-      // text,
       placeholder,
       title,
       controlButtonTheme,
@@ -187,22 +169,14 @@ class FormDateTime extends React.PureComponent /** @lends @FormDateTime.prototyp
       showTime,
       selectsRange,
       calendarClassName,
-      // startDate,
-      // endDate,
     } = this.props;
-    // const lang = langUtils.getLang();
-    // const locale = lang && lang.components && lang.components.lang || config.app.defaultLocale; // TODO?
     const dateSelectorProps = {
       inline: true,
       calendarClassName,
       onChange: this.onChange,
       value,
-      // startDate,
-      // endDate,
       showTime,
       selectsRange,
-      // startDate,
-      // endDate,
     };
     return (
       <DateTimeSelector {...dateSelectorProps} />
@@ -226,7 +200,6 @@ class FormDateTime extends React.PureComponent /** @lends @FormDateTime.prototyp
     const popupProps = {
       id,
       className: this.getClassName(),
-      // contentClassName: 'XXX', // ???
       disabled,
       title,
       open,

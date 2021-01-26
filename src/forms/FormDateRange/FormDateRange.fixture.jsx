@@ -10,6 +10,8 @@ import FormDateRange from './FormDateRange';
 
 import FormGroup from '../FormGroup';
 
+import * as dateUtils from 'utils/dates';
+
 // Demo styles for cosmos engine
 import 'demo.pcss';
 
@@ -20,6 +22,8 @@ export const DemoWrapper = FormGroup;
 
 const dayTicks = 1000 * 60 * 60 * 24;
 const thisDate = Date.now() - 2 * dayTicks;
+const startDate = dateUtils.tuneDateValue(thisDate);
+const endDate = dateUtils.tuneDateValue(thisDate + 3 * dayTicks, true);
 
 const onDateChanged = (params) => {
   console.log('FormDateRange.fixture:onDateChanged', params);
@@ -32,8 +36,8 @@ const simple = (
     title="DateTime title"
     // text="DateTime text"
     placeholder="DateTime placeholder"
-    startDate={thisDate}
-    endDate={thisDate + 2 * dayTicks}
+    startDate={startDate}
+    endDate={endDate}
     onChange={onDateChanged}
     // closeOnSelect
   />
@@ -45,10 +49,11 @@ const showTime = (
     title="DateTime title"
     // text="DateTime text"
     placeholder="DateTime placeholder"
-    startDate={thisDate}
-    endDate={thisDate + 2 * dayTicks}
+    startDate={startDate}
+    endDate={endDate}
     onChange={onDateChanged}
     showTime
+    timeIntervals={30}
   />
 );
 

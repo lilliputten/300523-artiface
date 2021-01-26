@@ -8,6 +8,8 @@ import React from 'react';
 
 import DateTimeSelector from './DateTimeSelector';
 
+import * as dateUtils from 'utils/dates';
+
 // import FormGroup from '../FormGroup';
 
 // Demo styles for cosmos engine
@@ -20,6 +22,8 @@ import './DateTimeSelector.fixture.pcss';
 
 const dayTicks = 1000 * 60 * 60 * 24;
 const thisDate = Date.now() - 2 * dayTicks;
+const startDate = dateUtils.tuneDateValue(thisDate);
+const endDate = dateUtils.tuneDateValue(thisDate + 3 * dayTicks, true);
 
 const onDateChanged = (params) => {
   console.log('DateTimeSelector.fixture:onDateChanged', params);
@@ -57,8 +61,8 @@ const range = (
     title="DateTime title"
     // text="DateTime text"
     placeholder="DateTime placeholder"
-    startDate={thisDate}
-    endDate={thisDate + 3 * dayTicks}
+    startDate={startDate}
+    endDate={endDate}
     onChange={onDateChanged}
     selectsRange
   />
@@ -70,8 +74,8 @@ const rangeTime = (
     title="DateTime title"
     // text="DateTime text"
     placeholder="DateTime placeholder"
-    startDate={thisDate}
-    endDate={thisDate + 3 * dayTicks}
+    startDate={startDate}
+    endDate={endDate}
     onChange={onDateChanged}
     selectsRange
     showTime

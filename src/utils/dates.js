@@ -109,11 +109,18 @@ export function formatDateToString(date, fmt, opt = {}) {
 export function formatDateTimeToString(date, opt = {}) {
   const fmt = opt.showTime ? config.constants.dateTimeFormat : config.constants.dateFormat;
   // @see https://date-fns.org/v2.16.1/docs/format
-  return format(date, fmt, opt);
+  return format(convertToDateObject(date), fmt, opt);
 }
 
-export function tuneDateValue(origDate, keepTime, isEndDate, timeIntervals = 60) {
-  let date = new Date(origDate.getTime());
+export function tuneDateValue(origDate, isEndDate, keepTime, timeIntervals = 60) {
+  const dateType = detectDateValueType(origDate);
+  let date;
+  if (dateType === 'object') { // Just clone date object
+    date = new Date(origDate.getTime());
+  }
+  else {
+    date = convertToDateObject(origDate);
+  }
   if (!keepTime) {
     if (isEndDate) {
       date.setHours(23, 59, 59, 999);
@@ -137,7 +144,7 @@ export function tuneDateValue(origDate, keepTime, isEndDate, timeIntervals = 60)
       date.setSeconds(0);
     }
   }
-  return date;
+  return convertDateToType(date, dateType);
 }
 
 

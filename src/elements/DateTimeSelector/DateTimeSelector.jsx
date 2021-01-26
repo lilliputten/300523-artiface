@@ -145,8 +145,8 @@ class DateTimeSelector extends React.PureComponent /** @lends @DateTimeSelector.
       [ 'value', 'startDate', 'endDate'].forEach(id => {
         const date = cbParams[id];
         if (date) {
-          const isEndDate = id === 'endDate';
-          const dateObj = dateUtils.tuneDateValue(date, showTime, isEndDate, timeIntervals);
+          const isEndDate = (id === 'endDate');
+          const dateObj = dateUtils.tuneDateValue(date, isEndDate, showTime, timeIntervals);
           cbParams[id + 'Obj'] = dateObj;
           cbParams[id] = dateUtils.convertDateToType(dateObj, dateType);
         }

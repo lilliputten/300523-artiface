@@ -111,25 +111,19 @@ class FormDateRange extends React.PureComponent /** @lends @FormDateRange.protot
     } = this.props;
     const dateFormat = showTime ? config.constants.dateTimeFormat : config.constants.dateFormat;
     return [
-      startDate && dateUtils.formatDateTimeToString(startDate, dateFormat),
-      endDate && dateUtils.formatDateTimeToString(endDate, dateFormat),
+      startDate && dateUtils.formatDateToString(startDate, dateFormat),
+      endDate && dateUtils.formatDateToString(endDate, dateFormat),
     ].filter(Boolean).join(config.constants.dateRangeDelim);
   }
 
   onChange = ({ startDate, startDateObj, endDate, endDateObj }) => {
     const {
-      // showTime,
-      // selectsRange,
       onChange,
-      // id,
-      // inputId,
-      // name
       closeOnSelect,
     } = this.props;
     const setParams = { id: this.id, startDate, startDateObj, endDate, endDateObj };
-    setParams.displayValue = this.getDisplayValue(setParams); // dateUtils.formatDateTimeToString(value); // TODO: showTime option
-    console.log('FormDateRange:onChange', setParams);
-    // debugger;
+    setParams.displayValue = this.getDisplayValue(setParams); // dateUtils.formatDateToString(value); // TODO: showTime option
+    // console.log('FormDateRange:onChange', setParams);
     this.setState(setParams);
     if (typeof onChange === 'function') {
       // const cbParams = { ...setParams }; // Convert date values to target date type...
@@ -190,23 +184,22 @@ class FormDateRange extends React.PureComponent /** @lends @FormDateRange.protot
       endDate,
     } = this.state;
     const {
-      showTime,
-      // selectsRange,
       calendarClassName,
+      id,
       inputId,
+      showTime,
+      timeIntervals,
     } = this.props;
-    // const lang = langUtils.getLang();
-    // const locale = lang && lang.components && lang.components.lang || config.app.defaultLocale; // TODO?
     const dateSelectorProps = {
-      id: this.id,
-      inputId: inputId,
-      // value: startDate,
+      id,
+      inputId,
       onChange: this.onChange,
       startDate,
       endDate,
       inline: true,
       calendarClassName,
       showTime,
+      timeIntervals,
       selectsRange: true,
     };
     return (
