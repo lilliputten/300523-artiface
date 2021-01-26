@@ -1,3 +1,842 @@
+.react-datepicker-popper[data-placement^="bottom"] .react-datepicker__triangle, .react-datepicker-popper[data-placement^="top"] .react-datepicker__triangle, .react-datepicker__year-read-view--down-arrow, .react-datepicker__month-read-view--down-arrow, .react-datepicker__month-year-read-view--down-arrow {
+  margin-left: -8px;
+  position: absolute;
+}
+
+.react-datepicker-popper[data-placement^="bottom"] .react-datepicker__triangle, .react-datepicker-popper[data-placement^="top"] .react-datepicker__triangle, .react-datepicker__year-read-view--down-arrow, .react-datepicker__month-read-view--down-arrow, .react-datepicker__month-year-read-view--down-arrow, .react-datepicker-popper[data-placement^="bottom"] .react-datepicker__triangle::before, .react-datepicker-popper[data-placement^="top"] .react-datepicker__triangle::before, .react-datepicker__year-read-view--down-arrow::before, .react-datepicker__month-read-view--down-arrow::before, .react-datepicker__month-year-read-view--down-arrow::before {
+  -webkit-box-sizing: content-box;
+          box-sizing: content-box;
+  position: absolute;
+  border: 8px solid transparent;
+  height: 0;
+  width: 1px;
+}
+
+.react-datepicker-popper[data-placement^="bottom"] .react-datepicker__triangle::before, .react-datepicker-popper[data-placement^="top"] .react-datepicker__triangle::before, .react-datepicker__year-read-view--down-arrow::before, .react-datepicker__month-read-view--down-arrow::before, .react-datepicker__month-year-read-view--down-arrow::before {
+  content: "";
+  z-index: -1;
+  border-width: 8px;
+  left: -8px;
+  border-bottom-color: #aeaeae;
+}
+
+.react-datepicker-popper[data-placement^="bottom"] .react-datepicker__triangle {
+  top: 0;
+  margin-top: -8px;
+}
+
+.react-datepicker-popper[data-placement^="bottom"] .react-datepicker__triangle, .react-datepicker-popper[data-placement^="bottom"] .react-datepicker__triangle::before {
+  border-top: none;
+  border-bottom-color: #f0f0f0;
+}
+
+.react-datepicker-popper[data-placement^="bottom"] .react-datepicker__triangle::before {
+  top: -1px;
+  border-bottom-color: #aeaeae;
+}
+
+.react-datepicker-popper[data-placement^="top"] .react-datepicker__triangle, .react-datepicker__year-read-view--down-arrow, .react-datepicker__month-read-view--down-arrow, .react-datepicker__month-year-read-view--down-arrow {
+  bottom: 0;
+  margin-bottom: -8px;
+}
+
+.react-datepicker-popper[data-placement^="top"] .react-datepicker__triangle, .react-datepicker__year-read-view--down-arrow, .react-datepicker__month-read-view--down-arrow, .react-datepicker__month-year-read-view--down-arrow, .react-datepicker-popper[data-placement^="top"] .react-datepicker__triangle::before, .react-datepicker__year-read-view--down-arrow::before, .react-datepicker__month-read-view--down-arrow::before, .react-datepicker__month-year-read-view--down-arrow::before {
+  border-bottom: none;
+  border-top-color: #fff;
+}
+
+.react-datepicker-popper[data-placement^="top"] .react-datepicker__triangle::before, .react-datepicker__year-read-view--down-arrow::before, .react-datepicker__month-read-view--down-arrow::before, .react-datepicker__month-year-read-view--down-arrow::before {
+  bottom: -1px;
+  border-top-color: #aeaeae;
+}
+
+.react-datepicker-wrapper {
+  display: inline-block;
+  padding: 0;
+  border: 0;
+}
+
+.react-datepicker {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 0.8rem;
+  background-color: #fff;
+  color: #000;
+  border: 1px solid #aeaeae;
+  border-radius: 0.3rem;
+  display: inline-block;
+  position: relative;
+}
+
+.react-datepicker--time-only .react-datepicker__triangle {
+  left: 35px;
+}
+
+.react-datepicker--time-only .react-datepicker__time-container {
+  border-left: 0;
+}
+
+.react-datepicker--time-only .react-datepicker__time,
+.react-datepicker--time-only .react-datepicker__time-box {
+  border-bottom-left-radius: 0.3rem;
+  border-bottom-right-radius: 0.3rem;
+}
+
+.react-datepicker__triangle {
+  position: absolute;
+  left: 50px;
+}
+
+.react-datepicker-popper {
+  z-index: 1;
+}
+
+.react-datepicker-popper[data-placement^="bottom"] {
+  margin-top: 10px;
+}
+
+.react-datepicker-popper[data-placement="bottom-end"] .react-datepicker__triangle, .react-datepicker-popper[data-placement="top-end"] .react-datepicker__triangle {
+  left: auto;
+  right: 50px;
+}
+
+.react-datepicker-popper[data-placement^="top"] {
+  margin-bottom: 10px;
+}
+
+.react-datepicker-popper[data-placement^="right"] {
+  margin-left: 8px;
+}
+
+.react-datepicker-popper[data-placement^="right"] .react-datepicker__triangle {
+  left: auto;
+  right: 42px;
+}
+
+.react-datepicker-popper[data-placement^="left"] {
+  margin-right: 8px;
+}
+
+.react-datepicker-popper[data-placement^="left"] .react-datepicker__triangle {
+  left: 42px;
+  right: auto;
+}
+
+.react-datepicker__header {
+  text-align: center;
+  background-color: #f0f0f0;
+  border-bottom: 1px solid #aeaeae;
+  border-top-left-radius: 0.3rem;
+  padding-top: 8px;
+  position: relative;
+}
+
+.react-datepicker__header--time {
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.react-datepicker__header--time:not(.react-datepicker__header--time--only) {
+  border-top-left-radius: 0;
+}
+
+.react-datepicker__header:not(.react-datepicker__header--has-time-select) {
+  border-top-right-radius: 0.3rem;
+}
+
+.react-datepicker__year-dropdown-container--select,
+.react-datepicker__month-dropdown-container--select,
+.react-datepicker__month-year-dropdown-container--select,
+.react-datepicker__year-dropdown-container--scroll,
+.react-datepicker__month-dropdown-container--scroll,
+.react-datepicker__month-year-dropdown-container--scroll {
+  display: inline-block;
+  margin: 0 2px;
+}
+
+.react-datepicker__current-month,
+.react-datepicker-time__header,
+.react-datepicker-year-header {
+  margin-top: 0;
+  color: #000;
+  font-weight: bold;
+  font-size: 0.944rem;
+}
+
+.react-datepicker-time__header {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.react-datepicker__navigation {
+  background: none;
+  line-height: 1.7rem;
+  text-align: center;
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  width: 0;
+  padding: 0;
+  border: 0.45rem solid transparent;
+  z-index: 1;
+  height: 10px;
+  width: 10px;
+  text-indent: -999em;
+  overflow: hidden;
+}
+
+.react-datepicker__navigation--previous {
+  left: 10px;
+  border-right-color: #ccc;
+}
+
+.react-datepicker__navigation--previous:hover {
+  border-right-color: #b3b3b3;
+}
+
+.react-datepicker__navigation--previous--disabled, .react-datepicker__navigation--previous--disabled:hover {
+  border-right-color: #e6e6e6;
+  cursor: default;
+}
+
+.react-datepicker__navigation--next {
+  right: 10px;
+  border-left-color: #ccc;
+}
+
+.react-datepicker__navigation--next--with-time:not(.react-datepicker__navigation--next--with-today-button) {
+  right: 95px;
+}
+
+.react-datepicker__navigation--next:hover {
+  border-left-color: #b3b3b3;
+}
+
+.react-datepicker__navigation--next--disabled, .react-datepicker__navigation--next--disabled:hover {
+  border-left-color: #e6e6e6;
+  cursor: default;
+}
+
+.react-datepicker__navigation--years {
+  position: relative;
+  top: 0;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.react-datepicker__navigation--years-previous {
+  top: 4px;
+  border-top-color: #ccc;
+}
+
+.react-datepicker__navigation--years-previous:hover {
+  border-top-color: #b3b3b3;
+}
+
+.react-datepicker__navigation--years-upcoming {
+  top: -4px;
+  border-bottom-color: #ccc;
+}
+
+.react-datepicker__navigation--years-upcoming:hover {
+  border-bottom-color: #b3b3b3;
+}
+
+.react-datepicker__month-container {
+  float: left;
+}
+
+.react-datepicker__year {
+  margin: 0.4rem;
+  text-align: center;
+}
+
+.react-datepicker__year-wrapper {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  max-width: 180px;
+}
+
+.react-datepicker__year .react-datepicker__year-text {
+  display: inline-block;
+  width: 4rem;
+  margin: 2px;
+}
+
+.react-datepicker__month {
+  margin: 0.4rem;
+  text-align: center;
+}
+
+.react-datepicker__month .react-datepicker__month-text,
+.react-datepicker__month .react-datepicker__quarter-text {
+  display: inline-block;
+  width: 4rem;
+  margin: 2px;
+}
+
+.react-datepicker__input-time-container {
+  clear: both;
+  width: 100%;
+  float: left;
+  margin: 5px 0 10px 15px;
+  text-align: left;
+}
+
+.react-datepicker__input-time-container .react-datepicker-time__caption {
+  display: inline-block;
+}
+
+.react-datepicker__input-time-container .react-datepicker-time__input-container {
+  display: inline-block;
+}
+
+.react-datepicker__input-time-container .react-datepicker-time__input-container .react-datepicker-time__input {
+  display: inline-block;
+  margin-left: 10px;
+}
+
+.react-datepicker__input-time-container .react-datepicker-time__input-container .react-datepicker-time__input input {
+  width: 85px;
+}
+
+.react-datepicker__input-time-container .react-datepicker-time__input-container .react-datepicker-time__input input[type="time"]::-webkit-inner-spin-button,
+.react-datepicker__input-time-container .react-datepicker-time__input-container .react-datepicker-time__input input[type="time"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.react-datepicker__input-time-container .react-datepicker-time__input-container .react-datepicker-time__input input[type="time"] {
+  -moz-appearance: textfield;
+}
+
+.react-datepicker__input-time-container .react-datepicker-time__input-container .react-datepicker-time__delimiter {
+  margin-left: 5px;
+  display: inline-block;
+}
+
+.react-datepicker__time-container {
+  float: right;
+  border-left: 1px solid #aeaeae;
+  width: 85px;
+}
+
+.react-datepicker__time-container--with-today-button {
+  display: inline;
+  border: 1px solid #aeaeae;
+  border-radius: 0.3rem;
+  position: absolute;
+  right: -72px;
+  top: 0;
+}
+
+.react-datepicker__time-container .react-datepicker__time {
+  position: relative;
+  background: white;
+  border-bottom-right-radius: 0.3rem;
+}
+
+.react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box {
+  width: 85px;
+  overflow-x: hidden;
+  margin: 0 auto;
+  text-align: center;
+  border-bottom-right-radius: 0.3rem;
+}
+
+.react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list {
+  list-style: none;
+  margin: 0;
+  height: calc(195px + 0.85rem);
+  overflow-y: scroll;
+  padding-right: 0px;
+  padding-left: 0px;
+  width: 100%;
+  -webkit-box-sizing: content-box;
+          box-sizing: content-box;
+}
+
+.react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list li.react-datepicker__time-list-item {
+  height: 30px;
+  padding: 5px 10px;
+  white-space: nowrap;
+}
+
+.react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list li.react-datepicker__time-list-item:hover {
+  cursor: pointer;
+  background-color: #f0f0f0;
+}
+
+.react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list li.react-datepicker__time-list-item--selected {
+  background-color: #216ba5;
+  color: white;
+  font-weight: bold;
+}
+
+.react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list li.react-datepicker__time-list-item--selected:hover {
+  background-color: #216ba5;
+}
+
+.react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list li.react-datepicker__time-list-item--disabled {
+  color: #ccc;
+}
+
+.react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list li.react-datepicker__time-list-item--disabled:hover {
+  cursor: default;
+  background-color: transparent;
+}
+
+.react-datepicker__week-number {
+  color: #ccc;
+  display: inline-block;
+  width: 1.7rem;
+  line-height: 1.7rem;
+  text-align: center;
+  margin: 0.166rem;
+}
+
+.react-datepicker__week-number.react-datepicker__week-number--clickable {
+  cursor: pointer;
+}
+
+.react-datepicker__week-number.react-datepicker__week-number--clickable:hover {
+  border-radius: 0.3rem;
+  background-color: #f0f0f0;
+}
+
+.react-datepicker__day-names,
+.react-datepicker__week {
+  white-space: nowrap;
+}
+
+.react-datepicker__day-name,
+.react-datepicker__day,
+.react-datepicker__time-name {
+  color: #000;
+  display: inline-block;
+  width: 1.7rem;
+  line-height: 1.7rem;
+  text-align: center;
+  margin: 0.166rem;
+}
+
+.react-datepicker__month--selected, .react-datepicker__month--in-selecting-range, .react-datepicker__month--in-range, .react-datepicker__quarter--selected, .react-datepicker__quarter--in-selecting-range, .react-datepicker__quarter--in-range {
+  border-radius: 0.3rem;
+  background-color: #216ba5;
+  color: #fff;
+}
+
+.react-datepicker__month--selected:hover, .react-datepicker__month--in-selecting-range:hover, .react-datepicker__month--in-range:hover, .react-datepicker__quarter--selected:hover, .react-datepicker__quarter--in-selecting-range:hover, .react-datepicker__quarter--in-range:hover {
+  background-color: #1d5d90;
+}
+
+.react-datepicker__month--disabled,
+.react-datepicker__quarter--disabled {
+  color: #ccc;
+  pointer-events: none;
+}
+
+.react-datepicker__month--disabled:hover,
+.react-datepicker__quarter--disabled:hover {
+  cursor: default;
+  background-color: transparent;
+}
+
+.react-datepicker__day,
+.react-datepicker__month-text,
+.react-datepicker__quarter-text,
+.react-datepicker__year-text {
+  cursor: pointer;
+}
+
+.react-datepicker__day:hover,
+.react-datepicker__month-text:hover,
+.react-datepicker__quarter-text:hover,
+.react-datepicker__year-text:hover {
+  border-radius: 0.3rem;
+  background-color: #f0f0f0;
+}
+
+.react-datepicker__day--today,
+.react-datepicker__month-text--today,
+.react-datepicker__quarter-text--today,
+.react-datepicker__year-text--today {
+  font-weight: bold;
+}
+
+.react-datepicker__day--highlighted,
+.react-datepicker__month-text--highlighted,
+.react-datepicker__quarter-text--highlighted,
+.react-datepicker__year-text--highlighted {
+  border-radius: 0.3rem;
+  background-color: #3dcc4a;
+  color: #fff;
+}
+
+.react-datepicker__day--highlighted:hover,
+.react-datepicker__month-text--highlighted:hover,
+.react-datepicker__quarter-text--highlighted:hover,
+.react-datepicker__year-text--highlighted:hover {
+  background-color: #32be3f;
+}
+
+.react-datepicker__day--highlighted-custom-1,
+.react-datepicker__month-text--highlighted-custom-1,
+.react-datepicker__quarter-text--highlighted-custom-1,
+.react-datepicker__year-text--highlighted-custom-1 {
+  color: magenta;
+}
+
+.react-datepicker__day--highlighted-custom-2,
+.react-datepicker__month-text--highlighted-custom-2,
+.react-datepicker__quarter-text--highlighted-custom-2,
+.react-datepicker__year-text--highlighted-custom-2 {
+  color: green;
+}
+
+.react-datepicker__day--selected, .react-datepicker__day--in-selecting-range, .react-datepicker__day--in-range, .react-datepicker__month-text--selected, .react-datepicker__month-text--in-selecting-range, .react-datepicker__month-text--in-range, .react-datepicker__quarter-text--selected, .react-datepicker__quarter-text--in-selecting-range, .react-datepicker__quarter-text--in-range, .react-datepicker__year-text--selected, .react-datepicker__year-text--in-selecting-range, .react-datepicker__year-text--in-range {
+  border-radius: 0.3rem;
+  background-color: #216ba5;
+  color: #fff;
+}
+
+.react-datepicker__day--selected:hover, .react-datepicker__day--in-selecting-range:hover, .react-datepicker__day--in-range:hover, .react-datepicker__month-text--selected:hover, .react-datepicker__month-text--in-selecting-range:hover, .react-datepicker__month-text--in-range:hover, .react-datepicker__quarter-text--selected:hover, .react-datepicker__quarter-text--in-selecting-range:hover, .react-datepicker__quarter-text--in-range:hover, .react-datepicker__year-text--selected:hover, .react-datepicker__year-text--in-selecting-range:hover, .react-datepicker__year-text--in-range:hover {
+  background-color: #1d5d90;
+}
+
+.react-datepicker__day--keyboard-selected,
+.react-datepicker__month-text--keyboard-selected,
+.react-datepicker__quarter-text--keyboard-selected,
+.react-datepicker__year-text--keyboard-selected {
+  border-radius: 0.3rem;
+  background-color: #2a87d0;
+  color: #fff;
+}
+
+.react-datepicker__day--keyboard-selected:hover,
+.react-datepicker__month-text--keyboard-selected:hover,
+.react-datepicker__quarter-text--keyboard-selected:hover,
+.react-datepicker__year-text--keyboard-selected:hover {
+  background-color: #1d5d90;
+}
+
+.react-datepicker__day--in-selecting-range,
+.react-datepicker__month-text--in-selecting-range,
+.react-datepicker__quarter-text--in-selecting-range,
+.react-datepicker__year-text--in-selecting-range {
+  background-color: rgba(33, 107, 165, 0.5);
+}
+
+.react-datepicker__month--selecting-range .react-datepicker__day--in-range, .react-datepicker__month--selecting-range
+.react-datepicker__month-text--in-range, .react-datepicker__month--selecting-range
+.react-datepicker__quarter-text--in-range, .react-datepicker__month--selecting-range
+.react-datepicker__year-text--in-range {
+  background-color: #f0f0f0;
+  color: #000;
+}
+
+.react-datepicker__day--disabled,
+.react-datepicker__month-text--disabled,
+.react-datepicker__quarter-text--disabled,
+.react-datepicker__year-text--disabled {
+  cursor: default;
+  color: #ccc;
+}
+
+.react-datepicker__day--disabled:hover,
+.react-datepicker__month-text--disabled:hover,
+.react-datepicker__quarter-text--disabled:hover,
+.react-datepicker__year-text--disabled:hover {
+  background-color: transparent;
+}
+
+.react-datepicker__month-text.react-datepicker__month--selected:hover, .react-datepicker__month-text.react-datepicker__month--in-range:hover, .react-datepicker__month-text.react-datepicker__quarter--selected:hover, .react-datepicker__month-text.react-datepicker__quarter--in-range:hover, .react-datepicker__quarter-text.react-datepicker__month--selected:hover, .react-datepicker__quarter-text.react-datepicker__month--in-range:hover, .react-datepicker__quarter-text.react-datepicker__quarter--selected:hover, .react-datepicker__quarter-text.react-datepicker__quarter--in-range:hover {
+  background-color: #216ba5;
+}
+
+.react-datepicker__month-text:hover,
+.react-datepicker__quarter-text:hover {
+  background-color: #f0f0f0;
+}
+
+.react-datepicker__input-container {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.react-datepicker__year-read-view,
+.react-datepicker__month-read-view,
+.react-datepicker__month-year-read-view {
+  border: 1px solid transparent;
+  border-radius: 0.3rem;
+}
+
+.react-datepicker__year-read-view:hover,
+.react-datepicker__month-read-view:hover,
+.react-datepicker__month-year-read-view:hover {
+  cursor: pointer;
+}
+
+.react-datepicker__year-read-view:hover .react-datepicker__year-read-view--down-arrow,
+.react-datepicker__year-read-view:hover .react-datepicker__month-read-view--down-arrow,
+.react-datepicker__month-read-view:hover .react-datepicker__year-read-view--down-arrow,
+.react-datepicker__month-read-view:hover .react-datepicker__month-read-view--down-arrow,
+.react-datepicker__month-year-read-view:hover .react-datepicker__year-read-view--down-arrow,
+.react-datepicker__month-year-read-view:hover .react-datepicker__month-read-view--down-arrow {
+  border-top-color: #b3b3b3;
+}
+
+.react-datepicker__year-read-view--down-arrow,
+.react-datepicker__month-read-view--down-arrow,
+.react-datepicker__month-year-read-view--down-arrow {
+  border-top-color: #ccc;
+  float: right;
+  margin-left: 20px;
+  top: 8px;
+  position: relative;
+  border-width: 0.45rem;
+}
+
+.react-datepicker__year-dropdown,
+.react-datepicker__month-dropdown,
+.react-datepicker__month-year-dropdown {
+  background-color: #f0f0f0;
+  position: absolute;
+  width: 50%;
+  left: 25%;
+  top: 30px;
+  z-index: 1;
+  text-align: center;
+  border-radius: 0.3rem;
+  border: 1px solid #aeaeae;
+}
+
+.react-datepicker__year-dropdown:hover,
+.react-datepicker__month-dropdown:hover,
+.react-datepicker__month-year-dropdown:hover {
+  cursor: pointer;
+}
+
+.react-datepicker__year-dropdown--scrollable,
+.react-datepicker__month-dropdown--scrollable,
+.react-datepicker__month-year-dropdown--scrollable {
+  height: 150px;
+  overflow-y: scroll;
+}
+
+.react-datepicker__year-option,
+.react-datepicker__month-option,
+.react-datepicker__month-year-option {
+  line-height: 20px;
+  width: 100%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.react-datepicker__year-option:first-of-type,
+.react-datepicker__month-option:first-of-type,
+.react-datepicker__month-year-option:first-of-type {
+  border-top-left-radius: 0.3rem;
+  border-top-right-radius: 0.3rem;
+}
+
+.react-datepicker__year-option:last-of-type,
+.react-datepicker__month-option:last-of-type,
+.react-datepicker__month-year-option:last-of-type {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border-bottom-left-radius: 0.3rem;
+  border-bottom-right-radius: 0.3rem;
+}
+
+.react-datepicker__year-option:hover,
+.react-datepicker__month-option:hover,
+.react-datepicker__month-year-option:hover {
+  background-color: #ccc;
+}
+
+.react-datepicker__year-option:hover .react-datepicker__navigation--years-upcoming,
+.react-datepicker__month-option:hover .react-datepicker__navigation--years-upcoming,
+.react-datepicker__month-year-option:hover .react-datepicker__navigation--years-upcoming {
+  border-bottom-color: #b3b3b3;
+}
+
+.react-datepicker__year-option:hover .react-datepicker__navigation--years-previous,
+.react-datepicker__month-option:hover .react-datepicker__navigation--years-previous,
+.react-datepicker__month-year-option:hover .react-datepicker__navigation--years-previous {
+  border-top-color: #b3b3b3;
+}
+
+.react-datepicker__year-option--selected,
+.react-datepicker__month-option--selected,
+.react-datepicker__month-year-option--selected {
+  position: absolute;
+  left: 15px;
+}
+
+.react-datepicker__close-icon {
+  cursor: pointer;
+  background-color: transparent;
+  border: 0;
+  outline: 0;
+  padding: 0px 6px 0px 0px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.react-datepicker__close-icon::after {
+  cursor: pointer;
+  background-color: #216ba5;
+  color: #fff;
+  border-radius: 50%;
+  height: 16px;
+  width: 16px;
+  padding: 2px;
+  font-size: 12px;
+  line-height: 1;
+  text-align: center;
+  display: table-cell;
+  vertical-align: middle;
+  content: "\00d7";
+}
+
+.react-datepicker__today-button {
+  background: #f0f0f0;
+  border-top: 1px solid #aeaeae;
+  cursor: pointer;
+  text-align: center;
+  font-weight: bold;
+  padding: 5px 0;
+  clear: left;
+}
+
+.react-datepicker__portal {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.8);
+  left: 0;
+  top: 0;
+  -ms-flex-pack: center;
+      justify-content: center;
+  -ms-flex-align: center;
+      align-items: center;
+  display: -ms-flexbox;
+  display: flex;
+  z-index: 2147483647;
+}
+
+.react-datepicker__portal .react-datepicker__day-name,
+.react-datepicker__portal .react-datepicker__day,
+.react-datepicker__portal .react-datepicker__time-name {
+  width: 3rem;
+  line-height: 3rem;
+}
+
+@media (max-width: 400px), (max-height: 550px) {
+  .react-datepicker__portal .react-datepicker__day-name,
+  .react-datepicker__portal .react-datepicker__day,
+  .react-datepicker__portal .react-datepicker__time-name {
+    width: 2rem;
+    line-height: 2rem;
+  }
+}
+
+.react-datepicker__portal .react-datepicker__current-month,
+.react-datepicker__portal .react-datepicker-time__header {
+  font-size: 1.44rem;
+}
+
+.react-datepicker__portal .react-datepicker__navigation {
+  border: 0.81rem solid transparent;
+}
+
+.react-datepicker__portal .react-datepicker__navigation--previous {
+  border-right-color: #ccc;
+}
+
+.react-datepicker__portal .react-datepicker__navigation--previous:hover {
+  border-right-color: #b3b3b3;
+}
+
+.react-datepicker__portal .react-datepicker__navigation--previous--disabled, .react-datepicker__portal .react-datepicker__navigation--previous--disabled:hover {
+  border-right-color: #e6e6e6;
+  cursor: default;
+}
+
+.react-datepicker__portal .react-datepicker__navigation--next {
+  border-left-color: #ccc;
+}
+
+.react-datepicker__portal .react-datepicker__navigation--next:hover {
+  border-left-color: #b3b3b3;
+}
+
+.react-datepicker__portal .react-datepicker__navigation--next--disabled, .react-datepicker__portal .react-datepicker__navigation--next--disabled:hover {
+  border-left-color: #e6e6e6;
+  cursor: default;
+}
+
+/** @module DateTimeSelector.styles
+ *  @since 2021.01.23, 19:44
+ *  @changed 2021.01.26, 19:43
+ */
+
+.ModalPortal_type_Popup .DateTimeSelector .react-datepicker {
+      border: none;
+      margin: 0;
+      display: block;
+    }
+
+.DateTimeSelector .react-datepicker__current-month,
+    .DateTimeSelector .react-datepicker-time__header {
+      font-weight: normal;
+    }
+
+.DateTimeSelector .react-datepicker__time-list-item {
+      height: auto !important;
+      padding: 2px !important; /* Override rule for `.react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list li.react-datepicker__time-list-item`*/
+      padding-top: 4px !important; /* Override rule for `.react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list li.react-datepicker__time-list-item`*/
+    }
+
+.DateTimeSelector .react-datepicker__navigation {
+      margin-top: 4px;
+    }
+
+.DateTimeSelector .react-datepicker__day:focus, .DateTimeSelector .react-datepicker__time-list-item:focus {
+        outline: 0;
+      }
+
+.DateTimeSelector .react-datepicker__day--selected, .DateTimeSelector .react-datepicker__time-list-item--selected {
+        background-color: #07f !important;
+        font-weight: normal !important;
+      }
+
+.DateTimeSelector .react-datepicker__month--selecting-range .react-datepicker__day--in-range {
+      background-color: rgba(33, 107, 165, 0.5);
+      color: #fff;
+    }
+
+.DateTimeSelector .react-datepicker__day--in-range.react-datepicker__day--in-selecting-range {
+      background-color: #216ba5;
+    }
+
+.DateTimeSelector .react-datepicker__time-list:focus, .DateTimeSelector .react-datepicker button:focus {
+        outline: 0;
+      }
+
 /** @module InlineIcon.styles
  *  @since 2020.10.07, 02:08
  *  @changed 2020.12.24, 04:05
@@ -648,7 +1487,7 @@ label.FormLabel-Control[for] {
   .FormButton .FormButton-Icon {
     /* transition: color $(transitionTime)ms, opacity $(transitionTime)ms;*/
     color: #000;
-    opacity: .8;
+    opacity: .9;
   }
 
 .FormButton .FormButton-Icon {
@@ -664,7 +1503,7 @@ label.FormLabel-Control[for] {
     }
 
 .FormButton.FormButton_active .FormButton-Icon, .FormButton.FormItem_focused .FormButton-Icon, .FormButton.FormItem_hovered .FormButton-Icon {
-      opacity: .6;
+      opacity: .5;
     }
 
 /*   // -webkit-font-smoothing: subpixel-antialiased;*/
@@ -683,6 +1522,7 @@ label.FormLabel-Control[for] {
 .FormButton_plain.FormButton_active,
     .FormButton_plain.FormItem_focused,
     .FormButton_plain.FormItem_hovered {
+      /* $borderColor, $innerSize, $innerGlowSize, $outerGlowColor, $outerSize, $outerGlowSize*/
       -webkit-box-shadow: inset 0 0 1px 1px rgb(184, 184, 184),
     0 0 4px 1px rgba(209, 209, 209, 0.5);
               box-shadow: inset 0 0 1px 1px rgb(184, 184, 184),
@@ -702,12 +1542,11 @@ label.FormLabel-Control[for] {
 /* $formItemGlowColor;*/
 
 .FormButton_plain.FormButton_onDark {
-      /* $color: #fff; // $neutralDarkColor;*/
-      /* .FormButton-Icon,*/
-      /* .FormButton-Text {*/
+      /* $hoveredBorderColor: color($primaryColor shade(0) alpha(1));*/
+      /* $activeBorderColor: color($primaryColor shade(0));*/
     }
 
-/* }*/
+/* $activeGlowColor: color($primaryColor alpha(.2));*/
 
 .FormButton_plain.FormButton_onDark.FormButton_active,
       .FormButton_plain.FormButton_onDark.FormItem_focused,
@@ -718,7 +1557,7 @@ label.FormLabel-Control[for] {
     0 0 4px 1px rgba(209, 209, 209, 0.2);
       }
 
-/*   color: $color;*/
+/* $hoveredGlowColor: color($primaryColor alpha(.2));*/
 
 .FormButton_plain.FormButton_onDark.FormButton_active,
       .FormButton_plain.FormButton_onDark.FormItem_focused {
@@ -734,12 +1573,15 @@ label.FormLabel-Control[for] {
 
 .FormButton_theme_default {
       /* $iconColor: $neutralTintedDarkColor;*/
+      /* $activeColor: color($primaryColor shade(0));*/
       /* border-color: $borderColor;*/
       -webkit-box-shadow: inset 0 0 0 1px #ccc,
     0 0 0 0 transparent;
               box-shadow: inset 0 0 0 1px #ccc,
     0 0 0 0 transparent;
       background-color: rgb(227, 227, 227);
+      /* $hoveredBorderColor: color($borderColor shade(5));*/
+      /* $activeBorderColor: color($hoveredBorderColor shade(10));*/
     }
 
 /* box-shadow: inset 0 0 0 1px $borderColor;*/
@@ -758,11 +1600,11 @@ label.FormLabel-Control[for] {
       .FormButton_theme_default.FormItem_focused,
       .FormButton_theme_default.FormItem_hovered {
         /* border-color: $hoveredBorderColor;*/
-        -webkit-box-shadow: inset 0 0 1px 1px rgb(184, 184, 184),
-    0 0 4px 1px rgb(209, 209, 209);
-                box-shadow: inset 0 0 1px 1px rgb(184, 184, 184),
-    0 0 4px 1px rgb(209, 209, 209);
-        background-color: rgb(209, 209, 209);
+        -webkit-box-shadow: inset 0 0 1px 1px rgb(0, 113, 242),
+    0 0 4px 1px rgba(0, 119, 255, 0.5);
+                box-shadow: inset 0 0 1px 1px rgb(0, 113, 242),
+    0 0 4px 1px rgba(0, 119, 255, 0.5);
+        background-color: rgb(216, 216, 216);
         /* .FormButton-Icon, .FormButton-Text {*/
         /*   opacity: .9;*/
         /* }*/
@@ -772,11 +1614,11 @@ label.FormLabel-Control[for] {
 
 .FormButton_theme_default.FormButton_active,
       .FormButton_theme_default.FormItem_focused {
-        -webkit-box-shadow: inset 0 0 2px 1px rgb(173, 173, 173),
-    0 0 1px 2px rgb(193, 193, 193);
-                box-shadow: inset 0 0 2px 1px rgb(173, 173, 173),
-    0 0 1px 2px rgb(193, 193, 193); /* @calc($formItemOuterGlow - 2)px;*/
-        background-color: rgb(193, 193, 193);
+        -webkit-box-shadow: inset 0 0 2px 1px rgb(0, 101, 217),
+    0 0 1px 2px rgba(0, 119, 255, 0.5);
+                box-shadow: inset 0 0 2px 1px rgb(0, 101, 217),
+    0 0 1px 2px rgba(0, 119, 255, 0.5); /* @calc($formItemOuterGlow - 2)px;*/
+        background-color: rgb(184, 184, 184);
       }
 
 /* $formItemGlowColor;*/
@@ -788,6 +1630,8 @@ label.FormLabel-Control[for] {
                 box-shadow: inset 0 0 0 1px rgba(204, 204, 204, 0.2),
     0 0 0 0 transparent;
         background-color: rgba(227, 227, 227, 0.2);
+        /* $hoveredBorderColor: color($borderColor shade(5));*/
+        /* $activeBorderColor: color($hoveredBorderColor shade(10));*/
         /* $formItemGlowColor;*/
       }
 
@@ -807,11 +1651,11 @@ label.FormLabel-Control[for] {
       .FormButton_theme_default.FormButton_onDark.FormItem_focused,
       .FormButton_theme_default.FormButton_onDark.FormItem_hovered {
         /* border-color: $hoveredBorderColor;*/
-        -webkit-box-shadow: inset 0 0 1px 1px rgba(184, 184, 184, 0.2),
-    0 0 4px 1px rgba(209, 209, 209, 0.2);
-                box-shadow: inset 0 0 1px 1px rgba(184, 184, 184, 0.2),
-    0 0 4px 1px rgba(209, 209, 209, 0.2);
-        background-color: rgba(209, 209, 209, 0.2);
+        -webkit-box-shadow: inset 0 0 1px 1px rgb(194, 194, 194),
+    0 0 4px 1px rgb(194, 194, 194);
+                box-shadow: inset 0 0 1px 1px rgb(194, 194, 194),
+    0 0 4px 1px rgb(194, 194, 194);
+        background-color: rgba(216, 216, 216, 0.2);
         /* .FormButton-Icon, .FormButton-Text {*/
         /*   opacity: .9;*/
         /* }*/
@@ -821,18 +1665,18 @@ label.FormLabel-Control[for] {
 
 .FormButton_theme_default.FormButton_onDark.FormButton_active,
       .FormButton_theme_default.FormButton_onDark.FormItem_focused {
-        -webkit-box-shadow: inset 0 0 2px 1px rgba(173, 173, 173, 0.2),
-    0 0 1px 2px rgba(193, 193, 193, 0.2);
-                box-shadow: inset 0 0 2px 1px rgba(173, 173, 173, 0.2),
-    0 0 1px 2px rgba(193, 193, 193, 0.2); /* @calc($formItemOuterGlow - 2)px;*/
-        background-color: rgba(193, 193, 193, 0.2);
+        -webkit-box-shadow: inset 0 0 2px 1px rgb(173, 173, 173),
+    0 0 1px 2px rgb(194, 194, 194);
+                box-shadow: inset 0 0 2px 1px rgb(173, 173, 173),
+    0 0 1px 2px rgb(194, 194, 194); /* @calc($formItemOuterGlow - 2)px;*/
+        background-color: rgba(184, 184, 184, 0.2);
       }
 
 /* Theme colors*/
 
 .FormButton_theme_primary { /* $formItemBorderColor;*/ /* color($textColor alpha(.5));*/ /* border-color: $borderColor;*/ -webkit-box-shadow: inset 0 0 0 1px rgb(0, 107, 230),
     0 0 0 0 transparent; box-shadow: inset 0 0 0 1px rgb(0, 107, 230),
-    0 0 0 0 transparent; background-color: #07f; /* $formItemGlowColor;*/}
+    0 0 0 0 transparent; background-color: #07f; /* $hoveredBorderColor: color($borderColor shade(5));*/ /* $activeBorderColor: color($hoveredBorderColor shade(10));*/ /* $formItemGlowColor;*/}
 
 /* box-shadow: inset 0 0 0 1px $borderColor;*/
 
@@ -850,11 +1694,11 @@ label.FormLabel-Control[for] {
       .FormButton_theme_primary.FormItem_focused,
       .FormButton_theme_primary.FormItem_hovered {
         /* border-color: $hoveredBorderColor;*/
-        -webkit-box-shadow: inset 0 0 1px 1px rgb(0, 96, 207),
-    0 0 4px 1px rgb(0, 109, 235);
-                box-shadow: inset 0 0 1px 1px rgb(0, 96, 207),
-    0 0 4px 1px rgb(0, 109, 235);
-        background-color: rgb(0, 109, 235);
+        -webkit-box-shadow: inset 0 0 1px 1px rgb(0, 97, 208),
+    0 0 4px 1px rgb(0, 102, 219);
+                box-shadow: inset 0 0 1px 1px rgb(0, 97, 208),
+    0 0 4px 1px rgb(0, 102, 219);
+        background-color: rgb(0, 113, 242);
         /* .FormButton-Icon, .FormButton-Text {*/
         /*   opacity: .9;*/
         /* }*/
@@ -864,18 +1708,18 @@ label.FormLabel-Control[for] {
 
 .FormButton_theme_primary.FormButton_active,
       .FormButton_theme_primary.FormItem_focused {
-        -webkit-box-shadow: inset 0 0 2px 1px rgb(0, 91, 196),
-    0 0 1px 2px rgb(0, 101, 217);
-                box-shadow: inset 0 0 2px 1px rgb(0, 91, 196),
-    0 0 1px 2px rgb(0, 101, 217); /* @calc($formItemOuterGlow - 2)px;*/
-        background-color: rgb(0, 101, 217);
+        -webkit-box-shadow: inset 0 0 2px 1px rgb(0, 87, 186),
+    0 0 1px 2px rgb(0, 102, 219);
+                box-shadow: inset 0 0 2px 1px rgb(0, 87, 186),
+    0 0 1px 2px rgb(0, 102, 219); /* @calc($formItemOuterGlow - 2)px;*/
+        background-color: rgb(0, 96, 206);
       }
 
 /* @define-mixin styledDarkButton $bgColor, $textColor: $specialContrastColor {*/
 
 .FormButton_theme_secondary { /* $formItemBorderColor;*/ /* color($textColor alpha(.5));*/ /* border-color: $borderColor;*/ -webkit-box-shadow: inset 0 0 0 1px rgb(92, 107, 107),
     0 0 0 0 transparent; box-shadow: inset 0 0 0 1px rgb(92, 107, 107),
-    0 0 0 0 transparent; background-color: #677; /* $formItemGlowColor;*/}
+    0 0 0 0 transparent; background-color: #677; /* $hoveredBorderColor: color($borderColor shade(5));*/ /* $activeBorderColor: color($hoveredBorderColor shade(10));*/ /* $formItemGlowColor;*/}
 
 /* box-shadow: inset 0 0 0 1px $borderColor;*/
 
@@ -893,11 +1737,11 @@ label.FormLabel-Control[for] {
       .FormButton_theme_secondary.FormItem_focused,
       .FormButton_theme_secondary.FormItem_hovered {
         /* border-color: $hoveredBorderColor;*/
-        -webkit-box-shadow: inset 0 0 1px 1px rgb(83, 96, 96),
-    0 0 4px 1px rgb(94, 109, 109);
-                box-shadow: inset 0 0 1px 1px rgb(83, 96, 96),
-    0 0 4px 1px rgb(94, 109, 109);
-        background-color: rgb(94, 109, 109);
+        -webkit-box-shadow: inset 0 0 1px 1px rgb(83, 97, 97),
+    0 0 4px 1px rgb(87, 102, 102);
+                box-shadow: inset 0 0 1px 1px rgb(83, 97, 97),
+    0 0 4px 1px rgb(87, 102, 102);
+        background-color: rgb(97, 113, 113);
         /* .FormButton-Icon, .FormButton-Text {*/
         /*   opacity: .9;*/
         /* }*/
@@ -907,18 +1751,18 @@ label.FormLabel-Control[for] {
 
 .FormButton_theme_secondary.FormButton_active,
       .FormButton_theme_secondary.FormItem_focused {
-        -webkit-box-shadow: inset 0 0 2px 1px rgb(78, 91, 91),
-    0 0 1px 2px rgb(87, 101, 101);
-                box-shadow: inset 0 0 2px 1px rgb(78, 91, 91),
-    0 0 1px 2px rgb(87, 101, 101); /* @calc($formItemOuterGlow - 2)px;*/
-        background-color: rgb(87, 101, 101);
+        -webkit-box-shadow: inset 0 0 2px 1px rgb(74, 87, 87),
+    0 0 1px 2px rgb(87, 102, 102);
+                box-shadow: inset 0 0 2px 1px rgb(74, 87, 87),
+    0 0 1px 2px rgb(87, 102, 102); /* @calc($formItemOuterGlow - 2)px;*/
+        background-color: rgb(82, 96, 96);
       }
 
 /* Theme colors...*/
 
 .FormButton_theme_error { /* $formItemBorderColor;*/ /* color($textColor alpha(.5));*/ /* border-color: $borderColor;*/ -webkit-box-shadow: inset 0 0 0 1px rgb(184, 46, 46),
     0 0 0 0 transparent; box-shadow: inset 0 0 0 1px rgb(184, 46, 46),
-    0 0 0 0 transparent; background-color: #c33; /* $formItemGlowColor;*/}
+    0 0 0 0 transparent; background-color: #c33; /* $hoveredBorderColor: color($borderColor shade(5));*/ /* $activeBorderColor: color($hoveredBorderColor shade(10));*/ /* $formItemGlowColor;*/}
 
 /* box-shadow: inset 0 0 0 1px $borderColor;*/
 
@@ -936,11 +1780,11 @@ label.FormLabel-Control[for] {
       .FormButton_theme_error.FormItem_focused,
       .FormButton_theme_error.FormItem_hovered {
         /* border-color: $hoveredBorderColor;*/
-        -webkit-box-shadow: inset 0 0 1px 1px rgb(166, 41, 41),
-    0 0 4px 1px rgb(188, 47, 47);
-                box-shadow: inset 0 0 1px 1px rgb(166, 41, 41),
-    0 0 4px 1px rgb(188, 47, 47);
-        background-color: rgb(188, 47, 47);
+        -webkit-box-shadow: inset 0 0 1px 1px rgb(166, 42, 42),
+    0 0 4px 1px rgb(175, 44, 44);
+                box-shadow: inset 0 0 1px 1px rgb(166, 42, 42),
+    0 0 4px 1px rgb(175, 44, 44);
+        background-color: rgb(194, 48, 48);
         /* .FormButton-Icon, .FormButton-Text {*/
         /*   opacity: .9;*/
         /* }*/
@@ -950,18 +1794,18 @@ label.FormLabel-Control[for] {
 
 .FormButton_theme_error.FormButton_active,
       .FormButton_theme_error.FormItem_focused {
-        -webkit-box-shadow: inset 0 0 2px 1px rgb(156, 39, 39),
-    0 0 1px 2px rgb(173, 43, 43);
-                box-shadow: inset 0 0 2px 1px rgb(156, 39, 39),
-    0 0 1px 2px rgb(173, 43, 43); /* @calc($formItemOuterGlow - 2)px;*/
-        background-color: rgb(173, 43, 43);
+        -webkit-box-shadow: inset 0 0 2px 1px rgb(149, 37, 37),
+    0 0 1px 2px rgb(175, 44, 44);
+                box-shadow: inset 0 0 2px 1px rgb(149, 37, 37),
+    0 0 1px 2px rgb(175, 44, 44); /* @calc($formItemOuterGlow - 2)px;*/
+        background-color: rgb(165, 41, 41);
       }
 
 /* Mixin params: $bgColor, $borderColor, $iconColor, $textColor*/
 
 .FormButton_theme_warn { /* $formItemBorderColor;*/ /* color($textColor alpha(.5));*/ /* border-color: $borderColor;*/ -webkit-box-shadow: inset 0 0 0 1px rgb(230, 107, 46),
     0 0 0 0 transparent; box-shadow: inset 0 0 0 1px rgb(230, 107, 46),
-    0 0 0 0 transparent; background-color: #f73; /* $formItemGlowColor;*/}
+    0 0 0 0 transparent; background-color: #f73; /* $hoveredBorderColor: color($borderColor shade(5));*/ /* $activeBorderColor: color($hoveredBorderColor shade(10));*/ /* $formItemGlowColor;*/}
 
 /* box-shadow: inset 0 0 0 1px $borderColor;*/
 
@@ -979,11 +1823,11 @@ label.FormLabel-Control[for] {
       .FormButton_theme_warn.FormItem_focused,
       .FormButton_theme_warn.FormItem_hovered {
         /* border-color: $hoveredBorderColor;*/
-        -webkit-box-shadow: inset 0 0 1px 1px rgb(207, 96, 41),
-    0 0 4px 1px rgb(235, 109, 47);
-                box-shadow: inset 0 0 1px 1px rgb(207, 96, 41),
-    0 0 4px 1px rgb(235, 109, 47);
-        background-color: rgb(235, 109, 47);
+        -webkit-box-shadow: inset 0 0 1px 1px rgb(208, 97, 42),
+    0 0 4px 1px rgb(219, 102, 44);
+                box-shadow: inset 0 0 1px 1px rgb(208, 97, 42),
+    0 0 4px 1px rgb(219, 102, 44);
+        background-color: rgb(242, 113, 48);
         /* .FormButton-Icon, .FormButton-Text {*/
         /*   opacity: .9;*/
         /* }*/
@@ -993,18 +1837,18 @@ label.FormLabel-Control[for] {
 
 .FormButton_theme_warn.FormButton_active,
       .FormButton_theme_warn.FormItem_focused {
-        -webkit-box-shadow: inset 0 0 2px 1px rgb(196, 91, 39),
-    0 0 1px 2px rgb(217, 101, 43);
-                box-shadow: inset 0 0 2px 1px rgb(196, 91, 39),
-    0 0 1px 2px rgb(217, 101, 43); /* @calc($formItemOuterGlow - 2)px;*/
-        background-color: rgb(217, 101, 43);
+        -webkit-box-shadow: inset 0 0 2px 1px rgb(186, 87, 37),
+    0 0 1px 2px rgb(219, 102, 44);
+                box-shadow: inset 0 0 2px 1px rgb(186, 87, 37),
+    0 0 1px 2px rgb(219, 102, 44); /* @calc($formItemOuterGlow - 2)px;*/
+        background-color: rgb(206, 96, 41);
       }
 
 /* Button themes...*/
 
 .FormButton_theme_success { /* $formItemBorderColor;*/ /* color($textColor alpha(.5));*/ /* border-color: $borderColor;*/ -webkit-box-shadow: inset 0 0 0 1px rgb(77, 138, 46),
     0 0 0 0 transparent; box-shadow: inset 0 0 0 1px rgb(77, 138, 46),
-    0 0 0 0 transparent; background-color: #593; /* $formItemGlowColor;*/}
+    0 0 0 0 transparent; background-color: #593; /* $hoveredBorderColor: color($borderColor shade(5));*/ /* $activeBorderColor: color($hoveredBorderColor shade(10));*/ /* $formItemGlowColor;*/}
 
 /* box-shadow: inset 0 0 0 1px $borderColor;*/
 
@@ -1022,11 +1866,11 @@ label.FormLabel-Control[for] {
       .FormButton_theme_success.FormItem_focused,
       .FormButton_theme_success.FormItem_hovered {
         /* border-color: $hoveredBorderColor;*/
-        -webkit-box-shadow: inset 0 0 1px 1px rgb(69, 124, 41),
-    0 0 4px 1px rgb(78, 141, 47);
-                box-shadow: inset 0 0 1px 1px rgb(69, 124, 41),
-    0 0 4px 1px rgb(78, 141, 47);
-        background-color: rgb(78, 141, 47);
+        -webkit-box-shadow: inset 0 0 1px 1px rgb(69, 124, 42),
+    0 0 4px 1px rgb(73, 131, 44);
+                box-shadow: inset 0 0 1px 1px rgb(69, 124, 42),
+    0 0 4px 1px rgb(73, 131, 44);
+        background-color: rgb(81, 145, 48);
         /* .FormButton-Icon, .FormButton-Text {*/
         /*   opacity: .9;*/
         /* }*/
@@ -1036,16 +1880,16 @@ label.FormLabel-Control[for] {
 
 .FormButton_theme_success.FormButton_active,
       .FormButton_theme_success.FormItem_focused {
-        -webkit-box-shadow: inset 0 0 2px 1px rgb(65, 117, 39),
-    0 0 1px 2px rgb(72, 130, 43);
-                box-shadow: inset 0 0 2px 1px rgb(65, 117, 39),
-    0 0 1px 2px rgb(72, 130, 43); /* @calc($formItemOuterGlow - 2)px;*/
-        background-color: rgb(72, 130, 43);
+        -webkit-box-shadow: inset 0 0 2px 1px rgb(62, 111, 37),
+    0 0 1px 2px rgb(73, 131, 44);
+                box-shadow: inset 0 0 2px 1px rgb(62, 111, 37),
+    0 0 1px 2px rgb(73, 131, 44); /* @calc($formItemOuterGlow - 2)px;*/
+        background-color: rgb(69, 123, 41);
       }
 
 .FormButton_theme_info { /* $formItemBorderColor;*/ /* color($textColor alpha(.5));*/ /* border-color: $borderColor;*/ -webkit-box-shadow: inset 0 0 0 1px rgb(0, 107, 230),
     0 0 0 0 transparent; box-shadow: inset 0 0 0 1px rgb(0, 107, 230),
-    0 0 0 0 transparent; background-color: #07f; /* $formItemGlowColor;*/}
+    0 0 0 0 transparent; background-color: #07f; /* $hoveredBorderColor: color($borderColor shade(5));*/ /* $activeBorderColor: color($hoveredBorderColor shade(10));*/ /* $formItemGlowColor;*/}
 
 /* box-shadow: inset 0 0 0 1px $borderColor;*/
 
@@ -1063,11 +1907,11 @@ label.FormLabel-Control[for] {
       .FormButton_theme_info.FormItem_focused,
       .FormButton_theme_info.FormItem_hovered {
         /* border-color: $hoveredBorderColor;*/
-        -webkit-box-shadow: inset 0 0 1px 1px rgb(0, 96, 207),
-    0 0 4px 1px rgb(0, 109, 235);
-                box-shadow: inset 0 0 1px 1px rgb(0, 96, 207),
-    0 0 4px 1px rgb(0, 109, 235);
-        background-color: rgb(0, 109, 235);
+        -webkit-box-shadow: inset 0 0 1px 1px rgb(0, 97, 208),
+    0 0 4px 1px rgb(0, 102, 219);
+                box-shadow: inset 0 0 1px 1px rgb(0, 97, 208),
+    0 0 4px 1px rgb(0, 102, 219);
+        background-color: rgb(0, 113, 242);
         /* .FormButton-Icon, .FormButton-Text {*/
         /*   opacity: .9;*/
         /* }*/
@@ -1077,16 +1921,16 @@ label.FormLabel-Control[for] {
 
 .FormButton_theme_info.FormButton_active,
       .FormButton_theme_info.FormItem_focused {
-        -webkit-box-shadow: inset 0 0 2px 1px rgb(0, 91, 196),
-    0 0 1px 2px rgb(0, 101, 217);
-                box-shadow: inset 0 0 2px 1px rgb(0, 91, 196),
-    0 0 1px 2px rgb(0, 101, 217); /* @calc($formItemOuterGlow - 2)px;*/
-        background-color: rgb(0, 101, 217);
+        -webkit-box-shadow: inset 0 0 2px 1px rgb(0, 87, 186),
+    0 0 1px 2px rgb(0, 102, 219);
+                box-shadow: inset 0 0 2px 1px rgb(0, 87, 186),
+    0 0 1px 2px rgb(0, 102, 219); /* @calc($formItemOuterGlow - 2)px;*/
+        background-color: rgb(0, 96, 206);
       }
 
 .FormButton_theme_confirm { /* $formItemBorderColor;*/ /* color($textColor alpha(.5));*/ /* border-color: $borderColor;*/ -webkit-box-shadow: inset 0 0 0 1px rgb(122, 138, 15),
     0 0 0 0 transparent; box-shadow: inset 0 0 0 1px rgb(122, 138, 15),
-    0 0 0 0 transparent; background-color: #891; /* $formItemGlowColor;*/}
+    0 0 0 0 transparent; background-color: #891; /* $hoveredBorderColor: color($borderColor shade(5));*/ /* $activeBorderColor: color($hoveredBorderColor shade(10));*/ /* $formItemGlowColor;*/}
 
 /* box-shadow: inset 0 0 0 1px $borderColor;*/
 
@@ -1104,11 +1948,11 @@ label.FormLabel-Control[for] {
       .FormButton_theme_confirm.FormItem_focused,
       .FormButton_theme_confirm.FormItem_hovered {
         /* border-color: $hoveredBorderColor;*/
-        -webkit-box-shadow: inset 0 0 1px 1px rgb(110, 124, 14),
-    0 0 4px 1px rgb(125, 141, 16);
-                box-shadow: inset 0 0 1px 1px rgb(110, 124, 14),
-    0 0 4px 1px rgb(125, 141, 16);
-        background-color: rgb(125, 141, 16);
+        -webkit-box-shadow: inset 0 0 1px 1px rgb(110, 124, 13),
+    0 0 4px 1px rgb(116, 131, 14);
+                box-shadow: inset 0 0 1px 1px rgb(110, 124, 13),
+    0 0 4px 1px rgb(116, 131, 14);
+        background-color: rgb(129, 145, 16);
         /* .FormButton-Icon, .FormButton-Text {*/
         /*   opacity: .9;*/
         /* }*/
@@ -1118,16 +1962,16 @@ label.FormLabel-Control[for] {
 
 .FormButton_theme_confirm.FormButton_active,
       .FormButton_theme_confirm.FormItem_focused {
-        -webkit-box-shadow: inset 0 0 2px 1px rgb(104, 117, 13),
-    0 0 1px 2px rgb(116, 130, 14);
-                box-shadow: inset 0 0 2px 1px rgb(104, 117, 13),
-    0 0 1px 2px rgb(116, 130, 14); /* @calc($formItemOuterGlow - 2)px;*/
-        background-color: rgb(116, 130, 14);
+        -webkit-box-shadow: inset 0 0 2px 1px rgb(99, 111, 12),
+    0 0 1px 2px rgb(116, 131, 14);
+                box-shadow: inset 0 0 2px 1px rgb(99, 111, 12),
+    0 0 1px 2px rgb(116, 131, 14); /* @calc($formItemOuterGlow - 2)px;*/
+        background-color: rgb(110, 123, 14);
       }
 
 .FormButton_theme_select { /* $formItemBorderColor;*/ /* color($textColor alpha(.5));*/ /* border-color: $borderColor;*/ -webkit-box-shadow: inset 0 0 0 1px rgb(0, 77, 168),
     0 0 0 0 transparent; box-shadow: inset 0 0 0 1px rgb(0, 77, 168),
-    0 0 0 0 transparent; background-color: #05b; /* $formItemGlowColor;*/}
+    0 0 0 0 transparent; background-color: #05b; /* $hoveredBorderColor: color($borderColor shade(5));*/ /* $activeBorderColor: color($hoveredBorderColor shade(10));*/ /* $formItemGlowColor;*/}
 
 /* box-shadow: inset 0 0 0 1px $borderColor;*/
 
@@ -1145,11 +1989,11 @@ label.FormLabel-Control[for] {
       .FormButton_theme_select.FormItem_focused,
       .FormButton_theme_select.FormItem_hovered {
         /* border-color: $hoveredBorderColor;*/
-        -webkit-box-shadow: inset 0 0 1px 1px rgb(0, 69, 151),
-    0 0 4px 1px rgb(0, 78, 172);
-                box-shadow: inset 0 0 1px 1px rgb(0, 69, 151),
-    0 0 4px 1px rgb(0, 78, 172);
-        background-color: rgb(0, 78, 172);
+        -webkit-box-shadow: inset 0 0 1px 1px rgb(0, 69, 152),
+    0 0 4px 1px rgb(0, 73, 160);
+                box-shadow: inset 0 0 1px 1px rgb(0, 69, 152),
+    0 0 4px 1px rgb(0, 73, 160);
+        background-color: rgb(0, 81, 178);
         /* .FormButton-Icon, .FormButton-Text {*/
         /*   opacity: .9;*/
         /* }*/
@@ -1159,16 +2003,16 @@ label.FormLabel-Control[for] {
 
 .FormButton_theme_select.FormButton_active,
       .FormButton_theme_select.FormItem_focused {
-        -webkit-box-shadow: inset 0 0 2px 1px rgb(0, 65, 143),
-    0 0 1px 2px rgb(0, 72, 159);
-                box-shadow: inset 0 0 2px 1px rgb(0, 65, 143),
-    0 0 1px 2px rgb(0, 72, 159); /* @calc($formItemOuterGlow - 2)px;*/
-        background-color: rgb(0, 72, 159);
+        -webkit-box-shadow: inset 0 0 2px 1px rgb(0, 62, 136),
+    0 0 1px 2px rgb(0, 73, 160);
+                box-shadow: inset 0 0 2px 1px rgb(0, 62, 136),
+    0 0 1px 2px rgb(0, 73, 160); /* @calc($formItemOuterGlow - 2)px;*/
+        background-color: rgb(0, 69, 151);
       }
 
 .FormButton_theme_maroon { /* $formItemBorderColor;*/ /* color($textColor alpha(.5));*/ /* border-color: $borderColor;*/ -webkit-box-shadow: inset 0 0 0 1px rgb(115, 0, 0),
     0 0 0 0 transparent; box-shadow: inset 0 0 0 1px rgb(115, 0, 0),
-    0 0 0 0 transparent; background-color: #800000; /* $formItemGlowColor;*/}
+    0 0 0 0 transparent; background-color: #800000; /* $hoveredBorderColor: color($borderColor shade(5));*/ /* $activeBorderColor: color($hoveredBorderColor shade(10));*/ /* $formItemGlowColor;*/}
 
 /* box-shadow: inset 0 0 0 1px $borderColor;*/
 
@@ -1187,10 +2031,10 @@ label.FormLabel-Control[for] {
       .FormButton_theme_maroon.FormItem_hovered {
         /* border-color: $hoveredBorderColor;*/
         -webkit-box-shadow: inset 0 0 1px 1px rgb(104, 0, 0),
-    0 0 4px 1px rgb(118, 0, 0);
+    0 0 4px 1px rgb(109, 0, 0);
                 box-shadow: inset 0 0 1px 1px rgb(104, 0, 0),
-    0 0 4px 1px rgb(118, 0, 0);
-        background-color: rgb(118, 0, 0);
+    0 0 4px 1px rgb(109, 0, 0);
+        background-color: rgb(122, 0, 0);
         /* .FormButton-Icon, .FormButton-Text {*/
         /*   opacity: .9;*/
         /* }*/
@@ -1200,16 +2044,16 @@ label.FormLabel-Control[for] {
 
 .FormButton_theme_maroon.FormButton_active,
       .FormButton_theme_maroon.FormItem_focused {
-        -webkit-box-shadow: inset 0 0 2px 1px rgb(98, 0, 0),
+        -webkit-box-shadow: inset 0 0 2px 1px rgb(93, 0, 0),
     0 0 1px 2px rgb(109, 0, 0);
-                box-shadow: inset 0 0 2px 1px rgb(98, 0, 0),
+                box-shadow: inset 0 0 2px 1px rgb(93, 0, 0),
     0 0 1px 2px rgb(109, 0, 0); /* @calc($formItemOuterGlow - 2)px;*/
-        background-color: rgb(109, 0, 0);
+        background-color: rgb(104, 0, 0);
       }
 
 .FormButton_theme_red { /* $formItemBorderColor;*/ /* color($textColor alpha(.5));*/ /* border-color: $borderColor;*/ -webkit-box-shadow: inset 0 0 0 1px rgb(230, 0, 0),
     0 0 0 0 transparent; box-shadow: inset 0 0 0 1px rgb(230, 0, 0),
-    0 0 0 0 transparent; background-color: #ff0000; /* $formItemGlowColor;*/}
+    0 0 0 0 transparent; background-color: #ff0000; /* $hoveredBorderColor: color($borderColor shade(5));*/ /* $activeBorderColor: color($hoveredBorderColor shade(10));*/ /* $formItemGlowColor;*/}
 
 /* box-shadow: inset 0 0 0 1px $borderColor;*/
 
@@ -1227,11 +2071,11 @@ label.FormLabel-Control[for] {
       .FormButton_theme_red.FormItem_focused,
       .FormButton_theme_red.FormItem_hovered {
         /* border-color: $hoveredBorderColor;*/
-        -webkit-box-shadow: inset 0 0 1px 1px rgb(207, 0, 0),
-    0 0 4px 1px rgb(235, 0, 0);
-                box-shadow: inset 0 0 1px 1px rgb(207, 0, 0),
-    0 0 4px 1px rgb(235, 0, 0);
-        background-color: rgb(235, 0, 0);
+        -webkit-box-shadow: inset 0 0 1px 1px rgb(208, 0, 0),
+    0 0 4px 1px rgb(219, 0, 0);
+                box-shadow: inset 0 0 1px 1px rgb(208, 0, 0),
+    0 0 4px 1px rgb(219, 0, 0);
+        background-color: rgb(242, 0, 0);
         /* .FormButton-Icon, .FormButton-Text {*/
         /*   opacity: .9;*/
         /* }*/
@@ -1241,16 +2085,16 @@ label.FormLabel-Control[for] {
 
 .FormButton_theme_red.FormButton_active,
       .FormButton_theme_red.FormItem_focused {
-        -webkit-box-shadow: inset 0 0 2px 1px rgb(196, 0, 0),
-    0 0 1px 2px rgb(217, 0, 0);
-                box-shadow: inset 0 0 2px 1px rgb(196, 0, 0),
-    0 0 1px 2px rgb(217, 0, 0); /* @calc($formItemOuterGlow - 2)px;*/
-        background-color: rgb(217, 0, 0);
+        -webkit-box-shadow: inset 0 0 2px 1px rgb(186, 0, 0),
+    0 0 1px 2px rgb(219, 0, 0);
+                box-shadow: inset 0 0 2px 1px rgb(186, 0, 0),
+    0 0 1px 2px rgb(219, 0, 0); /* @calc($formItemOuterGlow - 2)px;*/
+        background-color: rgb(206, 0, 0);
       }
 
 .FormButton_theme_purple { /* $formItemBorderColor;*/ /* color($textColor alpha(.5));*/ /* border-color: $borderColor;*/ -webkit-box-shadow: inset 0 0 0 1px rgb(115, 0, 115),
     0 0 0 0 transparent; box-shadow: inset 0 0 0 1px rgb(115, 0, 115),
-    0 0 0 0 transparent; background-color: #800080; /* $formItemGlowColor;*/}
+    0 0 0 0 transparent; background-color: #800080; /* $hoveredBorderColor: color($borderColor shade(5));*/ /* $activeBorderColor: color($hoveredBorderColor shade(10));*/ /* $formItemGlowColor;*/}
 
 /* box-shadow: inset 0 0 0 1px $borderColor;*/
 
@@ -1269,10 +2113,10 @@ label.FormLabel-Control[for] {
       .FormButton_theme_purple.FormItem_hovered {
         /* border-color: $hoveredBorderColor;*/
         -webkit-box-shadow: inset 0 0 1px 1px rgb(104, 0, 104),
-    0 0 4px 1px rgb(118, 0, 118);
+    0 0 4px 1px rgb(109, 0, 109);
                 box-shadow: inset 0 0 1px 1px rgb(104, 0, 104),
-    0 0 4px 1px rgb(118, 0, 118);
-        background-color: rgb(118, 0, 118);
+    0 0 4px 1px rgb(109, 0, 109);
+        background-color: rgb(122, 0, 122);
         /* .FormButton-Icon, .FormButton-Text {*/
         /*   opacity: .9;*/
         /* }*/
@@ -1282,16 +2126,16 @@ label.FormLabel-Control[for] {
 
 .FormButton_theme_purple.FormButton_active,
       .FormButton_theme_purple.FormItem_focused {
-        -webkit-box-shadow: inset 0 0 2px 1px rgb(98, 0, 98),
+        -webkit-box-shadow: inset 0 0 2px 1px rgb(93, 0, 93),
     0 0 1px 2px rgb(109, 0, 109);
-                box-shadow: inset 0 0 2px 1px rgb(98, 0, 98),
+                box-shadow: inset 0 0 2px 1px rgb(93, 0, 93),
     0 0 1px 2px rgb(109, 0, 109); /* @calc($formItemOuterGlow - 2)px;*/
-        background-color: rgb(109, 0, 109);
+        background-color: rgb(104, 0, 104);
       }
 
 .FormButton_theme_fuchsia { /* $formItemBorderColor;*/ /* color($textColor alpha(.5));*/ /* border-color: $borderColor;*/ -webkit-box-shadow: inset 0 0 0 1px rgb(230, 0, 230),
     0 0 0 0 transparent; box-shadow: inset 0 0 0 1px rgb(230, 0, 230),
-    0 0 0 0 transparent; background-color: #ff00ff; /* $formItemGlowColor;*/}
+    0 0 0 0 transparent; background-color: #ff00ff; /* $hoveredBorderColor: color($borderColor shade(5));*/ /* $activeBorderColor: color($hoveredBorderColor shade(10));*/ /* $formItemGlowColor;*/}
 
 /* box-shadow: inset 0 0 0 1px $borderColor;*/
 
@@ -1309,11 +2153,11 @@ label.FormLabel-Control[for] {
       .FormButton_theme_fuchsia.FormItem_focused,
       .FormButton_theme_fuchsia.FormItem_hovered {
         /* border-color: $hoveredBorderColor;*/
-        -webkit-box-shadow: inset 0 0 1px 1px rgb(207, 0, 207),
-    0 0 4px 1px rgb(235, 0, 235);
-                box-shadow: inset 0 0 1px 1px rgb(207, 0, 207),
-    0 0 4px 1px rgb(235, 0, 235);
-        background-color: rgb(235, 0, 235);
+        -webkit-box-shadow: inset 0 0 1px 1px rgb(208, 0, 208),
+    0 0 4px 1px rgb(219, 0, 219);
+                box-shadow: inset 0 0 1px 1px rgb(208, 0, 208),
+    0 0 4px 1px rgb(219, 0, 219);
+        background-color: rgb(242, 0, 242);
         /* .FormButton-Icon, .FormButton-Text {*/
         /*   opacity: .9;*/
         /* }*/
@@ -1323,16 +2167,16 @@ label.FormLabel-Control[for] {
 
 .FormButton_theme_fuchsia.FormButton_active,
       .FormButton_theme_fuchsia.FormItem_focused {
-        -webkit-box-shadow: inset 0 0 2px 1px rgb(196, 0, 196),
-    0 0 1px 2px rgb(217, 0, 217);
-                box-shadow: inset 0 0 2px 1px rgb(196, 0, 196),
-    0 0 1px 2px rgb(217, 0, 217); /* @calc($formItemOuterGlow - 2)px;*/
-        background-color: rgb(217, 0, 217);
+        -webkit-box-shadow: inset 0 0 2px 1px rgb(186, 0, 186),
+    0 0 1px 2px rgb(219, 0, 219);
+                box-shadow: inset 0 0 2px 1px rgb(186, 0, 186),
+    0 0 1px 2px rgb(219, 0, 219); /* @calc($formItemOuterGlow - 2)px;*/
+        background-color: rgb(206, 0, 206);
       }
 
 .FormButton_theme_green { /* $formItemBorderColor;*/ /* color($textColor alpha(.5));*/ /* border-color: $borderColor;*/ -webkit-box-shadow: inset 0 0 0 1px rgb(0, 115, 0),
     0 0 0 0 transparent; box-shadow: inset 0 0 0 1px rgb(0, 115, 0),
-    0 0 0 0 transparent; background-color: #008000; /* $formItemGlowColor;*/}
+    0 0 0 0 transparent; background-color: #008000; /* $hoveredBorderColor: color($borderColor shade(5));*/ /* $activeBorderColor: color($hoveredBorderColor shade(10));*/ /* $formItemGlowColor;*/}
 
 /* box-shadow: inset 0 0 0 1px $borderColor;*/
 
@@ -1351,10 +2195,10 @@ label.FormLabel-Control[for] {
       .FormButton_theme_green.FormItem_hovered {
         /* border-color: $hoveredBorderColor;*/
         -webkit-box-shadow: inset 0 0 1px 1px rgb(0, 104, 0),
-    0 0 4px 1px rgb(0, 118, 0);
+    0 0 4px 1px rgb(0, 109, 0);
                 box-shadow: inset 0 0 1px 1px rgb(0, 104, 0),
-    0 0 4px 1px rgb(0, 118, 0);
-        background-color: rgb(0, 118, 0);
+    0 0 4px 1px rgb(0, 109, 0);
+        background-color: rgb(0, 122, 0);
         /* .FormButton-Icon, .FormButton-Text {*/
         /*   opacity: .9;*/
         /* }*/
@@ -1364,16 +2208,16 @@ label.FormLabel-Control[for] {
 
 .FormButton_theme_green.FormButton_active,
       .FormButton_theme_green.FormItem_focused {
-        -webkit-box-shadow: inset 0 0 2px 1px rgb(0, 98, 0),
+        -webkit-box-shadow: inset 0 0 2px 1px rgb(0, 93, 0),
     0 0 1px 2px rgb(0, 109, 0);
-                box-shadow: inset 0 0 2px 1px rgb(0, 98, 0),
+                box-shadow: inset 0 0 2px 1px rgb(0, 93, 0),
     0 0 1px 2px rgb(0, 109, 0); /* @calc($formItemOuterGlow - 2)px;*/
-        background-color: rgb(0, 109, 0);
+        background-color: rgb(0, 104, 0);
       }
 
 .FormButton_theme_olive { /* $formItemBorderColor;*/ /* color($textColor alpha(.5));*/ /* border-color: $borderColor;*/ -webkit-box-shadow: inset 0 0 0 1px rgb(115, 115, 0),
     0 0 0 0 transparent; box-shadow: inset 0 0 0 1px rgb(115, 115, 0),
-    0 0 0 0 transparent; background-color: #808000; /* $formItemGlowColor;*/}
+    0 0 0 0 transparent; background-color: #808000; /* $hoveredBorderColor: color($borderColor shade(5));*/ /* $activeBorderColor: color($hoveredBorderColor shade(10));*/ /* $formItemGlowColor;*/}
 
 /* box-shadow: inset 0 0 0 1px $borderColor;*/
 
@@ -1392,10 +2236,10 @@ label.FormLabel-Control[for] {
       .FormButton_theme_olive.FormItem_hovered {
         /* border-color: $hoveredBorderColor;*/
         -webkit-box-shadow: inset 0 0 1px 1px rgb(104, 104, 0),
-    0 0 4px 1px rgb(118, 118, 0);
+    0 0 4px 1px rgb(109, 109, 0);
                 box-shadow: inset 0 0 1px 1px rgb(104, 104, 0),
-    0 0 4px 1px rgb(118, 118, 0);
-        background-color: rgb(118, 118, 0);
+    0 0 4px 1px rgb(109, 109, 0);
+        background-color: rgb(122, 122, 0);
         /* .FormButton-Icon, .FormButton-Text {*/
         /*   opacity: .9;*/
         /* }*/
@@ -1405,16 +2249,16 @@ label.FormLabel-Control[for] {
 
 .FormButton_theme_olive.FormButton_active,
       .FormButton_theme_olive.FormItem_focused {
-        -webkit-box-shadow: inset 0 0 2px 1px rgb(98, 98, 0),
+        -webkit-box-shadow: inset 0 0 2px 1px rgb(93, 93, 0),
     0 0 1px 2px rgb(109, 109, 0);
-                box-shadow: inset 0 0 2px 1px rgb(98, 98, 0),
+                box-shadow: inset 0 0 2px 1px rgb(93, 93, 0),
     0 0 1px 2px rgb(109, 109, 0); /* @calc($formItemOuterGlow - 2)px;*/
-        background-color: rgb(109, 109, 0);
+        background-color: rgb(104, 104, 0);
       }
 
 .FormButton_theme_navy { /* $formItemBorderColor;*/ /* color($textColor alpha(.5));*/ /* border-color: $borderColor;*/ -webkit-box-shadow: inset 0 0 0 1px rgb(0, 0, 115),
     0 0 0 0 transparent; box-shadow: inset 0 0 0 1px rgb(0, 0, 115),
-    0 0 0 0 transparent; background-color: #000080; /* $formItemGlowColor;*/}
+    0 0 0 0 transparent; background-color: #000080; /* $hoveredBorderColor: color($borderColor shade(5));*/ /* $activeBorderColor: color($hoveredBorderColor shade(10));*/ /* $formItemGlowColor;*/}
 
 /* box-shadow: inset 0 0 0 1px $borderColor;*/
 
@@ -1433,10 +2277,10 @@ label.FormLabel-Control[for] {
       .FormButton_theme_navy.FormItem_hovered {
         /* border-color: $hoveredBorderColor;*/
         -webkit-box-shadow: inset 0 0 1px 1px rgb(0, 0, 104),
-    0 0 4px 1px rgb(0, 0, 118);
+    0 0 4px 1px rgb(0, 0, 109);
                 box-shadow: inset 0 0 1px 1px rgb(0, 0, 104),
-    0 0 4px 1px rgb(0, 0, 118);
-        background-color: rgb(0, 0, 118);
+    0 0 4px 1px rgb(0, 0, 109);
+        background-color: rgb(0, 0, 122);
         /* .FormButton-Icon, .FormButton-Text {*/
         /*   opacity: .9;*/
         /* }*/
@@ -1446,16 +2290,16 @@ label.FormLabel-Control[for] {
 
 .FormButton_theme_navy.FormButton_active,
       .FormButton_theme_navy.FormItem_focused {
-        -webkit-box-shadow: inset 0 0 2px 1px rgb(0, 0, 98),
+        -webkit-box-shadow: inset 0 0 2px 1px rgb(0, 0, 93),
     0 0 1px 2px rgb(0, 0, 109);
-                box-shadow: inset 0 0 2px 1px rgb(0, 0, 98),
+                box-shadow: inset 0 0 2px 1px rgb(0, 0, 93),
     0 0 1px 2px rgb(0, 0, 109); /* @calc($formItemOuterGlow - 2)px;*/
-        background-color: rgb(0, 0, 109);
+        background-color: rgb(0, 0, 104);
       }
 
 .FormButton_theme_blue { /* $formItemBorderColor;*/ /* color($textColor alpha(.5));*/ /* border-color: $borderColor;*/ -webkit-box-shadow: inset 0 0 0 1px rgb(0, 0, 230),
     0 0 0 0 transparent; box-shadow: inset 0 0 0 1px rgb(0, 0, 230),
-    0 0 0 0 transparent; background-color: #0000ff; /* $formItemGlowColor;*/}
+    0 0 0 0 transparent; background-color: #0000ff; /* $hoveredBorderColor: color($borderColor shade(5));*/ /* $activeBorderColor: color($hoveredBorderColor shade(10));*/ /* $formItemGlowColor;*/}
 
 /* box-shadow: inset 0 0 0 1px $borderColor;*/
 
@@ -1473,11 +2317,11 @@ label.FormLabel-Control[for] {
       .FormButton_theme_blue.FormItem_focused,
       .FormButton_theme_blue.FormItem_hovered {
         /* border-color: $hoveredBorderColor;*/
-        -webkit-box-shadow: inset 0 0 1px 1px rgb(0, 0, 207),
-    0 0 4px 1px rgb(0, 0, 235);
-                box-shadow: inset 0 0 1px 1px rgb(0, 0, 207),
-    0 0 4px 1px rgb(0, 0, 235);
-        background-color: rgb(0, 0, 235);
+        -webkit-box-shadow: inset 0 0 1px 1px rgb(0, 0, 208),
+    0 0 4px 1px rgb(0, 0, 219);
+                box-shadow: inset 0 0 1px 1px rgb(0, 0, 208),
+    0 0 4px 1px rgb(0, 0, 219);
+        background-color: rgb(0, 0, 242);
         /* .FormButton-Icon, .FormButton-Text {*/
         /*   opacity: .9;*/
         /* }*/
@@ -1487,16 +2331,16 @@ label.FormLabel-Control[for] {
 
 .FormButton_theme_blue.FormButton_active,
       .FormButton_theme_blue.FormItem_focused {
-        -webkit-box-shadow: inset 0 0 2px 1px rgb(0, 0, 196),
-    0 0 1px 2px rgb(0, 0, 217);
-                box-shadow: inset 0 0 2px 1px rgb(0, 0, 196),
-    0 0 1px 2px rgb(0, 0, 217); /* @calc($formItemOuterGlow - 2)px;*/
-        background-color: rgb(0, 0, 217);
+        -webkit-box-shadow: inset 0 0 2px 1px rgb(0, 0, 186),
+    0 0 1px 2px rgb(0, 0, 219);
+                box-shadow: inset 0 0 2px 1px rgb(0, 0, 186),
+    0 0 1px 2px rgb(0, 0, 219); /* @calc($formItemOuterGlow - 2)px;*/
+        background-color: rgb(0, 0, 206);
       }
 
 .FormButton_theme_teal { /* $formItemBorderColor;*/ /* color($textColor alpha(.5));*/ /* border-color: $borderColor;*/ -webkit-box-shadow: inset 0 0 0 1px rgb(0, 115, 115),
     0 0 0 0 transparent; box-shadow: inset 0 0 0 1px rgb(0, 115, 115),
-    0 0 0 0 transparent; background-color: #008080; /* $formItemGlowColor;*/}
+    0 0 0 0 transparent; background-color: #008080; /* $hoveredBorderColor: color($borderColor shade(5));*/ /* $activeBorderColor: color($hoveredBorderColor shade(10));*/ /* $formItemGlowColor;*/}
 
 /* box-shadow: inset 0 0 0 1px $borderColor;*/
 
@@ -1515,10 +2359,10 @@ label.FormLabel-Control[for] {
       .FormButton_theme_teal.FormItem_hovered {
         /* border-color: $hoveredBorderColor;*/
         -webkit-box-shadow: inset 0 0 1px 1px rgb(0, 104, 104),
-    0 0 4px 1px rgb(0, 118, 118);
+    0 0 4px 1px rgb(0, 109, 109);
                 box-shadow: inset 0 0 1px 1px rgb(0, 104, 104),
-    0 0 4px 1px rgb(0, 118, 118);
-        background-color: rgb(0, 118, 118);
+    0 0 4px 1px rgb(0, 109, 109);
+        background-color: rgb(0, 122, 122);
         /* .FormButton-Icon, .FormButton-Text {*/
         /*   opacity: .9;*/
         /* }*/
@@ -1528,16 +2372,16 @@ label.FormLabel-Control[for] {
 
 .FormButton_theme_teal.FormButton_active,
       .FormButton_theme_teal.FormItem_focused {
-        -webkit-box-shadow: inset 0 0 2px 1px rgb(0, 98, 98),
+        -webkit-box-shadow: inset 0 0 2px 1px rgb(0, 93, 93),
     0 0 1px 2px rgb(0, 109, 109);
-                box-shadow: inset 0 0 2px 1px rgb(0, 98, 98),
+                box-shadow: inset 0 0 2px 1px rgb(0, 93, 93),
     0 0 1px 2px rgb(0, 109, 109); /* @calc($formItemOuterGlow - 2)px;*/
-        background-color: rgb(0, 109, 109);
+        background-color: rgb(0, 104, 104);
       }
 
 .FormButton_theme_orange { /* $formItemBorderColor;*/ /* color($textColor alpha(.5));*/ /* border-color: $borderColor;*/ -webkit-box-shadow: inset 0 0 0 1px rgb(230, 149, 0),
     0 0 0 0 transparent; box-shadow: inset 0 0 0 1px rgb(230, 149, 0),
-    0 0 0 0 transparent; background-color: #ffa500; /* $formItemGlowColor;*/}
+    0 0 0 0 transparent; background-color: #ffa500; /* $hoveredBorderColor: color($borderColor shade(5));*/ /* $activeBorderColor: color($hoveredBorderColor shade(10));*/ /* $formItemGlowColor;*/}
 
 /* box-shadow: inset 0 0 0 1px $borderColor;*/
 
@@ -1555,11 +2399,11 @@ label.FormLabel-Control[for] {
       .FormButton_theme_orange.FormItem_focused,
       .FormButton_theme_orange.FormItem_hovered {
         /* border-color: $hoveredBorderColor;*/
-        -webkit-box-shadow: inset 0 0 1px 1px rgb(207, 134, 0),
-    0 0 4px 1px rgb(235, 152, 0);
-                box-shadow: inset 0 0 1px 1px rgb(207, 134, 0),
-    0 0 4px 1px rgb(235, 152, 0);
-        background-color: rgb(235, 152, 0);
+        -webkit-box-shadow: inset 0 0 1px 1px rgb(208, 135, 0),
+    0 0 4px 1px rgb(219, 142, 0);
+                box-shadow: inset 0 0 1px 1px rgb(208, 135, 0),
+    0 0 4px 1px rgb(219, 142, 0);
+        background-color: rgb(242, 157, 0);
         /* .FormButton-Icon, .FormButton-Text {*/
         /*   opacity: .9;*/
         /* }*/
@@ -1569,16 +2413,16 @@ label.FormLabel-Control[for] {
 
 .FormButton_theme_orange.FormButton_active,
       .FormButton_theme_orange.FormItem_focused {
-        -webkit-box-shadow: inset 0 0 2px 1px rgb(196, 127, 0),
-    0 0 1px 2px rgb(217, 140, 0);
-                box-shadow: inset 0 0 2px 1px rgb(196, 127, 0),
-    0 0 1px 2px rgb(217, 140, 0); /* @calc($formItemOuterGlow - 2)px;*/
-        background-color: rgb(217, 140, 0);
+        -webkit-box-shadow: inset 0 0 2px 1px rgb(186, 121, 0),
+    0 0 1px 2px rgb(219, 142, 0);
+                box-shadow: inset 0 0 2px 1px rgb(186, 121, 0),
+    0 0 1px 2px rgb(219, 142, 0); /* @calc($formItemOuterGlow - 2)px;*/
+        background-color: rgb(206, 133, 0);
       }
 
 .FormButton_theme_blueviolet { /* $formItemBorderColor;*/ /* color($textColor alpha(.5));*/ /* border-color: $borderColor;*/ -webkit-box-shadow: inset 0 0 0 1px rgb(124, 39, 203),
     0 0 0 0 transparent; box-shadow: inset 0 0 0 1px rgb(124, 39, 203),
-    0 0 0 0 transparent; background-color: #8a2be2; /* $formItemGlowColor;*/}
+    0 0 0 0 transparent; background-color: #8a2be2; /* $hoveredBorderColor: color($borderColor shade(5));*/ /* $activeBorderColor: color($hoveredBorderColor shade(10));*/ /* $formItemGlowColor;*/}
 
 /* box-shadow: inset 0 0 0 1px $borderColor;*/
 
@@ -1597,10 +2441,10 @@ label.FormLabel-Control[for] {
       .FormButton_theme_blueviolet.FormItem_hovered {
         /* border-color: $hoveredBorderColor;*/
         -webkit-box-shadow: inset 0 0 1px 1px rgb(112, 35, 183),
-    0 0 4px 1px rgb(127, 40, 208);
+    0 0 4px 1px rgb(118, 37, 193);
                 box-shadow: inset 0 0 1px 1px rgb(112, 35, 183),
-    0 0 4px 1px rgb(127, 40, 208);
-        background-color: rgb(127, 40, 208);
+    0 0 4px 1px rgb(118, 37, 193);
+        background-color: rgb(131, 41, 215);
         /* .FormButton-Icon, .FormButton-Text {*/
         /*   opacity: .9;*/
         /* }*/
@@ -1610,16 +2454,16 @@ label.FormLabel-Control[for] {
 
 .FormButton_theme_blueviolet.FormButton_active,
       .FormButton_theme_blueviolet.FormItem_focused {
-        -webkit-box-shadow: inset 0 0 2px 1px rgb(105, 33, 173),
-    0 0 1px 2px rgb(117, 37, 192);
-                box-shadow: inset 0 0 2px 1px rgb(105, 33, 173),
-    0 0 1px 2px rgb(117, 37, 192); /* @calc($formItemOuterGlow - 2)px;*/
-        background-color: rgb(117, 37, 192);
+        -webkit-box-shadow: inset 0 0 2px 1px rgb(100, 31, 164),
+    0 0 1px 2px rgb(118, 37, 193);
+                box-shadow: inset 0 0 2px 1px rgb(100, 31, 164),
+    0 0 1px 2px rgb(118, 37, 193); /* @calc($formItemOuterGlow - 2)px;*/
+        background-color: rgb(111, 35, 183);
       }
 
 .FormButton_theme_brown { /* $formItemBorderColor;*/ /* color($textColor alpha(.5));*/ /* border-color: $borderColor;*/ -webkit-box-shadow: inset 0 0 0 1px rgb(149, 38, 38),
     0 0 0 0 transparent; box-shadow: inset 0 0 0 1px rgb(149, 38, 38),
-    0 0 0 0 transparent; background-color: #a52a2a; /* $formItemGlowColor;*/}
+    0 0 0 0 transparent; background-color: #a52a2a; /* $hoveredBorderColor: color($borderColor shade(5));*/ /* $activeBorderColor: color($hoveredBorderColor shade(10));*/ /* $formItemGlowColor;*/}
 
 /* box-shadow: inset 0 0 0 1px $borderColor;*/
 
@@ -1637,11 +2481,11 @@ label.FormLabel-Control[for] {
       .FormButton_theme_brown.FormItem_focused,
       .FormButton_theme_brown.FormItem_hovered {
         /* border-color: $hoveredBorderColor;*/
-        -webkit-box-shadow: inset 0 0 1px 1px rgb(134, 34, 34),
-    0 0 4px 1px rgb(152, 39, 39);
-                box-shadow: inset 0 0 1px 1px rgb(134, 34, 34),
-    0 0 4px 1px rgb(152, 39, 39);
-        background-color: rgb(152, 39, 39);
+        -webkit-box-shadow: inset 0 0 1px 1px rgb(135, 34, 34),
+    0 0 4px 1px rgb(142, 36, 36);
+                box-shadow: inset 0 0 1px 1px rgb(135, 34, 34),
+    0 0 4px 1px rgb(142, 36, 36);
+        background-color: rgb(157, 40, 40);
         /* .FormButton-Icon, .FormButton-Text {*/
         /*   opacity: .9;*/
         /* }*/
@@ -1651,16 +2495,16 @@ label.FormLabel-Control[for] {
 
 .FormButton_theme_brown.FormButton_active,
       .FormButton_theme_brown.FormItem_focused {
-        -webkit-box-shadow: inset 0 0 2px 1px rgb(127, 32, 32),
-    0 0 1px 2px rgb(140, 36, 36);
-                box-shadow: inset 0 0 2px 1px rgb(127, 32, 32),
-    0 0 1px 2px rgb(140, 36, 36); /* @calc($formItemOuterGlow - 2)px;*/
-        background-color: rgb(140, 36, 36);
+        -webkit-box-shadow: inset 0 0 2px 1px rgb(121, 31, 31),
+    0 0 1px 2px rgb(142, 36, 36);
+                box-shadow: inset 0 0 2px 1px rgb(121, 31, 31),
+    0 0 1px 2px rgb(142, 36, 36); /* @calc($formItemOuterGlow - 2)px;*/
+        background-color: rgb(133, 34, 34);
       }
 
 .FormButton_theme_cadetblue { /* $formItemBorderColor;*/ /* color($textColor alpha(.5));*/ /* border-color: $borderColor;*/ -webkit-box-shadow: inset 0 0 0 1px rgb(86, 142, 144),
     0 0 0 0 transparent; box-shadow: inset 0 0 0 1px rgb(86, 142, 144),
-    0 0 0 0 transparent; background-color: #5f9ea0; /* $formItemGlowColor;*/}
+    0 0 0 0 transparent; background-color: #5f9ea0; /* $hoveredBorderColor: color($borderColor shade(5));*/ /* $activeBorderColor: color($hoveredBorderColor shade(10));*/ /* $formItemGlowColor;*/}
 
 /* box-shadow: inset 0 0 0 1px $borderColor;*/
 
@@ -1678,11 +2522,11 @@ label.FormLabel-Control[for] {
       .FormButton_theme_cadetblue.FormItem_focused,
       .FormButton_theme_cadetblue.FormItem_hovered {
         /* border-color: $hoveredBorderColor;*/
-        -webkit-box-shadow: inset 0 0 1px 1px rgb(77, 128, 130),
-    0 0 4px 1px rgb(87, 145, 147);
-                box-shadow: inset 0 0 1px 1px rgb(77, 128, 130),
-    0 0 4px 1px rgb(87, 145, 147);
-        background-color: rgb(87, 145, 147);
+        -webkit-box-shadow: inset 0 0 1px 1px rgb(78, 128, 130),
+    0 0 4px 1px rgb(82, 135, 137);
+                box-shadow: inset 0 0 1px 1px rgb(78, 128, 130),
+    0 0 4px 1px rgb(82, 135, 137);
+        background-color: rgb(90, 150, 152);
         /* .FormButton-Icon, .FormButton-Text {*/
         /*   opacity: .9;*/
         /* }*/
@@ -1692,16 +2536,16 @@ label.FormLabel-Control[for] {
 
 .FormButton_theme_cadetblue.FormButton_active,
       .FormButton_theme_cadetblue.FormItem_focused {
-        -webkit-box-shadow: inset 0 0 2px 1px rgb(73, 121, 122),
-    0 0 1px 2px rgb(81, 134, 136);
-                box-shadow: inset 0 0 2px 1px rgb(73, 121, 122),
-    0 0 1px 2px rgb(81, 134, 136); /* @calc($formItemOuterGlow - 2)px;*/
-        background-color: rgb(81, 134, 136);
+        -webkit-box-shadow: inset 0 0 2px 1px rgb(70, 115, 116),
+    0 0 1px 2px rgb(82, 135, 137);
+                box-shadow: inset 0 0 2px 1px rgb(70, 115, 116),
+    0 0 1px 2px rgb(82, 135, 137); /* @calc($formItemOuterGlow - 2)px;*/
+        background-color: rgb(77, 128, 129);
       }
 
 .FormButton_theme_darkblue { /* $formItemBorderColor;*/ /* color($textColor alpha(.5));*/ /* border-color: $borderColor;*/ -webkit-box-shadow: inset 0 0 0 1px rgb(0, 0, 125),
     0 0 0 0 transparent; box-shadow: inset 0 0 0 1px rgb(0, 0, 125),
-    0 0 0 0 transparent; background-color: #00008b; /* $formItemGlowColor;*/}
+    0 0 0 0 transparent; background-color: #00008b; /* $hoveredBorderColor: color($borderColor shade(5));*/ /* $activeBorderColor: color($hoveredBorderColor shade(10));*/ /* $formItemGlowColor;*/}
 
 /* box-shadow: inset 0 0 0 1px $borderColor;*/
 
@@ -1720,10 +2564,10 @@ label.FormLabel-Control[for] {
       .FormButton_theme_darkblue.FormItem_hovered {
         /* border-color: $hoveredBorderColor;*/
         -webkit-box-shadow: inset 0 0 1px 1px rgb(0, 0, 113),
-    0 0 4px 1px rgb(0, 0, 128);
+    0 0 4px 1px rgb(0, 0, 119);
                 box-shadow: inset 0 0 1px 1px rgb(0, 0, 113),
-    0 0 4px 1px rgb(0, 0, 128);
-        background-color: rgb(0, 0, 128);
+    0 0 4px 1px rgb(0, 0, 119);
+        background-color: rgb(0, 0, 132);
         /* .FormButton-Icon, .FormButton-Text {*/
         /*   opacity: .9;*/
         /* }*/
@@ -1733,16 +2577,16 @@ label.FormLabel-Control[for] {
 
 .FormButton_theme_darkblue.FormButton_active,
       .FormButton_theme_darkblue.FormItem_focused {
-        -webkit-box-shadow: inset 0 0 2px 1px rgb(0, 0, 106),
-    0 0 1px 2px rgb(0, 0, 118);
-                box-shadow: inset 0 0 2px 1px rgb(0, 0, 106),
-    0 0 1px 2px rgb(0, 0, 118); /* @calc($formItemOuterGlow - 2)px;*/
-        background-color: rgb(0, 0, 118);
+        -webkit-box-shadow: inset 0 0 2px 1px rgb(0, 0, 101),
+    0 0 1px 2px rgb(0, 0, 119);
+                box-shadow: inset 0 0 2px 1px rgb(0, 0, 101),
+    0 0 1px 2px rgb(0, 0, 119); /* @calc($formItemOuterGlow - 2)px;*/
+        background-color: rgb(0, 0, 112);
       }
 
 .FormButton_theme_darkcyan { /* $formItemBorderColor;*/ /* color($textColor alpha(.5));*/ /* border-color: $borderColor;*/ -webkit-box-shadow: inset 0 0 0 1px rgb(0, 125, 125),
     0 0 0 0 transparent; box-shadow: inset 0 0 0 1px rgb(0, 125, 125),
-    0 0 0 0 transparent; background-color: #008b8b; /* $formItemGlowColor;*/}
+    0 0 0 0 transparent; background-color: #008b8b; /* $hoveredBorderColor: color($borderColor shade(5));*/ /* $activeBorderColor: color($hoveredBorderColor shade(10));*/ /* $formItemGlowColor;*/}
 
 /* box-shadow: inset 0 0 0 1px $borderColor;*/
 
@@ -1761,10 +2605,10 @@ label.FormLabel-Control[for] {
       .FormButton_theme_darkcyan.FormItem_hovered {
         /* border-color: $hoveredBorderColor;*/
         -webkit-box-shadow: inset 0 0 1px 1px rgb(0, 113, 113),
-    0 0 4px 1px rgb(0, 128, 128);
+    0 0 4px 1px rgb(0, 119, 119);
                 box-shadow: inset 0 0 1px 1px rgb(0, 113, 113),
-    0 0 4px 1px rgb(0, 128, 128);
-        background-color: rgb(0, 128, 128);
+    0 0 4px 1px rgb(0, 119, 119);
+        background-color: rgb(0, 132, 132);
         /* .FormButton-Icon, .FormButton-Text {*/
         /*   opacity: .9;*/
         /* }*/
@@ -1774,16 +2618,16 @@ label.FormLabel-Control[for] {
 
 .FormButton_theme_darkcyan.FormButton_active,
       .FormButton_theme_darkcyan.FormItem_focused {
-        -webkit-box-shadow: inset 0 0 2px 1px rgb(0, 106, 106),
-    0 0 1px 2px rgb(0, 118, 118);
-                box-shadow: inset 0 0 2px 1px rgb(0, 106, 106),
-    0 0 1px 2px rgb(0, 118, 118); /* @calc($formItemOuterGlow - 2)px;*/
-        background-color: rgb(0, 118, 118);
+        -webkit-box-shadow: inset 0 0 2px 1px rgb(0, 101, 101),
+    0 0 1px 2px rgb(0, 119, 119);
+                box-shadow: inset 0 0 2px 1px rgb(0, 101, 101),
+    0 0 1px 2px rgb(0, 119, 119); /* @calc($formItemOuterGlow - 2)px;*/
+        background-color: rgb(0, 112, 112);
       }
 
 .FormButton_theme_darkgoldenrod { /* $formItemBorderColor;*/ /* color($textColor alpha(.5));*/ /* border-color: $borderColor;*/ -webkit-box-shadow: inset 0 0 0 1px rgb(166, 121, 10),
     0 0 0 0 transparent; box-shadow: inset 0 0 0 1px rgb(166, 121, 10),
-    0 0 0 0 transparent; background-color: #b8860b; /* $formItemGlowColor;*/}
+    0 0 0 0 transparent; background-color: #b8860b; /* $hoveredBorderColor: color($borderColor shade(5));*/ /* $activeBorderColor: color($hoveredBorderColor shade(10));*/ /* $formItemGlowColor;*/}
 
 /* box-shadow: inset 0 0 0 1px $borderColor;*/
 
@@ -1801,11 +2645,11 @@ label.FormLabel-Control[for] {
       .FormButton_theme_darkgoldenrod.FormItem_focused,
       .FormButton_theme_darkgoldenrod.FormItem_hovered {
         /* border-color: $hoveredBorderColor;*/
-        -webkit-box-shadow: inset 0 0 1px 1px rgb(149, 109, 9),
-    0 0 4px 1px rgb(169, 123, 10);
-                box-shadow: inset 0 0 1px 1px rgb(149, 109, 9),
-    0 0 4px 1px rgb(169, 123, 10);
-        background-color: rgb(169, 123, 10);
+        -webkit-box-shadow: inset 0 0 1px 1px rgb(150, 109, 10),
+    0 0 4px 1px rgb(158, 115, 10);
+                box-shadow: inset 0 0 1px 1px rgb(150, 109, 10),
+    0 0 4px 1px rgb(158, 115, 10);
+        background-color: rgb(175, 127, 10);
         /* .FormButton-Icon, .FormButton-Text {*/
         /*   opacity: .9;*/
         /* }*/
@@ -1815,16 +2659,16 @@ label.FormLabel-Control[for] {
 
 .FormButton_theme_darkgoldenrod.FormButton_active,
       .FormButton_theme_darkgoldenrod.FormItem_focused {
-        -webkit-box-shadow: inset 0 0 2px 1px rgb(141, 103, 9),
-    0 0 1px 2px rgb(156, 114, 9);
-                box-shadow: inset 0 0 2px 1px rgb(141, 103, 9),
-    0 0 1px 2px rgb(156, 114, 9); /* @calc($formItemOuterGlow - 2)px;*/
-        background-color: rgb(156, 114, 9);
+        -webkit-box-shadow: inset 0 0 2px 1px rgb(134, 98, 9),
+    0 0 1px 2px rgb(158, 115, 10);
+                box-shadow: inset 0 0 2px 1px rgb(134, 98, 9),
+    0 0 1px 2px rgb(158, 115, 10); /* @calc($formItemOuterGlow - 2)px;*/
+        background-color: rgb(149, 108, 9);
       }
 
 .FormButton_theme_darkorange { /* $formItemBorderColor;*/ /* color($textColor alpha(.5));*/ /* border-color: $borderColor;*/ -webkit-box-shadow: inset 0 0 0 1px rgb(230, 126, 0),
     0 0 0 0 transparent; box-shadow: inset 0 0 0 1px rgb(230, 126, 0),
-    0 0 0 0 transparent; background-color: #ff8c00; /* $formItemGlowColor;*/}
+    0 0 0 0 transparent; background-color: #ff8c00; /* $hoveredBorderColor: color($borderColor shade(5));*/ /* $activeBorderColor: color($hoveredBorderColor shade(10));*/ /* $formItemGlowColor;*/}
 
 /* box-shadow: inset 0 0 0 1px $borderColor;*/
 
@@ -1842,11 +2686,11 @@ label.FormLabel-Control[for] {
       .FormButton_theme_darkorange.FormItem_focused,
       .FormButton_theme_darkorange.FormItem_hovered {
         /* border-color: $hoveredBorderColor;*/
-        -webkit-box-shadow: inset 0 0 1px 1px rgb(207, 113, 0),
-    0 0 4px 1px rgb(235, 129, 0);
-                box-shadow: inset 0 0 1px 1px rgb(207, 113, 0),
-    0 0 4px 1px rgb(235, 129, 0);
-        background-color: rgb(235, 129, 0);
+        -webkit-box-shadow: inset 0 0 1px 1px rgb(208, 114, 0),
+    0 0 4px 1px rgb(219, 120, 0);
+                box-shadow: inset 0 0 1px 1px rgb(208, 114, 0),
+    0 0 4px 1px rgb(219, 120, 0);
+        background-color: rgb(242, 133, 0);
         /* .FormButton-Icon, .FormButton-Text {*/
         /*   opacity: .9;*/
         /* }*/
@@ -1856,16 +2700,16 @@ label.FormLabel-Control[for] {
 
 .FormButton_theme_darkorange.FormButton_active,
       .FormButton_theme_darkorange.FormItem_focused {
-        -webkit-box-shadow: inset 0 0 2px 1px rgb(196, 107, 0),
-    0 0 1px 2px rgb(217, 119, 0);
-                box-shadow: inset 0 0 2px 1px rgb(196, 107, 0),
-    0 0 1px 2px rgb(217, 119, 0); /* @calc($formItemOuterGlow - 2)px;*/
-        background-color: rgb(217, 119, 0);
+        -webkit-box-shadow: inset 0 0 2px 1px rgb(186, 102, 0),
+    0 0 1px 2px rgb(219, 120, 0);
+                box-shadow: inset 0 0 2px 1px rgb(186, 102, 0),
+    0 0 1px 2px rgb(219, 120, 0); /* @calc($formItemOuterGlow - 2)px;*/
+        background-color: rgb(206, 113, 0);
       }
 
 .FormButton_theme_darkorchid { /* $formItemBorderColor;*/ /* color($textColor alpha(.5));*/ /* border-color: $borderColor;*/ -webkit-box-shadow: inset 0 0 0 1px rgb(138, 45, 184),
     0 0 0 0 transparent; box-shadow: inset 0 0 0 1px rgb(138, 45, 184),
-    0 0 0 0 transparent; background-color: #9932cc; /* $formItemGlowColor;*/}
+    0 0 0 0 transparent; background-color: #9932cc; /* $hoveredBorderColor: color($borderColor shade(5));*/ /* $activeBorderColor: color($hoveredBorderColor shade(10));*/ /* $formItemGlowColor;*/}
 
 /* box-shadow: inset 0 0 0 1px $borderColor;*/
 
@@ -1884,10 +2728,10 @@ label.FormLabel-Control[for] {
       .FormButton_theme_darkorchid.FormItem_hovered {
         /* border-color: $hoveredBorderColor;*/
         -webkit-box-shadow: inset 0 0 1px 1px rgb(124, 41, 166),
-    0 0 4px 1px rgb(141, 46, 188);
+    0 0 4px 1px rgb(131, 43, 175);
                 box-shadow: inset 0 0 1px 1px rgb(124, 41, 166),
-    0 0 4px 1px rgb(141, 46, 188);
-        background-color: rgb(141, 46, 188);
+    0 0 4px 1px rgb(131, 43, 175);
+        background-color: rgb(145, 48, 194);
         /* .FormButton-Icon, .FormButton-Text {*/
         /*   opacity: .9;*/
         /* }*/
@@ -1897,16 +2741,16 @@ label.FormLabel-Control[for] {
 
 .FormButton_theme_darkorchid.FormButton_active,
       .FormButton_theme_darkorchid.FormItem_focused {
-        -webkit-box-shadow: inset 0 0 2px 1px rgb(117, 38, 156),
-    0 0 1px 2px rgb(130, 43, 173);
-                box-shadow: inset 0 0 2px 1px rgb(117, 38, 156),
-    0 0 1px 2px rgb(130, 43, 173); /* @calc($formItemOuterGlow - 2)px;*/
-        background-color: rgb(130, 43, 173);
+        -webkit-box-shadow: inset 0 0 2px 1px rgb(111, 37, 149),
+    0 0 1px 2px rgb(131, 43, 175);
+                box-shadow: inset 0 0 2px 1px rgb(111, 37, 149),
+    0 0 1px 2px rgb(131, 43, 175); /* @calc($formItemOuterGlow - 2)px;*/
+        background-color: rgb(123, 41, 165);
       }
 
 .FormButton_theme_darkred { /* $formItemBorderColor;*/ /* color($textColor alpha(.5));*/ /* border-color: $borderColor;*/ -webkit-box-shadow: inset 0 0 0 1px rgb(125, 0, 0),
     0 0 0 0 transparent; box-shadow: inset 0 0 0 1px rgb(125, 0, 0),
-    0 0 0 0 transparent; background-color: #8b0000; /* $formItemGlowColor;*/}
+    0 0 0 0 transparent; background-color: #8b0000; /* $hoveredBorderColor: color($borderColor shade(5));*/ /* $activeBorderColor: color($hoveredBorderColor shade(10));*/ /* $formItemGlowColor;*/}
 
 /* box-shadow: inset 0 0 0 1px $borderColor;*/
 
@@ -1925,10 +2769,10 @@ label.FormLabel-Control[for] {
       .FormButton_theme_darkred.FormItem_hovered {
         /* border-color: $hoveredBorderColor;*/
         -webkit-box-shadow: inset 0 0 1px 1px rgb(113, 0, 0),
-    0 0 4px 1px rgb(128, 0, 0);
+    0 0 4px 1px rgb(119, 0, 0);
                 box-shadow: inset 0 0 1px 1px rgb(113, 0, 0),
-    0 0 4px 1px rgb(128, 0, 0);
-        background-color: rgb(128, 0, 0);
+    0 0 4px 1px rgb(119, 0, 0);
+        background-color: rgb(132, 0, 0);
         /* .FormButton-Icon, .FormButton-Text {*/
         /*   opacity: .9;*/
         /* }*/
@@ -1938,16 +2782,16 @@ label.FormLabel-Control[for] {
 
 .FormButton_theme_darkred.FormButton_active,
       .FormButton_theme_darkred.FormItem_focused {
-        -webkit-box-shadow: inset 0 0 2px 1px rgb(106, 0, 0),
-    0 0 1px 2px rgb(118, 0, 0);
-                box-shadow: inset 0 0 2px 1px rgb(106, 0, 0),
-    0 0 1px 2px rgb(118, 0, 0); /* @calc($formItemOuterGlow - 2)px;*/
-        background-color: rgb(118, 0, 0);
+        -webkit-box-shadow: inset 0 0 2px 1px rgb(101, 0, 0),
+    0 0 1px 2px rgb(119, 0, 0);
+                box-shadow: inset 0 0 2px 1px rgb(101, 0, 0),
+    0 0 1px 2px rgb(119, 0, 0); /* @calc($formItemOuterGlow - 2)px;*/
+        background-color: rgb(112, 0, 0);
       }
 
 .FormButton_theme_darkslateblue { /* $formItemBorderColor;*/ /* color($textColor alpha(.5));*/ /* border-color: $borderColor;*/ -webkit-box-shadow: inset 0 0 0 1px rgb(65, 55, 125),
     0 0 0 0 transparent; box-shadow: inset 0 0 0 1px rgb(65, 55, 125),
-    0 0 0 0 transparent; background-color: #483d8b; /* $formItemGlowColor;*/}
+    0 0 0 0 transparent; background-color: #483d8b; /* $hoveredBorderColor: color($borderColor shade(5));*/ /* $activeBorderColor: color($hoveredBorderColor shade(10));*/ /* $formItemGlowColor;*/}
 
 /* box-shadow: inset 0 0 0 1px $borderColor;*/
 
@@ -1965,11 +2809,11 @@ label.FormLabel-Control[for] {
       .FormButton_theme_darkslateblue.FormItem_focused,
       .FormButton_theme_darkslateblue.FormItem_hovered {
         /* border-color: $hoveredBorderColor;*/
-        -webkit-box-shadow: inset 0 0 1px 1px rgb(59, 50, 113),
-    0 0 4px 1px rgb(66, 56, 128);
-                box-shadow: inset 0 0 1px 1px rgb(59, 50, 113),
-    0 0 4px 1px rgb(66, 56, 128);
-        background-color: rgb(66, 56, 128);
+        -webkit-box-shadow: inset 0 0 1px 1px rgb(59, 49, 113),
+    0 0 4px 1px rgb(62, 52, 119);
+                box-shadow: inset 0 0 1px 1px rgb(59, 49, 113),
+    0 0 4px 1px rgb(62, 52, 119);
+        background-color: rgb(68, 58, 132);
         /* .FormButton-Icon, .FormButton-Text {*/
         /*   opacity: .9;*/
         /* }*/
@@ -1979,16 +2823,16 @@ label.FormLabel-Control[for] {
 
 .FormButton_theme_darkslateblue.FormButton_active,
       .FormButton_theme_darkslateblue.FormItem_focused {
-        -webkit-box-shadow: inset 0 0 2px 1px rgb(55, 47, 106),
-    0 0 1px 2px rgb(61, 52, 118);
-                box-shadow: inset 0 0 2px 1px rgb(55, 47, 106),
-    0 0 1px 2px rgb(61, 52, 118); /* @calc($formItemOuterGlow - 2)px;*/
-        background-color: rgb(61, 52, 118);
+        -webkit-box-shadow: inset 0 0 2px 1px rgb(53, 44, 101),
+    0 0 1px 2px rgb(62, 52, 119);
+                box-shadow: inset 0 0 2px 1px rgb(53, 44, 101),
+    0 0 1px 2px rgb(62, 52, 119); /* @calc($formItemOuterGlow - 2)px;*/
+        background-color: rgb(58, 49, 112);
       }
 
 .FormButton_theme_darkslategray { /* $formItemBorderColor;*/ /* color($textColor alpha(.5));*/ /* border-color: $borderColor;*/ -webkit-box-shadow: inset 0 0 0 1px rgb(42, 71, 71),
     0 0 0 0 transparent; box-shadow: inset 0 0 0 1px rgb(42, 71, 71),
-    0 0 0 0 transparent; background-color: #2f4f4f; /* $formItemGlowColor;*/}
+    0 0 0 0 transparent; background-color: #2f4f4f; /* $hoveredBorderColor: color($borderColor shade(5));*/ /* $activeBorderColor: color($hoveredBorderColor shade(10));*/ /* $formItemGlowColor;*/}
 
 /* box-shadow: inset 0 0 0 1px $borderColor;*/
 
@@ -2007,10 +2851,10 @@ label.FormLabel-Control[for] {
       .FormButton_theme_darkslategray.FormItem_hovered {
         /* border-color: $hoveredBorderColor;*/
         -webkit-box-shadow: inset 0 0 1px 1px rgb(38, 64, 64),
-    0 0 4px 1px rgb(43, 73, 73);
+    0 0 4px 1px rgb(40, 67, 67);
                 box-shadow: inset 0 0 1px 1px rgb(38, 64, 64),
-    0 0 4px 1px rgb(43, 73, 73);
-        background-color: rgb(43, 73, 73);
+    0 0 4px 1px rgb(40, 67, 67);
+        background-color: rgb(45, 75, 75);
         /* .FormButton-Icon, .FormButton-Text {*/
         /*   opacity: .9;*/
         /* }*/
@@ -2020,11 +2864,11 @@ label.FormLabel-Control[for] {
 
 .FormButton_theme_darkslategray.FormButton_active,
       .FormButton_theme_darkslategray.FormItem_focused {
-        -webkit-box-shadow: inset 0 0 2px 1px rgb(36, 60, 60),
+        -webkit-box-shadow: inset 0 0 2px 1px rgb(34, 57, 57),
     0 0 1px 2px rgb(40, 67, 67);
-                box-shadow: inset 0 0 2px 1px rgb(36, 60, 60),
+                box-shadow: inset 0 0 2px 1px rgb(34, 57, 57),
     0 0 1px 2px rgb(40, 67, 67); /* @calc($formItemOuterGlow - 2)px;*/
-        background-color: rgb(40, 67, 67);
+        background-color: rgb(38, 64, 64);
       }
 
 /** @module FormGroup.styles
@@ -5184,6 +6028,60 @@ input.FormTextInput-Control:-internal-autofill-previewed,
 .FormItem_hovered.FormItem_focused.FormRadio_theme_darkslategray .FormRadio-Actor {
         background-color: rgb(38, 63, 63);
       }
+
+/** @module FormDateTime.styles
+ *  @since 2021.01.23, 19:44
+ *  @changed 2021.01.23, 19:44
+ */
+
+.FormDateTime .react-datepicker {
+    margin: 0;
+    border: none;
+    display: block;
+  }
+
+.FormDateTime .react-datepicker__time-list-item {
+      padding: 0 !important; /* Override rule for `.react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list li.react-datepicker__time-list-item`*/
+      height: 30px !important;
+    }
+
+.FormDateTime .react-datepicker__navigation {
+      margin-top: 6px;
+    }
+
+/** @module FormDateRange.styles
+ *  @since 2021.01.26, 13:19
+ *  @changed 2021.01.26, 13:19
+ */
+
+.FormDateRange {
+  /* .react-datepicker {*/
+  /*   margin: 0;*/
+  /*   border: none;*/
+  /*   display: block;*/
+  /*   &__time-list-item {*/
+  /*     padding: 0 !important; // Override rule for `.react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list li.react-datepicker__time-list-item`*/
+  /*     height: 30px !important;*/
+  /*   }*/
+  /*   &__navigation {*/
+  /*     margin-top: 6px;*/
+  /*   }*/
+  /* }*/
+}
+
+.FormDateRange-PopupWrapper {
+    display: -ms-flexbox;
+    display: flex;
+  }
+
+.FormDateRange-PopupWrapper .DateTimeSelector {
+      -ms-flex-align: stretch;
+          align-items: stretch;
+    }
+
+.FormDateRange-PopupWrapper .DateTimeSelector + .DateTimeSelector {
+      border-left: 1px solid #aeaeae;
+    }
 
 /** @module Loader.pcss
  *  @since 2020.12.24, 22:38

@@ -1,5 +1,7 @@
 # CHANGELOG
 
+- 2021.01.26, 21:01 -- v.0.2.7.
+- 2021.01.26, 20:37 -- PD-3546: DateTimeSelector, FormDateRange: Support for date/time range selection (done).
 - 2021.01.21, 12:24 -- PD-3327: Fixed interactive styles for FormRadio.
 - 2021.01.21, 01:30 -- PD-3327: Fixed overridings for standard html button tag  & imput text autofill styles (in FormButton & FormTextInput).
 - 2021.01.20, 23:28 -- PD-3327: Interactive styles for FormRadio (and FormInteractiveItem).
@@ -75,5 +77,5 @@
 - 2020.10.05, 20:38 -- v.0.0.15: Extracted `demoSupport.jsx` routines, fixture selection from url query (parameter `fixture`), added avaialble fixtures list if fixture to display is not specified, added DemoWrapper & demoTitle exportable ficture parameters for demo rendering.
 
 <!--
- @changed 2021.01.21, 12:24
+ @changed 2021.01.26, 20:37
 -->
