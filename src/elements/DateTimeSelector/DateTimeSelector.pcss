@@ -1,6 +1,6 @@
 /** @module DateTimeSelector.styles
  *  @since 2021.01.23, 19:44
- *  @changed 2021.01.23, 19:44
+ *  @changed 2021.01.26, 19:43
  */
 
 .DateTimeSelector {
@@ -9,6 +9,10 @@
       border: none;
       margin: 0;
       display: block;
+    }
+    &__current-month,
+    &-time__header {
+      font-weight: normal;
     }
     &__time-list-item {
       height: auto !important;
@@ -28,6 +32,15 @@
         font-weight: normal !important;
       }
     }
+    $selectingColor: #216ba5;
+    &__month--selecting-range .react-datepicker__day--in-range {
+      background-color: color($selectingColor alpha(.5));
+      color: #fff;
+    }
+    &__day--in-range.react-datepicker__day--in-selecting-range {
+      background-color: $selectingColor;
+    }
+    &__time-list,
     button {
       &:focus {
         outline: 0;

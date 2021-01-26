@@ -112,3 +112,32 @@ export function formatDateTimeToString(date, opt = {}) {
   return format(date, fmt, opt);
 }
 
+export function tuneDateValue(origDate, keepTime, isEndDate, timeIntervals = 60) {
+  let date = new Date(origDate.getTime());
+  if (!keepTime) {
+    if (isEndDate) {
+      date.setHours(23, 59, 59, 999);
+    }
+    else {
+      date.setHours(0, 0, 0, 0);
+    }
+  }
+  else {
+    if (isEndDate) {
+      date.setMilliseconds(999);
+      date.setSeconds(59);
+      const minutes = date.getMinutes();
+      // To end of period slot
+      const extraMinutes = timeIntervals - (minutes % timeIntervals);
+      const setMinutes = minutes + extraMinutes - 1;
+      date.setMinutes(setMinutes);
+    }
+    else {
+      date.setMilliseconds(0);
+      date.setSeconds(0);
+    }
+  }
+  return date;
+}
+
+

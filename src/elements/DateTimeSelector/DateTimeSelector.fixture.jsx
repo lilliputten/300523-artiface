@@ -47,6 +47,7 @@ const showTime = (
     value={thisDate}
     onChange={onDateChanged}
     showTime
+    timeIntervals={30}
   />
 );
 
@@ -63,8 +64,24 @@ const range = (
   />
 );
 
+const rangeTime = (
+  <DateTimeSelector
+    id="showTime"
+    title="DateTime title"
+    // text="DateTime text"
+    placeholder="DateTime placeholder"
+    startDate={thisDate}
+    endDate={thisDate + 3 * dayTicks}
+    onChange={onDateChanged}
+    selectsRange
+    showTime
+    timeIntervals={30}
+  />
+);
+
 export default {
   simple,
   showTime,
   range,
+  rangeTime,
 };

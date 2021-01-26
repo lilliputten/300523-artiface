@@ -118,61 +118,65 @@ class DateTimeSelector extends React.PureComponent /** @lends @DateTimeSelector.
   // Handlers...
 
   onChange = (value) => {
+    const origValue = value;
     const {
       selectsRange,
       onChange,
-      // id,
-      // inputId,
-      // name
       closeOnSelect,
+      showTime,
+      timeIntervals,
     } = this.props;
     const {
       dateType,
-      selectsStart,
-      // selectsEnd,
     } = this.state;
-    let setParams = { id: this.id, value };
+    let setParams;
+    let selectsStart = this.state.selectsStart;
     if (selectsRange) {
-      // const valueId = selectsStart ? 'startDate' : 'endDate';
       let startDate = this.state.startDate;
       let endDate = this.state.endDate;
-      if (Array.isArray(value)) {
-        startDate = value[0];
-        endDate = value[1];
-        value = selectsStart ? startDate : endDate;
+      if (Array.isArray(value)) { // datepicker v.3: array -- changed day, single value -- changed time
+        value = value[0]; // ???
       }
       else {
-        if (selectsStart) {
-          startDate = value;
-        }
-        else {
-          endDate = value;
-        }
+        selectsStart = !selectsStart; // Re-revert start/end switch
       }
-      // const selectedStart = (startDate && !endDate);
+      if (selectsStart) {
+        startDate = value;
+      }
+      else {
+        endDate = value;
+      }
       setParams = {
         id: this.id,
-        startDate, // : startDate || this.state.startDate,
-        endDate, // : endDate || this.state.endDate,
+        startDate: startDate || this.state.startDate,
+        endDate: endDate || this.state.endDate,
         selectsStart: !selectsStart,
         selectsEnd: selectsStart,
         value,
       };
     }
-    // setParams.displayValue = this.getDisplayValue(setParams);
-    console.log('DateTimeSelector:onChange', value, this.state, setParams);
-    // debugger;
+    else {
+      setParams = {
+        id: this.id,
+        value,
+      };
+    }
+    console.log('DateTimeSelector:onChange', selectsStart ? 'start' : 'end', origValue, setParams);
     this.setState(setParams);
     if (typeof onChange === 'function') {
       const cbParams = { ...setParams }; // Convert date values to target date type...
       [ 'value', 'startDate', 'endDate'].forEach(id => {
-        if (cbParams[id]) {
-          cbParams[id] = dateUtils.convertDateToType(cbParams[id], dateType);
+        const date = cbParams[id];
+        if (date) {
+          const isEndDate = id === 'endDate';
+          const dateObj = dateUtils.tuneDateValue(date, showTime, isEndDate, timeIntervals);
+          cbParams[id + 'Obj'] = dateObj;
+          cbParams[id] = dateUtils.convertDateToType(dateObj, dateType);
         }
       });
       onChange(cbParams);
     }
-    if (closeOnSelect && this.popupNode) {
+    if (closeOnSelect && this.popupNode /* && (!selectsRange || ???) */) {
       this.popupNode.close();
     }
   }
@@ -199,11 +203,11 @@ class DateTimeSelector extends React.PureComponent /** @lends @DateTimeSelector.
     const calendarLang = langComponents.calendar || {};
     // @see https://reactdatepicker.com/
     // @see https://github.com/Hacker0x01/react-datepicker
-    console.log('DateTimeSelector:render', {
-      value,
-      startDate,
-      endDate,
-    });
+    // console.log('DateTimeSelector:render', {
+    //   value,
+    //   startDate,
+    //   endDate,
+    // });
     const datePickerProps = {
       id: this.id,
       inline: true,
