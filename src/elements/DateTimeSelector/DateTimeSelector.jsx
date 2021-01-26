@@ -1,7 +1,7 @@
 /** @module DateTimeSelector
  *  @class DateTimeSelector
  *  @since 2021.01.23, 19:44
- *  @changed 2021.01.23, 19:44
+ *  @changed 2021.01.26, 20:28
  *
  *  TODO 2020.12.16, 23:07 -- Add hidden html form element (for form submission)
  */
@@ -41,13 +41,14 @@ const defaultDateType = 'number';
 
 // Initialize locale
 registerLocale('ru-RU', ru);
+// TDDO: Register locales in target project (using config data)?
 
 class DateTimeSelector extends React.PureComponent /** @lends @DateTimeSelector.prototype */ {
 
   static propTypes = {
     value: PropTypes.oneOfType([ PropTypes.string, PropTypes.number, PropTypes.instanceOf(Date) ]),
-    // startDate: PropTypes.oneOfType([ PropTypes.string, PropTypes.number, PropTypes.instanceOf(Date) ]),
-    // endDate: PropTypes.oneOfType([ PropTypes.string, PropTypes.number, PropTypes.instanceOf(Date) ]),
+    startDate: PropTypes.oneOfType([ PropTypes.string, PropTypes.number, PropTypes.instanceOf(Date) ]),
+    endDate: PropTypes.oneOfType([ PropTypes.string, PropTypes.number, PropTypes.instanceOf(Date) ]),
     disabled: PropTypes.bool,
     id: PropTypes.string,
     onChange: PropTypes.func,
@@ -92,37 +93,13 @@ class DateTimeSelector extends React.PureComponent /** @lends @DateTimeSelector.
     return classList;
   }
 
-  /* // UNUSED: getDisplayValue
-   * getDisplayValue(params) {
-   *   params = params || this.state;
-   *   const {
-   *     value,
-   *     // startDate,
-   *     // endDate,
-   *   } = params;
-   *   const {
-   *     showTime,
-   *     // selectsRange,
-   *   } = this.props;
-   *   const dateFormat = showTime ? config.constants.dateTimeFormat : config.constants.dateFormat;
-   *   // if (selectsRange) {
-   *   //   return [
-   *   //     startDate && dateUtils.formatDateTimeToString(startDate, dateFormat),
-   *   //     endDate && dateUtils.formatDateTimeToString(endDate, dateFormat),
-   *   //   ].filter(Boolean).join(config.constants.dateRangeDelim);
-   *   // }
-   *   return dateUtils.formatDateToString(value, dateFormat);
-   * }
-   */
-
   // Handlers...
 
   onChange = (value) => {
-    const origValue = value;
+    // const origValue = value;
     const {
       selectsRange,
       onChange,
-      closeOnSelect,
       showTime,
       timeIntervals,
     } = this.props;
@@ -161,7 +138,7 @@ class DateTimeSelector extends React.PureComponent /** @lends @DateTimeSelector.
         value,
       };
     }
-    console.log('DateTimeSelector:onChange', selectsStart ? 'start' : 'end', origValue, setParams);
+    // console.log('DateTimeSelector:onChange', selectsStart ? 'start' : 'end', origValue, setParams);
     this.setState(setParams);
     if (typeof onChange === 'function') {
       const cbParams = { ...setParams }; // Convert date values to target date type...
@@ -175,9 +152,6 @@ class DateTimeSelector extends React.PureComponent /** @lends @DateTimeSelector.
         }
       });
       onChange(cbParams);
-    }
-    if (closeOnSelect && this.popupNode /* && (!selectsRange || ???) */) {
-      this.popupNode.close();
     }
   }
 
@@ -201,13 +175,13 @@ class DateTimeSelector extends React.PureComponent /** @lends @DateTimeSelector.
     const langComponents = lang && lang.components || {};
     const locale = langComponents.lang || config.app.defaultLocale; // TODO?
     const calendarLang = langComponents.calendar || {};
-    // @see https://reactdatepicker.com/
-    // @see https://github.com/Hacker0x01/react-datepicker
     // console.log('DateTimeSelector:render', {
     //   value,
     //   startDate,
     //   endDate,
     // });
+    // @see https://reactdatepicker.com/
+    // @see https://github.com/Hacker0x01/react-datepicker
     const datePickerProps = {
       id: this.id,
       inline: true,

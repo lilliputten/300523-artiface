@@ -1,0 +1,28 @@
+/** @module FormDateRange.styles
+ *  @since 2021.01.26, 13:19
+ *  @changed 2021.01.26, 13:19
+ */
+
+.FormDateRange {
+  &-PopupWrapper {
+    display: flex;
+    .DateTimeSelector {
+      align-items: stretch;
+    }
+    .DateTimeSelector + .DateTimeSelector {
+      border-left: 1px solid #aeaeae;
+    }
+  }
+  // .react-datepicker {
+  //   margin: 0;
+  //   border: none;
+  //   display: block;
+  //   &__time-list-item {
+  //     padding: 0 !important; // Override rule for `.react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list li.react-datepicker__time-list-item`
+  //     height: 30px !important;
+  //   }
+  //   &__navigation {
+  //     margin-top: 6px;
+  //   }
+  // }
+}
