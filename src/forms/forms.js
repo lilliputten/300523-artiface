@@ -31,7 +31,7 @@ export FormRadio from './FormRadio';
 // export FormSwitch from './FormSwitch';
 
 export FormDateTime from './FormDateTime';
-// export FormDateRange from './FormDateRange';
+export FormDateRange from './FormDateRange';
 
 // TODO...
 

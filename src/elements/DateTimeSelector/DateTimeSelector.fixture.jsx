@@ -50,8 +50,21 @@ const showTime = (
   />
 );
 
+const range = (
+  <DateTimeSelector
+    id="showTime"
+    title="DateTime title"
+    // text="DateTime text"
+    placeholder="DateTime placeholder"
+    startDate={thisDate}
+    endDate={thisDate + 3 * dayTicks}
+    onChange={onDateChanged}
+    selectsRange
+  />
+);
+
 export default {
   simple,
   showTime,
-  // selectsRange,
+  range,
 };

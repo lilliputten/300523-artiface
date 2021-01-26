@@ -69,15 +69,16 @@ class DateTimeSelector extends React.PureComponent /** @lends @DateTimeSelector.
       value,
       startDate,
       endDate,
-      // selectsRange,
+      selectsRange,
     } = props;
     this.id = props.id || props.inputId || props.name;
     const dateType = props.dateType || dateUtils.detectDateValueType(value || startDate || endDate) || defaultDateType;
     this.state = {
       dateType,
       value: value && dateUtils.convertToDateObject(value),
-      // startDate: startDate && dateUtils.convertToDateObject(startDate),
-      // endDate: endDate && dateUtils.convertToDateObject(endDate),
+      startDate: startDate && dateUtils.convertToDateObject(startDate),
+      endDate: endDate && dateUtils.convertToDateObject(endDate),
+      selectsStart: selectsRange,
     };
   }
 
@@ -91,37 +92,80 @@ class DateTimeSelector extends React.PureComponent /** @lends @DateTimeSelector.
     return classList;
   }
 
+  /* // UNUSED: getDisplayValue
+   * getDisplayValue(params) {
+   *   params = params || this.state;
+   *   const {
+   *     value,
+   *     // startDate,
+   *     // endDate,
+   *   } = params;
+   *   const {
+   *     showTime,
+   *     // selectsRange,
+   *   } = this.props;
+   *   const dateFormat = showTime ? config.constants.dateTimeFormat : config.constants.dateFormat;
+   *   // if (selectsRange) {
+   *   //   return [
+   *   //     startDate && dateUtils.formatDateTimeToString(startDate, dateFormat),
+   *   //     endDate && dateUtils.formatDateTimeToString(endDate, dateFormat),
+   *   //   ].filter(Boolean).join(config.constants.dateRangeDelim);
+   *   // }
+   *   return dateUtils.formatDateToString(value, dateFormat);
+   * }
+   */
+
   // Handlers...
 
   onChange = (value) => {
     const {
-      // showTimeSelect,
-      // selectsRange,
+      selectsRange,
       onChange,
       // id,
       // inputId,
       // name
       closeOnSelect,
     } = this.props;
-    const { dateType } = this.state;
+    const {
+      dateType,
+      selectsStart,
+      // selectsEnd,
+    } = this.state;
     let setParams = { id: this.id, value };
-    // if (selectsRange) {
-    //   const [ startDate, endDate ] = value;
-    //   const isEndDate = (startDate && !endDate);
-    //   setParams = {
-    //     id: this.id,
-    //     startDate, // : startDate || this.state.startDate,
-    //     endDate, // : endDate || this.state.endDate,
-    //     selectsStart: !isEndDate,
-    //     selectsEnd: isEndDate,
-    //   };
-    // }
-    console.log('DateTimeSelector:onChange', value, setParams);
+    if (selectsRange) {
+      // const valueId = selectsStart ? 'startDate' : 'endDate';
+      let startDate = this.state.startDate;
+      let endDate = this.state.endDate;
+      if (Array.isArray(value)) {
+        startDate = value[0];
+        endDate = value[1];
+        value = selectsStart ? startDate : endDate;
+      }
+      else {
+        if (selectsStart) {
+          startDate = value;
+        }
+        else {
+          endDate = value;
+        }
+      }
+      // const selectedStart = (startDate && !endDate);
+      setParams = {
+        id: this.id,
+        startDate, // : startDate || this.state.startDate,
+        endDate, // : endDate || this.state.endDate,
+        selectsStart: !selectsStart,
+        selectsEnd: selectsStart,
+        value,
+      };
+    }
+    // setParams.displayValue = this.getDisplayValue(setParams);
+    console.log('DateTimeSelector:onChange', value, this.state, setParams);
     // debugger;
     this.setState(setParams);
     if (typeof onChange === 'function') {
       const cbParams = { ...setParams }; // Convert date values to target date type...
-      [ 'value'/* , 'startDate', 'endDate' */ ].forEach(id => {
+      [ 'value', 'startDate', 'endDate'].forEach(id => {
         if (cbParams[id]) {
           cbParams[id] = dateUtils.convertDateToType(cbParams[id], dateType);
         }
@@ -138,16 +182,16 @@ class DateTimeSelector extends React.PureComponent /** @lends @DateTimeSelector.
   render() {
     const {
       value,
+      startDate,
+      endDate,
+      selectsStart,
+      selectsEnd,
     } = this.state;
     const {
       showTime,
       timeIntervals,
       selectsRange,
       calendarClassName,
-      selectsStart,
-      selectsEnd,
-      // startDate,
-      // endDate,
     } = this.props;
     const lang = langUtils.getLang();
     const langComponents = lang && lang.components || {};
@@ -155,6 +199,11 @@ class DateTimeSelector extends React.PureComponent /** @lends @DateTimeSelector.
     const calendarLang = langComponents.calendar || {};
     // @see https://reactdatepicker.com/
     // @see https://github.com/Hacker0x01/react-datepicker
+    console.log('DateTimeSelector:render', {
+      value,
+      startDate,
+      endDate,
+    });
     const datePickerProps = {
       id: this.id,
       inline: true,
@@ -165,8 +214,8 @@ class DateTimeSelector extends React.PureComponent /** @lends @DateTimeSelector.
       dateFormat: config.constants.dateFormat,
       onChange: this.onChange,
       selected: value,
-      // startDate,
-      // endDate,
+      startDate,
+      endDate,
       showTimeSelect: showTime,
       selectsRange,
       selectsStart,

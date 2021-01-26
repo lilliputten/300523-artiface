@@ -37,7 +37,7 @@ export function detectDateValueType(date) {
 export function convertToDateObject(date) {
   const dateType = detectDateValueType(date);
   let result = date;
-  if (dateType !== 'onject') {
+  if (dateType !== 'object') {
     if (dateType === 'msDateStr') {
       result = parseInt(result.substr(5)); // 'Date(*' -> number
     }
@@ -103,7 +103,7 @@ export function convertDateToType(date, targetType) {
 export function formatDateToString(date, fmt, opt = {}) {
   fmt = fmt || config.constants.dateFormat;
   // @see https://date-fns.org/v2.16.1/docs/format
-  return format(date, fmt, opt);
+  return format(convertToDateObject(date), fmt, opt);
 }
 
 export function formatDateTimeToString(date, opt = {}) {

@@ -5,9 +5,11 @@
 
 .DateTimeSelector {
   .react-datepicker {
-    // border: none;
-    // margin: 0;
-    // display: block;
+    .ModalPortal_type_Popup & {
+      border: none;
+      margin: 0;
+      display: block;
+    }
     &__time-list-item {
       height: auto !important;
       padding: 2px !important; // Override rule for `.react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list li.react-datepicker__time-list-item`
@@ -23,6 +25,7 @@
       }
       &--selected {
         background-color: $primaryColor !important;
+        font-weight: normal !important;
       }
     }
     button {

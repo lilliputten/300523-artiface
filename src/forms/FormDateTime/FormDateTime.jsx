@@ -24,10 +24,6 @@ import DateTimeSelector from 'elements/DateTimeSelector';
 // import * as langUtils from 'utils/lang';
 // // getCommonLangText('cancelButton', 'Cancel', lang)}
 
-// import DatePicker from 'react-datepicker';
-// import { ru } from 'date-fns/esm/locale';
-// import { registerLocale } from 'react-datepicker';
-
 import * as dateUtils from 'utils/dates';
 
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -38,7 +34,7 @@ import './FormDateTime.pcss';
 
 const cnFormDateTime = cn('FormDateTime');
 
-const defaultDateType = 'number';
+// const defaultDateType = 'number';
 
 class FormDateTime extends React.PureComponent /** @lends @FormDateTime.prototype */ {
 
@@ -69,10 +65,10 @@ class FormDateTime extends React.PureComponent /** @lends @FormDateTime.prototyp
       // selectsRange,
     } = props;
     this.id = props.id || props.inputId || props.name;
-    const dateType = props.dateType || dateUtils.detectDateValueType(value || startDate || endDate) || defaultDateType;
+    // const dateType = props.dateType || dateUtils.detectDateValueType(value || startDate || endDate) || defaultDateType;
     this.state = {
-      dateType,
-      value: value && dateUtils.convertToDateObject(value),
+      // dateType,
+      value, // : value && dateUtils.convertToDateObject(value),
     };
     this.state.displayValue = this.getDisplayValue(this.state);
   }
@@ -132,7 +128,7 @@ class FormDateTime extends React.PureComponent /** @lends @FormDateTime.prototyp
       // name
       closeOnSelect,
     } = this.props;
-    const { dateType } = this.state;
+    // const { dateType } = this.state;
     let setParams = { id: this.id, value };
     // if (selectsRange) {
     //   const [ startDate, endDate ] = value;
@@ -150,13 +146,13 @@ class FormDateTime extends React.PureComponent /** @lends @FormDateTime.prototyp
     // debugger;
     this.setState(setParams);
     if (typeof onChange === 'function') {
-      const cbParams = { ...setParams }; // Convert date values to target date type...
-      [ 'value', 'startDate', 'endDate' ].forEach(id => {
-        if (cbParams[id]) {
-          cbParams[id] = dateUtils.convertDateToType(cbParams[id], dateType);
-        }
-      });
-      onChange(cbParams);
+      // const cbParams = { ...setParams }; // Convert date values to target date type...
+      // [ 'value', 'startDate', 'endDate' ].forEach(id => {
+      //   if (cbParams[id]) {
+      //     cbParams[id] = dateUtils.convertDateToType(cbParams[id], dateType);
+      //   }
+      // });
+      onChange(setParams);
     }
     if (closeOnSelect && this.popupNode) {
       this.popupNode.close();

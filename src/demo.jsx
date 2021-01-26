@@ -122,7 +122,7 @@ const fixtureComponentsList = {
   // FormSwitch: require('forms/FormSwitch/FormSwitch.fixture'),
 
   FormDateTime: require('forms/FormDateTime/FormDateTime.fixture'),
-  // FormDateRange: require('forms/FormDateRange/FormDateRange.fixture'),
+  FormDateRange: require('forms/FormDateRange/FormDateRange.fixture'),
 
 };
 
