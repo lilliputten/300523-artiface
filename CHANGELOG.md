@@ -1,5 +1,6 @@
 # CHANGELOG
 
+- 2021.01.26, 21:01 -- v.0.2.7.
 - 2021.01.26, 20:37 -- PD-3546: DateTimeSelector, FormDateRange: Support for date/time range selection (done).
 - 2021.01.21, 12:24 -- PD-3327: Fixed interactive styles for FormRadio.
 - 2021.01.21, 01:30 -- PD-3327: Fixed overridings for standard html button tag  & imput text autofill styles (in FormButton & FormTextInput).
