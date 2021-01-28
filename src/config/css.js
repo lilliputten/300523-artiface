@@ -206,7 +206,7 @@ const cssConfig = { // Common-used css variables...
 const formItemSpacing = 4;
 const formItemHeight = 32; // px
 const formItemBorderSize = 1; // px
-const formItemInnerHeight = formItemHeight - formItemBorderSize * 2; // px
+const formItemInnerHeight = formItemHeight; // - formItemBorderSize * 2; // px -- if used css border
 
 Object.assign(cssConfig, { // Form properties...
 

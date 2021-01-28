@@ -5,8 +5,11 @@
 
 .FormLabel {
   /*!KEEP*/
+  // border: 1px solid green;
+  // box-shadow: 0 0 0 1px green;
   label&-Control {
     @mixin FormItemTextInputMixin;
+    display: block;
     margin-bottom: 0; // Override bootstrap styles
     overflow: hidden;
     text-overflow: ellipsis;

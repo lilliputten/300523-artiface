@@ -1,5 +1,6 @@
 # CHANGELOG
 
+- 2021.01.29, 00:29 -- FormItemHOC: Manually call focusIn/focusOut event handlers on focus/blur event handlers, added `framed` modifier. FormGroup: Styles for nested items/groups. FormButton (in `config/css`): set inner height to outer height due to usage of `box-shadow` instead `border` in styles.
 - 2021.01.29, 00:12 -- FormDateRange: Pass modal `open` state (as `checked`), minor changes (dates preparation in demo fixture).
 - 2021.01.29, 00:10 -- FormSelect, Menu, MenuItem, FormSelect: PropTypes updated, use `selectable`, `selected` parameters for multiple choices (consider `checkable` & `checked` for boolean-like elements). FormSelect: Pass open & checked state to popup control element, handle open state from `ModalPopup`, tune styles for fullWidth control element.
 - 2021.01.28, 23:52 -- utils/dates: Minor changes (dayTicks, weekTicks exported constants).
@@ -82,5 +83,5 @@
 - 2020.10.05, 20:38 -- v.0.0.15: Extracted `demoSupport.jsx` routines, fixture selection from url query (parameter `fixture`), added avaialble fixtures list if fixture to display is not specified, added DemoWrapper & demoTitle exportable ficture parameters for demo rendering.
 
 <!--
- @changed 2021.01.28, 20:18
+ @changed 2021.01.29, 00:29
 -->

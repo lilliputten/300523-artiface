@@ -12,28 +12,12 @@
   &_clickable {
     cursor: pointer;
   }
-  // NOTE: Theming styles (especially for frame) must be specified in FormItem users (eg FormButton, FormTextInput, FormRadio etc).
+  // NOTE: Theming styles (especially for frame) must be specified in FormItem subscribers (eg FormButton, FormTextInput, FormRadio etc).
   &_framed {
-    // @mixin FormItemFramed transparent;
     @mixin FormItemFramed;
-    // border-color: $formItemBorderColor;
-    // box-shadow: inset 0 0 0 1px $formItemBorderColor;
-    // background-color: $formItemBgColor;
-    &^&_hovered {
-      // border-color: color($formItemBorderColor shade(10%));
-      // box-shadow: inset 0 0 0 1px color($formItemBorderColor shade(10%));
-      // 0 0 2px 1px color($formItemBorderColor alpha(50%)); // Outer shadow (not using due to clipping issues)
-    }
-    // focusable:
-    &^&_focused {
-      // border-color: color($formItemBorderColor shade(20%));
-      // box-shadow: inset 0 0 1px 1px color($formItemBorderColor shade(20%));
-      // 0 0 2px 2px color($formItemBorderColor alpha(70%)); // Outer shadow (not using due to clipping issues)
-    }
   }
   &_fullWidth {
     display: block;
-    // width: 100%; // Dont use `width:100%` for regular items due it breaks `container->item` layout geometry.
     .FormGroup_flow > & {
       flex: 2;
     }

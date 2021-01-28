@@ -20,6 +20,17 @@
     margin: 0;
   }
 
+  // Nested items/groups...
+  > .FormItem { // ???
+    margin: $(vMargin)px $(hMargin)px;
+  }
+  // No margins for nested groups
+  & > &.FormItem {
+    // margin-top: 0;
+    // margin-bottom: 0;
+    margin: 0;
+  }
+
   // Padded content
   &_padded {
     padding: $(innerPadding)px;
@@ -44,6 +55,7 @@
     // flex-wrap: wrap;
     & > .FormItem {
       min-width: $(formItemHeight)px; // Hint for limiting the maximum width (overflow causes cropping items outer glow on ubteractive control events).
+      display: block;
     }
     & > .FormItem_fill {
       flex: 1;
@@ -72,14 +84,4 @@
     }
   }
 
-  // No margins for nested groups
-  & > &.FormItem {
-    // margin-top: 0;
-    // margin-bottom: 0;
-    margin: 0;
-  }
-
-  > .FormItem {
-    margin: $(vMargin)px $(hMargin)px;
-  }
 }

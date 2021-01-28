@@ -1,7 +1,7 @@
 /** @module FormItemHOC
  *  @class FormItemHOC
  *  @since 2019.09.25, 19:18
- *  @changed 2020.06.04, 22:58
+ *  @changed 2021.01.28, 21:58
  */
 
 import React from 'react';
@@ -17,7 +17,7 @@ const classNameModifiers = [ // Pass props/state params to class modifiers
   'fullWidth',
   // 'innerFlex', // (???)
   // 'solid', // Item is unwrappable (???)
-  // 'framed', // Frame around item (input field, select etc) (???)
+  'framed', // Frame around item (input field, button, select etc)
   // Behavior-related modifiers...
   'hoverable', // Allow hover effects
   'focusable', // Allow hover effects
@@ -81,6 +81,7 @@ const wrapFormItemHOC = (WrappedComponent, params = {}) => class FormItem extend
     disabled: PropTypes.bool,
     focusable: PropTypes.bool,
     focused: PropTypes.bool,
+    framed: PropTypes.bool,
     fullWidth: PropTypes.bool,
     hoverable: PropTypes.bool,
     hovered: PropTypes.bool,
@@ -117,7 +118,6 @@ const wrapFormItemHOC = (WrappedComponent, params = {}) => class FormItem extend
     super(props);
     this.state = deriveState(defaultState, params, props); // deriveStateFromProps(props, defaultState)
     this.id = props.id || params.id;
-    // this.formItemRef = React.createRef()
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -126,7 +126,6 @@ const wrapFormItemHOC = (WrappedComponent, params = {}) => class FormItem extend
   }
 
   componentDidMount() {
-    // const { formItemRef: { current } = {} } = this
     const { formItemDomRef } = this;
     if (formItemDomRef && formItemDomRef.addEventListener) {
       const hoverable = this.getStateOrPropOrParam('hoverable');
@@ -190,14 +189,14 @@ const wrapFormItemHOC = (WrappedComponent, params = {}) => class FormItem extend
   focus = () => {
     const { formItemDomRef } = this;
     // console.log('FormItem:focus');
-    // debugger;
     formItemDomRef && formItemDomRef.focus && formItemDomRef.focus();
+    this.handleFocusIn();
   }
   blur = () => {
     const { formItemDomRef } = this;
-    // console.log('FormItem:focus');
-    // debugger;
-    formItemDomRef && formItemDomRef.focus && formItemDomRef.focus();
+    // console.log('FormItem:blur');
+    formItemDomRef && formItemDomRef.blur && formItemDomRef.blur();
+    this.handleFocusOut();
   }
 
   handleMouseOver = () => {
