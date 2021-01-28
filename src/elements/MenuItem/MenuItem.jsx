@@ -5,8 +5,8 @@
  */
 
 import React from 'react';
-// import PropTypes from 'prop-types'
-// import connect from 'react-redux/es/connect/connect'
+import PropTypes from 'prop-types';
+// import connect from 'react-redux/es/connect/connect';
 import { cn } from 'utils/configure';
 
 import InlineIcon from 'elements/InlineIcon';
@@ -18,6 +18,21 @@ import './MenuItem.pcss';
 const cnMenuItem = cn('MenuItem');
 
 class MenuItem extends React.PureComponent /** @lends @MenuItem.prototype */ {
+
+  static propTypes = {
+    checkable: PropTypes.bool,
+    checked: PropTypes.bool,
+    className: PropTypes.string,
+    disabled: PropTypes.bool,
+    htmlId: PropTypes.string, // ???
+    icon: PropTypes.oneOfType([ PropTypes.string, PropTypes.object ]),
+    id: PropTypes.string,
+    onClick: PropTypes.func,
+    setDomRef: PropTypes.func, // From FormItemHOC
+    text: PropTypes.string,
+    val: PropTypes.oneOfType([ PropTypes.string, PropTypes.number ]),
+    withIcon: PropTypes.bool,
+  }
 
   // Event handlers...
 
@@ -47,6 +62,7 @@ class MenuItem extends React.PureComponent /** @lends @MenuItem.prototype */ {
       checked,
       disabled,
     }, [this.props.className]);
+    // console.log('MenuItem:constructor', this.props);
     return className;
   }
 

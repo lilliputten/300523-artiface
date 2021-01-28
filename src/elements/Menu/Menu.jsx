@@ -1,12 +1,12 @@
 /** @module Menu
  *  @class Menu
  *  @since 2020.10.27, 02:58
- *  @changed 2020.12.16, 20:21
+ *  @changed 2021.01.28, 21:55
  */
 
 import React from 'react';
-// import PropTypes from 'prop-types'
-// import connect from 'react-redux/es/connect/connect'
+import PropTypes from 'prop-types';
+// import connect from 'react-redux/es/connect/connect';
 import { cn } from 'utils/configure';
 
 import MenuItem from '../MenuItem';
@@ -19,6 +19,19 @@ const cnMenu = cn('Menu');
 let uniqIdCount = 1;
 
 class Menu extends React.PureComponent /** @lends @Menu.prototype */ {
+
+  static propTypes = {
+    className: PropTypes.string,
+    disabled: PropTypes.bool,
+    id: PropTypes.string,
+    layout: PropTypes.string,
+    mode: PropTypes.string, // ???
+    onChange: PropTypes.func,
+    onClick: PropTypes.func,
+    selectable: PropTypes.bool,
+    setDomRef: PropTypes.func,
+    singleChoice: PropTypes.oneOfType([ PropTypes.string, PropTypes.bool ]),
+  }
 
   // Helper fuctions...
 
@@ -39,16 +52,16 @@ class Menu extends React.PureComponent /** @lends @Menu.prototype */ {
     return className;
   }
 
-  setChildrenItemsFromProps(/* children, checkedValStates */) {
+  setChildrenItemsFromProps() {
     // console.log('Menu:setChildrenItemsFromProps', {
     //   children,
     // })
     let children = this.props.children;
-    const checkedList = [];
+    const selectedList = [];
     if (Array.isArray(children)) {
       const { singleChoice } = this.props;
-      const { value, checked } = this.props;
-      const propsChecked = (singleChoice && value != null) ? [value] : checked;
+      const { value, selected } = this.props;
+      const propsSelected = (singleChoice && value != null) ? [value] : selected;
       children = children.map((item) => {
         const isArray = !!item && Array.isArray(item);
         const isObject = !!item && typeof item ==='object' && !isArray; // Array.isArray(item)
@@ -66,9 +79,8 @@ class Menu extends React.PureComponent /** @lends @Menu.prototype */ {
           const itemProps = isRawObject ? item : item.props;
           // Construct unique key values...
           const val = itemProps.val;
-          const checked = Array.isArray(propsChecked) ? propsChecked.includes(val) : itemProps.checked;
-          // const checked = checkedValStates && checkedValStates[val] != null ? checkedValStates[val] : itemProps.checked
-          const checkable = itemProps.checkable != null ? itemProps.checkable : this.props.checkable;
+          const checked = Array.isArray(propsSelected) ? propsSelected.includes(val) : itemProps.checked;
+          const checkable = itemProps.checkable != null ? itemProps.checkable : this.props.selectable;
           const newProps = {
             ...itemProps,
             onClick: itemProps.onClick || this.onMenuItemClick,
@@ -83,8 +95,8 @@ class Menu extends React.PureComponent /** @lends @Menu.prototype */ {
           else if (isMenuItem) { // MenuItem -> Add onClick handler if handler is not defined
             item = { ...item, props: newProps };
           }
-          if (item.props.checked && (!singleChoice || !checkedList.length)) {
-            checkedList.push(val);
+          if (item.props.checked && (!singleChoice || !selectedList.length)) {
+            selectedList.push(val);
           }
         }
         // TODO: Process arrays (subitems/groups)?
@@ -93,15 +105,15 @@ class Menu extends React.PureComponent /** @lends @Menu.prototype */ {
     }
     this.setState({
       items: children,
-      checkedList,
+      selectedList,
     });
     // return children
   }
 
   updateChildrenItems(checkedValStates) {
-    const { singleChoice, onChange } = this.props;
+    const { id, singleChoice, onChange } = this.props;
     let { items } = this.state;
-    const checkedList = [];
+    const selectedList = [];
     if (Array.isArray(items)) {
       items = items.map((item) => {
         const isObject = !!item && typeof item ==='object';
@@ -117,8 +129,8 @@ class Menu extends React.PureComponent /** @lends @Menu.prototype */ {
           if (checkedVal !== checked) {
             item = { ...item, props: { ...itemProps, checked: checkedVal } };
           }
-          if (checkedVal) { // && (!singleChoice || !checkedList.length)) {
-            checkedList.push(val);
+          if (checkedVal) { // && (!singleChoice || !selectedList.length)) {
+            selectedList.push(val);
           }
         }
         return item;
@@ -126,12 +138,12 @@ class Menu extends React.PureComponent /** @lends @Menu.prototype */ {
     }
     this.setState({
       items,
-      checkedList,
+      selectedList,
     });
     if (typeof onChange === 'function') {
-      const params = { checked: checkedList };
-      if (singleChoice && checkedList.length) { // Add `val` param if singleChoice mode (and has checked)
-        params.value = checkedList[0];
+      const params = { id, selected: selectedList };
+      if (singleChoice && selectedList && selectedList.length) { // Add `val` param if singleChoice mode (and has selected)
+        params.value = selectedList[0];
       }
       onChange(params);
     }
@@ -154,7 +166,6 @@ class Menu extends React.PureComponent /** @lends @Menu.prototype */ {
   }
 
   componentDidMount() {
-    // const children = this.props.children
     this.setChildrenItemsFromProps();
   }
 
@@ -171,15 +182,15 @@ class Menu extends React.PureComponent /** @lends @Menu.prototype */ {
 
   onMenuItemClick = ({ /* id, component, */ val }) => {
     const { onClick, singleChoice } = this.props;
-    const { checkedList } = this.state;
-    const setChecked = !checkedList.includes(val);
-    if (singleChoice === 'forced' && !setChecked) { // Don not made changes if single mode and clicked item was checked
+    const { selectedList } = this.state;
+    const setSelected = !selectedList.includes(val);
+    if (singleChoice === 'forced' && !setSelected) { // Don not made changes if single mode and clicked item was selected
       return;
     }
     if (typeof onClick === 'function') { // Invoke onClick handler
       onClick({ value: val });
     }
-    this.updateChildrenItems({ [val]: setChecked }); // Apply items changes
+    this.updateChildrenItems({ [val]: setSelected }); // Apply items changes
   }
 
   // Render...
@@ -193,19 +204,12 @@ class Menu extends React.PureComponent /** @lends @Menu.prototype */ {
 
     const {
       id,
-      // val,
-      // title,
-      // onClick,
-      // children,
       setDomRef, // From FormItemHOC
     } = this.props;
 
     const renderProps = {
       id,
       className: this.getClassName(),
-      // title,
-      // onClick,
-      // key,
       ref: setDomRef, // Init ref for FormItemHOC
     };
 

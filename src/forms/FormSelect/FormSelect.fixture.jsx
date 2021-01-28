@@ -23,8 +23,9 @@ const demoOptions = [
   { val: 2, text: 'Swimming extra long text item name string value' },
 ];
 
-const demoChange = ({ id, checked, value }) => {
-  console.log('demoChange', { id, checked, value });
+const demoChange = (params) => {
+  const { id, selected, value } = params;
+  console.log('FormSelect.fixture:demoChange', { id, selected, value, params });
   // debugger
 };
 
@@ -53,6 +54,7 @@ export default {
       title="Select title"
       text="Select"
       options={demoOptions}
+      onChange={demoChange}
     />
   ),
   withExtraOptions: (
@@ -72,7 +74,7 @@ export default {
       placeholder="Select some option"
       singleChoice="forced"
       _value={1}
-      checked={[1,2]}
+      selected={[1,2]}
       onChange={demoChange}
       options={demoOptions}
       closeOnSelect
@@ -85,9 +87,10 @@ export default {
     <FormGroup id="withLabel" flow fullWidth>
       <FormLabel htmlFor="testId" title="Label title">Label</FormLabel>
       <FormSelect
+        inputId="testId"
         title="Select question"
         placeholder="Select some option"
-        checked={[2]}
+        selected={[2]}
         onChange={demoChange}
         options={demoOptions}
         controlButtonTheme="default"
@@ -97,11 +100,12 @@ export default {
     </FormGroup>
   ),
   withLabeledGroup: (
-    <FormLabeledGroup id="withLabeledGroup" title="withLabeledGroup" fullWidth flow>
+    <FormLabeledGroup id="withLabeledGroup" htmlFor="withLabeledGroup-Label" title="withLabeledGroup" fullWidth flow>
       <FormSelect
+        inputId="withLabeledGroup-Label"
         title="Select question"
         placeholder="Select some option"
-        checked={[2]}
+        selected={[2]}
         onChange={demoChange}
         options={demoOptions}
         controlButtonTheme="default"
@@ -118,7 +122,7 @@ export default {
    *             <FormSelect
    *               title="Select question"
    *               placeholder="Select some option"
-   *               checked={[2]}
+   *               selected={[2]}
    *               onChange={demoChange}
    *               options={demoOptions}
    *               controlButtonTheme="default"

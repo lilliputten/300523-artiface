@@ -31,7 +31,7 @@ class FormSelect extends React.PureComponent /** @lends @FormSelect.prototype */
 
   static propTypes = {
     // value: PropTypes.oneOfType([ PropTypes.string, PropTypes.number, PropTypes.arrayOf(PropTypes.oneOfType([ PropTypes.string, PropTypes.number ])) ]),
-    checked: PropTypes.arrayOf(PropTypes.oneOfType([ PropTypes.string, PropTypes.number ])),
+    selected: PropTypes.arrayOf(PropTypes.oneOfType([ PropTypes.string, PropTypes.number ])),
     disabled: PropTypes.bool,
     fullWidth: PropTypes.bool,
     id: PropTypes.string,
@@ -51,9 +51,9 @@ class FormSelect extends React.PureComponent /** @lends @FormSelect.prototype */
     super(props);
     // this.formItemRef = React.createRef()
     this.id = props.id || props.inputId || props.name;
-    const { checked, value } = props;
+    const { selected, value } = props;
     this.state = {
-      checked: Array.isArray(checked) ? checked : value && [value] || []
+      selected: Array.isArray(selected) ? selected : value && [value] || []
     };
     // if (props.setNodeRef) {
     //   props.setNodeRef(this);
@@ -71,10 +71,10 @@ class FormSelect extends React.PureComponent /** @lends @FormSelect.prototype */
   }
 
   getItemsText() {
-    const { checked } = this.state;
+    const { selected } = this.state;
     const { options } = this.props;
-    const text = Array.isArray(options) && Array.isArray(checked) && options.map(({ val, text }) => {
-      if (checked.includes(val)) {
+    const text = Array.isArray(options) && Array.isArray(selected) && options.map(({ val, text }) => {
+      if (selected.includes(val)) {
         return text;
       }
     }).filter(Boolean).join(', ');
@@ -100,15 +100,15 @@ class FormSelect extends React.PureComponent /** @lends @FormSelect.prototype */
   }
   onMenuChange = (params) => {
     const { onChange } = this.props;
-    const { checked } = params;
+    const { selected, /* id, value */ } = params;
     if (typeof onChange === 'function') {
       const { id, inputId, name, singleChoice } = this.props;
-      const value = singleChoice ? checked[0] : checked;
+      const value = singleChoice ? selected[0] : selected;
       const setId = id || inputId || name;
-      const setParams = { id: setId, checked, value };
+      const setParams = { id: setId, selected, value };
       onChange(setParams);
     }
-    this.setState({ checked });
+    this.setState({ selected });
   }
 
   setPopupRef = (node) => {
@@ -117,6 +117,10 @@ class FormSelect extends React.PureComponent /** @lends @FormSelect.prototype */
     if (setPopupNodeRef && typeof setPopupNodeRef === 'function') {
       setPopupNodeRef(node);
     }
+  }
+
+  handleOpenState = ({ open }) => {
+    this.setState({ open });
   }
 
   // Render...
@@ -129,10 +133,15 @@ class FormSelect extends React.PureComponent /** @lends @FormSelect.prototype */
       controlButtonTheme,
       fullWidth = true,
       disabled,
+      inputId,
     } = this.props;
+    const {
+      open,
+    } = this.state;
     const buttonText = this.getItemsText() || placeholder || text;
     return (
       <FormButton
+        inputId={inputId}
         icon="faChevronDown"
         rightIcon
         theme={controlButtonTheme || 'primary'}
@@ -142,6 +151,8 @@ class FormSelect extends React.PureComponent /** @lends @FormSelect.prototype */
         title={title}
         fullWidth={fullWidth}
         disabled={disabled}
+        checkable
+        checked={open}
       />
     );
   }
@@ -150,21 +161,19 @@ class FormSelect extends React.PureComponent /** @lends @FormSelect.prototype */
     const {
       singleChoice,
       options,
-      // checked,
-      // value,
       disabled,
       // inputId, // ???
     } = this.props;
     const {
-      checked,
+      selected,
     } = this.state;
     return (
       <Menu
-        checkable={true}
+        selectable={true}
         singleChoice={singleChoice}
         onChange={this.onMenuChange}
         onClick={this.onMenuItemClick}
-        checked={checked}
+        selected={selected}
         // value={value}
         disabled={disabled}
       >
@@ -200,6 +209,7 @@ class FormSelect extends React.PureComponent /** @lends @FormSelect.prototype */
       fullWidth,
       ref: this.setPopupRef,
       setDomRef,
+      handleOpenState: this.handleOpenState,
     };
 
     return (

@@ -43,17 +43,20 @@ const ModalPopupContent = () => {
 const popupControlEl = <ModalPopupControl />;
 const popupContentEl = <ModalPopupContent />;
 
-const menuOnChange = ({ checked, value }) => { // `value` passed only for `singleChoice` mode, `checked` is array
-  console.log('ModalPopup.fixture: menuOnChange', { checked, value });
+const menuOnChange = (params) => { // `value` passed only for `singleChoice` mode, `selected` is array
+  const { selected, value } = params;
+  console.log('ModalPopup.fixture: menuOnChange', { selected, value, params });
   // debugger
 };
-const menuOnClick = ({ value }) => {
-  console.log('ModalPopup.fixture: menuOnClick', { value });
+const menuOnClick = (params) => {
+  const { value } = params;
+  console.log('ModalPopup.fixture: menuOnClick', { value, params });
   // debugger
   // cbHideStopper && cbHideStopper()
 };
-const buttonOnClick = ({ show }) => {
-  console.log('ModalPopup.fixture: buttonOnClick', { show });
+const buttonOnClick = (params) => {
+  const { show } = params;
+  console.log('ModalPopup.fixture: buttonOnClick', { show, params });
   // debugger
 };
 

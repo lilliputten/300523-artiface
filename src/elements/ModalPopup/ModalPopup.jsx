@@ -611,6 +611,7 @@ class ModalPopup extends React.PureComponent /** @lends @ModalPopup.prototype */
     if (nextOpen) {
       if (this.controlNode) { // Move focus out of control element...
         // this.controlNode.focus && this.controlNode.focus(); // Ensure focus isnt on other element (eg, selects' inner button).
+        // console.log('ModalPopup:onControlClick: blur');
         this.controlNode.blur && this.controlNode.blur();
       }
       if (this.controlDomNode) { // Move focus out of control element...

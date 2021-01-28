@@ -1,6 +1,6 @@
 /** @module Menu.fixture
  *  @since 2020.10.27, 02:58
- *  @changed 2020.10.27, 21:16
+ *  @changed 2021.01.28, 21:55
  */
 /* eslint-disable no-console */
 
@@ -29,33 +29,33 @@ const itemElems = items.map((props, i) => {
   return i ? props : React.createElement(MenuItem, { ...props, key: props.val });
 });
 
-const onChange = ({ checkedValues }) => {
-  console.log('Menu.fixture: onChange handler', checkedValues);
-  // debugger
+const onChange = (params) => {
+  const { selected } = params;
+  console.log('Menu.fixture: onChange handler', { selected, params });
 };
-const onClick = ({ val }) => {
-  console.log('Menu.fixture: onClick handler', val);
-  // debugger
+const onClick = (params) => {
+  const { value } = params;
+  console.log('Menu.fixture: onClick handler', { value, params });
 };
 
 export default {
-  // simple: (
-  //   <Menu id="simple">
-  //     {itemElems}
-  //   </Menu>
-  // ),
+  simple: (
+    <Menu id="simple">
+      {itemElems}
+    </Menu>
+  ),
   horizontal: (
-    <Menu id="horizontal" _checkable={true} layout="horizontal" onClick={onClick}>
+    <Menu id="horizontal" _selectable={true} layout="horizontal" onClick={onClick}>
       {itemElems}
     </Menu>
   ),
-  checkableMultiply: (
-    <Menu id="checkableMultiply" checkable={true} singleChoice="forced" onChange={onChange}>
+  selectableMultiply: (
+    <Menu id="selectableMultiply" selectable={true} onChange={onChange}>
       {itemElems}
     </Menu>
   ),
-  checkableSingle: (
-    <Menu id="checkableSingle" checkable={true} singleChoice="forced" onChange={onChange}>
+  selectableSingle: (
+    <Menu id="selectableSingle" selectable={true} singleChoice="forced" onChange={onChange}>
       {itemElems}
     </Menu>
   ),
