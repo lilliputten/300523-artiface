@@ -31,8 +31,9 @@ fi
 # Increment patch number
 NEXT_PATCH_NUMBER=`expr $PATCH_NUMBER + 1`
 
-echo "Increment patch number ($PATCH_NUMBER -> $NEXT_PATCH_NUMBER)" \
-  && cp "$VERSION_FILE" "$BACKUP" \
+# echo "Increment patch number ($PATCH_NUMBER -> $NEXT_PATCH_NUMBER)"
+
+cp "$VERSION_FILE" "$BACKUP" \
   && cat "$BACKUP" \
     | sed "s/^\(.*\)\.\([0-9]\+\)$/\1.$NEXT_PATCH_NUMBER/" \
     > "$VERSION_FILE" \

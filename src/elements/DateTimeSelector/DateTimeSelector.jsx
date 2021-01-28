@@ -46,16 +46,20 @@ registerLocale('ru-RU', ru);
 class DateTimeSelector extends React.PureComponent /** @lends @DateTimeSelector.prototype */ {
 
   static propTypes = {
-    value: PropTypes.oneOfType([ PropTypes.string, PropTypes.number, PropTypes.instanceOf(Date) ]),
-    startDate: PropTypes.oneOfType([ PropTypes.string, PropTypes.number, PropTypes.instanceOf(Date) ]),
-    endDate: PropTypes.oneOfType([ PropTypes.string, PropTypes.number, PropTypes.instanceOf(Date) ]),
-    disabled: PropTypes.bool,
-    id: PropTypes.string,
-    onChange: PropTypes.func,
-    selectsStart: PropTypes.bool,
-    selectsEnd: PropTypes.bool,
     calendarClassName: PropTypes.string,
+    disabled: PropTypes.bool,
+    endDate: PropTypes.oneOfType([ PropTypes.string, PropTypes.number, PropTypes.instanceOf(Date) ]),
+    id: PropTypes.string,
+    inputId: PropTypes.string,
+    onChange: PropTypes.func,
+    selectsEnd: PropTypes.bool,
+    selectsRange: PropTypes.bool,
+    selectsStart: PropTypes.bool,
+    showTime: PropTypes.bool,
+    startDate: PropTypes.oneOfType([ PropTypes.string, PropTypes.number, PropTypes.instanceOf(Date) ]),
     timeIntervals: PropTypes.number,
+    title: PropTypes.string,
+    value: PropTypes.oneOfType([ PropTypes.string, PropTypes.number, PropTypes.instanceOf(Date) ]),
   }
 
   static defaultProps = {
@@ -107,7 +111,7 @@ class DateTimeSelector extends React.PureComponent /** @lends @DateTimeSelector.
       dateType,
     } = this.state;
     let setParams;
-    let selectsStart = this.state.selectsStart;
+    let selectedStart = this.state.selectsStart;
     if (selectsRange) {
       let startDate = this.state.startDate;
       let endDate = this.state.endDate;
@@ -115,9 +119,9 @@ class DateTimeSelector extends React.PureComponent /** @lends @DateTimeSelector.
         value = value[0]; // ???
       }
       else {
-        selectsStart = !selectsStart; // Re-revert start/end switch
+        selectedStart = !selectedStart; // Re-revert start/end switch
       }
-      if (selectsStart) {
+      if (selectedStart) {
         startDate = value;
       }
       else {
@@ -127,8 +131,9 @@ class DateTimeSelector extends React.PureComponent /** @lends @DateTimeSelector.
         id: this.id,
         startDate: startDate || this.state.startDate,
         endDate: endDate || this.state.endDate,
-        selectsStart: !selectsStart,
-        selectsEnd: selectsStart,
+        selectedStart,
+        selectsStart: !selectedStart,
+        selectsEnd: selectedStart,
         value,
       };
     }

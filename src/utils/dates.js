@@ -112,7 +112,14 @@ export function formatDateTimeToString(date, opt = {}) {
   return format(convertToDateObject(date), fmt, opt);
 }
 
-export function tuneDateValue(origDate, isEndDate, keepTime, timeIntervals = 60) {
+/** tuneDateValue -- Adjust date to day/interval start/end.
+ * @param {Date|Number|moment|msDateStr} origDate - date (in any format)
+ * @param {Boolean} [toEnd=false] -- Adjust to end
+ * @param {Boolean} [toTime=false] -- Adjust to time periods (timeIntervals)
+ * @param {Number} [timeIntervals=60] -- Time period to adjust (in minutes)
+ * @return {Date|Number|moment|msDateStr} adjustedDate -- Date in the input format
+ */
+export function tuneDateValue(origDate, toEnd, toTime, timeIntervals = 60) {
   const dateType = detectDateValueType(origDate);
   let date;
   if (dateType === 'object') { // Just clone date object
@@ -121,8 +128,8 @@ export function tuneDateValue(origDate, isEndDate, keepTime, timeIntervals = 60)
   else {
     date = convertToDateObject(origDate);
   }
-  if (!keepTime) {
-    if (isEndDate) {
+  if (!toTime) {
+    if (toEnd) {
       date.setHours(23, 59, 59, 999);
     }
     else {
@@ -130,7 +137,7 @@ export function tuneDateValue(origDate, isEndDate, keepTime, timeIntervals = 60)
     }
   }
   else {
-    if (isEndDate) {
+    if (toEnd) {
       date.setMilliseconds(999);
       date.setSeconds(59);
       const minutes = date.getMinutes();
@@ -145,6 +152,14 @@ export function tuneDateValue(origDate, isEndDate, keepTime, timeIntervals = 60)
     }
   }
   return convertDateToType(date, dateType);
+}
+
+export function startOfTheDay(date) {
+  return tuneDateValue(date);
+}
+
+export function endOfTheDay(date) {
+  return tuneDateValue(date, true);
 }
 
 

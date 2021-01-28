@@ -6,6 +6,8 @@
 import React from 'react';
 import FormRadio from './FormRadio';
 import FormGroup from '../FormGroup';
+import FormLabel from '../FormLabel';
+import FormTextInput from '../FormTextInput';
 
 import { FormContextProvider } from 'helpers/FormContext';
 
@@ -24,7 +26,10 @@ class DemoFormRadio extends React.PureComponent /** @lends @FormRadio.prototype 
   handleChange = ({ /* id, */ value }) => {
     this.setState({ value });
   }
-  setRef = (node) => {
+  setDomRef = (node) => {
+    node && typeof node.focus === 'function' && node.focus();
+  }
+  setFormItemNodeRef = (node) => {
     node && typeof node.focus === 'function' && node.focus();
   }
   render() {
@@ -34,7 +39,8 @@ class DemoFormRadio extends React.PureComponent /** @lends @FormRadio.prototype 
         id="DemoRadio"
         onChange={this.handleChange}
         value={value}
-        ref={this.setRef}
+        // setDomRef={this.setDomRef}
+        setFormItemNodeRef={this.setFormItemNodeRef}
       />
     );
   }
@@ -42,8 +48,8 @@ class DemoFormRadio extends React.PureComponent /** @lends @FormRadio.prototype 
 
 class WithFormContext extends React.PureComponent /** @lends @ModalsContainer.prototype */ {
   onInputEnterPressed = ({ id }) => {
-    console.log('FormRadio.fixture:onInputEnterPressed', id);
-    debugger;
+    console.log('FormRadio.fixture:onInputEnterPressed', id); // eslint-disable-line no-console
+    debugger; // eslint-disable-line no-debugger
   }
   render() {
     return (
@@ -53,7 +59,7 @@ class WithFormContext extends React.PureComponent /** @lends @ModalsContainer.pr
           id="WithFormContext"
           // onChange={this.handleChange}
           // value={value}
-          // ref={this.setRef}
+          // ref={this.setDomRef}
         />
       </FormContextProvider>
     );
@@ -61,9 +67,27 @@ class WithFormContext extends React.PureComponent /** @lends @ModalsContainer.pr
 }
 const wrappedWithFormContext = <WithFormContext />;
 
+const withLabel = (
+  <FormGroup flow>
+    <FormRadio
+      inputId="withLabelRadio"
+      // onChange={this.handleFilterChange}
+    />
+    <FormLabel htmlFor="withLabelRadio"
+      title="Label"
+    />
+    <FormTextInput
+      value="text value"
+      placeholder="placeholder"
+      // fullWidth
+    />
+  </FormGroup>
+);
+
 export default {
   simple: <FormRadio className="extraButtonClass" />,
   primaryChecked: <FormRadio value={true} theme="primary" />,
   demoWithState: <DemoFormRadio />,
   wrappedWithFormContext,
+  withLabel,
 };

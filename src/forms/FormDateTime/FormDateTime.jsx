@@ -40,15 +40,24 @@ class FormDateTime extends React.PureComponent /** @lends @FormDateTime.prototyp
 
   static propTypes = {
     calendarClassName: PropTypes.string,
+    className: PropTypes.string,
+    closeOnSelect: PropTypes.bool,
+    controlButtonTheme: PropTypes.string,
     disabled: PropTypes.bool,
     fullWidth: PropTypes.bool,
     id: PropTypes.string,
+    inputId: PropTypes.string,
     onChange: PropTypes.func,
+    onControlClick: PropTypes.func,
     open: PropTypes.bool,
     placeholder: PropTypes.string,
     selectsEnd: PropTypes.bool,
+    selectsRange: PropTypes.bool,
     selectsStart: PropTypes.bool,
     setDomRef: PropTypes.func,
+    setPopupNodeRef: PropTypes.func,
+    showTime: PropTypes.bool,
+    title: PropTypes.string,
     value: PropTypes.oneOfType([ PropTypes.string, PropTypes.number, PropTypes.instanceOf(Date) ]),
   }
 
@@ -59,7 +68,7 @@ class FormDateTime extends React.PureComponent /** @lends @FormDateTime.prototyp
     const {
       value,
     } = props;
-    this.id = props.id || props.inputId || props.name;
+    this.id = props.id || props.inputId; // || props.name;
     this.state = {
       value,
     };

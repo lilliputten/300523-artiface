@@ -20,8 +20,8 @@ export const DemoWrapper = <FormGroup stack id="Wrapper" />; // ({ children }) =
 
 class WithFormContext extends React.PureComponent /** @lends @ModalsContainer.prototype */ {
   onInputEnterPressed = ({ id }) => {
-    console.log('FormTextInput.fixture:onInputEnterPressed', id);
-    debugger;
+    console.log('FormTextInput.fixture:onInputEnterPressed', id); // eslint-disable-line no-console
+    debugger; // eslint-disable-line no-debugger
   }
   render() {
     return (

@@ -16,6 +16,9 @@
   $vMargin: $formItemSpacing;
 
   margin: -$(vMargin)px -$(hMargin)px;
+  &_noSpace {
+    margin: 0;
+  }
 
   // Padded content
   &_padded {
@@ -49,6 +52,9 @@
       &_center {
         justify-content: center;
       }
+    }
+    &^&_wrap {
+      flex-wrap: wrap;
     }
   }
 

@@ -26,11 +26,15 @@ const cnFormRadio = cn('FormRadio');
 class FormRadio extends React.PureComponent /** @lends @FormRadio.prototype */ {
 
   static propTypes = {
+    active: PropTypes.bool,
+    disabled: PropTypes.bool,
+    handleChange: PropTypes.func,
     id: PropTypes.string,
     name: PropTypes.string,
-    value: PropTypes.bool,
-    disabled: PropTypes.bool,
     onChange: PropTypes.func,
+    setDomRef: PropTypes.func, // From FormItemHOC
+    theme: PropTypes.string,
+    value: PropTypes.bool,
   }
 
   static defaultProps = {
@@ -70,11 +74,9 @@ class FormRadio extends React.PureComponent /** @lends @FormRadio.prototype */ {
       id,
       inputId,
       name,
-      // tabIndex, // focusable
       handleChange,
       value,
       setDomRef, // From FormItemHOC
-      // setInputDomRef,
     } = this.props;
     const checked = !!value;
     const inputProps = {

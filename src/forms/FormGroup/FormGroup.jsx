@@ -19,20 +19,20 @@ const cnFormGroup = cn('FormGroup');
 class FormGroup extends React.PureComponent /** @lends @FormGroup.prototype */ {
 
   static propTypes = {
-    id: PropTypes.string,
+    // content: PropTypes.any, // ???
     align: PropTypes.string,
     alignItems: PropTypes.string,
     background: PropTypes.string,
-    flow: PropTypes.oneOfType([ PropTypes.bool, PropTypes.string ]),
-    noWrap: PropTypes.bool,
+    className: PropTypes.string,
+    disabled: PropTypes.bool, // ???
+    flow: PropTypes.bool,
     fullWidth: PropTypes.bool,
+    id: PropTypes.string,
+    noSpace: PropTypes.bool,
+    noWrap: PropTypes.bool,
     padded: PropTypes.bool,
-    stack: PropTypes.oneOfType([ PropTypes.bool, PropTypes.string ]),
-    // name: PropTypes.string,
-    // disabled: PropTypes.bool,
-    // value: PropTypes.any,
-    // valueType: PropTypes.string,
-    // onChange: PropTypes.func,
+    stack: PropTypes.bool,
+    wrap: PropTypes.bool,
   }
 
   static classNameModifiers = [
@@ -43,10 +43,13 @@ class FormGroup extends React.PureComponent /** @lends @FormGroup.prototype */ {
     'alignItems',
     'background',
     'flow',
-    'noWrap',
     'fullWidth',
+    'noSpace',
+    'noWrap',
     'padded',
     'stack',
+    'wrap',
+    // 'disabled',
   ]
 
   constructor(props) {

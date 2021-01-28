@@ -6,6 +6,7 @@
 
 import React from 'react';
 import { cn } from 'utils/configure';
+import PropTypes from 'prop-types';
 
 import './FormItemHOC.pcss';
 
@@ -14,9 +15,9 @@ const cnFormItem = cn('FormItem');
 const classNameModifiers = [ // Pass props/state params to class modifiers
   // Display-related modifiers...
   'fullWidth',
-  'innerFlex', // (???)
-  'solid', // Item is unwrappable (???)
-  'framed', // Frame around item (input field, select etc) (???)
+  // 'innerFlex', // (???)
+  // 'solid', // Item is unwrappable (???)
+  // 'framed', // Frame around item (input field, select etc) (???)
   // Behavior-related modifiers...
   'hoverable', // Allow hover effects
   'focusable', // Allow hover effects
@@ -27,7 +28,7 @@ const classNameModifiers = [ // Pass props/state params to class modifiers
   'pressed',
   'checked',
   'disabled',
-  'fill', // (???)
+  // 'fill', // (???)
 ];
 const classNameExpectedModifierTypes = {
   checked: 'boolean',
@@ -72,6 +73,22 @@ const deriveState = (...sets) => {
 let uniqIdCount = 1;
 
 const wrapFormItemHOC = (WrappedComponent, params = {}) => class FormItem extends React.Component {
+
+  static propTypes = {
+    checked: PropTypes.bool,
+    className: PropTypes.string,
+    clickable: PropTypes.bool,
+    disabled: PropTypes.bool,
+    focusable: PropTypes.bool,
+    focused: PropTypes.bool,
+    fullWidth: PropTypes.bool,
+    hoverable: PropTypes.bool,
+    hovered: PropTypes.bool,
+    id: PropTypes.string,
+    pressed: PropTypes.bool,
+    setDomRef: PropTypes.func,
+    setFormItemNodeRef: PropTypes.func,
+  }
 
   // Helper methods...
 
@@ -131,6 +148,10 @@ const wrapFormItemHOC = (WrappedComponent, params = {}) => class FormItem extend
           formItemDomRef && formItemDomRef.focus && formItemDomRef.focus();
         };
       }
+    }
+    const { setFormItemNodeRef } = this.props;
+    if (typeof setFormItemNodeRef === 'function') {
+      setFormItemNodeRef(this);
     }
   }
 

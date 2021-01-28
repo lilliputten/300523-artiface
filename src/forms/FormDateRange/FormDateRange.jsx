@@ -39,19 +39,30 @@ const cnFormDateRange = cn('FormDateRange');
 class FormDateRange extends React.PureComponent /** @lends @FormDateRange.prototype */ {
 
   static propTypes = {
+    // selectsEnd: PropTypes.bool,
+    // selectsStart: PropTypes.bool,
+    // value: PropTypes.oneOfType([ PropTypes.string, PropTypes.number, PropTypes.instanceOf(Date) ]),
     calendarClassName: PropTypes.string,
+    className: PropTypes.string,
+    closeOnSelect: PropTypes.bool,
+    controlButtonTheme: PropTypes.string,
     disabled: PropTypes.bool,
+    endDate: PropTypes.oneOfType([ PropTypes.string, PropTypes.number, PropTypes.instanceOf(Date) ]),
     fullWidth: PropTypes.bool,
     id: PropTypes.string,
+    inputId: PropTypes.string,
     onChange: PropTypes.func,
+    onStartDateChange: PropTypes.func,
+    onEndDateChange: PropTypes.func,
+    onControlClick: PropTypes.func,
     open: PropTypes.bool,
     placeholder: PropTypes.string,
-    selectsEnd: PropTypes.bool,
-    selectsStart: PropTypes.bool,
     setDomRef: PropTypes.func,
-    // value: PropTypes.oneOfType([ PropTypes.string, PropTypes.number, PropTypes.instanceOf(Date) ]),
+    setPopupNodeRef: PropTypes.func,
+    showTime: PropTypes.bool,
     startDate: PropTypes.oneOfType([ PropTypes.string, PropTypes.number, PropTypes.instanceOf(Date) ]),
-    endDate: PropTypes.oneOfType([ PropTypes.string, PropTypes.number, PropTypes.instanceOf(Date) ]),
+    timeIntervals: PropTypes.number,
+    title: PropTypes.string,
   }
 
   // Lifecycle methods...
@@ -116,19 +127,25 @@ class FormDateRange extends React.PureComponent /** @lends @FormDateRange.protot
     ].filter(Boolean).join(config.constants.dateRangeDelim);
   }
 
-  onChange = ({ startDate, startDateObj, endDate, endDateObj }) => {
+  onChange = ({ startDate, startDateObj, endDate, endDateObj, value, valueObj, selectedStart }) => {
     const {
       onChange,
       closeOnSelect,
+      onStartDateChange,
+      onEndDateChange,
     } = this.props;
-    const setParams = { id: this.id, startDate, startDateObj, endDate, endDateObj };
+    const setParams = { id: this.id, startDate, startDateObj, endDate, endDateObj, value, valueObj, selectedStart };
     setParams.displayValue = this.getDisplayValue(setParams); // dateUtils.formatDateToString(value); // TODO: showTime option
     // console.log('FormDateRange:onChange', setParams);
     this.setState(setParams);
     if (typeof onChange === 'function') {
-      // const cbParams = { ...setParams }; // Convert date values to target date type...
-      // cbParams.value = dateUtils.convertDateToType(cbParams.value, dateType);
       onChange(setParams);
+    }
+    if (selectedStart && typeof onStartDateChange === 'function') {
+      onStartDateChange(setParams);
+    }
+    if (!selectedStart && typeof onEndDateChange === 'function') {
+      onEndDateChange(setParams);
     }
     if (closeOnSelect /* && lastRangeChanged && lastRangeChanged !== rangeId */ && this.popupNode) {
       this.popupNode.close();
