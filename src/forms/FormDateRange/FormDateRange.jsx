@@ -191,6 +191,8 @@ class FormDateRange extends React.PureComponent /** @lends @FormDateRange.protot
         title={title}
         fullWidth={fullWidth}
         disabled={disabled}
+        checkable
+        checked={open}
       />
     );
   }
