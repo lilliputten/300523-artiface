@@ -4141,7 +4141,7 @@ label.FormLabel-Control[for] {
 
 /** @module FormTextInput.styles
  *  @since 2020.10.07, 00:20
- *  @changed 2020.10.29, 23:44
+ *  @changed 2021.01.29, 00:54
  */
 
 .FormTextInput {
@@ -4256,21 +4256,27 @@ input.FormTextInput-Control:-internal-autofill-previewed,
 
 /* color($glowColor shade(10));*/
 
-.FormTextInput.FormItem_focused,
-  .FormTextInput.FormItem_hovered {
-    -webkit-box-shadow: inset 0 0 2px 1px rgb(184, 184, 184),
-    0 0 4px 1px rgb(204, 204, 204);
-            box-shadow: inset 0 0 2px 1px rgb(184, 184, 184),
-    0 0 4px 1px rgb(204, 204, 204);
+.FormTextInput.FormItem_hovered {
+    -webkit-box-shadow: inset 0 0 1px 1px rgb(184, 184, 184),
+    0 0 4px 0px rgb(204, 204, 204);
+            box-shadow: inset 0 0 1px 1px rgb(184, 184, 184),
+    0 0 4px 0px rgb(204, 204, 204);
   }
 
 /* Frame...*/
 
 .FormTextInput.FormItem_focused {
-    -webkit-box-shadow: inset 0 0 2px 1px rgb(0, 101, 217),
-    0 0 5px 0px rgba(0, 119, 255, 0.8);
-            box-shadow: inset 0 0 2px 1px rgb(0, 101, 217),
-    0 0 5px 0px rgba(0, 119, 255, 0.8); /* , 2px, 1px; // @calc($formItemOuterGlow - 2)px;*/
+    -webkit-box-shadow: inset 0 0 1px 1px rgb(0, 101, 217),
+    0 0 1px 0px rgba(0, 119, 255, 0.8);
+            box-shadow: inset 0 0 1px 1px rgb(0, 101, 217),
+    0 0 1px 0px rgba(0, 119, 255, 0.8); /* @calc($formItemOuterGlow - 2)px;*/
+  }
+
+.FormTextInput.FormItem_focused.FormItem_hovered {
+    -webkit-box-shadow: inset 0 0 1px 1px rgb(0, 96, 206),
+    0 0 0px 1px rgba(0, 119, 255, 0.8);
+            box-shadow: inset 0 0 1px 1px rgb(0, 96, 206),
+    0 0 0px 1px rgba(0, 119, 255, 0.8); /* @calc($formItemOuterGlow - 2)px;*/
   }
 
 
