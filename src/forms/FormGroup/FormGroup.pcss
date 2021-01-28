@@ -44,14 +44,15 @@
   }
 
   &_stack {
-    // border: 1px solid blue; // DEBUG
-    display: flex;
     flex-wrap: nowrap;
     align-items: stretch;
     flex-direction: column;
+    &, &.FormItem { // Override nested FormItem display:block rule
+      // border: 1px solid blue; // DEBUG
+      display: flex;
+    }
   }
   &_flow {
-    display: flex;
     // flex-wrap: wrap;
     & > .FormItem {
       min-width: $(formItemHeight)px; // Hint for limiting the maximum width (overflow causes cropping items outer glow on ubteractive control events).
@@ -60,13 +61,16 @@
     & > .FormItem_fill {
       flex: 1;
     }
-    &^&_alignItems {
+    &.FormGroup_alignItems {
       &_center {
         justify-content: center;
       }
     }
-    &^&_wrap {
+    &.FormGroup_wrap {
       flex-wrap: wrap;
+    }
+    &, &.FormItem { // Override nested FormItem display:block rule
+      display: flex;
     }
   }
 
