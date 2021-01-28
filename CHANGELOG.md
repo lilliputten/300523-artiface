@@ -1,5 +1,6 @@
 # CHANGELOG
 
+- 2021.01.28, 20:09 -- v.0.2.8: Fixed PropTypes for DateTimeSelector, FormDateRange, FormDateTime, FormGroup (added props `wrap`, `noSpace`), FormItemHOC, FormRadio. FormDateRange: Use event handlers `onStartDateChange`, `onEndDateChange`. Added `utils.dates` methods: `startOfTheDay`, `endOfTheDay` (fixed exports in `utils`). Minor maintenance tools fixups.
 - 2021.01.26, 21:01 -- v.0.2.7.
 - 2021.01.26, 20:37 -- PD-3546: DateTimeSelector, FormDateRange: Support for date/time range selection (done).
 - 2021.01.21, 12:24 -- PD-3327: Fixed interactive styles for FormRadio.
@@ -77,5 +78,5 @@
 - 2020.10.05, 20:38 -- v.0.0.15: Extracted `demoSupport.jsx` routines, fixture selection from url query (parameter `fixture`), added avaialble fixtures list if fixture to display is not specified, added DemoWrapper & demoTitle exportable ficture parameters for demo rendering.
 
 <!--
- @changed 2021.01.26, 20:37
+ @changed 2021.01.28, 20:18
 -->

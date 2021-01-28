@@ -38770,7 +38770,7 @@ module.exports = { // Common-used app variables...
  */
 
 var DEBUG = true;
-var DEV_DEBUG = true;
+var DEV_DEBUG = undefined;
 
 module.exports = { // Common-used build variables...
 
@@ -38778,10 +38778,10 @@ module.exports = { // Common-used build variables...
   DEV_DEBUG: DEV_DEBUG,
 
   THEME: "default",
-  buildTag: "v.0.2.7-210126-2105-build-dev-default",
-  timestamp: "2021.01.26, 21:05",
-  timetag: "210126-2105",
-  version: "0.2.7" };
+  buildTag: "v.0.2.8-210128-2031-build-dev-default",
+  timestamp: "2021.01.28, 20:31",
+  timetag: "210128-2031",
+  version: "0.2.8" };
 
 /***/ }),
 
@@ -39467,6 +39467,10 @@ DateTimeSelector = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_
 
 
 
+
+
+
+
   // Lifecycle methods...
 
   function DateTimeSelector(props) {var _this;
@@ -39512,7 +39516,7 @@ DateTimeSelector = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_
       dateType =
       _this.state.dateType;
       var setParams;
-      var selectsStart = _this.state.selectsStart;
+      var selectedStart = _this.state.selectsStart;
       if (selectsRange) {
         var startDate = _this.state.startDate;
         var endDate = _this.state.endDate;
@@ -39520,9 +39524,9 @@ DateTimeSelector = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_
           value = value[0]; // ???
         } else
         {
-          selectsStart = !selectsStart; // Re-revert start/end switch
+          selectedStart = !selectedStart; // Re-revert start/end switch
         }
-        if (selectsStart) {
+        if (selectedStart) {
           startDate = value;
         } else
         {
@@ -39532,8 +39536,9 @@ DateTimeSelector = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_
           id: _this.id,
           startDate: startDate || _this.state.startDate,
           endDate: endDate || _this.state.endDate,
-          selectsStart: !selectsStart,
-          selectsEnd: selectsStart,
+          selectedStart: selectedStart,
+          selectsStart: !selectedStart,
+          selectsEnd: selectedStart,
           value: value };
 
       } else
@@ -39615,7 +39620,7 @@ DateTimeSelector = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_
       react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(react_datepicker__WEBPACK_IMPORTED_MODULE_9___default.a, datePickerProps)));
 
 
-  };return DateTimeSelector;}(react__WEBPACK_IMPORTED_MODULE_4___default.a.PureComponent /** @lends @DateTimeSelector.prototype */);_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3___default()(DateTimeSelector, "propTypes", { value: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.string, prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.number, prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.instanceOf(Date)]), startDate: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.string, prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.number, prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.instanceOf(Date)]), endDate: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.string, prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.number, prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.instanceOf(Date)]), disabled: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.bool, id: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.string, onChange: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.func, selectsStart: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.bool, selectsEnd: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.bool, calendarClassName: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.string, timeIntervals: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.number });_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3___default()(DateTimeSelector, "defaultProps", { timeIntervals: 60 });
+  };return DateTimeSelector;}(react__WEBPACK_IMPORTED_MODULE_4___default.a.PureComponent /** @lends @DateTimeSelector.prototype */);_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3___default()(DateTimeSelector, "propTypes", { calendarClassName: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.string, disabled: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.bool, endDate: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.string, prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.number, prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.instanceOf(Date)]), id: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.string, inputId: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.string, onChange: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.func, selectsEnd: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.bool, selectsRange: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.bool, selectsStart: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.bool, showTime: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.bool, startDate: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.string, prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.number, prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.instanceOf(Date)]), timeIntervals: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.number, title: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.string, value: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.string, prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.number, prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.instanceOf(Date)]) });_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3___default()(DateTimeSelector, "defaultProps", { timeIntervals: 60 });
 
 
 
@@ -43275,6 +43280,17 @@ FormDateRange = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_hel
 
 
 
+
+
+
+
+
+
+
+
+
+
+
   // Lifecycle methods...
 
   function FormDateRange(props) {var _this;
@@ -43337,19 +43353,25 @@ FormDateRange = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_hel
 
 
 
-    function (_ref) {var startDate = _ref.startDate,startDateObj = _ref.startDateObj,endDate = _ref.endDate,endDateObj = _ref.endDateObj;var _this$props =
+    function (_ref) {var startDate = _ref.startDate,startDateObj = _ref.startDateObj,endDate = _ref.endDate,endDateObj = _ref.endDateObj,value = _ref.value,valueObj = _ref.valueObj,selectedStart = _ref.selectedStart;var _this$props =
 
 
 
-      _this.props,onChange = _this$props.onChange,closeOnSelect = _this$props.closeOnSelect;
-      var setParams = { id: _this.id, startDate: startDate, startDateObj: startDateObj, endDate: endDate, endDateObj: endDateObj };
+
+
+      _this.props,onChange = _this$props.onChange,closeOnSelect = _this$props.closeOnSelect,onStartDateChange = _this$props.onStartDateChange,onEndDateChange = _this$props.onEndDateChange;
+      var setParams = { id: _this.id, startDate: startDate, startDateObj: startDateObj, endDate: endDate, endDateObj: endDateObj, value: value, valueObj: valueObj, selectedStart: selectedStart };
       setParams.displayValue = _this.getDisplayValue(setParams); // dateUtils.formatDateToString(value); // TODO: showTime option
       // console.log('FormDateRange:onChange', setParams);
       _this.setState(setParams);
       if (typeof onChange === 'function') {
-        // const cbParams = { ...setParams }; // Convert date values to target date type...
-        // cbParams.value = dateUtils.convertDateToType(cbParams.value, dateType);
         onChange(setParams);
+      }
+      if (selectedStart && typeof onStartDateChange === 'function') {
+        onStartDateChange(setParams);
+      }
+      if (!selectedStart && typeof onEndDateChange === 'function') {
+        onEndDateChange(setParams);
       }
       if (closeOnSelect /* && lastRangeChanged && lastRangeChanged !== rangeId */ && _this.popupNode) {
         _this.popupNode.close();
@@ -43457,10 +43479,10 @@ FormDateRange = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_hel
     return /*#__PURE__*/(
       react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_elements_ModalPopup_ModalPopup__WEBPACK_IMPORTED_MODULE_8__["default"], popupProps));
 
-  };return FormDateRange;}(react__WEBPACK_IMPORTED_MODULE_3___default.a.PureComponent /** @lends @FormDateRange.prototype */);_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2___default()(FormDateRange, "propTypes", { calendarClassName: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string, disabled: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool, fullWidth: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool, id: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string, onChange: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func, open: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool, placeholder: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string, selectsEnd: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool, selectsStart: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool, setDomRef: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func, // value: PropTypes.oneOfType([ PropTypes.string, PropTypes.number, PropTypes.instanceOf(Date) ]),
-  startDate: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string, prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.number, prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.instanceOf(Date)]), endDate: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string, prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.number, prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.instanceOf(Date)]) });
-
-
+  };return FormDateRange;}(react__WEBPACK_IMPORTED_MODULE_3___default.a.PureComponent /** @lends @FormDateRange.prototype */);_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2___default()(FormDateRange, "propTypes", { // selectsEnd: PropTypes.bool,
+  // selectsStart: PropTypes.bool,
+  // value: PropTypes.oneOfType([ PropTypes.string, PropTypes.number, PropTypes.instanceOf(Date) ]),
+  calendarClassName: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string, className: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string, closeOnSelect: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool, controlButtonTheme: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string, disabled: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool, endDate: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string, prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.number, prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.instanceOf(Date)]), fullWidth: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool, id: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string, inputId: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string, onChange: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func, onStartDateChange: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func, onEndDateChange: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func, onControlClick: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func, open: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool, placeholder: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string, setDomRef: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func, setPopupNodeRef: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func, showTime: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool, startDate: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string, prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.number, prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.instanceOf(Date)]), timeIntervals: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.number, title: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string });
 /* harmony default export */ __webpack_exports__["default"] = (Object(_FormItemHOC_FormItemHOC__WEBPACK_IMPORTED_MODULE_7__["default"])({ solid: true, hoverable: true })(FormDateRange));
 
 /***/ }),
@@ -43563,6 +43585,15 @@ FormDateTime = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_help
 
 
 
+
+
+
+
+
+
+
+
+
   // Lifecycle methods...
 
   function FormDateTime(props) {var _this;
@@ -43640,11 +43671,11 @@ FormDateTime = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_help
 
     function (_ref2) {var open = _ref2.open;
       _this.setState({ open: open });
-    });var _value = props.value;_this.id = props.id || props.inputId || props.name;_this.state = { value: _value };_this.state.displayValue = _this.getDisplayValue(_this.state);return _this;} // Helper methods...
+    });var _value = props.value;_this.id = props.id || props.inputId; // || props.name;
+    _this.state = { value: _value };_this.state.displayValue = _this.getDisplayValue(_this.state);return _this;} // Helper methods...
   var _proto = FormDateTime.prototype;_proto.getClassName = function getClassName() {var id = this.id;var classList = cnFormDateTime({ id: id }, [this.props.className]);return classList;};_proto.getItemsText = function getItemsText() {var displayValue = this.state.displayValue;return displayValue;} // Handlers...
   ;_proto.getDisplayValue = function getDisplayValue(params) {params = params || this.state;var _params = params,value = _params.value;var showTime = this.props.showTime;var dateFormat = showTime ? _config_config__WEBPACK_IMPORTED_MODULE_6___default.a.constants.dateTimeFormat : _config_config__WEBPACK_IMPORTED_MODULE_6___default.a.constants.dateFormat;return _utils_dates__WEBPACK_IMPORTED_MODULE_11__["formatDateToString"](value, dateFormat);}; // Render...
-  _proto.
-  renderControlContent = function renderControlContent() {var _this$props2 =
+  _proto.renderControlContent = function renderControlContent() {var _this$props2 =
 
 
 
@@ -43727,7 +43758,7 @@ FormDateTime = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_help
       react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_elements_ModalPopup_ModalPopup__WEBPACK_IMPORTED_MODULE_8__["default"], popupProps));
 
 
-  };return FormDateTime;}(react__WEBPACK_IMPORTED_MODULE_3___default.a.PureComponent /** @lends @FormDateTime.prototype */);_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2___default()(FormDateTime, "propTypes", { calendarClassName: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string, disabled: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool, fullWidth: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool, id: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string, onChange: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func, open: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool, placeholder: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string, selectsEnd: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool, selectsStart: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool, setDomRef: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func, value: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string, prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.number, prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.instanceOf(Date)]) });
+  };return FormDateTime;}(react__WEBPACK_IMPORTED_MODULE_3___default.a.PureComponent /** @lends @FormDateTime.prototype */);_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2___default()(FormDateTime, "propTypes", { calendarClassName: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string, className: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string, closeOnSelect: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool, controlButtonTheme: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string, disabled: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool, fullWidth: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool, id: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string, inputId: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string, onChange: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func, onControlClick: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func, open: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool, placeholder: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string, selectsEnd: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool, selectsRange: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool, selectsStart: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool, setDomRef: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func, setPopupNodeRef: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func, showTime: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool, title: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string, value: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string, prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.number, prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.instanceOf(Date)]) });
 
 
 
@@ -43868,6 +43899,9 @@ FormGroup = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helpers
 
 
 
+
+
+
   function FormGroup(props) {var _this;
     _this = _React$PureComponent.call(this, props) || this;
     _this.state = {};return _this;
@@ -43903,14 +43937,12 @@ FormGroup = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helpers
       content || children));
 
 
-  };return FormGroup;}(react__WEBPACK_IMPORTED_MODULE_3___default.a.PureComponent /** @lends @FormGroup.prototype */);_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2___default()(FormGroup, "propTypes", { id: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string, align: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string, alignItems: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string, background: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string, flow: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool, prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string]), noWrap: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool, fullWidth: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool, padded: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool, stack: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool, prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string]) // name: PropTypes.string,
-  // disabled: PropTypes.bool,
-  // value: PropTypes.any,
-  // valueType: PropTypes.string,
-  // onChange: PropTypes.func,
-});_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2___default()(FormGroup, "classNameModifiers", [// Basic element properties
+  };return FormGroup;}(react__WEBPACK_IMPORTED_MODULE_3___default.a.PureComponent /** @lends @FormGroup.prototype */);_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2___default()(FormGroup, "propTypes", { // content: PropTypes.any, // ???
+  align: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string, alignItems: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string, background: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string, className: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string, disabled: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool, // ???
+  flow: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool, fullWidth: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool, id: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string, noSpace: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool, noWrap: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool, padded: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool, stack: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool, wrap: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool });_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2___default()(FormGroup, "classNameModifiers", [// Basic element properties
 'id', // Style-related modifiers...
-'align', 'alignItems', 'background', 'flow', 'noWrap', 'fullWidth', 'padded', 'stack']);/* harmony default export */ __webpack_exports__["default"] = (Object(_FormItemHOC_FormItemHOC__WEBPACK_IMPORTED_MODULE_6__["default"])(FormGroup));
+'align', 'alignItems', 'background', 'flow', 'fullWidth', 'noSpace', 'noWrap', 'padded', 'stack', 'wrap' // 'disabled',
+]);/* harmony default export */ __webpack_exports__["default"] = (Object(_FormItemHOC_FormItemHOC__WEBPACK_IMPORTED_MODULE_6__["default"])(FormGroup));
 
 /***/ }),
 
@@ -44458,8 +44490,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _utils_configure__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../utils/configure */ "./src/utils/configure.js");
-/* harmony import */ var _FormItemHOC_pcss__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./FormItemHOC.pcss */ "./src/forms/FormItemHOC/FormItemHOC.pcss");
-/* harmony import */ var _FormItemHOC_pcss__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_FormItemHOC_pcss__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _FormItemHOC_pcss__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./FormItemHOC.pcss */ "./src/forms/FormItemHOC/FormItemHOC.pcss");
+/* harmony import */ var _FormItemHOC_pcss__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_FormItemHOC_pcss__WEBPACK_IMPORTED_MODULE_7__);
  /** @module FormItemHOC
                                                                                                                                                                                                                                                                                 *  @class FormItemHOC
                                                                                                                                                                                                                                                                                 *  @since 2019.09.25, 19:18
@@ -44471,14 +44505,15 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 var cnFormItem = Object(_utils_configure__WEBPACK_IMPORTED_MODULE_5__["cn"])('FormItem');
 
 var classNameModifiers = [// Pass props/state params to class modifiers
 // Display-related modifiers...
 'fullWidth',
-'innerFlex', // (???)
-'solid', // Item is unwrappable (???)
-'framed', // Frame around item (input field, select etc) (???)
+// 'innerFlex', // (???)
+// 'solid', // Item is unwrappable (???)
+// 'framed', // Frame around item (input field, select etc) (???)
 // Behavior-related modifiers...
 'hoverable', // Allow hover effects
 'focusable', // Allow hover effects
@@ -44488,8 +44523,8 @@ var classNameModifiers = [// Pass props/state params to class modifiers
 'focused',
 'pressed',
 'checked',
-'disabled',
-'fill' // (???)
+'disabled'
+// 'fill', // (???)
 ];
 var classNameExpectedModifierTypes = {
   checked: 'boolean' };
@@ -44533,7 +44568,23 @@ var deriveState = function deriveState() {for (var _len = arguments.length, sets
 // Unique id counter
 var uniqIdCount = 1;
 
-var wrapFormItemHOC = function wrapFormItemHOC(WrappedComponent, params) {var _temp;if (params === void 0) {params = {};}return _temp = /*#__PURE__*/function (_React$Component) {_babel_runtime_helpers_inheritsLoose__WEBPACK_IMPORTED_MODULE_1___default()(FormItem, _React$Component);var _proto = FormItem.prototype;
+var wrapFormItemHOC = function wrapFormItemHOC(WrappedComponent, params) {var _class, _temp;if (params === void 0) {params = {};}return _temp = _class = /*#__PURE__*/function (_React$Component) {_babel_runtime_helpers_inheritsLoose__WEBPACK_IMPORTED_MODULE_1___default()(FormItem, _React$Component);var _proto = FormItem.prototype;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     // Helper methods...
     _proto.
@@ -44560,6 +44611,10 @@ var wrapFormItemHOC = function wrapFormItemHOC(WrappedComponent, params) {var _t
     ;
     function FormItem(props) {var _this;
       _this = _React$Component.call(this, props) || this;_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_0___default()(_this), "focus",
+
+
+
+
 
 
 
@@ -44690,7 +44745,7 @@ var wrapFormItemHOC = function wrapFormItemHOC(WrappedComponent, params) {var _t
       var formItemDomRef = this.formItemDomRef;if (formItemDomRef && formItemDomRef.addEventListener) {var hoverable = this.getStateOrPropOrParam('hoverable');var focusable = this.getStateOrPropOrParam('focusable');if (hoverable && !this.hoverableInited) {this.hoverableInited = true;formItemDomRef.addEventListener('mouseover', this.handleMouseOver);formItemDomRef.addEventListener('mouseout', this.handleMouseOut);}if (focusable && !this.focusableInited) {this.focusableInited = true; // formItemDomRef.addEventListener('focus', this.handleFocusIn);
           formItemDomRef.addEventListener('focus', this.handleFocusIn);formItemDomRef.addEventListener('blur', this.handleFocusOut);formItemDomRef.addEventListener('focusin', this.handleFocusIn);formItemDomRef.addEventListener('focusout', this.handleFocusOut); // console.log('FormItemHOC:componentDidMount: focus event handlers added');
           this.focus = function () {// Focus handler
-            formItemDomRef && formItemDomRef.focus && formItemDomRef.focus();};}}};_proto.componentWillUnmount = function componentWillUnmount() {var formItemDomRef = this.formItemDomRef;if (formItemDomRef && formItemDomRef.removeEventListener) {// const hoverable = this.getStateOrPropOrParam('hoverable')
+            formItemDomRef && formItemDomRef.focus && formItemDomRef.focus();};}}var setFormItemNodeRef = this.props.setFormItemNodeRef;if (typeof setFormItemNodeRef === 'function') {setFormItemNodeRef(this);}};_proto.componentWillUnmount = function componentWillUnmount() {var formItemDomRef = this.formItemDomRef;if (formItemDomRef && formItemDomRef.removeEventListener) {// const hoverable = this.getStateOrPropOrParam('hoverable')
         // const focusable = this.getStateOrPropOrParam('focusable')
         if (this.hoverableInited) {formItemDomRef.removeEventListener('mouseover', this.handleMouseOver);formItemDomRef.removeEventListener('mouseout', this.handleMouseOut);}if (this.focusableInited) {formItemDomRef.removeEventListener('focus', this.handleFocusIn);formItemDomRef.removeEventListener('blur', this.handleFocusOut);formItemDomRef.removeEventListener('focusin', this.handleFocusIn);formItemDomRef.removeEventListener('focusout', this.handleFocusOut);}}};_proto.getClassName = function getClassName() {var _this2 = this; // Collect modifier values from state or props
       var mods = classNameModifiers.reduce(function (mods, id) {var val = _this2.getStateOrPropOrParam(id); // (this.state[id] != null) ? this.state[id] : this.props[id]
@@ -44707,14 +44762,14 @@ var wrapFormItemHOC = function wrapFormItemHOC(WrappedComponent, params) {var _t
         renderProps)));
 
 
-    };return FormItem;}(react__WEBPACK_IMPORTED_MODULE_4___default.a.Component), _temp;};
+    };return FormItem;}(react__WEBPACK_IMPORTED_MODULE_4___default.a.Component), _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2___default()(_class, "propTypes", { checked: prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.bool, className: prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.string, clickable: prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.bool, disabled: prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.bool, focusable: prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.bool, focused: prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.bool, fullWidth: prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.bool, hoverable: prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.bool, hovered: prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.bool, id: prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.string, pressed: prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.bool, setDomRef: prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.func, setFormItemNodeRef: prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.func }), _temp;};
 
 
 
 /** Usage:
-                                                    * FormItemHOC(component)
-                                                    * FormItemHOC(params)(component)
-                                                    */
+                                                                                                                                                                                                                                                                                                                                                                                                                                                          * FormItemHOC(component)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                          * FormItemHOC(params)(component)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                          */
 var FormItemHOC = function FormItemHOC(params) {
   if (typeof params === 'string') {// Passed identifier
     params = { id: params };
@@ -45151,6 +45206,10 @@ FormRadio = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helpers
 
 
 
+
+
+
+
   // Lifecycle
 
   // Helper methods...
@@ -45180,8 +45239,6 @@ FormRadio = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helpers
   // Render...
   ;_proto.
   renderInput = function renderInput() {var _this$props2 =
-
-
 
 
 
@@ -45239,8 +45296,8 @@ FormRadio = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helpers
 
 
 // export default FormItemHOC({ hoverable: true, focusable: true, framed: false })(FormRadio)
-_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1___default()(FormRadio, "propTypes", { id: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.string, name: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.string, value: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.bool, disabled: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.bool, onChange: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func });_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1___default()(FormRadio, "defaultProps", { value: false });/* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_5__["compose"])(
-// withFormContext,
+_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1___default()(FormRadio, "propTypes", { active: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.bool, disabled: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.bool, handleChange: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func, id: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.string, name: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.string, onChange: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func, setDomRef: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func, // From FormItemHOC
+  theme: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.string, value: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.bool });_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1___default()(FormRadio, "defaultProps", { value: false });/* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_5__["compose"])( // withFormContext,
 _FormInteractiveItemHOC_FormInteractiveItemHOC__WEBPACK_IMPORTED_MODULE_8__["default"],
 // FormFocusableItemHOC,
 Object(_FormItemHOC_FormItemHOC__WEBPACK_IMPORTED_MODULE_6__["default"])({ hoverable: true, focusable: true, framed: false }),
@@ -46289,7 +46346,7 @@ var cn = function cn() {for (var _len = arguments.length, args = new Array(_len)
 /*!****************************!*\
   !*** ./src/utils/dates.js ***!
   \****************************/
-/*! exports provided: detectDateValueType, convertToDateObject, toMicrosoftDateTime, convertDateToType, formatDateToString, formatDateTimeToString, tuneDateValue */
+/*! exports provided: detectDateValueType, convertToDateObject, toMicrosoftDateTime, convertDateToType, formatDateToString, formatDateTimeToString, tuneDateValue, startOfTheDay, endOfTheDay */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -46301,6 +46358,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "formatDateToString", function() { return formatDateToString; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "formatDateTimeToString", function() { return formatDateTimeToString; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "tuneDateValue", function() { return tuneDateValue; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "startOfTheDay", function() { return startOfTheDay; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "endOfTheDay", function() { return endOfTheDay; });
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! moment */ "moment");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! date-fns */ "date-fns");
@@ -46418,7 +46477,14 @@ function formatDateTimeToString(date, opt) {if (opt === void 0) {opt = {};}
   return Object(date_fns__WEBPACK_IMPORTED_MODULE_1__["format"])(convertToDateObject(date), fmt, opt);
 }
 
-function tuneDateValue(origDate, isEndDate, keepTime, timeIntervals) {if (timeIntervals === void 0) {timeIntervals = 60;}
+/** tuneDateValue -- Adjust date to day/interval start/end.
+   * @param {Date|Number|moment|msDateStr} origDate - date (in any format)
+   * @param {Boolean} [toEnd=false] -- Adjust to end
+   * @param {Boolean} [toTime=false] -- Adjust to time periods (timeIntervals)
+   * @param {Number} [timeIntervals=60] -- Time period to adjust (in minutes)
+   * @return {Date|Number|moment|msDateStr} adjustedDate -- Date in the input format
+   */
+function tuneDateValue(origDate, toEnd, toTime, timeIntervals) {if (timeIntervals === void 0) {timeIntervals = 60;}
   var dateType = detectDateValueType(origDate);
   var date;
   if (dateType === 'object') {// Just clone date object
@@ -46427,8 +46493,8 @@ function tuneDateValue(origDate, isEndDate, keepTime, timeIntervals) {if (timeIn
   {
     date = convertToDateObject(origDate);
   }
-  if (!keepTime) {
-    if (isEndDate) {
+  if (!toTime) {
+    if (toEnd) {
       date.setHours(23, 59, 59, 999);
     } else
     {
@@ -46436,7 +46502,7 @@ function tuneDateValue(origDate, isEndDate, keepTime, timeIntervals) {if (timeIn
     }
   } else
   {
-    if (isEndDate) {
+    if (toEnd) {
       date.setMilliseconds(999);
       date.setSeconds(59);
       var minutes = date.getMinutes();
@@ -46451,6 +46517,14 @@ function tuneDateValue(origDate, isEndDate, keepTime, timeIntervals) {if (timeIn
     }
   }
   return convertDateToType(date, dateType);
+}
+
+function startOfTheDay(date) {
+  return tuneDateValue(date);
+}
+
+function endOfTheDay(date) {
+  return tuneDateValue(date, true);
 }
 
 /***/ }),
@@ -46711,19 +46785,21 @@ var splitMultiline = function splitMultiline(text, opt) {
 /*!****************************!*\
   !*** ./src/utils/utils.js ***!
   \****************************/
-/*! exports provided: configure, domUtils, lang, strings */
+/*! exports provided: configure, dates, domUtils, lang, strings */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _configure__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./configure */ "./src/utils/configure.js");
 /* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "configure", function() { return _configure__WEBPACK_IMPORTED_MODULE_0__; });
-/* harmony import */ var _domUtils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./domUtils */ "./src/utils/domUtils.js");
-/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "domUtils", function() { return _domUtils__WEBPACK_IMPORTED_MODULE_1__; });
-/* harmony import */ var _lang__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./lang */ "./src/utils/lang.js");
-/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "lang", function() { return _lang__WEBPACK_IMPORTED_MODULE_2__; });
-/* harmony import */ var _strings__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./strings */ "./src/utils/strings.js");
-/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "strings", function() { return _strings__WEBPACK_IMPORTED_MODULE_3__; });
+/* harmony import */ var _dates__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./dates */ "./src/utils/dates.js");
+/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "dates", function() { return _dates__WEBPACK_IMPORTED_MODULE_1__; });
+/* harmony import */ var _domUtils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./domUtils */ "./src/utils/domUtils.js");
+/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "domUtils", function() { return _domUtils__WEBPACK_IMPORTED_MODULE_2__; });
+/* harmony import */ var _lang__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./lang */ "./src/utils/lang.js");
+/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "lang", function() { return _lang__WEBPACK_IMPORTED_MODULE_3__; });
+/* harmony import */ var _strings__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./strings */ "./src/utils/strings.js");
+/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "strings", function() { return _strings__WEBPACK_IMPORTED_MODULE_4__; });
 /** @module utils
  *  @desc Library utilities
  *  @since 2020.05.19, 17:16
