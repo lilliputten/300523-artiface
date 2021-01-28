@@ -11,6 +11,11 @@ import {
 } from 'date-fns';
 import config from 'config';
 
+// Export constants...
+
+export const dayTicks = 1000 * 60 * 60 * 24;
+export const weekTicks = dayTicks * 7;
+
 /** Get date type
  * @param {Date|Moment|number} date
  * @return {String} dateType ('number', 'object', 'moment', 'msDateStr')
