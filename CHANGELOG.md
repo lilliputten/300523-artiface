@@ -1,5 +1,6 @@
 # CHANGELOG
 
+- 2021.01.29, 00:30 -- v.0.2.9.
 - 2021.01.29, 00:29 -- FormItemHOC: Manually call focusIn/focusOut event handlers on focus/blur event handlers, added `framed` modifier. FormGroup: Styles for nested items/groups. FormButton (in `config/css`): set inner height to outer height due to usage of `box-shadow` instead `border` in styles.
 - 2021.01.29, 00:12 -- FormDateRange: Pass modal `open` state (as `checked`), minor changes (dates preparation in demo fixture).
 - 2021.01.29, 00:10 -- FormSelect, Menu, MenuItem, FormSelect: PropTypes updated, use `selectable`, `selected` parameters for multiple choices (consider `checkable` & `checked` for boolean-like elements). FormSelect: Pass open & checked state to popup control element, handle open state from `ModalPopup`, tune styles for fullWidth control element.
