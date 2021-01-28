@@ -35,6 +35,12 @@ export default {
       <FormButton icon={faCheck} theme="default" text="Button with icon" />
     </FormGroup>
   ),
+  flow: (
+    <FormGroup flow>
+      <FormButton theme="default" text="Button1" />
+      <FormButton theme="default" text="Button2" />
+    </FormGroup>
+  ),
   center: (
     <FormGroup flow alignItems="center">
       <FormButton theme="default" text="Button" />

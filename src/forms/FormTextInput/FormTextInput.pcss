@@ -1,6 +1,6 @@
 /** @module FormTextInput.styles
  *  @since 2020.10.07, 00:20
- *  @changed 2020.10.29, 23:44
+ *  @changed 2021.01.29, 00:54
  */
 
 .FormTextInput {
@@ -78,16 +78,18 @@
   $glowColor: $formItemGlowColor;
   $hoveredBorderColor: color($borderColor shade(10));
   $activeBorderColor: color($glowColor shade(15));
+  $hoveredFocusedBorderColor: color($activeBorderColor shade(5));
   $hoveredGlowColor: color($borderColor alpha(1)); // color($glowColor shade(10));
   $activeGlowColor: color($glowColor alpha(.8));
   @mixin FormItemFrame $borderColor, $(formItemBorderSize)px, 0;
-
-  &.FormItem_focused,
   &.FormItem_hovered {
-    @mixin FormItemFrame $hoveredBorderColor, $(formItemBorderSize)px, 2px, $hoveredGlowColor, 1px, $(formItemOuterGlow)px;
+    @mixin FormItemFrame $hoveredBorderColor, $(formItemBorderSize)px, 1px, $hoveredGlowColor, 0px, $(formItemOuterGlow)px;
   }
   &.FormItem_focused {
-    @mixin FormItemFrame $activeBorderColor, $(formItemBorderSize)px, 2px, $activeGlowColor, 0px, @calc($formItemOuterGlow + 1)px; // , 2px, 1px; // @calc($formItemOuterGlow - 2)px;
+    @mixin FormItemFrame $activeBorderColor, $(formItemBorderSize)px, 1px, $activeGlowColor, 0px, 1px; // @calc($formItemOuterGlow - 2)px;
+  }
+  &.FormItem_focused.FormItem_hovered {
+    @mixin FormItemFrame $hoveredFocusedBorderColor, $(formItemBorderSize)px, 1px, $activeGlowColor, 1px, 0px; // @calc($formItemOuterGlow - 2)px;
   }
 }
 
