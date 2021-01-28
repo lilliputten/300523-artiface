@@ -22,8 +22,8 @@ export const DemoWrapper = FormGroup;
 
 const dayTicks = 1000 * 60 * 60 * 24;
 const thisDate = Date.now() - 2 * dayTicks;
-const startDate = dateUtils.tuneDateValue(thisDate);
-const endDate = dateUtils.tuneDateValue(thisDate + 3 * dayTicks, true);
+const startDate = dateUtils.startOfTheDay(thisDate);
+const endDate = dateUtils.adjustDateValue(thisDate + 3 * dayTicks, true);
 
 const onDateChanged = (params) => {
   console.log('FormDateRange.fixture:onDateChanged', params);

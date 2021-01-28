@@ -112,14 +112,14 @@ export function formatDateTimeToString(date, opt = {}) {
   return format(convertToDateObject(date), fmt, opt);
 }
 
-/** tuneDateValue -- Adjust date to day/interval start/end.
+/** adjustDateValue -- Adjust date to day/interval start/end.
  * @param {Date|Number|moment|msDateStr} origDate - date (in any format)
  * @param {Boolean} [toEnd=false] -- Adjust to end
  * @param {Boolean} [toTime=false] -- Adjust to time periods (timeIntervals)
  * @param {Number} [timeIntervals=60] -- Time period to adjust (in minutes)
  * @return {Date|Number|moment|msDateStr} adjustedDate -- Date in the input format
  */
-export function tuneDateValue(origDate, toEnd, toTime, timeIntervals = 60) {
+export function adjustDateValue(origDate, toEnd, toTime, timeIntervals = 60) {
   const dateType = detectDateValueType(origDate);
   let date;
   if (dateType === 'object') { // Just clone date object
@@ -155,11 +155,11 @@ export function tuneDateValue(origDate, toEnd, toTime, timeIntervals = 60) {
 }
 
 export function startOfTheDay(date) {
-  return tuneDateValue(date);
+  return adjustDateValue(date);
 }
 
 export function endOfTheDay(date) {
-  return tuneDateValue(date, true);
+  return adjustDateValue(date, true);
 }
 
 
