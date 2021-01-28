@@ -1264,6 +1264,7 @@ label.FormLabel-Control[for] {
     font-size: 16px;
     font-weight: normal;
     line-height: 1.6;
+    color: #444;
     vertical-align: bottom;
     background: none;
     text-align: left;
@@ -3661,9 +3662,6 @@ label.FormLabel-Control[for] {
     }
 
 .FormGroup_stack {
-    /* border: 1px solid blue; // DEBUG*/
-    display: -ms-flexbox;
-    display: flex;
     -ms-flex-wrap: nowrap;
         flex-wrap: nowrap;
     -ms-flex-align: stretch;
@@ -3672,10 +3670,11 @@ label.FormLabel-Control[for] {
         flex-direction: column;
   }
 
-.FormGroup_flow {
-    display: -ms-flexbox;
-    display: flex;
-  }
+.FormGroup_stack, .FormGroup_stack.FormItem { /* Override nested FormItem display:block rule*/
+      /* border: 1px solid blue; // DEBUG*/
+      display: -ms-flexbox;
+      display: flex;
+    }
 
 /* flex-wrap: wrap;*/
 
@@ -3697,6 +3696,11 @@ label.FormLabel-Control[for] {
 .FormGroup_flow.FormGroup_wrap {
       -ms-flex-wrap: wrap;
           flex-wrap: wrap;
+    }
+
+.FormGroup_flow, .FormGroup_flow.FormItem { /* Override nested FormItem display:block rule*/
+      display: -ms-flexbox;
+      display: flex;
     }
 
 .FormGroup_noWrap {
