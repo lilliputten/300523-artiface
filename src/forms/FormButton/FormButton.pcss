@@ -7,15 +7,17 @@
 .FormButton {
 
   // Override standard html button styles
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  border: none;
-  @mixin defaultFont;
-  vertical-align: bottom;
-  background: none;
+  & {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    border: none;
+    @mixin defaultFont;
+    vertical-align: bottom;
+    background: none;
+    text-align: left;
+  }
 
   outline: 0;
-  // overflow: hidden;
 
   padding: 0 $(formItemInnerPaddingH)px;
 

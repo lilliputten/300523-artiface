@@ -48,45 +48,73 @@
     $borderColor: $formItemBorderColor;
     $hoveredBorderColor: color($borderColor shade(10));
     $activeBorderColor: color($borderColor shade(15));
+    $hoveredFocusedBorderColor: color($activeBorderColor shade(5));
     $hoveredBgColor: color($bgColor shade(8));
     $activeBgColor: color($bgColor shade(15));
     $glowColor: $borderColor; // $formItemGlowColor;
     $hoveredGlowColor: color($hoveredBgColor alpha(.5)); // color($glowColor alpha(1));
     $activeGlowColor: $activeBgColor; // color($glowColor alpha(1) shade(10));
-    &.FormButton_active,
-    &.FormItem_focused,
     &.FormItem_hovered {
-      // $borderColor, $innerSize, $innerGlowSize, $outerGlowColor, $outerSize, $outerGlowSize
-      @mixin FormItemFrame $hoveredBorderColor, $(formItemBorderSize)px, 1px, $hoveredGlowColor, 1px, $(formItemOuterGlow)px;
+      @mixin FormItemFrame $hoveredBorderColor, $(formItemBorderSize)px, 1px, $hoveredGlowColor, 0px, $(formItemOuterGlow)px;
+      // background-color: $hoveredBgColor;
     }
-    &.FormButton_active,
     &.FormItem_focused {
-      @mixin FormItemFrame $activeBorderColor, $(formItemBorderSize)px, 2px, $activeGlowColor, 2px, 1px; // @calc($formItemOuterGlow - 2)px;
+      @mixin FormItemFrame $activeBorderColor, $(formItemBorderSize)px, 1px, $activeGlowColor, 0px, 1px; // @calc($formItemOuterGlow - 2)px;
+      // background-color: $activeBgColor;
+    }
+    &.FormItem_focused.FormItem_hovered {
+      @mixin FormItemFrame $hoveredFocusedBorderColor, $(formItemBorderSize)px, 2px, $activeGlowColor, 1px, 2px; // @calc($formItemOuterGlow - 2)px;
+      // background-color: color($activeBgColor shade(8));
+    }
+    &.FormButton_active.FormItem_hovered,
+    &.FormButton_active.FormItem_focused,
+    &.FormButton_active {
+      @mixin FormItemFrame $activeBorderColor, $(formItemBorderSize)px, 2px, $activeBorderColor, 2px, 1px; // @calc($formItemOuterGlow - 2)px;
+      // background-color: color($activeBgColor shade(15));
     }
     &.FormButton_onDark {
       $hoveredBorderColor: color($borderColor shade(10) alpha(.5));
       $activeBorderColor: color($borderColor shade(15));
+      $hoveredFocusedBorderColor: color($activeBorderColor shade(15));
       $hoveredGlowColor: color($hoveredBgColor alpha(.2));
       $activeGlowColor: color($activeBgColor alpha(.2));
       // $hoveredBorderColor: color($primaryColor shade(0) alpha(1));
       // $activeBorderColor: color($primaryColor shade(0));
       // $hoveredGlowColor: color($primaryColor alpha(.2));
       // $activeGlowColor: color($primaryColor alpha(.2));
-      &.FormButton_active,
-      &.FormItem_focused,
       &.FormItem_hovered {
-        @mixin FormItemFrame $hoveredBorderColor, $(formItemBorderSize)px, 1px, $hoveredGlowColor, 1px, $(formItemOuterGlow)px;
+        @mixin FormItemFrame $hoveredBorderColor, $(formItemBorderSize)px, 1px, $hoveredGlowColor, 0px, $(formItemOuterGlow)px;
+        // background-color: $hoveredBgColor;
       }
-      &.FormButton_active,
       &.FormItem_focused {
-        @mixin FormItemFrame $activeBorderColor, $(formItemBorderSize)px, 2px, $activeGlowColor, 2px, 1px; // @calc($formItemOuterGlow - 2)px;
+        @mixin FormItemFrame $activeBorderColor, $(formItemBorderSize)px, 1px, $activeGlowColor, 0px, 1px; // @calc($formItemOuterGlow - 2)px;
+        // background-color: $activeBgColor;
       }
+      &.FormItem_focused.FormItem_hovered {
+        @mixin FormItemFrame $hoveredFocusedBorderColor, $(formItemBorderSize)px, 2px, $activeGlowColor, 2px, 1px; // @calc($formItemOuterGlow - 2)px;
+        // background-color: color($activeBgColor shade(8));
+      }
+      &.FormButton_active.FormItem_hovered,
+      &.FormButton_active.FormItem_focused,
+      &.FormButton_active {
+        @mixin FormItemFrame $activeBorderColor, $(formItemBorderSize)px, 2px, $activeBorderColor, 2px, 1px; // @calc($formItemOuterGlow - 2)px;
+        // background-color: color($activeBgColor shade(15));
+      }
+      // &.FormButton_active,
+      // &.FormItem_focused,
+      // &.FormItem_hovered {
+      //   @mixin FormItemFrame $hoveredBorderColor, $(formItemBorderSize)px, 1px, $hoveredGlowColor, 1px, $(formItemOuterGlow)px;
+      // }
+      // &.FormButton_active,
+      // &.FormItem_focused {
+      //   @mixin FormItemFrame $activeBorderColor, $(formItemBorderSize)px, 2px, $activeGlowColor, 2px, 1px; // @calc($formItemOuterGlow - 2)px;
+      // }
     }
   }
 
   &_theme { // Button themes...
 
-    // Mixin params: $bgColor, $borderColor, $iconColor, $textColor
+    // Mixin params: $bgColor, $borderColor, $iconColor, $textColor, $hoverColor, $activeColor;
     @define-mixin buttonStyle $bgColor, $borderColor: $formItemBorderColor, $iconColor: $neutralShadedColor, $textColor: $formItemTextColor, $hoverColor, $activeColor {
       // border-color: $borderColor;
       @mixin FormItemFrame $borderColor, $(formItemBorderSize)px, 0;
@@ -101,26 +129,30 @@
       // $hoveredBorderColor: color($borderColor shade(5));
       // $activeBorderColor: color($hoveredBorderColor shade(10));
       $hoveredBorderColor: color($hoverColor shade(5));
-      $activeBorderColor: color($hoverColor shade(15));
+      $activeBorderColor: color($hoveredBorderColor shade(5));
+      $hoveredFocusedBorderColor: color($activeBorderColor shade(5));
       $hoveredBgColor: color($bgColor shade(5));
-      $activeBgColor: color($hoveredBgColor shade(15));
+      $activeBgColor: color($hoveredBgColor shade(5));
       $glowColor: $borderColor; // $formItemGlowColor;
       $hoveredGlowColor: $activeColor; // color($glowColor alpha(1));
       $activeGlowColor: $activeColor; // color($glowColor alpha(1) shade(10));
-      &.FormButton_active,
-      &.FormItem_focused,
       &.FormItem_hovered {
-        // border-color: $hoveredBorderColor;
         @mixin FormItemFrame $hoveredBorderColor, $(formItemBorderSize)px, 1px, $hoveredGlowColor, 1px, $(formItemOuterGlow)px;
         background-color: $hoveredBgColor;
-        // .FormButton-Icon, .FormButton-Text {
-        //   opacity: .9;
-        // }
       }
-      &.FormButton_active,
       &.FormItem_focused {
-        @mixin FormItemFrame $activeBorderColor, $(formItemBorderSize)px, 2px, $activeGlowColor, 2px, 1px; // @calc($formItemOuterGlow - 2)px;
+        @mixin FormItemFrame $activeBorderColor, $(formItemBorderSize)px, 1px, $activeGlowColor, 0px, 1px; // @calc($formItemOuterGlow - 2)px;
         background-color: $activeBgColor;
+      }
+      &.FormItem_focused.FormItem_hovered {
+        @mixin FormItemFrame $hoveredFocusedBorderColor, $(formItemBorderSize)px, 2px, $activeGlowColor, 1px, 2px; // @calc($formItemOuterGlow - 2)px;
+        background-color: color($activeBgColor shade(8));
+      }
+      &.FormButton_active.FormItem_hovered,
+      &.FormButton_active.FormItem_focused,
+      &.FormButton_active {
+        @mixin FormItemFrame $activeBorderColor, $(formItemBorderSize)px, 2px, $activeBorderColor, 2px, 1px; // @calc($formItemOuterGlow - 2)px;
+        background-color: color($activeBgColor shade(15));
       }
     }
     @define-mixin styledButton $bgColor, $textColor: $specialContrastColor {
@@ -128,6 +160,7 @@
       $iconColor: $textColor; // color($textColor alpha(.5));
       $hoverColor: color($borderColor shade(5));
       $activeColor: color($borderColor shade(5));
+      // buttonStyle: $bgColor, $borderColor, $iconColor, $textColor, $hoverColor, $activeColor;
       @mixin buttonStyle $bgColor, $borderColor, $iconColor, $textColor, $hoverColor, $activeColor;
     }
     // @define-mixin styledDarkButton $bgColor, $textColor: $specialContrastColor {
@@ -141,6 +174,7 @@
       // $activeColor: color($primaryColor shade(0));
       $hoverColor: color($primaryColor);
       $activeColor: color($primaryColor alpha(.5));
+      // buttonStyle: $bgColor, $borderColor, $iconColor, $textColor, $hoverColor, $activeColor;
       @mixin buttonStyle $bgColor, $borderColor, $textColor, $textColor, $hoverColor, $activeColor;
       &^^&_onDark {
         $darkBgColor: color($bgColor alpha(.2));
@@ -148,18 +182,25 @@
         $darkTextColor: #fff;
         $darkHoverColor: color($borderColor);
         $darkActiveColor: color($borderColor shade(5));
+        // buttonStyle: $bgColor, $borderColor, $iconColor, $textColor, $hoverColor, $activeColor;
         @mixin buttonStyle $darkBgColor, $darkBorderColor, $darkTextColor, $darkTextColor, $darkHoverColor, $darkActiveColor;
       }
     }
 
     // Theme colors
 
-    &_primary { @mixin styledButton $primaryColor, $primaryContrastColor }
-    &_secondary { @mixin styledButton $secondaryColor, $secondaryContrastColor }
+    &_primary {
+      @mixin styledButton $primaryColor, $primaryContrastColor;
+    }
+    &_secondary {
+      @mixin styledButton $secondaryColor, $secondaryContrastColor;
+    }
 
     // Theme colors...
     @each $color $name in $themeColors {
-      &_$(name) { @mixin styledButton $color }
+      &_$(name) {
+        @mixin styledButton $color;
+      }
     }
 
   }

@@ -23,14 +23,13 @@ import 'demo.pcss';
 //   )
 // }
 
-export const DarkBg = ({ children }) => {
+const DarkBg = ({ children }) => {
   return (
     <FormGroup className="DarkBg" id="Dark">
       {children}
     </FormGroup>
   );
 };
-
 
 const inlineIcon = <InlineIcon icon={faCheck} className="extraIconClass" />;
 

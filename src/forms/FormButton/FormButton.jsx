@@ -22,6 +22,8 @@ import './FormButton-Themes.pcss';
 
 const cnFormButton = cn('FormButton');
 
+const defaultTag = 'button'; // 'div'; // `button` element is 'labelable', @see `https://stackoverflow.com/questions/54792126/html-label-with-for-div-id-to-focus-a-contenteditable-div-does-label-label`
+
 class FormButton extends React.PureComponent /** @lends @FormButton.prototype */ {
 
   static propTypes = { // TODO!!!
@@ -132,14 +134,12 @@ class FormButton extends React.PureComponent /** @lends @FormButton.prototype */
   focus = () => {
     const { formItemNode } = this.props;
     // console.log('FormButton:focus');
-    // debugger;
     formItemNode && formItemNode.focus && formItemNode.focus();
   }
   blur = () => {
     const { formItemNode } = this.props;
-    // console.log('FormButton:focus');
-    // debugger;
-    formItemNode && formItemNode.focus && formItemNode.focus();
+    // console.log('FormButton:blur');
+    formItemNode && formItemNode.blur && formItemNode.blur();
   }
 
   onClick = (event) => {
@@ -206,6 +206,7 @@ class FormButton extends React.PureComponent /** @lends @FormButton.prototype */
 
     const {
       id,
+      inputId,
       disabled,
       tag,
       type,
@@ -220,14 +221,14 @@ class FormButton extends React.PureComponent /** @lends @FormButton.prototype */
     // const basicRenderProps = this.getRenderProps() // Get from props not from overrided `super`
     const renderProps = {
       // ...basicRenderProps,
-      id,
+      id: inputId || id,
       className: this.getClassName(),
       disabled,
       title,
       type,
       onClick: this.onClick,
       ref: setDomRef, // Init ref for FormItemHOC
-      tabIndex: -1,
+      tabIndex: 0,
     };
 
     const content = (
@@ -237,7 +238,7 @@ class FormButton extends React.PureComponent /** @lends @FormButton.prototype */
       </React.Fragment>
     );
 
-    const tagName = tag || 'div';
+    const tagName = tag || defaultTag;
     const element = React.createElement(tagName, renderProps, content);
     return element;
   }
@@ -247,5 +248,5 @@ class FormButton extends React.PureComponent /** @lends @FormButton.prototype */
 // export default FormItemHOC({ solid: true, hoverable: true, framed: true })(FormButton)
 export default compose(
   withActionsContext,
-  FormItemHOC({ solid: true, hoverable: true, framed: true }),
+  FormItemHOC({ solid: true, hoverable: true, focusable: true, framed: true }),
 )(FormButton);

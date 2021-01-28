@@ -18,6 +18,14 @@ import 'demo.pcss';
 // export const DemoWrapper = FormGroup; // ({ children }) => {
 export const DemoWrapper = <FormGroup />; // ({ children }) => {
 
+export const DarkBg = ({ children }) => {
+  return (
+    <FormGroup className="DarkBg" id="Dark">
+      {children}
+    </FormGroup>
+  );
+};
+
 const inlineIcon = <InlineIcon icon={faCheck} className="extraIconClass" />;
 
 const submitButton = (
@@ -26,14 +34,6 @@ const submitButton = (
     icon={inlineIcon}
     tag="button"
     type="submit"
-    theme="default"
-    plain
-  />
-);
-const plain = (
-  <FormButton
-    icon={inlineIcon}
-    text="Style: plain with icon"
     theme="default"
     plain
   />
@@ -51,12 +51,18 @@ export default {
    * },
    */
 
-  simple: <FormButton theme="default" text="Style: default" className="extraButtonClass" />,
+  simple: <FormButton text="Simple" className="passedExtraButtonClass" />,
+  plain: <FormButton text="Plain" plain />,
+  themeDefault: <FormButton theme="default" text="Theme: default" />,
+  darkPlain: <DarkBg><FormButton icon={inlineIcon} plain onDark text="Plain on dark" /></DarkBg>,
+  darkDefault: <DarkBg><FormButton icon={inlineIcon} theme="default" onDark text="Default on dark" /></DarkBg>,
+  defaultPlainWithIcon: <FormButton icon={inlineIcon} text="Default plain with icon" theme="default" plain />,
+  themePrimary: <FormButton theme="primary" text="Theme: primary" />,
+  themeError: <FormButton theme="error" text="Theme: error" />,
   withInlineIcon: <FormButton icon={inlineIcon} theme="default" text="With inline icon" />,
   withIconAsComponent: <FormButton icon={faCheck} theme="default" text="With icon as string" />,
   withIconAsString: <FormButton icon="faCheck" theme="default" text="With icon as text" />,
   submitButton,
-  plain,
 
   /* // TODO:
    * - onlyIcon
