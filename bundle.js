@@ -38778,9 +38778,9 @@ module.exports = { // Common-used build variables...
   DEV_DEBUG: DEV_DEBUG,
 
   THEME: "default",
-  buildTag: "v.0.2.9-210129-0112-build-dev-default",
-  timestamp: "2021.01.29, 01:12",
-  timetag: "210129-0112",
+  buildTag: "v.0.2.9-210129-1401-build-dev-default",
+  timestamp: "2021.01.29, 14:01",
+  timetag: "210129-1401",
   version: "0.2.9" };
 
 /***/ }),
@@ -45878,7 +45878,7 @@ FormTextInput = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_hel
         if (numericValue && !isNaN(value)) {
           value = Number(value);
         }
-        var setId = inputId || id || name;
+        var setId = id || inputId || name;
         onChange({ id: setId, value: value });
       }
     });_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_0___default()(_this), "handleChange",
