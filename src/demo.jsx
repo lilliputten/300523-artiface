@@ -1,7 +1,7 @@
 /** @module demo
  *  @desc Demo app entry point
  *  @since 2020.05.19, 17:16
- *  @changed 2021.01.11, 20:14
+ *  @changed 2021.02.15, 18:05
  */
 /* eslint-disable react/jsx-max-depth */
 
@@ -27,11 +27,13 @@ import { render } from 'react-dom';
 
 import * as demoSupport from './demoSupport';
 
+// import * as build from './build'
+import WebUiCoreRoot from './build';
+
 // Demo app styles
 import './demo.pcss';
 
-// import * as build from './build'
-import WebUiCoreRoot from './build';
+import { demoFixtures } from './demoFixtures';
 
 /* // DEBUG: Check strings module
  * import { strings } from 'utils'
@@ -89,48 +91,11 @@ utils.configure.setConfigOptions({
   lang,
 });
 
-const fixtureComponentsList = {
-
-  Hello: require('demo/Hello/Hello.fixture'),
-
-  Loader: require('elements/Loader/Loader.fixture'),
-
-  DateTimeSelector: require('elements/DateTimeSelector/DateTimeSelector.fixture'),
-  InlineIcon: require('elements/InlineIcon/InlineIcon.fixture'),
-  ModalWindow: require('elements/ModalWindow/ModalWindow.fixture'),
-  ModalPopup: require('elements/ModalPopup/ModalPopup.fixture'),
-  Menu: require('elements/Menu/Menu.fixture'),
-  MenuItem: require('elements/MenuItem/MenuItem.fixture'),
-
-  FormButton: require('forms/FormButton/FormButton.fixture'),
-  FormButtonThemes: require('forms/FormButton/FormButton-Themes.fixture'),
-  FormButtonDark: require('forms/FormButton/FormButton-Dark.fixture'),
-
-  FormLabel: require('forms/FormLabel/FormLabel.fixture'),
-  FormTextInput: require('forms/FormTextInput/FormTextInput.fixture'),
-  FormPasswordInput: require('forms/FormPasswordInput/FormPasswordInput.fixture'),
-  FormGroup: require('forms/FormGroup/FormGroup.fixture'),
-  FormButtonGroup: require('forms/FormButtonGroup/FormButtonGroup.fixture'),
-  FormInputGroup: require('forms/FormInputGroup/FormInputGroup.fixture'),
-  FormSelect: require('forms/FormSelect/FormSelect.fixture'),
-  FormText: require('forms/FormText/FormText.fixture'),
-
-  // Booleans:
-  FormRadio: require('forms/FormRadio/FormRadio.fixture'),
-  FormRadioThemes: require('forms/FormRadio/FormRadio-Themes.fixture'),
-  // FormCheck: require('forms/FormCheck/FormCheck.fixture'),
-  // FormSwitch: require('forms/FormSwitch/FormSwitch.fixture'),
-
-  FormDateTime: require('forms/FormDateTime/FormDateTime.fixture'),
-  FormDateRange: require('forms/FormDateRange/FormDateRange.fixture'),
-
-};
-
 const findFixture = window.location.search && window.location.search.match(/\bfixture=(([^&:]+)(?::([^&]+))?)/);
 // const fullFixtureId = findFixture && findFixture[1]
 const fixtureId = findFixture && findFixture[2];
 const fixtureItemId = findFixture && findFixture[3];
-const fixtureModuleExports = fixtureId && fixtureComponentsList[fixtureId];
+const fixtureModuleExports = fixtureId && demoFixtures[fixtureId];
 
 let content;
 
@@ -146,7 +111,7 @@ else if (fixtureId) { // Fixture specified but not found!
   content = 'Fixture for id "' + fixtureId + '" not found!';
 }
 else { // List all available fixtures to display
-  const fixtures = demoSupport.FixturesContents(fixtureComponentsList);
+  const fixtures = demoSupport.FixturesContents(demoFixtures);
   content = (
     <div className="demoIndex">
       <h3 className="demoIndex-Title">Available fixtures</h3>

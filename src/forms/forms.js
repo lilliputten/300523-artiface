@@ -1,7 +1,7 @@
 /** @module forms
  *  @desc Form components
  *  @since 2020.07.20, 19:21
- *  @changed 2020.10.22, 00:16
+ *  @changed 2021.02.15, 18:05
  */
 
 // Form elements...
@@ -12,10 +12,6 @@ export FormItemDummy from './FormItemDummy'; // DEBUG: Demo element
 
 export FormLabel from './FormLabel';
 export FormButton from './FormButton';
-export FormGroup from './FormGroup';
-export FormLabeledGroup from './FormLabeledGroup';
-export FormButtonGroup from './FormButtonGroup';
-export FormInputGroup from './FormInputGroup';
 
 export FormDelim from './FormDelim';
 export FormSpacer from './FormSpacer';
@@ -32,6 +28,13 @@ export FormRadio from './FormRadio';
 
 export FormDateTime from './FormDateTime';
 export FormDateRange from './FormDateRange';
+
+export FormActions from './FormActions';
+
+export FormGroup from './FormGroup';
+export FormLabeledGroup from './FormLabeledGroup';
+export FormButtonGroup from './FormButtonGroup';
+export FormInputGroup from './FormInputGroup';
 
 // TODO...
 
