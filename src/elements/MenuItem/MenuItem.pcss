@@ -4,13 +4,13 @@
  */
 
 .MenuItem {
-  padding: 2px 6px;
+  padding: 5px 15px;
   &:not(&_disabled) {
     cursor: pointer;
   }
   // transition: background $(transitionTime)ms; // Blink
-  &.FormItem {
-    &_hovered {
+  & {
+    &.FormItem_hovered {
       // TODO: Use themes (via `themeColors`)?
       background-color: $primaryColor;
       color: $primaryContrastColor;
@@ -19,6 +19,7 @@
   &_checkable,
   &_withIcon {
     position: relative;
+    // padding-left: 5px;
     ^&-Icon {
       position: absolute;
       left: 8px;
@@ -26,12 +27,32 @@
       // color: $(primaryColor);
     }
     ^&-Text {
-      padding-left: 25px;
+      padding-left: 20px;
     }
   }
-  &-Text {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  &_theme {
+    // Theme colors...
+    @each $color $name in $themeColors {
+      &_$(name) {
+        & .MenuItem-Icon {
+          color: $color;
+          opacity: .75;
+        }
+        &.FormItem_hovered {
+          background-color: $color;
+          & .MenuItem-Icon {
+            color: $primaryContrastColor;
+            opacity: .5;
+          }
+        }
+      }
+    }
+  }
+  &:not(&_wrap) {
+    &-Text {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
   }
 }

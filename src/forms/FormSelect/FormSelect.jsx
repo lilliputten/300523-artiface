@@ -1,7 +1,7 @@
 /** @module FormSelect
  *  @class FormSelect
  *  @since 2020.10.28, 22:49
- *  @changed 2020.10.29, 03:14
+ *  @changed 2021.02.15, 18:28
  *
  *  TODO 2020.12.16, 23:07 -- Add hidden html form element (for form submission)
  */
@@ -30,19 +30,30 @@ const cnFormSelect = cn('FormSelect');
 class FormSelect extends React.PureComponent /** @lends @FormSelect.prototype */ {
 
   static propTypes = {
+    // setNodeRef: PropTypes.func,
     // value: PropTypes.oneOfType([ PropTypes.string, PropTypes.number, PropTypes.arrayOf(PropTypes.oneOfType([ PropTypes.string, PropTypes.number ])) ]),
-    selected: PropTypes.arrayOf(PropTypes.oneOfType([ PropTypes.string, PropTypes.number ])),
+    closeOnSelect: PropTypes.bool,
+    controlButtonTheme: PropTypes.string,
+    // itemSelectedTheme: PropTypes.string,
+    wrapContent: PropTypes.bool,
     disabled: PropTypes.bool,
     fullWidth: PropTypes.bool,
     id: PropTypes.string,
+    inputId: PropTypes.string,
+    name: PropTypes.string,
     onChange: PropTypes.func,
+    onControlClick: PropTypes.func,
+    onMenuItemClick: PropTypes.func,
     open: PropTypes.bool,
     options: PropTypes.arrayOf(PropTypes.shape({ val: PropTypes.oneOfType([ PropTypes.string, PropTypes.number ]), text: PropTypes.string })),
     placeholder: PropTypes.string,
-    text: PropTypes.string,
-    value: PropTypes.oneOfType([ PropTypes.string, PropTypes.number ]),
+    selected: PropTypes.arrayOf(PropTypes.oneOfType([ PropTypes.string, PropTypes.number ])),
     setDomRef: PropTypes.func,
-    // setNodeRef: PropTypes.func,
+    setPopupNodeRef: PropTypes.func,
+    singleChoice: PropTypes.oneOfType([ PropTypes.string, PropTypes.bool ]),
+    text: PropTypes.string,
+    title: PropTypes.string,
+    value: PropTypes.oneOfType([ PropTypes.string, PropTypes.number ]),
   }
 
   // Lifecycle methods...
@@ -162,6 +173,9 @@ class FormSelect extends React.PureComponent /** @lends @FormSelect.prototype */
       singleChoice,
       options,
       disabled,
+      itemTheme,
+      // itemSelectedTheme,
+      wrapContent,
       // inputId, // ???
     } = this.props;
     const {
@@ -176,6 +190,9 @@ class FormSelect extends React.PureComponent /** @lends @FormSelect.prototype */
         selected={selected}
         // value={value}
         disabled={disabled}
+        itemTheme={itemTheme}
+        // itemSelectedTheme={itemSelectedTheme}
+        wrapContent={wrapContent}
       >
         {options}
       </Menu>

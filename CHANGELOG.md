@@ -1,5 +1,6 @@
 # CHANGELOG
 
+- 2021.02.15, 19:35 -- PD-3327: Tuning for Select, Menu, MenuItem: menu items theming, menu window & items stylizing, popup window geometry (added container gaps) etc.
 - 2021.01.29, 00:55 -- FormGroup: flow demo fixture. FormTextInput: interactive styles fixups.
 - 2021.01.29, 00:30 -- v.0.2.9.
 - 2021.01.29, 00:29 -- FormItemHOC: Manually call focusIn/focusOut event handlers on focus/blur event handlers, added `framed` modifier. FormGroup: Styles for nested items/groups. FormButton (in `config/css`): set inner height to outer height due to usage of `box-shadow` instead `border` in styles.
@@ -85,5 +86,5 @@
 - 2020.10.05, 20:38 -- v.0.0.15: Extracted `demoSupport.jsx` routines, fixture selection from url query (parameter `fixture`), added avaialble fixtures list if fixture to display is not specified, added DemoWrapper & demoTitle exportable ficture parameters for demo rendering.
 
 <!--
- @changed 2021.01.29, 00:29
+ @changed 2021.02.15, 19:36
 -->

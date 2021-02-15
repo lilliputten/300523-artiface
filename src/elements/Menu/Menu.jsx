@@ -1,7 +1,7 @@
 /** @module Menu
  *  @class Menu
  *  @since 2020.10.27, 02:58
- *  @changed 2021.01.28, 21:55
+ *  @changed 2021.02.15, 18:28
  */
 
 import React from 'react';
@@ -29,8 +29,9 @@ class Menu extends React.PureComponent /** @lends @Menu.prototype */ {
     onChange: PropTypes.func,
     onClick: PropTypes.func,
     selectable: PropTypes.bool,
+    wrapContent: PropTypes.bool,
     setDomRef: PropTypes.func,
-    singleChoice: PropTypes.oneOfType([ PropTypes.string, PropTypes.bool ]),
+    singleChoice: PropTypes.oneOfType([ PropTypes.string, PropTypes.bool ]), // false, true, 'forced'
   }
 
   // Helper fuctions...
@@ -52,57 +53,79 @@ class Menu extends React.PureComponent /** @lends @Menu.prototype */ {
     return className;
   }
 
+  createItemElement(item) {
+    const {
+      singleChoice,
+      value,
+      selected,
+      itemTheme,
+      itemSelectedTheme,
+      wrapContent,
+    } = this.props;
+    const propsSelected = (singleChoice && value != null) ? [value] : selected;
+    const isArray = !!item && Array.isArray(item);
+    const isObject = !!item && typeof item ==='object' && !isArray; // Array.isArray(item)
+    const isElement = isObject && React.isValidElement(item);
+    const isMenuItem = isElement && item.type === MenuItem;
+    const isRawObject = isObject && !isElement;
+    if (isRawObject || isMenuItem) {
+      const itemProps = isRawObject ? item : item.props;
+      // Construct unique key values...
+      const val = itemProps.val;
+      const checked = Array.isArray(propsSelected) ? propsSelected.includes(val) : itemProps.checked;
+      const checkable = itemProps.checkable != null ? itemProps.checkable : this.props.selectable;
+      const newProps = {
+        theme: itemTheme,
+        selectedTheme: itemSelectedTheme,
+        wrap: wrapContent,
+        ...itemProps,
+        onClick: itemProps.onClick || this.onMenuItemClick,
+        checkable,
+        checked,
+      };
+      if (isRawObject) { // Raw object -> create MenuItem
+        const key = item && item.key || this.getId() + '_Item_' + (itemProps.id || itemProps.val);
+        item = (<MenuItem {...newProps} key={key} />);
+        // isMenuItem = isElement = true
+      }
+      else if (isMenuItem) { // MenuItem -> Add onClick handler if handler is not defined
+        item = { ...item, props: newProps };
+      }
+      // if (item.props.checked && (!singleChoice || !selectedList.length)) {
+      //   selectedList.push(val);
+      // }
+    }
+    // TODO: Process arrays (subitems/groups)?
+    // console.log('Menu:setChildrenItemsFromProps:item', {
+    //   item,
+    //   isElement,
+    //   isArray,
+    //   isObject,
+    //   isMenuItem,
+    // });
+    return item;
+  }
+
   setChildrenItemsFromProps() {
     // console.log('Menu:setChildrenItemsFromProps', {
     //   children,
     // })
     let children = this.props.children;
-    const selectedList = [];
+    // const selectedList = [];
     if (Array.isArray(children)) {
-      const { singleChoice } = this.props;
-      const { value, selected } = this.props;
-      const propsSelected = (singleChoice && value != null) ? [value] : selected;
-      children = children.map((item) => {
-        const isArray = !!item && Array.isArray(item);
-        const isObject = !!item && typeof item ==='object' && !isArray; // Array.isArray(item)
-        const isElement = isObject && React.isValidElement(item);
-        const isMenuItem = isElement && item.type === MenuItem;
-        const isRawObject = isObject && !isElement;
-        // console.log('Menu:setChildrenItemsFromProps:item', {
-        //   item,
-        //   isElement,
-        //   isArray,
-        //   isObject,
-        //   isMenuItem,
-        // })
-        if (isRawObject || isMenuItem) {
-          const itemProps = isRawObject ? item : item.props;
-          // Construct unique key values...
-          const val = itemProps.val;
-          const checked = Array.isArray(propsSelected) ? propsSelected.includes(val) : itemProps.checked;
-          const checkable = itemProps.checkable != null ? itemProps.checkable : this.props.selectable;
-          const newProps = {
-            ...itemProps,
-            onClick: itemProps.onClick || this.onMenuItemClick,
-            checkable,
-            checked,
-          };
-          if (isRawObject) { // Raw object -> create MenuItem
-            const key = item && item.key || this.getId() + '_Item_' + (itemProps.id || itemProps.val);
-            item = (<MenuItem {...newProps} key={key} />);
-            // isMenuItem = isElement = true
-          }
-          else if (isMenuItem) { // MenuItem -> Add onClick handler if handler is not defined
-            item = { ...item, props: newProps };
-          }
-          if (item.props.checked && (!singleChoice || !selectedList.length)) {
-            selectedList.push(val);
-          }
-        }
-        // TODO: Process arrays (subitems/groups)?
-        return item;
-      });
+      // const { singleChoice } = this.props;
+      // const { value, selected } = this.props;
+      // const propsSelected = (singleChoice && value != null) ? [value] : selected;
+      children = children.map(this.createItemElement, this);
     }
+    const selectedList = children
+      .filter(({ props }) => {
+        return props.checked;
+      })
+      .map(({ props }) => {
+        return props.val;
+      })
+    ;
     this.setState({
       items: children,
       selectedList,
@@ -127,7 +150,9 @@ class Menu extends React.PureComponent /** @lends @Menu.prototype */ {
             checkedVal = singleChoice ? false : checked;
           }
           if (checkedVal !== checked) {
-            item = { ...item, props: { ...itemProps, checked: checkedVal } };
+            // const theme = (checkedVal && selectedTheme) ? selectedTheme : itemTheme || itemProps.theme;
+            item = { ...item, props: { ...itemProps, checked: checkedVal /* , theme */ } };
+            // TODO: Use `React.cloneElement`?
           }
           if (checkedVal) { // && (!singleChoice || !selectedList.length)) {
             selectedList.push(val);

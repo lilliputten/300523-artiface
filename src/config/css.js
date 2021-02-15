@@ -30,12 +30,12 @@ const cssConfig = { // Common-used css variables...
   primaryColor: theme.primaryColor,
   primaryLightColor: theme.primaryLightColor,
   primaryDarkColor: theme.primaryDarkColor,
-  primaryContrastColor: theme.primaryContrastColor,
+  primaryContrastColor: theme.primaryContrastColor || '#fff',
 
   secondaryColor: theme.secondaryColor,
   secondaryLightColor: theme.secondaryLightColor,
   secondaryDarkColor: theme.secondaryDarkColor,
-  secondaryContrastColor: theme.secondaryContrastColor,
+  secondaryContrastColor: theme.secondaryContrastColor || '#fff',
 
   // Colors...
 
@@ -132,7 +132,7 @@ const cssConfig = { // Common-used css variables...
   fontSizeXl: defaultFontSize + 4,
   fontSizeXxl: defaultFontSize + 8,
   titleFontSize: defaultFontSize + 8,
-  defaultLineHeight: 1.6,
+  defaultLineHeight: 1.3,
   // defaultFontWeight: 400,
   defaultFontWeight: 'normal',
   // defaultFontWeight: 500,
@@ -235,7 +235,8 @@ Object.assign(cssConfig, { // Form properties...
   defaultIconSize: 24,
   smallIconSize: 16,
 
-  popupContentGap: 4,
+  popupVerticalOffset: 4,
+  popupWindowOffset: 10,
 
 });
 

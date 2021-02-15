@@ -1,7 +1,7 @@
 /** @module FormButton.styles
  *  @desc Only basic elements geometry
  *  @since 2020.07.20, 19:24
- *  @changed 2021.01.21, 13:45
+ *  @changed 2021.02.15, 18:28
  */
 
 .FormButton {
@@ -83,7 +83,7 @@
   }
 
   &.FormItem_hovered {
-    // z-index: 10; // Lift active item up (m.b. used in button-groups? Don't forget to lift modals, popups etc.)
+    z-index: 10; // Lift active item up (m.b. used in button-groups? Don't forget to lift modals, popups etc.)
     // NOTE: Cause bug for FormSelect controller button: It displaying over ModalPopupCurtain
   }
 
