@@ -1,5 +1,7 @@
 # CHANGELOG
 
+- 2021.02.15, 19:46 -- v.0.2.10.
+- 2021.02.15, 19:37 -- PD-3585: Added FormActions component (in progress).
 - 2021.02.15, 19:35 -- PD-3327: Tuning for Select, Menu, MenuItem: menu items theming, menu window & items stylizing, popup window geometry (added container gaps) etc.
 - 2021.01.29, 00:55 -- FormGroup: flow demo fixture. FormTextInput: interactive styles fixups.
 - 2021.01.29, 00:30 -- v.0.2.9.
