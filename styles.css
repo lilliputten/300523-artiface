@@ -7072,33 +7072,49 @@ input.FormTextInput-Control:-internal-autofill-previewed,
 
 .FormGroup {
 
-  /* display: flex;*/
-  /* flex-direction: row;*/
-  /* flex-wrap: wrap;*/
-  /* align-items: stretch;*/
-
-  /* TODO: Use config for values?*/
-
-  margin: -4px -4px;
+  /* margin: -$hMargin;*/
+  margin-left: -4px;
+  margin-right: -4px;
 
 }
-
-.FormGroup_noSpace {
-    margin: 0;
-  }
 
 /* Nested items/groups...*/
 
 .FormGroup > .FormItem { /* ???*/
-    margin: 4px 4px;
+    margin: 4px;
+    /* margin-left: $hMargin;*/
+    /* margin-right: $hMargin;*/
   }
 
 /* No margins for nested groups*/
 
 .FormGroup > .FormGroup.FormItem {
-    /* margin-top: 0;*/
-    /* margin-bottom: 0;*/
     margin: 0;
+    /* margin-left: 0;*/
+    /* margin-right: 0;*/
+  }
+
+.FormGroup_tagged {
+  }
+
+.FormGroup {
+
+  position: relative;
+
+}
+
+.FormGroup-Tag {
+    position: relative;
+    vertical-align: bottom;
+    height: 32px;
+    line-height: 32px;
+    background-color: #999;
+    /* background: repeating-linear-gradient(90deg, #fff 3px, #fff 4px, #000 4px, #000 7px);*/
+    /* background: repeating-linear-gradient(0deg, #fff 3px, #fff 4px, #000 4px, #000 7px);*/
+    /* background: repeating-linear-gradient(90deg, #fff, #fff 1px, #000 1px, #000 2px);*/
+    background: repeating-linear-gradient(180deg, #fff 1px, #fff 2px, #000 2px, #000 3px);
+    opacity: .15;
+    width: 5px;
   }
 
 /* Padded content*/
@@ -7123,12 +7139,9 @@ input.FormTextInput-Control:-internal-autofill-previewed,
   }
 
 .FormGroup_stack, .FormGroup_stack.FormItem { /* Override nested FormItem display:block rule*/
-      /* border: 1px solid blue; // DEBUG*/
       display: -ms-flexbox;
       display: flex;
     }
-
-/* flex-wrap: wrap;*/
 
 .FormGroup_flow > .FormItem {
       min-width: 32px; /* Hint for limiting the maximum width (overflow causes cropping items outer glow on ubteractive control events).*/

@@ -38806,9 +38806,9 @@ module.exports = { // Common-used build variables...
   DEV_DEBUG: DEV_DEBUG,
 
   THEME: "default",
-  buildTag: "v.0.2.10-210219-1756-build-dev-default",
-  timestamp: "2021.02.19, 17:56",
-  timetag: "210219-1756",
+  buildTag: "v.0.2.10-210219-2057-build-dev-default",
+  timestamp: "2021.02.19, 20:57",
+  timetag: "210219-2057",
   version: "0.2.10" };
 
 /***/ }),
@@ -44160,6 +44160,7 @@ FormGroup = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helpers
 
 
 
+
   function FormGroup(props) {var _this;
     _this = _React$PureComponent.call(this, props) || this;
     _this.state = {};return _this;
@@ -44186,12 +44187,16 @@ FormGroup = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helpers
 
 
 
-    this.props,id = _this$props.id,children = _this$props.children,content = _this$props.content;
+
+    this.props,id = _this$props.id,children = _this$props.children,content = _this$props.content,tagged = _this$props.tagged;
 
     // const renderProps = this.getRenderProps()
 
     return /*#__PURE__*/(
       react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", { id: id, className: this.getClassName() },
+      tagged && /*#__PURE__*/
+      react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", { className: cnFormGroup('Tag', ['FormItem']) }),
+
       content || children));
 
 
@@ -44199,7 +44204,7 @@ FormGroup = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helpers
   align: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string, alignItems: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string, background: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string, className: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string, disabled: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool, // ???
   flow: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool, fullWidth: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool, id: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string, noSpace: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool, noWrap: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool, padded: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool, stack: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool, wrap: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool });_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2___default()(FormGroup, "classNameModifiers", [// Basic element properties
 'id', // Style-related modifiers...
-'align', 'alignItems', 'background', 'flow', 'fullWidth', 'noSpace', 'noWrap', 'padded', 'stack', 'wrap' // 'disabled',
+'align', 'alignItems', 'background', 'flow', 'fullWidth', 'noSpace', 'noWrap', 'padded', 'stack', 'wrap', 'tagged' // 'disabled',
 ]);/* harmony default export */ __webpack_exports__["default"] = (Object(_FormItemHOC_FormItemHOC__WEBPACK_IMPORTED_MODULE_6__["default"])(FormGroup));
 
 /***/ }),
