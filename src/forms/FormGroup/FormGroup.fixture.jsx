@@ -35,6 +35,22 @@ export default {
       <FormButton icon={faCheck} theme="default" text="Button with icon" />
     </FormGroup>
   ),
+  nested: (
+    <FormGroup id="nested">
+      <FormGroup id="nested-1-a" tagged>
+        <FormGroup id="nested-2">
+          <FormButton theme="default" text="1a" />
+          <FormButton theme="default" text="1b" />
+        </FormGroup>
+        <FormButton theme="default" text="2a" />
+        <FormButton theme="default" text="2b" />
+      </FormGroup>
+      <FormGroup id="nested-1-b" tagged>
+        <FormButton theme="default" text="3a" />
+        <FormButton theme="default" text="3b" />
+      </FormGroup>
+    </FormGroup>
+  ),
   flow: (
     <FormGroup flow>
       <FormButton theme="default" text="Button1" />

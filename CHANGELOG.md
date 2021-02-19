@@ -1,5 +1,6 @@
 # CHANGELOG
 
+- 2021.02.19, 21:05 -- FormGroup: Styles for items grouping, `tagged` groups.
 - 2021.02.19, 17:56 -- Fixed linter warnings.
 - 2021.02.19, 17:52 -- PD-3585: FormActions: Allow creating of `FormActions` from actions list.
 - 2021.02.19, 16:47 -- PD-3585: FormActions (ActionsBar) proxy.
@@ -91,5 +92,5 @@
 - 2020.10.05, 20:38 -- v.0.0.15: Extracted `demoSupport.jsx` routines, fixture selection from url query (parameter `fixture`), added avaialble fixtures list if fixture to display is not specified, added DemoWrapper & demoTitle exportable ficture parameters for demo rendering.
 
 <!--
- @changed 2021.02.19, 17:56
+ @changed 2021.02.19, 21:06
 -->

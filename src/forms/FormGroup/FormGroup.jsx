@@ -49,6 +49,7 @@ class FormGroup extends React.PureComponent /** @lends @FormGroup.prototype */ {
     'padded',
     'stack',
     'wrap',
+    'tagged',
     // 'disabled',
   ]
 
@@ -78,12 +79,16 @@ class FormGroup extends React.PureComponent /** @lends @FormGroup.prototype */ {
       // disabled,
       children,
       content,
+      tagged,
     } = this.props;
 
     // const renderProps = this.getRenderProps()
 
     return (
       <div id={id} className={this.getClassName()}>
+        {tagged && (
+          <div className={cnFormGroup('Tag', ['FormItem'])} />
+        )}
         {content || children}
       </div>
     );

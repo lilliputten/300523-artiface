@@ -6,29 +6,43 @@
 
 .FormGroup {
 
-  // display: flex;
-  // flex-direction: row;
-  // flex-wrap: wrap;
-  // align-items: stretch;
+  $hMargin: $(formItemSpacing)px;
+  $vMargin: $(formItemSpacing)px;
 
-  // TODO: Use config for values?
-  $hMargin: $formItemSpacing;
-  $vMargin: $formItemSpacing;
-
-  margin: -$(vMargin)px -$(hMargin)px;
-  &_noSpace {
-    margin: 0;
-  }
+  // margin: -$hMargin;
+  margin-left: -$hMargin;
+  margin-right: -$hMargin;
 
   // Nested items/groups...
   > .FormItem { // ???
-    margin: $(vMargin)px $(hMargin)px;
+    margin: $hMargin;
+    // margin-left: $hMargin;
+    // margin-right: $hMargin;
   }
   // No margins for nested groups
   & > &.FormItem {
-    // margin-top: 0;
-    // margin-bottom: 0;
     margin: 0;
+    // margin-left: 0;
+    // margin-right: 0;
+  }
+
+  &_tagged {
+  }
+
+  position: relative;
+
+  &-Tag {
+    position: relative;
+    vertical-align: bottom;
+    height: $(formItemHeight)px;
+    line-height: $(formItemHeight)px;
+    background-color: $neutralDarkColor;
+    // background: repeating-linear-gradient(90deg, #fff 3px, #fff 4px, #000 4px, #000 7px);
+    // background: repeating-linear-gradient(0deg, #fff 3px, #fff 4px, #000 4px, #000 7px);
+    // background: repeating-linear-gradient(90deg, #fff, #fff 1px, #000 1px, #000 2px);
+    background: repeating-linear-gradient(180deg, #fff 1px, #fff 2px, #000 2px, #000 3px);
+    opacity: .15;
+    width: 5px;
   }
 
   // Padded content
@@ -48,12 +62,10 @@
     align-items: stretch;
     flex-direction: column;
     &, &.FormItem { // Override nested FormItem display:block rule
-      // border: 1px solid blue; // DEBUG
       display: flex;
     }
   }
   &_flow {
-    // flex-wrap: wrap;
     & > .FormItem {
       min-width: $(formItemHeight)px; // Hint for limiting the maximum width (overflow causes cropping items outer glow on ubteractive control events).
       display: block;
