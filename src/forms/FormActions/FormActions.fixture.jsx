@@ -6,14 +6,14 @@
 
 import React from 'react';
 
-import FormLabeledGroup from '../FormLabeledGroup';
-import FormRadio from '../FormRadio';
-import FormDelim from '../FormDelim';
+// import FormLabeledGroup from '../FormLabeledGroup';
+// import FormRadio from '../FormRadio';
+// import FormDelim from '../FormDelim';
 
-import FormLabel from '../FormLabel';
+// import FormLabel from '../FormLabel';
 import FormButton from '../FormButton';
-import FormTextInput from '../FormTextInput';
-import FormPasswordInput from '../FormPasswordInput';
+// import FormTextInput from '../FormTextInput';
+// import FormPasswordInput from '../FormPasswordInput';
 
 import FormActions from './FormActions';
 
@@ -28,11 +28,16 @@ import './FormActions.fixture.pcss';
 
 export const demoTitle = 'FormActions component';
 
+function handleAction({ result, id }) {
+  console.log('FormActions.fixture:handleAction', { result, id });
+  // debugger;
+}
+
 export default {
   simple: (
-    <FormActions>
-      <FormButton theme="default" text="Button" />
-      <FormButton icon={faCheck} theme="default" text="Button with icon" />
+    <FormActions id="simpleActions" onAction={handleAction}>
+      <FormButton id="default" theme="default" text="Button" />
+      <FormButton id="withIcon" icon={faCheck} theme="default" text="Button with icon" />
     </FormActions>
   ),
 };

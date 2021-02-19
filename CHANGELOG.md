@@ -1,5 +1,6 @@
 # CHANGELOG
 
+- 2021.02.19, 16:47 -- PD-3585: FormActions (ActionsBar) proxy.
 - 2021.02.15, 19:46 -- v.0.2.10.
 - 2021.02.15, 19:37 -- PD-3585: Added FormActions component (in progress).
 - 2021.02.15, 19:35 -- PD-3327: Tuning for Select, Menu, MenuItem: menu items theming, menu window & items stylizing, popup window geometry (added container gaps) etc.
@@ -88,5 +89,5 @@
 - 2020.10.05, 20:38 -- v.0.0.15: Extracted `demoSupport.jsx` routines, fixture selection from url query (parameter `fixture`), added avaialble fixtures list if fixture to display is not specified, added DemoWrapper & demoTitle exportable ficture parameters for demo rendering.
 
 <!--
- @changed 2021.02.15, 19:36
+ @changed 2021.02.19, 16:47
 -->
