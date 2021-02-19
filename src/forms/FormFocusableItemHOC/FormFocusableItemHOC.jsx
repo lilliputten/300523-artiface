@@ -62,7 +62,7 @@ const wrapFormFocusableItemHOC = (WrappedComponent, params = {}) => {
 
     onFocusIn = () => {
       if (!this.props.disabled) {
-        console.log('FormFocusableItemHOC:onFocusIn');
+        // console.log('FormFocusableItemHOC:onFocusIn');
         this.mounted && this.setState({ focused: true });
         if (typeof this.props.onFocusIn === 'function') { // Propogate event if handler passed
           this.props.onFocusIn(event);
@@ -71,7 +71,7 @@ const wrapFormFocusableItemHOC = (WrappedComponent, params = {}) => {
     }
     onFocusOut = (event) => {
       if (!this.props.disabled) {
-        console.log('FormFocusableItemHOC:onFocusOut');
+        // console.log('FormFocusableItemHOC:onFocusOut');
         this.mounted && this.setState({ focused: false });
         if (typeof this.props.onFocusOut === 'function') { // Propogate event if handler passed
           this.props.onFocusOut(event);
@@ -82,8 +82,7 @@ const wrapFormFocusableItemHOC = (WrappedComponent, params = {}) => {
     setDomRef = (domNode) => {
       const { setDomRef } = this.props;
       this.domNode = domNode;
-      console.log('FormFocusableItemHOC:setDomRef', { domNode });
-      debugger;
+      // console.log('FormFocusableItemHOC:setDomRef', { domNode });
       this.addEventListeners();
       if (typeof setDomRef === 'function') { // Pass to parent if callback specified
         setDomRef(domNode);

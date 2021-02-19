@@ -399,31 +399,31 @@ class ModalPopup extends React.PureComponent /** @lends @ModalPopup.prototype */
       domNode.style[keys.contentStyleMaxSize] = cssContentStyleMaxSize; // Update dom node css style
     }
 
-    // DEBUG (use doDebug?)...
-    console.log('ModalPopup:updateOneAxisContentPos', {
-      // Parameters...
-      axis,
-      placeBefore,
-      isntFit,
-      // Coordinates...
-      fitSize,
-      contentPos,
-      cssContentPos,
-      cssContentStyleMaxSize,
-      // controlScreenPos,
-      // controlScreenEnd,
-      // controlScreenAfter,
-      // General...
-      updatedGeometryKeys,
-      geometry: geometry,
-      'this.geometry': this.geometry,
-      'changed geometry': Object.entries(geometry).reduce((result, [key, val]) => {
-        return updatedGeometryKeys.includes(key) ? { ...result, [key]: val } : result;
-      }, {}),
-      'changed this.geometry': Object.entries(this.geometry).reduce((result, [key, val]) => {
-        return updatedGeometryKeys.includes(key) ? { ...result, [key]: val } : result;
-      }, {}),
-    });
+    // // DEBUG (use doDebug?)...
+    // console.log('ModalPopup:updateOneAxisContentPos', {
+    //   // Parameters...
+    //   axis,
+    //   placeBefore,
+    //   isntFit,
+    //   // Coordinates...
+    //   fitSize,
+    //   contentPos,
+    //   cssContentPos,
+    //   cssContentStyleMaxSize,
+    //   // controlScreenPos,
+    //   // controlScreenEnd,
+    //   // controlScreenAfter,
+    //   // General...
+    //   updatedGeometryKeys,
+    //   geometry: geometry,
+    //   'this.geometry': this.geometry,
+    //   'changed geometry': Object.entries(geometry).reduce((result, [key, val]) => {
+    //     return updatedGeometryKeys.includes(key) ? { ...result, [key]: val } : result;
+    //   }, {}),
+    //   'changed this.geometry': Object.entries(this.geometry).reduce((result, [key, val]) => {
+    //     return updatedGeometryKeys.includes(key) ? { ...result, [key]: val } : result;
+    //   }, {}),
+    // });
   }
 
   updateGeometryInstant = () => { // UNUSED? TODO? Update geometry
