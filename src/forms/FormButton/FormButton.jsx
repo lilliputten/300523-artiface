@@ -152,8 +152,8 @@ class FormButton extends React.PureComponent /** @lends @FormButton.prototype */
     } = this.props;
     if (!disabled) {
       const hasOnClick = onClick && typeof onClick === 'function';
-      const result = hasOnClick ? onClick(event) : true;
-      if (result !== false && actionsContextNode && typeof actionsContextNode.onAction) {
+      const result = hasOnClick ? onClick(event) : undefined; // true;
+      if (result !== false && actionsContextNode && typeof actionsContextNode.onAction === 'function') {
         Promise.resolve(result).then((result) => {
           if (result !== false) { // Check for non-false value
             actionsContextNode.onAction({ id, result });

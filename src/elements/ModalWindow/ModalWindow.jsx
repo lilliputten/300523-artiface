@@ -130,7 +130,7 @@ class ModalWindow extends React.PureComponent /** @lends @ModalWindow.prototype 
     else { // ...Or all `resolveResult` immediatelly
       ModalPortal.resolveResult();
     }
-    if (actionsContextNode && typeof actionsContextNode.onAction) {
+    if (actionsContextNode && typeof actionsContextNode.onAction === 'function') {
       actionsContextNode.onAction(actionProps);
     }
   }

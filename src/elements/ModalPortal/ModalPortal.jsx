@@ -401,7 +401,7 @@ class ModalPortal extends React.PureComponent /** @lends @ModalPortal.prototype 
     else { // ...Or all `resolveResult` immediatelly
       this.resolveResult();
     }
-    if (actionsContextNode && typeof actionsContextNode.onAction) { // Use chaining ActionsContext?
+    if (actionsContextNode && typeof actionsContextNode.onAction === 'function') { // Use chaining ActionsContext?
       actionsContextNode.onAction({ ...actionProps, modalPortalId: id });
     }
   }
