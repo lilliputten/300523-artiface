@@ -3,8 +3,8 @@
   "description": "Arti UI Components Library",
   "NOTE": "All version and time stamp properties are updated automatically (see `util-update-build-variables.sh`, `util-increment-version.sh`)!",
   "version": "0.2.10",
-  "timetag": "210215-1938",
-  "timestamp": "2021.02.15, 19:38",
+  "timetag": "210219-1643",
+  "timestamp": "2021.02.19, 16:43",
   "changed": "2020.12.28, 03:36",
   "main": "src/build.js",
   "keywords": [
