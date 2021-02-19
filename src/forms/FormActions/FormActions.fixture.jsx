@@ -1,8 +1,8 @@
 /** @module FormActions.fixture
  *  @since 2021.02.15, 18:03
- *  @changed 2021.02.15, 18:03
+ *  @changed 2021.02.19, 17:51
  */
-/* eslint-disable react/jsx-max-depth */
+/* eslint-disable react/jsx-max-depth, no-console */
 
 import React from 'react';
 
@@ -28,16 +28,38 @@ import './FormActions.fixture.pcss';
 
 export const demoTitle = 'FormActions component';
 
-function handleAction({ result, id }) {
-  console.log('FormActions.fixture:handleAction', { result, id });
+function handleAction(params) {
+  const { result, id, actionsId } = params;
+  console.log('FormActions.fixture:handleAction', { actionsId, id, result, params });
   // debugger;
 }
 
+function handleClick(params) {
+  const { id } = params;
+  console.log('FormActions.fixture:handleClick', { id, params });
+  // debugger;
+}
+
+const actionsList = [
+  {
+    id: 'update',
+    onClick: handleClick,
+    text: 'Update',
+    icon: 'faSync',
+    // theme: 'default',
+  },
+];
+
 export default {
   simple: (
-    <FormActions id="simpleActions" onAction={handleAction}>
+    <FormActions id="simple" onAction={handleAction}>
       <FormButton id="default" theme="default" text="Button" />
       <FormButton id="withIcon" icon={faCheck} theme="default" text="Button with icon" />
+    </FormActions>
+  ),
+  fromList: (
+    <FormActions id="fromList" onAction={handleAction}>
+      {actionsList}
     </FormActions>
   ),
 };

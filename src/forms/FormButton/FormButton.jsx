@@ -1,7 +1,7 @@
 /** @module FormButton
  *  @class FormButton
  *  @since 2020.07.20, 19:07
- *  @changed 2020.12.29, 20:57
+ *  @changed 2021.02.19, 17:51
  */
 
 import React from 'react';
@@ -152,7 +152,7 @@ class FormButton extends React.PureComponent /** @lends @FormButton.prototype */
     } = this.props;
     if (!disabled) {
       const hasOnClick = onClick && typeof onClick === 'function';
-      const result = hasOnClick ? onClick(event) : undefined; // true;
+      const result = hasOnClick ? onClick({ ...event, id }) : undefined; // true;
       if (result !== false && actionsContextNode && typeof actionsContextNode.onAction === 'function') {
         Promise.resolve(result).then((result) => {
           if (result !== false) { // Check for non-false value

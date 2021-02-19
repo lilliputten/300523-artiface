@@ -1,7 +1,7 @@
 /** @module FormActions
  *  @class FormActions
  *  @since 2021.02.15, 18:03
- *  @changed 2021.02.19, 16:35
+ *  @changed 2021.02.19, 17:51
  */
 /* eslint-disable react/require-default-props, react/no-unused-prop-types */
 
@@ -13,6 +13,7 @@ import { cn } from 'utils/configure';
 
 import FormItemHOC from '../FormItemHOC';
 import FormGroup from '../FormGroup';
+import FormButton from '../FormButton';
 
 import {
   ActionsContextProvider,
@@ -22,6 +23,10 @@ import {
 import './FormActions.pcss';
 
 const cnFormActions = cn('FormActions');
+
+const defaultActionButtonProps = {
+  theme: 'default',
+};
 
 class FormActions extends React.PureComponent /** @lends @FormActions.prototype */ {
 
@@ -41,23 +46,27 @@ class FormActions extends React.PureComponent /** @lends @FormActions.prototype 
     };
   }
 
-  getClassName() {
-    return cnFormActions(null, [this.props.className]);
-  }
+  // getClassName() {
+  //   return cnFormActions(null, [this.props.className]);
+  // }
 
   onAction = (actionProps) => {
     const {
+      id,
       onAction,
       actionsContextNode, // ActionsContext Provider
       disabled,
     } = this.props;
-    // console.log('FormActions:onAction', {
-    //   actionProps,
-    //   onAction,
-    //   actionsContextNode,
-    // });
     // Throw action up...
     if (!disabled) {
+      if (id) {
+        actionProps = { ...actionProps, actionsId: id };
+      }
+      // console.log('FormActions:onAction', {
+      //   actionProps,
+      //   onAction,
+      //   actionsContextNode,
+      // });
       if (actionsContextNode && typeof actionsContextNode.onAction === 'function') {
         actionsContextNode.onAction(actionProps);
       }
@@ -69,10 +78,37 @@ class FormActions extends React.PureComponent /** @lends @FormActions.prototype 
 
   // Render...
 
+  renderActionItem(data, n) {
+    // console.log('FormActions:renderActionItem', {
+    //   data,
+    // });
+    if (React.isValidElement(data)) {
+      return data;
+    }
+    if (typeof data !== 'object') {
+      data = { text: String(data) };
+    }
+    const id = data.id || String(n);
+    const element = (
+      <FormButton key={id} id={id} {...defaultActionButtonProps} {...data} />
+    );
+    return element;
+  }
+
   render() {
+    const { actions, children, className, ...restProps } = this.props;
+    let content = actions || children;
+    // console.log('FormActions:render', {
+    //   content,
+    // });
+    if (Array.isArray(content)) {
+      content = content.map(this.renderActionItem, this);
+    }
     return (
       <ActionsContextProvider value={this}>
-        <FormGroup {...this.props} className={this.getClassName()} />
+        <FormGroup {...restProps} className={cnFormActions(null, [className])}>
+          {content}
+        </FormGroup>
       </ActionsContextProvider>
     );
   }
