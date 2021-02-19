@@ -30,10 +30,10 @@ module.exports = (env, argv) => {
   const isWatch = !!argv.watch;
   const isDev = (/* isDevServer || */ mode === 'development');
   const isProd = !isDev; // mode === 'production'
-  const useDevTool = true; // && (isDev || isDevServer) // Need server restart
+  const useDevTool = true && isDev; // Need server restart
   const minimizeBundles = false && isProd; // To minimize production bundles
   const preprocessBundles = false && isProd; // To minimize production bundles
-  const sourceMaps = true; // !preprocessBundles // To minimize production bundles
+  const sourceMaps = true && isDev; // !preprocessBundles // To minimize production bundles
   // const extemeUglify = false // Use mangling (WARNING: May broke some code! Don't use without testing!)
   const DEBUG = true && (isDev || isDevServer);
   const rootPath = path.resolve(__dirname);
@@ -66,6 +66,7 @@ module.exports = (env, argv) => {
   // Project version, application title
   const {
     name: projectName,
+    // title: projectTitle,
     version,
     timestamp,
     timetag,
@@ -135,7 +136,7 @@ module.exports = (env, argv) => {
     // // name: (isDevServer || isDevServer) ? '[path][name].[ext]' : staticFolderUrl + '/[name]-[contenthash:8].[ext]',
     // name: (isDevServer || isDevServer) ? '[path][name].[ext]' : staticFolderUrl + '/[name]-[hash:8].[ext]',
     // Mirroring static files folders
-    // publicPath: '..', // Root relative to 'css' folder
+    // publicPath: '../', // Root relative from 'css' folder
     name: (file) => {
       let name = file;
       if (isDevServer /* || isDev */) {
@@ -341,7 +342,7 @@ module.exports = (env, argv) => {
         options: {
           // sourceRoot: '/',
           inputSourceMap: true,
-          sourceMaps: true,
+          sourceMaps: sourceMaps,
           retainLines: true,
           cacheDirectory: true,
         },
@@ -374,7 +375,9 @@ module.exports = (env, argv) => {
         // due to incorrect webpack `publicPath` resolving for library.
         // See [How to ship assets?](https://github.com/webpack/webpack/issues/7353)
         // TODO: M.b. here exists the solution for store library assets outside js code?
-        loader: isDevServer ? require.resolve('file-loader') : require.resolve('url-loader'),
+        loader: isDevServer ? require.resolve('file-loader') : require.resolve('url-loader'), // External assets for dev-time, embedded for library build
+        // loader: require.resolve('file-loader'), // Use external assed from files
+        // loader: require.resolve('url-loader'), // Use css-injected assets
         options: fileLoaderOptions,
       },
     ] },
@@ -396,6 +399,7 @@ module.exports = (env, argv) => {
       !isDevServer && new CopyWebpackPlugin({ // Simply copies the files over
         patterns: [
           { from: 'static-build-files', to: './', ...CopyWebpackPluginOptions },
+          { from: 'favicon.ico', to: './', ...CopyWebpackPluginOptions },
           { from: 'CHANGELOG.md', to: './', ...CopyWebpackPluginOptions },
           { from: 'README.md', to: './', ...CopyWebpackPluginOptions }, // Readme listed at last position -- then can be overriden if readme exists in `static-build-files` (commands executiong in reversed order?).
         ].filter(Boolean),
@@ -405,7 +409,8 @@ module.exports = (env, argv) => {
         filename: htmlFilename,
         cache: true,
         inject: true,
-        minimify: minimizeBundles,
+        // minimify: minimizeBundles,
+        minify: false,
         // title: appTitle, // Not using; see i18n-specific appTitle** variables above (passed to js code env)
         templateParameters: Object.assign({}, cssConfig, passParameters),
       }),
