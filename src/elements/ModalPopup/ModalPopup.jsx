@@ -328,8 +328,11 @@ class ModalPopup extends React.PureComponent /** @lends @ModalPopup.prototype */
       // throw error
       return;
     }
-    const { popupContentGap } = config.css;
-    // const doubleContentModalPopupGap = popupContentGap * 2 // UNUSED
+    const {
+      popupVerticalOffset,
+      popupWindowOffset,
+    } = config.css;
+    // const doubleContentModalPopupGap = popupVerticalOffset * 2 // UNUSED
     const keys = axisKeys[axis];
     const isVertical = (axis === 'vertical');
 
@@ -347,15 +350,15 @@ class ModalPopup extends React.PureComponent /** @lends @ModalPopup.prototype */
       domNode[keys.storedContentSize] = contentSize;
     }
 
-    // const viewStart = popupContentGap
-    const viewStart = /* viewPos + */ popupContentGap;
-    const viewEnd = viewStart + viewSize - popupContentGap;
+    // const viewStart = popupVerticalOffset
+    const viewStart = /* viewPos + */ popupWindowOffset; // popupVerticalOffset;
+    const viewEnd = viewStart + viewSize - popupWindowOffset * 2; // - popupVerticalOffset;
 
     // Calculate control coordinates...
     const controlScreenPos = controlPos;
     const controlScreenEnd = controlScreenPos + controlSize;
-    const posNormal = isVertical ? controlScreenEnd + popupContentGap : controlScreenPos;
-    const posReverted = isVertical ? controlScreenPos - popupContentGap : controlScreenEnd;
+    const posNormal = isVertical ? controlScreenEnd + popupVerticalOffset : controlScreenPos;
+    const posReverted = isVertical ? controlScreenPos - popupVerticalOffset : controlScreenEnd;
     const spaceAfter = viewEnd - posNormal;
     const spaceBefore = posReverted - viewStart;
 
@@ -376,11 +379,11 @@ class ModalPopup extends React.PureComponent /** @lends @ModalPopup.prototype */
     if (placeBefore) { // Down-up position: from control top -> up
       const fitContentSize = isntFit ? fitSize : contentMaxSize;
       contentPosValue = (posReverted - fitContentSize);
-      // contentPosValue = (controlScreenPos - fitContentSize - popupContentGap)
+      // contentPosValue = (controlScreenPos - fitContentSize - popupVerticalOffset)
     }
     else { // Normal position: from control bottom -> down
       contentPosValue = posNormal;
-      // contentPosValue = (controlScreenEnd + popupContentGap)
+      // contentPosValue = (controlScreenEnd + popupVerticalOffset)
     }
     contentPosValue -= viewPos; // Relative to global view
     const cssContentPos = contentPosValue + 'px';
@@ -396,32 +399,31 @@ class ModalPopup extends React.PureComponent /** @lends @ModalPopup.prototype */
       domNode.style[keys.contentStyleMaxSize] = cssContentStyleMaxSize; // Update dom node css style
     }
 
-    /* // DEBUG (use doDebug?)...
-     * console.log('ModalPopup:updateOneAxisContentPos', {
-     *   // Parameters...
-     *   axis,
-     *   placeBefore,
-     *   isntFit,
-     *   // Coordinates...
-     *   fitSize,
-     *   contentPos,
-     *   cssContentPos,
-     *   cssContentStyleMaxSize,
-     *   // controlScreenPos,
-     *   // controlScreenEnd,
-     *   // controlScreenAfter,
-     *   // General...
-     *   updatedGeometryKeys,
-     *   geometry: geometry,
-     *   'this.geometry': this.geometry,
-     *   'changed geometry': Object.entries(geometry).reduce((result, [key, val]) => {
-     *     return updatedGeometryKeys.includes(key) ? { ...result, [key]: val } : result
-     *   }, {}),
-     *   'changed this.geometry': Object.entries(this.geometry).reduce((result, [key, val]) => {
-     *     return updatedGeometryKeys.includes(key) ? { ...result, [key]: val } : result
-     *   }, {}),
-     * })
-     */
+    // DEBUG (use doDebug?)...
+    console.log('ModalPopup:updateOneAxisContentPos', {
+      // Parameters...
+      axis,
+      placeBefore,
+      isntFit,
+      // Coordinates...
+      fitSize,
+      contentPos,
+      cssContentPos,
+      cssContentStyleMaxSize,
+      // controlScreenPos,
+      // controlScreenEnd,
+      // controlScreenAfter,
+      // General...
+      updatedGeometryKeys,
+      geometry: geometry,
+      'this.geometry': this.geometry,
+      'changed geometry': Object.entries(geometry).reduce((result, [key, val]) => {
+        return updatedGeometryKeys.includes(key) ? { ...result, [key]: val } : result;
+      }, {}),
+      'changed this.geometry': Object.entries(this.geometry).reduce((result, [key, val]) => {
+        return updatedGeometryKeys.includes(key) ? { ...result, [key]: val } : result;
+      }, {}),
+    });
   }
 
   updateGeometryInstant = () => { // UNUSED? TODO? Update geometry

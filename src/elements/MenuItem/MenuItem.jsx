@@ -25,6 +25,7 @@ class MenuItem extends React.PureComponent /** @lends @MenuItem.prototype */ {
     className: PropTypes.string,
     disabled: PropTypes.bool,
     htmlId: PropTypes.string, // ???
+    theme: PropTypes.string,
     icon: PropTypes.oneOfType([ PropTypes.string, PropTypes.object ]),
     id: PropTypes.string,
     onClick: PropTypes.func,
@@ -32,6 +33,7 @@ class MenuItem extends React.PureComponent /** @lends @MenuItem.prototype */ {
     text: PropTypes.string,
     val: PropTypes.oneOfType([ PropTypes.string, PropTypes.number ]),
     withIcon: PropTypes.bool,
+    wrap: PropTypes.bool,
   }
 
   // Event handlers...
@@ -52,6 +54,8 @@ class MenuItem extends React.PureComponent /** @lends @MenuItem.prototype */ {
       withIcon,
       checked,
       disabled,
+      theme,
+      wrap,
       // title,
       // onClick,
     } = this.props;
@@ -61,6 +65,8 @@ class MenuItem extends React.PureComponent /** @lends @MenuItem.prototype */ {
       withIcon,
       checked,
       disabled,
+      theme,
+      wrap,
     }, [this.props.className]);
     // console.log('MenuItem:constructor', this.props);
     return className;

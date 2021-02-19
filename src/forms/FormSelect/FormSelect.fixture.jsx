@@ -1,6 +1,6 @@
 /** @module FormSelect.fixture
  *  @since 2020.10.28, 22:49
- *  @changed 2020.10.29, 03:14
+ *  @changed 2021.02.15, 18:28
  */
 /* eslint-disable react/jsx-max-depth, no-console */
 
@@ -62,10 +62,13 @@ export default {
       title="Select title"
       text="Select"
       options={demoOptions}
-      singleChoice
-      closeOnSelect
       controlButtonTheme="success"
+      itemTheme="success"
+      // itemSelectedTheme="success"
       onChange={demoChange}
+      singleChoice
+      // closeOnSelect
+      wrapContent
     />
   ),
   Question: (

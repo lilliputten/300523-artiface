@@ -81,7 +81,7 @@ class FormTextInput extends React.PureComponent /** @lends @FormTextInput.protot
       if (numericValue && !isNaN(value)) {
         value = Number(value);
       }
-      const setId = inputId || id || name;
+      const setId = id || inputId || name;
       onChange({ id: setId, value });
     }
   }
