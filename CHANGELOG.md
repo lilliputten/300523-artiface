@@ -1,5 +1,6 @@
 # CHANGELOG
 
+- 2021.02.20, 17:25 -- FormContainer: new component for wrapping groups etc.
 - 2021.02.20, 15:11 -- MenuItemSeparator component.
 - 2021.02.20, 13:49 -- FormSeparator component.
 - 2021.02.19, 21:05 -- FormGroup: Styles for items grouping, `tagged` groups.
@@ -94,5 +95,5 @@
 - 2020.10.05, 20:38 -- v.0.0.15: Extracted `demoSupport.jsx` routines, fixture selection from url query (parameter `fixture`), added avaialble fixtures list if fixture to display is not specified, added DemoWrapper & demoTitle exportable ficture parameters for demo rendering.
 
 <!--
- @changed 2021.02.20, 15:11
+ @changed 2021.02.20, 17:25
 -->

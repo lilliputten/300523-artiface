@@ -1,7 +1,7 @@
 /** @module demoFixtures
  *  @desc Demo fixtures list
  *  @since 2021.02.15, 18:05
- *  @changed 2021.02.20, 13:42
+ *  @changed 2021.02.20, 16:56
  */
 
 // import * as build from './build'
@@ -40,6 +40,8 @@ export const demoFixtures = {
 
   FormDateTime: require('forms/FormDateTime/FormDateTime.fixture'),
   FormDateRange: require('forms/FormDateRange/FormDateRange.fixture'),
+
+  FormContainer: require('forms/FormContainer/FormContainer.fixture'),
 
   FormGroup: require('forms/FormGroup/FormGroup.fixture'),
   FormButtonGroup: require('forms/FormButtonGroup/FormButtonGroup.fixture'),
