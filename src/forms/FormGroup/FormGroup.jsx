@@ -1,7 +1,7 @@
 /** @module FormGroup
  *  @class FormGroup
  *  @since 2020.07.20, 19:07
- *  @changed 2021.02.20, 17:30
+ *  @changed 2021.02.20, 19:09
  */
 /* eslint-disable react/require-default-props, react/no-unused-prop-types */
 
@@ -39,6 +39,7 @@ class FormGroup extends React.PureComponent /** @lends @FormGroup.prototype */ {
     spaced: PropTypes.bool,
     stack: PropTypes.bool,
     wrap: PropTypes.bool,
+    withContainer: PropTypes.bool,
   }
 
   static classNameModifiers = [
@@ -88,7 +89,7 @@ class FormGroup extends React.PureComponent /** @lends @FormGroup.prototype */ {
       children,
       content,
       separated,
-      container,
+      withContainer,
     } = this.props;
 
     // const renderProps = this.getRenderProps()
@@ -100,7 +101,7 @@ class FormGroup extends React.PureComponent /** @lends @FormGroup.prototype */ {
       </div>
     );
 
-    if (container) {
+    if (withContainer) {
       result = (
         <FormContainer>
           {result}

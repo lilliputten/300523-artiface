@@ -12,7 +12,7 @@ import FormGroup from '../FormGroup';
 // Demo styles for cosmos engine
 import 'demo.pcss';
 
-import './FormSeparator.fixture.pcss'
+import './FormSeparator.fixture.pcss';
 
 export default {
   simple: (

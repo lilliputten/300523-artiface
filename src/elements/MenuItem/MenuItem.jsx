@@ -6,8 +6,11 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import { compose } from 'redux';
 // import connect from 'react-redux/es/connect/connect';
 import { cn } from 'utils/configure';
+import config from 'config';
+import { withActionsContext } from 'helpers/ActionsContext';
 
 import InlineIcon from 'elements/InlineIcon';
 
@@ -32,18 +35,66 @@ class MenuItem extends React.PureComponent /** @lends @MenuItem.prototype */ {
     setDomRef: PropTypes.func, // From FormItemHOC
     text: PropTypes.string,
     val: PropTypes.oneOfType([ PropTypes.string, PropTypes.number ]),
-    withIcon: PropTypes.bool,
+    hasIcon: PropTypes.bool,
     wrap: PropTypes.bool,
+    // setNodeRef: PropTypes.func, // ??? use ref in parent component
   }
 
   // Lifecycle...
 
+  constructor(props) {
+    super(props);
+    this.state = {};
+    this.mounted = true;
+    // if (props.setNodeRef) {
+    //   props.setNodeRef(this);
+    // }
+  }
+
+  componentWillUnmount() {
+    this.mounted = false;
+  }
+
   // Event handlers...
 
-  onClick = (ev) => {
-    const { id, val, onClick } = this.props;
-    if (typeof onClick === 'function') {
-      onClick({ ...ev, id, val, component: this });
+  onClick = (/* event */) => {
+    const {
+      id,
+      val,
+      onClick,
+      actionsContextNode, // ActionsContext Provider
+      disabled,
+    } = this.props;
+    if (!disabled) {
+      // console.log('MenuItem:onClick', {
+      //   id,
+      //   val,
+      //   onClick,
+      //   actionsContextNode, // ActionsContext Provider
+      //   disabled,
+      // });
+      // debugger;
+      const hasOnClick = onClick && typeof onClick === 'function';
+      const actionProps = {
+        // ...event,
+        id: id || val,
+        val,
+        component: this,
+      };
+      const result = hasOnClick ? onClick(actionProps) : undefined; // true;
+      if (result !== false && actionsContextNode && typeof actionsContextNode.onAction === 'function') {
+        Promise.resolve(result).then((result) => {
+          if (result !== false) { // Check for non-false value
+            actionsContextNode.onAction({ ...actionProps, result });
+          }
+        });
+      }
+      this.setState({ active: true });
+      setTimeout(() => {
+        if (this.mounted) {
+          this.setState({ active: false });
+        }
+      }, config.css.transitionTime);
     }
   }
 
@@ -53,8 +104,8 @@ class MenuItem extends React.PureComponent /** @lends @MenuItem.prototype */ {
     const {
       id,
       checkable,
-      withIcon,
-      // icon,
+      hasIcon,
+      icon,
       checked,
       disabled,
       theme,
@@ -63,8 +114,8 @@ class MenuItem extends React.PureComponent /** @lends @MenuItem.prototype */ {
     const className = cnMenuItem({
       id,
       checkable,
-      // withIcon: !!(withIcon || icon),
-      withIcon,
+      hasIcon: !!(hasIcon || icon || checkable),
+      // hasIcon,
       checked,
       disabled,
       theme,
@@ -77,12 +128,12 @@ class MenuItem extends React.PureComponent /** @lends @MenuItem.prototype */ {
 
   renderIconContent() {
     const {
-      withIcon,
+      hasIcon,
       checkable,
       checked,
       icon,
     } = this.props;
-    if (( withIcon && icon) || (checkable && checked)) {
+    if (((hasIcon || !checkable) && icon) || (checkable && checked)) {
       const iconContent = icon || 'faCheck';
       return iconContent && <InlineIcon icon={iconContent} className={cnMenuItem('Icon')} />;
     }
@@ -130,4 +181,7 @@ class MenuItem extends React.PureComponent /** @lends @MenuItem.prototype */ {
 
 }
 
-export default FormItemHOC({ solid: true, hoverable: true })(MenuItem);
+export default compose(
+  withActionsContext,
+  FormItemHOC({ solid: true, hoverable: true, focusable: true }),
+)(MenuItem);

@@ -35,7 +35,7 @@ export default {
       onClick={handleClick}
       theme="success"
       icon="faCheck"
-      withIcon
+      hasIcon
     />
   ),
 };

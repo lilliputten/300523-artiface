@@ -9,19 +9,13 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-// import connect from 'react-redux/es/connect/connect'
 import { cn } from 'utils/configure';
 
 import FormItemHOC from '../FormItemHOC';
 
-// import FormGroup from 'forms/FormGroup'
-// import FormGroup from '../FormGroup'
 import ModalPopup from 'elements/ModalPopup';
-// import { FormItemPopup } from 'elements/ModalPopup'
 import Menu from 'elements/Menu';
 import FormButton from 'forms/FormButton';
-
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import './FormSelect.pcss';
 

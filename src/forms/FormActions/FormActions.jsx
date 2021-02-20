@@ -1,7 +1,7 @@
 /** @module FormActions
  *  @class FormActions
  *  @since 2021.02.15, 18:03
- *  @changed 2021.02.19, 17:51
+ *  @changed 2021.02.20, 16:43
  */
 /* eslint-disable react/require-default-props, react/no-unused-prop-types */
 
@@ -11,12 +11,15 @@ import PropTypes from 'prop-types';
 // import connect from 'react-redux/es/connect/connect'
 import { cn } from 'utils/configure';
 
+import Menu from 'elements/Menu';
+
 import FormItemHOC from '../FormItemHOC';
 import FormGroup from '../FormGroup';
 import FormButton from '../FormButton';
 import FormSeparator from '../FormSeparator';
+import ModalPopup from 'elements/ModalPopup';
 
-import {
+import { // ActionsContext...
   ActionsContextProvider,
   withActionsContext,
 } from 'helpers/ActionsContext';
@@ -32,15 +35,22 @@ const defaultActionButtonProps = {
 class FormActions extends React.PureComponent /** @lends @FormActions.prototype */ {
 
   static propTypes = {
+    // children,
+    actions: PropTypes.oneOfType([ PropTypes.array, PropTypes.object ]),
+    actionsContextNode: PropTypes.element, // ActionsContext Provider
+    className: PropTypes.string,
+    disabled: PropTypes.bool,
     id: PropTypes.string,
+    // layout: PropTypes.string,
+    menu: PropTypes.oneOfType([ PropTypes.array, PropTypes.object ]),
+    menuButtonTheme: PropTypes.string,
+    onAction: PropTypes.func,
+    withMenu: PropTypes.bool,
+    setPopupNodeRef: PropTypes.func,
     // See props definitions for FormGroup
   }
 
-  constructor(props) {
-    super(props);
-    this.state = {
-    };
-  }
+  // Handlers...
 
   onAction = (actionProps) => {
     const {
@@ -59,6 +69,7 @@ class FormActions extends React.PureComponent /** @lends @FormActions.prototype 
       //   onAction,
       //   actionsContextNode,
       // });
+      // debugger;
       if (actionsContextNode && typeof actionsContextNode.onAction === 'function') {
         actionsContextNode.onAction(actionProps);
       }
@@ -68,12 +79,41 @@ class FormActions extends React.PureComponent /** @lends @FormActions.prototype 
     }
   }
 
+  onMenuAction = (actionProps) => {
+    const { popupNode } = this;
+    const { disabled } = this.props;
+    if (!disabled) {
+      // console.log('FormActions:onMenuAction', { actionProps, popupNode });
+      // debugger;
+      this.onAction(actionProps);
+      if (/* closeMenuOnAction && */ popupNode) {
+        popupNode.close();
+      }
+    }
+  }
+
+  setPopupNodeRef = (node) => {
+    const { setPopupNodeRef } = this.props;
+    this.popupNode = node;
+    if (setPopupNodeRef && typeof setPopupNodeRef === 'function') {
+      setPopupNodeRef(node);
+    }
+  }
+
   // Render...
 
+  getClassName() {
+    const {
+      withMenu,
+      className,
+    } = this.props;
+    const mods = {
+      withMenu,
+    };
+    return cnFormActions(mods, [className]);
+  }
+
   renderActionItem(data, n) {
-    // console.log('FormActions:renderActionItem', {
-    //   data,
-    // });
     if (React.isValidElement(data)) {
       return data;
     }
@@ -81,9 +121,9 @@ class FormActions extends React.PureComponent /** @lends @FormActions.prototype 
       data = { text: String(data) };
     }
     else if (data.id === 'separator') {
-      return (<FormSeparator />);
+      return (<FormSeparator key={'separator' + n} />);
     }
-    const id = data.id || String(n);
+    const id = data.id || 'item' + n;
     const element = (
       <FormButton
         key={id}
@@ -96,21 +136,88 @@ class FormActions extends React.PureComponent /** @lends @FormActions.prototype 
     return element;
   }
 
+  renderMenu() {
+    const {
+      withMenu,
+      menu,
+      menuButtonTheme = 'plain',
+    } = this.props;
+    if (!withMenu || !menu) {
+      return null;
+    }
+    let menuElement;
+    const menuProps = {
+      // onClick: this.onMenuItemClick,
+      onAction: this.onMenuAction,
+    };
+    if (React.isValidElement(menu)) {
+      menuElement = React.cloneElement(menu, menuProps);
+    }
+    else {
+      menuElement = (
+        <ActionsContextProvider value={this}>
+          <Menu {...menuProps}>
+            {menu}
+          </Menu>
+        </ActionsContextProvider>
+      );
+    }
+    const popupControl = (
+      <FormButton
+        key="popupControl"
+        id="popupControl"
+        icon="faBars"
+        theme={menuButtonTheme}
+      />
+    );
+    const menuPopup = (
+      <ModalPopup
+        key="menuPopup"
+        id="menuPopup"
+        popupControl={popupControl}
+        popupContent={menuElement}
+        ref={this.setPopupNodeRef}
+      />
+    );
+    return (
+      <FormGroup
+        key="FormActionsMenu"
+        id="FormActionsMenu"
+        className={cnFormActions('Menu')}
+        align="right"
+        flow
+      >
+        {menuPopup}
+      </FormGroup>
+    );
+  }
+
   render() {
-    const { actions, children, className, ...restProps } = this.props;
+    const {
+      actions,
+      children,
+      // Omit own props (do not pass to FormGroup)...
+      /* eslint-disable no-unused-vars */
+      className,
+      withMenu,
+      menu,
+      setPopupNodeRef,
+      // theme,
+      // layout,
+      /* eslint-enable no-unused-vars */
+      ...restProps
+    } = this.props;
     let content = actions || children;
-    // console.log('FormActions:render', {
-    //   content,
-    // });
     if (Array.isArray(content)) {
       content = content.map(this.renderActionItem, this);
     }
     return (
-      <ActionsContextProvider value={this}>
-        <FormGroup {...restProps} className={cnFormActions(null, [className])}>
+      <FormGroup {...restProps} className={this.getClassName()}>
+        <ActionsContextProvider value={this}>
           {content}
-        </FormGroup>
-      </ActionsContextProvider>
+        </ActionsContextProvider>
+        {this.renderMenu()}
+      </FormGroup>
     );
   }
 

@@ -8,6 +8,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 // import connect from 'react-redux/es/connect/connect';
 import { cn } from 'utils/configure';
+import { // ActionsContext...
+  ActionsContextProvider,
+  // withActionsContext,
+} from 'helpers/ActionsContext';
 
 import MenuItem from '../MenuItem';
 import MenuItemSeparator from '../MenuItemSeparator';
@@ -54,9 +58,9 @@ class Menu extends React.PureComponent /** @lends @Menu.prototype */ {
     return className;
   }
 
-  createItemElement(item) {
+  createItemElement(item, n) {
     if (item && item.id === 'separator') {
-      return <MenuItemSeparator />;
+      return <MenuItemSeparator key={'separator' + n} />;
     }
     const {
       singleChoice,
@@ -112,11 +116,7 @@ class Menu extends React.PureComponent /** @lends @Menu.prototype */ {
     //   children,
     // })
     let children = this.props.children;
-    // const selectedList = [];
     if (Array.isArray(children)) {
-      // const { singleChoice } = this.props;
-      // const { value, selected } = this.props;
-      // const propsSelected = (singleChoice && value != null) ? [value] : selected;
       children = children.map(this.createItemElement, this);
     }
     const selectedList = children
@@ -206,17 +206,36 @@ class Menu extends React.PureComponent /** @lends @Menu.prototype */ {
 
   // Handlers...
 
+  onAction = (actionProps) => { // Event handler for ActionContext consumed children
+    const {
+      id,
+      // actionsContextNode, // Using with `withActionsContext` only!
+      onAction,
+    } = this.props;
+    const passProps = { ...actionProps, menuId: id };
+    // console.log('Menu:onAction', id, actionProps, passProps);
+    // debugger;
+    if (typeof onAction === 'function') {
+      onAction(passProps);
+    }
+    // if (actionsContextNode && typeof actionsContextNode.onAction === 'function') { // Use chaining ActionsContext?
+    //   actionsContextNode.onAction(passProps);
+    // }
+  }
+
   onMenuItemClick = ({ /* id, component, */ val }) => {
-    const { onClick, singleChoice } = this.props;
-    const { selectedList } = this.state;
-    const setSelected = !selectedList.includes(val);
-    if (singleChoice === 'forced' && !setSelected) { // Don not made changes if single mode and clicked item was selected
-      return;
+    const { onClick, singleChoice, disabled } = this.props;
+    if (!disabled) {
+      const { selectedList } = this.state;
+      const setSelected = !selectedList.includes(val);
+      if (singleChoice === 'forced' && !setSelected) { // Don not made changes if single mode and clicked item was selected
+        return;
+      }
+      if (typeof onClick === 'function') { // Invoke onClick handler
+        onClick({ value: val });
+      }
+      this.updateChildrenItems({ [val]: setSelected }); // Apply items changes
     }
-    if (typeof onClick === 'function') { // Invoke onClick handler
-      onClick({ value: val });
-    }
-    this.updateChildrenItems({ [val]: setSelected }); // Apply items changes
   }
 
   // Render...
@@ -243,11 +262,14 @@ class Menu extends React.PureComponent /** @lends @Menu.prototype */ {
 
     return (
       <div {...renderProps}>
-        {content}
+        <ActionsContextProvider value={this}>
+          {content}
+        </ActionsContextProvider>
       </div>
     );
   }
 
 }
 
+// withActionsContext?
 export default Menu;

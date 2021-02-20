@@ -394,7 +394,7 @@ class ModalPortal extends React.PureComponent /** @lends @ModalPortal.prototype 
     const actionId = actionProps.id;
     const { id, actionsContextNode, autoClose, closeOnCancelAction } = this.props;
     this.setResult(actionId);
-    // console.log('ModalPortal:ModalPortal:onAction', id, actionId)
+    // console.log('ModalPortal:onAction', id, actionId)
     if (autoClose || (closeOnCancelAction && actionId === 'cancel')) { // Close and call `resolveResult` when window is closed
       this.close();
     }

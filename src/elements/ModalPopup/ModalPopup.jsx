@@ -193,6 +193,8 @@ class ModalPopup extends React.PureComponent /** @lends @ModalPopup.prototype */
       open: null, // null -- uninitialized
     };
     this.updateGeometry = debounce(debouncedUpdateGeometryTimeout, this.updateGeometryInstant);
+    // if (typeof props.setNodeRef) {
+    // }
   }
 
   componentWillUnmount() {
@@ -639,6 +641,14 @@ class ModalPopup extends React.PureComponent /** @lends @ModalPopup.prototype */
     } = this.props;
     const { open } = this.state;
 
+    const controlClassName = this.getClassName({ cnCtx: cnModalPopupControl, className });
+    const renderProps = {
+      id,
+      className: controlClassName,
+      setDomRef: this.setControlDomRef,
+      // ref: this.setControlDomRef, // For html element (div)
+    };
+
     // TODO: Cache modified `popupControl` in state?
     const content = React.cloneElement(popupControl, {
       onClick: this.onControlClick,
@@ -646,18 +656,10 @@ class ModalPopup extends React.PureComponent /** @lends @ModalPopup.prototype */
       // setDomRef: this.setControlDomRef,
       // ref: this.setControlNodeRef,
       setNodeRef: this.setControlNodeRef,
+      ...renderProps,
     });
 
-    const renderProps = {
-      id,
-      className: this.getClassName({ cnCtx: cnModalPopupControl, className }),
-      ref: this.setControlDomRef,
-    };
-    return (
-      <div {...renderProps}>
-        {content}
-      </div>
-    );
+    return content;
   }
 
   renderPortalContent = (portalProps) => {

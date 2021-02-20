@@ -142,7 +142,7 @@ class FormButton extends React.PureComponent /** @lends @FormButton.prototype */
     formItemNode && formItemNode.blur && formItemNode.blur();
   }
 
-  onClick = (event) => {
+  onClick = (/* event */) => {
     const {
       id,
       actionsContextNode, // ActionsContext Provider
@@ -152,11 +152,15 @@ class FormButton extends React.PureComponent /** @lends @FormButton.prototype */
     } = this.props;
     if (!disabled) {
       const hasOnClick = onClick && typeof onClick === 'function';
-      const result = hasOnClick ? onClick({ ...event, id }) : undefined; // true;
+      const actionProps = {
+        // ...event,
+        id,
+      };
+      const result = hasOnClick ? onClick(actionProps) : undefined; // true;
       if (result !== false && actionsContextNode && typeof actionsContextNode.onAction === 'function') {
         Promise.resolve(result).then((result) => {
           if (result !== false) { // Check for non-false value
-            actionsContextNode.onAction({ id, result });
+            actionsContextNode.onAction({ ...actionProps, result });
           }
         });
       }

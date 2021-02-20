@@ -40,7 +40,25 @@ function handleClick(params) {
   // debugger;
 }
 
-const actionsList = [
+const actionItems = [
+  { id: 'separator' },
+  {
+    id: 'update',
+    onClick: handleClick,
+    text: 'Update',
+    icon: 'faSync',
+    // theme: 'default',
+  },
+];
+
+const menuItems = [
+  {
+    id: 'test',
+    onClick: handleClick,
+    text: 'Test',
+    icon: 'faCheck',
+    // theme: 'default',
+  },
   { id: 'separator' },
   {
     id: 'update',
@@ -59,8 +77,33 @@ export default {
     </FormActions>
   ),
   fromList: (
-    <FormActions id="fromList" onAction={handleAction}>
-      {actionsList}
+    <FormActions
+      id="fromList"
+      onAction={handleAction}
+      fullWidth
+      flow
+    >
+      {actionItems}
+    </FormActions>
+  ),
+  withMenu: (
+    <FormActions
+      id="withMenu"
+      onAction={handleAction}
+      menu={menuItems}
+      withMenu
+      fullWidth
+      flow
+      wrap
+      shaded
+      padded
+      spaced
+      withContainer
+      // padded
+      // theme="MediumGray"
+      // layout="Padded"
+    >
+      {actionItems}
     </FormActions>
   ),
 };
