@@ -177,6 +177,7 @@ class FormActions extends React.PureComponent /** @lends @FormActions.prototype 
         popupControl={popupControl}
         popupContent={menuElement}
         ref={this.setPopupNodeRef}
+        // closeOnEscPressed
       />
     );
     return (

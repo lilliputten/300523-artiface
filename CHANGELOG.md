@@ -1,5 +1,6 @@
 # CHANGELOG
 
+- 2021.02.20, 19:31 -- v.0.2.11.
 - 2021.02.20, 19:30 -- FormActions: Minor changes (display menu without `withMenu` prop -- only if `menu` prop passed).
 - 2021.02.20, 19:19 -- Menu, MenuItem, FormActions: throw up action events. FormActions: render menu popup, catch menu actions, close menu popup on menu action. MenuItem: use `hasIcon` instead `withIcon`, use ActionsContext. ModalPopup: render wrapper-less control element. FormGroup: withContainer prop (wraps with `FormContainer`). Other minor changes.
 - 2021.02.20, 17:31 -- FormGroups: restructured styles, added mod props (`separated` (instead of `tagged`), `shaded`, `padded`).
