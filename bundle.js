@@ -38632,7 +38632,7 @@ module.exports = g;
 /*!***********************!*\
   !*** ./src/build.jsx ***!
   \***********************/
-/*! exports provided: config, utils, helpers, DateTimeSelector, InlineIcon, Loader, Menu, MenuItem, ModalWindow, ModalPopup, ModalPortal, ModalsContainer, FormItemHOC, FormItemDummy, FormLabel, FormButton, FormDelim, FormSpacer, FormText, FormSelect, FormTextInput, FormPasswordInput, FormRadio, FormDateTime, FormDateRange, FormActions, FormGroup, FormLabeledGroup, FormButtonGroup, FormInputGroup, Hello, default */
+/*! exports provided: config, utils, helpers, DateTimeSelector, InlineIcon, Loader, Menu, MenuItem, MenuItemSeparator, ModalWindow, ModalPopup, ModalPortal, ModalsContainer, FormItemHOC, FormItemDummy, FormLabel, FormButton, FormDelim, FormSpacer, FormSeparator, FormText, FormSelect, FormTextInput, FormPasswordInput, FormRadio, FormDateTime, FormDateRange, FormActions, FormContainer, FormGroup, FormLabeledGroup, FormButtonGroup, FormInputGroup, Hello, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -38657,6 +38657,8 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "MenuItem", function() { return _elements_elements__WEBPACK_IMPORTED_MODULE_4__["MenuItem"]; });
 
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "MenuItemSeparator", function() { return _elements_elements__WEBPACK_IMPORTED_MODULE_4__["MenuItemSeparator"]; });
+
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ModalWindow", function() { return _elements_elements__WEBPACK_IMPORTED_MODULE_4__["ModalWindow"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ModalPopup", function() { return _elements_elements__WEBPACK_IMPORTED_MODULE_4__["ModalPopup"]; });
@@ -38678,6 +38680,8 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "FormSpacer", function() { return _forms_forms__WEBPACK_IMPORTED_MODULE_5__["FormSpacer"]; });
 
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "FormSeparator", function() { return _forms_forms__WEBPACK_IMPORTED_MODULE_5__["FormSeparator"]; });
+
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "FormText", function() { return _forms_forms__WEBPACK_IMPORTED_MODULE_5__["FormText"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "FormSelect", function() { return _forms_forms__WEBPACK_IMPORTED_MODULE_5__["FormSelect"]; });
@@ -38693,6 +38697,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "FormDateRange", function() { return _forms_forms__WEBPACK_IMPORTED_MODULE_5__["FormDateRange"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "FormActions", function() { return _forms_forms__WEBPACK_IMPORTED_MODULE_5__["FormActions"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "FormContainer", function() { return _forms_forms__WEBPACK_IMPORTED_MODULE_5__["FormContainer"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "FormGroup", function() { return _forms_forms__WEBPACK_IMPORTED_MODULE_5__["FormGroup"]; });
 
@@ -38806,10 +38812,10 @@ module.exports = { // Common-used build variables...
   DEV_DEBUG: DEV_DEBUG,
 
   THEME: "default",
-  buildTag: "v.0.2.10-210219-2057-build-dev-default",
-  timestamp: "2021.02.19, 20:57",
-  timetag: "210219-2057",
-  version: "0.2.10" };
+  buildTag: "v.0.2.11-210220-1921-build-dev-default",
+  timestamp: "2021.02.20, 19:21",
+  timetag: "210220-1921",
+  version: "0.2.11" };
 
 /***/ }),
 
@@ -39115,6 +39121,12 @@ Object.assign(cssConfig, { // Form properties...
   formItemDisabledOpacity: .5,
 
   formPlaceholderColor: '#ccc',
+
+  // Menu...
+
+  menuVPadding: 8,
+  menuSeparatorVPadding: 4,
+  menuSeparatorHPadding: 4,
 
   // tableBorderWidth: 2,
 
@@ -39967,9 +39979,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _utils_configure__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../utils/configure */ "./src/utils/configure.js");
-/* harmony import */ var _MenuItem_MenuItem__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../MenuItem/MenuItem */ "./src/elements/MenuItem/MenuItem.jsx");
-/* harmony import */ var _Menu_pcss__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./Menu.pcss */ "./src/elements/Menu/Menu.pcss");
-/* harmony import */ var _Menu_pcss__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_Menu_pcss__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _helpers_ActionsContext__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../helpers/ActionsContext */ "./src/helpers/ActionsContext.jsx");
+/* harmony import */ var _MenuItem_MenuItem__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../MenuItem/MenuItem */ "./src/elements/MenuItem/MenuItem.jsx");
+/* harmony import */ var _MenuItemSeparator_MenuItemSeparator__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../MenuItemSeparator/MenuItemSeparator */ "./src/elements/MenuItemSeparator/MenuItemSeparator.jsx");
+/* harmony import */ var _Menu_pcss__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./Menu.pcss */ "./src/elements/Menu/Menu.pcss");
+/* harmony import */ var _Menu_pcss__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_Menu_pcss__WEBPACK_IMPORTED_MODULE_10__);
  /** @module Menu
                                                                                                                                                                                                                                                                                 *  @class Menu
                                                                                                                                                                                                                                                                                 *  @since 2020.10.27, 02:58
@@ -39979,6 +39993,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 // import connect from 'react-redux/es/connect/connect';
+
+
 
 
 
@@ -40025,7 +40041,10 @@ Menu = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helpers_inhe
     return className;
   };_proto.
 
-  createItemElement = function createItemElement(item) {var _this$props2 =
+  createItemElement = function createItemElement(item, n) {
+    if (item && item.id === 'separator') {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(_MenuItemSeparator_MenuItemSeparator__WEBPACK_IMPORTED_MODULE_9__["default"], { key: 'separator' + n });
+    }var _this$props2 =
 
 
 
@@ -40038,7 +40057,7 @@ Menu = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helpers_inhe
     var isArray = !!item && Array.isArray(item);
     var isObject = !!item && typeof item === 'object' && !isArray; // Array.isArray(item)
     var isElement = isObject && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default.a.isValidElement(item);
-    var isMenuItem = isElement && item.type === _MenuItem_MenuItem__WEBPACK_IMPORTED_MODULE_7__["default"];
+    var isMenuItem = isElement && item.type === _MenuItem_MenuItem__WEBPACK_IMPORTED_MODULE_8__["default"];
     var isRawObject = isObject && !isElement;
     if (isRawObject || isMenuItem) {
       var itemProps = isRawObject ? item : item.props;
@@ -40049,7 +40068,8 @@ Menu = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helpers_inhe
       var newProps = _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0___default()({
         theme: itemTheme,
         selectedTheme: itemSelectedTheme,
-        wrap: wrapContent },
+        wrap: wrapContent,
+        text: /* itemProps.text || */itemProps.id || itemProps.val },
       itemProps, {
         onClick: itemProps.onClick || this.onMenuItemClick,
         checkable: checkable,
@@ -40057,15 +40077,11 @@ Menu = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helpers_inhe
 
       if (isRawObject) {// Raw object -> create MenuItem
         var key = item && item.key || this.getId() + '_Item_' + (itemProps.id || itemProps.val);
-        item = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(_MenuItem_MenuItem__WEBPACK_IMPORTED_MODULE_7__["default"], _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0___default()({}, newProps, { key: key }));
-        // isMenuItem = isElement = true
+        item = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(_MenuItem_MenuItem__WEBPACK_IMPORTED_MODULE_8__["default"], _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0___default()({}, newProps, { key: key }));
       } else
       if (isMenuItem) {// MenuItem -> Add onClick handler if handler is not defined
         item = _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0___default()({}, item, { props: newProps });
       }
-      // if (item.props.checked && (!singleChoice || !selectedList.length)) {
-      //   selectedList.push(val);
-      // }
     }
     // TODO: Process arrays (subitems/groups)?
     // console.log('Menu:setChildrenItemsFromProps:item', {
@@ -40083,11 +40099,7 @@ Menu = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helpers_inhe
     //   children,
     // })
     var children = this.props.children;
-    // const selectedList = [];
     if (Array.isArray(children)) {
-      // const { singleChoice } = this.props;
-      // const { value, selected } = this.props;
-      // const propsSelected = (singleChoice && value != null) ? [value] : selected;
       children = children.map(this.createItemElement, this);
     }
     var selectedList = children.
@@ -40113,7 +40125,7 @@ Menu = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helpers_inhe
       items = items.map(function (item) {
         var isObject = !!item && typeof item === 'object';
         var isElement = isObject && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default.a.isValidElement(item);
-        var isMenuItem = isElement && item.type === _MenuItem_MenuItem__WEBPACK_IMPORTED_MODULE_7__["default"];
+        var isMenuItem = isElement && item.type === _MenuItem_MenuItem__WEBPACK_IMPORTED_MODULE_8__["default"];
         if (isMenuItem) {
           var itemProps = item.props;var
           val = itemProps.val,checked = itemProps.checked;
@@ -40158,7 +40170,7 @@ Menu = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helpers_inhe
   // Lifecycle...
   ;
   function Menu(props) {var _this;
-    _this = _React$PureComponent.call(this, props) || this;_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1___default()(_this), "onMenuItemClick",
+    _this = _React$PureComponent.call(this, props) || this;_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1___default()(_this), "onAction",
 
 
 
@@ -40177,17 +40189,36 @@ Menu = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helpers_inhe
 
 
 
-    function (_ref3) {var _this$updateChildrenI;var val = _ref3.val;var _this$props4 =
-      _this.props,onClick = _this$props4.onClick,singleChoice = _this$props4.singleChoice;var
-      selectedList = _this.state.selectedList;
-      var setSelected = !selectedList.includes(val);
-      if (singleChoice === 'forced' && !setSelected) {// Don not made changes if single mode and clicked item was selected
-        return;
+    function (actionProps) {// Event handler for ActionContext consumed children
+      var _this$props4 =
+
+
+
+      _this.props,id = _this$props4.id,onAction = _this$props4.onAction;
+      var passProps = _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0___default()({}, actionProps, { menuId: id });
+      // console.log('Menu:onAction', id, actionProps, passProps);
+      // debugger;
+      if (typeof onAction === 'function') {
+        onAction(passProps);
       }
-      if (typeof onClick === 'function') {// Invoke onClick handler
-        onClick({ value: val });
+      // if (actionsContextNode && typeof actionsContextNode.onAction === 'function') { // Use chaining ActionsContext?
+      //   actionsContextNode.onAction(passProps);
+      // }
+    });_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1___default()(_this), "onMenuItemClick",
+
+    function (_ref3) {var val = _ref3.val;var _this$props5 =
+      _this.props,onClick = _this$props5.onClick,singleChoice = _this$props5.singleChoice,disabled = _this$props5.disabled;
+      if (!disabled) {var _this$updateChildrenI;var
+        selectedList = _this.state.selectedList;
+        var setSelected = !selectedList.includes(val);
+        if (singleChoice === 'forced' && !setSelected) {// Don not made changes if single mode and clicked item was selected
+          return;
+        }
+        if (typeof onClick === 'function') {// Invoke onClick handler
+          onClick({ value: val });
+        }
+        _this.updateChildrenItems((_this$updateChildrenI = {}, _this$updateChildrenI[val] = setSelected, _this$updateChildrenI)); // Apply items changes
       }
-      _this.updateChildrenItems((_this$updateChildrenI = {}, _this$updateChildrenI[val] = setSelected, _this$updateChildrenI)); // Apply items changes
     });_this.state = {};return _this;}_proto.componentDidMount = function componentDidMount() {this.setChildrenItemsFromProps();};_proto.componentDidUpdate = function componentDidUpdate(prevProps) {var prevChildren = prevProps.children;var children = this.props.children;if (prevChildren !== children) {// TODO: To update items states?
       this.setChildrenItemsFromProps();}} // Handlers...
   ; // Render...
@@ -40197,12 +40228,12 @@ Menu = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helpers_inhe
     return items;
   };_proto.
 
-  render = function render() {var _this$props5 =
+  render = function render() {var _this$props6 =
 
 
 
 
-    this.props,id = _this$props5.id,setDomRef = _this$props5.setDomRef;
+    this.props,id = _this$props6.id,setDomRef = _this$props6.setDomRef;
 
     var renderProps = {
       id: id,
@@ -40213,15 +40244,20 @@ Menu = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helpers_inhe
     var content = this.renderContent();
 
     return /*#__PURE__*/(
-      react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement("div", renderProps,
-      content));
+      react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement("div", renderProps, /*#__PURE__*/
+      react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(_helpers_ActionsContext__WEBPACK_IMPORTED_MODULE_7__["ActionsContextProvider"], { value: this },
+      content)));
 
 
-  };return Menu;}(react__WEBPACK_IMPORTED_MODULE_4___default.a.PureComponent /** @lends @Menu.prototype */);_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3___default()(Menu, "propTypes", { className: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.string, disabled: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.bool, id: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.string, layout: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.string, mode: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.string, // ???
+
+  };return Menu;}(react__WEBPACK_IMPORTED_MODULE_4___default.a.PureComponent /** @lends @Menu.prototype */);
+
+
+
+// withActionsContext?
+_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3___default()(Menu, "propTypes", { className: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.string, disabled: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.bool, id: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.string, layout: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.string, mode: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.string, // ???
   onChange: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.func, onClick: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.func, selectable: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.bool, wrapContent: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.bool, setDomRef: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.func, singleChoice: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.string, prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.bool]) // false, true, 'forced'
-});
-
-/* harmony default export */ __webpack_exports__["default"] = (Menu);
+});/* harmony default export */ __webpack_exports__["default"] = (Menu);
 
 /***/ }),
 
@@ -40245,26 +40281,34 @@ Menu = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helpers_inhe
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/assertThisInitialized */ "./node_modules/@babel/runtime/helpers/assertThisInitialized.js");
-/* harmony import */ var _babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _babel_runtime_helpers_inheritsLoose__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/inheritsLoose */ "./node_modules/@babel/runtime/helpers/inheritsLoose.js");
-/* harmony import */ var _babel_runtime_helpers_inheritsLoose__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_inheritsLoose__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/defineProperty.js");
-/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _utils_configure__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../utils/configure */ "./src/utils/configure.js");
-/* harmony import */ var _InlineIcon_InlineIcon__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../InlineIcon/InlineIcon */ "./src/elements/InlineIcon/InlineIcon.jsx");
-/* harmony import */ var _forms_FormItemHOC_FormItemHOC__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../forms/FormItemHOC/FormItemHOC */ "./src/forms/FormItemHOC/FormItemHOC.jsx");
-/* harmony import */ var _MenuItem_pcss__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./MenuItem.pcss */ "./src/elements/MenuItem/MenuItem.pcss");
-/* harmony import */ var _MenuItem_pcss__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_MenuItem_pcss__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/extends */ "./node_modules/@babel/runtime/helpers/extends.js");
+/* harmony import */ var _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/assertThisInitialized */ "./node_modules/@babel/runtime/helpers/assertThisInitialized.js");
+/* harmony import */ var _babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _babel_runtime_helpers_inheritsLoose__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime/helpers/inheritsLoose */ "./node_modules/@babel/runtime/helpers/inheritsLoose.js");
+/* harmony import */ var _babel_runtime_helpers_inheritsLoose__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_inheritsLoose__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/defineProperty.js");
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! redux */ "redux");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(redux__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _utils_configure__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../utils/configure */ "./src/utils/configure.js");
+/* harmony import */ var _config_config__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../config/config */ "./src/config/config.js");
+/* harmony import */ var _config_config__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_config_config__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _helpers_ActionsContext__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../helpers/ActionsContext */ "./src/helpers/ActionsContext.jsx");
+/* harmony import */ var _InlineIcon_InlineIcon__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../InlineIcon/InlineIcon */ "./src/elements/InlineIcon/InlineIcon.jsx");
+/* harmony import */ var _forms_FormItemHOC_FormItemHOC__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../forms/FormItemHOC/FormItemHOC */ "./src/forms/FormItemHOC/FormItemHOC.jsx");
+/* harmony import */ var _MenuItem_pcss__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./MenuItem.pcss */ "./src/elements/MenuItem/MenuItem.pcss");
+/* harmony import */ var _MenuItem_pcss__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(_MenuItem_pcss__WEBPACK_IMPORTED_MODULE_12__);
  /** @module MenuItem
-                                                                                                                                                                                                                          *  @class MenuItem
-                                                                                                                                                                                                                          *  @since 2020.10.27, 03:05
-                                                                                                                                                                                                                          *  @changed 2020.10.27, 03:06
-                                                                                                                                                                                                                          */
+                                                                                                                                                                                                                                                                                *  @class MenuItem
+                                                                                                                                                                                                                                                                                *  @since 2020.10.27, 03:05
+                                                                                                                                                                                                                                                                                *  @changed 2021.02.20, 14:20
+                                                                                                                                                                                                                                                                                */
+
 
 
 
@@ -40277,13 +40321,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var cnMenuItem = Object(_utils_configure__WEBPACK_IMPORTED_MODULE_5__["cn"])('MenuItem');var
-
-MenuItem = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helpers_inheritsLoose__WEBPACK_IMPORTED_MODULE_1___default()(MenuItem, _React$PureComponent);function MenuItem() {var _this;for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {args[_key] = arguments[_key];}_this = _React$PureComponent.call.apply(_React$PureComponent, [this].concat(args)) || this;_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_0___default()(_this), "onClick",
 
 
+var cnMenuItem = Object(_utils_configure__WEBPACK_IMPORTED_MODULE_7__["cn"])('MenuItem');var
 
-
+MenuItem = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helpers_inheritsLoose__WEBPACK_IMPORTED_MODULE_2___default()(MenuItem, _React$PureComponent);
 
 
 
@@ -40300,19 +40342,71 @@ MenuItem = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helpers_
 
 
 
-    function () {var _this$props =
-      _this.props,id = _this$props.id,val = _this$props.val,onClick = _this$props.onClick;
-      if (typeof onClick === 'function') {
-        onClick({ id: id, val: val, component: _babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_0___default()(_this) });
+
+
+
+  // Lifecycle...
+
+  function MenuItem(props) {var _this;
+    _this = _React$PureComponent.call(this, props) || this;_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1___default()(_this), "onClick",
+
+
+
+
+
+
+
+
+
+
+
+
+
+    function () /* event */{var _this$props =
+
+
+
+
+
+
+      _this.props,id = _this$props.id,val = _this$props.val,onClick = _this$props.onClick,actionsContextNode = _this$props.actionsContextNode,disabled = _this$props.disabled;
+      if (!disabled) {
+        // console.log('MenuItem:onClick', {
+        //   id,
+        //   val,
+        //   onClick,
+        //   actionsContextNode, // ActionsContext Provider
+        //   disabled,
+        // });
+        // debugger;
+        var hasOnClick = onClick && typeof onClick === 'function';
+        var actionProps = {
+          // ...event,
+          id: id || val,
+          val: val,
+          component: _babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1___default()(_this) };
+
+        var result = hasOnClick ? onClick(actionProps) : undefined; // true;
+        if (result !== false && actionsContextNode && typeof actionsContextNode.onAction === 'function') {
+          Promise.resolve(result).then(function (result) {
+            if (result !== false) {// Check for non-false value
+              actionsContextNode.onAction(_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0___default()({}, actionProps, { result: result }));
+            }
+          });
+        }
+        _this.setState({ active: true });
+        setTimeout(function () {
+          if (_this.mounted) {
+            _this.setState({ active: false });
+          }
+        }, _config_config__WEBPACK_IMPORTED_MODULE_8___default.a.css.transitionTime);
       }
-    });return _this;}var _proto = MenuItem.prototype;
-
-  // Helper methods...
-  _proto.
-  getClassName = function getClassName() {var _this$props2 =
-
-
-
+    });_this.state = {};_this.mounted = true; // if (props.setNodeRef) {
+    //   props.setNodeRef(this);
+    // }
+    return _this;}var _proto = MenuItem.prototype;_proto.componentWillUnmount = function componentWillUnmount() {this.mounted = false;} // Event handlers...
+  ; // Helper methods...
+  _proto.getClassName = function getClassName() {var _this$props2 =
 
 
 
@@ -40320,17 +40414,18 @@ MenuItem = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helpers_
 
 
 
-    this.props,id = _this$props2.id,checkable = _this$props2.checkable,withIcon = _this$props2.withIcon,checked = _this$props2.checked,disabled = _this$props2.disabled,theme = _this$props2.theme,wrap = _this$props2.wrap;
+
+    this.props,id = _this$props2.id,checkable = _this$props2.checkable,hasIcon = _this$props2.hasIcon,icon = _this$props2.icon,checked = _this$props2.checked,disabled = _this$props2.disabled,theme = _this$props2.theme,wrap = _this$props2.wrap;
     var className = cnMenuItem({
       id: id,
       checkable: checkable,
-      withIcon: withIcon,
+      hasIcon: !!(hasIcon || icon || checkable),
+      // hasIcon,
       checked: checked,
       disabled: disabled,
       theme: theme,
       wrap: wrap },
     [this.props.className]);
-    // console.log('MenuItem:constructor', this.props);
     return className;
   }
 
@@ -40342,10 +40437,10 @@ MenuItem = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helpers_
 
 
 
-    this.props,withIcon = _this$props3.withIcon,checkable = _this$props3.checkable,checked = _this$props3.checked,icon = _this$props3.icon;
-    if (withIcon && icon || checkable && checked) {
+    this.props,hasIcon = _this$props3.hasIcon,checkable = _this$props3.checkable,checked = _this$props3.checked,icon = _this$props3.icon;
+    if ((hasIcon || !checkable) && icon || checkable && checked) {
       var iconContent = icon || 'faCheck';
-      return iconContent && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_InlineIcon_InlineIcon__WEBPACK_IMPORTED_MODULE_6__["default"], { icon: iconContent, className: cnMenuItem('Icon') });
+      return iconContent && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(_InlineIcon_InlineIcon__WEBPACK_IMPORTED_MODULE_10__["default"], { icon: iconContent, className: cnMenuItem('Icon') });
     }
   };_proto.
 
@@ -40355,7 +40450,7 @@ MenuItem = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helpers_
 
     this.props,children = _this$props4.children,text = _this$props4.text;
     return /*#__PURE__*/(
-      react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", { className: cnMenuItem('Text') },
+      react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement("div", { className: cnMenuItem('Text') },
       children || text));
 
 
@@ -40382,16 +40477,19 @@ MenuItem = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helpers_
     // console.log('MenuItem:render', val)
 
     return /*#__PURE__*/(
-      react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", renderProps,
+      react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement("div", renderProps,
       iconContent,
       textContent));
 
 
-  };return MenuItem;}(react__WEBPACK_IMPORTED_MODULE_3___default.a.PureComponent /** @lends @MenuItem.prototype */);_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2___default()(MenuItem, "propTypes", { checkable: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool, checked: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool, className: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string, disabled: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool, htmlId: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string, // ???
-  theme: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string, icon: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string, prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.object]), id: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string, onClick: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func, setDomRef: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func, // From FormItemHOC
-  text: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string, val: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string, prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.number]), withIcon: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool, wrap: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool });
-
-/* harmony default export */ __webpack_exports__["default"] = (Object(_forms_FormItemHOC_FormItemHOC__WEBPACK_IMPORTED_MODULE_7__["default"])({ solid: true, hoverable: true })(MenuItem));
+  };return MenuItem;}(react__WEBPACK_IMPORTED_MODULE_4___default.a.PureComponent /** @lends @MenuItem.prototype */);_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3___default()(MenuItem, "propTypes", { checkable: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.bool, checked: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.bool, className: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.string, disabled: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.bool, htmlId: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.string, // ???
+  theme: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.string, icon: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.string, prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.object]), id: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.string, onClick: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.func, setDomRef: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.func, // From FormItemHOC
+  text: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.string, val: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.string, prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.number]), hasIcon: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.bool, wrap: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.bool // setNodeRef: PropTypes.func, // ??? use ref in parent component
+});
+/* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_6__["compose"])(
+_helpers_ActionsContext__WEBPACK_IMPORTED_MODULE_9__["withActionsContext"],
+Object(_forms_FormItemHOC_FormItemHOC__WEBPACK_IMPORTED_MODULE_11__["default"])({ solid: true, hoverable: true, focusable: true }))(
+MenuItem));
 
 /***/ }),
 
@@ -40399,6 +40497,54 @@ MenuItem = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helpers_
 /*!*********************************************!*\
   !*** ./src/elements/MenuItem/MenuItem.pcss ***!
   \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
+/***/ "./src/elements/MenuItemSeparator/MenuItemSeparator.jsx":
+/*!**************************************************************!*\
+  !*** ./src/elements/MenuItemSeparator/MenuItemSeparator.jsx ***!
+  \**************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _utils_configure__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../utils/configure */ "./src/utils/configure.js");
+/* harmony import */ var _MenuItemSeparator_pcss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./MenuItemSeparator.pcss */ "./src/elements/MenuItemSeparator/MenuItemSeparator.pcss");
+/* harmony import */ var _MenuItemSeparator_pcss__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_MenuItemSeparator_pcss__WEBPACK_IMPORTED_MODULE_2__);
+/** @module MenuItemSeparator
+ *  @class MenuItemSeparator
+ *  @since 2021.02.20, 14:33
+ *  @changed 2021.02.20, 14:33
+ */
+
+
+
+
+
+
+var cnMenuItemSeparator = Object(_utils_configure__WEBPACK_IMPORTED_MODULE_1__["cn"])('MenuItemSeparator');
+
+var MenuItemSeparator = function MenuItemSeparator(props) {
+  return /*#__PURE__*/(
+    react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", { className: cnMenuItemSeparator(null, [props.className]) }));
+
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (MenuItemSeparator);
+
+/***/ }),
+
+/***/ "./src/elements/MenuItemSeparator/MenuItemSeparator.pcss":
+/*!***************************************************************!*\
+  !*** ./src/elements/MenuItemSeparator/MenuItemSeparator.pcss ***!
+  \***************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -40629,6 +40775,8 @@ ModalPopup = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helper
 
   function ModalPopup(props) {var _this;
     _this = _React$PureComponent.call(this, props) || this;_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1___default()(_this), "delayedClickTimerHandler", null);_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1___default()(_this), "globalHandlersRegistered", false);_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1___default()(_this), "controlNode", null);_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1___default()(_this), "controlDomNode", null);_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1___default()(_this), "contentDomNode", null);_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1___default()(_this), "geometry", {});_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1___default()(_this), "windowDomNode", null);_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1___default()(_this), "wrapperDomNode", null);_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1___default()(_this), "ModalPortal", null);_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1___default()(_this), "updateGeometryInstant",
+
+
 
 
 
@@ -41124,7 +41272,9 @@ ModalPopup = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helper
 
 
     });_this.state = { open: null // null -- uninitialized
-    };_this.updateGeometry = Object(throttle_debounce__WEBPACK_IMPORTED_MODULE_8__["debounce"])(debouncedUpdateGeometryTimeout, _this.updateGeometryInstant);return _this;}var _proto = ModalPopup.prototype;_proto.componentWillUnmount = function componentWillUnmount() {this.unregisterGlobalHandlers();} // Helpers...
+    };_this.updateGeometry = Object(throttle_debounce__WEBPACK_IMPORTED_MODULE_8__["debounce"])(debouncedUpdateGeometryTimeout, _this.updateGeometryInstant); // if (typeof props.setNodeRef) {
+    // }
+    return _this;}var _proto = ModalPopup.prototype;_proto.componentWillUnmount = function componentWillUnmount() {this.unregisterGlobalHandlers();} // Helpers...
   ;_proto.getDomNodeGeometry = function getDomNodeGeometry(domNode, id) {id = id || 'default';var rect = domNode && domNode.getBoundingClientRect(); /* // controlBouningBox sample:
                                                                                                                                                       * bottom: 642.8125
                                                                                                                                                       * height: 32
@@ -41267,10 +41417,11 @@ ModalPopup = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helper
   // Provide ModalPortal public methods...
   ;_proto.clearContentGeometry = function clearContentGeometry() {var _this2 = this; // UNUSED? Must be used on content update (using registrable callback; see example in constructor).
     Object.keys(this.geometry).forEach(function (key) {if (key.startsWith('content')) {_this2.geometry[key] = null;}});}; // Render...
-  _proto.renderControl = function renderControl() {var _this$props4 = this.props,id = _this$props4.id,popupControl = _this$props4.popupControl,className = _this$props4.className;var open = this.state.open; // TODO: Cache modified `popupControl` in state?
-    var content = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default.a.cloneElement(popupControl, { onClick: this.onControlClick, checked: open, // setDomRef: this.setControlDomRef,
+  _proto.renderControl = function renderControl() {var _this$props4 = this.props,id = _this$props4.id,popupControl = _this$props4.popupControl,className = _this$props4.className;var open = this.state.open;var controlClassName = this.getClassName({ cnCtx: cnModalPopupControl, className: className });var renderProps = { id: id, className: controlClassName, setDomRef: this.setControlDomRef // ref: this.setControlDomRef, // For html element (div)
+    }; // TODO: Cache modified `popupControl` in state?
+    var content = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default.a.cloneElement(popupControl, _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0___default()({ onClick: this.onControlClick, checked: open, // setDomRef: this.setControlDomRef,
       // ref: this.setControlNodeRef,
-      setNodeRef: this.setControlNodeRef });var renderProps = { id: id, className: this.getClassName({ cnCtx: cnModalPopupControl, className: className }), ref: this.setControlDomRef };return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement("div", renderProps, content);};_proto.renderContent = function renderContent() {var _this3 = this;var portalProps = _ModalPortal_ModalPortal__WEBPACK_IMPORTED_MODULE_10__["passModalPortalProps"].reduce(function (data, id) {var _extends2;return _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0___default()({}, data, (_extends2 = {}, _extends2[id] = _this3.props[id], _extends2));}, {});if (this.state.open != null) {portalProps.open = this.state.open;}Object.assign(portalProps, { handleOpenState: this.handleOpenState, onActivate: this.onActivate, onDeactivate: this.onDeactivate, wrapperTheme: 'SubtleDark' });return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(_ModalPortal_ModalPortal__WEBPACK_IMPORTED_MODULE_10__["default"], _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0___default()({}, portalProps, { type: "Popup" }), this.renderPortalContent);};_proto.render = function render() {return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_4___default.a.Fragment, null, this.renderControl(), this.renderContent());};return ModalPopup;}(react__WEBPACK_IMPORTED_MODULE_4___default.a.PureComponent /** @lends @ModalPopup.prototype */);_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3___default()(ModalPopup, "propTypes", { // onEscPressed: PropTypes.func,
+      setNodeRef: this.setControlNodeRef }, renderProps));return content;};_proto.renderContent = function renderContent() {var _this3 = this;var portalProps = _ModalPortal_ModalPortal__WEBPACK_IMPORTED_MODULE_10__["passModalPortalProps"].reduce(function (data, id) {var _extends2;return _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0___default()({}, data, (_extends2 = {}, _extends2[id] = _this3.props[id], _extends2));}, {});if (this.state.open != null) {portalProps.open = this.state.open;}Object.assign(portalProps, { handleOpenState: this.handleOpenState, onActivate: this.onActivate, onDeactivate: this.onDeactivate, wrapperTheme: 'SubtleDark' });return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(_ModalPortal_ModalPortal__WEBPACK_IMPORTED_MODULE_10__["default"], _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0___default()({}, portalProps, { type: "Popup" }), this.renderPortalContent);};_proto.render = function render() {return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_4___default.a.Fragment, null, this.renderControl(), this.renderContent());};return ModalPopup;}(react__WEBPACK_IMPORTED_MODULE_4___default.a.PureComponent /** @lends @ModalPopup.prototype */);_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3___default()(ModalPopup, "propTypes", { // onEscPressed: PropTypes.func,
   // onKeyPress: PropTypes.func,
   // registerCallback: PropTypes.func, // registerCallback(handler = this.someMethod) -- handler stored by parent component and called when detected click on pulldown menu -- prevents popup content closing
   className: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.string, closeOnClickOutside: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.bool, closeOnEscPressed: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.bool, id: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.string, onControlClick: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.func, open: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.bool, popupContent: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.func, prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.object]).isRequired, popupControl: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.func, prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.object]).isRequired, setModalPopupNodeRef: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.func });_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3___default()(ModalPopup, "defaultProps", { // onEscPressed: null,
@@ -41756,7 +41907,7 @@ ModalPortal = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helpe
       var actionId = actionProps.id;var _this$props4 =
       _this.props,id = _this$props4.id,actionsContextNode = _this$props4.actionsContextNode,autoClose = _this$props4.autoClose,closeOnCancelAction = _this$props4.closeOnCancelAction;
       _this.setResult(actionId);
-      // console.log('ModalPortal:ModalPortal:onAction', id, actionId)
+      // console.log('ModalPortal:onAction', id, actionId)
       if (autoClose || closeOnCancelAction && actionId === 'cancel') {// Close and call `resolveResult` when window is closed
         _this.close();
       } else
@@ -42586,7 +42737,7 @@ ModalsContainer = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_h
 /*!**********************************!*\
   !*** ./src/elements/elements.js ***!
   \**********************************/
-/*! exports provided: DateTimeSelector, InlineIcon, Loader, Menu, MenuItem, ModalWindow, ModalPopup, ModalPortal, ModalsContainer */
+/*! exports provided: DateTimeSelector, InlineIcon, Loader, Menu, MenuItem, MenuItemSeparator, ModalWindow, ModalPopup, ModalPortal, ModalsContainer */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -42606,22 +42757,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _MenuItem_MenuItem__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./MenuItem/MenuItem */ "./src/elements/MenuItem/MenuItem.jsx");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "MenuItem", function() { return _MenuItem_MenuItem__WEBPACK_IMPORTED_MODULE_4__["default"]; });
 
-/* harmony import */ var _ModalWindow_ModalWindow__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./ModalWindow/ModalWindow */ "./src/elements/ModalWindow/ModalWindow.jsx");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ModalWindow", function() { return _ModalWindow_ModalWindow__WEBPACK_IMPORTED_MODULE_5__["default"]; });
+/* harmony import */ var _MenuItemSeparator_MenuItemSeparator__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./MenuItemSeparator/MenuItemSeparator */ "./src/elements/MenuItemSeparator/MenuItemSeparator.jsx");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "MenuItemSeparator", function() { return _MenuItemSeparator_MenuItemSeparator__WEBPACK_IMPORTED_MODULE_5__["default"]; });
 
-/* harmony import */ var _ModalPopup_ModalPopup__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./ModalPopup/ModalPopup */ "./src/elements/ModalPopup/ModalPopup.jsx");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ModalPopup", function() { return _ModalPopup_ModalPopup__WEBPACK_IMPORTED_MODULE_6__["default"]; });
+/* harmony import */ var _ModalWindow_ModalWindow__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./ModalWindow/ModalWindow */ "./src/elements/ModalWindow/ModalWindow.jsx");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ModalWindow", function() { return _ModalWindow_ModalWindow__WEBPACK_IMPORTED_MODULE_6__["default"]; });
 
-/* harmony import */ var _ModalPortal_ModalPortal__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./ModalPortal/ModalPortal */ "./src/elements/ModalPortal/ModalPortal.jsx");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ModalPortal", function() { return _ModalPortal_ModalPortal__WEBPACK_IMPORTED_MODULE_7__["default"]; });
+/* harmony import */ var _ModalPopup_ModalPopup__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./ModalPopup/ModalPopup */ "./src/elements/ModalPopup/ModalPopup.jsx");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ModalPopup", function() { return _ModalPopup_ModalPopup__WEBPACK_IMPORTED_MODULE_7__["default"]; });
 
-/* harmony import */ var _ModalsContainer_ModalsContainer__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./ModalsContainer/ModalsContainer */ "./src/elements/ModalsContainer/ModalsContainer.jsx");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ModalsContainer", function() { return _ModalsContainer_ModalsContainer__WEBPACK_IMPORTED_MODULE_8__["default"]; });
+/* harmony import */ var _ModalPortal_ModalPortal__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./ModalPortal/ModalPortal */ "./src/elements/ModalPortal/ModalPortal.jsx");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ModalPortal", function() { return _ModalPortal_ModalPortal__WEBPACK_IMPORTED_MODULE_8__["default"]; });
+
+/* harmony import */ var _ModalsContainer_ModalsContainer__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./ModalsContainer/ModalsContainer */ "./src/elements/ModalsContainer/ModalsContainer.jsx");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ModalsContainer", function() { return _ModalsContainer_ModalsContainer__WEBPACK_IMPORTED_MODULE_9__["default"]; });
 
 /** @module elements
  *  @desc Basic elements
  *  @since 2020.10.07, 02:12
- *  @changed 2020.12.24, 23:52
+ *  @changed 2021.02.20, 14:29
  */
 
 /***/ }),
@@ -42652,16 +42806,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_7__);
 /* harmony import */ var _utils_configure__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../utils/configure */ "./src/utils/configure.js");
-/* harmony import */ var _FormItemHOC_FormItemHOC__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../FormItemHOC/FormItemHOC */ "./src/forms/FormItemHOC/FormItemHOC.jsx");
-/* harmony import */ var _FormGroup_FormGroup__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../FormGroup/FormGroup */ "./src/forms/FormGroup/FormGroup.jsx");
-/* harmony import */ var _FormButton_FormButton__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../FormButton/FormButton */ "./src/forms/FormButton/FormButton.jsx");
-/* harmony import */ var _helpers_ActionsContext__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../helpers/ActionsContext */ "./src/helpers/ActionsContext.jsx");
-/* harmony import */ var _FormActions_pcss__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./FormActions.pcss */ "./src/forms/FormActions/FormActions.pcss");
-/* harmony import */ var _FormActions_pcss__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(_FormActions_pcss__WEBPACK_IMPORTED_MODULE_13__);
+/* harmony import */ var _elements_Menu_Menu__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../elements/Menu/Menu */ "./src/elements/Menu/Menu.jsx");
+/* harmony import */ var _FormItemHOC_FormItemHOC__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../FormItemHOC/FormItemHOC */ "./src/forms/FormItemHOC/FormItemHOC.jsx");
+/* harmony import */ var _FormGroup_FormGroup__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../FormGroup/FormGroup */ "./src/forms/FormGroup/FormGroup.jsx");
+/* harmony import */ var _FormButton_FormButton__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../FormButton/FormButton */ "./src/forms/FormButton/FormButton.jsx");
+/* harmony import */ var _FormSeparator_FormSeparator__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../FormSeparator/FormSeparator */ "./src/forms/FormSeparator/FormSeparator.jsx");
+/* harmony import */ var _elements_ModalPopup_ModalPopup__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../elements/ModalPopup/ModalPopup */ "./src/elements/ModalPopup/ModalPopup.jsx");
+/* harmony import */ var _helpers_ActionsContext__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../helpers/ActionsContext */ "./src/helpers/ActionsContext.jsx");
+/* harmony import */ var _FormActions_pcss__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./FormActions.pcss */ "./src/forms/FormActions/FormActions.pcss");
+/* harmony import */ var _FormActions_pcss__WEBPACK_IMPORTED_MODULE_16___default = /*#__PURE__*/__webpack_require__.n(_FormActions_pcss__WEBPACK_IMPORTED_MODULE_16__);
  /** @module FormActions
                                                                                                                                                                                                                                                                                                                                                                                 *  @class FormActions
                                                                                                                                                                                                                                                                                                                                                                                 *  @since 2021.02.15, 18:03
-                                                                                                                                                                                                                                                                                                                                                                                *  @changed 2021.02.19, 17:51
+                                                                                                                                                                                                                                                                                                                                                                                *  @changed 2021.02.20, 16:43
                                                                                                                                                                                                                                                                                                                                                                                 */
 /* eslint-disable react/require-default-props, react/no-unused-prop-types */
 
@@ -42680,26 +42837,28 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
 var cnFormActions = Object(_utils_configure__WEBPACK_IMPORTED_MODULE_8__["cn"])('FormActions');
 
 var defaultActionButtonProps = {
   theme: 'default' };var
 
 
-FormActions = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helpers_inheritsLoose__WEBPACK_IMPORTED_MODULE_3___default()(FormActions, _React$PureComponent);
+FormActions = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helpers_inheritsLoose__WEBPACK_IMPORTED_MODULE_3___default()(FormActions, _React$PureComponent);function FormActions() {var _this;for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {args[_key] = arguments[_key];}_this = _React$PureComponent.call.apply(_React$PureComponent, [this].concat(args)) || this;_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_4___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_2___default()(_this), "onAction",
 
 
 
 
 
 
-  // static classNameModifiers = [
-  //   // Basic element properties
-  //   // 'id',
-  // ]
 
-  function FormActions(props) {var _this;
-    _this = _React$PureComponent.call(this, props) || this;_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_4___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_2___default()(_this), "onAction",
+
+
+
+
 
 
 
@@ -42725,6 +42884,7 @@ FormActions = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helpe
         //   onAction,
         //   actionsContextNode,
         // });
+        // debugger;
         if (actionsContextNode && typeof actionsContextNode.onAction === 'function') {
           actionsContextNode.onAction(actionProps);
         }
@@ -42732,50 +42892,155 @@ FormActions = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helpe
           onAction(actionProps);
         }
       }
-    });_this.state = {};return _this;} // getClassName() {
-  //   return cnFormActions(null, [this.props.className]);
-  // }
-  var _proto = FormActions.prototype; // Render...
-  _proto.renderActionItem = function renderActionItem(data, n) {
-    // console.log('FormActions:renderActionItem', {
-    //   data,
-    // });
+    });_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_4___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_2___default()(_this), "onMenuAction",
+
+    function (actionProps) {var _assertThisInitialize = _babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_2___default()(_this),
+      popupNode = _assertThisInitialize.popupNode;var
+      disabled = _this.props.disabled;
+      if (!disabled) {
+        // console.log('FormActions:onMenuAction', { actionProps, popupNode });
+        // debugger;
+        _this.onAction(actionProps);
+        if ( /* closeMenuOnAction && */popupNode) {
+          popupNode.close();
+        }
+      }
+    });_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_4___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_2___default()(_this), "setPopupNodeRef",
+
+    function (node) {var
+      setPopupNodeRef = _this.props.setPopupNodeRef;
+      _this.popupNode = node;
+      if (setPopupNodeRef && typeof setPopupNodeRef === 'function') {
+        setPopupNodeRef(node);
+      }
+    });return _this;}var _proto = FormActions.prototype;
+
+  // Render...
+  _proto.
+  getClassName = function getClassName() {var _this$props2 =
+
+
+
+    this.props,withMenu = _this$props2.withMenu,className = _this$props2.className;
+    var mods = {
+      withMenu: withMenu };
+
+    return cnFormActions(mods, [className]);
+  };_proto.
+
+  renderActionItem = function renderActionItem(data, n) {
     if ( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5___default.a.isValidElement(data)) {
       return data;
     }
     if (typeof data !== 'object') {
       data = { text: String(data) };
+    } else
+    if (data.id === 'separator') {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(_FormSeparator_FormSeparator__WEBPACK_IMPORTED_MODULE_13__["default"], { key: 'separator' + n });
     }
-    var id = data.id || String(n);
+    var id = data.id || 'item' + n;
     var element = /*#__PURE__*/
-    react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(_FormButton_FormButton__WEBPACK_IMPORTED_MODULE_11__["default"], _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_1___default()({ key: id, id: id }, defaultActionButtonProps, data));
+    react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(_FormButton_FormButton__WEBPACK_IMPORTED_MODULE_12__["default"], _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_1___default()({
+      key: id,
+      id: id,
+      text: id // Default text: would be overrided from `data` if exists
+    }, defaultActionButtonProps,
+    data));
+
 
     return element;
   };_proto.
 
-  render = function render() {var _this$props2 =
-    this.props,actions = _this$props2.actions,children = _this$props2.children,className = _this$props2.className,restProps = _babel_runtime_helpers_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_0___default()(_this$props2, ["actions", "children", "className"]);
+  renderMenu = function renderMenu() {var _this$props3 =
+
+
+
+
+    this.props,withMenu = _this$props3.withMenu,menu = _this$props3.menu,_this$props3$menuButt = _this$props3.menuButtonTheme,menuButtonTheme = _this$props3$menuButt === void 0 ? 'plain' : _this$props3$menuButt;
+    if (!withMenu || !menu) {
+      return null;
+    }
+    var menuElement;
+    var menuProps = {
+      // onClick: this.onMenuItemClick,
+      onAction: this.onMenuAction };
+
+    if ( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5___default.a.isValidElement(menu)) {
+      menuElement = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5___default.a.cloneElement(menu, menuProps);
+    } else
+    {
+      menuElement = /*#__PURE__*/
+      react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(_helpers_ActionsContext__WEBPACK_IMPORTED_MODULE_15__["ActionsContextProvider"], { value: this }, /*#__PURE__*/
+      react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(_elements_Menu_Menu__WEBPACK_IMPORTED_MODULE_9__["default"], menuProps,
+      menu));
+
+
+
+    }
+    var popupControl = /*#__PURE__*/
+    react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(_FormButton_FormButton__WEBPACK_IMPORTED_MODULE_12__["default"], {
+      key: "popupControl",
+      id: "popupControl",
+      icon: "faBars",
+      theme: menuButtonTheme });
+
+
+    var menuPopup = /*#__PURE__*/
+    react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(_elements_ModalPopup_ModalPopup__WEBPACK_IMPORTED_MODULE_14__["default"], {
+      key: "menuPopup",
+      id: "menuPopup",
+      popupControl: popupControl,
+      popupContent: menuElement,
+      ref: this.setPopupNodeRef });
+
+
+    return /*#__PURE__*/(
+      react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(_FormGroup_FormGroup__WEBPACK_IMPORTED_MODULE_11__["default"], {
+        key: "FormActionsMenu",
+        id: "FormActionsMenu",
+        className: cnFormActions('Menu'),
+        align: "right",
+        flow: true },
+
+      menuPopup));
+
+
+  };_proto.
+
+  render = function render() {var _this$props4 =
+
+
+
+
+
+
+
+
+
+
+
+
+
+    this.props,actions = _this$props4.actions,children = _this$props4.children,className = _this$props4.className,withMenu = _this$props4.withMenu,menu = _this$props4.menu,setPopupNodeRef = _this$props4.setPopupNodeRef,restProps = _babel_runtime_helpers_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_0___default()(_this$props4, ["actions", "children", "className", "withMenu", "menu", "setPopupNodeRef"]);
     var content = actions || children;
-    // console.log('FormActions:render', {
-    //   content,
-    // });
     if (Array.isArray(content)) {
       content = content.map(this.renderActionItem, this);
     }
     return /*#__PURE__*/(
-      react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(_helpers_ActionsContext__WEBPACK_IMPORTED_MODULE_12__["ActionsContextProvider"], { value: this }, /*#__PURE__*/
-      react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(_FormGroup_FormGroup__WEBPACK_IMPORTED_MODULE_10__["default"], _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_1___default()({}, restProps, { className: cnFormActions(null, [className]) }),
-      content)));
+      react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(_FormGroup_FormGroup__WEBPACK_IMPORTED_MODULE_11__["default"], _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_1___default()({}, restProps, { className: this.getClassName() }), /*#__PURE__*/
+      react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(_helpers_ActionsContext__WEBPACK_IMPORTED_MODULE_15__["ActionsContextProvider"], { value: this },
+      content),
+
+      this.renderMenu()));
 
 
-
-  };return FormActions;}(react__WEBPACK_IMPORTED_MODULE_5___default.a.PureComponent /** @lends @FormActions.prototype */);_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_4___default()(FormActions, "propTypes", { id: prop_types__WEBPACK_IMPORTED_MODULE_7___default.a.string // See props definitions for FormGroup
-});
-
-
-/* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_6__["compose"])(
-_helpers_ActionsContext__WEBPACK_IMPORTED_MODULE_12__["withActionsContext"],
-_FormItemHOC_FormItemHOC__WEBPACK_IMPORTED_MODULE_9__["default"])(
+  };return FormActions;}(react__WEBPACK_IMPORTED_MODULE_5___default.a.PureComponent /** @lends @FormActions.prototype */);_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_4___default()(FormActions, "propTypes", { // children,
+  actions: prop_types__WEBPACK_IMPORTED_MODULE_7___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_7___default.a.array, prop_types__WEBPACK_IMPORTED_MODULE_7___default.a.object]), actionsContextNode: prop_types__WEBPACK_IMPORTED_MODULE_7___default.a.element, // ActionsContext Provider
+  className: prop_types__WEBPACK_IMPORTED_MODULE_7___default.a.string, disabled: prop_types__WEBPACK_IMPORTED_MODULE_7___default.a.bool, id: prop_types__WEBPACK_IMPORTED_MODULE_7___default.a.string, // layout: PropTypes.string,
+  menu: prop_types__WEBPACK_IMPORTED_MODULE_7___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_7___default.a.array, prop_types__WEBPACK_IMPORTED_MODULE_7___default.a.object]), menuButtonTheme: prop_types__WEBPACK_IMPORTED_MODULE_7___default.a.string, onAction: prop_types__WEBPACK_IMPORTED_MODULE_7___default.a.func, withMenu: prop_types__WEBPACK_IMPORTED_MODULE_7___default.a.bool, setPopupNodeRef: prop_types__WEBPACK_IMPORTED_MODULE_7___default.a.func // See props definitions for FormGroup
+});/* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_6__["compose"])(
+_helpers_ActionsContext__WEBPACK_IMPORTED_MODULE_15__["withActionsContext"],
+_FormItemHOC_FormItemHOC__WEBPACK_IMPORTED_MODULE_10__["default"])(
 FormActions));
 // export default FormItemHOC(FormActions);
 
@@ -43208,7 +43473,7 @@ FormButton = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helper
       formItemNode && formItemNode.blur && formItemNode.blur();
     });_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1___default()(_this), "onClick",
 
-    function (event) {var _this$props =
+    function () /* event */{var _this$props =
 
 
 
@@ -43218,11 +43483,15 @@ FormButton = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helper
       _this.props,id = _this$props.id,actionsContextNode = _this$props.actionsContextNode,disabled = _this$props.disabled,onClick = _this$props.onClick;
       if (!disabled) {
         var hasOnClick = onClick && typeof onClick === 'function';
-        var result = hasOnClick ? onClick(_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0___default()({}, event, { id: id })) : undefined; // true;
+        var actionProps = {
+          // ...event,
+          id: id };
+
+        var result = hasOnClick ? onClick(actionProps) : undefined; // true;
         if (result !== false && actionsContextNode && typeof actionsContextNode.onAction === 'function') {
           Promise.resolve(result).then(function (result) {
             if (result !== false) {// Check for non-false value
-              actionsContextNode.onAction({ id: id, result: result });
+              actionsContextNode.onAction(_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0___default()({}, actionProps, { result: result }));
             }
           });
         }
@@ -43440,6 +43709,60 @@ FormButtonGroup = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_h
 /*!********************************************************!*\
   !*** ./src/forms/FormButtonGroup/FormButtonGroup.pcss ***!
   \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
+/***/ "./src/forms/FormContainer/FormContainer.jsx":
+/*!***************************************************!*\
+  !*** ./src/forms/FormContainer/FormContainer.jsx ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _utils_configure__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../utils/configure */ "./src/utils/configure.js");
+/* harmony import */ var _FormContainer_pcss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./FormContainer.pcss */ "./src/forms/FormContainer/FormContainer.pcss");
+/* harmony import */ var _FormContainer_pcss__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_FormContainer_pcss__WEBPACK_IMPORTED_MODULE_2__);
+/** @module FormContainer
+ *  @class FormContainer
+ *  @since 2021.02.20, 16:55
+ *  @changed 2021.02.20, 16:56
+ */
+
+
+
+
+
+
+var cnFormContainer = Object(_utils_configure__WEBPACK_IMPORTED_MODULE_1__["cn"])('FormContainer');
+
+var FormContainer = function FormContainer(props) {var
+
+  children =
+
+  props.children,spaced = props.spaced;
+  return /*#__PURE__*/(
+    react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", { className: cnFormContainer({ spaced: spaced }) },
+    children));
+
+
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (FormContainer);
+
+/***/ }),
+
+/***/ "./src/forms/FormContainer/FormContainer.pcss":
+/*!****************************************************!*\
+  !*** ./src/forms/FormContainer/FormContainer.pcss ***!
+  \****************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -44083,6 +44406,28 @@ var FormDelim = function FormDelim(props) {var
 
 /***/ }),
 
+/***/ "./src/forms/FormGroup/FormGroup-Layout.pcss":
+/*!***************************************************!*\
+  !*** ./src/forms/FormGroup/FormGroup-Layout.pcss ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
+/***/ "./src/forms/FormGroup/FormGroup-Variations.pcss":
+/*!*******************************************************!*\
+  !*** ./src/forms/FormGroup/FormGroup-Variations.pcss ***!
+  \*******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
 /***/ "./src/forms/FormGroup/FormGroup.jsx":
 /*!*******************************************!*\
   !*** ./src/forms/FormGroup/FormGroup.jsx ***!
@@ -44104,18 +44449,27 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _utils_configure__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../utils/configure */ "./src/utils/configure.js");
 /* harmony import */ var _FormItemHOC_FormItemHOC__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../FormItemHOC/FormItemHOC */ "./src/forms/FormItemHOC/FormItemHOC.jsx");
-/* harmony import */ var _FormGroup_pcss__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./FormGroup.pcss */ "./src/forms/FormGroup/FormGroup.pcss");
-/* harmony import */ var _FormGroup_pcss__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_FormGroup_pcss__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _FormSeparator_FormSeparator__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../FormSeparator/FormSeparator */ "./src/forms/FormSeparator/FormSeparator.jsx");
+/* harmony import */ var _FormContainer_FormContainer__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../FormContainer/FormContainer */ "./src/forms/FormContainer/FormContainer.jsx");
+/* harmony import */ var _FormGroup_pcss__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./FormGroup.pcss */ "./src/forms/FormGroup/FormGroup.pcss");
+/* harmony import */ var _FormGroup_pcss__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_FormGroup_pcss__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _FormGroup_Layout_pcss__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./FormGroup-Layout.pcss */ "./src/forms/FormGroup/FormGroup-Layout.pcss");
+/* harmony import */ var _FormGroup_Layout_pcss__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_FormGroup_Layout_pcss__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var _FormGroup_Variations_pcss__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./FormGroup-Variations.pcss */ "./src/forms/FormGroup/FormGroup-Variations.pcss");
+/* harmony import */ var _FormGroup_Variations_pcss__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_FormGroup_Variations_pcss__WEBPACK_IMPORTED_MODULE_11__);
  /** @module FormGroup
                                                                                                                                                                                               *  @class FormGroup
                                                                                                                                                                                               *  @since 2020.07.20, 19:07
-                                                                                                                                                                                              *  @changed 2020.07.20, 19:07
+                                                                                                                                                                                              *  @changed 2021.02.20, 19:09
                                                                                                                                                                                               */
 /* eslint-disable react/require-default-props, react/no-unused-prop-types */
 
 
 
-// import connect from 'react-redux/es/connect/connect'
+
+
+
+
 
 
 
@@ -44125,6 +44479,12 @@ __webpack_require__.r(__webpack_exports__);
 var cnFormGroup = Object(_utils_configure__WEBPACK_IMPORTED_MODULE_5__["cn"])('FormGroup');var
 
 FormGroup = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helpers_inheritsLoose__WEBPACK_IMPORTED_MODULE_1___default()(FormGroup, _React$PureComponent);
+
+
+
+
+
+
 
 
 
@@ -44188,23 +44548,34 @@ FormGroup = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helpers
 
 
 
-    this.props,id = _this$props.id,children = _this$props.children,content = _this$props.content,tagged = _this$props.tagged;
+
+    this.props,id = _this$props.id,children = _this$props.children,content = _this$props.content,separated = _this$props.separated,withContainer = _this$props.withContainer;
 
     // const renderProps = this.getRenderProps()
 
-    return /*#__PURE__*/(
-      react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", { id: id, className: this.getClassName() },
-      tagged && /*#__PURE__*/
-      react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", { className: cnFormGroup('Tag', ['FormItem']) }),
-
-      content || children));
+    var result = /*#__PURE__*/
+    react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", { id: id, className: this.getClassName() },
+    separated && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_FormSeparator_FormSeparator__WEBPACK_IMPORTED_MODULE_7__["default"], null),
+    content || children);
 
 
-  };return FormGroup;}(react__WEBPACK_IMPORTED_MODULE_3___default.a.PureComponent /** @lends @FormGroup.prototype */);_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2___default()(FormGroup, "propTypes", { // content: PropTypes.any, // ???
-  align: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string, alignItems: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string, background: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string, className: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string, disabled: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool, // ???
-  flow: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool, fullWidth: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool, id: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string, noSpace: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool, noWrap: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool, padded: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool, stack: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool, wrap: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool });_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2___default()(FormGroup, "classNameModifiers", [// Basic element properties
+
+    if (withContainer) {
+      result = /*#__PURE__*/
+      react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_FormContainer_FormContainer__WEBPACK_IMPORTED_MODULE_8__["default"], null,
+      result);
+
+
+    }
+
+    return result;
+  };return FormGroup;}(react__WEBPACK_IMPORTED_MODULE_3___default.a.PureComponent /** @lends @FormGroup.prototype */);_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2___default()(FormGroup, "propTypes", { // background: PropTypes.string,
+  align: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string, alignItems: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string, className: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string, content: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.element, // ???
+  disabled: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool, // ???
+  flow: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool, fullWidth: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool, id: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string, noSpace: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool, noWrap: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool, padded: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool, separated: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool, shaded: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool, spaced: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool, stack: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool, wrap: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool, withContainer: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool });_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2___default()(FormGroup, "classNameModifiers", [// Basic element properties
 'id', // Style-related modifiers...
-'align', 'alignItems', 'background', 'flow', 'fullWidth', 'noSpace', 'noWrap', 'padded', 'stack', 'wrap', 'tagged' // 'disabled',
+'align', 'alignItems', // 'background',
+'flow', 'fullWidth', 'noSpace', 'noWrap', 'padded', 'separated', 'shaded', 'spaced', 'stack', 'wrap' // 'disabled',
 ]);/* harmony default export */ __webpack_exports__["default"] = (Object(_FormItemHOC_FormItemHOC__WEBPACK_IMPORTED_MODULE_6__["default"])(FormGroup));
 
 /***/ }),
@@ -45616,19 +45987,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-// import connect from 'react-redux/es/connect/connect'
 
 
 
 
-// import FormGroup from 'forms/FormGroup'
-// import FormGroup from '../FormGroup'
-
-// import { FormItemPopup } from 'elements/ModalPopup'
 
 
 
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 
 
@@ -45852,6 +46217,54 @@ FormSelect = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helper
 /*!**********************************************!*\
   !*** ./src/forms/FormSelect/FormSelect.pcss ***!
   \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
+/***/ "./src/forms/FormSeparator/FormSeparator.jsx":
+/*!***************************************************!*\
+  !*** ./src/forms/FormSeparator/FormSeparator.jsx ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _utils_configure__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../utils/configure */ "./src/utils/configure.js");
+/* harmony import */ var _FormSeparator_pcss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./FormSeparator.pcss */ "./src/forms/FormSeparator/FormSeparator.pcss");
+/* harmony import */ var _FormSeparator_pcss__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_FormSeparator_pcss__WEBPACK_IMPORTED_MODULE_2__);
+/** @module FormSeparator
+ *  @class FormSeparator
+ *  @since 2021.02.20, 13:40
+ *  @changed 2021.02.20, 13:40
+ */
+
+
+
+
+
+
+var FormSeparator = function FormSeparator(props) {var
+  id = props.id;
+  var className = Object(_utils_configure__WEBPACK_IMPORTED_MODULE_1__["cn"])('FormSeparator')({ id: id }, [props.className, 'FormItem']);
+  return /*#__PURE__*/(
+    react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", { className: className }));
+
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (FormSeparator);
+
+/***/ }),
+
+/***/ "./src/forms/FormSeparator/FormSeparator.pcss":
+/*!****************************************************!*\
+  !*** ./src/forms/FormSeparator/FormSeparator.pcss ***!
+  \****************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -46327,7 +46740,7 @@ FormTextInput));
 /*!****************************!*\
   !*** ./src/forms/forms.js ***!
   \****************************/
-/*! exports provided: FormItemHOC, FormItemDummy, FormLabel, FormButton, FormDelim, FormSpacer, FormText, FormSelect, FormTextInput, FormPasswordInput, FormRadio, FormDateTime, FormDateRange, FormActions, FormGroup, FormLabeledGroup, FormButtonGroup, FormInputGroup */
+/*! exports provided: FormItemHOC, FormItemDummy, FormLabel, FormButton, FormDelim, FormSpacer, FormSeparator, FormText, FormSelect, FormTextInput, FormPasswordInput, FormRadio, FormDateTime, FormDateRange, FormActions, FormContainer, FormGroup, FormLabeledGroup, FormButtonGroup, FormInputGroup */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -46350,46 +46763,52 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _FormSpacer_FormSpacer__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./FormSpacer/FormSpacer */ "./src/forms/FormSpacer/FormSpacer.jsx");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "FormSpacer", function() { return _FormSpacer_FormSpacer__WEBPACK_IMPORTED_MODULE_5__["default"]; });
 
-/* harmony import */ var _FormText_FormText__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./FormText/FormText */ "./src/forms/FormText/FormText.jsx");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "FormText", function() { return _FormText_FormText__WEBPACK_IMPORTED_MODULE_6__["default"]; });
+/* harmony import */ var _FormSeparator_FormSeparator__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./FormSeparator/FormSeparator */ "./src/forms/FormSeparator/FormSeparator.jsx");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "FormSeparator", function() { return _FormSeparator_FormSeparator__WEBPACK_IMPORTED_MODULE_6__["default"]; });
 
-/* harmony import */ var _FormSelect_FormSelect__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./FormSelect/FormSelect */ "./src/forms/FormSelect/FormSelect.jsx");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "FormSelect", function() { return _FormSelect_FormSelect__WEBPACK_IMPORTED_MODULE_7__["default"]; });
+/* harmony import */ var _FormText_FormText__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./FormText/FormText */ "./src/forms/FormText/FormText.jsx");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "FormText", function() { return _FormText_FormText__WEBPACK_IMPORTED_MODULE_7__["default"]; });
 
-/* harmony import */ var _FormTextInput_FormTextInput__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./FormTextInput/FormTextInput */ "./src/forms/FormTextInput/FormTextInput.jsx");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "FormTextInput", function() { return _FormTextInput_FormTextInput__WEBPACK_IMPORTED_MODULE_8__["default"]; });
+/* harmony import */ var _FormSelect_FormSelect__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./FormSelect/FormSelect */ "./src/forms/FormSelect/FormSelect.jsx");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "FormSelect", function() { return _FormSelect_FormSelect__WEBPACK_IMPORTED_MODULE_8__["default"]; });
 
-/* harmony import */ var _FormPasswordInput_FormPasswordInput__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./FormPasswordInput/FormPasswordInput */ "./src/forms/FormPasswordInput/FormPasswordInput.jsx");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "FormPasswordInput", function() { return _FormPasswordInput_FormPasswordInput__WEBPACK_IMPORTED_MODULE_9__["default"]; });
+/* harmony import */ var _FormTextInput_FormTextInput__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./FormTextInput/FormTextInput */ "./src/forms/FormTextInput/FormTextInput.jsx");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "FormTextInput", function() { return _FormTextInput_FormTextInput__WEBPACK_IMPORTED_MODULE_9__["default"]; });
 
-/* harmony import */ var _FormRadio_FormRadio__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./FormRadio/FormRadio */ "./src/forms/FormRadio/FormRadio.jsx");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "FormRadio", function() { return _FormRadio_FormRadio__WEBPACK_IMPORTED_MODULE_10__["default"]; });
+/* harmony import */ var _FormPasswordInput_FormPasswordInput__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./FormPasswordInput/FormPasswordInput */ "./src/forms/FormPasswordInput/FormPasswordInput.jsx");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "FormPasswordInput", function() { return _FormPasswordInput_FormPasswordInput__WEBPACK_IMPORTED_MODULE_10__["default"]; });
 
-/* harmony import */ var _FormDateTime_FormDateTime__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./FormDateTime/FormDateTime */ "./src/forms/FormDateTime/FormDateTime.jsx");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "FormDateTime", function() { return _FormDateTime_FormDateTime__WEBPACK_IMPORTED_MODULE_11__["default"]; });
+/* harmony import */ var _FormRadio_FormRadio__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./FormRadio/FormRadio */ "./src/forms/FormRadio/FormRadio.jsx");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "FormRadio", function() { return _FormRadio_FormRadio__WEBPACK_IMPORTED_MODULE_11__["default"]; });
 
-/* harmony import */ var _FormDateRange_FormDateRange__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./FormDateRange/FormDateRange */ "./src/forms/FormDateRange/FormDateRange.jsx");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "FormDateRange", function() { return _FormDateRange_FormDateRange__WEBPACK_IMPORTED_MODULE_12__["default"]; });
+/* harmony import */ var _FormDateTime_FormDateTime__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./FormDateTime/FormDateTime */ "./src/forms/FormDateTime/FormDateTime.jsx");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "FormDateTime", function() { return _FormDateTime_FormDateTime__WEBPACK_IMPORTED_MODULE_12__["default"]; });
 
-/* harmony import */ var _FormActions_FormActions__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./FormActions/FormActions */ "./src/forms/FormActions/FormActions.jsx");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "FormActions", function() { return _FormActions_FormActions__WEBPACK_IMPORTED_MODULE_13__["default"]; });
+/* harmony import */ var _FormDateRange_FormDateRange__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./FormDateRange/FormDateRange */ "./src/forms/FormDateRange/FormDateRange.jsx");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "FormDateRange", function() { return _FormDateRange_FormDateRange__WEBPACK_IMPORTED_MODULE_13__["default"]; });
 
-/* harmony import */ var _FormGroup_FormGroup__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./FormGroup/FormGroup */ "./src/forms/FormGroup/FormGroup.jsx");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "FormGroup", function() { return _FormGroup_FormGroup__WEBPACK_IMPORTED_MODULE_14__["default"]; });
+/* harmony import */ var _FormActions_FormActions__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./FormActions/FormActions */ "./src/forms/FormActions/FormActions.jsx");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "FormActions", function() { return _FormActions_FormActions__WEBPACK_IMPORTED_MODULE_14__["default"]; });
 
-/* harmony import */ var _FormLabeledGroup_FormLabeledGroup__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./FormLabeledGroup/FormLabeledGroup */ "./src/forms/FormLabeledGroup/FormLabeledGroup.jsx");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "FormLabeledGroup", function() { return _FormLabeledGroup_FormLabeledGroup__WEBPACK_IMPORTED_MODULE_15__["default"]; });
+/* harmony import */ var _FormContainer_FormContainer__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./FormContainer/FormContainer */ "./src/forms/FormContainer/FormContainer.jsx");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "FormContainer", function() { return _FormContainer_FormContainer__WEBPACK_IMPORTED_MODULE_15__["default"]; });
 
-/* harmony import */ var _FormButtonGroup_FormButtonGroup__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./FormButtonGroup/FormButtonGroup */ "./src/forms/FormButtonGroup/FormButtonGroup.jsx");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "FormButtonGroup", function() { return _FormButtonGroup_FormButtonGroup__WEBPACK_IMPORTED_MODULE_16__["default"]; });
+/* harmony import */ var _FormGroup_FormGroup__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./FormGroup/FormGroup */ "./src/forms/FormGroup/FormGroup.jsx");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "FormGroup", function() { return _FormGroup_FormGroup__WEBPACK_IMPORTED_MODULE_16__["default"]; });
 
-/* harmony import */ var _FormInputGroup_FormInputGroup__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./FormInputGroup/FormInputGroup */ "./src/forms/FormInputGroup/FormInputGroup.jsx");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "FormInputGroup", function() { return _FormInputGroup_FormInputGroup__WEBPACK_IMPORTED_MODULE_17__["default"]; });
+/* harmony import */ var _FormLabeledGroup_FormLabeledGroup__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./FormLabeledGroup/FormLabeledGroup */ "./src/forms/FormLabeledGroup/FormLabeledGroup.jsx");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "FormLabeledGroup", function() { return _FormLabeledGroup_FormLabeledGroup__WEBPACK_IMPORTED_MODULE_17__["default"]; });
+
+/* harmony import */ var _FormButtonGroup_FormButtonGroup__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./FormButtonGroup/FormButtonGroup */ "./src/forms/FormButtonGroup/FormButtonGroup.jsx");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "FormButtonGroup", function() { return _FormButtonGroup_FormButtonGroup__WEBPACK_IMPORTED_MODULE_18__["default"]; });
+
+/* harmony import */ var _FormInputGroup_FormInputGroup__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./FormInputGroup/FormInputGroup */ "./src/forms/FormInputGroup/FormInputGroup.jsx");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "FormInputGroup", function() { return _FormInputGroup_FormInputGroup__WEBPACK_IMPORTED_MODULE_19__["default"]; });
 
 /** @module forms
  *  @desc Form components
  *  @since 2020.07.20, 19:21
- *  @changed 2021.02.15, 18:05
+ *  @changed 2021.02.20, 16:56
  */
 
 // Form elements...

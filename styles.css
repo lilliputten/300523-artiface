@@ -910,7 +910,6 @@
  */
 
 .FormItem {
-  /* display: block; */
   display: inline-block;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
@@ -919,13 +918,10 @@
 .FormItem_solid {
     height: 32px;
     line-height: 32px;
-    /* overflow: hidden; */
     max-width: 100%;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
-
-/* @mixin debug; */
 
 .FormItem_disabled {
     opacity: .5;
@@ -939,14 +935,8 @@
 /* NOTE: Theming styles (especially for frame) must be specified in FormItem subscribers (eg FormButton, FormTextInput, FormRadio etc).*/
 
 .FormItem_framed {
-    /* border-width: $(formItemBorderSize)px; */
-    /* border-style: solid; */
     border-radius: 3px;
-    /* border-color: $formItemBorderColor; */
-    /* border-color: transparent; */
   }
-
-/* border-color: $color; */
 
 .FormItem_framed .FormItem-Control {
     border-radius: 2px;
@@ -974,15 +964,11 @@
 
 .FormItemDummy {
 
-  /* display: block; */
-
   display: inline-block;
 
   -webkit-box-sizing: border-box;
 
-          box-sizing: border-box;
-
-  /* @mixin debug; */ /* Hide default css frame for `button` tags (if applied)*/
+          box-sizing: border-box; /* Hide default css frame for `button` tags (if applied)*/
 
   /* &_plain.FormItem_hovered {*/
   /*   ^&-Text {*/
@@ -1007,7 +993,6 @@
 .FormItemDummy_solid {
     height: 32px;
     line-height: 32px;
-    /* overflow: hidden; */
     max-width: 100%;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -1491,7 +1476,7 @@ label.FormLabel-Control[for] {
 
 /* color($glowColor alpha(1) shade(10));*/
 
-.FormButton_plain.FormItem_hovered {
+.FormButton_theme_plain.FormItem_hovered, .FormButton_plain.FormItem_hovered {
       -webkit-box-shadow: inset 0 0 1px 1px rgb(184, 184, 184),
     0 0 4px 0px rgba(209, 209, 209, 0.5);
               box-shadow: inset 0 0 1px 1px rgb(184, 184, 184),
@@ -1501,7 +1486,7 @@ label.FormLabel-Control[for] {
 
 /* color($glowColor alpha(1));*/
 
-.FormButton_plain.FormItem_focused {
+.FormButton_theme_plain.FormItem_focused, .FormButton_plain.FormItem_focused {
       -webkit-box-shadow: inset 0 0 1px 1px rgb(173, 173, 173),
     0 0 1px 0px rgb(193, 193, 193);
               box-shadow: inset 0 0 1px 1px rgb(173, 173, 173),
@@ -1511,7 +1496,7 @@ label.FormLabel-Control[for] {
 
 /* $formItemGlowColor;*/
 
-.FormButton_plain.FormItem_focused.FormItem_hovered {
+.FormButton_theme_plain.FormItem_focused.FormItem_hovered, .FormButton_plain.FormItem_focused.FormItem_hovered {
       -webkit-box-shadow: inset 0 0 2px 1px rgb(164, 164, 164),
     0 0 2px 1px rgb(193, 193, 193);
               box-shadow: inset 0 0 2px 1px rgb(164, 164, 164),
@@ -1519,7 +1504,10 @@ label.FormLabel-Control[for] {
       /* background-color: color($activeBgColor shade(8));*/
     }
 
-.FormButton_plain.FormButton_active.FormItem_hovered,
+.FormButton_theme_plain.FormButton_active.FormItem_hovered,
+    .FormButton_theme_plain.FormButton_active.FormItem_focused,
+    .FormButton_theme_plain.FormButton_active,
+    .FormButton_plain.FormButton_active.FormItem_hovered,
     .FormButton_plain.FormButton_active.FormItem_focused,
     .FormButton_plain.FormButton_active {
       -webkit-box-shadow: inset 0 0 2px 1px rgb(173, 173, 173),
@@ -1529,7 +1517,7 @@ label.FormLabel-Control[for] {
       /* background-color: color($activeBgColor shade(15));*/
     }
 
-.FormButton_plain.FormButton_onDark {
+.FormButton_theme_plain.FormButton_onDark, .FormButton_plain.FormButton_onDark {
       /* &.FormButton_active,*/
       /* &.FormItem_focused,*/
       /* &.FormItem_hovered {*/
@@ -1543,7 +1531,7 @@ label.FormLabel-Control[for] {
 
 /* $activeGlowColor: color($primaryColor alpha(.2));*/
 
-.FormButton_plain.FormButton_onDark.FormItem_hovered {
+.FormButton_theme_plain.FormButton_onDark.FormItem_hovered, .FormButton_plain.FormButton_onDark.FormItem_hovered {
         -webkit-box-shadow: inset 0 0 1px 1px rgba(184, 184, 184, 0.5),
     0 0 4px 0px rgba(209, 209, 209, 0.2);
                 box-shadow: inset 0 0 1px 1px rgba(184, 184, 184, 0.5),
@@ -1553,7 +1541,7 @@ label.FormLabel-Control[for] {
 
 /* $hoveredGlowColor: color($primaryColor alpha(.2));*/
 
-.FormButton_plain.FormButton_onDark.FormItem_focused {
+.FormButton_theme_plain.FormButton_onDark.FormItem_focused, .FormButton_plain.FormButton_onDark.FormItem_focused {
         -webkit-box-shadow: inset 0 0 1px 1px rgb(173, 173, 173),
     0 0 1px 0px rgba(193, 193, 193, 0.2);
                 box-shadow: inset 0 0 1px 1px rgb(173, 173, 173),
@@ -1563,7 +1551,7 @@ label.FormLabel-Control[for] {
 
 /* $activeBorderColor: color($primaryColor shade(0));*/
 
-.FormButton_plain.FormButton_onDark.FormItem_focused.FormItem_hovered {
+.FormButton_theme_plain.FormButton_onDark.FormItem_focused.FormItem_hovered, .FormButton_plain.FormButton_onDark.FormItem_focused.FormItem_hovered {
         -webkit-box-shadow: inset 0 0 2px 1px rgb(147, 147, 147),
     0 0 1px 2px rgba(193, 193, 193, 0.2);
                 box-shadow: inset 0 0 2px 1px rgb(147, 147, 147),
@@ -1573,7 +1561,10 @@ label.FormLabel-Control[for] {
 
 /* $hoveredBorderColor: color($primaryColor shade(0) alpha(1));*/
 
-.FormButton_plain.FormButton_onDark.FormButton_active.FormItem_hovered,
+.FormButton_theme_plain.FormButton_onDark.FormButton_active.FormItem_hovered,
+      .FormButton_theme_plain.FormButton_onDark.FormButton_active.FormItem_focused,
+      .FormButton_theme_plain.FormButton_onDark.FormButton_active,
+      .FormButton_plain.FormButton_onDark.FormButton_active.FormItem_hovered,
       .FormButton_plain.FormButton_onDark.FormButton_active.FormItem_focused,
       .FormButton_plain.FormButton_onDark.FormButton_active {
         -webkit-box-shadow: inset 0 0 2px 1px rgb(173, 173, 173),
@@ -3633,6 +3624,26 @@ label.FormLabel-Control[for] {
   height: 15px;
 }
 
+/** @module FormSeparator.styles
+ *  @class FormSeparator
+ *  @since 2021.02.20, 13:40
+ *  @changed 2021.02.20, 13:40
+ */
+
+.FormSeparator {
+  position: relative;
+  vertical-align: bottom;
+  height: 32px;
+  line-height: 32px;
+  background-color: #999;
+  /* background: repeating-linear-gradient(90deg, #fff 3px, #fff 4px, #000 4px, #000 7px);*/
+  /* background: repeating-linear-gradient(0deg, #fff 3px, #fff 4px, #000 4px, #000 7px);*/
+  /* background: repeating-linear-gradient(90deg, #fff, #fff 1px, #000 1px, #000 2px);*/
+  background: repeating-linear-gradient(180deg, #fff 1px, #fff 2px, #000 2px, #000 3px);
+  opacity: .15;
+  width: 5px;
+}
+
 /** @module FormText.styles
  *  @since 2020.10.29, 21:25
  *  @changed 2020.10.29, 22:42
@@ -3920,20 +3931,17 @@ label.FormLabel-Control[for] {
     }
 
 .MenuItem_checkable,
-  .MenuItem_withIcon {
+  .MenuItem_hasIcon {
     position: relative;
   }
 
-/* padding-left: 5px;*/
-
-.MenuItem_checkable .MenuItem-Icon, .MenuItem_withIcon .MenuItem-Icon {
+.MenuItem_checkable .MenuItem-Icon, .MenuItem_hasIcon .MenuItem-Icon {
       position: absolute;
       left: 8px;
       opacity: .5; /* ???*/
-      /* color: $(primaryColor);*/
     }
 
-.MenuItem_checkable .MenuItem-Text, .MenuItem_withIcon .MenuItem-Text {
+.MenuItem_checkable .MenuItem-Text, .MenuItem_hasIcon .MenuItem-Text {
       padding-left: 20px;
     }
 
@@ -4323,10 +4331,40 @@ label.FormLabel-Control[for] {
       text-overflow: ellipsis;
     }
 
+/** @module MenuItemSeparator.styles
+ *  @since 2021.02.20, 14:33
+ *  @changed 2021.02.20, 14:33
+ */
+
+.MenuItemSeparator {
+  height: 1px;
+  background-color: #ccc;
+  margin-top: 4px;
+  margin-bottom: 4px;
+  /* NOTE: See aadditional styles for horizontal mode in `Menu.pcss`*/
+}
+
 /** @module Menu.styles
  *  @since 2020.10.27, 02:58
  *  @changed 2020.10.27, 02:58
  */
+
+.Menu_layout_horizontal {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    -ms-flex-align: stretch;
+        align-items: stretch;
+  }
+
+/* align-content: stretch;*/
+
+.Menu_layout_horizontal .MenuItemSeparator {
+      margin: 0 4px; /* Is horizontal space required (set to 0)?*/
+      height: auto;
+      width: 1px;
+    }
 
 .Menu:not(.Menu_layout_horizontal) {
     max-width: 100%;
@@ -7064,15 +7102,40 @@ input.FormTextInput-Control:-internal-autofill-previewed,
       border-left: 1px solid #aeaeae;
     }
 
-/** @module FormGroup.styles
+/** @module FormContainer.pcss
+ *  @class FormContainer
+ *  @since 2021.02.20, 16:55
+ *  @changed 2021.02.20, 16:56
+ */
+
+.FormContainer {
+
+  position: relative;
+
+  margin-left: 4px;
+  margin-right: 4px;
+
+}
+
+/** @module FormGroup.pcss
  *  @class FormGroup
  *  @since 2020.07.20, 19:24
  *  @changed 2021.01.20, 22:00
  */
 
 .FormGroup {
+}
 
-  /* margin: -$hMargin;*/
+/** @module FormGroup-Layout.pcss
+ *  @class FormGroup
+ *  @since 2021.02.20, 16:45
+ *  @changed 2021.02.20, 16:45
+ */
+
+.FormGroup {
+
+  position: relative;
+
   margin-left: -4px;
   margin-right: -4px;
 
@@ -7082,71 +7145,34 @@ input.FormTextInput-Control:-internal-autofill-previewed,
 
 .FormGroup > .FormItem { /* ???*/
     margin: 4px;
-    /* margin-left: $hMargin;*/
-    /* margin-right: $hMargin;*/
   }
 
 /* No margins for nested groups*/
 
 .FormGroup > .FormGroup.FormItem {
     margin: 0;
-    /* margin-left: 0;*/
-    /* margin-right: 0;*/
   }
 
-.FormGroup_tagged {
+/* &_separated {} // ???*/
+
+.FormGroup_padded { /* With inner space*/
+    padding: 4px;
   }
 
-.FormGroup {
-
-  position: relative;
-
-}
-
-.FormGroup-Tag {
-    position: relative;
-    vertical-align: bottom;
-    height: 32px;
-    line-height: 32px;
-    background-color: #999;
-    /* background: repeating-linear-gradient(90deg, #fff 3px, #fff 4px, #000 4px, #000 7px);*/
-    /* background: repeating-linear-gradient(0deg, #fff 3px, #fff 4px, #000 4px, #000 7px);*/
-    /* background: repeating-linear-gradient(90deg, #fff, #fff 1px, #000 1px, #000 2px);*/
-    background: repeating-linear-gradient(180deg, #fff 1px, #fff 2px, #000 2px, #000 3px);
-    opacity: .15;
-    width: 5px;
+.FormGroup_spaced { /* With outer space*/
+    /* Vertical only?*/
+    margin-top: 4px;
+    margin-bottom: 4px;
   }
 
-/* Padded content*/
-
-.FormGroup_padded {
-    padding: 5px;
-  }
-
-/* Background styles*/
-
-.FormGroup_background_shaded {
-      background-color: #f0f0f0;
-    }
-
-.FormGroup_stack {
-    -ms-flex-wrap: nowrap;
-        flex-wrap: nowrap;
-    -ms-flex-align: stretch;
-        align-items: stretch;
-    -ms-flex-direction: column;
-        flex-direction: column;
-  }
-
-.FormGroup_stack, .FormGroup_stack.FormItem { /* Override nested FormItem display:block rule*/
-      display: -ms-flexbox;
-      display: flex;
-    }
+.FormGroup_flow > .FormItem:not(.FormSeparator) {
+        min-width: 32px; /* ??? Hint for limiting the maximum width (overflow causes cropping items outer glow on interactive control events).*/
+      }
 
 .FormGroup_flow > .FormItem {
-      min-width: 32px; /* Hint for limiting the maximum width (overflow causes cropping items outer glow on ubteractive control events).*/
       display: block;
-    }
+
+}
 
 .FormGroup_flow > .FormItem_fill {
       -ms-flex: 1 1;
@@ -7168,26 +7194,52 @@ input.FormTextInput-Control:-internal-autofill-previewed,
       display: flex;
     }
 
-.FormGroup_noWrap {
-    white-space: nowrap;
-    -ms-flex-wrap: nowrap;
-        flex-wrap: nowrap;
-  }
-
 .FormGroup > .FormGroup_align_right { /* flow*/
       /* Align to right*/
       -ms-flex-pack: end;
           justify-content: flex-end;
       -ms-flex-align: end;
           align-items: flex-end;
+      /* align-self: flex-end;*/
       -ms-flex: 1 1;
           flex: 1 1;
     }
 
+/** @module FormGroup-Variations.pcss
+ *  @class FormGroup
+ *  @since 2021.02.20, 16:45
+ *  @changed 2021.02.20, 16:45
+ */
+
+.FormGroup_shaded {
+    /* background-color: $neutralExtraLightColor;*/
+    background-color: rgba(204, 204, 204, 0.3);
+  }
+
+.FormGroup_stack {
+    -ms-flex-wrap: nowrap;
+        flex-wrap: nowrap;
+    -ms-flex-align: stretch;
+        align-items: stretch;
+    -ms-flex-direction: column;
+        flex-direction: column;
+  }
+
+.FormGroup_stack, .FormGroup_stack.FormItem { /* Override nested FormItem display:block rule*/
+      display: -ms-flexbox;
+      display: flex;
+    }
+
+.FormGroup_noWrap {
+    white-space: nowrap;
+    -ms-flex-wrap: nowrap;
+        flex-wrap: nowrap;
+  }
+
 /** @module FormActions.styles
  *  @class FormActions
  *  @since 2021.02.15, 18:03
- *  @changed 2021.02.15, 18:03
+ *  @changed 2021.02.20, 16:43
  */
 
 .FormActions {
