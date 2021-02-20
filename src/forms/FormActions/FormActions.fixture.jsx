@@ -91,7 +91,7 @@ export default {
       id="withMenu"
       onAction={handleAction}
       menu={menuItems}
-      withMenu
+      // withMenu
       fullWidth
       flow
       wrap

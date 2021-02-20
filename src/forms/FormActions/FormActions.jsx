@@ -142,7 +142,7 @@ class FormActions extends React.PureComponent /** @lends @FormActions.prototype 
       menu,
       menuButtonTheme = 'plain',
     } = this.props;
-    if (!withMenu || !menu) {
+    if (!withMenu && !menu) {
       return null;
     }
     let menuElement;
