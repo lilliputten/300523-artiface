@@ -1,7 +1,7 @@
 /** @module MenuItem
  *  @class MenuItem
  *  @since 2020.10.27, 03:05
- *  @changed 2020.10.27, 03:06
+ *  @changed 2021.02.20, 14:20
  */
 
 import React from 'react';
@@ -36,12 +36,14 @@ class MenuItem extends React.PureComponent /** @lends @MenuItem.prototype */ {
     wrap: PropTypes.bool,
   }
 
+  // Lifecycle...
+
   // Event handlers...
 
-  onClick = () => {
+  onClick = (ev) => {
     const { id, val, onClick } = this.props;
     if (typeof onClick === 'function') {
-      onClick({ id, val, component: this });
+      onClick({ ...ev, id, val, component: this });
     }
   }
 
@@ -52,23 +54,22 @@ class MenuItem extends React.PureComponent /** @lends @MenuItem.prototype */ {
       id,
       checkable,
       withIcon,
+      // icon,
       checked,
       disabled,
       theme,
       wrap,
-      // title,
-      // onClick,
     } = this.props;
     const className = cnMenuItem({
       id,
       checkable,
+      // withIcon: !!(withIcon || icon),
       withIcon,
       checked,
       disabled,
       theme,
       wrap,
     }, [this.props.className]);
-    // console.log('MenuItem:constructor', this.props);
     return className;
   }
 
@@ -81,7 +82,7 @@ class MenuItem extends React.PureComponent /** @lends @MenuItem.prototype */ {
       checked,
       icon,
     } = this.props;
-    if ((withIcon && icon) || (checkable && checked)) {
+    if (( withIcon && icon) || (checkable && checked)) {
       const iconContent = icon || 'faCheck';
       return iconContent && <InlineIcon icon={iconContent} className={cnMenuItem('Icon')} />;
     }
