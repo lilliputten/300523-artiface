@@ -38812,9 +38812,9 @@ module.exports = { // Common-used build variables...
   DEV_DEBUG: DEV_DEBUG,
 
   THEME: "default",
-  buildTag: "v.0.2.11-210220-1931-build-dev-default",
-  timestamp: "2021.02.20, 19:31",
-  timetag: "210220-1931",
+  buildTag: "v.0.2.11-210220-1936-build-dev-default",
+  timestamp: "2021.02.20, 19:36",
+  timetag: "210220-1936",
   version: "0.2.11" };
 
 /***/ }),
@@ -42991,7 +42991,8 @@ FormActions = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helpe
       id: "menuPopup",
       popupControl: popupControl,
       popupContent: menuElement,
-      ref: this.setPopupNodeRef });
+      ref: this.setPopupNodeRef,
+      closeOnEscPressed: true });
 
 
     return /*#__PURE__*/(
