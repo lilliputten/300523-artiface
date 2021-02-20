@@ -1,7 +1,7 @@
 /** @module FormGroup
  *  @class FormGroup
  *  @since 2020.07.20, 19:07
- *  @changed 2020.07.20, 19:07
+ *  @changed 2021.02.20, 13:45
  */
 /* eslint-disable react/require-default-props, react/no-unused-prop-types */
 
@@ -11,6 +11,7 @@ import PropTypes from 'prop-types';
 import { cn } from 'utils/configure';
 
 import FormItemHOC from '../FormItemHOC';
+import FormSeparator from '../FormSeparator';
 
 import './FormGroup.pcss';
 
@@ -49,7 +50,7 @@ class FormGroup extends React.PureComponent /** @lends @FormGroup.prototype */ {
     'padded',
     'stack',
     'wrap',
-    'tagged',
+    'separated',
     // 'disabled',
   ]
 
@@ -79,16 +80,14 @@ class FormGroup extends React.PureComponent /** @lends @FormGroup.prototype */ {
       // disabled,
       children,
       content,
-      tagged,
+      separated,
     } = this.props;
 
     // const renderProps = this.getRenderProps()
 
     return (
       <div id={id} className={this.getClassName()}>
-        {tagged && (
-          <div className={cnFormGroup('Tag', ['FormItem'])} />
-        )}
+        {separated && (<FormSeparator />)}
         {content || children}
       </div>
     );

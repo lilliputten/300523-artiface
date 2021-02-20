@@ -1,7 +1,7 @@
 /** @module demoFixtures
  *  @desc Demo fixtures list
  *  @since 2021.02.15, 18:05
- *  @changed 2021.02.15, 18:05
+ *  @changed 2021.02.20, 13:42
  */
 
 // import * as build from './build'
@@ -11,6 +11,8 @@ export const demoFixtures = {
   Hello: require('demo/Hello/Hello.fixture'),
 
   Loader: require('elements/Loader/Loader.fixture'),
+
+  FormSeparator: require('forms/FormSeparator/FormSeparator.fixture'),
 
   DateTimeSelector: require('elements/DateTimeSelector/DateTimeSelector.fixture'),
   InlineIcon: require('elements/InlineIcon/InlineIcon.fixture'),

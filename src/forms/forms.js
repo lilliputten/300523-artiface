@@ -15,6 +15,7 @@ export FormButton from './FormButton';
 
 export FormDelim from './FormDelim';
 export FormSpacer from './FormSpacer';
+export FormSeparator from './FormSeparator';
 
 export FormText from './FormText';
 

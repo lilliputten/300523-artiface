@@ -9,41 +9,22 @@
   $hMargin: $(formItemSpacing)px;
   $vMargin: $(formItemSpacing)px;
 
-  // margin: -$hMargin;
   margin-left: -$hMargin;
   margin-right: -$hMargin;
 
   // Nested items/groups...
   > .FormItem { // ???
     margin: $hMargin;
-    // margin-left: $hMargin;
-    // margin-right: $hMargin;
   }
   // No margins for nested groups
   & > &.FormItem {
     margin: 0;
-    // margin-left: 0;
-    // margin-right: 0;
   }
 
-  &_tagged {
+  &_separated {
   }
 
   position: relative;
-
-  &-Tag {
-    position: relative;
-    vertical-align: bottom;
-    height: $(formItemHeight)px;
-    line-height: $(formItemHeight)px;
-    background-color: $neutralDarkColor;
-    // background: repeating-linear-gradient(90deg, #fff 3px, #fff 4px, #000 4px, #000 7px);
-    // background: repeating-linear-gradient(0deg, #fff 3px, #fff 4px, #000 4px, #000 7px);
-    // background: repeating-linear-gradient(90deg, #fff, #fff 1px, #000 1px, #000 2px);
-    background: repeating-linear-gradient(180deg, #fff 1px, #fff 2px, #000 2px, #000 3px);
-    opacity: .15;
-    width: 5px;
-  }
 
   // Padded content
   &_padded {

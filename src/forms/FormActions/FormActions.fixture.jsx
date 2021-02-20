@@ -41,6 +41,7 @@ function handleClick(params) {
 }
 
 const actionsList = [
+  { id: 'separator' },
   {
     id: 'update',
     onClick: handleClick,

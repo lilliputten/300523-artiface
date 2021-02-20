@@ -14,6 +14,7 @@ import { cn } from 'utils/configure';
 import FormItemHOC from '../FormItemHOC';
 import FormGroup from '../FormGroup';
 import FormButton from '../FormButton';
+import FormSeparator from '../FormSeparator';
 
 import {
   ActionsContextProvider,
@@ -35,20 +36,11 @@ class FormActions extends React.PureComponent /** @lends @FormActions.prototype 
     // See props definitions for FormGroup
   }
 
-  // static classNameModifiers = [
-  //   // Basic element properties
-  //   // 'id',
-  // ]
-
   constructor(props) {
     super(props);
     this.state = {
     };
   }
-
-  // getClassName() {
-  //   return cnFormActions(null, [this.props.className]);
-  // }
 
   onAction = (actionProps) => {
     const {
@@ -88,9 +80,18 @@ class FormActions extends React.PureComponent /** @lends @FormActions.prototype 
     if (typeof data !== 'object') {
       data = { text: String(data) };
     }
+    else if (data.id === 'separator') {
+      return (<FormSeparator />);
+    }
     const id = data.id || String(n);
     const element = (
-      <FormButton key={id} id={id} {...defaultActionButtonProps} {...data} />
+      <FormButton
+        key={id}
+        id={id}
+        text={id} // Default text: would be overrided from `data` if exists
+        {...defaultActionButtonProps}
+        {...data}
+      />
     );
     return element;
   }
