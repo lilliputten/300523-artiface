@@ -38812,9 +38812,9 @@ module.exports = { // Common-used build variables...
   DEV_DEBUG: DEV_DEBUG,
 
   THEME: "default",
-  buildTag: "v.0.2.11-210220-1921-build-dev-default",
-  timestamp: "2021.02.20, 19:21",
-  timetag: "210220-1921",
+  buildTag: "v.0.2.11-210220-1931-build-dev-default",
+  timestamp: "2021.02.20, 19:31",
+  timetag: "210220-1931",
   version: "0.2.11" };
 
 /***/ }),
@@ -42957,7 +42957,7 @@ FormActions = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helpe
 
 
     this.props,withMenu = _this$props3.withMenu,menu = _this$props3.menu,_this$props3$menuButt = _this$props3.menuButtonTheme,menuButtonTheme = _this$props3$menuButt === void 0 ? 'plain' : _this$props3$menuButt;
-    if (!withMenu || !menu) {
+    if (!withMenu && !menu) {
       return null;
     }
     var menuElement;
