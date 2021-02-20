@@ -1,0 +1,71 @@
+/** @module FormGroup-Layout.pcss
+ *  @class FormGroup
+ *  @since 2021.02.20, 16:45
+ *  @changed 2021.02.20, 16:45
+ */
+
+.FormGroup {
+
+  position: relative;
+
+  $hMargin: $(formItemSpacing)px;
+  $vMargin: $(formItemSpacing)px;
+
+  margin-left: -$hMargin;
+  margin-right: -$hMargin;
+
+  // Nested items/groups...
+  > .FormItem { // ???
+    margin: $hMargin;
+  }
+  // No margins for nested groups
+  & > &.FormItem {
+    margin: 0;
+  }
+
+  // &_separated {} // ???
+
+  &_padded { // With inner space
+    padding: $(formItemSpacing)px;
+  }
+
+  &_spaced { // With outer space
+    // Vertical only?
+    margin-top: $(formItemSpacing)px;
+    margin-bottom: $(formItemSpacing)px;
+  }
+
+  &_flow {
+    & > .FormItem {
+      &:not(.FormSeparator) {
+        min-width: $(formItemHeight)px; // ??? Hint for limiting the maximum width (overflow causes cropping items outer glow on interactive control events).
+      }
+      display: block;
+    }
+    & > .FormItem_fill {
+      flex: 1;
+    }
+    &.FormGroup_alignItems {
+      &_center {
+        justify-content: center;
+      }
+    }
+    &.FormGroup_wrap {
+      flex-wrap: wrap;
+    }
+    &, &.FormItem { // Override nested FormItem display:block rule
+      display: flex;
+    }
+  }
+
+  & > & {
+    &_align_right { // flow
+      // Align to right
+      justify-content: flex-end;
+      align-items: flex-end;
+      // align-self: flex-end;
+      flex: 1;
+    }
+  }
+
+}

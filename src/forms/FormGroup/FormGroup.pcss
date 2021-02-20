@@ -1,84 +1,8 @@
-/** @module FormGroup.styles
+/** @module FormGroup.pcss
  *  @class FormGroup
  *  @since 2020.07.20, 19:24
  *  @changed 2021.01.20, 22:00
  */
 
 .FormGroup {
-
-  $hMargin: $(formItemSpacing)px;
-  $vMargin: $(formItemSpacing)px;
-
-  margin-left: -$hMargin;
-  margin-right: -$hMargin;
-
-  // Nested items/groups...
-  > .FormItem { // ???
-    margin: $hMargin;
-  }
-  // No margins for nested groups
-  & > &.FormItem {
-    margin: 0;
-  }
-
-  &_separated {
-  }
-
-  position: relative;
-
-  // Padded content
-  &_padded {
-    padding: $(innerPadding)px;
-  }
-
-  // Background styles
-  &_background {
-    &_shaded {
-      background-color: $neutralExtraLightColor;
-    }
-  }
-
-  &_stack {
-    flex-wrap: nowrap;
-    align-items: stretch;
-    flex-direction: column;
-    &, &.FormItem { // Override nested FormItem display:block rule
-      display: flex;
-    }
-  }
-  &_flow {
-    & > .FormItem {
-      min-width: $(formItemHeight)px; // Hint for limiting the maximum width (overflow causes cropping items outer glow on ubteractive control events).
-      display: block;
-    }
-    & > .FormItem_fill {
-      flex: 1;
-    }
-    &.FormGroup_alignItems {
-      &_center {
-        justify-content: center;
-      }
-    }
-    &.FormGroup_wrap {
-      flex-wrap: wrap;
-    }
-    &, &.FormItem { // Override nested FormItem display:block rule
-      display: flex;
-    }
-  }
-
-  &_noWrap {
-    white-space: nowrap;
-    flex-wrap: nowrap;
-  }
-
-  & > & {
-    &_align_right { // flow
-      // Align to right
-      justify-content: flex-end;
-      align-items: flex-end;
-      flex: 1;
-    }
-  }
-
 }

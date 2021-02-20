@@ -1,0 +1,27 @@
+/** @module FormGroup-Variations.pcss
+ *  @class FormGroup
+ *  @since 2021.02.20, 16:45
+ *  @changed 2021.02.20, 16:45
+ */
+
+.FormGroup {
+
+  &_shaded {
+    // background-color: $neutralExtraLightColor;
+    background-color: color($neutralColor alpha(.3));
+  }
+
+  &_stack {
+    flex-wrap: nowrap;
+    align-items: stretch;
+    flex-direction: column;
+    &, &.FormItem { // Override nested FormItem display:block rule
+      display: flex;
+    }
+  }
+  &_noWrap {
+    white-space: nowrap;
+    flex-wrap: nowrap;
+  }
+
+}
