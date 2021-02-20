@@ -1,0 +1,7 @@
+@define-mixin FormItemSolidMixin {
+  height: $(formItemHeight)px;
+  line-height: $(formItemHeight)px;
+  max-width: 100%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

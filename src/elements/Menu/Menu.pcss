@@ -4,9 +4,20 @@
  */
 
 .Menu {
+  &_layout_horizontal {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    // align-content: stretch;
+    .MenuItemSeparator {
+      margin: 0 $(menuSeparatorHPadding)px; // Is horizontal space required (set to 0)?
+      height: auto;
+      width: 1px;
+    }
+  }
   &:not(&_layout_horizontal) {
     max-width: 100%;
-    padding: 8px 0;
+    padding: $(menuVPadding)px 0;
     .MenuItem {
       display: block;
       &_fullWidth {

@@ -8,13 +8,6 @@ import React from 'react';
 import Menu from './Menu';
 import MenuItem from '../MenuItem';
 
-// import FormButton from 'forms/FormButton'
-// import FormGroup from '../FormGroup'
-
-// import { // Icons (solid)...
-//   faCheck,
-// } from '@fortawesome/free-solid-svg-icons'
-
 // Demo styles for cosmos engine
 import 'demo.pcss';
 
@@ -42,6 +35,16 @@ export default {
   simple: (
     <Menu id="simple">
       {itemElems}
+    </Menu>
+  ),
+  withSeparator: (
+    <Menu id="withSeparator" onClick={onClick}>
+      {[
+        { val: 1, text: 'Swimming' },
+        { val: 2, text: 'Skiing' },
+        { id: 'separator' },
+        { val: 3, text: 'Skiing' },
+      ]}
     </Menu>
   ),
   horizontal: (

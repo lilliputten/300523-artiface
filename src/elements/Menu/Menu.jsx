@@ -10,6 +10,7 @@ import PropTypes from 'prop-types';
 import { cn } from 'utils/configure';
 
 import MenuItem from '../MenuItem';
+import MenuItemSeparator from '../MenuItemSeparator';
 
 import './Menu.pcss';
 
@@ -54,6 +55,9 @@ class Menu extends React.PureComponent /** @lends @Menu.prototype */ {
   }
 
   createItemElement(item) {
+    if (item && item.id === 'separator') {
+      return <MenuItemSeparator />;
+    }
     const {
       singleChoice,
       value,
@@ -78,6 +82,7 @@ class Menu extends React.PureComponent /** @lends @Menu.prototype */ {
         theme: itemTheme,
         selectedTheme: itemSelectedTheme,
         wrap: wrapContent,
+        text: /* itemProps.text || */ itemProps.id || itemProps.val, // Default value for text (overriding with itemProps.text value if specified)
         ...itemProps,
         onClick: itemProps.onClick || this.onMenuItemClick,
         checkable,
@@ -86,14 +91,10 @@ class Menu extends React.PureComponent /** @lends @Menu.prototype */ {
       if (isRawObject) { // Raw object -> create MenuItem
         const key = item && item.key || this.getId() + '_Item_' + (itemProps.id || itemProps.val);
         item = (<MenuItem {...newProps} key={key} />);
-        // isMenuItem = isElement = true
       }
       else if (isMenuItem) { // MenuItem -> Add onClick handler if handler is not defined
         item = { ...item, props: newProps };
       }
-      // if (item.props.checked && (!singleChoice || !selectedList.length)) {
-      //   selectedList.push(val);
-      // }
     }
     // TODO: Process arrays (subitems/groups)?
     // console.log('Menu:setChildrenItemsFromProps:item', {

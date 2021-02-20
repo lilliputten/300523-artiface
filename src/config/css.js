@@ -230,6 +230,12 @@ Object.assign(cssConfig, { // Form properties...
 
   formPlaceholderColor: '#ccc',
 
+  // Menu...
+
+  menuVPadding: 8,
+  menuSeparatorVPadding: 4,
+  menuSeparatorHPadding: 4,
+
   // tableBorderWidth: 2,
 
   defaultIconSize: 24,

@@ -20,6 +20,7 @@ export const demoFixtures = {
   ModalPopup: require('elements/ModalPopup/ModalPopup.fixture'),
   Menu: require('elements/Menu/Menu.fixture'),
   MenuItem: require('elements/MenuItem/MenuItem.fixture'),
+  MenuItemSeparator: require('elements/MenuItemSeparator/MenuItemSeparator.fixture'),
 
   FormButton: require('forms/FormButton/FormButton.fixture'),
   FormButtonThemes: require('forms/FormButton/FormButton-Themes.fixture'),
