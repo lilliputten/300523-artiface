@@ -7687,11 +7687,11 @@ input.FormTextInput-Control:-internal-autofill-previewed,
 /* Layout items: Header, Container, Content, Layout, Main, Actions*/
 
 .ModalWindow-Header,
-  
+
   .ModalWindow-Content,
-  
+
   .ModalWindow-Layout,
-  
+
   .ModalWindow-Main {
     display: -ms-flexbox;
     display: flex;
