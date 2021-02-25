@@ -26,7 +26,7 @@ echo "Publishing build ($VERSION, $TIMESTAMP)..."
 
 COMMIT_TEXT="Build dist.$VERSION, $TIMESTAMP ($TIMETAG)"
 cd "$PUBLISH_FOLDER" && \
-  echo "Fetch..." && git fetch && \
+  echo "Fetch..." && git fetch && git pull && \
   echo "Add files..." && git add . -Av && \
   echo "Commit..." && git commit -am "$COMMIT_TEXT" && \
   echo "Push basic branch..." && git push && \
