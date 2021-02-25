@@ -1,0 +1,17 @@
+/** @module ModalPortal-Variants.styles
+ *  @since 2021.02.25, 16:00
+ *  @changed 2021.02.25, 16:00
+ */
+
+.ModalPortal {
+  &_noWrapper {
+    &,
+    &.ModalPortal-enter-done,
+    & > ^&-Wrapper {
+      // border: 1px solid red;
+      // box-shadow: inset 0 0 0 3px red;
+      pointer-events: none;
+      background-color: transparent;
+    }
+  }
+}

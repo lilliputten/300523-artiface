@@ -150,14 +150,16 @@ class ModalPopup extends React.PureComponent /** @lends @ModalPopup.prototype */
     // onKeyPress: PropTypes.func,
     // registerCallback: PropTypes.func, // registerCallback(handler = this.someMethod) -- handler stored by parent component and called when detected click on pulldown menu -- prevents popup content closing
     className: PropTypes.string,
-    closeOnClickOutside: PropTypes.bool,
-    closeOnEscPressed: PropTypes.bool,
+    closeOnClickOutside: PropTypes.bool, // For ModalPortal
+    closeOnEscPressed: PropTypes.bool, // For ModalPortal
     id: PropTypes.string,
     onControlClick: PropTypes.func,
     open: PropTypes.bool,
     popupContent: PropTypes.oneOfType([ PropTypes.func, PropTypes.object ]).isRequired,
     popupControl: PropTypes.oneOfType([ PropTypes.func, PropTypes.object ]).isRequired,
     setModalPopupNodeRef: PropTypes.func,
+    noWrapper: PropTypes.bool, // For ModalPortal
+    noCloseOnControlClick: PropTypes.bool,
   }
 
   static defaultProps = {
@@ -166,8 +168,8 @@ class ModalPopup extends React.PureComponent /** @lends @ModalPopup.prototype */
     // popupContent: null,
     // popupControl: null,
     // registerCallback: null,
-    closeOnClickOutside: true,
-    closeOnEscPressed: true,
+    closeOnClickOutside: true, // For ModalPortal
+    closeOnEscPressed: true, // For ModalPortal
     open: false,
   }
 
@@ -193,8 +195,6 @@ class ModalPopup extends React.PureComponent /** @lends @ModalPopup.prototype */
       open: null, // null -- uninitialized
     };
     this.updateGeometry = debounce(debouncedUpdateGeometryTimeout, this.updateGeometryInstant);
-    // if (typeof props.setNodeRef) {
-    // }
   }
 
   componentWillUnmount() {
@@ -550,11 +550,12 @@ class ModalPopup extends React.PureComponent /** @lends @ModalPopup.prototype */
   // Handlers...
 
   onActivate = () => {
-    // console.log('ModalPopup:onActivate')
+    // console.log('ModalPopup:onActivate');
     setTimeout(this.updateGeometryInstant, 0);
+    this.hasControlClicked = false; // Reset state
   }
   onDeactivate = () => {
-    // console.log('ModalPopup:onDeactivate')
+    // console.log('ModalPopup:onDeactivate');
     this.clearContentGeometry(); // Due to content is destroyed when hidden
   }
 
@@ -607,27 +608,63 @@ class ModalPopup extends React.PureComponent /** @lends @ModalPopup.prototype */
     }
   }
 
+  startOutsideClickWaiting = () => {
+    this.isOutsideClickWaiting = true;
+    // console.log('ModalPopup:startOutsideClickWaiting');
+  }
+  stopOutsideClickWaiting = () => {
+    this.isOutsideClickWaiting = false;
+    this.hasControlClicked = false;
+    // console.log('ModalPopup:stopOutsideClickWaiting');
+  }
+
+  preventCloseOnOutsideClick = () => {
+    const {
+      // id,
+      noCloseOnControlClick,
+    } = this.props;
+    const {
+      hasControlClicked,
+    } = this;
+    const result = noCloseOnControlClick && hasControlClicked;
+    // console.log('ModalPopup:preventCloseOnOutsideClick', {
+    //   id,
+    //   noCloseOnControlClick,
+    //   hasControlClicked,
+    //   result,
+    // });
+    this.isOutsideClickWaiting = false;
+    return result;
+  }
+
   onControlClick = (/* event */) => {
-    const { id } = this.props;
+    const { id, disabled } = this.props;
     const { open } = this.state;
-    const nextOpen = !open;
-    // console.log('ModalPopup:onControlClick', id, nextOpen, open);
-    if (nextOpen) {
-      if (this.controlNode) { // Move focus out of control element...
-        // this.controlNode.focus && this.controlNode.focus(); // Ensure focus isnt on other element (eg, selects' inner button).
-        // console.log('ModalPopup:onControlClick: blur');
-        this.controlNode.blur && this.controlNode.blur();
+    const { isOutsideClickWaiting } = this;
+    // console.log('ModalPopup:onControlClick: pre-check', { id, isOutsideClickWaiting, disabled });
+    if (!disabled) {
+      if (!isOutsideClickWaiting) { // Prevent re-opening on `closeOnClickOutside`
+        const nextOpen = !open;
+        // console.log('ModalPopup:onControlClick', { id, nextOpen, open });
+        if (nextOpen) {
+          if (this.controlNode) { // Move focus out of control element...
+            // this.controlNode.focus && this.controlNode.focus(); // Ensure focus isnt on other element (eg, selects' inner button).
+            // console.log('ModalPopup:onControlClick: blur');
+            this.controlNode.blur && this.controlNode.blur();
+          }
+          if (this.controlDomNode) { // Move focus out of control element...
+            // this.controlDomNode.focus && this.controlDomNode.focus(); // Ensure focus isnt on other element (eg, selects' inner button).
+            this.controlDomNode.blur && this.controlDomNode.blur();
+          }
+        }
+        this.setState({ open: nextOpen }, this.updateOpenOrCloseWithState); // Update own open state
+        // TODO: Notify `ModalModalsContainer` when popup opens for closing all other popups from same level (before first modal in popups stack). (Now user can open several popups at the same time.
+        const { onControlClick } = this.props;
+        if (typeof onControlClick === 'function') {
+          onControlClick({ id, open: nextOpen });
+        }
       }
-      if (this.controlDomNode) { // Move focus out of control element...
-        // this.controlDomNode.focus && this.controlDomNode.focus(); // Ensure focus isnt on other element (eg, selects' inner button).
-        this.controlDomNode.blur && this.controlDomNode.blur();
-      }
-    }
-    this.setState({ open: nextOpen }, this.updateOpenOrCloseWithState); // Update own open state
-    // TODO: Notify `ModalModalsContainer` when popup opens for closing all other popups from same level (before first modal in popups stack). (Now user can open several popups at the same time.
-    const { onControlClick } = this.props;
-    if (typeof onControlClick === 'function') {
-      onControlClick({ id, open: nextOpen });
+      this.hasControlClicked = true;
     }
   }
 
@@ -699,6 +736,9 @@ class ModalPopup extends React.PureComponent /** @lends @ModalPopup.prototype */
       onActivate: this.onActivate,
       onDeactivate: this.onDeactivate,
       wrapperTheme: 'SubtleDark',
+      startOutsideClickWaiting: this.startOutsideClickWaiting,
+      stopOutsideClickWaiting: this.stopOutsideClickWaiting,
+      preventCloseOnOutsideClick: this.preventCloseOnOutsideClick,
     });
     return (
       <ModalPortal {...portalProps} type="Popup">

@@ -6,9 +6,9 @@
 
 import React from 'react';
 
-// import { FormItemModalPopup } from './ModalPopup'
+// import { FormItemModalPopup } from './ModalPopup';
 import ModalPopup from './ModalPopup';
-// import FormGroup from 'forms/FormGroup'
+import FormGroup from 'forms/FormGroup';
 import FormButton from 'forms/FormButton';
 import Menu from 'elements/Menu';
 
@@ -17,7 +17,7 @@ import 'demo.pcss';
 
 import './ModalPopup.fixture.pcss';
 
-// export const DemoWrapper = FormGroup // ({ children }) => {
+export const DemoWrapper = FormGroup; // ({ children }) => {
 
 const ModalPopupControl = (props) => {
   const { onClick } = props;
@@ -88,6 +88,17 @@ const simple = (
   </div>
 );
 
+const noWrapper = (
+  <ModalPopup
+    id="noWrapper"
+    popupControl={<FormButton icon="faChevronRight" rightIcon theme="primary" variation="popupControl" text="noWrapper" />}
+    popupContent={demoMenu}
+    noWrapper
+    // noCloseOnControlClick
+    open
+  />
+);
+
 const withMenu = (
   <ModalPopup
     id="withMenu"
@@ -109,6 +120,7 @@ const stayOpenAfterItemClick = (
 
 export default {
   simple,
+  noWrapper,
   withMenu,
   stayOpenAfterItemClick,
 };

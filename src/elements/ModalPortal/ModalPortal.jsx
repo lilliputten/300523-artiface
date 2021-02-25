@@ -40,17 +40,17 @@ import Loader from 'elements/Loader';
 import './ModalPortal-Geometry.pcss';
 import './ModalPortal-Themes.pcss';
 import './ModalPortal-Transitions.pcss';
+import './ModalPortal-Variants.pcss';
 
 const cnModalPortal = cn('ModalPortal');
 
-// const doDebug = [>DEBUG<] false && config.build.DEV_DEBUG || // DEBUG!
-//   false
-
-//
+// Event names...
 const mouseDownEvent = 'mousedown';
 const mouseUpEvent = 'mouseup';
 const mouseLeaveEvent = 'mouseleave';
 const globalKeyPressEventName = 'keydown';
+
+const delayedHandlerTimeout = 50;
 
 export const passModalPortalProps = [
   'id',
@@ -61,6 +61,8 @@ export const passModalPortalProps = [
   'useLoader',
   'loaderTheme',
   'loading',
+  'noWrapper',
+  // 'noCloseOnControlClick',
   'onAction',
   'onClickOutside',
   'onCloseButtonClick',
@@ -75,6 +77,9 @@ export const passModalPortalProps = [
   'windowWidth',
   'wrapperClassName',
   'wrapperTheme',
+  'startOutsideClickWaiting',
+  'stopOutsideClickWaiting',
+  'preventCloseOnOutsideClick',
 ];
 
 export const selfCloseActionId = '--modal-portal-self-close--';
@@ -113,6 +118,10 @@ class ModalPortal extends React.PureComponent /** @lends @ModalPortal.prototype 
     wrapperTheme: PropTypes.string, // Wrapper (back-curtain) theme (using `theme` if not specified)
     loaderTheme: PropTypes.string, // Loader theme ('MediumDark' is default)
     setPortalNode: PropTypes.func, // Get reference to `ModalPortal` instance node
+    startOutsideClickWaiting: PropTypes.func,
+    stopOutsideClickWaiting: PropTypes.func,
+    preventCloseOnOutsideClick: PropTypes.func,
+    // onOutsideClickCatched: PropTypes.func,
   }
 
   static defaultProps = {
@@ -147,7 +156,7 @@ class ModalPortal extends React.PureComponent /** @lends @ModalPortal.prototype 
     if (typeof props.setPortalNode === 'function') {
       props.setPortalNode(this);
     }
-    /* // UNUSED: Failed `ModalsContext` test implementation
+    /* // UNUSED: Failed `ModalsContext` test implementation; TODO: See ActionsContext as example if required.
      * const {
      *   modalsContainerNode, // ModalsContext Provider
      * } = props
@@ -303,7 +312,8 @@ class ModalPortal extends React.PureComponent /** @lends @ModalPortal.prototype 
       document.addEventListener(globalKeyPressEventName, this.onKeyPress);
       if (windowDomNode && globalDomNode) {
         globalDomNode.addEventListener(mouseDownEvent, this.startOutsideClickWaiting);
-        windowDomNode.addEventListener(mouseUpEvent, this.stopOutsideClickWaiting);
+        windowDomNode.addEventListener(mouseUpEvent, this.stopOutsideClickWaitingDelayed);
+        // windowDomNode.addEventListener(mouseUpEvent, this.stopOutsideClickWaiting);
       }
     }
   }
@@ -332,7 +342,8 @@ class ModalPortal extends React.PureComponent /** @lends @ModalPortal.prototype 
       // if (windowDomNode && globalDomNode) {
       this.stopOutsideClickWaiting();
       globalDomNode && globalDomNode.removeEventListener(mouseDownEvent, this.startOutsideClickWaiting);
-      windowDomNode && windowDomNode.removeEventListener(mouseUpEvent, this.stopOutsideClickWaiting);
+      windowDomNode && windowDomNode.removeEventListener(mouseUpEvent, this.stopOutsideClickWaitingDelayed);
+      // windowDomNode && windowDomNode.removeEventListener(mouseUpEvent, this.stopOutsideClickWaiting);
       // }
     }
   }
@@ -439,38 +450,68 @@ class ModalPortal extends React.PureComponent /** @lends @ModalPortal.prototype 
   }
 
   stopOutsideClickWaiting = (/* ev */) => { // Mouse released on window --> cancel waiting for mouse up on wrapper (don't close modal)
-    const { globalDomNode, windowDomNode } = this;
-    if (this.isOutsideClickWaiting /* && globalDomNode && windowDomNode */) {
-      // console.log('ModalPortal:stopOutsideClickWaiting', ev && ev.type, ev && ev.currentTarget)
-      globalDomNode && globalDomNode.removeEventListener(mouseUpEvent, this.onOutsideClickCatched);
+    if (this.stopOutsideClickWaitingDelayedHandler) {
+      clearTimeout(this.stopOutsideClickWaitingDelayedHandler);
+      this.stopOutsideClickWaitingDelayedHandler = null;
+    }
+    const { globalDomNode, windowDomNode, mounted } = this;
+    const { stopOutsideClickWaiting/* , preventCloseOnOutsideClick */ } = this.props;
+    if (mounted, this.isOutsideClickWaiting /* && globalDomNode && windowDomNode */) {
+      // console.log('ModalPortal:stopOutsideClickWaiting'[> , { preventClose } <]);
+      globalDomNode && globalDomNode.removeEventListener(mouseUpEvent, this.onOutsideClickCatchedDelayed);
+      windowDomNode && windowDomNode.removeEventListener(mouseUpEvent, this.stopOutsideClickWaiting);
       windowDomNode && windowDomNode.removeEventListener(mouseLeaveEvent, this.stopOutsideClickWaiting);
       this.isOutsideClickWaiting = false;
+      if (typeof stopOutsideClickWaiting === 'function') {
+        setTimeout(stopOutsideClickWaiting, delayedHandlerTimeout);
+      }
     }
   }
+  stopOutsideClickWaitingDelayed = () => {
+    if (this.stopOutsideClickWaitingDelayedHandler) {
+      clearTimeout(this.stopOutsideClickWaitingDelayedHandler);
+    }
+    this.stopOutsideClickWaitingDelayedHandler = setTimeout(this.stopOutsideClickWaiting, delayedHandlerTimeout);
+  }
   startOutsideClickWaiting = () => { // Start waiting for mouse up on wrapper (close modal) or window (continue working)
-    const { loading } = this.props;
+    const { loading, startOutsideClickWaiting } = this.props;
     const isTopmost = config.modals.containerNode.isModalTopmostVisible(this);
     if (!loading && isTopmost) {
       const { globalDomNode, windowDomNode } = this;
-      // console.log('ModalPortal:startOutsideClickWaiting')
+      // console.log('ModalPortal:startOutsideClickWaiting');
       if (!this.isOutsideClickWaiting && globalDomNode && windowDomNode) { // Start waiting for
         this.isOutsideClickWaiting = true;
-        globalDomNode.addEventListener(mouseUpEvent, this.onOutsideClickCatched);
-        windowDomNode.addEventListener(mouseLeaveEvent, this.stopOutsideClickWaiting);
+        globalDomNode && globalDomNode.addEventListener(mouseUpEvent, this.onOutsideClickCatchedDelayed);
+        windowDomNode && windowDomNode.addEventListener(mouseUpEvent, this.stopOutsideClickWaiting);
+        windowDomNode && windowDomNode.addEventListener(mouseLeaveEvent, this.stopOutsideClickWaiting);
+        if (typeof startOutsideClickWaiting === 'function') {
+          startOutsideClickWaiting();
+        }
       }
     }
   }
   onOutsideClickCatched = () => { // Mouse released on wrapper --> close modal
-    const { id, closeOnClickOutside, onClickOutside } = this.props;
+    const { id, closeOnClickOutside, onClickOutside, preventCloseOnOutsideClick } = this.props;
     // console.log('ModalPortal:onOutsideClickCatched', id);
-    this.stopOutsideClickWaiting();
-    if (closeOnClickOutside) {
-      this.setResult(selfCloseActionId);
-      this.close();
-    }
     if (typeof onClickOutside === 'function') {
       onClickOutside({ id });
     }
+    if (closeOnClickOutside) {
+      const preventClose = (typeof preventCloseOnOutsideClick === 'function' && preventCloseOnOutsideClick());
+      // console.log('ModalPortal:onOutsideClickCatched: check', { id, preventClose });
+      if (preventClose !== true) {
+        this.setResult(selfCloseActionId);
+        this.close();
+      }
+    }
+    // setTimeout(this.stopOutsideClickWaiting, delayedHandlerTimeout);
+    this.stopOutsideClickWaitingDelayed();
+  }
+  onOutsideClickCatchedDelayed = () => {
+    if (this.onOutsideClickCatchedDelayedHandler) {
+      clearTimeout(this.onOutsideClickCatchedDelayedHandler);
+    }
+    this.onOutsideClickCatchedDelayedHandler = setTimeout(this.onOutsideClickCatched, delayedHandlerTimeout);
   }
 
   onCloseButtonClick = () => { // Mouse released on wrapper --> close modal
@@ -492,8 +533,6 @@ class ModalPortal extends React.PureComponent /** @lends @ModalPortal.prototype 
   setWrapperDomRef = (domNode) => {
     this.wrapperDomNode = domNode;
   }
-
-  // Render helpers...
 
   // Render...
 
@@ -531,7 +570,16 @@ class ModalPortal extends React.PureComponent /** @lends @ModalPortal.prototype 
   }
 
   renderModalPortal() {
-    const { type, id, theme, wrapperTheme, className, wrapperClassName, useLoader, loading } = this.props;
+    const { type,
+      id,
+      theme,
+      wrapperTheme,
+      className,
+      wrapperClassName,
+      useLoader,
+      loading,
+      noWrapper,
+    } = this.props;
     if (loading && !useLoader) {
       const error = new Error('ModalPortal: `useLoader` must be enabled for using `loading` prop');
       console.error(error); // eslint-disable-line no-console
@@ -539,6 +587,7 @@ class ModalPortal extends React.PureComponent /** @lends @ModalPortal.prototype 
       throw error; // ???
     }
     const { open } = this.state;
+    const realWrapperTheme = noWrapper ? false : wrapperTheme || theme;
     return (
       <CSSTransition
         key={id}
@@ -548,11 +597,11 @@ class ModalPortal extends React.PureComponent /** @lends @ModalPortal.prototype 
         classNames={cnModalPortal()} // Generate animation classes
       >
         <div
-          className={cnModalPortal({ type, id }, [className])} // Root node
+          className={cnModalPortal({ type, id, noWrapper }, [className])} // Root node
           ref={this.setRootDomRef}
         >
           <div
-            className={cnModalPortal('Wrapper', { theme: wrapperTheme || theme }, [wrapperClassName])}
+            className={cnModalPortal('Wrapper', { theme: realWrapperTheme }, [wrapperClassName])}
             ref={this.setWrapperDomRef}
           >
             {this.renderWindow()}

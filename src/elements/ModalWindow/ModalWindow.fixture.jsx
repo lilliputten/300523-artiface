@@ -44,7 +44,7 @@ class Interactive extends React.PureComponent /** @lends @ModalsContainer.protot
     this.modalRef = ref;
   }
   handleLoaderCancel = () => {
-    console.log('handleLoaderCancel');
+    console.log('ModalWindow.fixture:handleLoaderCancel');
     this.setState(({ loading }) => ({ loading: !loading }));
   }
   renderActions() {
@@ -64,6 +64,7 @@ class Interactive extends React.PureComponent /** @lends @ModalsContainer.protot
             id="cancel"
             icon="faTimes"
             text="Cancel"
+            plain
             inline
           />
         </FormGroup>
@@ -71,7 +72,7 @@ class Interactive extends React.PureComponent /** @lends @ModalsContainer.protot
     );
   }
   onAction = ({ id }) => {
-    console.log('onAction', id);
+    console.log('ModalWindow.fixture:onAction', id);
   }
   render() {
     const { open } = this.state;
@@ -127,7 +128,7 @@ class WithSelect extends React.PureComponent /** @lends @ModalsContainer.prototy
   constructor(props) {
     super(props);
     this.state = {
-      open: true,
+      open: false,
       loading: false, // Use `useLoader` for ability to controlling Loader
     };
     // setTimeout(this.close, 3000)
@@ -146,7 +147,7 @@ class WithSelect extends React.PureComponent /** @lends @ModalsContainer.prototy
     this.modalRef = ref;
   }
   handleLoaderCancel = () => {
-    console.log('handleLoaderCancel');
+    console.log('ModalWindow.fixture:handleLoaderCancel');
     this.setState(({ loading }) => ({ loading: !loading }));
   }
   renderActions() {
@@ -173,7 +174,7 @@ class WithSelect extends React.PureComponent /** @lends @ModalsContainer.prototy
     );
   }
   onAction = ({ id }) => {
-    console.log('onAction', id);
+    console.log('ModalWindow.fixture:onAction', id);
   }
   render() {
     const { open } = this.state;
@@ -249,7 +250,7 @@ class WithInput extends React.PureComponent /** @lends @ModalsContainer.prototyp
     this.modalRef = ref;
   }
   handleLoaderCancel = () => {
-    console.log('handleLoaderCancel');
+    console.log('ModalWindow.fixture:handleLoaderCancel');
     this.setState(({ loading }) => ({ loading: !loading }));
   }
   onChange = ({ value }) => {
@@ -280,7 +281,7 @@ class WithInput extends React.PureComponent /** @lends @ModalsContainer.prototyp
     );
   }
   onAction = ({ id }) => {
-    console.log('onAction', id);
+    console.log('ModalWindow.fixture:onAction', id);
   }
   render() {
     const { value, open } = this.state;
@@ -327,6 +328,7 @@ class WithInput extends React.PureComponent /** @lends @ModalsContainer.prototyp
 }
 const withInput = <WithInput />;
 
+// Non interactive: without controller
 const simple = (
   <ModalWindow
     error={['error 1', 'error2']}

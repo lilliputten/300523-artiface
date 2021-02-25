@@ -12,12 +12,13 @@ export const demoFixtures = {
 
   Loader: require('elements/Loader/Loader.fixture'),
 
+  ModalWindow: require('elements/ModalWindow/ModalWindow.fixture'),
+  ModalPopup: require('elements/ModalPopup/ModalPopup.fixture'),
+
   FormSeparator: require('forms/FormSeparator/FormSeparator.fixture'),
 
   DateTimeSelector: require('elements/DateTimeSelector/DateTimeSelector.fixture'),
   InlineIcon: require('elements/InlineIcon/InlineIcon.fixture'),
-  ModalWindow: require('elements/ModalWindow/ModalWindow.fixture'),
-  ModalPopup: require('elements/ModalPopup/ModalPopup.fixture'),
   Menu: require('elements/Menu/Menu.fixture'),
   MenuItem: require('elements/MenuItem/MenuItem.fixture'),
   MenuItemSeparator: require('elements/MenuItemSeparator/MenuItemSeparator.fixture'),
