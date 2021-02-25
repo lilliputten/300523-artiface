@@ -910,7 +910,6 @@
  */
 
 .FormItem {
-  /* display: block; */
   display: inline-block;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
@@ -919,13 +918,10 @@
 .FormItem_solid {
     height: 32px;
     line-height: 32px;
-    /* overflow: hidden; */
     max-width: 100%;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
-
-/* @mixin debug; */
 
 .FormItem_disabled {
     opacity: .5;
@@ -939,14 +935,8 @@
 /* NOTE: Theming styles (especially for frame) must be specified in FormItem subscribers (eg FormButton, FormTextInput, FormRadio etc).*/
 
 .FormItem_framed {
-    /* border-width: $(formItemBorderSize)px; */
-    /* border-style: solid; */
     border-radius: 3px;
-    /* border-color: $formItemBorderColor; */
-    /* border-color: transparent; */
   }
-
-/* border-color: $color; */
 
 .FormItem_framed .FormItem-Control {
     border-radius: 2px;
@@ -974,15 +964,11 @@
 
 .FormItemDummy {
 
-  /* display: block; */
-
   display: inline-block;
 
   -webkit-box-sizing: border-box;
 
-          box-sizing: border-box;
-
-  /* @mixin debug; */ /* Hide default css frame for `button` tags (if applied)*/
+          box-sizing: border-box; /* Hide default css frame for `button` tags (if applied)*/
 
   /* &_plain.FormItem_hovered {*/
   /*   ^&-Text {*/
@@ -1007,7 +993,6 @@
 .FormItemDummy_solid {
     height: 32px;
     line-height: 32px;
-    /* overflow: hidden; */
     max-width: 100%;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -1251,7 +1236,7 @@ label.FormLabel-Control[for] {
 /** @module FormButton.styles
  *  @desc Only basic elements geometry
  *  @since 2020.07.20, 19:24
- *  @changed 2021.01.21, 13:45
+ *  @changed 2021.02.15, 18:28
  */
 
 /* Override standard html button styles*/
@@ -1263,7 +1248,7 @@ label.FormLabel-Control[for] {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     font-size: 16px;
     font-weight: normal;
-    line-height: 1.6;
+    line-height: 1.3;
     vertical-align: bottom;
     background: none;
     text-align: left;
@@ -1345,7 +1330,7 @@ label.FormLabel-Control[for] {
   }
 
 .FormButton.FormItem_hovered {
-    /* z-index: 10; // Lift active item up (m.b. used in button-groups? Don't forget to lift modals, popups etc.)*/
+    z-index: 10; /* Lift active item up (m.b. used in button-groups? Don't forget to lift modals, popups etc.)*/
     /* NOTE: Cause bug for FormSelect controller button: It displaying over ModalPopupCurtain*/
   }
 
@@ -1491,7 +1476,7 @@ label.FormLabel-Control[for] {
 
 /* color($glowColor alpha(1) shade(10));*/
 
-.FormButton_plain.FormItem_hovered {
+.FormButton_theme_plain.FormItem_hovered, .FormButton_plain.FormItem_hovered {
       -webkit-box-shadow: inset 0 0 1px 1px rgb(184, 184, 184),
     0 0 4px 0px rgba(209, 209, 209, 0.5);
               box-shadow: inset 0 0 1px 1px rgb(184, 184, 184),
@@ -1501,7 +1486,7 @@ label.FormLabel-Control[for] {
 
 /* color($glowColor alpha(1));*/
 
-.FormButton_plain.FormItem_focused {
+.FormButton_theme_plain.FormItem_focused, .FormButton_plain.FormItem_focused {
       -webkit-box-shadow: inset 0 0 1px 1px rgb(173, 173, 173),
     0 0 1px 0px rgb(193, 193, 193);
               box-shadow: inset 0 0 1px 1px rgb(173, 173, 173),
@@ -1511,7 +1496,7 @@ label.FormLabel-Control[for] {
 
 /* $formItemGlowColor;*/
 
-.FormButton_plain.FormItem_focused.FormItem_hovered {
+.FormButton_theme_plain.FormItem_focused.FormItem_hovered, .FormButton_plain.FormItem_focused.FormItem_hovered {
       -webkit-box-shadow: inset 0 0 2px 1px rgb(164, 164, 164),
     0 0 2px 1px rgb(193, 193, 193);
               box-shadow: inset 0 0 2px 1px rgb(164, 164, 164),
@@ -1519,7 +1504,10 @@ label.FormLabel-Control[for] {
       /* background-color: color($activeBgColor shade(8));*/
     }
 
-.FormButton_plain.FormButton_active.FormItem_hovered,
+.FormButton_theme_plain.FormButton_active.FormItem_hovered,
+    .FormButton_theme_plain.FormButton_active.FormItem_focused,
+    .FormButton_theme_plain.FormButton_active,
+    .FormButton_plain.FormButton_active.FormItem_hovered,
     .FormButton_plain.FormButton_active.FormItem_focused,
     .FormButton_plain.FormButton_active {
       -webkit-box-shadow: inset 0 0 2px 1px rgb(173, 173, 173),
@@ -1529,7 +1517,7 @@ label.FormLabel-Control[for] {
       /* background-color: color($activeBgColor shade(15));*/
     }
 
-.FormButton_plain.FormButton_onDark {
+.FormButton_theme_plain.FormButton_onDark, .FormButton_plain.FormButton_onDark {
       /* &.FormButton_active,*/
       /* &.FormItem_focused,*/
       /* &.FormItem_hovered {*/
@@ -1543,7 +1531,7 @@ label.FormLabel-Control[for] {
 
 /* $activeGlowColor: color($primaryColor alpha(.2));*/
 
-.FormButton_plain.FormButton_onDark.FormItem_hovered {
+.FormButton_theme_plain.FormButton_onDark.FormItem_hovered, .FormButton_plain.FormButton_onDark.FormItem_hovered {
         -webkit-box-shadow: inset 0 0 1px 1px rgba(184, 184, 184, 0.5),
     0 0 4px 0px rgba(209, 209, 209, 0.2);
                 box-shadow: inset 0 0 1px 1px rgba(184, 184, 184, 0.5),
@@ -1553,7 +1541,7 @@ label.FormLabel-Control[for] {
 
 /* $hoveredGlowColor: color($primaryColor alpha(.2));*/
 
-.FormButton_plain.FormButton_onDark.FormItem_focused {
+.FormButton_theme_plain.FormButton_onDark.FormItem_focused, .FormButton_plain.FormButton_onDark.FormItem_focused {
         -webkit-box-shadow: inset 0 0 1px 1px rgb(173, 173, 173),
     0 0 1px 0px rgba(193, 193, 193, 0.2);
                 box-shadow: inset 0 0 1px 1px rgb(173, 173, 173),
@@ -1563,7 +1551,7 @@ label.FormLabel-Control[for] {
 
 /* $activeBorderColor: color($primaryColor shade(0));*/
 
-.FormButton_plain.FormButton_onDark.FormItem_focused.FormItem_hovered {
+.FormButton_theme_plain.FormButton_onDark.FormItem_focused.FormItem_hovered, .FormButton_plain.FormButton_onDark.FormItem_focused.FormItem_hovered {
         -webkit-box-shadow: inset 0 0 2px 1px rgb(147, 147, 147),
     0 0 1px 2px rgba(193, 193, 193, 0.2);
                 box-shadow: inset 0 0 2px 1px rgb(147, 147, 147),
@@ -1573,7 +1561,10 @@ label.FormLabel-Control[for] {
 
 /* $hoveredBorderColor: color($primaryColor shade(0) alpha(1));*/
 
-.FormButton_plain.FormButton_onDark.FormButton_active.FormItem_hovered,
+.FormButton_theme_plain.FormButton_onDark.FormButton_active.FormItem_hovered,
+      .FormButton_theme_plain.FormButton_onDark.FormButton_active.FormItem_focused,
+      .FormButton_theme_plain.FormButton_onDark.FormButton_active,
+      .FormButton_plain.FormButton_onDark.FormButton_active.FormItem_hovered,
       .FormButton_plain.FormButton_onDark.FormButton_active.FormItem_focused,
       .FormButton_plain.FormButton_onDark.FormButton_active {
         -webkit-box-shadow: inset 0 0 2px 1px rgb(173, 173, 173),
@@ -3611,175 +3602,6 @@ label.FormLabel-Control[for] {
         background-color: rgb(37, 60, 60);
       }
 
-/** @module FormGroup.styles
- *  @class FormGroup
- *  @since 2020.07.20, 19:24
- *  @changed 2021.01.20, 22:00
- */
-
-.FormGroup {
-
-  /* display: flex;*/
-  /* flex-direction: row;*/
-  /* flex-wrap: wrap;*/
-  /* align-items: stretch;*/
-
-  /* TODO: Use config for values?*/
-
-  margin: -4px -4px;
-
-}
-
-.FormGroup_noSpace {
-    margin: 0;
-  }
-
-/* Nested items/groups...*/
-
-.FormGroup > .FormItem { /* ???*/
-    margin: 4px 4px;
-  }
-
-/* No margins for nested groups*/
-
-.FormGroup > .FormGroup.FormItem {
-    /* margin-top: 0;*/
-    /* margin-bottom: 0;*/
-    margin: 0;
-  }
-
-/* Padded content*/
-
-.FormGroup_padded {
-    padding: 5px;
-  }
-
-/* Background styles*/
-
-.FormGroup_background_shaded {
-      background-color: #f0f0f0;
-    }
-
-.FormGroup_stack {
-    -ms-flex-wrap: nowrap;
-        flex-wrap: nowrap;
-    -ms-flex-align: stretch;
-        align-items: stretch;
-    -ms-flex-direction: column;
-        flex-direction: column;
-  }
-
-.FormGroup_stack, .FormGroup_stack.FormItem { /* Override nested FormItem display:block rule*/
-      /* border: 1px solid blue; // DEBUG*/
-      display: -ms-flexbox;
-      display: flex;
-    }
-
-/* flex-wrap: wrap;*/
-
-.FormGroup_flow > .FormItem {
-      min-width: 32px; /* Hint for limiting the maximum width (overflow causes cropping items outer glow on ubteractive control events).*/
-      display: block;
-    }
-
-.FormGroup_flow > .FormItem_fill {
-      -ms-flex: 1 1;
-          flex: 1 1;
-    }
-
-.FormGroup_flow.FormGroup_alignItems_center {
-        -ms-flex-pack: center;
-            justify-content: center;
-      }
-
-.FormGroup_flow.FormGroup_wrap {
-      -ms-flex-wrap: wrap;
-          flex-wrap: wrap;
-    }
-
-.FormGroup_flow, .FormGroup_flow.FormItem { /* Override nested FormItem display:block rule*/
-      display: -ms-flexbox;
-      display: flex;
-    }
-
-.FormGroup_noWrap {
-    white-space: nowrap;
-    -ms-flex-wrap: nowrap;
-        flex-wrap: nowrap;
-  }
-
-.FormGroup > .FormGroup_align_right { /* flow*/
-      /* Align to right*/
-      -ms-flex-pack: end;
-          justify-content: flex-end;
-      -ms-flex-align: end;
-          align-items: flex-end;
-      -ms-flex: 1 1;
-          flex: 1 1;
-    }
-
-/** @module FormButtonGroup.styles
- *  @class FormButtonGroup
- *  @since 2020.10.21, 23:43
- *  @changed 2020.10.21, 23:43
- */
-
-.FormButtonGroup > .FormButton {
-    margin-top: 0;
-    margin-bottom: 0;
-  }
-
-.FormButtonGroup > .FormButton:not(:last-child) {
-    margin-right: 0;
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-    /* border-right-width: 0;*/
-  }
-
-.FormButtonGroup > .FormButton:not(:first-child) {
-    margin-left: 0;
-    margin-left: -1px;
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-    /* border-left-width: 0;*/
-  }
-
-.FormGroup > .FormItem.FormButtonGroup {
-    margin-top: 4px;
-    margin-bottom: 4px;
-  }
-
-/** @module FormInputGroup.styles
- *  @class FormInputGroup
- *  @since 2020.10.21, 23:43
- *  @changed 2020.10.21, 23:43
- */
-
-.FormInputGroup > .FormItem {
-    margin-top: 0;
-    margin-bottom: 0;
-  }
-
-.FormInputGroup > .FormItem:not(:last-child) {
-    margin-right: 0;
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-    /* border-right-width: 0;*/
-  }
-
-.FormInputGroup > .FormItem:not(:first-child) {
-    margin-left: 0;
-    margin-left: -1px;
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-    /* border-left-width: 0;*/
-  }
-
-.FormGroup > .FormItem.FormInputGroup {
-    margin-top: 4px;
-    margin-bottom: 4px;
-  }
-
 /** @module FormDelim.styles
  *  @class FormDelim
  *  @since 2020.11.27, 12:52
@@ -3802,6 +3624,26 @@ label.FormLabel-Control[for] {
   height: 15px;
 }
 
+/** @module FormSeparator.styles
+ *  @class FormSeparator
+ *  @since 2021.02.20, 13:40
+ *  @changed 2021.02.20, 13:40
+ */
+
+.FormSeparator {
+  position: relative;
+  vertical-align: bottom;
+  height: 32px;
+  line-height: 32px;
+  background-color: #999;
+  /* background: repeating-linear-gradient(90deg, #fff 3px, #fff 4px, #000 4px, #000 7px);*/
+  /* background: repeating-linear-gradient(0deg, #fff 3px, #fff 4px, #000 4px, #000 7px);*/
+  /* background: repeating-linear-gradient(90deg, #fff, #fff 1px, #000 1px, #000 2px);*/
+  background: repeating-linear-gradient(180deg, #fff 1px, #fff 2px, #000 2px, #000 3px);
+  opacity: .15;
+  width: 5px;
+}
+
 /** @module FormText.styles
  *  @since 2020.10.29, 21:25
  *  @changed 2020.10.29, 22:42
@@ -3812,7 +3654,7 @@ label.FormLabel-Control[for] {
   line-height: 32px;
 }
 
-/** @module ModalPortal.styles
+/** @module ModalPortal-Geometry.styles
  *  @desc Basic modal layout styles
  *  @since 2020.12.21, 22:58
  *  @changed 2021.01.12, 13:46
@@ -3840,6 +3682,9 @@ label.FormLabel-Control[for] {
 
 .ModalPortal-Wrapper, .ModalPortal-Wrapper_theme_Transparent {
       /* background-color: transparent;*/
+    }
+
+.ModalPortal-Wrapper_theme_Transparent {
     }
 
 .ModalPortal-Wrapper_theme_SubtleDark {
@@ -4040,6 +3885,20 @@ label.FormLabel-Control[for] {
       opacity: 0;
     }
 
+/** @module ModalPortal-Variants.styles
+ *  @since 2021.02.25, 16:00
+ *  @changed 2021.02.25, 16:00
+ */
+
+.ModalPortal_noWrapper,
+    .ModalPortal_noWrapper.ModalPortal-enter-done,
+    .ModalPortal_noWrapper > .ModalPortal-Wrapper {
+      /* border: 1px solid red;*/
+      /* box-shadow: inset 0 0 0 3px red;*/
+      pointer-events: none;
+      background-color: transparent;
+    }
+
 /** @module ModalPopup.styles
  *  @since 2020.10.27, 00:39
  *  @changed 2020.12.18, 01:32
@@ -4073,7 +3932,7 @@ label.FormLabel-Control[for] {
  */
 
 .MenuItem {
-  padding: 2px 6px;
+  padding: 5px 15px;
 }
 
 .MenuItem:not(.MenuItem_disabled) {
@@ -4089,34 +3948,444 @@ label.FormLabel-Control[for] {
     }
 
 .MenuItem_checkable,
-  .MenuItem_withIcon {
+  .MenuItem_hasIcon {
     position: relative;
   }
 
-.MenuItem_checkable .MenuItem-Icon, .MenuItem_withIcon .MenuItem-Icon {
+.MenuItem_checkable .MenuItem-Icon, .MenuItem_hasIcon .MenuItem-Icon {
       position: absolute;
       left: 8px;
       opacity: .5; /* ???*/
-      /* color: $(primaryColor);*/
     }
 
-.MenuItem_checkable .MenuItem-Text, .MenuItem_withIcon .MenuItem-Text {
-      padding-left: 25px;
+.MenuItem_checkable .MenuItem-Text, .MenuItem_hasIcon .MenuItem-Text {
+      padding-left: 20px;
     }
 
-.MenuItem-Text {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
+/* Theme colors...*/
+
+.MenuItem_theme_error .MenuItem-Icon {
+          color: #c33;
+          opacity: .75;
+        }
+
+.MenuItem_theme_error.FormItem_hovered {
+          background-color: #c33;
+        }
+
+.MenuItem_theme_error.FormItem_hovered .MenuItem-Icon {
+            color: #fff;
+            opacity: .5;
+          }
+
+.MenuItem_theme_warn .MenuItem-Icon {
+          color: #f73;
+          opacity: .75;
+        }
+
+.MenuItem_theme_warn.FormItem_hovered {
+          background-color: #f73;
+        }
+
+.MenuItem_theme_warn.FormItem_hovered .MenuItem-Icon {
+            color: #fff;
+            opacity: .5;
+          }
+
+.MenuItem_theme_success .MenuItem-Icon {
+          color: #593;
+          opacity: .75;
+        }
+
+.MenuItem_theme_success.FormItem_hovered {
+          background-color: #593;
+        }
+
+.MenuItem_theme_success.FormItem_hovered .MenuItem-Icon {
+            color: #fff;
+            opacity: .5;
+          }
+
+.MenuItem_theme_info .MenuItem-Icon {
+          color: #07f;
+          opacity: .75;
+        }
+
+.MenuItem_theme_info.FormItem_hovered {
+          background-color: #07f;
+        }
+
+.MenuItem_theme_info.FormItem_hovered .MenuItem-Icon {
+            color: #fff;
+            opacity: .5;
+          }
+
+.MenuItem_theme_confirm .MenuItem-Icon {
+          color: #891;
+          opacity: .75;
+        }
+
+.MenuItem_theme_confirm.FormItem_hovered {
+          background-color: #891;
+        }
+
+.MenuItem_theme_confirm.FormItem_hovered .MenuItem-Icon {
+            color: #fff;
+            opacity: .5;
+          }
+
+.MenuItem_theme_select .MenuItem-Icon {
+          color: #05b;
+          opacity: .75;
+        }
+
+.MenuItem_theme_select.FormItem_hovered {
+          background-color: #05b;
+        }
+
+.MenuItem_theme_select.FormItem_hovered .MenuItem-Icon {
+            color: #fff;
+            opacity: .5;
+          }
+
+.MenuItem_theme_maroon .MenuItem-Icon {
+          color: #800000;
+          opacity: .75;
+        }
+
+.MenuItem_theme_maroon.FormItem_hovered {
+          background-color: #800000;
+        }
+
+.MenuItem_theme_maroon.FormItem_hovered .MenuItem-Icon {
+            color: #fff;
+            opacity: .5;
+          }
+
+.MenuItem_theme_red .MenuItem-Icon {
+          color: #ff0000;
+          opacity: .75;
+        }
+
+.MenuItem_theme_red.FormItem_hovered {
+          background-color: #ff0000;
+        }
+
+.MenuItem_theme_red.FormItem_hovered .MenuItem-Icon {
+            color: #fff;
+            opacity: .5;
+          }
+
+.MenuItem_theme_purple .MenuItem-Icon {
+          color: #800080;
+          opacity: .75;
+        }
+
+.MenuItem_theme_purple.FormItem_hovered {
+          background-color: #800080;
+        }
+
+.MenuItem_theme_purple.FormItem_hovered .MenuItem-Icon {
+            color: #fff;
+            opacity: .5;
+          }
+
+.MenuItem_theme_fuchsia .MenuItem-Icon {
+          color: #ff00ff;
+          opacity: .75;
+        }
+
+.MenuItem_theme_fuchsia.FormItem_hovered {
+          background-color: #ff00ff;
+        }
+
+.MenuItem_theme_fuchsia.FormItem_hovered .MenuItem-Icon {
+            color: #fff;
+            opacity: .5;
+          }
+
+.MenuItem_theme_green .MenuItem-Icon {
+          color: #008000;
+          opacity: .75;
+        }
+
+.MenuItem_theme_green.FormItem_hovered {
+          background-color: #008000;
+        }
+
+.MenuItem_theme_green.FormItem_hovered .MenuItem-Icon {
+            color: #fff;
+            opacity: .5;
+          }
+
+.MenuItem_theme_olive .MenuItem-Icon {
+          color: #808000;
+          opacity: .75;
+        }
+
+.MenuItem_theme_olive.FormItem_hovered {
+          background-color: #808000;
+        }
+
+.MenuItem_theme_olive.FormItem_hovered .MenuItem-Icon {
+            color: #fff;
+            opacity: .5;
+          }
+
+.MenuItem_theme_navy .MenuItem-Icon {
+          color: #000080;
+          opacity: .75;
+        }
+
+.MenuItem_theme_navy.FormItem_hovered {
+          background-color: #000080;
+        }
+
+.MenuItem_theme_navy.FormItem_hovered .MenuItem-Icon {
+            color: #fff;
+            opacity: .5;
+          }
+
+.MenuItem_theme_blue .MenuItem-Icon {
+          color: #0000ff;
+          opacity: .75;
+        }
+
+.MenuItem_theme_blue.FormItem_hovered {
+          background-color: #0000ff;
+        }
+
+.MenuItem_theme_blue.FormItem_hovered .MenuItem-Icon {
+            color: #fff;
+            opacity: .5;
+          }
+
+.MenuItem_theme_teal .MenuItem-Icon {
+          color: #008080;
+          opacity: .75;
+        }
+
+.MenuItem_theme_teal.FormItem_hovered {
+          background-color: #008080;
+        }
+
+.MenuItem_theme_teal.FormItem_hovered .MenuItem-Icon {
+            color: #fff;
+            opacity: .5;
+          }
+
+.MenuItem_theme_orange .MenuItem-Icon {
+          color: #ffa500;
+          opacity: .75;
+        }
+
+.MenuItem_theme_orange.FormItem_hovered {
+          background-color: #ffa500;
+        }
+
+.MenuItem_theme_orange.FormItem_hovered .MenuItem-Icon {
+            color: #fff;
+            opacity: .5;
+          }
+
+.MenuItem_theme_blueviolet .MenuItem-Icon {
+          color: #8a2be2;
+          opacity: .75;
+        }
+
+.MenuItem_theme_blueviolet.FormItem_hovered {
+          background-color: #8a2be2;
+        }
+
+.MenuItem_theme_blueviolet.FormItem_hovered .MenuItem-Icon {
+            color: #fff;
+            opacity: .5;
+          }
+
+.MenuItem_theme_brown .MenuItem-Icon {
+          color: #a52a2a;
+          opacity: .75;
+        }
+
+.MenuItem_theme_brown.FormItem_hovered {
+          background-color: #a52a2a;
+        }
+
+.MenuItem_theme_brown.FormItem_hovered .MenuItem-Icon {
+            color: #fff;
+            opacity: .5;
+          }
+
+.MenuItem_theme_cadetblue .MenuItem-Icon {
+          color: #5f9ea0;
+          opacity: .75;
+        }
+
+.MenuItem_theme_cadetblue.FormItem_hovered {
+          background-color: #5f9ea0;
+        }
+
+.MenuItem_theme_cadetblue.FormItem_hovered .MenuItem-Icon {
+            color: #fff;
+            opacity: .5;
+          }
+
+.MenuItem_theme_darkblue .MenuItem-Icon {
+          color: #00008b;
+          opacity: .75;
+        }
+
+.MenuItem_theme_darkblue.FormItem_hovered {
+          background-color: #00008b;
+        }
+
+.MenuItem_theme_darkblue.FormItem_hovered .MenuItem-Icon {
+            color: #fff;
+            opacity: .5;
+          }
+
+.MenuItem_theme_darkcyan .MenuItem-Icon {
+          color: #008b8b;
+          opacity: .75;
+        }
+
+.MenuItem_theme_darkcyan.FormItem_hovered {
+          background-color: #008b8b;
+        }
+
+.MenuItem_theme_darkcyan.FormItem_hovered .MenuItem-Icon {
+            color: #fff;
+            opacity: .5;
+          }
+
+.MenuItem_theme_darkgoldenrod .MenuItem-Icon {
+          color: #b8860b;
+          opacity: .75;
+        }
+
+.MenuItem_theme_darkgoldenrod.FormItem_hovered {
+          background-color: #b8860b;
+        }
+
+.MenuItem_theme_darkgoldenrod.FormItem_hovered .MenuItem-Icon {
+            color: #fff;
+            opacity: .5;
+          }
+
+.MenuItem_theme_darkorange .MenuItem-Icon {
+          color: #ff8c00;
+          opacity: .75;
+        }
+
+.MenuItem_theme_darkorange.FormItem_hovered {
+          background-color: #ff8c00;
+        }
+
+.MenuItem_theme_darkorange.FormItem_hovered .MenuItem-Icon {
+            color: #fff;
+            opacity: .5;
+          }
+
+.MenuItem_theme_darkorchid .MenuItem-Icon {
+          color: #9932cc;
+          opacity: .75;
+        }
+
+.MenuItem_theme_darkorchid.FormItem_hovered {
+          background-color: #9932cc;
+        }
+
+.MenuItem_theme_darkorchid.FormItem_hovered .MenuItem-Icon {
+            color: #fff;
+            opacity: .5;
+          }
+
+.MenuItem_theme_darkred .MenuItem-Icon {
+          color: #8b0000;
+          opacity: .75;
+        }
+
+.MenuItem_theme_darkred.FormItem_hovered {
+          background-color: #8b0000;
+        }
+
+.MenuItem_theme_darkred.FormItem_hovered .MenuItem-Icon {
+            color: #fff;
+            opacity: .5;
+          }
+
+.MenuItem_theme_darkslateblue .MenuItem-Icon {
+          color: #483d8b;
+          opacity: .75;
+        }
+
+.MenuItem_theme_darkslateblue.FormItem_hovered {
+          background-color: #483d8b;
+        }
+
+.MenuItem_theme_darkslateblue.FormItem_hovered .MenuItem-Icon {
+            color: #fff;
+            opacity: .5;
+          }
+
+.MenuItem_theme_darkslategray .MenuItem-Icon {
+          color: #2f4f4f;
+          opacity: .75;
+        }
+
+.MenuItem_theme_darkslategray.FormItem_hovered {
+          background-color: #2f4f4f;
+        }
+
+.MenuItem_theme_darkslategray.FormItem_hovered .MenuItem-Icon {
+            color: #fff;
+            opacity: .5;
+          }
+
+.MenuItem:not(.MenuItem_wrap)-Text {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+/** @module MenuItemSeparator.styles
+ *  @since 2021.02.20, 14:33
+ *  @changed 2021.02.20, 14:33
+ */
+
+.MenuItemSeparator {
+  height: 1px;
+  background-color: #ccc;
+  margin-top: 4px;
+  margin-bottom: 4px;
+  /* NOTE: See aadditional styles for horizontal mode in `Menu.pcss`*/
+}
 
 /** @module Menu.styles
  *  @since 2020.10.27, 02:58
  *  @changed 2020.10.27, 02:58
  */
 
+.Menu_layout_horizontal {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    -ms-flex-align: stretch;
+        align-items: stretch;
+  }
+
+/* align-content: stretch;*/
+
+.Menu_layout_horizontal .MenuItemSeparator {
+      margin: 0 4px; /* Is horizontal space required (set to 0)?*/
+      height: auto;
+      width: 1px;
+    }
+
 .Menu:not(.Menu_layout_horizontal) {
     max-width: 100%;
+    padding: 8px 0;
   }
 
 .Menu:not(.Menu_layout_horizontal) .MenuItem {
@@ -6850,6 +7119,211 @@ input.FormTextInput-Control:-internal-autofill-previewed,
       border-left: 1px solid #aeaeae;
     }
 
+/** @module FormContainer.pcss
+ *  @class FormContainer
+ *  @since 2021.02.20, 16:55
+ *  @changed 2021.02.20, 16:56
+ */
+
+.FormContainer {
+
+  position: relative;
+
+  margin-left: 4px;
+  margin-right: 4px;
+
+}
+
+/** @module FormGroup.pcss
+ *  @class FormGroup
+ *  @since 2020.07.20, 19:24
+ *  @changed 2021.01.20, 22:00
+ */
+
+.FormGroup {
+}
+
+/** @module FormGroup-Layout.pcss
+ *  @class FormGroup
+ *  @since 2021.02.20, 16:45
+ *  @changed 2021.02.20, 16:45
+ */
+
+.FormGroup {
+
+  position: relative;
+
+  margin-left: -4px;
+  margin-right: -4px;
+
+}
+
+/* Nested items/groups...*/
+
+.FormGroup > .FormItem { /* ???*/
+    margin: 4px;
+  }
+
+/* No margins for nested groups*/
+
+.FormGroup > .FormGroup.FormItem {
+    margin: 0;
+  }
+
+/* &_separated {} // ???*/
+
+.FormGroup_padded { /* With inner space*/
+    padding: 4px;
+  }
+
+.FormGroup_spaced { /* With outer space*/
+    /* Vertical only?*/
+    margin-top: 4px;
+    margin-bottom: 4px;
+  }
+
+.FormGroup_flow > .FormItem:not(.FormSeparator) {
+        min-width: 32px; /* ??? Hint for limiting the maximum width (overflow causes cropping items outer glow on interactive control events).*/
+      }
+
+.FormGroup_flow > .FormItem {
+      display: block;
+
+}
+
+.FormGroup_flow > .FormItem_fill {
+      -ms-flex: 1 1;
+          flex: 1 1;
+    }
+
+.FormGroup_flow.FormGroup_alignItems_center {
+        -ms-flex-pack: center;
+            justify-content: center;
+      }
+
+.FormGroup_flow.FormGroup_wrap {
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap;
+    }
+
+.FormGroup_flow, .FormGroup_flow.FormItem { /* Override nested FormItem display:block rule*/
+      display: -ms-flexbox;
+      display: flex;
+    }
+
+.FormGroup > .FormGroup_align_right { /* flow*/
+      /* Align to right*/
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+      /* align-self: flex-end;*/
+      -ms-flex: 1 1;
+          flex: 1 1;
+    }
+
+/** @module FormGroup-Variations.pcss
+ *  @class FormGroup
+ *  @since 2021.02.20, 16:45
+ *  @changed 2021.02.20, 16:45
+ */
+
+.FormGroup_shaded {
+    /* background-color: $neutralExtraLightColor;*/
+    background-color: rgba(204, 204, 204, 0.3);
+  }
+
+.FormGroup_stack {
+    -ms-flex-wrap: nowrap;
+        flex-wrap: nowrap;
+    -ms-flex-align: stretch;
+        align-items: stretch;
+    -ms-flex-direction: column;
+        flex-direction: column;
+  }
+
+.FormGroup_stack, .FormGroup_stack.FormItem { /* Override nested FormItem display:block rule*/
+      display: -ms-flexbox;
+      display: flex;
+    }
+
+.FormGroup_noWrap {
+    white-space: nowrap;
+    -ms-flex-wrap: nowrap;
+        flex-wrap: nowrap;
+  }
+
+/** @module FormActions.styles
+ *  @class FormActions
+ *  @since 2021.02.15, 18:03
+ *  @changed 2021.02.20, 16:43
+ */
+
+.FormActions {
+}
+
+/** @module FormButtonGroup.styles
+ *  @class FormButtonGroup
+ *  @since 2020.10.21, 23:43
+ *  @changed 2020.10.21, 23:43
+ */
+
+.FormButtonGroup > .FormButton {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+.FormButtonGroup > .FormButton:not(:last-child) {
+    margin-right: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    /* border-right-width: 0;*/
+  }
+
+.FormButtonGroup > .FormButton:not(:first-child) {
+    margin-left: 0;
+    margin-left: -1px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    /* border-left-width: 0;*/
+  }
+
+.FormGroup > .FormItem.FormButtonGroup {
+    margin-top: 4px;
+    margin-bottom: 4px;
+  }
+
+/** @module FormInputGroup.styles
+ *  @class FormInputGroup
+ *  @since 2020.10.21, 23:43
+ *  @changed 2020.10.21, 23:43
+ */
+
+.FormInputGroup > .FormItem {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+.FormInputGroup > .FormItem:not(:last-child) {
+    margin-right: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    /* border-right-width: 0;*/
+  }
+
+.FormInputGroup > .FormItem:not(:first-child) {
+    margin-left: 0;
+    margin-left: -1px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    /* border-left-width: 0;*/
+  }
+
+.FormGroup > .FormItem.FormInputGroup {
+    margin-top: 4px;
+    margin-bottom: 4px;
+  }
+
 /** @module Loader.pcss
  *  @since 2020.12.24, 22:38
  *  @changed 2020.12.24, 22:38
@@ -7440,7 +7914,7 @@ textarea,
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   font-size: 16px;
   font-weight: normal;
-  line-height: 1.6;
+  line-height: 1.3;
   /* font-size: 30px; // DEBUG*/
   color: #444;
 }

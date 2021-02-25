@@ -1,5 +1,20 @@
 # CHANGELOG
 
+- 2021.02.25, 21:00 -- PD-3591: Non-blocking popup wrapper (rewrited event handlers mechanism; ugly but working).
+- 2021.02.20, 19:31 -- v.0.2.11.
+- 2021.02.20, 19:30 -- FormActions: Minor changes (display menu without `withMenu` prop -- only if `menu` prop passed).
+- 2021.02.20, 19:19 -- Menu, MenuItem, FormActions: throw up action events. FormActions: render menu popup, catch menu actions, close menu popup on menu action. MenuItem: use `hasIcon` instead `withIcon`, use ActionsContext. ModalPopup: render wrapper-less control element. FormGroup: withContainer prop (wraps with `FormContainer`). Other minor changes.
+- 2021.02.20, 17:31 -- FormGroups: restructured styles, added mod props (`separated` (instead of `tagged`), `shaded`, `padded`).
+- 2021.02.20, 17:25 -- FormContainer: new component for wrapping groups etc.
+- 2021.02.20, 15:11 -- MenuItemSeparator component.
+- 2021.02.20, 13:49 -- FormSeparator component.
+- 2021.02.19, 21:05 -- FormGroup: Styles for items grouping, `tagged` groups.
+- 2021.02.19, 17:56 -- Fixed linter warnings.
+- 2021.02.19, 17:52 -- PD-3585: FormActions: Allow creating of `FormActions` from actions list.
+- 2021.02.19, 16:47 -- PD-3585: FormActions (ActionsBar) proxy.
+- 2021.02.15, 19:46 -- v.0.2.10.
+- 2021.02.15, 19:37 -- PD-3585: Added FormActions component (in progress).
+- 2021.02.15, 19:35 -- PD-3327: Tuning for Select, Menu, MenuItem: menu items theming, menu window & items stylizing, popup window geometry (added container gaps) etc.
 - 2021.01.29, 00:55 -- FormGroup: flow demo fixture. FormTextInput: interactive styles fixups.
 - 2021.01.29, 00:30 -- v.0.2.9.
 - 2021.01.29, 00:29 -- FormItemHOC: Manually call focusIn/focusOut event handlers on focus/blur event handlers, added `framed` modifier. FormGroup: Styles for nested items/groups. FormButton (in `config/css`): set inner height to outer height due to usage of `box-shadow` instead `border` in styles.
@@ -85,5 +100,5 @@
 - 2020.10.05, 20:38 -- v.0.0.15: Extracted `demoSupport.jsx` routines, fixture selection from url query (parameter `fixture`), added avaialble fixtures list if fixture to display is not specified, added DemoWrapper & demoTitle exportable ficture parameters for demo rendering.
 
 <!--
- @changed 2021.01.29, 00:29
+ @changed 2021.02.20, 19:30
 -->
