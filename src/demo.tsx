@@ -95,37 +95,43 @@ utils.configure.setConfigOptions({
   lang,
 });
 
-const findFixture = window.location.search && window.location.search.match(/\bfixture=(([^&:]+)(?::([^&]+))?)/);
-// const fullFixtureId = findFixture && findFixture[1]
-const fixtureId = findFixture && findFixture[2];
-const fixtureItemId = findFixture && findFixture[3];
-const fixtureModuleExports = fixtureId && demoFixtures[fixtureId];
+function getFixtureContent() {
+  const findFixture = window.location.search && window.location.search.match(/\bfixture=(([^&:]+)(?::([^&]+))?)/);
+  // const fullFixtureId = findFixture && findFixture[1]
+  const fixtureId = findFixture && findFixture[2];
+  const fixtureItemId = findFixture && findFixture[3];
+  const fixtureModuleExports = fixtureId && demoFixtures[fixtureId];
 
-let content;
+  let content;
 
-if (fixtureModuleExports) { // Found fixture
-  const {
-    default: fixture,
-    demoTitle = 'Demo fixture: ' + fixtureId, // fullFixtureId,
-    DemoWrapper,
-  } = fixtureModuleExports;
-  content = demoSupport.PlaceFixture({ fixtureId, fixture, fixtureItemId, demoTitle, DemoWrapper });
+  if (fixtureModuleExports) { // Found fixture
+    const {
+      default: fixture,
+      demoTitle = 'Demo fixture: ' + fixtureId, // fullFixtureId,
+      DemoWrapper,
+    } = fixtureModuleExports;
+    content = demoSupport.PlaceFixture({ fixtureId, fixture, fixtureItemId, demoTitle, DemoWrapper });
+  }
+  else if (fixtureId) { // Fixture specified but not found!
+    content = 'Fixture for id "' + fixtureId + '" not found!';
+  }
+  else { // List all available fixtures to display
+    const fixtures = demoSupport.FixturesContents(demoFixtures);
+    content = (
+      <div className="demoIndex">
+        <h3 className="demoIndex-Title">Available fixtures</h3>
+        {fixtures}
+        <h3 className="demoIndex-Title">Available demos</h3>
+        (TODO)
+        <p className="demoIndex-Comment">TODO: Navigation, styles, hierarchical components structure</p>
+      </div>
+    );
+  }
+
+  return content;
 }
-else if (fixtureId) { // Fixture specified but not found!
-  content = 'Fixture for id "' + fixtureId + '" not found!';
-}
-else { // List all available fixtures to display
-  const fixtures = demoSupport.FixturesContents(demoFixtures);
-  content = (
-    <div className="demoIndex">
-      <h3 className="demoIndex-Title">Available fixtures</h3>
-      {fixtures}
-      <h3 className="demoIndex-Title">Available demos</h3>
-      (TODO)
-      <p className="demoIndex-Comment">TODO: Navigation, styles, hierarchical components structure</p>
-    </div>
-  );
-}
+
+const content = getFixtureContent();
 
 /* // Demo redux state...
  * export function demoReducer(state = {}, action) {

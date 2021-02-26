@@ -180,7 +180,8 @@ module.exports = (env, argv) => {
   const demoModule = // 'AsyncModal' ||
     env.DEMO_MODULE || 'demo';
 
-  const jsEntryFile = isBuild ? 'build.jsx' : demoModule + '.jsx'; // js source
+  const jsEntryExt = '.tsx';
+  const jsEntryFile = (isBuild ? 'build' : demoModule) + jsEntryExt; // js source
 
   const bundleFile = 'bundle.js';
 
