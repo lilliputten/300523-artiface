@@ -37,6 +37,7 @@
     "pretty": true
   },
   "include": [
+    "src/custom.d.ts",
     "src/*"
   ]
 }

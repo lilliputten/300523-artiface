@@ -58,6 +58,7 @@ rules:
   react/destructuring-assignment: 0
   react/forbid-component-props: 0
   react/jsx-boolean-value: 0
+  react/jsx-filename-extension: [ 2, { 'extensions': [ '.js', '.jsx', '.ts', '.tsx' ] } ]
   react/jsx-closing-bracket-location: 0
   react/jsx-first-prop-new-line: 0
   react/jsx-fragments: 0
@@ -120,6 +121,9 @@ rules:
     -
       skipBlankLines: true
 overrides:
+  -  # ts
+    files: '**/*.{ts,tsx}'
+    parser: '@typescript-eslint/parser'
   -  # default js
     files: '**/*.{js,jsx}'
     env:

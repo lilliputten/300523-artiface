@@ -36,6 +36,8 @@ import './demo.pcss';
 import { demoFixtures } from './demoFixtures';
 
 // import { testVar } from './test'; // ts test
+// console.log(testVar);
+// debugger;
 
 /* // DEBUG: Check strings module
  * import { strings } from 'utils'

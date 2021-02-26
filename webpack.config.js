@@ -335,14 +335,15 @@ module.exports = (env, argv) => {
       host: '0.0.0.0',
     },
     module: { rules: [
-      { // ts
-        test: /\.tsx?$/,
-        use: 'ts-loader',
-        exclude: /node_modules/,
-        // @see https://github.com/TypeStrong/ts-loader#loader-options
-      },
+      // { // ts
+      //   test: /\.tsx?$/,
+      //   use: 'ts-loader',
+      //   exclude: /node_modules/,
+      //   // @see https://github.com/TypeStrong/ts-loader#loader-options
+      // },
       { // js
-        test: /\.(js|jsx)$/,
+        // test: /\.(js|jsx)$/,
+        test: /\.(ts|tsx|js|jsx)$/,
         exclude: /(node_modules)/,
         loader: 'babel-loader',
         options: {

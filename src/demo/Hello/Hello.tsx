@@ -9,7 +9,8 @@ import { cn } from 'utils/configure';
 
 import './Hello.pcss';
 
-import Image from './img/LockColor2.svg';
+import LockImage from './img/LockColor2.svg';
+// const LockImage = require('./img/LockColor2.svg'); // ts
 
 const cnHello = cn('Hello');
 
@@ -21,8 +22,8 @@ const Hello = ({ greeting = 'Greeting', name = 'Name' }) => {
   return (
     <div className={className} title={str}>
       <h1 className={cnHello('Title')}>{greeting}, {name}!</h1>
-      <div className={cnHello('Image')}>
-        <img src={Image} />
+      <div className={cnHello('LockImage')}>
+        <img src={LockImage} />
       </div>
     </div>
   );
