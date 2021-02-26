@@ -1,6 +1,6 @@
 /** @desc Webpack configuration
  *  @since 2020.05.18, 12:00
- *  @changed 2021.01.18, 23:54
+ *  @changed 2021.02.26, 14:19
  */
 /* eslint-disable no-console */
 
@@ -316,7 +316,7 @@ module.exports = (env, argv) => {
       ],
     },
     resolve: {
-      extensions: ['.js', '.jsx'],
+      extensions: [ '.ts', '.tsx', '.js', '.jsx' ],
     },
     output: {
       path: buildPath,
@@ -335,7 +335,13 @@ module.exports = (env, argv) => {
       host: '0.0.0.0',
     },
     module: { rules: [
-      { // JS
+      { // ts
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
+        // @see https://github.com/TypeStrong/ts-loader#loader-options
+      },
+      { // js
         test: /\.(js|jsx)$/,
         exclude: /(node_modules)/,
         loader: 'babel-loader',

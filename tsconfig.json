@@ -1,0 +1,42 @@
+{
+  "compilerOptions": {
+
+    "target": "es6",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "jsx": "react",
+    "lib": [
+      "dom",
+      "es7"
+    ],
+
+    "allowJs": true,
+
+    "sourceMap": true,
+    "allowSyntheticDefaultImports" : true,
+    "esModuleInterop" : true,
+
+    "rootDir": "src",
+    "baseUrl": "./src",
+
+    "strictFunctionTypes": true,
+    "strictNullChecks": true,
+
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noFallthroughCasesInSwitch": true,
+
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+
+    "downlevelIteration": true,
+
+    "esModuleInterop" : false,
+
+    "pretty": true
+  },
+  "include": [
+    "src/*"
+  ]
+}

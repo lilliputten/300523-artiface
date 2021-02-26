@@ -6,7 +6,10 @@
 
 import React from 'react';
 
-export config from 'config';
+// export config from 'config';
+import config from 'config';
+export { config };
+
 export * as utils from 'utils';
 export * as helpers from 'helpers';
 
@@ -14,7 +17,9 @@ export * from './elements';
 export * from './forms';
 
 // Demo component
-export Hello from './demo/Hello';
+// export Hello from './demo/Hello';
+import Hello from './demo/Hello';
+export { Hello };
 
 // Basic styles
 import './build.pcss';
