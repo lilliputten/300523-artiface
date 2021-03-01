@@ -55,12 +55,14 @@ const cssConfig = { // Common-used css variables...
   // Neutral colors...
 
   neutralExtraDarkColor: '#666',
+  neutralSuperDarkColor: '#777',
   neutralDarkColor: '#999',
   neutralTintedDarkColor: '#aaa',
   neutralShadedColor: '#bbb',
   neutralColor: '#ccc',
   neutralTintedColor: '#d0d0d0',
   neutralLightColor: '#e0e0e0',
+  neutralSuperLightColor: '#eee',
   neutralExtraLightColor: '#f0f0f0',
 
   // Theme colors...
