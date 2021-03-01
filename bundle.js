@@ -82,7 +82,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./src/build.jsx");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./src/build.tsx");
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -38628,9 +38628,20 @@ module.exports = g;
 
 /***/ }),
 
-/***/ "./src/build.jsx":
+/***/ "./src/build.pcss":
+/*!************************!*\
+  !*** ./src/build.pcss ***!
+  \************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
+/***/ "./src/build.tsx":
 /*!***********************!*\
-  !*** ./src/build.jsx ***!
+  !*** ./src/build.tsx ***!
   \***********************/
 /*! exports provided: config, utils, helpers, DateTimeSelector, InlineIcon, Loader, Menu, MenuItem, MenuItemSeparator, ModalWindow, ModalPopup, ModalPortal, ModalsContainer, FormItemHOC, FormItemDummy, FormLabel, FormButton, FormDelim, FormSpacer, FormSeparator, FormText, FormSelect, FormTextInput, FormPasswordInput, FormRadio, FormDateTime, FormDateRange, FormActions, FormContainer, FormGroup, FormLabeledGroup, FormButtonGroup, FormInputGroup, Hello, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -38708,7 +38719,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "FormInputGroup", function() { return _forms_forms__WEBPACK_IMPORTED_MODULE_5__["FormInputGroup"]; });
 
-/* harmony import */ var _demo_Hello_Hello__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./demo/Hello/Hello */ "./src/demo/Hello/Hello.jsx");
+/* harmony import */ var _demo_Hello_Hello__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./demo/Hello/Hello */ "./src/demo/Hello/Hello.tsx");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Hello", function() { return _demo_Hello_Hello__WEBPACK_IMPORTED_MODULE_6__["default"]; });
 
 /* harmony import */ var _build_pcss__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./build.pcss */ "./src/build.pcss");
@@ -38722,10 +38733,16 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+// export config from 'config';
+
+
+
 
 
 
 // Demo component
+// export Hello from './demo/Hello';
+
 
 
 // Basic styles
@@ -38743,17 +38760,6 @@ var WebUiCoreRoot = function WebUiCoreRoot(_ref) {var children = _ref.children,a
 
 };
 /* harmony default export */ __webpack_exports__["default"] = (WebUiCoreRoot);
-
-/***/ }),
-
-/***/ "./src/build.pcss":
-/*!************************!*\
-  !*** ./src/build.pcss ***!
-  \************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
 
 /***/ }),
 
@@ -38812,10 +38818,10 @@ module.exports = { // Common-used build variables...
   DEV_DEBUG: DEV_DEBUG,
 
   THEME: "default",
-  buildTag: "v.0.2.11-210225-2101-build-dev-default",
-  timestamp: "2021.02.25, 21:01",
-  timetag: "210225-2101",
-  version: "0.2.11" };
+  buildTag: "v.0.2.12-210301-1343-build-dev-default",
+  timestamp: "2021.03.01, 13:43",
+  timetag: "210301-1343",
+  version: "0.2.12" };
 
 /***/ }),
 
@@ -39338,9 +39344,20 @@ module.exports = userAgent;
 
 /***/ }),
 
-/***/ "./src/demo/Hello/Hello.jsx":
+/***/ "./src/demo/Hello/Hello.pcss":
+/*!***********************************!*\
+  !*** ./src/demo/Hello/Hello.pcss ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
+/***/ "./src/demo/Hello/Hello.tsx":
 /*!**********************************!*\
-  !*** ./src/demo/Hello/Hello.jsx ***!
+  !*** ./src/demo/Hello/Hello.tsx ***!
   \**********************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -39365,6 +39382,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+// const LockImage = require('./img/LockColor2.svg'); // ts
 
 var cnHello = Object(_utils_configure__WEBPACK_IMPORTED_MODULE_1__["cn"])('Hello');
 
@@ -39376,7 +39394,7 @@ var Hello = function Hello(_ref) {var _ref$greeting = _ref.greeting,greeting = _
   return /*#__PURE__*/(
     react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", { className: className, title: str }, /*#__PURE__*/
     react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", { className: cnHello('Title') }, greeting, ", ", name, "!"), /*#__PURE__*/
-    react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", { className: cnHello('Image') }, /*#__PURE__*/
+    react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", { className: cnHello('LockImage') }, /*#__PURE__*/
     react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", { src: _img_LockColor2_svg__WEBPACK_IMPORTED_MODULE_3__["default"] }))));
 
 
@@ -39384,17 +39402,6 @@ var Hello = function Hello(_ref) {var _ref$greeting = _ref.greeting,greeting = _
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Hello);
-
-/***/ }),
-
-/***/ "./src/demo/Hello/Hello.pcss":
-/*!***********************************!*\
-  !*** ./src/demo/Hello/Hello.pcss ***!
-  \***********************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
 
 /***/ }),
 
