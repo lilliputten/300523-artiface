@@ -1,6 +1,6 @@
 # CHANGELOG
 
-- 2021.02.26, 14:26 -- PD-3595, v.0.2.12: TS added.
+- 2021.02.26, 14:26 -- PD-3595, v.0.2.12: Typescript support added.
 - 2021.02.25, 21:00 -- PD-3591: Non-blocking popup wrapper (rewrited event handlers mechanism; ugly but working).
 - 2021.02.20, 19:31 -- v.0.2.11.
 - 2021.02.20, 19:30 -- FormActions: Minor changes (display menu without `withMenu` prop -- only if `menu` prop passed).
