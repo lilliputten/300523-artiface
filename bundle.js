@@ -38818,10 +38818,10 @@ module.exports = { // Common-used build variables...
   DEV_DEBUG: DEV_DEBUG,
 
   THEME: "default",
-  buildTag: "v.0.2.12-210301-1406-build-dev-default",
-  timestamp: "2021.03.01, 14:06",
-  timetag: "210301-1406",
-  version: "0.2.12" };
+  buildTag: "v.0.2.13-210303-0405-build-dev-default",
+  timestamp: "2021.03.03, 04:05",
+  timetag: "210303-0405",
+  version: "0.2.13" };
 
 /***/ }),
 
@@ -38974,8 +38974,9 @@ var cssConfig = { // Common-used css variables...
 
   themeColors: { // Generic theming colors...
 
-    // primary: theme.primaryColor,
-    // secondary: theme.primaryColor,
+    // ??? TODO: See buttons themes
+    primary: theme.primaryColor,
+    secondary: theme.primaryColor,
 
     error: errorColor,
     warn: warnColor,
@@ -39987,17 +39988,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _utils_configure__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../utils/configure */ "./src/utils/configure.js");
-/* harmony import */ var _helpers_ActionsContext__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../helpers/ActionsContext */ "./src/helpers/ActionsContext.jsx");
-/* harmony import */ var _MenuItem_MenuItem__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../MenuItem/MenuItem */ "./src/elements/MenuItem/MenuItem.jsx");
-/* harmony import */ var _MenuItemSeparator_MenuItemSeparator__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../MenuItemSeparator/MenuItemSeparator */ "./src/elements/MenuItemSeparator/MenuItemSeparator.jsx");
-/* harmony import */ var _Menu_pcss__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./Menu.pcss */ "./src/elements/Menu/Menu.pcss");
-/* harmony import */ var _Menu_pcss__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_Menu_pcss__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! redux */ "redux");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(redux__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _utils_configure__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../utils/configure */ "./src/utils/configure.js");
+/* harmony import */ var _helpers_ActionsContext__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../helpers/ActionsContext */ "./src/helpers/ActionsContext.jsx");
+/* harmony import */ var _MenuItem_MenuItem__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../MenuItem/MenuItem */ "./src/elements/MenuItem/MenuItem.jsx");
+/* harmony import */ var _MenuItemSeparator_MenuItemSeparator__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../MenuItemSeparator/MenuItemSeparator */ "./src/elements/MenuItemSeparator/MenuItemSeparator.jsx");
+/* harmony import */ var _Menu_pcss__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./Menu.pcss */ "./src/elements/Menu/Menu.pcss");
+/* harmony import */ var _Menu_pcss__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_Menu_pcss__WEBPACK_IMPORTED_MODULE_11__);
  /** @module Menu
                                                                                                                                                                                                                                                                                 *  @class Menu
                                                                                                                                                                                                                                                                                 *  @since 2020.10.27, 02:58
                                                                                                                                                                                                                                                                                 *  @changed 2021.02.15, 18:28
                                                                                                                                                                                                                                                                                 */
+
 
 
 
@@ -40010,12 +40014,17 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var cnMenu = Object(_utils_configure__WEBPACK_IMPORTED_MODULE_6__["cn"])('Menu');
+
+var cnMenu = Object(_utils_configure__WEBPACK_IMPORTED_MODULE_7__["cn"])('Menu');
 
 // Unique id counter
 var uniqIdCount = 1;var
 
 Menu = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helpers_inheritsLoose__WEBPACK_IMPORTED_MODULE_2___default()(Menu, _React$PureComponent);var _proto = Menu.prototype;
+
+
+
+
 
 
 
@@ -40052,7 +40061,7 @@ Menu = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helpers_inhe
 
   createItemElement = function createItemElement(item, n) {
     if (item && item.id === 'separator') {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(_MenuItemSeparator_MenuItemSeparator__WEBPACK_IMPORTED_MODULE_9__["default"], { key: 'separator' + n });
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(_MenuItemSeparator_MenuItemSeparator__WEBPACK_IMPORTED_MODULE_10__["default"], { key: 'separator' + n });
     }var _this$props2 =
 
 
@@ -40061,12 +40070,12 @@ Menu = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helpers_inhe
 
 
 
-    this.props,singleChoice = _this$props2.singleChoice,value = _this$props2.value,selected = _this$props2.selected,itemTheme = _this$props2.itemTheme,itemSelectedTheme = _this$props2.itemSelectedTheme,wrapContent = _this$props2.wrapContent;
+    this.props,singleChoice = _this$props2.singleChoice,value = _this$props2.value,selected = _this$props2.selected,itemTheme = _this$props2.itemTheme,checkedItemTheme = _this$props2.checkedItemTheme,wrapContent = _this$props2.wrapContent;
     var propsSelected = singleChoice && value != null ? [value] : selected;
     var isArray = !!item && Array.isArray(item);
     var isObject = !!item && typeof item === 'object' && !isArray; // Array.isArray(item)
     var isElement = isObject && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default.a.isValidElement(item);
-    var isMenuItem = isElement && item.type === _MenuItem_MenuItem__WEBPACK_IMPORTED_MODULE_8__["default"];
+    var isMenuItem = isElement && item.type === _MenuItem_MenuItem__WEBPACK_IMPORTED_MODULE_9__["default"];
     var isRawObject = isObject && !isElement;
     if (isRawObject || isMenuItem) {
       var itemProps = isRawObject ? item : item.props;
@@ -40076,7 +40085,7 @@ Menu = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helpers_inhe
       var checkable = itemProps.checkable != null ? itemProps.checkable : this.props.selectable;
       var newProps = _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0___default()({
         theme: itemTheme,
-        selectedTheme: itemSelectedTheme,
+        checkedTheme: checkedItemTheme,
         wrap: wrapContent,
         text: /* itemProps.text || */itemProps.id || itemProps.val },
       itemProps, {
@@ -40085,8 +40094,8 @@ Menu = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helpers_inhe
         checked: checked });
 
       if (isRawObject) {// Raw object -> create MenuItem
-        var key = item && item.key || this.getId() + '_Item_' + (itemProps.id || itemProps.val);
-        item = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(_MenuItem_MenuItem__WEBPACK_IMPORTED_MODULE_8__["default"], _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0___default()({}, newProps, { key: key }));
+        var key = item && item.key || this.getId() + '_Item_' + (itemProps.val || itemProps.id);
+        item = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(_MenuItem_MenuItem__WEBPACK_IMPORTED_MODULE_9__["default"], _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0___default()({}, newProps, { key: key }));
       } else
       if (isMenuItem) {// MenuItem -> Add onClick handler if handler is not defined
         item = _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0___default()({}, item, { props: newProps });
@@ -40134,7 +40143,7 @@ Menu = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helpers_inhe
       items = items.map(function (item) {
         var isObject = !!item && typeof item === 'object';
         var isElement = isObject && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default.a.isValidElement(item);
-        var isMenuItem = isElement && item.type === _MenuItem_MenuItem__WEBPACK_IMPORTED_MODULE_8__["default"];
+        var isMenuItem = isElement && item.type === _MenuItem_MenuItem__WEBPACK_IMPORTED_MODULE_9__["default"];
         if (isMenuItem) {
           var itemProps = item.props;var
           val = itemProps.val,checked = itemProps.checked;
@@ -40143,7 +40152,7 @@ Menu = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helpers_inhe
             checkedVal = singleChoice ? false : checked;
           }
           if (checkedVal !== checked) {
-            // const theme = (checkedVal && selectedTheme) ? selectedTheme : itemTheme || itemProps.theme;
+            // const theme = (checkedVal && checkedTheme) ? checkedTheme : itemTheme || itemProps.theme;
             item = _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0___default()({}, item, { props: _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0___default()({}, itemProps, { checked: checkedVal /* , theme */ }) });
             // TODO: Use `React.cloneElement`?
           }
@@ -40203,16 +40212,17 @@ Menu = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helpers_inhe
 
 
 
-      _this.props,id = _this$props4.id,onAction = _this$props4.onAction;
+      _this.props,id = _this$props4.id,actionsContextNode = _this$props4.actionsContextNode,onAction = _this$props4.onAction;
       var passProps = _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0___default()({}, actionProps, { menuId: id });
       // console.log('Menu:onAction', id, actionProps, passProps);
       // debugger;
       if (typeof onAction === 'function') {
         onAction(passProps);
       }
-      // if (actionsContextNode && typeof actionsContextNode.onAction === 'function') { // Use chaining ActionsContext?
-      //   actionsContextNode.onAction(passProps);
-      // }
+      // Using chained ActionsContext?
+      if (actionsContextNode && typeof actionsContextNode.onAction === 'function') {
+        actionsContextNode.onAction(passProps);
+      }
     });_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1___default()(_this), "onMenuItemClick",
 
     function (_ref3) {var val = _ref3.val;var _this$props5 =
@@ -40254,19 +40264,19 @@ Menu = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helpers_inhe
 
     return /*#__PURE__*/(
       react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement("div", renderProps, /*#__PURE__*/
-      react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(_helpers_ActionsContext__WEBPACK_IMPORTED_MODULE_7__["ActionsContextProvider"], { value: this },
+      react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(_helpers_ActionsContext__WEBPACK_IMPORTED_MODULE_8__["ActionsContextProvider"], { value: this },
       content)));
 
 
 
-  };return Menu;}(react__WEBPACK_IMPORTED_MODULE_4___default.a.PureComponent /** @lends @Menu.prototype */);
-
-
-
-// withActionsContext?
-_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3___default()(Menu, "propTypes", { className: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.string, disabled: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.bool, id: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.string, layout: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.string, mode: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.string, // ???
-  onChange: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.func, onClick: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.func, selectable: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.bool, wrapContent: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.bool, setDomRef: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.func, singleChoice: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.string, prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.bool]) // false, true, 'forced'
-});/* harmony default export */ __webpack_exports__["default"] = (Menu);
+  };return Menu;}(react__WEBPACK_IMPORTED_MODULE_4___default.a.PureComponent /** @lends @Menu.prototype */);_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3___default()(Menu, "propTypes", { className: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.string, disabled: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.bool, id: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.string, checkedItemTheme: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.string, itemTheme: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.string, layout: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.string, mode: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.string, // ???
+  onChange: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.func, onClick: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.func, selectable: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.bool, selected: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.arrayOf(prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.string, prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.number])), setDomRef: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.func, singleChoice: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.string, prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.bool]), // false, true, 'forced'
+  value: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.string, prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.number]), // ???
+  wrapContent: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.bool });
+/* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_6__["compose"])(
+_helpers_ActionsContext__WEBPACK_IMPORTED_MODULE_8__["withActionsContext"])(
+Menu));
+// export default Menu;
 
 /***/ }),
 
@@ -40354,6 +40364,7 @@ MenuItem = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helpers_
 
 
 
+
   // Lifecycle...
 
   function MenuItem(props) {var _this;
@@ -40378,7 +40389,8 @@ MenuItem = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helpers_
 
 
 
-      _this.props,id = _this$props.id,val = _this$props.val,onClick = _this$props.onClick,actionsContextNode = _this$props.actionsContextNode,disabled = _this$props.disabled;
+
+      _this.props,id = _this$props.id,val = _this$props.val,onClick = _this$props.onClick,actionsContextNode = _this$props.actionsContextNode,disabled = _this$props.disabled,data = _this$props.data;
       if (!disabled) {
         // console.log('MenuItem:onClick', {
         //   id,
@@ -40393,7 +40405,8 @@ MenuItem = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helpers_
           // ...event,
           id: id || val,
           val: val,
-          component: _babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1___default()(_this) };
+          component: _babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1___default()(_this),
+          data: data };
 
         var result = hasOnClick ? onClick(actionProps) : undefined; // true;
         if (result !== false && actionsContextNode && typeof actionsContextNode.onAction === 'function') {
@@ -40424,7 +40437,8 @@ MenuItem = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helpers_
 
 
 
-    this.props,id = _this$props2.id,checkable = _this$props2.checkable,hasIcon = _this$props2.hasIcon,icon = _this$props2.icon,checked = _this$props2.checked,disabled = _this$props2.disabled,theme = _this$props2.theme,wrap = _this$props2.wrap;
+
+    this.props,id = _this$props2.id,checkable = _this$props2.checkable,hasIcon = _this$props2.hasIcon,icon = _this$props2.icon,checked = _this$props2.checked,disabled = _this$props2.disabled,theme = _this$props2.theme,checkedTheme = _this$props2.checkedTheme,wrap = _this$props2.wrap;
     var className = cnMenuItem({
       id: id,
       checkable: checkable,
@@ -40432,7 +40446,7 @@ MenuItem = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helpers_
       // hasIcon,
       checked: checked,
       disabled: disabled,
-      theme: theme,
+      theme: checked && checkedTheme ? checkedTheme : theme,
       wrap: wrap },
     [this.props.className]);
     return className;
@@ -40491,10 +40505,10 @@ MenuItem = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helpers_
       textContent));
 
 
-  };return MenuItem;}(react__WEBPACK_IMPORTED_MODULE_4___default.a.PureComponent /** @lends @MenuItem.prototype */);_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3___default()(MenuItem, "propTypes", { checkable: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.bool, checked: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.bool, className: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.string, disabled: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.bool, htmlId: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.string, // ???
-  theme: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.string, icon: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.string, prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.object]), id: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.string, onClick: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.func, setDomRef: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.func, // From FormItemHOC
-  text: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.string, val: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.string, prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.number]), hasIcon: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.bool, wrap: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.bool // setNodeRef: PropTypes.func, // ??? use ref in parent component
-});
+  };return MenuItem;}(react__WEBPACK_IMPORTED_MODULE_4___default.a.PureComponent /** @lends @MenuItem.prototype */);_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3___default()(MenuItem, "propTypes", { // setNodeRef: PropTypes.func, // ??? use ref in parent component
+  checkable: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.bool, checked: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.bool, checkedTheme: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.string, className: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.string, disabled: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.bool, hasIcon: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.bool, htmlId: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.string, // ???
+  icon: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.string, prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.object]), id: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.string, onClick: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.func, setDomRef: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.func, // From FormItemHOC
+  text: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.string, theme: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.string, val: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.string, prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.number]), wrap: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.bool });
 /* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_6__["compose"])(
 _helpers_ActionsContext__WEBPACK_IMPORTED_MODULE_9__["withActionsContext"],
 Object(_forms_FormItemHOC_FormItemHOC__WEBPACK_IMPORTED_MODULE_11__["default"])({ solid: true, hoverable: true, focusable: true }))(
@@ -41843,7 +41857,7 @@ ModalPortal = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helpe
       var prevOpen = _this.state.open;
       // console.log('ModalPortal:close', this.props.id, prevOpen)
       if (prevOpen) {
-        _this.setState({ open: false }, _this.updateShowWithState);
+        _this.setState({ open: false }); // , this.updateShowWithState);
       }
     });_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1___default()(_this), "open",
 
@@ -41855,9 +41869,9 @@ ModalPortal = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helpe
         _this.resolvingResult = null; // Reset resolving action
         // First activate portal then enter into opening animation
         _this.activate(function () {
-          _this.setState({ open: open }, _this.updateShowWithState);
+          _this.setState({ open: open }); // , this.updateShowWithState);
         });
-        _this.activate(function () {return _this.setState({ open: open }, _this.updateShowWithState);});
+        // this.activate(() => this.setState({ open }, this.updateShowWithState)); // ??? WTF?
       }
     });_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1___default()(_this), "updateGeometry",
 
@@ -41949,7 +41963,7 @@ ModalPortal = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helpe
       open = _this.props.open;
       if (open) {// Immediately open if passed open status
         // this.activate(() => this.setState({ open: true }))
-        _this.activate(function () {return _this.setState({ open: true });}, _this.updateShowWithState);
+        _this.activate(function () {return _this.setState({ open: true });}); // , this.updateShowWithState);
       }
     });_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1___default()(_this), "onAction",
 
@@ -42305,13 +42319,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ModalPortal_ModalPortal__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../ModalPortal/ModalPortal */ "./src/elements/ModalPortal/ModalPortal.jsx");
 /* harmony import */ var _InlineIcon_InlineIcon__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../InlineIcon/InlineIcon */ "./src/elements/InlineIcon/InlineIcon.jsx");
 /* harmony import */ var _forms_FormButton_FormButton__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../forms/FormButton/FormButton */ "./src/forms/FormButton/FormButton.jsx");
-/* harmony import */ var _helpers_ActionsContext__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../helpers/ActionsContext */ "./src/helpers/ActionsContext.jsx");
-/* harmony import */ var _ModalWindow_Geometry_pcss__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./ModalWindow-Geometry.pcss */ "./src/elements/ModalWindow/ModalWindow-Geometry.pcss");
-/* harmony import */ var _ModalWindow_Geometry_pcss__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(_ModalWindow_Geometry_pcss__WEBPACK_IMPORTED_MODULE_12__);
-/* harmony import */ var _ModalWindow_Themes_pcss__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./ModalWindow-Themes.pcss */ "./src/elements/ModalWindow/ModalWindow-Themes.pcss");
-/* harmony import */ var _ModalWindow_Themes_pcss__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(_ModalWindow_Themes_pcss__WEBPACK_IMPORTED_MODULE_13__);
-/* harmony import */ var _ModalWindow_Errors_pcss__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./ModalWindow-Errors.pcss */ "./src/elements/ModalWindow/ModalWindow-Errors.pcss");
-/* harmony import */ var _ModalWindow_Errors_pcss__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(_ModalWindow_Errors_pcss__WEBPACK_IMPORTED_MODULE_14__);
+/* harmony import */ var _forms_FormActions_FormActions__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../forms/FormActions/FormActions */ "./src/forms/FormActions/FormActions.jsx");
+/* harmony import */ var _helpers_ActionsContext__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../helpers/ActionsContext */ "./src/helpers/ActionsContext.jsx");
+/* harmony import */ var _ModalWindow_Geometry_pcss__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./ModalWindow-Geometry.pcss */ "./src/elements/ModalWindow/ModalWindow-Geometry.pcss");
+/* harmony import */ var _ModalWindow_Geometry_pcss__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(_ModalWindow_Geometry_pcss__WEBPACK_IMPORTED_MODULE_13__);
+/* harmony import */ var _ModalWindow_Themes_pcss__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./ModalWindow-Themes.pcss */ "./src/elements/ModalWindow/ModalWindow-Themes.pcss");
+/* harmony import */ var _ModalWindow_Themes_pcss__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(_ModalWindow_Themes_pcss__WEBPACK_IMPORTED_MODULE_14__);
+/* harmony import */ var _ModalWindow_Errors_pcss__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./ModalWindow-Errors.pcss */ "./src/elements/ModalWindow/ModalWindow-Errors.pcss");
+/* harmony import */ var _ModalWindow_Errors_pcss__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(_ModalWindow_Errors_pcss__WEBPACK_IMPORTED_MODULE_15__);
  /** @module ModalWindow
                                                                                                                                                                                                                                                                                 *  @class ModalWindow
                                                                                                                                                                                                                                                                                 *  @since 2020.12.21, 22:58
@@ -42325,6 +42340,7 @@ __webpack_require__.r(__webpack_exports__);
                                                                                                                                                                                                                                                                                 *  TODO 2020.12.29, 21:51 -- Use level mod (increase margins)
                                                                                                                                                                                                                                                                                 */
 /* --eslint-disable no-console */
+
 
 
 
@@ -42436,7 +42452,7 @@ ModalWindow = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helpe
       }
       var actionId = actionProps.id;var _this$props2 =
       _this.props,open = _this$props2.open,actionsContextNode = _this$props2.actionsContextNode,autoClose = _this$props2.autoClose,closeOnCancelAction = _this$props2.closeOnCancelAction;
-      // console.log('ModalWindow:onAction', this.props.id, actionId)
+      // console.log('ModalWindow:onAction', this.props.id, actionId);
       ModalPortal.setResult(actionId);
       if (open && (autoClose || closeOnCancelAction && actionId === 'cancel')) {// Close and call `resolveResult` when window is closed
         ModalPortal.close();
@@ -42592,6 +42608,7 @@ ModalWindow = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helpe
 
 
 
+
     function () /* portalProps */{
       // const { ModalPortal } = portalProps || {} // !!!
       // this.ModalPortal = ModalPortal // Save ModalPortal handler
@@ -42614,8 +42631,8 @@ ModalWindow = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helpe
   _proto.renderHeaderIcon = function renderHeaderIcon() {var _this$props4 = this.props,icon = _this$props4.icon,iconTheme = _this$props4.iconTheme;var theme = iconTheme || this.props.theme;var showIcon = icon || theme && _config_config__WEBPACK_IMPORTED_MODULE_7___default.a.ui.defaultIcons[theme];return showIcon && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement("div", { key: "HeaderIcon", className: cnModalWindow('HeaderIcon', { theme: theme }) }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(_InlineIcon_InlineIcon__WEBPACK_IMPORTED_MODULE_9__["default"], { theme: theme, icon: showIcon }));};_proto.renderHeaderTitle = function renderHeaderTitle() {var title = this.props.title;return title && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement("div", { key: "HeaderTitle", className: cnModalWindow('HeaderTitle') }, title);};_proto.renderHeaderCloseButton = function renderHeaderCloseButton() {var showCloseButton = this.props.showCloseButton;return showCloseButton && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement("div", { key: "HeaderCloseButton", className: cnModalWindow('HeaderCloseButton') }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(_forms_FormButton_FormButton__WEBPACK_IMPORTED_MODULE_10__["default"], { icon: "faTimes", largeIcon: true, plain: true, title: "Close window" // TODO; Translate?
       , onClick: this.onCloseButtonClick }));};_proto.renderHeader = function renderHeader() {var _this$props5 = this.props,headerTheme = _this$props5.headerTheme,theme = _this$props5.theme;var content = [this.renderHeaderIcon(), this.renderHeaderTitle(), this.renderHeaderCloseButton()].filter(Boolean);var hasHeader = !!(content && content.length);return hasHeader && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement("div", { className: cnModalWindow('Header', { theme: headerTheme || theme }) }, content);};_proto.renderLeftContent = function renderLeftContent() {var leftContent = this.props.leftContent;return leftContent && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement("div", { className: cnModalWindow('LeftContent') }, leftContent);};_proto.renderContent = function renderContent() {var _this$props6 = this.props,children = _this$props6.children,contentClassName = _this$props6.contentClassName,error = _this$props6.error; // console.log('ModalWindow:renderContent', children)
     // debugger
-    var errorContent = error && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement("div", { className: cnModalWindow('Error') }, this.renderContentError(error));return children && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement("div", { className: cnModalWindow('Content', [contentClassName]) }, errorContent, children);};_proto.renderActions = function renderActions() {var actions = this.props.actions;return actions && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement("div", { className: cnModalWindow('Actions') }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(_helpers_ActionsContext__WEBPACK_IMPORTED_MODULE_11__["ActionsContextProvider"], { value: this }, actions));};_proto.render = function render() {var _this2 = this;var portalProps = _ModalPortal_ModalPortal__WEBPACK_IMPORTED_MODULE_8__["passModalPortalProps"].reduce(function (data, id) {var _extends2;return _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0___default()({}, data, (_extends2 = {}, _extends2[id] = _this2.props[id], _extends2));}, {});
-    Object.assign(portalProps, {
+    var errorContent = error && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement("div", { className: cnModalWindow('Error') }, this.renderContentError(error));return children && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement("div", { className: cnModalWindow('Content', [contentClassName]) }, errorContent, children);};_proto.renderActions = function renderActions() {var actions = this.props.actions; // Allow to treat actions as ids/texts/ list see `FromActions`.
+    return actions && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(_helpers_ActionsContext__WEBPACK_IMPORTED_MODULE_12__["ActionsContextProvider"], { value: this }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(_forms_FormActions_FormActions__WEBPACK_IMPORTED_MODULE_11__["default"], { className: cnModalWindow('Actions') }, actions));};_proto.render = function render() {var _this2 = this;var portalProps = _ModalPortal_ModalPortal__WEBPACK_IMPORTED_MODULE_8__["passModalPortalProps"].reduce(function (data, id) {var _extends2;return _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0___default()({}, data, (_extends2 = {}, _extends2[id] = _this2.props[id], _extends2));}, {});Object.assign(portalProps, {
       handleOpenState: this.handleOpenState
       // onActivate: this.onActivate,
       // onDeactivate: this.onDeactivate,
@@ -43148,7 +43165,7 @@ FormActions = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helpe
 
 
   };return FormActions;}(react__WEBPACK_IMPORTED_MODULE_5___default.a.PureComponent /** @lends @FormActions.prototype */);_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_4___default()(FormActions, "propTypes", { // children,
-  actions: prop_types__WEBPACK_IMPORTED_MODULE_7___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_7___default.a.array, prop_types__WEBPACK_IMPORTED_MODULE_7___default.a.object]), actionsContextNode: prop_types__WEBPACK_IMPORTED_MODULE_7___default.a.element, // ActionsContext Provider
+  actions: prop_types__WEBPACK_IMPORTED_MODULE_7___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_7___default.a.array, prop_types__WEBPACK_IMPORTED_MODULE_7___default.a.object]), actionsContextNode: prop_types__WEBPACK_IMPORTED_MODULE_7___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_7___default.a.element, prop_types__WEBPACK_IMPORTED_MODULE_7___default.a.object]), // ActionsContext Provider or object contained `onAction` method
   className: prop_types__WEBPACK_IMPORTED_MODULE_7___default.a.string, disabled: prop_types__WEBPACK_IMPORTED_MODULE_7___default.a.bool, id: prop_types__WEBPACK_IMPORTED_MODULE_7___default.a.string, // layout: PropTypes.string,
   menu: prop_types__WEBPACK_IMPORTED_MODULE_7___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_7___default.a.array, prop_types__WEBPACK_IMPORTED_MODULE_7___default.a.object]), menuButtonTheme: prop_types__WEBPACK_IMPORTED_MODULE_7___default.a.string, onAction: prop_types__WEBPACK_IMPORTED_MODULE_7___default.a.func, withMenu: prop_types__WEBPACK_IMPORTED_MODULE_7___default.a.bool, setPopupNodeRef: prop_types__WEBPACK_IMPORTED_MODULE_7___default.a.func // See props definitions for FormGroup
 });/* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_6__["compose"])(
@@ -45269,7 +45286,7 @@ var classNameModifiers = [// Pass props/state params to class modifiers
 'hovered',
 'focused',
 'pressed',
-'checked',
+// 'checked', // Use in derived elements
 'disabled'
 // 'fill', // (???)
 ];
