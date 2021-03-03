@@ -21,6 +21,7 @@ import ModalPortal, { passModalPortalProps } from 'elements/ModalPortal';
 
 import InlineIcon from 'elements/InlineIcon';
 import FormButton from 'forms/FormButton';
+import FormActions from 'forms/FormActions';
 
 import { ActionsContextProvider } from 'helpers/ActionsContext';
 
@@ -122,7 +123,7 @@ class ModalWindow extends React.PureComponent /** @lends @ModalWindow.prototype 
     }
     const actionId = actionProps.id;
     const { open, actionsContextNode, autoClose, closeOnCancelAction } = this.props;
-    // console.log('ModalWindow:onAction', this.props.id, actionId)
+    // console.log('ModalWindow:onAction', this.props.id, actionId);
     ModalPortal.setResult(actionId);
     if (open && (autoClose || (closeOnCancelAction && actionId === 'cancel'))) { // Close and call `resolveResult` when window is closed
       ModalPortal.close();
@@ -269,12 +270,13 @@ class ModalWindow extends React.PureComponent /** @lends @ModalWindow.prototype 
 
   renderActions() {
     const { actions } = this.props;
+    // Allow to treat actions as ids/texts/ list see `FromActions`.
     return actions && (
-      <div className={cnModalWindow('Actions')}>
-        <ActionsContextProvider value={this}>
+      <ActionsContextProvider value={this}>
+        <FormActions className={cnModalWindow('Actions')}>
           {actions}
-        </ActionsContextProvider>
-      </div>
+        </FormActions>
+      </ActionsContextProvider>
     );
   }
 
