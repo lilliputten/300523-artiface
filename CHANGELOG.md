@@ -1,5 +1,6 @@
 # CHANGELOG
 
+- 2021.03.03, 03:56 -- Css config parameters: added `primary` & `secondary` to theme names.
 - 2021.03.03, 03:54 -- Menu: fixed prop types, added chained actions context.
 - 2021.02.26, 14:26 -- PD-3595, v.0.2.12: Typescript support added.
 - 2021.02.25, 21:00 -- PD-3591: Non-blocking popup wrapper (rewrited event handlers mechanism; ugly but working).
@@ -102,5 +103,5 @@
 - 2020.10.05, 20:38 -- v.0.0.15: Extracted `demoSupport.jsx` routines, fixture selection from url query (parameter `fixture`), added avaialble fixtures list if fixture to display is not specified, added DemoWrapper & demoTitle exportable ficture parameters for demo rendering.
 
 <!--
- @changed 2021.03.03, 03:55
+ @changed 2021.03.03, 03:56
 -->

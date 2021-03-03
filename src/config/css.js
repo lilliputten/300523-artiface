@@ -76,8 +76,9 @@ const cssConfig = { // Common-used css variables...
 
   themeColors: { // Generic theming colors...
 
-    // primary: theme.primaryColor,
-    // secondary: theme.primaryColor,
+    // ??? TODO: See buttons themes
+    primary: theme.primaryColor,
+    secondary: theme.primaryColor,
 
     error: errorColor,
     warn: warnColor,
