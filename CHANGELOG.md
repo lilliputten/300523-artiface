@@ -1,5 +1,6 @@
 # CHANGELOG
 
+- 2021.03.03, 04:04 -- v.0.2.13.
 - 2021.03.03, 04:03 -- Minor changes: removed extra `checked` prop from `FormItem`, fixed prop types in `FormActions`.
 - 2021.03.03, 04:02 -- ModalWindow: Used FormActions for actions block (can be specified as buttons list, not react elements).
 - 2021.03.03, 04:00 -- ModalPortal: Removed extra `updateShowWithState` calls after state changes.
@@ -107,5 +108,5 @@
 - 2020.10.05, 20:38 -- v.0.0.15: Extracted `demoSupport.jsx` routines, fixture selection from url query (parameter `fixture`), added avaialble fixtures list if fixture to display is not specified, added DemoWrapper & demoTitle exportable ficture parameters for demo rendering.
 
 <!--
- @changed 2021.03.03, 04:03
+ @changed 2021.03.03, 04:04
 -->
