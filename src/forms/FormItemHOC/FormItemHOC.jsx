@@ -26,7 +26,7 @@ const classNameModifiers = [ // Pass props/state params to class modifiers
   'hovered',
   'focused',
   'pressed',
-  'checked',
+  // 'checked', // Use in derived elements
   'disabled',
   // 'fill', // (???)
 ];

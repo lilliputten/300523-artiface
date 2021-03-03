@@ -37,7 +37,7 @@ class FormActions extends React.PureComponent /** @lends @FormActions.prototype 
   static propTypes = {
     // children,
     actions: PropTypes.oneOfType([ PropTypes.array, PropTypes.object ]),
-    actionsContextNode: PropTypes.element, // ActionsContext Provider
+    actionsContextNode: PropTypes.oneOfType([ PropTypes.element, PropTypes.object ]), // ActionsContext Provider or object contained `onAction` method
     className: PropTypes.string,
     disabled: PropTypes.bool,
     id: PropTypes.string,
