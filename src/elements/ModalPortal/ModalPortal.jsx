@@ -268,7 +268,7 @@ class ModalPortal extends React.PureComponent /** @lends @ModalPortal.prototype 
     const { open: prevOpen } = this.state;
     // console.log('ModalPortal:close', this.props.id, prevOpen)
     if (prevOpen) {
-      this.setState({ open: false }, this.updateShowWithState);
+      this.setState({ open: false }); // , this.updateShowWithState);
     }
   }
 
@@ -280,9 +280,9 @@ class ModalPortal extends React.PureComponent /** @lends @ModalPortal.prototype 
       this.resolvingResult = null; // Reset resolving action
       // First activate portal then enter into opening animation
       this.activate(() => {
-        this.setState({ open }, this.updateShowWithState);
+        this.setState({ open }); // , this.updateShowWithState);
       });
-      this.activate(() => this.setState({ open }, this.updateShowWithState));
+      // this.activate(() => this.setState({ open }, this.updateShowWithState)); // ??? WTF?
     }
   }
 
@@ -374,7 +374,7 @@ class ModalPortal extends React.PureComponent /** @lends @ModalPortal.prototype 
     const { open } = this.props;
     if (open) { // Immediately open if passed open status
       // this.activate(() => this.setState({ open: true }))
-      this.activate(() => this.setState({ open: true }), this.updateShowWithState);
+      this.activate(() => this.setState({ open: true })); // , this.updateShowWithState);
     }
   }
 

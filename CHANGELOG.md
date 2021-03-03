@@ -1,5 +1,6 @@
 # CHANGELOG
 
+- 2021.03.03, 04:00 -- ModalPortal: Removed extra `updateShowWithState` calls after state changes.
 - 2021.03.03, 03:58 -- MenuItem: fixed prop types, added item data parameter (passed to onClick or onAction events), checkedTheme prop.
 - 2021.03.03, 03:56 -- Css config parameters: added `primary` & `secondary` to theme names.
 - 2021.03.03, 03:54 -- Menu: fixed prop types, added chained actions context.
@@ -104,5 +105,5 @@
 - 2020.10.05, 20:38 -- v.0.0.15: Extracted `demoSupport.jsx` routines, fixture selection from url query (parameter `fixture`), added avaialble fixtures list if fixture to display is not specified, added DemoWrapper & demoTitle exportable ficture parameters for demo rendering.
 
 <!--
- @changed 2021.03.03, 03:58
+ @changed 2021.03.03, 04:00
 -->
