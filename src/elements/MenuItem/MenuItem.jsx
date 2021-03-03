@@ -23,21 +23,22 @@ const cnMenuItem = cn('MenuItem');
 class MenuItem extends React.PureComponent /** @lends @MenuItem.prototype */ {
 
   static propTypes = {
+    // setNodeRef: PropTypes.func, // ??? use ref in parent component
     checkable: PropTypes.bool,
     checked: PropTypes.bool,
+    checkedTheme: PropTypes.string,
     className: PropTypes.string,
     disabled: PropTypes.bool,
+    hasIcon: PropTypes.bool,
     htmlId: PropTypes.string, // ???
-    theme: PropTypes.string,
     icon: PropTypes.oneOfType([ PropTypes.string, PropTypes.object ]),
     id: PropTypes.string,
     onClick: PropTypes.func,
     setDomRef: PropTypes.func, // From FormItemHOC
     text: PropTypes.string,
+    theme: PropTypes.string,
     val: PropTypes.oneOfType([ PropTypes.string, PropTypes.number ]),
-    hasIcon: PropTypes.bool,
     wrap: PropTypes.bool,
-    // setNodeRef: PropTypes.func, // ??? use ref in parent component
   }
 
   // Lifecycle...
@@ -64,6 +65,7 @@ class MenuItem extends React.PureComponent /** @lends @MenuItem.prototype */ {
       onClick,
       actionsContextNode, // ActionsContext Provider
       disabled,
+      data,
     } = this.props;
     if (!disabled) {
       // console.log('MenuItem:onClick', {
@@ -80,6 +82,7 @@ class MenuItem extends React.PureComponent /** @lends @MenuItem.prototype */ {
         id: id || val,
         val,
         component: this,
+        data,
       };
       const result = hasOnClick ? onClick(actionProps) : undefined; // true;
       if (result !== false && actionsContextNode && typeof actionsContextNode.onAction === 'function') {
@@ -109,6 +112,7 @@ class MenuItem extends React.PureComponent /** @lends @MenuItem.prototype */ {
       checked,
       disabled,
       theme,
+      checkedTheme,
       wrap,
     } = this.props;
     const className = cnMenuItem({
@@ -118,7 +122,7 @@ class MenuItem extends React.PureComponent /** @lends @MenuItem.prototype */ {
       // hasIcon,
       checked,
       disabled,
-      theme,
+      theme: (checked && checkedTheme) ? checkedTheme : theme,
       wrap,
     }, [this.props.className]);
     return className;

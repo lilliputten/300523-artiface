@@ -30,19 +30,37 @@
   }
   &_theme {
     // Theme colors...
+    @define-mixin MenuItemTheme $color {
+      & .MenuItem-Icon {
+        color: $color;
+        opacity: .75;
+      }
+      &.MenuItem_checked, // Use theme background color for checked items?
+      &.FormItem_hovered {
+        background-color: $color;
+        color: $primaryContrastColor;
+        & .MenuItem-Icon {
+          color: $primaryContrastColor;
+          opacity: .5;
+        }
+      }
+      &.MenuItem_checked.FormItem_hovered { // Use theme background color for checked items?
+        background-color: color($color shade(20));
+        // & .MenuItem-Icon {
+        //   color: $primaryContrastColor;
+        //   opacity: .5;
+        // }
+      }
+    }
+    // &_primary {
+    //   @mixin MenuItemTheme $primaryColor;
+    // }
+    // &_secondary {
+    //   @mixin MenuItemTheme $primaryColor;
+    // }
     @each $color $name in $themeColors {
       &_$(name) {
-        & .MenuItem-Icon {
-          color: $color;
-          opacity: .75;
-        }
-        &.FormItem_hovered {
-          background-color: $color;
-          & .MenuItem-Icon {
-            color: $primaryContrastColor;
-            opacity: .5;
-          }
-        }
+        @mixin MenuItemTheme $color;
       }
     }
   }
