@@ -31,6 +31,13 @@ const onClick = (params) => {
   console.log('Menu.fixture: onClick handler', { value, params });
 };
 
+const literalItemsList = [
+  { val: 1, text: 'Swimming' },
+  { val: 2, text: 'Skiing' },
+  { id: 'separator' },
+  { val: 3, text: 'Skiing' },
+];
+
 export default {
   simple: (
     <Menu id="simple">
@@ -39,12 +46,7 @@ export default {
   ),
   withSeparator: (
     <Menu id="withSeparator" onClick={onClick}>
-      {[
-        { val: 1, text: 'Swimming' },
-        { val: 2, text: 'Skiing' },
-        { id: 'separator' },
-        { val: 3, text: 'Skiing' },
-      ]}
+      {literalItemsList}
     </Menu>
   ),
   horizontal: (

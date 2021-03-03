@@ -6,11 +6,12 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import { compose } from 'redux';
 // import connect from 'react-redux/es/connect/connect';
 import { cn } from 'utils/configure';
 import { // ActionsContext...
   ActionsContextProvider,
-  // withActionsContext,
+  withActionsContext,
 } from 'helpers/ActionsContext';
 
 import MenuItem from '../MenuItem';
@@ -29,14 +30,18 @@ class Menu extends React.PureComponent /** @lends @Menu.prototype */ {
     className: PropTypes.string,
     disabled: PropTypes.bool,
     id: PropTypes.string,
+    checkedItemTheme: PropTypes.string,
+    itemTheme: PropTypes.string,
     layout: PropTypes.string,
     mode: PropTypes.string, // ???
     onChange: PropTypes.func,
     onClick: PropTypes.func,
     selectable: PropTypes.bool,
-    wrapContent: PropTypes.bool,
+    selected: PropTypes.arrayOf(PropTypes.oneOfType([ PropTypes.string, PropTypes.number ])),
     setDomRef: PropTypes.func,
     singleChoice: PropTypes.oneOfType([ PropTypes.string, PropTypes.bool ]), // false, true, 'forced'
+    value: PropTypes.oneOfType([ PropTypes.string, PropTypes.number ]), // ???
+    wrapContent: PropTypes.bool,
   }
 
   // Helper fuctions...
@@ -67,7 +72,7 @@ class Menu extends React.PureComponent /** @lends @Menu.prototype */ {
       value,
       selected,
       itemTheme,
-      itemSelectedTheme,
+      checkedItemTheme,
       wrapContent,
     } = this.props;
     const propsSelected = (singleChoice && value != null) ? [value] : selected;
@@ -84,7 +89,7 @@ class Menu extends React.PureComponent /** @lends @Menu.prototype */ {
       const checkable = itemProps.checkable != null ? itemProps.checkable : this.props.selectable;
       const newProps = {
         theme: itemTheme,
-        selectedTheme: itemSelectedTheme,
+        checkedTheme: checkedItemTheme,
         wrap: wrapContent,
         text: /* itemProps.text || */ itemProps.id || itemProps.val, // Default value for text (overriding with itemProps.text value if specified)
         ...itemProps,
@@ -93,7 +98,7 @@ class Menu extends React.PureComponent /** @lends @Menu.prototype */ {
         checked,
       };
       if (isRawObject) { // Raw object -> create MenuItem
-        const key = item && item.key || this.getId() + '_Item_' + (itemProps.id || itemProps.val);
+        const key = item && item.key || this.getId() + '_Item_' + (itemProps.val || itemProps.id);
         item = (<MenuItem {...newProps} key={key} />);
       }
       else if (isMenuItem) { // MenuItem -> Add onClick handler if handler is not defined
@@ -151,7 +156,7 @@ class Menu extends React.PureComponent /** @lends @Menu.prototype */ {
             checkedVal = singleChoice ? false : checked;
           }
           if (checkedVal !== checked) {
-            // const theme = (checkedVal && selectedTheme) ? selectedTheme : itemTheme || itemProps.theme;
+            // const theme = (checkedVal && checkedTheme) ? checkedTheme : itemTheme || itemProps.theme;
             item = { ...item, props: { ...itemProps, checked: checkedVal /* , theme */ } };
             // TODO: Use `React.cloneElement`?
           }
@@ -209,7 +214,7 @@ class Menu extends React.PureComponent /** @lends @Menu.prototype */ {
   onAction = (actionProps) => { // Event handler for ActionContext consumed children
     const {
       id,
-      // actionsContextNode, // Using with `withActionsContext` only!
+      actionsContextNode, // Using with `withActionsContext` only!
       onAction,
     } = this.props;
     const passProps = { ...actionProps, menuId: id };
@@ -218,9 +223,10 @@ class Menu extends React.PureComponent /** @lends @Menu.prototype */ {
     if (typeof onAction === 'function') {
       onAction(passProps);
     }
-    // if (actionsContextNode && typeof actionsContextNode.onAction === 'function') { // Use chaining ActionsContext?
-    //   actionsContextNode.onAction(passProps);
-    // }
+    // Using chained ActionsContext?
+    if (actionsContextNode && typeof actionsContextNode.onAction === 'function') {
+      actionsContextNode.onAction(passProps);
+    }
   }
 
   onMenuItemClick = ({ /* id, component, */ val }) => {
@@ -271,5 +277,7 @@ class Menu extends React.PureComponent /** @lends @Menu.prototype */ {
 
 }
 
-// withActionsContext?
-export default Menu;
+export default compose(
+  withActionsContext,
+)(Menu);
+// export default Menu;
