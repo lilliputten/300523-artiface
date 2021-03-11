@@ -1,12 +1,12 @@
-/** @module FormDateRange.fixture
+/** @module FormDateRangeSingleBox.fixture
  *  @since 2021.01.26, 13:19
- *  @changed 2021.03.11, 19:38
+ *  @changed 2021.01.26, 13:19
  */
 /* eslint-disable react/jsx-max-depth, no-console */
 
 import React from 'react';
 
-import FormDateRange from './FormDateRange';
+import FormDateRangeSingleBox from './FormDateRangeSingleBox';
 
 import FormGroup from '../FormGroup';
 
@@ -15,24 +15,22 @@ import * as dateUtils from 'utils/dates';
 // Demo styles for cosmos engine
 import 'demo.pcss';
 
-import './FormDateRange.fixture.pcss';
+import './FormDateRangeSingleBox.fixture.pcss';
 
 export const DemoWrapper = FormGroup;
 // export const DemoWrapper = <FormGroup stack id="Wrapper" />; // ({ children }) => {
 
 const thisDate = Date.now() - 2 * dateUtils.dayTicks;
-// const startDate = dateUtils.startOfTheDay(thisDate);
-// const endDate = dateUtils.endOfTheDay(thisDate + 3 * dateUtils.dayTicks, true);
-const startDate = new Date(dateUtils.startOfTheDay(thisDate));
-const endDate = new Date(dateUtils.endOfTheDay(thisDate + 3 * dateUtils.dayTicks, true));
+const startDate = dateUtils.startOfTheDay(thisDate);
+const endDate = dateUtils.endOfTheDay(thisDate + 3 * dateUtils.dayTicks, true);
 
 const onDateChanged = (params) => {
-  console.log('FormDateRange.fixture:onDateChanged', params);
+  console.log('FormDateRangeSingleBox.fixture:onDateChanged', params);
   // debugger;
 };
 
 const simple = (
-  <FormDateRange
+  <FormDateRangeSingleBox
     id="simple"
     title="DateTime title"
     // text="DateTime text"
@@ -40,14 +38,12 @@ const simple = (
     startDate={startDate}
     endDate={endDate}
     onChange={onDateChanged}
-    startLabel="From"
-    endLabel="To"
     // closeOnSelect
   />
 );
 
 const showTime = (
-  <FormDateRange
+  <FormDateRangeSingleBox
     id="showTime"
     title="DateTime title"
     // text="DateTime text"

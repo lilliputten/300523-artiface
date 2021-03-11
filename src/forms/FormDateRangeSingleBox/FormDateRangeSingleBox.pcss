@@ -1,20 +1,17 @@
-/** @module FormDateRange.styles
+/** @module FormDateRangeSingleBox.styles
  *  @since 2021.01.26, 13:19
- *  @changed 2021.03.11, 19:38
+ *  @changed 2021.01.26, 13:19
  */
 
-.FormDateRange {
+.FormDateRangeSingleBox {
   &-PopupWrapper {
     display: flex;
-    .FormDateTime {
+    .DateTimeSelector {
       align-items: stretch;
     }
-    // .DateTimeSelector {
-    //   align-items: stretch;
-    // }
-    // .DateTimeSelector + .DateTimeSelector {
-    //   border-left: 1px solid #aeaeae;
-    // }
+    .DateTimeSelector + .DateTimeSelector {
+      border-left: 1px solid #aeaeae;
+    }
   }
   // .react-datepicker {
   //   margin: 0;

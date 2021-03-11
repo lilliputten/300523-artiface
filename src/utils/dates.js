@@ -1,11 +1,11 @@
 /** @module dates
  *  @description Objects utilities
  *  @since 2021.01.23, 20:29
- *  @changed 2021.01.23, 21:11
+ *  @changed 2021.03.11, 21:00
  */
 
 import moment from 'moment';
-import {
+import { // date-fns
   // compareAsc,
   format,
 } from 'date-fns';
@@ -13,8 +13,8 @@ import config from 'config';
 
 // Export constants...
 
-export const dayTicks = 1000 * 60 * 60 * 24;
-export const weekTicks = dayTicks * 7;
+export const dayTicks = config.constants.dayTicks; // 1000 * 60 * 60 * 24;
+export const weekTicks = config.constants.weekTicks; // dayTicks * 7;
 
 /** Get date type
  * @param {Date|Moment|number} date
@@ -121,10 +121,10 @@ export function formatDateTimeToString(date, opt = {}) {
  * @param {Date|Number|moment|msDateStr} origDate - date (in any format)
  * @param {Boolean} [toEnd=false] -- Adjust to end
  * @param {Boolean} [toTime=false] -- Adjust to time periods (timeIntervals)
- * @param {Number} [timeIntervals=60] -- Time period to adjust (in minutes)
+ * @param {Number} [timeIntervals] -- Time period to adjust (in minutes, default value = config.constants.timeIntervals)
  * @return {Date|Number|moment|msDateStr} adjustedDate -- Date in the input format
  */
-export function adjustDateValue(origDate, toEnd, toTime, timeIntervals = 60) {
+export function adjustDateValue(origDate, toEnd, toTime, timeIntervals) {
   const dateType = detectDateValueType(origDate);
   let date;
   if (dateType === 'object') { // Just clone date object
@@ -147,6 +147,9 @@ export function adjustDateValue(origDate, toEnd, toTime, timeIntervals = 60) {
       date.setSeconds(59);
       const minutes = date.getMinutes();
       // To end of period slot
+      if (!timeIntervals) {
+        timeIntervals = config.constants.timeIntervals;
+      }
       const extraMinutes = timeIntervals - (minutes % timeIntervals);
       const setMinutes = minutes + extraMinutes - 1;
       date.setMinutes(setMinutes);
@@ -166,5 +169,3 @@ export function startOfTheDay(date) {
 export function endOfTheDay(date) {
   return adjustDateValue(date, true);
 }
-
-

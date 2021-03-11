@@ -1,7 +1,7 @@
 /** @module forms
  *  @desc Form components
  *  @since 2020.07.20, 19:21
- *  @changed 2021.02.20, 16:56
+ *  @changed 2021.03.11, 20:54
  */
 
 // Form elements...
@@ -29,6 +29,7 @@ export FormRadio from './FormRadio';
 
 export FormDateTime from './FormDateTime';
 export FormDateRange from './FormDateRange';
+export FormDateRangeSingleBox from './FormDateRangeSingleBox';
 
 export FormActions from './FormActions';
 

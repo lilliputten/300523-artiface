@@ -6,6 +6,12 @@
 
 import config from 'config';
 
+import { ru } from 'date-fns/esm/locale';
+import { registerLocale } from 'react-datepicker';
+// Initialize locales...
+registerLocale('ru-RU', ru);
+// TDDO: Register locales in target project (using config data)?
+
 export function setLang(lang) {
   // console.log('WebUiCore:utils:lang:setLang', lang)
   // debugger

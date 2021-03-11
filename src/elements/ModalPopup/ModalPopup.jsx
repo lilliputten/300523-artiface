@@ -170,6 +170,7 @@ class ModalPopup extends React.PureComponent /** @lends @ModalPopup.prototype */
     // registerCallback: null,
     closeOnClickOutside: true, // For ModalPortal
     closeOnEscPressed: true, // For ModalPortal
+    noWrapper: true,
     open: false,
   }
 
@@ -717,6 +718,10 @@ class ModalPopup extends React.PureComponent /** @lends @ModalPopup.prototype */
       className: this.getClassName({ cnCtx: cnModalPopup, className }),
       ref: this.setContentDomRef, // Will be used windowDomNode from ModalPortal
     };
+    // console.log('ModalPopup:renderPortalContent', {
+    //   renderProps,
+    //   popupContent,
+    // });
     return (
       <div {...renderProps}>
         {popupContent}

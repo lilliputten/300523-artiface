@@ -1,7 +1,7 @@
 /** @module FormDateRange
  *  @class FormDateRange
  *  @since 2021.01.26, 13:19
- *  @changed 2021.01.26, 13:19
+ *  @changed 2021.03.11, 22:16
  *
  *  TODO 2020.12.16, 23:07 -- Add hidden html form element (for form submission)
  */
@@ -9,38 +9,29 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-// import connect from 'react-redux/es/connect/connect'
 import { cn } from 'utils/configure';
 
 import config from 'config';
-
-import FormItemHOC from '../FormItemHOC';
-
-import ModalPopup from 'elements/ModalPopup';
-import FormButton from 'forms/FormButton';
-
-import DateTimeSelector from 'elements/DateTimeSelector';
-
-// import * as langUtils from 'utils/lang';
-// // getCommonLangText('cancelButton', 'Cancel', lang)}
-
+import * as formUtils from 'utils/forms';
 import * as dateUtils from 'utils/dates';
 
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCalendarCheck } from '@fortawesome/free-solid-svg-icons';
-import { faCalendar } from '@fortawesome/free-regular-svg-icons';
+import * as langUtils from 'utils/lang';
+// // langUtils.getCommonLangText('cancelButton', 'Cancel', lang)
+
+import FormGroup from 'forms/FormGroup';
+import FormDateTime from 'forms/FormDateTime';
+import FormLabel from 'forms/FormLabel';
+import FormItemHOC from 'forms/FormItemHOC';
 
 import './FormDateRange.pcss';
 
 const cnFormDateRange = cn('FormDateRange');
 
-// const defaultDateType = 'number';
-
 class FormDateRange extends React.PureComponent /** @lends @FormDateRange.prototype */ {
 
   static propTypes = {
-    // selectsEnd: PropTypes.bool,
-    // selectsStart: PropTypes.bool,
+    selectsEnd: PropTypes.bool,
+    selectsStart: PropTypes.bool,
     // value: PropTypes.oneOfType([ PropTypes.string, PropTypes.number, PropTypes.instanceOf(Date) ]),
     calendarClassName: PropTypes.string,
     className: PropTypes.string,
@@ -63,7 +54,11 @@ class FormDateRange extends React.PureComponent /** @lends @FormDateRange.protot
     startDate: PropTypes.oneOfType([ PropTypes.string, PropTypes.number, PropTypes.instanceOf(Date) ]),
     timeIntervals: PropTypes.number,
     title: PropTypes.string,
-  }
+  };
+
+  // defaultProps = {
+  //   timeIntervals: 60,
+  // };
 
   // Lifecycle methods...
 
@@ -73,187 +68,209 @@ class FormDateRange extends React.PureComponent /** @lends @FormDateRange.protot
       // value,
       startDate,
       endDate,
+      showTime,
+      timeIntervals = config.constants.timeIntervals,
       // selectsRange,
     } = props;
-    this.id = props.id || props.inputId || props.name;
+    this.id = props.id || props.inputId;
+    this.uniqFormId = props.inputId || props.id || formUtils.getUniqFormId({ prefix: 'FormDateRange' }); // identifier for local labels refering to local inputs
     // const dateType = props.dateType || dateUtils.detectDateValueType(startDate || endDate) || defaultDateType;
+
+    // Default date (now)
+    this.now = new Date(props.now || Date.now()); // Date.now()
+
+    // Default start date (beginning of the day)
+    this.startNow = dateUtils.adjustDateValue(this.now, false, showTime, timeIntervals);
+    // this.startNow = new Date(this.now);
+    // this.startNow.setHours(0);
+    // this.startNow.setMinutes(0);
+    // this.startNow.setSeconds(0);
+    // this.startNow.setMilliseconds(0);
+
+    // Default end date (end of the day)
+    this.endNow = dateUtils.adjustDateValue(this.now, true, showTime, timeIntervals);
+    // this.endNow = new Date(this.now);
+    // this.endNow.setHours(23);
+    // this.endNow.setMinutes(59);
+    // this.endNow.setSeconds(59);
+    // this.endNow.setMilliseconds(999);
+
     this.state = {
       // dateType,
       startDate, // : startDate && dateUtils.convertToDateObject(startDate),
       endDate, // : endDate && dateUtils.convertToDateObject(endDate),
     };
-    this.state.displayValue = this.getDisplayValue(this.state);
+    // this.state.displayValue = this.getDisplayValue(this.state);
   }
 
   // Helper methods...
 
   getClassName() {
     const { id } = this;
-    const classList = cnFormDateRange({
+    const {
+      fullWidth,
+    } = this.props;
+    const className = cnFormDateRange({
       id,
+      fullWidth, // ???
     }, [this.props.className]);
-    return classList;
-  }
-
-  getItemsText() {
-    const { displayValue } = this.state;
-    return displayValue;
+    return className;
   }
 
   // Handlers...
 
-  onControlClick = (params) => {
-    const { onControlClick } = this.props;
-    if (typeof onControlClick === 'function') {
-      onControlClick(params);
-    }
-  }
-
-  getDisplayValue(params) {
-    params = params || this.state;
+  handleChange = (params) => {
     const {
-      // value,
-      startDate,
-      endDate,
+      id,
+      value,
+      valueObj,
+      // displayValue,
     } = params;
     const {
-      showTime,
-      // selectsRange,
-    } = this.props;
-    const dateFormat = showTime ? config.constants.dateTimeFormat : config.constants.dateFormat;
-    return [
-      startDate && dateUtils.formatDateToString(startDate, dateFormat),
-      endDate && dateUtils.formatDateToString(endDate, dateFormat),
-    ].filter(Boolean).join(config.constants.dateRangeDelim);
-  }
-
-  onChange = ({ startDate, startDateObj, endDate, endDateObj, value, valueObj, selectedStart }) => {
-    const {
       onChange,
-      closeOnSelect,
       onStartDateChange,
       onEndDateChange,
     } = this.props;
-    const setParams = { id: this.id, startDate, startDateObj, endDate, endDateObj, value, valueObj, selectedStart };
-    setParams.displayValue = this.getDisplayValue(setParams); // dateUtils.formatDateToString(value); // TODO: showTime option
-    // console.log('FormDateRange:onChange', setParams);
-    this.setState(setParams);
+    const {
+      startDate,
+      endDate,
+    } = this.state;
+    const selectedStart = id === 'startDate';
+    const stateParams = {
+      startDate,
+      endDate,
+    };
+    stateParams[id] = value;
+    const cbParams = {
+      ...stateParams,
+      id: this.id,
+      selectedStart,
+      valueId: id,
+      value,
+      valueObj,
+    };
+    // console.log('FormDateRange:handleChange', {
+    //   stateParams,
+    //   cbParams,
+    // });
+    this.setState(stateParams);
     if (typeof onChange === 'function') {
-      onChange(setParams);
+      onChange(cbParams);
     }
     if (selectedStart && typeof onStartDateChange === 'function') {
-      onStartDateChange(setParams);
+      onStartDateChange(cbParams);
     }
     if (!selectedStart && typeof onEndDateChange === 'function') {
-      onEndDateChange(setParams);
+      onEndDateChange(cbParams);
     }
-    if (closeOnSelect /* && lastRangeChanged && lastRangeChanged !== rangeId */ && this.popupNode) {
-      this.popupNode.close();
-    }
-  }
-
-  setPopupRef = (node) => {
-    const { setPopupNodeRef } = this.props;
-    this.popupNode = node;
-    if (setPopupNodeRef && typeof setPopupNodeRef === 'function') {
-      setPopupNodeRef(node);
-    }
-  }
-
-  handleOpenState = ({ open }) => {
-    this.setState({ open });
   }
 
   // Render...
-
-  renderControlContent() {
-    const {
-      // text,
-      placeholder,
-      title,
-      controlButtonTheme,
-      fullWidth = true,
-      disabled,
-    } = this.props;
-    const {
-      open,
-    } = this.state;
-    // const icon = open ? 'faCalendarCheck' : 'regular:faCalendar';
-    const icon = open ? faCalendarCheck : faCalendar;
-    const buttonText = this.getItemsText() || placeholder; // || text;
-    return (
-      <FormButton
-        icon={icon}
-        rightIcon
-        theme={controlButtonTheme || 'default'}
-        variation="popupControl"
-        text={buttonText}
-        title={title}
-        fullWidth={fullWidth}
-        disabled={disabled}
-        checkable
-        checked={open}
-      />
-    );
-  }
-
-  renderPopupContent() {
-    const {
-      startDate,
-      endDate,
-    } = this.state;
-    const {
-      calendarClassName,
-      id,
-      inputId,
-      showTime,
-      timeIntervals,
-    } = this.props;
-    const dateSelectorProps = {
-      id,
-      inputId,
-      onChange: this.onChange,
-      startDate,
-      endDate,
-      inline: true,
-      calendarClassName,
-      showTime,
-      timeIntervals,
-      selectsRange: true,
-    };
-    return (
-      <DateTimeSelector {...dateSelectorProps} />
-    );
-  }
 
   render() {
     const {
       id,
       disabled,
-      title,
-      open,
-      fullWidth,
-      setDomRef,
+      // title,
+      // open,
+      // fullWidth,
+      // setDomRef,
+      // language: { components: { lang } },
+      // value,
+      // placeholder,
+      startLabel,
+      endLabel,
+      startPlaceholder,
+      endPlaceholder,
+      showTime,
+      timeIntervals = config.constants.timeIntervals,
+      allowEmpty,
+      // // Skip our own parameters from props...
+      // [> eslint-disable no-unused-vars <]
+      // valueType,
+      // className,
+      // value: unusedValue,
+      // onChange,
+      // name,
+      // inputId,
+      // now,
+      // dispatch,
+      // [> eslint-enable no-unused-vars <]
+      // ...props
     } = this.props;
-    const popupControl = this.renderControlContent();
-    const popupContent =  this.renderPopupContent();
-    const popupProps = {
-      id,
+    const {
+      startDate,
+      endDate,
+    } = this.state;
+
+    const renderProps = {
       className: this.getClassName(),
-      // contentClassName: 'XXX', // ???
       disabled,
-      title,
-      open,
-      popupControl,
-      popupContent,
-      onControlClick: this.onControlClick,
-      fullWidth,
-      ref: this.setPopupRef,
-      setDomRef,
-      handleOpenState: this.handleOpenState,
+      flow: true,
+      id,
+    };
+
+    // console.log('FormDateRange:render', {
+    //   startDate,
+    //   endDate,
+    //   props,
+    // });
+
+    const uniqStartId = this.uniqFormId + 'StartDate';
+    const uniqEndId = this.uniqFormId + 'EndDate';
+
+    const startLabelText = startLabel; // || 'от'
+    const endLabelText = endLabel; // || 'до'
+
+    const startPlaceholderText = startPlaceholder || langUtils.getCommonLangText('from');
+    const endPlaceholderText = endPlaceholder || langUtils.getCommonLangText('to');
+
+    const commonProps = {
+      // startDate,
+      // endDate,
+      showTime,
+      timeIntervals,
+      allowEmpty,
     };
     return (
-      <ModalPopup {...popupProps} />
+      <FormGroup {...renderProps}>
+        {startLabelText && (<FormLabel
+          htmlFor={uniqStartId}
+          text={startLabelText}
+        />)}
+        <FormDateTime
+          {...commonProps}
+          selectsStart
+          name="startDate"
+          id="startDate"
+          inputId={uniqStartId}
+          startDate={startDate}
+          endDate={endDate}
+          value={startDate}
+          placeholder={startPlaceholderText}
+          now={this.startNow}
+          maxDate={endDate}
+          onChange={this.handleChange}
+        />
+        {endLabelText && (<FormLabel
+          htmlFor={uniqEndId}
+          text={endLabelText}
+        />)}
+        <FormDateTime
+          {...commonProps}
+          selectsEnd
+          name="endDate"
+          id="endDate"
+          inputId={uniqEndId}
+          startDate={startDate}
+          endDate={endDate}
+          value={endDate}
+          placeholder={endPlaceholderText}
+          now={this.endNow}
+          minDate={startDate}
+          onChange={this.handleChange}
+        />
+      </FormGroup>
     );
   }
 

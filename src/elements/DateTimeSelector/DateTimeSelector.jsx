@@ -9,27 +9,22 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-// import connect from 'react-redux/es/connect/connect'
 import { cn } from 'utils/configure';
 
 import config from 'config';
 
-// import FormItemHOC from '../FormItemHOC';
-
-// import ModalPopup from 'elements/ModalPopup';
-// import FormButton from 'forms/FormButton';
 import * as langUtils from 'utils/lang';
-// // getCommonLangText('cancelButton', 'Cancel', lang)}
+// // langUtils.getCommonLangText('cancelButton', 'Cancel', lang)
 
 import DatePicker from 'react-datepicker';
-import { ru } from 'date-fns/esm/locale';
-import { registerLocale } from 'react-datepicker';
 
 import * as dateUtils from 'utils/dates';
 
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-// import { faCalendarCheck } from '@fortawesome/free-solid-svg-icons';
-// import { faCalendar } from '@fortawesome/free-regular-svg-icons';
+import { ru } from 'date-fns/esm/locale';
+import { registerLocale } from 'react-datepicker';
+// Initialize locales...
+registerLocale('ru-RU', ru);
+// TDDO: Register locales in target project (using config data)?
 
 import 'react-datepicker/dist/react-datepicker.css';
 
@@ -38,10 +33,6 @@ import './DateTimeSelector.pcss';
 const cnDateTimeSelector = cn('DateTimeSelector');
 
 const defaultDateType = 'number';
-
-// Initialize locale
-registerLocale('ru-RU', ru);
-// TDDO: Register locales in target project (using config data)?
 
 class DateTimeSelector extends React.PureComponent /** @lends @DateTimeSelector.prototype */ {
 
@@ -76,15 +67,42 @@ class DateTimeSelector extends React.PureComponent /** @lends @DateTimeSelector.
       endDate,
       selectsRange,
     } = props;
-    this.id = props.id || props.inputId || props.name;
+    this.id = props.id || props.inputId/*  || props.name */;
     const dateType = props.dateType || dateUtils.detectDateValueType(value || startDate || endDate) || defaultDateType;
+    const selectsStart = (selectsRange && props.selectsStart == null) ? true : props.selectsStart;
+    const selectsEnd = (selectsRange && props.selectsEnd == null) ? !selectsStart : props.selectsEnd;
     this.state = {
       dateType,
       value: value && dateUtils.convertToDateObject(value),
       startDate: startDate && dateUtils.convertToDateObject(startDate),
       endDate: endDate && dateUtils.convertToDateObject(endDate),
-      selectsStart: selectsRange,
+      selectsStart,
+      selectsEnd,
     };
+  }
+
+  componentDidUpdate(prevProps) {
+    const checkDateKeys = [
+      'value',
+      'startDate',
+      'endDate',
+    ];
+    let hasStateChanges = 0;
+    const setState = {};
+    checkDateKeys.forEach(key => {
+      if (this.props[key] !== prevProps[key]) {
+        setState[key] = this.props[key] && dateUtils.convertToDateObject(this.props[key]);
+        hasStateChanges++;
+      }
+    });
+    // console.log('DateTimeSelector:componentDidUpdate', {
+    //   hasStateChanges,
+    //   prevProps,
+    //   props: this.props,
+    // });
+    if (hasStateChanges) {
+      this.setState(setState);
+    }
   }
 
   // Helper methods...
@@ -142,6 +160,12 @@ class DateTimeSelector extends React.PureComponent /** @lends @DateTimeSelector.
         id: this.id,
         value,
       };
+      if (this.state.selectsStart) {
+        setParams.startDate = value;
+      }
+      if (this.state.selectsEnd) {
+        setParams.endDate = value;
+      }
     }
     // console.log('DateTimeSelector:onChange', selectsStart ? 'start' : 'end', origValue, setParams);
     this.setState(setParams);
@@ -175,6 +199,9 @@ class DateTimeSelector extends React.PureComponent /** @lends @DateTimeSelector.
       timeIntervals,
       selectsRange,
       calendarClassName,
+      minDate,
+      maxDate,
+      now,
     } = this.props;
     const lang = langUtils.getLang();
     const langComponents = lang && lang.components || {};
@@ -191,7 +218,7 @@ class DateTimeSelector extends React.PureComponent /** @lends @DateTimeSelector.
       id: this.id,
       inline: true,
       calendarClassName,
-      locale, // Causes exception `A locale object was not found for the provided string`
+      locale, // Causes exception `A locale object was not found for the provided string` (use `registerLocale`)
       timeIntervals,
       timeFormat: config.constants.timeFormat,
       dateFormat: config.constants.dateFormat,
@@ -199,6 +226,9 @@ class DateTimeSelector extends React.PureComponent /** @lends @DateTimeSelector.
       selected: value,
       startDate,
       endDate,
+      minDate,
+      maxDate,
+      now,
       showTimeSelect: showTime,
       selectsRange,
       selectsStart,
