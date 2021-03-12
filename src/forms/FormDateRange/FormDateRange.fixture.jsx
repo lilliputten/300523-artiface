@@ -56,7 +56,7 @@ const showTime = (
     endDate={endDate}
     onChange={onDateChanged}
     showTime
-    timeIntervals={30}
+    timeIntervals={20}
   />
 );
 

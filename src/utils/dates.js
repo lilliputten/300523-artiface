@@ -142,14 +142,14 @@ export function adjustDateValue(origDate, toEnd, toTime, timeIntervals) {
     }
   }
   else {
+    if (!timeIntervals) {
+      timeIntervals = config.constants.timeIntervals;
+    }
     if (toEnd) {
       date.setMilliseconds(999);
       date.setSeconds(59);
       const minutes = date.getMinutes();
       // To end of period slot
-      if (!timeIntervals) {
-        timeIntervals = config.constants.timeIntervals;
-      }
       const extraMinutes = timeIntervals - (minutes % timeIntervals);
       const setMinutes = minutes + extraMinutes - 1;
       date.setMinutes(setMinutes);
@@ -157,6 +157,11 @@ export function adjustDateValue(origDate, toEnd, toTime, timeIntervals) {
     else {
       date.setMilliseconds(0);
       date.setSeconds(0);
+      const minutes = date.getMinutes();
+      // To begin of period slot
+      const extraMinutes = (minutes % timeIntervals);
+      const setMinutes = minutes - extraMinutes;
+      date.setMinutes(setMinutes);
     }
   }
   return convertDateToType(date, dateType);

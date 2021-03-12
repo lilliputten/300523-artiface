@@ -269,6 +269,7 @@ class FormDateRange extends React.PureComponent /** @lends @FormDateRange.protot
           now={this.endNow}
           minDate={startDate}
           onChange={this.handleChange}
+          isEndDate
         />
       </FormGroup>
     );

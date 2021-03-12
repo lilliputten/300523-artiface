@@ -66,6 +66,8 @@ class DateTimeSelector extends React.PureComponent /** @lends @DateTimeSelector.
       startDate,
       endDate,
       selectsRange,
+      showTime,
+      timeIntervals,
     } = props;
     this.id = props.id || props.inputId/*  || props.name */;
     const dateType = props.dateType || dateUtils.detectDateValueType(value || startDate || endDate) || defaultDateType;
@@ -73,7 +75,8 @@ class DateTimeSelector extends React.PureComponent /** @lends @DateTimeSelector.
     const selectsEnd = (selectsRange && props.selectsEnd == null) ? !selectsStart : props.selectsEnd;
     this.state = {
       dateType,
-      value: value && dateUtils.convertToDateObject(value),
+      // value: value && dateUtils.convertToDateObject(value),
+      value: value && dateUtils.adjustDateValue(dateUtils.convertToDateObject(value), false, showTime, timeIntervals),
       startDate: startDate && dateUtils.convertToDateObject(startDate),
       endDate: endDate && dateUtils.convertToDateObject(endDate),
       selectsStart,
@@ -124,6 +127,7 @@ class DateTimeSelector extends React.PureComponent /** @lends @DateTimeSelector.
       onChange,
       showTime,
       timeIntervals,
+      isEndDate,
     } = this.props;
     const {
       dateType,
@@ -174,12 +178,13 @@ class DateTimeSelector extends React.PureComponent /** @lends @DateTimeSelector.
       [ 'value', 'startDate', 'endDate'].forEach(id => {
         const date = cbParams[id];
         if (date) {
-          const isEndDate = (id === 'endDate');
-          const dateObj = dateUtils.adjustDateValue(date, isEndDate, showTime, timeIntervals);
+          const isEndDateCombined = (id === 'endDate') || (id === 'value' && isEndDate);
+          const dateObj = dateUtils.adjustDateValue(date, isEndDateCombined, showTime, timeIntervals);
           cbParams[id + 'Obj'] = dateObj;
           cbParams[id] = dateUtils.convertDateToType(dateObj, dateType);
         }
       });
+      console.log('DateTimeSelector:onChange', cbParams);
       onChange(cbParams);
     }
   }

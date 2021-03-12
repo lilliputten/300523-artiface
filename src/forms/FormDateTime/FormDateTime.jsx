@@ -25,7 +25,6 @@ import DateTimeSelector from 'elements/DateTimeSelector';
 
 import * as dateUtils from 'utils/dates';
 
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCalendarCheck } from '@fortawesome/free-solid-svg-icons';
 import { faCalendar } from '@fortawesome/free-regular-svg-icons';
 
@@ -178,7 +177,10 @@ class FormDateTime extends React.PureComponent /** @lends @FormDateTime.prototyp
       value,
     } = this.state;
     const {
+      id,
+      inputId,
       showTime,
+      timeIntervals,
       selectsRange,
       calendarClassName,
       selectsStart,
@@ -188,13 +190,17 @@ class FormDateTime extends React.PureComponent /** @lends @FormDateTime.prototyp
       minDate,
       maxDate,
       now,
+      isEndDate,
     } = this.props;
     const dateSelectorProps = {
+      id,
+      inputId,
       inline: true,
       calendarClassName,
       onChange: this.onChange,
       value,
       showTime,
+      timeIntervals,
       selectsRange,
       selectsStart,
       selectsEnd,
@@ -203,6 +209,7 @@ class FormDateTime extends React.PureComponent /** @lends @FormDateTime.prototyp
       minDate,
       maxDate,
       now,
+      isEndDate,
     };
     // console.log('FormDateTime:renderDateSelectorContent', {
     //   dateSelectorProps,

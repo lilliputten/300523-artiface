@@ -14,31 +14,53 @@
     &-time__header {
       font-weight: normal;
     }
-    &__time-list-item {
+    &__time-list-item { // Time slots
+      // Override rule for `.react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list li.react-datepicker__time-list-item`
       height: auto !important;
-      padding: 2px !important; // Override rule for `.react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list li.react-datepicker__time-list-item`
-      padding-top: 4px !important; // Override rule for `.react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list li.react-datepicker__time-list-item`
+      padding: 8px !important;
+      // padding-top: 4px !important;
     }
     &__navigation {
-      margin-top: 4px;
+      margin-top: 2px;
     }
     &__day,
     &__time-list-item {
+      color: $defaultTextColor;
       &:focus {
         outline: 0;
       }
-      &--selected {
-        background-color: $primaryColor !important;
-        font-weight: normal !important;
-      }
     }
-    $selectingColor: #216ba5;
+    &__time-list-item--selected {
+      background-color: $primaryColor !important;
+      font-weight: normal !important;
+      color: #fff;
+    }
+    &__day--keyboard-selected {
+      background-color: transparent;
+      color: $defaultTextColor;
+    }
+    &__month:not(.react-datepicker__month--selecting-range) .react-datepicker__day--selected {
+      background-color: $primaryColor !important;
+      font-weight: normal !important;
+      color: #fff;
+    }
+    // $selectingColor: #216ba5;
+    $selectingColor: $primaryColor;
+    &__day--in-range {
+      background-color: $selectingColor;
+      color: #fff;
+    }
     &__month--selecting-range .react-datepicker__day--in-range {
+      background-color: color($selectingColor alpha(.5));
+      color: #fff;
+    }
+    &__day--in-selecting-range {
       background-color: color($selectingColor alpha(.5));
       color: #fff;
     }
     &__day--in-range.react-datepicker__day--in-selecting-range {
       background-color: $selectingColor;
+      color: #fff;
     }
     &__time-list,
     button {
