@@ -17,7 +17,6 @@ export const demoFixtures = {
 
   FormSeparator: require('forms/FormSeparator/FormSeparator.fixture'),
 
-  DateTimeSelector: require('elements/DateTimeSelector/DateTimeSelector.fixture'),
   InlineIcon: require('elements/InlineIcon/InlineIcon.fixture'),
   Menu: require('elements/Menu/Menu.fixture'),
   MenuItem: require('elements/MenuItem/MenuItem.fixture'),
@@ -33,12 +32,14 @@ export const demoFixtures = {
   FormSelect: require('forms/FormSelect/FormSelect.fixture'),
   FormText: require('forms/FormText/FormText.fixture'),
 
-  // Booleans:
+  // Booleans...
   FormRadio: require('forms/FormRadio/FormRadio.fixture'),
   FormRadioThemes: require('forms/FormRadio/FormRadio-Themes.fixture'),
   // FormCheck: require('forms/FormCheck/FormCheck.fixture'),
   // FormSwitch: require('forms/FormSwitch/FormSwitch.fixture'),
 
+  // Date/time...
+  DateTimeSelector: require('elements/DateTimeSelector/DateTimeSelector.fixture'),
   FormDateTime: require('forms/FormDateTime/FormDateTime.fixture'),
   FormDateRange: require('forms/FormDateRange/FormDateRange.fixture'),
 

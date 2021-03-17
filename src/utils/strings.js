@@ -116,5 +116,6 @@ export const splitMultiline = (text, opt) => {
   });
 };
 
-// module.exports = strings
-// export default strings
+export function padNumber(num, size) {
+  return String(num).padStart(size, '0');
+}

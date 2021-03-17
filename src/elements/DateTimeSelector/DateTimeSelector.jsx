@@ -1,7 +1,7 @@
 /** @module DateTimeSelector
  *  @class DateTimeSelector
  *  @since 2021.01.23, 19:44
- *  @changed 2021.01.26, 20:28
+ *  @changed 2021.03.17, 15:25
  *
  *  TODO 2020.12.16, 23:07 -- Add hidden html form element (for form submission)
  */
@@ -19,6 +19,7 @@ import * as langUtils from 'utils/lang';
 import DatePicker from 'react-datepicker';
 
 import * as dateUtils from 'utils/dates';
+import * as stringUtils from 'utils/strings';
 
 import { ru } from 'date-fns/esm/locale';
 import { registerLocale } from 'react-datepicker';
@@ -84,6 +85,51 @@ class DateTimeSelector extends React.PureComponent /** @lends @DateTimeSelector.
     };
   }
 
+  updateTimeListItems = () => { // Update time values to period ends (eg, '00:00' -> '00:59' for 1-hour intervals
+    const {
+      // value,
+      // startDate,
+      // endDate,
+      // selectsRange,
+      showTime,
+      timeIntervals,
+      isEndDate,
+    } = this.props;
+    const { domNodeRef } = this;
+    if (!isEndDate || !showTime || !domNodeRef) { // Do nothing
+      return;
+    }
+    const items = domNodeRef.getElementsByClassName('react-datepicker__time-list-item');
+    // console.log('DateTimeSelector:updateTimeListItems', {
+    //   showTime,
+    //   timeIntervals,
+    //   isEndDate,
+    //   domNodeRef,
+    //   items,
+    // });
+    items.forEach((item) => {
+      const text = item.innerText;
+      let [ hours, mins ] = text.split(':').map(Number);
+      mins += timeIntervals - 1;
+      if (mins >= 60) {
+        hours += Math.ceil(mins - 60);
+        mins = mins % 60;
+      }
+      const resultText = stringUtils.padNumber(hours, 2) + ':' + stringUtils.padNumber(mins, 2);
+      item.innerText = resultText;
+    });
+  }
+
+  componentDidMount() {
+    const {
+      showTime,
+      isEndDate,
+    } = this.props;
+    if (isEndDate && showTime) {
+      setTimeout(this.updateTimeListItems, 0); // Delayed update
+    }
+  }
+
   componentDidUpdate(prevProps) {
     const checkDateKeys = [
       'value',
@@ -119,6 +165,12 @@ class DateTimeSelector extends React.PureComponent /** @lends @DateTimeSelector.
   }
 
   // Handlers...
+
+  setDomRef = (node) => {
+    this.domNodeRef = node;
+    // console.log(node);
+    // debugger;
+  }
 
   onChange = (value) => {
     // const origValue = value;
@@ -244,9 +296,11 @@ class DateTimeSelector extends React.PureComponent /** @lends @DateTimeSelector.
       nextYearButtonLabel: calendarLang.nextYearButtonLabel || 'Next Year',
       previousMonthButtonLabel: calendarLang.previousMonthButtonLabel || 'Previous Month',
       nextMonthButtonLabel: calendarLang.nextMonthButtonLabel || 'Next Month',
+      // onCalendarOpen: this.updateTimeListItems,
+      // ref: this.setRef,
     };
     return (
-      <div className={this.getClassName()}>
+      <div className={this.getClassName()} ref={this.setDomRef}>
         <DatePicker {...datePickerProps} />
       </div>
     );
