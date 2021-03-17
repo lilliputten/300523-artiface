@@ -1,5 +1,6 @@
 # CHANGELOG
 
+- 2021.03.17, 15:27 -- PD-3603: Update time values to period ends (eg, '00:00' -> '00:59' for 1-hour intervals.
 - 2021.03.11, 22:17 -- PD-2603, v.0.2.14: FormDateRange uses separated input controls for range begin and end.
 - 2021.03.03, 04:04 -- v.0.2.13.
 - 2021.03.03, 04:03 -- Minor changes: removed extra `checked` prop from `FormItem`, fixed prop types in `FormActions`.
