@@ -236,7 +236,7 @@ class DateTimeSelector extends React.PureComponent /** @lends @DateTimeSelector.
           cbParams[id] = dateUtils.convertDateToType(dateObj, dateType);
         }
       });
-      console.log('DateTimeSelector:onChange', cbParams);
+      // console.log('DateTimeSelector:onChange', cbParams);
       onChange(cbParams);
     }
   }
