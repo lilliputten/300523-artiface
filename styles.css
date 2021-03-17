@@ -805,32 +805,63 @@
       font-weight: normal;
     }
 
-.DateTimeSelector .react-datepicker__time-list-item {
+.DateTimeSelector .react-datepicker__time-list-item { /* Time slots*/
+      /* Override rule for `.react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list li.react-datepicker__time-list-item`*/
       height: auto !important;
-      padding: 2px !important; /* Override rule for `.react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list li.react-datepicker__time-list-item`*/
-      padding-top: 4px !important; /* Override rule for `.react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list li.react-datepicker__time-list-item`*/
+      padding: 8px !important;
+      /* padding-top: 4px !important;*/
     }
 
 .DateTimeSelector .react-datepicker__navigation {
-      margin-top: 4px;
+      margin-top: 2px;
+    }
+
+.DateTimeSelector .react-datepicker__day,
+    .DateTimeSelector .react-datepicker__time-list-item {
+      color: #444;
     }
 
 .DateTimeSelector .react-datepicker__day:focus, .DateTimeSelector .react-datepicker__time-list-item:focus {
         outline: 0;
       }
 
-.DateTimeSelector .react-datepicker__day--selected, .DateTimeSelector .react-datepicker__time-list-item--selected {
-        background-color: #07f !important;
-        font-weight: normal !important;
-      }
+.DateTimeSelector .react-datepicker__time-list-item--selected {
+      background-color: #07f !important;
+      font-weight: normal !important;
+      color: #fff;
+    }
+
+.DateTimeSelector .react-datepicker__day--keyboard-selected {
+      background-color: transparent;
+      color: #444;
+    }
+
+.DateTimeSelector .react-datepicker__month:not(.react-datepicker__month--selecting-range) .react-datepicker__day--selected {
+      background-color: #07f !important;
+      font-weight: normal !important;
+      color: #fff;
+    }
+
+/* $selectingColor: #216ba5;*/
+
+.DateTimeSelector .react-datepicker__day--in-range {
+      background-color: #07f;
+      color: #fff;
+    }
 
 .DateTimeSelector .react-datepicker__month--selecting-range .react-datepicker__day--in-range {
-      background-color: rgba(33, 107, 165, 0.5);
+      background-color: rgba(0, 119, 255, 0.5);
+      color: #fff;
+    }
+
+.DateTimeSelector .react-datepicker__day--in-selecting-range {
+      background-color: rgba(0, 119, 255, 0.5);
       color: #fff;
     }
 
 .DateTimeSelector .react-datepicker__day--in-range.react-datepicker__day--in-selecting-range {
-      background-color: #216ba5;
+      background-color: #07f;
+      color: #fff;
     }
 
 .DateTimeSelector .react-datepicker__time-list:focus, .DateTimeSelector .react-datepicker button:focus {
@@ -7698,50 +7729,8 @@ input.FormTextInput-Control:-internal-autofill-previewed,
     margin: 0;
     border: none;
     display: block;
+    /* NOTE: Use DateTimeSelector styles for tunings*/
   }
-
-.FormDateTime .react-datepicker__time-list-item {
-      padding: 0 !important; /* Override rule for `.react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list li.react-datepicker__time-list-item`*/
-      height: 30px !important;
-    }
-
-.FormDateTime .react-datepicker__navigation {
-      margin-top: 6px;
-    }
-
-/** @module FormDateRange.styles
- *  @since 2021.01.26, 13:19
- *  @changed 2021.01.26, 13:19
- */
-
-.FormDateRange {
-  /* .react-datepicker {*/
-  /*   margin: 0;*/
-  /*   border: none;*/
-  /*   display: block;*/
-  /*   &__time-list-item {*/
-  /*     padding: 0 !important; // Override rule for `.react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list li.react-datepicker__time-list-item`*/
-  /*     height: 30px !important;*/
-  /*   }*/
-  /*   &__navigation {*/
-  /*     margin-top: 6px;*/
-  /*   }*/
-  /* }*/
-}
-
-.FormDateRange-PopupWrapper {
-    display: -ms-flexbox;
-    display: flex;
-  }
-
-.FormDateRange-PopupWrapper .DateTimeSelector {
-      -ms-flex-align: stretch;
-          align-items: stretch;
-    }
-
-.FormDateRange-PopupWrapper .DateTimeSelector + .DateTimeSelector {
-      border-left: 1px solid #aeaeae;
-    }
 
 /** @module FormContainer.pcss
  *  @class FormContainer
@@ -7876,6 +7865,76 @@ input.FormTextInput-Control:-internal-autofill-previewed,
     -ms-flex-wrap: nowrap;
         flex-wrap: nowrap;
   }
+
+/** @module FormDateRange.styles
+ *  @since 2021.01.26, 13:19
+ *  @changed 2021.03.11, 19:38
+ */
+
+.FormDateRange {
+  /* .react-datepicker {*/
+  /*   margin: 0;*/
+  /*   border: none;*/
+  /*   display: block;*/
+  /*   &__time-list-item {*/
+  /*     padding: 0 !important; // Override rule for `.react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list li.react-datepicker__time-list-item`*/
+  /*     height: 30px !important;*/
+  /*   }*/
+  /*   &__navigation {*/
+  /*     margin-top: 6px;*/
+  /*   }*/
+  /* }*/
+}
+
+.FormDateRange-PopupWrapper {
+    display: -ms-flexbox;
+    display: flex;
+    /* .DateTimeSelector {*/
+    /*   align-items: stretch;*/
+    /* }*/
+    /* .DateTimeSelector + .DateTimeSelector {*/
+    /*   border-left: 1px solid #aeaeae;*/
+    /* }*/
+  }
+
+.FormDateRange-PopupWrapper .FormDateTime {
+      -ms-flex-align: stretch;
+          align-items: stretch;
+    }
+
+/** @module FormDateRangeSingleBox.styles
+ *  @since 2021.01.26, 13:19
+ *  @changed 2021.01.26, 13:19
+ */
+
+.FormDateRangeSingleBox {
+  /* .react-datepicker {*/
+  /*   margin: 0;*/
+  /*   border: none;*/
+  /*   display: block;*/
+  /*   &__time-list-item {*/
+  /*     padding: 0 !important; // Override rule for `.react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list li.react-datepicker__time-list-item`*/
+  /*     height: 30px !important;*/
+  /*   }*/
+  /*   &__navigation {*/
+  /*     margin-top: 6px;*/
+  /*   }*/
+  /* }*/
+}
+
+.FormDateRangeSingleBox-PopupWrapper {
+    display: -ms-flexbox;
+    display: flex;
+  }
+
+.FormDateRangeSingleBox-PopupWrapper .DateTimeSelector {
+      -ms-flex-align: stretch;
+          align-items: stretch;
+    }
+
+.FormDateRangeSingleBox-PopupWrapper .DateTimeSelector + .DateTimeSelector {
+      border-left: 1px solid #aeaeae;
+    }
 
 /** @module FormActions.styles
  *  @class FormActions
@@ -8492,7 +8551,7 @@ input.FormTextInput-Control:-internal-autofill-previewed,
  */
 
 .ModalsContainer {
-  z-index: 200; /* Lift ip to top-most level (but below footer which located at 300 z-level).*/
+  z-index: 300; /* Lift ip to top-most level (but below footer which located at 300 z-level).*/
   position: absolute;
   top: 0;
   bottom: 0;
@@ -8544,7 +8603,6 @@ textarea,
   font-size: 16px;
   font-weight: normal;
   line-height: 1.3;
-  color: #444;
   /* font-size: 30px; // DEBUG*/
   color: #444;
 }

@@ -38643,7 +38643,7 @@ module.exports = g;
 /*!***********************!*\
   !*** ./src/build.tsx ***!
   \***********************/
-/*! exports provided: config, utils, helpers, DateTimeSelector, InlineIcon, Loader, Menu, MenuItem, MenuItemSeparator, ModalWindow, ModalPopup, ModalPortal, ModalsContainer, FormItemHOC, FormItemDummy, FormLabel, FormButton, FormDelim, FormSpacer, FormSeparator, FormText, FormSelect, FormTextInput, FormPasswordInput, FormRadio, FormDateTime, FormDateRange, FormActions, FormContainer, FormGroup, FormLabeledGroup, FormButtonGroup, FormInputGroup, Hello, default */
+/*! exports provided: config, utils, helpers, DateTimeSelector, InlineIcon, Loader, Menu, MenuItem, MenuItemSeparator, ModalWindow, ModalPopup, ModalPortal, ModalsContainer, FormItemHOC, FormItemDummy, FormLabel, FormButton, FormDelim, FormSpacer, FormSeparator, FormText, FormSelect, FormTextInput, FormPasswordInput, FormRadio, FormDateTime, FormDateRange, FormDateRangeSingleBox, FormActions, FormContainer, FormGroup, FormLabeledGroup, FormButtonGroup, FormInputGroup, Hello, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -38706,6 +38706,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "FormDateTime", function() { return _forms_forms__WEBPACK_IMPORTED_MODULE_5__["FormDateTime"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "FormDateRange", function() { return _forms_forms__WEBPACK_IMPORTED_MODULE_5__["FormDateRange"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "FormDateRangeSingleBox", function() { return _forms_forms__WEBPACK_IMPORTED_MODULE_5__["FormDateRangeSingleBox"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "FormActions", function() { return _forms_forms__WEBPACK_IMPORTED_MODULE_5__["FormActions"]; });
 
@@ -38818,10 +38820,10 @@ module.exports = { // Common-used build variables...
   DEV_DEBUG: DEV_DEBUG,
 
   THEME: "default",
-  buildTag: "v.0.2.13-210309-1333-build-dev-default",
-  timestamp: "2021.03.09, 13:33",
-  timetag: "210309-1333",
-  version: "0.2.13" };
+  buildTag: "v.0.2.14-210317-1633-build-dev-default",
+  timestamp: "2021.03.17, 16:33",
+  timetag: "210317-1633",
+  version: "0.2.14" };
 
 /***/ }),
 
@@ -38856,7 +38858,7 @@ module.exports = config;
 /*!*********************************!*\
   !*** ./src/config/constants.js ***!
   \*********************************/
-/*! exports provided: dateFormat, timeFormat, dateTimeFormat, dateRangeDelim */
+/*! exports provided: dateFormat, timeFormat, dateTimeFormat, dateRangeDelim, timeIntervals, dayTicks, weekTicks */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -38865,10 +38867,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "timeFormat", function() { return timeFormat; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "dateTimeFormat", function() { return dateTimeFormat; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "dateRangeDelim", function() { return dateRangeDelim; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "timeIntervals", function() { return timeIntervals; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "dayTicks", function() { return dayTicks; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "weekTicks", function() { return weekTicks; });
 /** @module config.constants
  *  @description Basic constants
  *  @since 2019.09.10, 14:25
- *  @changed 2020.05.10, 06:13
+ *  @changed 2021.03.11, 21:00
  */
 
 /** Date conversion & presentation templates... */
@@ -38880,6 +38885,10 @@ var dateFormat = 'dd.MM.yyyy';
 var timeFormat = 'HH:mm';
 var dateTimeFormat = dateFormat + ' ' + timeFormat;
 var dateRangeDelim = ' – ';
+
+var timeIntervals = 60;
+var dayTicks = 1000 * 60 * 60 * 24;
+var weekTicks = dayTicks * 7;
 
 // dateStringFormat: 'yyyy.mm.dd HH:MM:ss',
 // dateTagFormat: 'yymmdd-HHMM',
@@ -39448,16 +39457,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utils_lang__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../utils/lang */ "./src/utils/lang.js");
 /* harmony import */ var react_datepicker__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react-datepicker */ "react-datepicker");
 /* harmony import */ var react_datepicker__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(react_datepicker__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var date_fns_esm_locale__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! date-fns/esm/locale */ "./node_modules/date-fns/esm/locale/index.js");
-/* harmony import */ var _utils_dates__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../utils/dates */ "./src/utils/dates.js");
-/* harmony import */ var react_datepicker_dist_react_datepicker_css__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! react-datepicker/dist/react-datepicker.css */ "./node_modules/react-datepicker/dist/react-datepicker.css");
-/* harmony import */ var react_datepicker_dist_react_datepicker_css__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(react_datepicker_dist_react_datepicker_css__WEBPACK_IMPORTED_MODULE_12__);
-/* harmony import */ var _DateTimeSelector_pcss__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./DateTimeSelector.pcss */ "./src/elements/DateTimeSelector/DateTimeSelector.pcss");
-/* harmony import */ var _DateTimeSelector_pcss__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(_DateTimeSelector_pcss__WEBPACK_IMPORTED_MODULE_13__);
+/* harmony import */ var _utils_dates__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../utils/dates */ "./src/utils/dates.js");
+/* harmony import */ var _utils_strings__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../utils/strings */ "./src/utils/strings.js");
+/* harmony import */ var date_fns_esm_locale__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! date-fns/esm/locale */ "./node_modules/date-fns/esm/locale/index.js");
+/* harmony import */ var react_datepicker_dist_react_datepicker_css__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! react-datepicker/dist/react-datepicker.css */ "./node_modules/react-datepicker/dist/react-datepicker.css");
+/* harmony import */ var react_datepicker_dist_react_datepicker_css__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(react_datepicker_dist_react_datepicker_css__WEBPACK_IMPORTED_MODULE_13__);
+/* harmony import */ var _DateTimeSelector_pcss__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./DateTimeSelector.pcss */ "./src/elements/DateTimeSelector/DateTimeSelector.pcss");
+/* harmony import */ var _DateTimeSelector_pcss__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(_DateTimeSelector_pcss__WEBPACK_IMPORTED_MODULE_14__);
  /** @module DateTimeSelector
                                                                                                                                                                                                                                                                                 *  @class DateTimeSelector
                                                                                                                                                                                                                                                                                 *  @since 2021.01.23, 19:44
-                                                                                                                                                                                                                                                                                *  @changed 2021.01.26, 20:28
+                                                                                                                                                                                                                                                                                *  @changed 2021.03.17, 15:25
                                                                                                                                                                                                                                                                                 *
                                                                                                                                                                                                                                                                                 *  TODO 2020.12.16, 23:07 -- Add hidden html form element (for form submission)
                                                                                                                                                                                                                                                                                 */
@@ -39465,17 +39475,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-// import connect from 'react-redux/es/connect/connect'
 
 
 
 
-// import FormItemHOC from '../FormItemHOC';
 
-// import ModalPopup from 'elements/ModalPopup';
-// import FormButton from 'forms/FormButton';
-
-// // getCommonLangText('cancelButton', 'Cancel', lang)}
+// // langUtils.getCommonLangText('cancelButton', 'Cancel', lang)
 
 
 
@@ -39483,9 +39488,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-// import { faCalendarCheck } from '@fortawesome/free-solid-svg-icons';
-// import { faCalendar } from '@fortawesome/free-regular-svg-icons';
+
+// Initialize locales...
+Object(react_datepicker__WEBPACK_IMPORTED_MODULE_9__["registerLocale"])('ru-RU', date_fns_esm_locale__WEBPACK_IMPORTED_MODULE_12__["ru"]);
+// TDDO: Register locales in target project (using config data)?
 
 
 
@@ -39493,12 +39499,8 @@ __webpack_require__.r(__webpack_exports__);
 
 var cnDateTimeSelector = Object(_utils_configure__WEBPACK_IMPORTED_MODULE_6__["cn"])('DateTimeSelector');
 
-var defaultDateType = 'number';
+var defaultDateType = 'number';var
 
-// Initialize locale
-Object(react_datepicker__WEBPACK_IMPORTED_MODULE_9__["registerLocale"])('ru-RU', date_fns_esm_locale__WEBPACK_IMPORTED_MODULE_10__["ru"]);
-// TDDO: Register locales in target project (using config data)?
-var
 DateTimeSelector = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helpers_inheritsLoose__WEBPACK_IMPORTED_MODULE_2___default()(DateTimeSelector, _React$PureComponent);
 
 
@@ -39525,7 +39527,7 @@ DateTimeSelector = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_
   // Lifecycle methods...
 
   function DateTimeSelector(props) {var _this;
-    _this = _React$PureComponent.call(this, props) || this;_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1___default()(_this), "onChange",
+    _this = _React$PureComponent.call(this, props) || this;_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1___default()(_this), "updateTimeListItems",
 
 
 
@@ -39549,20 +39551,102 @@ DateTimeSelector = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_
 
 
 
-
-
-
-
-
-
-    function (value) {
-      // const origValue = value;
+    function () {// Update time values to period ends (eg, '00:00' -> '00:59' for 1-hour intervals
       var _this$props =
 
 
 
 
-      _this.props,selectsRange = _this$props.selectsRange,onChange = _this$props.onChange,showTime = _this$props.showTime,timeIntervals = _this$props.timeIntervals;var
+
+
+
+      _this.props,showTime = _this$props.showTime,timeIntervals = _this$props.timeIntervals,isEndDate = _this$props.isEndDate;var _assertThisInitialize = _babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1___default()(_this),
+      domNodeRef = _assertThisInitialize.domNodeRef;
+      if (!isEndDate || !showTime || !domNodeRef) {// Do nothing
+        return;
+      }
+      var items = domNodeRef.getElementsByClassName('react-datepicker__time-list-item');
+      // console.log('DateTimeSelector:updateTimeListItems', {
+      //   showTime,
+      //   timeIntervals,
+      //   isEndDate,
+      //   domNodeRef,
+      //   items,
+      // });
+      items.forEach(function (item) {
+        var text = item.innerText;var _text$split$map =
+        text.split(':').map(Number),hours = _text$split$map[0],mins = _text$split$map[1];
+        mins += timeIntervals - 1;
+        if (mins >= 60) {
+          hours += Math.ceil(mins - 60);
+          mins = mins % 60;
+        }
+        var resultText = _utils_strings__WEBPACK_IMPORTED_MODULE_11__["padNumber"](hours, 2) + ':' + _utils_strings__WEBPACK_IMPORTED_MODULE_11__["padNumber"](mins, 2);
+        item.innerText = resultText;
+      });
+    });_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1___default()(_this), "setDomRef",
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    function (node) {
+      _this.domNodeRef = node;
+      // console.log(node);
+      // debugger;
+    });_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1___default()(_this), "onChange",
+
+    function (value) {
+      // const origValue = value;
+      var _this$props2 =
+
+
+
+
+
+      _this.props,selectsRange = _this$props2.selectsRange,onChange = _this$props2.onChange,showTime = _this$props2.showTime,timeIntervals = _this$props2.timeIntervals,isEndDate = _this$props2.isEndDate;var
 
       dateType =
       _this.state.dateType;
@@ -39598,6 +39682,12 @@ DateTimeSelector = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_
           id: _this.id,
           value: value };
 
+        if (_this.state.selectsStart) {
+          setParams.startDate = value;
+        }
+        if (_this.state.selectsEnd) {
+          setParams.endDate = value;
+        }
       }
       // console.log('DateTimeSelector:onChange', selectsStart ? 'start' : 'end', origValue, setParams);
       _this.setState(setParams);
@@ -39606,32 +39696,36 @@ DateTimeSelector = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_
         ['value', 'startDate', 'endDate'].forEach(function (id) {
           var date = cbParams[id];
           if (date) {
-            var isEndDate = id === 'endDate';
-            var dateObj = _utils_dates__WEBPACK_IMPORTED_MODULE_11__["adjustDateValue"](date, isEndDate, showTime, timeIntervals);
+            var isEndDateCombined = id === 'endDate' || id === 'value' && isEndDate;
+            var dateObj = _utils_dates__WEBPACK_IMPORTED_MODULE_10__["adjustDateValue"](date, isEndDateCombined, showTime, timeIntervals);
             cbParams[id + 'Obj'] = dateObj;
-            cbParams[id] = _utils_dates__WEBPACK_IMPORTED_MODULE_11__["convertDateToType"](dateObj, dateType);
+            cbParams[id] = _utils_dates__WEBPACK_IMPORTED_MODULE_10__["convertDateToType"](dateObj, dateType);
           }
         });
+        // console.log('DateTimeSelector:onChange', cbParams);
         onChange(cbParams);
       }
-    });var _value = props.value,_startDate = props.startDate,_endDate = props.endDate,_selectsRange = props.selectsRange;_this.id = props.id || props.inputId || props.name;var _dateType = props.dateType || _utils_dates__WEBPACK_IMPORTED_MODULE_11__["detectDateValueType"](_value || _startDate || _endDate) || defaultDateType;_this.state = { dateType: _dateType, value: _value && _utils_dates__WEBPACK_IMPORTED_MODULE_11__["convertToDateObject"](_value), startDate: _startDate && _utils_dates__WEBPACK_IMPORTED_MODULE_11__["convertToDateObject"](_startDate), endDate: _endDate && _utils_dates__WEBPACK_IMPORTED_MODULE_11__["convertToDateObject"](_endDate), selectsStart: _selectsRange };return _this;} // Helper methods...
-  var _proto = DateTimeSelector.prototype;_proto.getClassName = function getClassName() {var id = this.id;var classList = cnDateTimeSelector({ id: id }, [this.props.className]);return classList;} // Handlers...
+    });var _value = props.value,_startDate = props.startDate,_endDate = props.endDate,_selectsRange = props.selectsRange,_showTime = props.showTime,_timeIntervals = props.timeIntervals;_this.id = props.id || props.inputId /*  || props.name */;var _dateType = props.dateType || _utils_dates__WEBPACK_IMPORTED_MODULE_10__["detectDateValueType"](_value || _startDate || _endDate) || defaultDateType;var selectsStart = _selectsRange && props.selectsStart == null ? true : props.selectsStart;var selectsEnd = _selectsRange && props.selectsEnd == null ? !selectsStart : props.selectsEnd;_this.state = { dateType: _dateType, // value: value && dateUtils.convertToDateObject(value),
+      value: _value && _utils_dates__WEBPACK_IMPORTED_MODULE_10__["adjustDateValue"](_utils_dates__WEBPACK_IMPORTED_MODULE_10__["convertToDateObject"](_value), false, _showTime, _timeIntervals), startDate: _startDate && _utils_dates__WEBPACK_IMPORTED_MODULE_10__["convertToDateObject"](_startDate), endDate: _endDate && _utils_dates__WEBPACK_IMPORTED_MODULE_10__["convertToDateObject"](_endDate), selectsStart: selectsStart, selectsEnd: selectsEnd };return _this;}var _proto = DateTimeSelector.prototype;_proto.componentDidMount = function componentDidMount() {var _this$props3 = this.props,showTime = _this$props3.showTime,isEndDate = _this$props3.isEndDate;if (isEndDate && showTime) {setTimeout(this.updateTimeListItems, 0); // Delayed update
+    }};_proto.componentDidUpdate = function componentDidUpdate(prevProps) {var _this2 = this;var checkDateKeys = ['value', 'startDate', 'endDate'];var hasStateChanges = 0;var setState = {};checkDateKeys.forEach(function (key) {if (_this2.props[key] !== prevProps[key]) {setState[key] = _this2.props[key] && _utils_dates__WEBPACK_IMPORTED_MODULE_10__["convertToDateObject"](_this2.props[key]);hasStateChanges++;}}); // console.log('DateTimeSelector:componentDidUpdate', {
+    //   hasStateChanges,
+    //   prevProps,
+    //   props: this.props,
+    // });
+    if (hasStateChanges) {this.setState(setState);}} // Helper methods...
+  ;_proto.getClassName = function getClassName() {var id = this.id;var classList = cnDateTimeSelector({ id: id }, [this.props.className]);return classList;} // Handlers...
   ; // Render...
-  _proto.
-  render = function render() {var _this$state =
+  _proto.render = function render() {var _this$state =
+    this.state,value = _this$state.value,startDate = _this$state.startDate,endDate = _this$state.endDate,selectsStart = _this$state.selectsStart,selectsEnd = _this$state.selectsEnd;var _this$props4 =
 
 
 
 
 
 
-    this.state,value = _this$state.value,startDate = _this$state.startDate,endDate = _this$state.endDate,selectsStart = _this$state.selectsStart,selectsEnd = _this$state.selectsEnd;var _this$props2 =
 
 
-
-
-
-    this.props,showTime = _this$props2.showTime,timeIntervals = _this$props2.timeIntervals,selectsRange = _this$props2.selectsRange,calendarClassName = _this$props2.calendarClassName;
+    this.props,showTime = _this$props4.showTime,timeIntervals = _this$props4.timeIntervals,selectsRange = _this$props4.selectsRange,calendarClassName = _this$props4.calendarClassName,minDate = _this$props4.minDate,maxDate = _this$props4.maxDate,now = _this$props4.now;
     var lang = _utils_lang__WEBPACK_IMPORTED_MODULE_8__["getLang"]();
     var langComponents = lang && lang.components || {};
     var locale = langComponents.lang || _config_config__WEBPACK_IMPORTED_MODULE_7___default.a.app.defaultLocale; // TODO?
@@ -39647,7 +39741,7 @@ DateTimeSelector = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_
       id: this.id,
       inline: true,
       calendarClassName: calendarClassName,
-      locale: locale, // Causes exception `A locale object was not found for the provided string`
+      locale: locale, // Causes exception `A locale object was not found for the provided string` (use `registerLocale`)
       timeIntervals: timeIntervals,
       timeFormat: _config_config__WEBPACK_IMPORTED_MODULE_7___default.a.constants.timeFormat,
       dateFormat: _config_config__WEBPACK_IMPORTED_MODULE_7___default.a.constants.dateFormat,
@@ -39655,6 +39749,9 @@ DateTimeSelector = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_
       selected: value,
       startDate: startDate,
       endDate: endDate,
+      minDate: minDate,
+      maxDate: maxDate,
+      now: now,
       showTimeSelect: showTime,
       selectsRange: selectsRange,
       selectsStart: selectsStart,
@@ -39664,10 +39761,12 @@ DateTimeSelector = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_
       previousYearButtonLabel: calendarLang.previousYearButtonLabel || 'Previous Year',
       nextYearButtonLabel: calendarLang.nextYearButtonLabel || 'Next Year',
       previousMonthButtonLabel: calendarLang.previousMonthButtonLabel || 'Previous Month',
-      nextMonthButtonLabel: calendarLang.nextMonthButtonLabel || 'Next Month' };
-
+      nextMonthButtonLabel: calendarLang.nextMonthButtonLabel || 'Next Month'
+      // onCalendarOpen: this.updateTimeListItems,
+      // ref: this.setRef,
+    };
     return /*#__PURE__*/(
-      react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement("div", { className: this.getClassName() }, /*#__PURE__*/
+      react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement("div", { className: this.getClassName(), ref: this.setDomRef }, /*#__PURE__*/
       react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(react_datepicker__WEBPACK_IMPORTED_MODULE_9___default.a, datePickerProps)));
 
 
@@ -40782,6 +40881,7 @@ ModalPopup = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helper
 
 
 
+
   // Properties...
 
 
@@ -41326,6 +41426,10 @@ ModalPopup = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helper
         className: _this.getClassName({ cnCtx: cnModalPopup, className: className }),
         ref: _this.setContentDomRef // Will be used windowDomNode from ModalPortal
       };
+      // console.log('ModalPopup:renderPortalContent', {
+      //   renderProps,
+      //   popupContent,
+      // });
       return /*#__PURE__*/(
         react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement("div", renderProps,
         popupContent));
@@ -41492,7 +41596,7 @@ ModalPopup = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helper
   // registerCallback: null,
   closeOnClickOutside: true, // For ModalPortal
   closeOnEscPressed: true, // For ModalPortal
-  open: false });/* harmony default export */ __webpack_exports__["default"] = (ModalPopup);var FormItemModalPopup = Object(_forms_FormItemHOC_FormItemHOC__WEBPACK_IMPORTED_MODULE_9__["default"])(ModalPopup);
+  noWrapper: true, open: false });/* harmony default export */ __webpack_exports__["default"] = (ModalPopup);var FormItemModalPopup = Object(_forms_FormItemHOC_FormItemHOC__WEBPACK_IMPORTED_MODULE_9__["default"])(ModalPopup);
 
 /***/ }),
 
@@ -43909,6 +44013,333 @@ var FormContainer = function FormContainer(props) {var
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/extends */ "./node_modules/@babel/runtime/helpers/extends.js");
+/* harmony import */ var _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/assertThisInitialized */ "./node_modules/@babel/runtime/helpers/assertThisInitialized.js");
+/* harmony import */ var _babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _babel_runtime_helpers_inheritsLoose__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime/helpers/inheritsLoose */ "./node_modules/@babel/runtime/helpers/inheritsLoose.js");
+/* harmony import */ var _babel_runtime_helpers_inheritsLoose__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_inheritsLoose__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/defineProperty.js");
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _utils_configure__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../utils/configure */ "./src/utils/configure.js");
+/* harmony import */ var _config_config__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../config/config */ "./src/config/config.js");
+/* harmony import */ var _config_config__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_config_config__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _utils_forms__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../utils/forms */ "./src/utils/forms.js");
+/* harmony import */ var _utils_dates__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../utils/dates */ "./src/utils/dates.js");
+/* harmony import */ var _utils_lang__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../utils/lang */ "./src/utils/lang.js");
+/* harmony import */ var _FormGroup_FormGroup__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../FormGroup/FormGroup */ "./src/forms/FormGroup/FormGroup.jsx");
+/* harmony import */ var _FormDateTime_FormDateTime__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../FormDateTime/FormDateTime */ "./src/forms/FormDateTime/FormDateTime.jsx");
+/* harmony import */ var _FormLabel_FormLabel__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../FormLabel/FormLabel */ "./src/forms/FormLabel/FormLabel.jsx");
+/* harmony import */ var _FormItemHOC_FormItemHOC__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../FormItemHOC/FormItemHOC */ "./src/forms/FormItemHOC/FormItemHOC.jsx");
+/* harmony import */ var _FormDateRange_pcss__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./FormDateRange.pcss */ "./src/forms/FormDateRange/FormDateRange.pcss");
+/* harmony import */ var _FormDateRange_pcss__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(_FormDateRange_pcss__WEBPACK_IMPORTED_MODULE_15__);
+ /** @module FormDateRange
+                                                                                                                                                                                                                                                                                *  @class FormDateRange
+                                                                                                                                                                                                                                                                                *  @since 2021.01.26, 13:19
+                                                                                                                                                                                                                                                                                *  @changed 2021.03.11, 22:16
+                                                                                                                                                                                                                                                                                *
+                                                                                                                                                                                                                                                                                *  TODO 2020.12.16, 23:07 -- Add hidden html form element (for form submission)
+                                                                                                                                                                                                                                                                                */
+/* eslint-disable react/require-default-props */
+
+
+
+
+
+
+
+
+
+
+// // langUtils.getCommonLangText('cancelButton', 'Cancel', lang)
+
+
+
+
+
+
+
+
+var cnFormDateRange = Object(_utils_configure__WEBPACK_IMPORTED_MODULE_6__["cn"])('FormDateRange');var
+
+FormDateRange = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helpers_inheritsLoose__WEBPACK_IMPORTED_MODULE_2___default()(FormDateRange, _React$PureComponent);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  // defaultProps = {
+  //   timeIntervals: 60,
+  // };
+
+  // Lifecycle methods...
+
+  function FormDateRange(props) {var _this;
+    _this = _React$PureComponent.call(this, props) || this;_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1___default()(_this), "handleChange",
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    function (params) {var
+
+      id =
+
+
+
+      params.id,value = params.value,valueObj = params.valueObj;var _this$props =
+
+
+
+
+      _this.props,onChange = _this$props.onChange,onStartDateChange = _this$props.onStartDateChange,onEndDateChange = _this$props.onEndDateChange;var _this$state =
+
+
+
+      _this.state,startDate = _this$state.startDate,endDate = _this$state.endDate;
+      var selectedStart = id === 'startDate';
+      var stateParams = {
+        startDate: startDate,
+        endDate: endDate };
+
+      stateParams[id] = value;
+      var cbParams = _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0___default()({},
+      stateParams, {
+        id: _this.id,
+        selectedStart: selectedStart,
+        valueId: id,
+        value: value,
+        valueObj: valueObj });
+
+      // console.log('FormDateRange:handleChange', {
+      //   stateParams,
+      //   cbParams,
+      // });
+      _this.setState(stateParams);
+      if (typeof onChange === 'function') {
+        onChange(cbParams);
+      }
+      if (selectedStart && typeof onStartDateChange === 'function') {
+        onStartDateChange(cbParams);
+      }
+      if (!selectedStart && typeof onEndDateChange === 'function') {
+        onEndDateChange(cbParams);
+      }
+    });var _startDate = props.startDate,_endDate = props.endDate,showTime = props.showTime,_props$timeIntervals = props.timeIntervals,timeIntervals = _props$timeIntervals === void 0 ? _config_config__WEBPACK_IMPORTED_MODULE_7___default.a.constants.timeIntervals : _props$timeIntervals;_this.id = props.id || props.inputId;_this.uniqFormId = props.inputId || props.id || _utils_forms__WEBPACK_IMPORTED_MODULE_8__["getUniqFormId"]({ prefix: 'FormDateRange' }); // identifier for local labels refering to local inputs
+    // const dateType = props.dateType || dateUtils.detectDateValueType(startDate || endDate) || defaultDateType;
+    // Default date (now)
+    _this.now = new Date(props.now || Date.now()); // Date.now()
+    // Default start date (beginning of the day)
+    _this.startNow = _utils_dates__WEBPACK_IMPORTED_MODULE_9__["adjustDateValue"](_this.now, false, showTime, timeIntervals); // this.startNow = new Date(this.now);
+    // this.startNow.setHours(0);
+    // this.startNow.setMinutes(0);
+    // this.startNow.setSeconds(0);
+    // this.startNow.setMilliseconds(0);
+    // Default end date (end of the day)
+    _this.endNow = _utils_dates__WEBPACK_IMPORTED_MODULE_9__["adjustDateValue"](_this.now, true, showTime, timeIntervals); // this.endNow = new Date(this.now);
+    // this.endNow.setHours(23);
+    // this.endNow.setMinutes(59);
+    // this.endNow.setSeconds(59);
+    // this.endNow.setMilliseconds(999);
+    _this.state = { // dateType,
+      startDate: _startDate, // : startDate && dateUtils.convertToDateObject(startDate),
+      endDate: _endDate // : endDate && dateUtils.convertToDateObject(endDate),
+    }; // this.state.displayValue = this.getDisplayValue(this.state);
+    return _this;} // Helper methods...
+  var _proto = FormDateRange.prototype;_proto.getClassName = function getClassName() {var id = this.id;var fullWidth = this.props.fullWidth;var className = cnFormDateRange({ id: id, fullWidth: fullWidth // ???
+    }, [this.props.className]);return className;} // Handlers...
+  ; // Render...
+  _proto.render = function render() {var _this$props2 =
+
+
+
+
+
+
+
+
+
+    this.props,id = _this$props2.id,disabled = _this$props2.disabled,startLabel = _this$props2.startLabel,endLabel = _this$props2.endLabel,startPlaceholder = _this$props2.startPlaceholder,endPlaceholder = _this$props2.endPlaceholder,showTime = _this$props2.showTime,_this$props2$timeInte = _this$props2.timeIntervals,timeIntervals = _this$props2$timeInte === void 0 ? _config_config__WEBPACK_IMPORTED_MODULE_7___default.a.constants.timeIntervals : _this$props2$timeInte,allowEmpty = _this$props2.allowEmpty;var _this$state2 =
+
+
+
+    this.state,startDate = _this$state2.startDate,endDate = _this$state2.endDate;
+
+    var renderProps = {
+      className: this.getClassName(),
+      disabled: disabled,
+      flow: true,
+      id: id };
+
+
+    // console.log('FormDateRange:render', {
+    //   startDate,
+    //   endDate,
+    //   props,
+    // });
+
+    var uniqStartId = this.uniqFormId + 'StartDate';
+    var uniqEndId = this.uniqFormId + 'EndDate';
+
+    var startLabelText = startLabel; // || 'от'
+    var endLabelText = endLabel; // || 'до'
+
+    var startPlaceholderText = startPlaceholder || _utils_lang__WEBPACK_IMPORTED_MODULE_10__["getCommonLangText"]('from');
+    var endPlaceholderText = endPlaceholder || _utils_lang__WEBPACK_IMPORTED_MODULE_10__["getCommonLangText"]('to');
+
+    var commonProps = {
+      // startDate,
+      // endDate,
+      showTime: showTime,
+      timeIntervals: timeIntervals,
+      allowEmpty: allowEmpty };
+
+    return /*#__PURE__*/(
+      react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(_FormGroup_FormGroup__WEBPACK_IMPORTED_MODULE_11__["default"], renderProps,
+      startLabelText && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(_FormLabel_FormLabel__WEBPACK_IMPORTED_MODULE_13__["default"], {
+        htmlFor: uniqStartId,
+        text: startLabelText }), /*#__PURE__*/
+
+      react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(_FormDateTime_FormDateTime__WEBPACK_IMPORTED_MODULE_12__["default"], _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0___default()({},
+      commonProps, {
+        selectsStart: true,
+        name: "startDate",
+        id: "startDate",
+        inputId: uniqStartId,
+        startDate: startDate,
+        endDate: endDate,
+        value: startDate,
+        placeholder: startPlaceholderText,
+        now: this.startNow,
+        maxDate: endDate,
+        onChange: this.handleChange })),
+
+      endLabelText && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(_FormLabel_FormLabel__WEBPACK_IMPORTED_MODULE_13__["default"], {
+        htmlFor: uniqEndId,
+        text: endLabelText }), /*#__PURE__*/
+
+      react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(_FormDateTime_FormDateTime__WEBPACK_IMPORTED_MODULE_12__["default"], _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0___default()({},
+      commonProps, {
+        selectsEnd: true,
+        name: "endDate",
+        id: "endDate",
+        inputId: uniqEndId,
+        startDate: startDate,
+        endDate: endDate,
+        value: endDate,
+        placeholder: endPlaceholderText,
+        now: this.endNow,
+        minDate: startDate,
+        onChange: this.handleChange,
+        isEndDate: true }))));
+
+
+
+  };return FormDateRange;}(react__WEBPACK_IMPORTED_MODULE_4___default.a.PureComponent /** @lends @FormDateRange.prototype */);_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3___default()(FormDateRange, "propTypes", { selectsEnd: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.bool, selectsStart: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.bool, // value: PropTypes.oneOfType([ PropTypes.string, PropTypes.number, PropTypes.instanceOf(Date) ]),
+  calendarClassName: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.string, className: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.string, closeOnSelect: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.bool, controlButtonTheme: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.string, disabled: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.bool, endDate: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.string, prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.number, prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.instanceOf(Date)]), fullWidth: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.bool, id: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.string, inputId: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.string, onChange: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.func, onStartDateChange: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.func, onEndDateChange: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.func, onControlClick: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.func, open: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.bool, placeholder: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.string, setDomRef: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.func, setPopupNodeRef: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.func, showTime: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.bool, startDate: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.string, prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.number, prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.instanceOf(Date)]), timeIntervals: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.number, title: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.string });
+
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(_FormItemHOC_FormItemHOC__WEBPACK_IMPORTED_MODULE_14__["default"])({ solid: true, hoverable: true })(FormDateRange));
+
+/***/ }),
+
+/***/ "./src/forms/FormDateRange/FormDateRange.pcss":
+/*!****************************************************!*\
+  !*** ./src/forms/FormDateRange/FormDateRange.pcss ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
+/***/ "./src/forms/FormDateRangeSingleBox/FormDateRangeSingleBox.jsx":
+/*!*********************************************************************!*\
+  !*** ./src/forms/FormDateRangeSingleBox/FormDateRangeSingleBox.jsx ***!
+  \*********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/assertThisInitialized */ "./node_modules/@babel/runtime/helpers/assertThisInitialized.js");
 /* harmony import */ var _babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _babel_runtime_helpers_inheritsLoose__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/inheritsLoose */ "./node_modules/@babel/runtime/helpers/inheritsLoose.js");
@@ -43931,10 +44362,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_12__);
 /* harmony import */ var _fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @fortawesome/free-regular-svg-icons */ "@fortawesome/free-regular-svg-icons");
 /* harmony import */ var _fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(_fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_13__);
-/* harmony import */ var _FormDateRange_pcss__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./FormDateRange.pcss */ "./src/forms/FormDateRange/FormDateRange.pcss");
-/* harmony import */ var _FormDateRange_pcss__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(_FormDateRange_pcss__WEBPACK_IMPORTED_MODULE_14__);
- /** @module FormDateRange
-                                                                                                                                                                                                                          *  @class FormDateRange
+/* harmony import */ var _FormDateRangeSingleBox_pcss__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./FormDateRangeSingleBox.pcss */ "./src/forms/FormDateRangeSingleBox/FormDateRangeSingleBox.pcss");
+/* harmony import */ var _FormDateRangeSingleBox_pcss__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(_FormDateRangeSingleBox_pcss__WEBPACK_IMPORTED_MODULE_14__);
+ /** @module FormDateRangeSingleBox
+                                                                                                                                                                                                                          *  @class FormDateRangeSingleBox
                                                                                                                                                                                                                           *  @since 2021.01.26, 13:19
                                                                                                                                                                                                                           *  @changed 2021.01.26, 13:19
                                                                                                                                                                                                                           *
@@ -43967,11 +44398,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var cnFormDateRange = Object(_utils_configure__WEBPACK_IMPORTED_MODULE_5__["cn"])('FormDateRange');
+var cnFormDateRangeSingleBox = Object(_utils_configure__WEBPACK_IMPORTED_MODULE_5__["cn"])('FormDateRangeSingleBox');
 
 // const defaultDateType = 'number';
 var
-FormDateRange = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helpers_inheritsLoose__WEBPACK_IMPORTED_MODULE_1___default()(FormDateRange, _React$PureComponent);
+FormDateRangeSingleBox = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_helpers_inheritsLoose__WEBPACK_IMPORTED_MODULE_1___default()(FormDateRangeSingleBox, _React$PureComponent);
 
 
 
@@ -44002,7 +44433,7 @@ FormDateRange = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_hel
 
   // Lifecycle methods...
 
-  function FormDateRange(props) {var _this;
+  function FormDateRangeSingleBox(props) {var _this;
     _this = _React$PureComponent.call(this, props) || this;_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_0___default()(_this), "onControlClick",
 
 
@@ -44071,7 +44502,7 @@ FormDateRange = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_hel
       _this.props,onChange = _this$props.onChange,closeOnSelect = _this$props.closeOnSelect,onStartDateChange = _this$props.onStartDateChange,onEndDateChange = _this$props.onEndDateChange;
       var setParams = { id: _this.id, startDate: startDate, startDateObj: startDateObj, endDate: endDate, endDateObj: endDateObj, value: value, valueObj: valueObj, selectedStart: selectedStart };
       setParams.displayValue = _this.getDisplayValue(setParams); // dateUtils.formatDateToString(value); // TODO: showTime option
-      // console.log('FormDateRange:onChange', setParams);
+      // console.log('FormDateRangeSingleBox:onChange', setParams);
       _this.setState(setParams);
       if (typeof onChange === 'function') {
         onChange(setParams);
@@ -44102,7 +44533,7 @@ FormDateRange = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_hel
       startDate: _startDate, // : startDate && dateUtils.convertToDateObject(startDate),
       endDate: _endDate // : endDate && dateUtils.convertToDateObject(endDate),
     };_this.state.displayValue = _this.getDisplayValue(_this.state);return _this;} // Helper methods...
-  var _proto = FormDateRange.prototype;_proto.getClassName = function getClassName() {var id = this.id;var classList = cnFormDateRange({ id: id }, [this.props.className]);return classList;};_proto.getItemsText = function getItemsText() {var displayValue = this.state.displayValue;return displayValue;} // Handlers...
+  var _proto = FormDateRangeSingleBox.prototype;_proto.getClassName = function getClassName() {var id = this.id;var classList = cnFormDateRangeSingleBox({ id: id }, [this.props.className]);return classList;};_proto.getItemsText = function getItemsText() {var displayValue = this.state.displayValue;return displayValue;} // Handlers...
   ;_proto.getDisplayValue = function getDisplayValue(params) {params = params || this.state;var _params = params,startDate = _params.startDate,endDate = _params.endDate;var showTime = this.props.showTime;var dateFormat = showTime ? _config_config__WEBPACK_IMPORTED_MODULE_6___default.a.constants.dateTimeFormat : _config_config__WEBPACK_IMPORTED_MODULE_6___default.a.constants.dateFormat;return [startDate && _utils_dates__WEBPACK_IMPORTED_MODULE_11__["formatDateToString"](startDate, dateFormat), endDate && _utils_dates__WEBPACK_IMPORTED_MODULE_11__["formatDateToString"](endDate, dateFormat)].filter(Boolean).join(_config_config__WEBPACK_IMPORTED_MODULE_6___default.a.constants.dateRangeDelim);}; // Render...
   _proto.renderControlContent = function renderControlContent() {var _this$props2 =
 
@@ -44190,18 +44621,18 @@ FormDateRange = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_hel
     return /*#__PURE__*/(
       react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_elements_ModalPopup_ModalPopup__WEBPACK_IMPORTED_MODULE_8__["default"], popupProps));
 
-  };return FormDateRange;}(react__WEBPACK_IMPORTED_MODULE_3___default.a.PureComponent /** @lends @FormDateRange.prototype */);_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2___default()(FormDateRange, "propTypes", { // selectsEnd: PropTypes.bool,
+  };return FormDateRangeSingleBox;}(react__WEBPACK_IMPORTED_MODULE_3___default.a.PureComponent /** @lends @FormDateRangeSingleBox.prototype */);_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2___default()(FormDateRangeSingleBox, "propTypes", { // selectsEnd: PropTypes.bool,
   // selectsStart: PropTypes.bool,
   // value: PropTypes.oneOfType([ PropTypes.string, PropTypes.number, PropTypes.instanceOf(Date) ]),
   calendarClassName: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string, className: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string, closeOnSelect: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool, controlButtonTheme: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string, disabled: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool, endDate: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string, prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.number, prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.instanceOf(Date)]), fullWidth: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool, id: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string, inputId: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string, onChange: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func, onStartDateChange: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func, onEndDateChange: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func, onControlClick: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func, open: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool, placeholder: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string, setDomRef: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func, setPopupNodeRef: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func, showTime: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool, startDate: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string, prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.number, prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.instanceOf(Date)]), timeIntervals: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.number, title: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string });
-/* harmony default export */ __webpack_exports__["default"] = (Object(_FormItemHOC_FormItemHOC__WEBPACK_IMPORTED_MODULE_7__["default"])({ solid: true, hoverable: true })(FormDateRange));
+/* harmony default export */ __webpack_exports__["default"] = (Object(_FormItemHOC_FormItemHOC__WEBPACK_IMPORTED_MODULE_7__["default"])({ solid: true, hoverable: true })(FormDateRangeSingleBox));
 
 /***/ }),
 
-/***/ "./src/forms/FormDateRange/FormDateRange.pcss":
-/*!****************************************************!*\
-  !*** ./src/forms/FormDateRange/FormDateRange.pcss ***!
-  \****************************************************/
+/***/ "./src/forms/FormDateRangeSingleBox/FormDateRangeSingleBox.pcss":
+/*!**********************************************************************!*\
+  !*** ./src/forms/FormDateRangeSingleBox/FormDateRangeSingleBox.pcss ***!
+  \**********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -44249,7 +44680,6 @@ __webpack_require__.r(__webpack_exports__);
                                                                                                                                                                                                                           *
                                                                                                                                                                                                                           *  TODO 2020.12.16, 23:07 -- Add hidden html form element (for form submission)
                                                                                                                                                                                                                           */
-/* eslint-disable react/require-default-props */
 
 
 
@@ -44270,7 +44700,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 
 
@@ -44393,7 +44822,9 @@ FormDateTime = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_help
 
 
 
-    this.props,placeholder = _this$props2.placeholder,title = _this$props2.title,controlButtonTheme = _this$props2.controlButtonTheme,_this$props2$fullWidt = _this$props2.fullWidth,fullWidth = _this$props2$fullWidt === void 0 ? true : _this$props2$fullWidt,disabled = _this$props2.disabled;var
+
+
+    this.props,id = _this$props2.id,inputId = _this$props2.inputId,placeholder = _this$props2.placeholder,title = _this$props2.title,controlButtonTheme = _this$props2.controlButtonTheme,_this$props2$fullWidt = _this$props2.fullWidth,fullWidth = _this$props2$fullWidt === void 0 ? true : _this$props2$fullWidt,disabled = _this$props2.disabled;var
 
     open =
     this.state.open;
@@ -44402,6 +44833,8 @@ FormDateTime = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_help
     var buttonText = this.getItemsText() || placeholder; // || text;
     return /*#__PURE__*/(
       react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_FormButton_FormButton__WEBPACK_IMPORTED_MODULE_9__["default"], {
+        id: id,
+        inputId: inputId,
         icon: icon,
         rightIcon: true,
         theme: controlButtonTheme || 'default',
@@ -44414,7 +44847,7 @@ FormDateTime = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_help
 
   };_proto.
 
-  renderDatePickerContent = function renderDatePickerContent() {var
+  renderDateSelectorContent = function renderDateSelectorContent() {var
 
     value =
     this.state.value;var _this$props3 =
@@ -44422,15 +44855,40 @@ FormDateTime = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_help
 
 
 
-    this.props,showTime = _this$props3.showTime,selectsRange = _this$props3.selectsRange,calendarClassName = _this$props3.calendarClassName;
+
+
+
+
+
+
+
+
+
+
+
+    this.props,id = _this$props3.id,inputId = _this$props3.inputId,showTime = _this$props3.showTime,timeIntervals = _this$props3.timeIntervals,selectsRange = _this$props3.selectsRange,calendarClassName = _this$props3.calendarClassName,selectsStart = _this$props3.selectsStart,selectsEnd = _this$props3.selectsEnd,startDate = _this$props3.startDate,endDate = _this$props3.endDate,minDate = _this$props3.minDate,maxDate = _this$props3.maxDate,now = _this$props3.now,isEndDate = _this$props3.isEndDate;
     var dateSelectorProps = {
+      id: id,
+      inputId: inputId,
       inline: true,
       calendarClassName: calendarClassName,
       onChange: this.onChange,
       value: value,
       showTime: showTime,
-      selectsRange: selectsRange };
+      timeIntervals: timeIntervals,
+      selectsRange: selectsRange,
+      selectsStart: selectsStart,
+      selectsEnd: selectsEnd,
+      startDate: startDate,
+      endDate: endDate,
+      minDate: minDate,
+      maxDate: maxDate,
+      now: now,
+      isEndDate: isEndDate };
 
+    // console.log('FormDateTime:renderDateSelectorContent', {
+    //   dateSelectorProps,
+    // });
     return /*#__PURE__*/(
       react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_elements_DateTimeSelector_DateTimeSelector__WEBPACK_IMPORTED_MODULE_10__["default"], dateSelectorProps));
 
@@ -44445,13 +44903,13 @@ FormDateTime = /*#__PURE__*/function (_React$PureComponent) {_babel_runtime_help
 
 
 
-    this.props,id = _this$props4.id,disabled = _this$props4.disabled,title = _this$props4.title,open = _this$props4.open,fullWidth = _this$props4.fullWidth,setDomRef = _this$props4.setDomRef;
+    this.props,disabled = _this$props4.disabled,title = _this$props4.title,open = _this$props4.open,fullWidth = _this$props4.fullWidth,setDomRef = _this$props4.setDomRef;
 
     var controlContent = this.renderControlContent();
-    var dateSelectorContent = this.renderDatePickerContent();
+    var dateSelectorContent = this.renderDateSelectorContent();
 
     var popupProps = {
-      id: id,
+      // id,
       className: this.getClassName(),
       disabled: disabled,
       title: title,
@@ -46870,7 +47328,7 @@ FormTextInput));
 /*!****************************!*\
   !*** ./src/forms/forms.js ***!
   \****************************/
-/*! exports provided: FormItemHOC, FormItemDummy, FormLabel, FormButton, FormDelim, FormSpacer, FormSeparator, FormText, FormSelect, FormTextInput, FormPasswordInput, FormRadio, FormDateTime, FormDateRange, FormActions, FormContainer, FormGroup, FormLabeledGroup, FormButtonGroup, FormInputGroup */
+/*! exports provided: FormItemHOC, FormItemDummy, FormLabel, FormButton, FormDelim, FormSpacer, FormSeparator, FormText, FormSelect, FormTextInput, FormPasswordInput, FormRadio, FormDateTime, FormDateRange, FormDateRangeSingleBox, FormActions, FormContainer, FormGroup, FormLabeledGroup, FormButtonGroup, FormInputGroup */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -46917,28 +47375,31 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _FormDateRange_FormDateRange__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./FormDateRange/FormDateRange */ "./src/forms/FormDateRange/FormDateRange.jsx");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "FormDateRange", function() { return _FormDateRange_FormDateRange__WEBPACK_IMPORTED_MODULE_13__["default"]; });
 
-/* harmony import */ var _FormActions_FormActions__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./FormActions/FormActions */ "./src/forms/FormActions/FormActions.jsx");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "FormActions", function() { return _FormActions_FormActions__WEBPACK_IMPORTED_MODULE_14__["default"]; });
+/* harmony import */ var _FormDateRangeSingleBox_FormDateRangeSingleBox__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./FormDateRangeSingleBox/FormDateRangeSingleBox */ "./src/forms/FormDateRangeSingleBox/FormDateRangeSingleBox.jsx");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "FormDateRangeSingleBox", function() { return _FormDateRangeSingleBox_FormDateRangeSingleBox__WEBPACK_IMPORTED_MODULE_14__["default"]; });
 
-/* harmony import */ var _FormContainer_FormContainer__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./FormContainer/FormContainer */ "./src/forms/FormContainer/FormContainer.jsx");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "FormContainer", function() { return _FormContainer_FormContainer__WEBPACK_IMPORTED_MODULE_15__["default"]; });
+/* harmony import */ var _FormActions_FormActions__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./FormActions/FormActions */ "./src/forms/FormActions/FormActions.jsx");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "FormActions", function() { return _FormActions_FormActions__WEBPACK_IMPORTED_MODULE_15__["default"]; });
 
-/* harmony import */ var _FormGroup_FormGroup__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./FormGroup/FormGroup */ "./src/forms/FormGroup/FormGroup.jsx");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "FormGroup", function() { return _FormGroup_FormGroup__WEBPACK_IMPORTED_MODULE_16__["default"]; });
+/* harmony import */ var _FormContainer_FormContainer__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./FormContainer/FormContainer */ "./src/forms/FormContainer/FormContainer.jsx");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "FormContainer", function() { return _FormContainer_FormContainer__WEBPACK_IMPORTED_MODULE_16__["default"]; });
 
-/* harmony import */ var _FormLabeledGroup_FormLabeledGroup__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./FormLabeledGroup/FormLabeledGroup */ "./src/forms/FormLabeledGroup/FormLabeledGroup.jsx");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "FormLabeledGroup", function() { return _FormLabeledGroup_FormLabeledGroup__WEBPACK_IMPORTED_MODULE_17__["default"]; });
+/* harmony import */ var _FormGroup_FormGroup__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./FormGroup/FormGroup */ "./src/forms/FormGroup/FormGroup.jsx");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "FormGroup", function() { return _FormGroup_FormGroup__WEBPACK_IMPORTED_MODULE_17__["default"]; });
 
-/* harmony import */ var _FormButtonGroup_FormButtonGroup__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./FormButtonGroup/FormButtonGroup */ "./src/forms/FormButtonGroup/FormButtonGroup.jsx");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "FormButtonGroup", function() { return _FormButtonGroup_FormButtonGroup__WEBPACK_IMPORTED_MODULE_18__["default"]; });
+/* harmony import */ var _FormLabeledGroup_FormLabeledGroup__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./FormLabeledGroup/FormLabeledGroup */ "./src/forms/FormLabeledGroup/FormLabeledGroup.jsx");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "FormLabeledGroup", function() { return _FormLabeledGroup_FormLabeledGroup__WEBPACK_IMPORTED_MODULE_18__["default"]; });
 
-/* harmony import */ var _FormInputGroup_FormInputGroup__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./FormInputGroup/FormInputGroup */ "./src/forms/FormInputGroup/FormInputGroup.jsx");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "FormInputGroup", function() { return _FormInputGroup_FormInputGroup__WEBPACK_IMPORTED_MODULE_19__["default"]; });
+/* harmony import */ var _FormButtonGroup_FormButtonGroup__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./FormButtonGroup/FormButtonGroup */ "./src/forms/FormButtonGroup/FormButtonGroup.jsx");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "FormButtonGroup", function() { return _FormButtonGroup_FormButtonGroup__WEBPACK_IMPORTED_MODULE_19__["default"]; });
+
+/* harmony import */ var _FormInputGroup_FormInputGroup__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./FormInputGroup/FormInputGroup */ "./src/forms/FormInputGroup/FormInputGroup.jsx");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "FormInputGroup", function() { return _FormInputGroup_FormInputGroup__WEBPACK_IMPORTED_MODULE_20__["default"]; });
 
 /** @module forms
  *  @desc Form components
  *  @since 2020.07.20, 19:21
- *  @changed 2021.02.20, 16:56
+ *  @changed 2021.03.11, 20:54
  */
 
 // Form elements...
@@ -47212,7 +47673,7 @@ __webpack_require__.r(__webpack_exports__);
 /** @module dates
  *  @description Objects utilities
  *  @since 2021.01.23, 20:29
- *  @changed 2021.01.23, 21:11
+ *  @changed 2021.03.11, 21:00
  */
 
 
@@ -47221,14 +47682,14 @@ __webpack_require__.r(__webpack_exports__);
 
 // Export constants...
 
-var dayTicks = 1000 * 60 * 60 * 24;
-var weekTicks = dayTicks * 7;
+var dayTicks = _config_config__WEBPACK_IMPORTED_MODULE_2___default.a.constants.dayTicks; // 1000 * 60 * 60 * 24;
+var weekTicks = _config_config__WEBPACK_IMPORTED_MODULE_2___default.a.constants.weekTicks; // dayTicks * 7;
 
 /** Get date type
-                                      * @param {Date|Moment|number} date
-                                      * @return {String} dateType ('number', 'object', 'moment', 'msDateStr')
-                                      * msDateStr: '/Date(1498653276417+0300)/'
-                                      */
+ * @param {Date|Moment|number} date
+ * @return {String} dateType ('number', 'object', 'moment', 'msDateStr')
+ * msDateStr: '/Date(1498653276417+0300)/'
+ */
 function detectDateValueType(date) {
   if (date == null) {
     return undefined;
@@ -47329,10 +47790,10 @@ function formatDateTimeToString(date, opt) {if (opt === void 0) {opt = {};}
    * @param {Date|Number|moment|msDateStr} origDate - date (in any format)
    * @param {Boolean} [toEnd=false] -- Adjust to end
    * @param {Boolean} [toTime=false] -- Adjust to time periods (timeIntervals)
-   * @param {Number} [timeIntervals=60] -- Time period to adjust (in minutes)
+   * @param {Number} [timeIntervals] -- Time period to adjust (in minutes, default value = config.constants.timeIntervals)
    * @return {Date|Number|moment|msDateStr} adjustedDate -- Date in the input format
    */
-function adjustDateValue(origDate, toEnd, toTime, timeIntervals) {if (timeIntervals === void 0) {timeIntervals = 60;}
+function adjustDateValue(origDate, toEnd, toTime, timeIntervals) {
   var dateType = detectDateValueType(origDate);
   var date;
   if (dateType === 'object') {// Just clone date object
@@ -47350,6 +47811,9 @@ function adjustDateValue(origDate, toEnd, toTime, timeIntervals) {if (timeInterv
     }
   } else
   {
+    if (!timeIntervals) {
+      timeIntervals = _config_config__WEBPACK_IMPORTED_MODULE_2___default.a.constants.timeIntervals;
+    }
     if (toEnd) {
       date.setMilliseconds(999);
       date.setSeconds(59);
@@ -47362,6 +47826,11 @@ function adjustDateValue(origDate, toEnd, toTime, timeIntervals) {if (timeInterv
     {
       date.setMilliseconds(0);
       date.setSeconds(0);
+      var _minutes = date.getMinutes();
+      // To begin of period slot
+      var _extraMinutes = _minutes % timeIntervals;
+      var _setMinutes = _minutes - _extraMinutes;
+      date.setMinutes(_setMinutes);
     }
   }
   return convertDateToType(date, dateType);
@@ -47445,6 +47914,37 @@ function removeClassName(domNode, className) {
 
 /***/ }),
 
+/***/ "./src/utils/forms.js":
+/*!****************************!*\
+  !*** ./src/utils/forms.js ***!
+  \****************************/
+/*! exports provided: getUniqFormId */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getUniqFormId", function() { return getUniqFormId; });
+/** @module forms
+ *  @since 2021.03.11, 20:00
+ *  @changed 2021.03.11, 20:00
+ */
+
+// Unique for serializer
+var uniqCounter = 0;
+
+/** Get unique form identifier
+                      * @param {Object} [opt]
+                      * @param {String} [opt.prefix]
+                      * @return {String}
+                      */
+function getUniqFormId(_temp) {var _ref = _temp === void 0 ? {} : _temp,_ref$prefix = _ref.prefix,prefix = _ref$prefix === void 0 ? 'uniqForm' : _ref$prefix;
+  // const prefix = opts.prefix || 'uniqForm';
+  var id = prefix + (uniqCounter++ || '');
+  return id;
+}
+
+/***/ }),
+
 /***/ "./src/utils/lang.js":
 /*!***************************!*\
   !*** ./src/utils/lang.js ***!
@@ -47459,6 +47959,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getCommonLangText", function() { return getCommonLangText; });
 /* harmony import */ var _config_config__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../config/config */ "./src/config/config.js");
 /* harmony import */ var _config_config__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_config_config__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var date_fns_esm_locale__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! date-fns/esm/locale */ "./node_modules/date-fns/esm/locale/index.js");
+/* harmony import */ var react_datepicker__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-datepicker */ "react-datepicker");
+/* harmony import */ var react_datepicker__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_datepicker__WEBPACK_IMPORTED_MODULE_2__);
 /** @module lang
  *  @desc Language support tools
  *  @since 2021.01.11, 18:21
@@ -47466,6 +47969,12 @@ __webpack_require__.r(__webpack_exports__);
  */
 
 
+
+
+
+// Initialize locales...
+Object(react_datepicker__WEBPACK_IMPORTED_MODULE_2__["registerLocale"])('ru-RU', date_fns_esm_locale__WEBPACK_IMPORTED_MODULE_1__["ru"]);
+// TDDO: Register locales in target project (using config data)?
 
 function setLang(lang) {
   // console.log('WebUiCore:utils:lang:setLang', lang)
@@ -47489,7 +47998,7 @@ function getCommonLangText(id, defaultText, propsLang) {
 /*!******************************!*\
   !*** ./src/utils/strings.js ***!
   \******************************/
-/*! exports provided: toNumber, toString, toBoolean, typeTransforms, getCommonLength, ucFirst, toType, randomHexString, html2string, splitMultiline */
+/*! exports provided: toNumber, toString, toBoolean, typeTransforms, getCommonLength, ucFirst, toType, randomHexString, html2string, splitMultiline, padNumber */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -47504,6 +48013,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "randomHexString", function() { return randomHexString; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "html2string", function() { return html2string; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "splitMultiline", function() { return splitMultiline; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "padNumber", function() { return padNumber; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 var _this = undefined; /** @module strings
@@ -47624,8 +48134,9 @@ var splitMultiline = function splitMultiline(text, opt) {
   });
 };
 
-// module.exports = strings
-// export default strings
+function padNumber(num, size) {
+  return String(num).padStart(size, '0');
+}
 
 /***/ }),
 
@@ -47633,7 +48144,7 @@ var splitMultiline = function splitMultiline(text, opt) {
 /*!****************************!*\
   !*** ./src/utils/utils.js ***!
   \****************************/
-/*! exports provided: configure, dates, domUtils, lang, strings */
+/*! exports provided: configure, dates, domUtils, lang, strings, forms */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -47648,10 +48159,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "lang", function() { return _lang__WEBPACK_IMPORTED_MODULE_3__; });
 /* harmony import */ var _strings__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./strings */ "./src/utils/strings.js");
 /* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "strings", function() { return _strings__WEBPACK_IMPORTED_MODULE_4__; });
+/* harmony import */ var _forms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./forms */ "./src/utils/forms.js");
+/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "forms", function() { return _forms__WEBPACK_IMPORTED_MODULE_5__; });
 /** @module utils
  *  @desc Library utilities
  *  @since 2020.05.19, 17:16
- *  @changed 2020.12.15, 21:12
+ *  @changed 2021.03.11, 20:00
  */
 
 // export * from './configure'

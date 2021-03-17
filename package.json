@@ -2,9 +2,9 @@
   "name": "WebUiCoreDist",
   "description": "Arti UI Components Library",
   "NOTE": "All version and time stamp properties are updated automatically (see `util-update-build-variables.sh`, `util-increment-version.sh`)!",
-  "version": "0.2.13",
-  "timetag": "210309-1333",
-  "timestamp": "2021.03.09, 13:33",
+  "version": "0.2.14",
+  "timetag": "210317-1633",
+  "timestamp": "2021.03.17, 16:33",
   "changed": "2020.12.28, 03:36",
   "main": "bundle.js",
   "keywords": [
