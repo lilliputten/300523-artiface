@@ -234,7 +234,7 @@ class ModalPopup extends React.PureComponent /** @lends @ModalPopup.prototype */
   }
 
   getGlobalGeometry() {
-    const domNode = config.modals.domNode; // containerNode
+    const domNode = config.modals.controller.getDomNode(); // containerNode
     const globalGeometry = this.getDomNodeGeometry(domNode, 'global');
     return globalGeometry;
     // TODO!

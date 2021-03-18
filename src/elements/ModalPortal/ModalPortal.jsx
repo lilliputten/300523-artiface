@@ -224,7 +224,7 @@ class ModalPortal extends React.PureComponent /** @lends @ModalPortal.prototype 
           onActivate({ id });
         }
       });
-      config.modals.containerNode.registerModal(this);
+      config.modals.controller.registerModal(this);
     }
     else if (typeof cb === 'function') {
       cb();
@@ -243,7 +243,7 @@ class ModalPortal extends React.PureComponent /** @lends @ModalPortal.prototype 
       if (typeof onDeactivate === 'function') {
         onDeactivate({ id });
       }
-      config.modals.containerNode.unregisterModal(this);
+      config.modals.controller.unregisterModal(this);
     }
   }
 
@@ -434,7 +434,7 @@ class ModalPortal extends React.PureComponent /** @lends @ModalPortal.prototype 
     const cbProps = { event, id, key, keyCode, charCode };
     // console.log('ModalPortal:onKeyPress', cbProps);
     if (isEscPressed && !loading) {
-      const isTopmost = config.modals.containerNode.isModalTopmostVisible(this);
+      const isTopmost = config.modals.controller.isModalTopmostVisible(this);
       // console.log('ModalPortal:onKeyPress', id, isTopmost)
       if (isTopmost) {
         // event.stopPropagation()
@@ -475,7 +475,7 @@ class ModalPortal extends React.PureComponent /** @lends @ModalPortal.prototype 
   }
   startOutsideClickWaiting = () => { // Start waiting for mouse up on wrapper (close modal) or window (continue working)
     const { loading, startOutsideClickWaiting } = this.props;
-    const isTopmost = config.modals.containerNode.isModalTopmostVisible(this);
+    const isTopmost = config.modals.controller.isModalTopmostVisible(this);
     if (!loading && isTopmost) {
       const { globalDomNode, windowDomNode } = this;
       // console.log('ModalPortal:startOutsideClickWaiting');
@@ -597,6 +597,7 @@ class ModalPortal extends React.PureComponent /** @lends @ModalPortal.prototype 
         classNames={cnModalPortal()} // Generate animation classes
       >
         <div
+          key={id}
           className={cnModalPortal({ type, id, noWrapper }, [className])} // Root node
           ref={this.setRootDomRef}
         >
@@ -618,9 +619,9 @@ class ModalPortal extends React.PureComponent /** @lends @ModalPortal.prototype 
     if (!toDisplay) {
       return null;
     }
-    const node = config.modals.domNode;
+    const node = config.modals.controller.getDomNode();
     if (!node) {
-      const error = new Error('ModalPortal: config.modals.domNode is undefined. Don\'t forget to use WebUiCoreRoot with autoModalsContainer mode or render ModalsContainer manually.');
+      const error = new Error('ModalPortal: Modals domNode is undefined. Don\'t forget to use WebUiCoreRoot with autoModalsContainer mode or render ModalsContainer manually.');
       console.error(error); // eslint-disable-line no-console
       /*DEBUG*/ debugger; // eslint-disable-line no-debugger
       throw error; // ???
