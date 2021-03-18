@@ -38,10 +38,11 @@ module.exports = {
     '@babel/plugin-syntax-export-namespace-from', // Singlie-line reexport as namespace -- https://www.npmjs.com/package/@babel/plugin-syntax-export-namespace-from
     ['module-resolver', { // https://github.com/tleunen/babel-plugin-module-resolver
       root: [srcPath],
+      extenstions: ['.ts', '.tsx', '.js', '.jsx'],
       alias: srcFolders.reduce((aliases, dir) => {
         return { ...aliases, [dir]: [srcPath + '/' + dir] };
-      }, {}),
+      }, { '~': [srcPath] }),
     }],
-    ['directory-resolver', { moduleFileExtensions: ['js', 'jsx'] }], // https://github.com/mgcrea/babel-plugin-directory-resolver
+    ['directory-resolver', { moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'] }], // https://github.com/mgcrea/babel-plugin-directory-resolver
   ],
 };
