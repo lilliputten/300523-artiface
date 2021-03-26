@@ -6,7 +6,7 @@
 
 // import * as build from './build'
 
-export const demoFixtures = {
+const demoFixtures = {
 
   Hello: require('demo/Hello/Hello.fixture'),
 
@@ -52,3 +52,5 @@ export const demoFixtures = {
   FormActions: require('forms/FormActions/FormActions.fixture'),
 
 };
+
+export default demoFixtures;
