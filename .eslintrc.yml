@@ -12,7 +12,8 @@
 # - https://github.com/yannickcr/eslint-plugin-react#list-of-supported-rules
 # - https://github.com/jsx-eslint/eslint-plugin-jsx-a11y#supported-rules
 
-parser: 'babel-eslint'
+# parser: 'babel-eslint'
+parser: '@babel/eslint-parser'
 extends:
   - 'plugin:react/all'
   - 'eslint:recommended'
@@ -51,21 +52,20 @@ rules:
   # react/jsx-max-depth: 0
   # react/no-array-index-key: 0
   # react/require-optimization: 0
-  react/no-multi-comp: 0
-  react/require-default-props: 0
   react-hooks/exhaustive-deps: 'warn'
   react-hooks/rules-of-hooks: 'error'
   react/destructuring-assignment: 0
   react/forbid-component-props: 0
   react/jsx-boolean-value: 0
-  react/jsx-filename-extension: [ 2, { 'extensions': [ '.js', '.jsx', '.ts', '.tsx' ] } ]
   react/jsx-closing-bracket-location: 0
+  react/jsx-filename-extension: [ 2, { 'extensions': [ '.js', '.jsx', '.ts', '.tsx' ] } ]
   react/jsx-first-prop-new-line: 0
   react/jsx-fragments: 0
   react/jsx-handler-names: 0
   react/jsx-indent-props: 0
   react/jsx-indent: 0
   react/jsx-max-props-per-line: 0
+  react/jsx-newline: 0
   react/jsx-no-literals: 0
   react/jsx-one-expression-per-line: 0
   react/jsx-props-no-spreading: 0
@@ -74,9 +74,11 @@ rules:
   react/jsx-uses-react: 'error'
   react/jsx-uses-vars: 'error'
   react/no-did-update-set-state: 0
+  react/no-multi-comp: 0
   react/no-set-state: 0
   react/no-unused-state: 0
   react/prop-types: 0
+  react/require-default-props: 0
   react/sort-comp: 0
   react/sort-prop-types: 0
   react/style-prop-object: 0

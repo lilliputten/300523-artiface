@@ -13,8 +13,6 @@ const srcFolders = [
   'forms',
   'utils',
   'helpers',
-  // 'lib',
-  // 'tests',
 ];
 
 module.exports = {
@@ -25,9 +23,9 @@ module.exports = {
       // corejs: 3,
       loose: true,
     }],
-    ['@babel/preset-flow'],
+    // ['@babel/preset-flow'],
     ['@babel/preset-react'],
-    ['@babel/preset-typescript'],
+    // ['@babel/preset-typescript'],
   ],
   plugins: [
     '@babel/plugin-transform-runtime',
