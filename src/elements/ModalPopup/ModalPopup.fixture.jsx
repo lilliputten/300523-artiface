@@ -13,7 +13,7 @@ import FormButton from 'forms/FormButton';
 import Menu from 'elements/Menu';
 
 // Demo styles for cosmos engine
-import 'demo.pcss';
+// import 'demo.pcss';
 
 import './ModalPopup.fixture.pcss';
 

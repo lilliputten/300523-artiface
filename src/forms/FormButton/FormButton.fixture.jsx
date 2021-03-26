@@ -13,7 +13,7 @@ import { // Icons (solid)...
 } from '@fortawesome/free-solid-svg-icons';
 
 // Demo styles for cosmos engine
-import 'demo.pcss';
+// import 'demo.pcss';
 
 // export const DemoWrapper = FormGroup; // ({ children }) => {
 export const DemoWrapper = <FormGroup />; // ({ children }) => {

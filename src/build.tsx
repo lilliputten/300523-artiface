@@ -6,16 +6,14 @@
 
 import React from 'react';
 
-// export config from 'config';
 import * as config from 'config';
 export { config };
 
 export * as utils from 'utils';
-// export * as utils from 'utils';
 export * as helpers from 'helpers';
 
-export * from 'elements';
-export * from 'forms';
+export * as elements from 'elements';
+// export * as forms from 'forms';
 
 // Demo component
 // export Hello from './demo/Hello';
@@ -27,8 +25,25 @@ import './build.pcss';
 
 import ModalsContainer from 'elements/ModalsContainer';
 
+// // DEBUG
+// import FormTextInput from 'forms/FormTextInput';
+// import FormTextInputRaw from 'forms/FormTextInput/FormTextInput';
+// console.log('build', {
+//   FormTextInput,
+//   FormTextInputRaw,
+//   Hello,
+//   ModalsContainer,
+// });
+// debugger;
+// // export default Hello;
+
+interface IProps {
+    children: React.ReactNode;
+    autoModalsContainer?: boolean;
+}
+
 // TODO: Use WebUiCoreContext?
-const WebUiCoreRoot = ({ children, autoModalsContainer }) => {
+const WebUiCoreRoot = ({ children, autoModalsContainer }: IProps) => {
   return (
     <React.Fragment>
       {children}

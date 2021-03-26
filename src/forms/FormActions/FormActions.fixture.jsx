@@ -22,7 +22,7 @@ import { // Icons (solid)...
 } from '@fortawesome/free-solid-svg-icons';
 
 // Demo styles for cosmos engine
-import 'demo.pcss';
+// import 'demo.pcss';
 
 import './FormActions.fixture.pcss';
 

@@ -13,7 +13,7 @@ import * as dateUtils from 'utils/dates';
 // import FormGroup from '../FormGroup';
 
 // Demo styles for cosmos engine
-import 'demo.pcss';
+// import 'demo.pcss';
 
 import './DateTimeSelector.fixture.pcss';
 

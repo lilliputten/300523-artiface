@@ -14,7 +14,7 @@ import FormTextInput from 'forms/FormTextInput';
 // import Menu from 'elements/Menu'
 
 // Demo styles for cosmos engine
-import 'demo.pcss';
+// import 'demo.pcss';
 
 import './ModalWindow.fixture.pcss';
 

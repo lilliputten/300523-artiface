@@ -12,7 +12,7 @@ import FormTextInput from '../FormTextInput';
 import { FormContextProvider } from 'helpers/FormContext';
 
 // Demo styles for cosmos engine
-import 'demo.pcss';
+// import 'demo.pcss';
 
 export const DemoWrapper = FormGroup; // ({ children }) => {
 

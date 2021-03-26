@@ -260,4 +260,3 @@ export default compose(
   FormInteractiveItemHOC,
   FormItemHOC({ solid: true, hoverable: true, focusable: true, framed: true }),
 )(FormTextInput);
-

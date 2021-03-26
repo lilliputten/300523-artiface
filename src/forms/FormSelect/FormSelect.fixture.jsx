@@ -11,7 +11,7 @@ import FormLabeledGroup from '../FormLabeledGroup';
 import FormLabel from '../FormLabel';
 
 // Demo styles for cosmos engine
-import 'demo.pcss';
+// import 'demo.pcss';
 
 import './FormSelect.fixture.pcss';
 

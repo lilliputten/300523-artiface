@@ -10,7 +10,7 @@ import MenuItem from '../MenuItem';
 import MenuItemSeparator from './MenuItemSeparator';
 
 // Demo styles for cosmos engine
-import 'demo.pcss';
+// import 'demo.pcss';
 
 import './MenuItemSeparator.fixture.pcss';
 

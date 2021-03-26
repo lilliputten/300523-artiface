@@ -12,7 +12,7 @@ import FormGroup from '../FormGroup';
 import FormContainer from './FormContainer';
 
 // Demo styles for cosmos engine
-import 'demo.pcss';
+// import 'demo.pcss';
 
 import './FormContainer.fixture.pcss';
 

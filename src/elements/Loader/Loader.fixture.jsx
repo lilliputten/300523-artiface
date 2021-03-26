@@ -8,7 +8,7 @@ import React from 'react';
 import Loader from './Loader';
 
 // Demo styles for cosmos engine
-import 'demo.pcss';
+// import 'demo.pcss';
 
 import './Loader.fixture.pcss';
 

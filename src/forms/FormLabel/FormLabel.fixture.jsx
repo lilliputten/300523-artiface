@@ -9,7 +9,7 @@ import FormGroup from '../FormGroup';
 import FormTextInput from '../FormTextInput';
 
 // Demo styles for cosmos engine
-import 'demo.pcss';
+// import 'demo.pcss';
 
 // export const DemoWrapper = FormGroup // ({ children }) => {
 export const DemoWrapper = <FormGroup stack id="Wrapper" />; // ({ children }) => {

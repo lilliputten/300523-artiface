@@ -9,7 +9,7 @@ import Menu from './Menu';
 import MenuItem from '../MenuItem';
 
 // Demo styles for cosmos engine
-import 'demo.pcss';
+// import 'demo.pcss';
 
 // export const DemoWrapper = FormGroup // ({ children }) => {
 

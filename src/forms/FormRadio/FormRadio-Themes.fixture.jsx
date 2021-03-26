@@ -9,7 +9,7 @@ import FormRadio from './FormRadio';
 import FormGroup from '../FormGroup';
 
 // Demo styles for cosmos engine
-import 'demo.pcss';
+// import 'demo.pcss';
 
 export const DemoWrapper = FormGroup; // ({ children }) => {
 

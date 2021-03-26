@@ -10,7 +10,7 @@ import FormButton from '../FormButton';
 import FormGroup from '../FormGroup';
 
 // Demo styles for cosmos engine
-import 'demo.pcss';
+// import 'demo.pcss';
 
 import './FormSeparator.fixture.pcss';
 

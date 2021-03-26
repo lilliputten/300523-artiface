@@ -9,7 +9,7 @@ import FormGroup from '../FormGroup';
 import FormLabel from '../FormLabel';
 
 // Demo styles for cosmos engine
-import 'demo.pcss';
+// import 'demo.pcss';
 
 import './FormTextInput.fixture.pcss';
 

@@ -13,7 +13,7 @@ import FormGroup from '../FormGroup';
 import * as dateUtils from 'utils/dates';
 
 // Demo styles for cosmos engine
-import 'demo.pcss';
+// import 'demo.pcss';
 
 import './FormDateRange.fixture.pcss';
 
