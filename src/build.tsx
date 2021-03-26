@@ -7,14 +7,15 @@
 import React from 'react';
 
 // export config from 'config';
-import config from 'config';
+import * as config from 'config';
 export { config };
 
 export * as utils from 'utils';
+// export * as utils from 'utils';
 export * as helpers from 'helpers';
 
-export * from './elements';
-export * from './forms';
+export * from 'elements';
+export * from 'forms';
 
 // Demo component
 // export Hello from './demo/Hello';
@@ -24,7 +25,7 @@ export { Hello };
 // Basic styles
 import './build.pcss';
 
-import ModalsContainer from './elements/ModalsContainer';
+import ModalsContainer from 'elements/ModalsContainer';
 
 // TODO: Use WebUiCoreContext?
 const WebUiCoreRoot = ({ children, autoModalsContainer }) => {

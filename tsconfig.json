@@ -1,42 +1,24 @@
 {
   "compilerOptions": {
 
-    "target": "es6",
-    "module": "commonjs",
     "moduleResolution": "node",
-    "jsx": "react",
-    "lib": [
-      "dom",
-      "es7"
-    ],
-
-    "allowJs": true,
-
-    "sourceMap": true,
-    "allowSyntheticDefaultImports" : true,
-    "esModuleInterop" : true,
-
-    "rootDir": "src",
-    "baseUrl": "./src",
-
-    "paths": {
-      "~/*": ["*"]
-    },
-
-    "strictFunctionTypes": true,
-    "strictNullChecks": true,
-
     "noImplicitAny": true,
-    "noImplicitReturns": true,
-    "noImplicitThis": true,
-    "noFallthroughCasesInSwitch": true,
+    "module": "es6",
+    "target": "es5",
+    "jsx": "react",
+    "allowJs": true,
+    "sourceMap": true,
+    "allowSyntheticDefaultImports": true,
 
-    "noUnusedLocals": false,
-    "noUnusedParameters": false,
-
-    "downlevelIteration": true,
-
-    "esModuleInterop" : false,
+    "baseUrl": "./src",
+    "paths": {
+      "demo": ["demo/"], "demo/*": ["demo/*"],
+      "config": ["config/"], "config/*": ["config/*"],
+      "elements": ["elements/"], "elements/*": ["elements/*"],
+      "forms": ["forms/"], "forms/*": ["forms/*"],
+      "utils": ["utils/"], "utils/*": ["utils/*"],
+      "helpers": ["helpers/"], "helpers/*": ["helpers/*"]
+    },
 
     "pretty": true
   },

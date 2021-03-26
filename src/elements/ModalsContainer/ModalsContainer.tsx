@@ -11,12 +11,14 @@ import * as React from 'react';
 // import PropTypes from 'prop-types';
 import * as PropTypes from 'prop-types';
 import { Portal } from 'react-portal';
-// import { cssMapping } from 'utils/configure'
+// import { cssMapping } from 'utils/configure';
 // import { cn } from '../../utils/configure';
-import { cn } from '../../utils/configure';
-// import { cn } from '~/utils/configure';
-import config from '~/config';
-// import { ModalsContextProvider } from 'helpers/ModalsContext'
+import { cn } from 'utils/configure';
+// import { cn } from '~/utils/configure.js';
+import * as config from 'config';
+// import * as config from '../../config/config';
+// import config from 'config/config';
+// import { ModalsContextProvider } from 'helpers/ModalsContext';
 
 import './ModalsContainer.pcss';
 

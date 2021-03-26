@@ -317,7 +317,15 @@ module.exports = (env, argv) => {
       ],
     },
     resolve: {
-      extensions: [ '.ts', '.tsx', '.js', '.jsx' ],
+      extensions: ['.tsx', '.ts', '.jsx', '.js'],
+      alias: {
+        demo: path.join(srcPath, 'demo'),
+        config: path.join(srcPath, 'config'),
+        elements: path.join(srcPath, 'elements'),
+        forms: path.join(srcPath, 'forms'),
+        utils: path.join(srcPath, 'utils'),
+        helpers: path.join(srcPath, 'helpers'),
+      },
     },
     output: {
       path: buildPath,
@@ -428,7 +436,7 @@ module.exports = (env, argv) => {
       isBuild && preprocessBundles && new WebpackFilePreprocessorPlugin({
         debug: !isStats, // Prints processed assets if set to true (default: false)
         pattern: /\.js$/,
-        process: preprocessJs
+        process: preprocessJs,
       }),
       // new webpack.NoEmitOnErrorsPlugin(), // ???
       isBuild && new CreateFileWebpack({ // Create build tag file
