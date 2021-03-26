@@ -2,10 +2,10 @@
   "name": "WebUiCoreDist",
   "description": "Arti UI Components Library",
   "NOTE": "All version and time stamp properties are updated automatically (see `util-update-build-variables.sh`, `util-increment-version.sh`)!",
-  "version": "0.2.14",
+  "version": "0.3.0",
   "timetag": "210317-1633",
   "timestamp": "2021.03.17, 16:33",
-  "changed": "2020.12.28, 03:36",
+  "changed": "2021.03.24, 17:37",
   "main": "bundle.js",
   "keywords": [
     "ARTI",
@@ -17,6 +17,24 @@
   "author": "igor@lilliputten.ru",
   "license": "ISC",
   "dependencies": {
+    "@bem-react/classname": "^1.5.9",
+    "@fortawesome/fontawesome-free": "^5.15.3",
+    "@fortawesome/fontawesome-svg-core": "^1.2.35",
+    "@fortawesome/free-brands-svg-icons": "^5.15.3",
+    "@fortawesome/free-regular-svg-icons": "^5.15.3",
+    "@fortawesome/free-solid-svg-icons": "^5.15.3",
+    "@fortawesome/react-fontawesome": "^0.1.14",
+    "date-fns": "^2.19.0",
+    "moment": "^2.29.1",
+    "react": "^17.0.2",
+    "react-datepicker": "^3.6.0",
+    "react-dom": "^17.0.2",
+    "react-portal": "^4.2.1",
+    "react-transition-group": "^4.4.1",
+    "redux": "^4.0.5",
+    "throttle-debounce": "^3.0.1"
+  },
+  "stableDependencies-v.0.2.*": {
     "@bem-react/classname": "^1.5.8",
     "@fortawesome/fontawesome-free": "^5.14.0",
     "@fortawesome/fontawesome-svg-core": "^1.2.30",
@@ -33,6 +51,5 @@
     "react-transition-group": "^4.4.1",
     "redux": "^4.0.5",
     "throttle-debounce": "^3.0.1"
-  },
-  "peerDependencies": {}
+  }
 }
