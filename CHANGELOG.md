@@ -1,5 +1,6 @@
 # CHANGELOG
 
+- 2021.03.26, 13:55 -- v.0.2.14-last-non-ts-version
 - 2021.03.18, 16:09 -- PD-3621: Minor optimizations in `modals`, `ModalPopup`, `ModalPortal` (use global controller from `config.modals.controller`), ModalsContainer obtain domNode reference from ref, not deprecated `ReactDOM.findDOMNode`.
 - 2021.03.18, 16:03 -- PD-3623: Configuration (use tsserver, aliases -- istead babel module-resolver; in progress), ModalsContainer uses typescript.
 - 2021.03.17, 15:27 -- PD-3603: Update time values to period ends (eg, '00:00' -> '00:59' for 1-hour intervals.
@@ -112,5 +113,5 @@
 - 2020.10.05, 20:38 -- v.0.0.15: Extracted `demoSupport.jsx` routines, fixture selection from url query (parameter `fixture`), added avaialble fixtures list if fixture to display is not specified, added DemoWrapper & demoTitle exportable ficture parameters for demo rendering.
 
 <!--
- @changed 2021.03.18, 16:10
+ @changed 2021.03.26, 13:55
 -->
