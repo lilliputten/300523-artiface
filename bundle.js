@@ -197,7 +197,9 @@ module.exports = { // Common-used app variables...
  */
 
 var DEBUG = true;
-var DEV_DEBUG = undefined;
+var DEV_DEBUG = true;
+console.log('config:build:DEBUG', DEBUG, DEV_DEBUG);
+debugger;
 
 module.exports = { // Common-used build variables...
 
@@ -205,9 +207,9 @@ module.exports = { // Common-used build variables...
   DEV_DEBUG: DEV_DEBUG,
 
   THEME: "default",
-  buildTag: "v.0.3.0-210409-2234-build-dev-default",
-  timestamp: "2021.04.09, 22:34",
-  timetag: "210409-2234",
+  buildTag: "v.0.3.0-210409-2349-build-dev-default",
+  timestamp: "2021.04.09, 23:49",
+  timetag: "210409-2349",
   version: "0.3.0" };
 
 /***/ }),
@@ -4071,16 +4073,16 @@ ModalsContainer = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtim
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "DateTimeSelector": function() { return /* reexport module object */ _DateTimeSelector_index_ts__WEBPACK_IMPORTED_MODULE_0__; },
-/* harmony export */   "InlineIcon": function() { return /* reexport module object */ _InlineIcon_index_ts__WEBPACK_IMPORTED_MODULE_1__; },
-/* harmony export */   "Loader": function() { return /* reexport module object */ _Loader_index_ts__WEBPACK_IMPORTED_MODULE_2__; },
-/* harmony export */   "Menu": function() { return /* reexport module object */ _Menu_index_ts__WEBPACK_IMPORTED_MODULE_3__; },
-/* harmony export */   "MenuItem": function() { return /* reexport module object */ _MenuItem_index_ts__WEBPACK_IMPORTED_MODULE_4__; },
-/* harmony export */   "MenuItemSeparator": function() { return /* reexport module object */ _MenuItemSeparator_index_ts__WEBPACK_IMPORTED_MODULE_5__; },
-/* harmony export */   "ModalWindow": function() { return /* reexport module object */ _ModalWindow_index_ts__WEBPACK_IMPORTED_MODULE_6__; },
-/* harmony export */   "ModalPopup": function() { return /* reexport module object */ _ModalPopup_index_ts__WEBPACK_IMPORTED_MODULE_7__; },
-/* harmony export */   "ModalPortal": function() { return /* reexport module object */ _ModalPortal_index_ts__WEBPACK_IMPORTED_MODULE_8__; },
-/* harmony export */   "ModalsContainer": function() { return /* reexport module object */ _ModalsContainer_ModalsContainer__WEBPACK_IMPORTED_MODULE_9__; }
+/* harmony export */   "DateTimeSelector": function() { return /* reexport safe */ _DateTimeSelector_index_ts__WEBPACK_IMPORTED_MODULE_0__.default; },
+/* harmony export */   "InlineIcon": function() { return /* reexport safe */ _InlineIcon_index_ts__WEBPACK_IMPORTED_MODULE_1__.default; },
+/* harmony export */   "Loader": function() { return /* reexport safe */ _Loader_index_ts__WEBPACK_IMPORTED_MODULE_2__.default; },
+/* harmony export */   "Menu": function() { return /* reexport safe */ _Menu_index_ts__WEBPACK_IMPORTED_MODULE_3__.default; },
+/* harmony export */   "MenuItem": function() { return /* reexport safe */ _MenuItem_index_ts__WEBPACK_IMPORTED_MODULE_4__.default; },
+/* harmony export */   "MenuItemSeparator": function() { return /* reexport safe */ _MenuItemSeparator_index_ts__WEBPACK_IMPORTED_MODULE_5__.default; },
+/* harmony export */   "ModalWindow": function() { return /* reexport safe */ _ModalWindow_index_ts__WEBPACK_IMPORTED_MODULE_6__.default; },
+/* harmony export */   "ModalPopup": function() { return /* reexport safe */ _ModalPopup_index_ts__WEBPACK_IMPORTED_MODULE_7__.default; },
+/* harmony export */   "ModalPortal": function() { return /* reexport safe */ _ModalPortal_index_ts__WEBPACK_IMPORTED_MODULE_8__.default; },
+/* harmony export */   "ModalsContainer": function() { return /* reexport safe */ _ModalsContainer_index_ts__WEBPACK_IMPORTED_MODULE_9__.default; }
 /* harmony export */ });
 /* harmony import */ var _DateTimeSelector_index_ts__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DateTimeSelector/index.ts */ "./src/elements/DateTimeSelector/index.ts");
 /* harmony import */ var _InlineIcon_index_ts__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./InlineIcon/index.ts */ "./src/elements/InlineIcon/index.ts");
@@ -4091,14 +4093,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ModalWindow_index_ts__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./ModalWindow/index.ts */ "./src/elements/ModalWindow/index.ts");
 /* harmony import */ var _ModalPopup_index_ts__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./ModalPopup/index.ts */ "./src/elements/ModalPopup/index.ts");
 /* harmony import */ var _ModalPortal_index_ts__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./ModalPortal/index.ts */ "./src/elements/ModalPortal/index.ts");
-/* harmony import */ var _ModalsContainer_ModalsContainer__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./ModalsContainer/ModalsContainer */ "./src/elements/ModalsContainer/ModalsContainer.jsx");
+/* harmony import */ var _ModalsContainer_index_ts__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./ModalsContainer/index.ts */ "./src/elements/ModalsContainer/index.ts");
 /** @module elements
  *  @desc Basic elements
  *  @since 2020.10.07, 02:12
- *  @changed 2021.03.24, 18:02
+ *  @changed 2021.04.09, 23:48
  */
 
-// NOTE: This re-export format doesnt works in TS!
+
+
+
+
+
+
+
+
+
 
 
 /***/ }),
@@ -8040,32 +8050,32 @@ FormText = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_helpe
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "FormItemHOC": function() { return /* reexport module object */ _FormItemHOC_index_ts__WEBPACK_IMPORTED_MODULE_0__; },
-/* harmony export */   "FormItemDummy": function() { return /* reexport module object */ _FormItemDummy_index_ts__WEBPACK_IMPORTED_MODULE_1__; },
-/* harmony export */   "FormLabel": function() { return /* reexport module object */ _FormLabel_index_ts__WEBPACK_IMPORTED_MODULE_2__; },
-/* harmony export */   "FormButton": function() { return /* reexport module object */ _FormButton_index_ts__WEBPACK_IMPORTED_MODULE_3__; },
-/* harmony export */   "FormDelim": function() { return /* reexport module object */ _FormDelim_index_ts__WEBPACK_IMPORTED_MODULE_4__; },
-/* harmony export */   "FormSpacer": function() { return /* reexport module object */ _FormSpacer_index_ts__WEBPACK_IMPORTED_MODULE_5__; },
-/* harmony export */   "FormSeparator": function() { return /* reexport module object */ _FormSeparator_index_ts__WEBPACK_IMPORTED_MODULE_6__; },
-/* harmony export */   "FormText": function() { return /* reexport module object */ _FormText_index_ts__WEBPACK_IMPORTED_MODULE_7__; },
-/* harmony export */   "FormSelect": function() { return /* reexport module object */ _FormSelect_index_ts__WEBPACK_IMPORTED_MODULE_8__; },
-/* harmony export */   "FormTextInput": function() { return /* reexport module object */ _FormTextInput_index_ts__WEBPACK_IMPORTED_MODULE_9__; },
-/* harmony export */   "FormPasswordInput": function() { return /* reexport module object */ _FormPasswordInput_index_ts__WEBPACK_IMPORTED_MODULE_10__; },
-/* harmony export */   "FormRadio": function() { return /* reexport module object */ _FormRadio_index_ts__WEBPACK_IMPORTED_MODULE_11__; },
-/* harmony export */   "FormDateTime": function() { return /* reexport module object */ _FormDateTime_index_ts__WEBPACK_IMPORTED_MODULE_12__; },
-/* harmony export */   "FormDateRange": function() { return /* reexport module object */ _FormDateRange_index_ts__WEBPACK_IMPORTED_MODULE_13__; },
-/* harmony export */   "FormDateRangeSingleBox": function() { return /* reexport module object */ _FormDateRangeSingleBox_index_ts__WEBPACK_IMPORTED_MODULE_14__; },
-/* harmony export */   "FormActions": function() { return /* reexport module object */ _FormActions_index_ts__WEBPACK_IMPORTED_MODULE_15__; },
-/* harmony export */   "FormContainer": function() { return /* reexport module object */ _FormContainer_index_ts__WEBPACK_IMPORTED_MODULE_16__; },
-/* harmony export */   "FormGroup": function() { return /* reexport module object */ _FormGroup_index_ts__WEBPACK_IMPORTED_MODULE_17__; },
-/* harmony export */   "FormLabeledGroup": function() { return /* reexport module object */ _FormLabeledGroup_index_ts__WEBPACK_IMPORTED_MODULE_18__; },
-/* harmony export */   "FormButtonGroup": function() { return /* reexport module object */ _FormButtonGroup_index_ts__WEBPACK_IMPORTED_MODULE_19__; },
-/* harmony export */   "FormInputGroup": function() { return /* reexport module object */ _FormInputGroup_index_ts__WEBPACK_IMPORTED_MODULE_20__; }
+/* harmony export */   "FormButton": function() { return /* reexport safe */ _FormButton_index_ts__WEBPACK_IMPORTED_MODULE_0__.default; },
+/* harmony export */   "FormItemHOC": function() { return /* reexport safe */ _FormItemHOC_index_ts__WEBPACK_IMPORTED_MODULE_1__.default; },
+/* harmony export */   "FormItemDummy": function() { return /* reexport safe */ _FormItemDummy_index_ts__WEBPACK_IMPORTED_MODULE_2__.default; },
+/* harmony export */   "FormLabel": function() { return /* reexport safe */ _FormLabel_index_ts__WEBPACK_IMPORTED_MODULE_3__.default; },
+/* harmony export */   "FormDelim": function() { return /* reexport safe */ _FormDelim_index_ts__WEBPACK_IMPORTED_MODULE_4__.default; },
+/* harmony export */   "FormSpacer": function() { return /* reexport safe */ _FormSpacer_index_ts__WEBPACK_IMPORTED_MODULE_5__.default; },
+/* harmony export */   "FormSeparator": function() { return /* reexport safe */ _FormSeparator_index_ts__WEBPACK_IMPORTED_MODULE_6__.default; },
+/* harmony export */   "FormText": function() { return /* reexport safe */ _FormText_index_ts__WEBPACK_IMPORTED_MODULE_7__.default; },
+/* harmony export */   "FormSelect": function() { return /* reexport safe */ _FormSelect_index_ts__WEBPACK_IMPORTED_MODULE_8__.default; },
+/* harmony export */   "FormTextInput": function() { return /* reexport safe */ _FormTextInput_index_ts__WEBPACK_IMPORTED_MODULE_9__.default; },
+/* harmony export */   "FormPasswordInput": function() { return /* reexport safe */ _FormPasswordInput_index_ts__WEBPACK_IMPORTED_MODULE_10__.default; },
+/* harmony export */   "FormRadio": function() { return /* reexport safe */ _FormRadio_index_ts__WEBPACK_IMPORTED_MODULE_11__.default; },
+/* harmony export */   "FormDateTime": function() { return /* reexport safe */ _FormDateTime_index_ts__WEBPACK_IMPORTED_MODULE_12__.default; },
+/* harmony export */   "FormDateRange": function() { return /* reexport safe */ _FormDateRange_index_ts__WEBPACK_IMPORTED_MODULE_13__.default; },
+/* harmony export */   "FormDateRangeSingleBox": function() { return /* reexport safe */ _FormDateRangeSingleBox_index_ts__WEBPACK_IMPORTED_MODULE_14__.default; },
+/* harmony export */   "FormActions": function() { return /* reexport safe */ _FormActions_index_ts__WEBPACK_IMPORTED_MODULE_15__.default; },
+/* harmony export */   "FormContainer": function() { return /* reexport safe */ _FormContainer_index_ts__WEBPACK_IMPORTED_MODULE_16__.default; },
+/* harmony export */   "FormGroup": function() { return /* reexport safe */ _FormGroup_index_ts__WEBPACK_IMPORTED_MODULE_17__.default; },
+/* harmony export */   "FormLabeledGroup": function() { return /* reexport safe */ _FormLabeledGroup_index_ts__WEBPACK_IMPORTED_MODULE_18__.default; },
+/* harmony export */   "FormButtonGroup": function() { return /* reexport safe */ _FormButtonGroup_index_ts__WEBPACK_IMPORTED_MODULE_19__.default; },
+/* harmony export */   "FormInputGroup": function() { return /* reexport safe */ _FormInputGroup_index_ts__WEBPACK_IMPORTED_MODULE_20__.default; }
 /* harmony export */ });
-/* harmony import */ var _FormItemHOC_index_ts__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./FormItemHOC/index.ts */ "./src/forms/FormItemHOC/index.ts");
-/* harmony import */ var _FormItemDummy_index_ts__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./FormItemDummy/index.ts */ "./src/forms/FormItemDummy/index.ts");
-/* harmony import */ var _FormLabel_index_ts__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./FormLabel/index.ts */ "./src/forms/FormLabel/index.ts");
-/* harmony import */ var _FormButton_index_ts__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./FormButton/index.ts */ "./src/forms/FormButton/index.ts");
+/* harmony import */ var _FormButton_index_ts__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./FormButton/index.ts */ "./src/forms/FormButton/index.ts");
+/* harmony import */ var _FormItemHOC_index_ts__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./FormItemHOC/index.ts */ "./src/forms/FormItemHOC/index.ts");
+/* harmony import */ var _FormItemDummy_index_ts__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./FormItemDummy/index.ts */ "./src/forms/FormItemDummy/index.ts");
+/* harmony import */ var _FormLabel_index_ts__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./FormLabel/index.ts */ "./src/forms/FormLabel/index.ts");
 /* harmony import */ var _FormDelim_index_ts__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./FormDelim/index.ts */ "./src/forms/FormDelim/index.ts");
 /* harmony import */ var _FormSpacer_index_ts__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./FormSpacer/index.ts */ "./src/forms/FormSpacer/index.ts");
 /* harmony import */ var _FormSeparator_index_ts__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./FormSeparator/index.ts */ "./src/forms/FormSeparator/index.ts");
@@ -8086,14 +8096,47 @@ __webpack_require__.r(__webpack_exports__);
 /** @module forms
  *  @desc Form components
  *  @since 2020.07.20, 19:21
- *  @changed 2021.03.11, 20:54
+ *  @changed 2021.04.09, 23:48
  */
 
 // Form elements...
+
+// export * as FormButton from './FormButton';  // Old (non-ts) export style
+// NOTE: This re-export format doesnt works in TS!
+
+
+
+
+
  // DEBUG: Demo element
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // export * as FormCheck from './FormCheck';
 // export * as FormSwitch from './FormSwitch';
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 // TODO...
@@ -12456,26 +12499,57 @@ var __webpack_exports__ = {};
 !function() {
 "use strict";
 /*!***********************!*\
-  !*** ./src/build.tsx ***!
+  !*** ./src/build.jsx ***!
   \***********************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "config": function() { return /* reexport module object */ config__WEBPACK_IMPORTED_MODULE_1__; },
-/* harmony export */   "utils": function() { return /* reexport module object */ utils__WEBPACK_IMPORTED_MODULE_2__; },
-/* harmony export */   "helpers": function() { return /* reexport module object */ helpers__WEBPACK_IMPORTED_MODULE_3__; },
-/* harmony export */   "elements": function() { return /* reexport module object */ elements__WEBPACK_IMPORTED_MODULE_4__; },
-/* harmony export */   "Hello": function() { return /* reexport safe */ _demo_Hello__WEBPACK_IMPORTED_MODULE_5__.default; }
+/* harmony export */   "config": function() { return /* reexport module object */ _config_index_js__WEBPACK_IMPORTED_MODULE_1__; },
+/* harmony export */   "utils": function() { return /* reexport module object */ _utils_index_js__WEBPACK_IMPORTED_MODULE_2__; },
+/* harmony export */   "helpers": function() { return /* reexport module object */ _helpers_index_js__WEBPACK_IMPORTED_MODULE_3__; },
+/* harmony export */   "DateTimeSelector": function() { return /* reexport safe */ _elements_index_js__WEBPACK_IMPORTED_MODULE_4__.DateTimeSelector; },
+/* harmony export */   "InlineIcon": function() { return /* reexport safe */ _elements_index_js__WEBPACK_IMPORTED_MODULE_4__.InlineIcon; },
+/* harmony export */   "Loader": function() { return /* reexport safe */ _elements_index_js__WEBPACK_IMPORTED_MODULE_4__.Loader; },
+/* harmony export */   "Menu": function() { return /* reexport safe */ _elements_index_js__WEBPACK_IMPORTED_MODULE_4__.Menu; },
+/* harmony export */   "MenuItem": function() { return /* reexport safe */ _elements_index_js__WEBPACK_IMPORTED_MODULE_4__.MenuItem; },
+/* harmony export */   "MenuItemSeparator": function() { return /* reexport safe */ _elements_index_js__WEBPACK_IMPORTED_MODULE_4__.MenuItemSeparator; },
+/* harmony export */   "ModalPopup": function() { return /* reexport safe */ _elements_index_js__WEBPACK_IMPORTED_MODULE_4__.ModalPopup; },
+/* harmony export */   "ModalPortal": function() { return /* reexport safe */ _elements_index_js__WEBPACK_IMPORTED_MODULE_4__.ModalPortal; },
+/* harmony export */   "ModalWindow": function() { return /* reexport safe */ _elements_index_js__WEBPACK_IMPORTED_MODULE_4__.ModalWindow; },
+/* harmony export */   "ModalsContainer": function() { return /* reexport safe */ _elements_index_js__WEBPACK_IMPORTED_MODULE_4__.ModalsContainer; },
+/* harmony export */   "FormActions": function() { return /* reexport safe */ _forms_index_js__WEBPACK_IMPORTED_MODULE_5__.FormActions; },
+/* harmony export */   "FormButton": function() { return /* reexport safe */ _forms_index_js__WEBPACK_IMPORTED_MODULE_5__.FormButton; },
+/* harmony export */   "FormButtonGroup": function() { return /* reexport safe */ _forms_index_js__WEBPACK_IMPORTED_MODULE_5__.FormButtonGroup; },
+/* harmony export */   "FormContainer": function() { return /* reexport safe */ _forms_index_js__WEBPACK_IMPORTED_MODULE_5__.FormContainer; },
+/* harmony export */   "FormDateRange": function() { return /* reexport safe */ _forms_index_js__WEBPACK_IMPORTED_MODULE_5__.FormDateRange; },
+/* harmony export */   "FormDateRangeSingleBox": function() { return /* reexport safe */ _forms_index_js__WEBPACK_IMPORTED_MODULE_5__.FormDateRangeSingleBox; },
+/* harmony export */   "FormDateTime": function() { return /* reexport safe */ _forms_index_js__WEBPACK_IMPORTED_MODULE_5__.FormDateTime; },
+/* harmony export */   "FormDelim": function() { return /* reexport safe */ _forms_index_js__WEBPACK_IMPORTED_MODULE_5__.FormDelim; },
+/* harmony export */   "FormGroup": function() { return /* reexport safe */ _forms_index_js__WEBPACK_IMPORTED_MODULE_5__.FormGroup; },
+/* harmony export */   "FormInputGroup": function() { return /* reexport safe */ _forms_index_js__WEBPACK_IMPORTED_MODULE_5__.FormInputGroup; },
+/* harmony export */   "FormItemDummy": function() { return /* reexport safe */ _forms_index_js__WEBPACK_IMPORTED_MODULE_5__.FormItemDummy; },
+/* harmony export */   "FormItemHOC": function() { return /* reexport safe */ _forms_index_js__WEBPACK_IMPORTED_MODULE_5__.FormItemHOC; },
+/* harmony export */   "FormLabel": function() { return /* reexport safe */ _forms_index_js__WEBPACK_IMPORTED_MODULE_5__.FormLabel; },
+/* harmony export */   "FormLabeledGroup": function() { return /* reexport safe */ _forms_index_js__WEBPACK_IMPORTED_MODULE_5__.FormLabeledGroup; },
+/* harmony export */   "FormPasswordInput": function() { return /* reexport safe */ _forms_index_js__WEBPACK_IMPORTED_MODULE_5__.FormPasswordInput; },
+/* harmony export */   "FormRadio": function() { return /* reexport safe */ _forms_index_js__WEBPACK_IMPORTED_MODULE_5__.FormRadio; },
+/* harmony export */   "FormSelect": function() { return /* reexport safe */ _forms_index_js__WEBPACK_IMPORTED_MODULE_5__.FormSelect; },
+/* harmony export */   "FormSeparator": function() { return /* reexport safe */ _forms_index_js__WEBPACK_IMPORTED_MODULE_5__.FormSeparator; },
+/* harmony export */   "FormSpacer": function() { return /* reexport safe */ _forms_index_js__WEBPACK_IMPORTED_MODULE_5__.FormSpacer; },
+/* harmony export */   "FormText": function() { return /* reexport safe */ _forms_index_js__WEBPACK_IMPORTED_MODULE_5__.FormText; },
+/* harmony export */   "FormTextInput": function() { return /* reexport safe */ _forms_index_js__WEBPACK_IMPORTED_MODULE_5__.FormTextInput; },
+/* harmony export */   "Hello": function() { return /* reexport safe */ _demo_Hello_index_ts__WEBPACK_IMPORTED_MODULE_6__.default; }
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var config__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! config */ "./src/config/index.js");
-/* harmony import */ var config__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(config__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! utils */ "./src/utils/index.js");
-/* harmony import */ var helpers__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! helpers */ "./src/helpers/index.js");
-/* harmony import */ var elements__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! elements */ "./src/elements/index.js");
-/* harmony import */ var _demo_Hello__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./demo/Hello */ "./src/demo/Hello/index.ts");
-/* harmony import */ var _build_pcss__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./build.pcss */ "./src/build.pcss");
-/* harmony import */ var elements_ModalsContainer__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! elements/ModalsContainer */ "./src/elements/ModalsContainer/index.ts");
+/* harmony import */ var _config_index_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./config/index.js */ "./src/config/index.js");
+/* harmony import */ var _config_index_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_config_index_js__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _utils_index_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./utils/index.js */ "./src/utils/index.js");
+/* harmony import */ var _helpers_index_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./helpers/index.js */ "./src/helpers/index.js");
+/* harmony import */ var _elements_index_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./elements/index.js */ "./src/elements/index.js");
+/* harmony import */ var _forms_index_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./forms/index.js */ "./src/forms/index.js");
+/* harmony import */ var _demo_Hello_index_ts__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./demo/Hello/index.ts */ "./src/demo/Hello/index.ts");
+/* harmony import */ var _build_pcss__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./build.pcss */ "./src/build.pcss");
+/* harmony import */ var elements_ModalsContainer__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! elements/ModalsContainer */ "./src/elements/ModalsContainer/index.ts");
 /** @module build
  *  @desc Library exportable ditributive
  *  @since 2020.05.19, 17:16
@@ -12484,31 +12558,37 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+// export config from 'config';
+
+
+// export * as utils from 'utils';
 
 
 
 
 
-
-// export * as forms from 'forms';
 // Demo component
 // export Hello from './demo/Hello';
+
 
 
 // Basic styles
 
 
+
+
 // TODO: Use WebUiCoreContext?
-var WebUiCoreRoot = function (_a) {
-    var children = _a.children, autoModalsContainer = _a.autoModalsContainer;
-    return (react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null,
-        children,
-        autoModalsContainer && react__WEBPACK_IMPORTED_MODULE_0___default().createElement(elements_ModalsContainer__WEBPACK_IMPORTED_MODULE_7__.default, null)));
+var WebUiCoreRoot = function WebUiCoreRoot(_ref) {var children = _ref.children,autoModalsContainer = _ref.autoModalsContainer;
+  return /*#__PURE__*/(
+    react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null,
+    children,
+    autoModalsContainer && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(elements_ModalsContainer__WEBPACK_IMPORTED_MODULE_8__.default, null)));
+
+
 };
 /* harmony default export */ __webpack_exports__["default"] = (WebUiCoreRoot);
-
 }();
-module.exports.WebUiCore = __webpack_exports__;
+module.exports = __webpack_exports__;
 /******/ })()
 ;
 //# sourceMappingURL=bundle.js.map
