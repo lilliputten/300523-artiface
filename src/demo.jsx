@@ -25,10 +25,11 @@ import { render } from 'react-dom';
 
 // import Loader from 'elements/Loader'
 
-// import * as WebUiCore from 'WebUiCore';
-const WebUiCore = require('./build');
-console.log(WebUiCore && WebUiCore.ModalsContainer);
-debugger;
+// // import * as WebUiCore from 'WebUiCore';
+// const WebUiCore = require('./build');
+// const { FormButton } = WebUiCore;
+// console.log({ FormButton });
+// debugger;
 
 import * as demoSupport from './demoSupport';
 
@@ -38,7 +39,7 @@ import WebUiCoreRoot from './build';
 // Demo app styles
 import './demo.pcss';
 
-import { demoFixtures } from './demoFixtures';
+import demoFixtures from './demoFixtures';
 
 // import { testVar } from './test'; // ts test
 // console.log(testVar);

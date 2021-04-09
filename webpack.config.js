@@ -1,6 +1,6 @@
 /** @desc Webpack configuration
  *  @since 2020.05.18, 12:00
- *  @changed 2021.02.26, 14:19
+ *  @changed 2021.04.10, 00:09
  */
 /* eslint-disable no-console */
 
@@ -22,14 +22,15 @@ const ExtractCssPlugin = require('mini-css-extract-plugin');
 module.exports = (env, argv) => {
 
   const mode = argv.mode || 'production';
+  const isDev = (/* isDevServer || */ mode === 'development');
+  const isProd = !isDev; // mode === 'production'
   const isCosmos = (process.env.npm_lifecycle_event === 'cosmos'); // Runs under react-cosmos?
-  const isDevServer = isCosmos || !!argv.host; // (mode === 'none'); // (none = server) // Alternate method: !!argv.host
+  const isDevServer = isCosmos || (isDev && !!argv.hot); // (mode === 'none'); // (none = server) // Alternate method: !!argv.host;
+  // const isDevServer = isCosmos || !!argv.host; // OLD method; Doesnt works on Webpack 5
   const hotReload = isDevServer;
   const cssHotReload = hotReload; // Hot reload css for dev-server
   const isStats = !!argv.profile;
   const isWatch = !!argv.watch;
-  const isDev = (/* isDevServer || */ mode === 'development');
-  const isProd = !isDev; // mode === 'production'
   const useDevTool = true && isDev; // Need server restart
   const minimizeBundles = false && isProd; // To minimize production bundles
   // const preprocessBundles = false && isProd; // To minimize production bundles
@@ -65,7 +66,7 @@ module.exports = (env, argv) => {
 
   // Project version, application title
   const {
-    name: projectName,
+    // name: projectName,
     // title: projectTitle,
     version,
     timestamp,
@@ -446,42 +447,42 @@ module.exports = (env, argv) => {
         suppressSuccess: true,
       }),
     ].filter(Boolean),
-    // optimization: {
-    //   // Minimize if not preprocess and minimize flags configured
-    //   minimize: [> preprocessBundles || <] minimizeBundles,
-    //   minimizer: [
-    //     new UglifyJsPlugin({
-    //       test: /\.js$/i,
-    //       // parallel: 8,
-    //       sourceMap: sourceMaps,
-    //       uglifyOptions: {
-    //         output: {
-    //           comments: false,
-    //           ie8: true
-    //         },
-    //         // https://github.com/mishoo/UglifyJS2#compress-options
-    //         compress: {
-    //           // drop_debugger: false,
-    //           // screw_ie8: true,
-    //           // sequences: true,
-    //           // booleans: true,
-    //           // loops: true,
-    //           // unused: true,
-    //           // warnings: false,
-    //           // drop_console: true,
-    //           // unsafe: true
-    //         },
-    //         // beautify: false,
-    //       },
-    //     }),
-    //     // new OptimizeCSSAssetsPlugin({
-    //     //   cssProcessorPluginOptions: {
-    //     //     sourceMap: sourceMaps,
-    //     //     // preset: ['default', { discardComments: { removeAll: true } }],
-    //     //   },
-    //     // }),
-    //   ],
-    // },
+    optimization: {
+      // Minimize if not preprocess and minimize flags configured
+      minimize: /* preprocessBundles || */ minimizeBundles,
+      minimizer: [
+        new UglifyJsPlugin({
+          test: /\.js$/i,
+          // parallel: 8,
+          sourceMap: sourceMaps,
+          uglifyOptions: {
+            output: {
+              comments: false,
+              ie8: true
+            },
+            // https://github.com/mishoo/UglifyJS2#compress-options
+            compress: {
+              // drop_debugger: false,
+              // screw_ie8: true,
+              // sequences: true,
+              // booleans: true,
+              // loops: true,
+              // unused: true,
+              // warnings: false,
+              // drop_console: true,
+              // unsafe: true
+            },
+            // beautify: false,
+          },
+        }),
+        // new OptimizeCSSAssetsPlugin({
+        //   cssProcessorPluginOptions: {
+        //     sourceMap: sourceMaps,
+        //     // preset: ['default', { discardComments: { removeAll: true } }],
+        //   },
+        // }),
+      ],
+    },
     stats: {
       // Nice colored output
       colors: true,

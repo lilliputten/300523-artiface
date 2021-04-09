@@ -1,44 +1,48 @@
 /** @module forms
  *  @desc Form components
  *  @since 2020.07.20, 19:21
- *  @changed 2021.03.11, 20:54
+ *  @changed 2021.04.09, 23:48
  */
 
 // Form elements...
 
-export * as FormItemHOC from './FormItemHOC';
+// export * as FormButton from './FormButton';  // Old (non-ts) export style
+// NOTE: This re-export format doesnt works in TS!
 
-export * as FormItemDummy from './FormItemDummy'; // DEBUG: Demo element
+export { default as FormButton } from './FormButton';
 
-export * as FormLabel from './FormLabel';
-export * as FormButton from './FormButton';
+export { default as FormItemHOC } from './FormItemHOC';
 
-export * as FormDelim from './FormDelim';
-export * as FormSpacer from './FormSpacer';
-export * as FormSeparator from './FormSeparator';
+export { default as FormItemDummy } from './FormItemDummy'; // DEBUG: Demo element
 
-export * as FormText from './FormText';
+export { default as FormLabel } from './FormLabel';
 
-export * as FormSelect from './FormSelect';
-export * as FormTextInput from './FormTextInput';
-export * as FormPasswordInput from './FormPasswordInput';
+export { default as FormDelim } from './FormDelim';
+export { default as FormSpacer } from './FormSpacer';
+export { default as FormSeparator } from './FormSeparator';
 
-export * as FormRadio from './FormRadio';
+export { default as FormText } from './FormText';
+
+export { default as FormSelect } from './FormSelect';
+export { default as FormTextInput } from './FormTextInput';
+export { default as FormPasswordInput } from './FormPasswordInput';
+
+export { default as FormRadio } from './FormRadio';
 // export * as FormCheck from './FormCheck';
 // export * as FormSwitch from './FormSwitch';
 
-export * as FormDateTime from './FormDateTime';
-export * as FormDateRange from './FormDateRange';
-export * as FormDateRangeSingleBox from './FormDateRangeSingleBox';
+export { default as FormDateTime } from './FormDateTime';
+export { default as FormDateRange } from './FormDateRange';
+export { default as FormDateRangeSingleBox } from './FormDateRangeSingleBox';
 
-export * as FormActions from './FormActions';
+export { default as FormActions } from './FormActions';
 
-export * as FormContainer from './FormContainer';
+export { default as FormContainer } from './FormContainer';
 
-export * as FormGroup from './FormGroup';
-export * as FormLabeledGroup from './FormLabeledGroup';
-export * as FormButtonGroup from './FormButtonGroup';
-export * as FormInputGroup from './FormInputGroup';
+export { default as FormGroup } from './FormGroup';
+export { default as FormLabeledGroup } from './FormLabeledGroup';
+export { default as FormButtonGroup } from './FormButtonGroup';
+export { default as FormInputGroup } from './FormInputGroup';
 
 // TODO...
 
