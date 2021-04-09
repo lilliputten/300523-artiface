@@ -205,9 +205,9 @@ module.exports = { // Common-used build variables...
   DEV_DEBUG: DEV_DEBUG,
 
   THEME: "default",
-  buildTag: "v.0.3.0-210317-1633-build-dev-default",
-  timestamp: "2021.03.17, 16:33",
-  timetag: "210317-1633",
+  buildTag: "v.0.3.0-210409-2234-build-dev-default",
+  timestamp: "2021.04.09, 22:34",
+  timetag: "210409-2234",
   version: "0.3.0" };
 
 /***/ }),
@@ -567,10 +567,11 @@ var modalsConfig = { // Common-used app variables...
   controller: undefined, // Was (before 2021.03.18): `containerNode`
 
   // Initialized flag
-  isInited: false
+  isInited: false,
 
-  // __initPromiseResolve: undefined, // See `initPromise` below
-};
+  __initPromise: undefined, // See `initPromise` below
+  __initPromiseResolve: undefined };
+
 
 
 
@@ -4079,7 +4080,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "ModalWindow": function() { return /* reexport module object */ _ModalWindow_index_ts__WEBPACK_IMPORTED_MODULE_6__; },
 /* harmony export */   "ModalPopup": function() { return /* reexport module object */ _ModalPopup_index_ts__WEBPACK_IMPORTED_MODULE_7__; },
 /* harmony export */   "ModalPortal": function() { return /* reexport module object */ _ModalPortal_index_ts__WEBPACK_IMPORTED_MODULE_8__; },
-/* harmony export */   "ModalsContainer": function() { return /* reexport module object */ _ModalsContainer_index_ts__WEBPACK_IMPORTED_MODULE_9__; }
+/* harmony export */   "ModalsContainer": function() { return /* reexport module object */ _ModalsContainer_ModalsContainer__WEBPACK_IMPORTED_MODULE_9__; }
 /* harmony export */ });
 /* harmony import */ var _DateTimeSelector_index_ts__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DateTimeSelector/index.ts */ "./src/elements/DateTimeSelector/index.ts");
 /* harmony import */ var _InlineIcon_index_ts__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./InlineIcon/index.ts */ "./src/elements/InlineIcon/index.ts");
@@ -4090,7 +4091,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ModalWindow_index_ts__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./ModalWindow/index.ts */ "./src/elements/ModalWindow/index.ts");
 /* harmony import */ var _ModalPopup_index_ts__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./ModalPopup/index.ts */ "./src/elements/ModalPopup/index.ts");
 /* harmony import */ var _ModalPortal_index_ts__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./ModalPortal/index.ts */ "./src/elements/ModalPortal/index.ts");
-/* harmony import */ var _ModalsContainer_index_ts__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./ModalsContainer/index.ts */ "./src/elements/ModalsContainer/index.ts");
+/* harmony import */ var _ModalsContainer_ModalsContainer__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./ModalsContainer/ModalsContainer */ "./src/elements/ModalsContainer/ModalsContainer.jsx");
 /** @module elements
  *  @desc Basic elements
  *  @since 2020.10.07, 02:12
@@ -7743,10 +7744,11 @@ FormTextInput = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_
 
 
 
-    function (state) {var _this$props =
+    function (state) {
+      state = state || _this.state;var _this$props =
       _this.props,id = _this$props.id,inputId = _this$props.inputId,name = _this$props.name,onChange = _this$props.onChange,disabled = _this$props.disabled,numericValue = _this$props.numericValue;
-      if (!disabled && typeof onChange === 'function') {var
-        value = state.value;
+      if (!disabled && typeof onChange === 'function') {var _state =
+        state,value = _state.value;
         if (numericValue && !isNaN(value)) {
           value = Number(value);
         }
@@ -8737,14 +8739,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "randomHexString": function() { return /* binding */ randomHexString; },
 /* harmony export */   "html2string": function() { return /* binding */ html2string; },
 /* harmony export */   "splitMultiline": function() { return /* binding */ splitMultiline; },
-/* harmony export */   "padNumber": function() { return /* binding */ padNumber; }
+/* harmony export */   "padNumber": function() { return /* binding */ padNumber; },
+/* harmony export */   "periodizeNumber": function() { return /* binding */ periodizeNumber; }
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 var _this = undefined; /** @module strings
  *  @description Strings utilities
  *  @since 2019.04.03, 14:38
- *  @changed 2020.05.29, 13:35
+ *  @changed 2021.04.06, 14:00
  */
 
 
@@ -8861,6 +8864,21 @@ var splitMultiline = function splitMultiline(text, opt) {
 
 function padNumber(num, size) {
   return String(num).padStart(size, '0');
+}
+
+/** Make periods for long numbers. Returns string presentation of number.
+ * @param {String|Number} num
+ * @param {String} [periodChar=' ']
+ * @return {String}
+ */
+function periodizeNumber(num, periodChar) {
+  periodChar = periodChar || ' ';
+  num = String(num);
+  // If long number...
+  if (num.length > 3 && !num.match(/\D/)) {
+    num = num.replace(/\B(?=(\d{3})+(?!\d))/g, periodChar);
+  }
+  return num;
 }
 
 /***/ }),
@@ -11795,10 +11813,14 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": function() { return /* reexport safe */ _ModalsContainer__WEBPACK_IMPORTED_MODULE_0__.default; }
+/* harmony export */ });
 /* harmony import */ var _ModalsContainer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ModalsContainer */ "./src/elements/ModalsContainer/ModalsContainer.jsx");
-// NOTE: Workaround for directory index in TS
 
-/* harmony default export */ __webpack_exports__["default"] = (_ModalsContainer__WEBPACK_IMPORTED_MODULE_0__.default);
+// NOTE: Workaround for directory index in TS
+// import ModalsContainer from './ModalsContainer';
+// export default ModalsContainer;
 
 
 /***/ }),
