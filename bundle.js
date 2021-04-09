@@ -198,8 +198,6 @@ module.exports = { // Common-used app variables...
 
 var DEBUG = true;
 var DEV_DEBUG = true;
-console.log('config:build:DEBUG', DEBUG, DEV_DEBUG);
-debugger;
 
 module.exports = { // Common-used build variables...
 
@@ -207,10 +205,10 @@ module.exports = { // Common-used build variables...
   DEV_DEBUG: DEV_DEBUG,
 
   THEME: "default",
-  buildTag: "v.0.3.0-210409-2349-build-dev-default",
-  timestamp: "2021.04.09, 23:49",
-  timetag: "210409-2349",
-  version: "0.3.0" };
+  buildTag: "v.0.3.1-210410-0027-build-dev-default",
+  timestamp: "2021.04.10, 00:27",
+  timetag: "210410-0027",
+  version: "0.3.1" };
 
 /***/ }),
 
