@@ -15,7 +15,8 @@ const modalsConfig = { // Common-used app variables...
   // Initialized flag
   isInited: false,
 
-  // __initPromiseResolve: undefined, // See `initPromise` below
+  __initPromise: undefined, // See `initPromise` below
+  __initPromiseResolve: undefined,
 
 };
 

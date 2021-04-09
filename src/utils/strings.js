@@ -1,7 +1,7 @@
 /** @module strings
  *  @description Strings utilities
  *  @since 2019.04.03, 14:38
- *  @changed 2020.05.29, 13:35
+ *  @changed 2021.04.06, 14:00
  */
 
 import React from 'react';
@@ -119,3 +119,19 @@ export const splitMultiline = (text, opt) => {
 export function padNumber(num, size) {
   return String(num).padStart(size, '0');
 }
+
+/** Make periods for long numbers. Returns string presentation of number.
+ * @param {String|Number} num
+ * @param {String} [periodChar=' ']
+ * @return {String}
+ */
+export function periodizeNumber(num, periodChar) {
+  periodChar = periodChar || ' ';
+  num = String(num);
+  // If long number...
+  if (num.length > 3 && !num.match(/\D/)) {
+    num = num.replace(/\B(?=(\d{3})+(?!\d))/g, periodChar);
+  }
+  return num;
+}
+

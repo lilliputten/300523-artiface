@@ -6,14 +6,7 @@
 
 import React from 'react';
 
-// import FormLabeledGroup from '../FormLabeledGroup';
-// import FormRadio from '../FormRadio';
-// import FormDelim from '../FormDelim';
-
-// import FormLabel from '../FormLabel';
 import FormButton from '../FormButton';
-// import FormTextInput from '../FormTextInput';
-// import FormPasswordInput from '../FormPasswordInput';
 
 import FormActions from './FormActions';
 
