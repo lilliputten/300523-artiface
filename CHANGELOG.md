@@ -1,5 +1,6 @@
 # CHANGELOG
 
+- 2021.04.09, 22:32 -- Temporarily (?) using old (16.13 react version due compatibility with current WebUi due to webpack errors).
 - 2021.03.26, 15:50 -- PD-3623: First ts version: tslint linter added (in progress; need to use tsserver integration).
 - 2021.03.26, 15:00 -- PD-3623: First ts version: Config changes, source code changes.
 - 2021.03.26, 14:37 -- v.0.3.0, PD-3623: Stable ts configuration

@@ -178,7 +178,8 @@ module.exports = (env, argv) => {
   const demoModule = // 'AsyncModal' ||
     env.DEMO_MODULE || 'demo';
 
-  const jsEntryExt = '.tsx';
+  const jsEntryExt = '.jsx';
+  // const jsEntryExt = '.tsx';
   const jsEntryFile = (isBuild ? 'build' : demoModule) + jsEntryExt; // js source
 
   const bundleFile = 'bundle.js';
@@ -198,7 +199,7 @@ module.exports = (env, argv) => {
   };
 
   const libOutput = isBuild ? { // Additional webpack output for library mode
-    library: projectName,
+    // library: projectName, // Causes extra libarary folding level (`WebUiCore.WebUiCore.*`)
     libraryTarget: 'commonjs2',
     filename: bundleFile,
     auxiliaryComment: 'Test Comment', // ???
@@ -445,42 +446,42 @@ module.exports = (env, argv) => {
         suppressSuccess: true,
       }),
     ].filter(Boolean),
-    optimization: {
-      // Minimize if not preprocess and minimize flags configured
-      minimize: /* preprocessBundles || */ minimizeBundles,
-      minimizer: [
-        new UglifyJsPlugin({
-          test: /\.js$/i,
-          // parallel: 8,
-          sourceMap: sourceMaps,
-          uglifyOptions: {
-            output: {
-              comments: false,
-              ie8: true
-            },
-            // https://github.com/mishoo/UglifyJS2#compress-options
-            compress: {
-              // drop_debugger: false,
-              // screw_ie8: true,
-              // sequences: true,
-              // booleans: true,
-              // loops: true,
-              // unused: true,
-              // warnings: false,
-              // drop_console: true,
-              // unsafe: true
-            },
-            // beautify: false,
-          },
-        }),
-        // new OptimizeCSSAssetsPlugin({
-        //   cssProcessorPluginOptions: {
-        //     sourceMap: sourceMaps,
-        //     // preset: ['default', { discardComments: { removeAll: true } }],
-        //   },
-        // }),
-      ],
-    },
+    // optimization: {
+    //   // Minimize if not preprocess and minimize flags configured
+    //   minimize: [> preprocessBundles || <] minimizeBundles,
+    //   minimizer: [
+    //     new UglifyJsPlugin({
+    //       test: /\.js$/i,
+    //       // parallel: 8,
+    //       sourceMap: sourceMaps,
+    //       uglifyOptions: {
+    //         output: {
+    //           comments: false,
+    //           ie8: true
+    //         },
+    //         // https://github.com/mishoo/UglifyJS2#compress-options
+    //         compress: {
+    //           // drop_debugger: false,
+    //           // screw_ie8: true,
+    //           // sequences: true,
+    //           // booleans: true,
+    //           // loops: true,
+    //           // unused: true,
+    //           // warnings: false,
+    //           // drop_console: true,
+    //           // unsafe: true
+    //         },
+    //         // beautify: false,
+    //       },
+    //     }),
+    //     // new OptimizeCSSAssetsPlugin({
+    //     //   cssProcessorPluginOptions: {
+    //     //     sourceMap: sourceMaps,
+    //     //     // preset: ['default', { discardComments: { removeAll: true } }],
+    //     //   },
+    //     // }),
+    //   ],
+    // },
     stats: {
       // Nice colored output
       colors: true,

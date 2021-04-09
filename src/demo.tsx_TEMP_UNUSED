@@ -17,6 +17,9 @@ import * as demoSupport from './demoSupport';
 
 // import * as build from './build'
 import WebUiCoreRoot from './build';
+const WebUiCore = require('./build');
+console.log(WebUiCore && WebUiCore.config);
+debugger;
 
 // Demo app styles
 import './demo.pcss';
