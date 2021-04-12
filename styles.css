@@ -4995,7 +4995,7 @@ input.FormTextInput-Control:-internal-autofill-previewed,
 .FormTextInput_hasIcon .FormTextInput-Icon {
       position: absolute;
       right: 8px;
-      top: 2px;
+      top: 6px; /* ???*/
       opacity: .5;
       cursor: pointer;
     }

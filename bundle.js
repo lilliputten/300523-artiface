@@ -205,9 +205,9 @@ module.exports = { // Common-used build variables...
   DEV_DEBUG: DEV_DEBUG,
 
   THEME: "default",
-  buildTag: "v.0.3.1-210410-0027-build-dev-default",
-  timestamp: "2021.04.10, 00:27",
-  timetag: "210410-0027",
+  buildTag: "v.0.3.1-210412-1427-build-dev-default",
+  timestamp: "2021.04.12, 14:27",
+  timetag: "210412-1427",
   version: "0.3.1" };
 
 /***/ }),
@@ -7672,20 +7672,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! redux */ "redux");
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(redux__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _utils_configure__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../utils/configure */ "./src/utils/configure.js");
-/* harmony import */ var elements_InlineIcon__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! elements/InlineIcon */ "./src/elements/InlineIcon/index.ts");
-/* harmony import */ var _FormItemHOC_index_ts__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../FormItemHOC/index.ts */ "./src/forms/FormItemHOC/index.ts");
-/* harmony import */ var forms_FormInteractiveItemHOC__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! forms/FormInteractiveItemHOC */ "./src/forms/FormInteractiveItemHOC/index.ts");
-/* harmony import */ var _FormTextInput_pcss__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./FormTextInput.pcss */ "./src/forms/FormTextInput/FormTextInput.pcss");
+/* harmony import */ var _utils_lang__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../utils/lang */ "./src/utils/lang.js");
+/* harmony import */ var elements_InlineIcon__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! elements/InlineIcon */ "./src/elements/InlineIcon/index.ts");
+/* harmony import */ var _FormItemHOC_index_ts__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../FormItemHOC/index.ts */ "./src/forms/FormItemHOC/index.ts");
+/* harmony import */ var forms_FormInteractiveItemHOC__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! forms/FormInteractiveItemHOC */ "./src/forms/FormInteractiveItemHOC/index.ts");
+/* harmony import */ var _FormTextInput_pcss__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./FormTextInput.pcss */ "./src/forms/FormTextInput/FormTextInput.pcss");
  /** @module FormTextInput
  *  @class FormTextInput
  *  @since 2020.10.07, 00:20
- *  @changed 2021.01.19, 16:08
+ *  @changed 2021.04.12, 14:26
  */
 /* eslint-disable react/require-default-props */
 
 
 
 
+
+// import * as langUtils from 'utils/lang';
 
 
 
@@ -7699,6 +7702,40 @@ __webpack_require__.r(__webpack_exports__);
 var cnFormTextInput = (0,_utils_configure__WEBPACK_IMPORTED_MODULE_6__.cn)('FormTextInput');var
 
 FormTextInput = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_helpers_inheritsLoose__WEBPACK_IMPORTED_MODULE_1__.default)(FormTextInput, _React$PureComponent);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   // Lifecycle...
 
@@ -7752,14 +7789,50 @@ FormTextInput = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     function (state) {
       state = state || _this.state;var _this$props =
-      _this.props,id = _this$props.id,inputId = _this$props.inputId,name = _this$props.name,onChange = _this$props.onChange,disabled = _this$props.disabled,numericValue = _this$props.numericValue;
+      _this.props,id = _this$props.id,inputId = _this$props.inputId,name = _this$props.name,onChange = _this$props.onChange,disabled = _this$props.disabled;
       if (!disabled && typeof onChange === 'function') {var _state =
         state,value = _state.value;
-        if (numericValue && !isNaN(value)) {
-          value = Number(value);
-        }
+        var origValue = value;
+        console.log('FormTextInput:updateValueWithState', {
+          value: value });
+
         var setId = id || inputId || name;
         onChange({ id: setId, value: value });
       }
@@ -7784,14 +7857,18 @@ FormTextInput = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_
 
 
 
+
     function (event) {var
-      target = event.target;var
-      value = target.value;
+      target = event.target;
+      var origValue = target.value;
+      var value = _this.getCorrectedValue(origValue);
       _this.setState({ value: value });
     });(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2__.default)((0,_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_0__.default)(_this), "onClearClick",
 
-    function () {
-      _this.setState({ value: '' });
+    function () {var _this$props2 =
+      _this.props,allowEmpty = _this$props2.allowEmpty,numericValue = _this$props2.numericValue;
+      var value = numericValue && !allowEmpty ? 0 : '';
+      _this.setState({ value: value });
     });(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2__.default)((0,_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_0__.default)(_this), "onFocusIn",
 
     function () {
@@ -7819,7 +7896,7 @@ FormTextInput = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_
       if (typeof _this.props.setInputDomRef === 'function') {
         _this.props.setInputDomRef(inputDomElem);
       }
-    });var _this$props$value = _this.props.value,_value = _this$props$value === void 0 ? '' : _this$props$value;_this.state = { value: _value };return _this;} /* // UNUSED: componentDidMount
+    });var _value = _this.getCorrectedValue(props.value || props.defaultValue || (props.numericValue && !props.allowEmpty ? 0 : ''));_this.state = { value: _value };return _this;} /* // UNUSED: componentDidMount
    * componentDidMount() {
    *   const { registerKeyPressHandler } = this.props;
    *   if (typeof registerKeyPressHandler === 'function') { // From `FormInteractiveItemHOC`
@@ -7827,31 +7904,33 @@ FormTextInput = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_
    *     this.interactiveKeyPressHandler && registerKeyPressHandler(this.interactiveKeyPressHandler);
    *   }
    * }
-   */var _proto = FormTextInput.prototype;_proto.componentDidUpdate = function componentDidUpdate(prevProps, prevState) {var prevValue = prevProps.value;var propsValue = this.props.value;var stateValue = this.state.value;if (propsValue !== prevValue && propsValue !== stateValue) {// New value from props
-      this.setState({ value: propsValue }, this.updateValueWithState);} else if (stateValue !== prevState.value) {// New value from state
-      this.updateValueWithState(this.state);}} // Helper methods...
-  ;_proto.hasValue = function hasValue() {var value = this.state.value;return value != null && value !== '';};_proto.hasIcon = function hasIcon() {var _this$props2 = this.props,icon = _this$props2.icon,hasIcon = _this$props2.hasIcon,hasClear = _this$props2.hasClear;return hasIcon || !!icon || hasClear && this.hasValue();};_proto.getClassName = function getClassName() {var _this$props3 = this.props,id = _this$props3.id,hasClear = _this$props3.hasClear;var hasValue = this.hasValue();var hasClearActive = hasClear && hasValue;var classList = cnFormTextInput({ id: id, hasIcon: this.hasIcon(), hasValue: this.hasValue(), hasClear: hasClear, hasClearActive: hasClearActive }, [this.props.className]);return classList;} // Event handlers...
+   */var _proto = FormTextInput.prototype;_proto.componentDidUpdate = function componentDidUpdate(prevProps, prevState) {var prevPropsValue = prevProps.value; // const propsValue = this.getCorrectedValue(this.props.value);
+    var propsValue = this.props.value;var stateValue = this.state.value;var prevStateValue = prevState.value;if (propsValue !== prevPropsValue && propsValue !== prevStateValue) {// New value from props
+      console.log('FormTextInput:componentDidUpdate (propsValue)', { prevPropsValue: prevPropsValue, propsValue: propsValue, stateValue: stateValue, prevStateValue: prevStateValue });this.setState({ value: this.getCorrectedValue(propsValue) }, this.updateValueWithState);} else if (stateValue !== prevStateValue) {// New value from state
+      console.log('FormTextInput:componentDidUpdate (stateValue)', { prevPropsValue: prevPropsValue, propsValue: propsValue, stateValue: stateValue, prevStateValue: prevStateValue });this.setState({ value: stateValue }, this.updateValueWithState); // this.updateValueWithState(this.state);
+    }} // Helper methods...
+  ;_proto.getCorrectedValue = function getCorrectedValue(value) {// const origValue = value;
+    var _this$props3 = this.props,numericValue = _this$props3.numericValue,defaultValue = _this$props3.defaultValue,allowEmpty = _this$props3.allowEmpty;if (numericValue && typeof value !== 'number') {value = String(value).replace(/[^0-9.,-]/g, '');value = parseInt(value, 10);if (isNaN(value)) {value = defaultValue || allowEmpty ? '' : 0;}} // console.log('FormTextInput:getCorrectedValue', {
+    //   origValue,
+    //   value,
+    //   numericValue,
+    // });
+    return value;};_proto.hasValue = function hasValue() {var value = this.state.value;return value != null && value !== '';};_proto.hasIcon = function hasIcon() {var _this$props4 = this.props,icon = _this$props4.icon,hasIcon = _this$props4.hasIcon,hasClear = _this$props4.hasClear;return hasIcon || !!icon || hasClear && this.hasValue();};_proto.getClassName = function getClassName() {var _this$props5 = this.props,id = _this$props5.id,hasClear = _this$props5.hasClear,className = _this$props5.className;var hasValue = this.hasValue();var hasClearActive = hasClear && hasValue;var classList = cnFormTextInput({ id: id, hasIcon: this.hasIcon(), hasValue: this.hasValue(), hasClear: hasClear, hasClearActive: hasClearActive }, [className]);return classList;} // Event handlers...
   ; // Render...
   _proto.renderClearIcon = function renderClearIcon() {// DELETE
-    var _this$props4 = this.props,hasClear = _this$props4.hasClear,clearIcon = _this$props4.clearIcon,clearIconTitle = _this$props4.clearIconTitle;var hasValue = this.hasValue();var hasClearActive = hasClear && hasValue;return hasClearActive && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3___default().createElement(elements_InlineIcon__WEBPACK_IMPORTED_MODULE_7__.default, {
-      icon: clearIcon || 'faTimes',
-      className: cnFormTextInput('Icon', { mode: 'Clear' }),
-      onClick: this.onClearClick,
-      title: clearIconTitle || 'Clear content' });
-
-
+    var _this$props6 = this.props,hasClear = _this$props6.hasClear,clearIcon = _this$props6.clearIcon,clearIconTitle = _this$props6.clearIconTitle,lang = _this$props6.lang;var hasValue = this.hasValue();var hasClearActive = hasClear && hasValue;var title = clearIconTitle || (0,_utils_lang__WEBPACK_IMPORTED_MODULE_7__.getCommonLangText)('clearButton', 'Clear', lang);return hasClearActive && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3___default().createElement(elements_InlineIcon__WEBPACK_IMPORTED_MODULE_8__.default, { icon: clearIcon || 'faTimes', className: cnFormTextInput('Icon', { mode: 'Clear' }), onClick: this.onClearClick, title: title });
   };_proto.
 
   renderIcon = function renderIcon() {// DELETE
-    var _this$props5 =
+    var _this$props7 =
 
 
 
 
-    this.props,icon = _this$props5.icon,iconTitle = _this$props5.iconTitle,onIconClick = _this$props5.onIconClick;
+    this.props,icon = _this$props7.icon,iconTitle = _this$props7.iconTitle,onIconClick = _this$props7.onIconClick;
 
     return icon && /*#__PURE__*/
-    react__WEBPACK_IMPORTED_MODULE_3___default().createElement(elements_InlineIcon__WEBPACK_IMPORTED_MODULE_7__.default, {
+    react__WEBPACK_IMPORTED_MODULE_3___default().createElement(elements_InlineIcon__WEBPACK_IMPORTED_MODULE_8__.default, {
       icon: icon,
       className: cnFormTextInput('Icon'),
       onClick: onIconClick,
@@ -7863,7 +7942,7 @@ FormTextInput = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_
   renderInput = function renderInput() {var
 
     value =
-    this.state.value;var _this$props6 =
+    this.state.value;var _this$props8 =
 
 
 
@@ -7872,7 +7951,7 @@ FormTextInput = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_
 
 
 
-    this.props,id = _this$props6.id,inputId = _this$props6.inputId,name = _this$props6.name,disabled = _this$props6.disabled,placeholder = _this$props6.placeholder,_this$props6$type = _this$props6.type,type = _this$props6$type === void 0 ? 'text' : _this$props6$type;
+    this.props,id = _this$props8.id,inputId = _this$props8.inputId,name = _this$props8.name,disabled = _this$props8.disabled,placeholder = _this$props8.placeholder,_this$props8$type = _this$props8.type,type = _this$props8$type === void 0 ? 'text' : _this$props8$type;
 
     var inputProps = {
       key: 'Input',
@@ -7896,7 +7975,7 @@ FormTextInput = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_
 
   };_proto.
 
-  render = function render() {var _this$props7 =
+  render = function render() {var _this$props9 =
 
 
 
@@ -7904,7 +7983,7 @@ FormTextInput = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_
 
 
 
-    this.props,id = _this$props7.id,disabled = _this$props7.disabled,_this$props7$type = _this$props7.type,type = _this$props7$type === void 0 ? 'text' : _this$props7$type,title = _this$props7.title,setDomRef = _this$props7.setDomRef;
+    this.props,id = _this$props9.id,disabled = _this$props9.disabled,_this$props9$type = _this$props9.type,type = _this$props9$type === void 0 ? 'text' : _this$props9$type,title = _this$props9.title,setDomRef = _this$props9.setDomRef;
 
     var inputElem = this.renderInput();
 
@@ -7929,16 +8008,12 @@ FormTextInput = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_
 
 
 
-
-
-
-
 // export default FormItemHOC({ solid: true, hoverable: true, framed: true })(FormTextInput);
-(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2__.default)(FormTextInput, "propTypes", { id: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string) });/* harmony default export */ __webpack_exports__["default"] = ((0,redux__WEBPACK_IMPORTED_MODULE_5__.compose)(
-// withFormContext,
-forms_FormInteractiveItemHOC__WEBPACK_IMPORTED_MODULE_9__.default,
-(0,_FormItemHOC_index_ts__WEBPACK_IMPORTED_MODULE_8__.default)({ solid: true, hoverable: true, focusable: true, framed: true }))(
-FormTextInput));
+(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2__.default)(FormTextInput, "propTypes", { // TODO: minValue, maxValue
+  allowEmpty: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), className: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), clearIcon: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), clearIconTitle: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), defaultValue: prop_types__WEBPACK_IMPORTED_MODULE_4___default().oneOfType([(prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), (prop_types__WEBPACK_IMPORTED_MODULE_4___default().number)]), disabled: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), hasClear: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), hasClearActive: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), hasIcon: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), hasValue: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), icon: prop_types__WEBPACK_IMPORTED_MODULE_4___default().oneOfType([(prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), (prop_types__WEBPACK_IMPORTED_MODULE_4___default().object)]), // Icon id or icon object
+  iconTitle: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), id: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), inputId: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), name: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), numericValue: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), onChange: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func), onFocusIn: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func), onFocusOut: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func), onIconClick: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func), placeholder: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), setDomRef: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func), setInputDomRef: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func), type: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), value: prop_types__WEBPACK_IMPORTED_MODULE_4___default().oneOfType([(prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), (prop_types__WEBPACK_IMPORTED_MODULE_4___default().number)]) });(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2__.default)(FormTextInput, "defaultProps", { // allowEmpty: true,
+  value: '' });/* harmony default export */ __webpack_exports__["default"] = ((0,redux__WEBPACK_IMPORTED_MODULE_5__.compose)( // withFormContext,
+forms_FormInteractiveItemHOC__WEBPACK_IMPORTED_MODULE_10__.default, (0,_FormItemHOC_index_ts__WEBPACK_IMPORTED_MODULE_9__.default)({ solid: true, hoverable: true, focusable: true, framed: true }))(FormTextInput));
 
 /***/ }),
 
