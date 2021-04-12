@@ -7795,6 +7795,10 @@ input.FormTextInput-Control:-internal-autofill-previewed,
     margin-bottom: 4px;
   }
 
+.FormGroup .FormGroup > .FormRadio + .FormLabel { /* Adjust inner spacing for radio + label pairs*/
+    margin-left: -6px;
+  }
+
 .FormGroup_flow > .FormItem:not(.FormSeparator) {
         min-width: 32px; /* ??? Hint for limiting the maximum width (overflow causes cropping items outer glow on interactive control events).*/
       }
