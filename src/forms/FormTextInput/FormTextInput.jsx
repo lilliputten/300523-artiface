@@ -1,7 +1,7 @@
 /** @module FormTextInput
  *  @class FormTextInput
  *  @since 2020.10.07, 00:20
- *  @changed 2021.01.19, 16:08
+ *  @changed 2021.04.12, 14:26
  */
 /* eslint-disable react/require-default-props */
 
@@ -9,6 +9,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { cn } from 'utils/configure';
+// import * as langUtils from 'utils/lang';
+import { getCommonLangText } from 'utils/lang';
 
 import InlineIcon from 'elements/InlineIcon';
 import FormItemHOC from '../FormItemHOC';
@@ -22,11 +24,45 @@ const cnFormTextInput = cn('FormTextInput');
 
 class FormTextInput extends React.PureComponent /** @lends @FormTextInput.prototype */ {
 
+  static propTypes = {
+    // TODO: minValue, maxValue, maxLength
+    allowEmpty: PropTypes.bool,
+    className: PropTypes.string,
+    clearIcon: PropTypes.bool,
+    clearIconTitle: PropTypes.string,
+    defaultValue: PropTypes.oneOfType([ PropTypes.string, PropTypes.number ]),
+    disabled: PropTypes.bool,
+    hasClear: PropTypes.bool,
+    hasClearActive: PropTypes.bool,
+    hasIcon: PropTypes.bool,
+    hasValue: PropTypes.bool,
+    icon: PropTypes.oneOfType([ PropTypes.string, PropTypes.object ]), // Icon id or icon object
+    iconTitle: PropTypes.string,
+    id: PropTypes.string,
+    inputId: PropTypes.string,
+    name: PropTypes.string,
+    numericValue: PropTypes.bool,
+    onChange: PropTypes.func,
+    onFocusIn: PropTypes.func,
+    onFocusOut: PropTypes.func,
+    onIconClick: PropTypes.func,
+    placeholder: PropTypes.string,
+    setDomRef: PropTypes.func,
+    setInputDomRef: PropTypes.func,
+    type: PropTypes.string,
+    value: PropTypes.oneOfType([ PropTypes.string, PropTypes.number ]),
+  }
+
+  static defaultProps = {
+    // allowEmpty: true,
+    value: '',
+  }
+
   // Lifecycle...
 
   constructor(props) {
     super(props);
-    const { value = '' } = this.props;
+    const value = this.getCorrectedValue(props.value || props.defaultValue || ((props.numericValue && !props.allowEmpty) ? 0 : ''));
     this.state = {
       value,
     };
@@ -43,20 +79,55 @@ class FormTextInput extends React.PureComponent /** @lends @FormTextInput.protot
    */
 
   componentDidUpdate(prevProps, prevState) {
-    const prevValue = prevProps.value;
+    const prevPropsValue = prevProps.value;
+    // const propsValue = this.getCorrectedValue(this.props.value);
     const propsValue = this.props.value;
     const stateValue = this.state.value;
-    if (propsValue !== prevValue && propsValue !== stateValue) { // New value from props
+    const prevStateValue = prevState.value;
+    if (propsValue !== prevPropsValue && propsValue !== prevStateValue) { // New value from props
+      // console.log('FormTextInput:componentDidUpdate (propsValue)', {
+      //   prevPropsValue,
+      //   propsValue,
+      //   stateValue,
+      //   prevStateValue,
+      // });
       this.setState({
-        value: propsValue,
+        value: this.getCorrectedValue(propsValue),
       }, this.updateValueWithState);
     }
-    else if (stateValue !== prevState.value) { // New value from state
-      this.updateValueWithState(this.state);
+    else if (stateValue !== prevStateValue) { // New value from state
+      // console.log('FormTextInput:componentDidUpdate (stateValue)', {
+      //   prevPropsValue,
+      //   propsValue,
+      //   stateValue,
+      //   prevStateValue,
+      // });
+      this.setState({
+        value: stateValue,
+      }, this.updateValueWithState);
+      // this.updateValueWithState(this.state);
     }
   }
 
   // Helper methods...
+
+  getCorrectedValue(value) {
+    // const origValue = value;
+    const { numericValue, defaultValue, allowEmpty } = this.props;
+    if (numericValue && typeof value !== 'number') {
+      value = String(value).replace(/[^0-9.,-]/g, '');
+      value = parseInt(value, 10);
+      if (isNaN(value)) {
+        value = defaultValue || allowEmpty ? '' : 0;
+      }
+    }
+    // console.log('FormTextInput:getCorrectedValue', {
+    //   origValue,
+    //   value,
+    //   numericValue,
+    // });
+    return value;
+  }
 
   hasValue() {
     const {
@@ -76,12 +147,12 @@ class FormTextInput extends React.PureComponent /** @lends @FormTextInput.protot
 
   updateValueWithState = (state) => {
     state = state || this.state;
-    const { id, inputId, name, onChange, disabled, numericValue } = this.props;
+    const { id, inputId, name, onChange, disabled } = this.props;
     if (!disabled && typeof onChange === 'function') {
       let { value } = state;
-      if (numericValue && !isNaN(value)) {
-        value = Number(value);
-      }
+      // console.log('FormTextInput:updateValueWithState', {
+      //   value,
+      // });
       const setId = id || inputId || name;
       onChange({ id: setId, value });
     }
@@ -91,6 +162,7 @@ class FormTextInput extends React.PureComponent /** @lends @FormTextInput.protot
     const {
       id,
       hasClear,
+      className,
     } = this.props;
     const hasValue = this.hasValue();
     const hasClearActive = hasClear && hasValue;
@@ -100,7 +172,7 @@ class FormTextInput extends React.PureComponent /** @lends @FormTextInput.protot
       hasValue: this.hasValue(),
       hasClear,
       hasClearActive,
-    }, [this.props.className]);
+    }, [className]);
     return classList;
   }
 
@@ -108,12 +180,15 @@ class FormTextInput extends React.PureComponent /** @lends @FormTextInput.protot
 
   handleChange = (event) => {
     const { target } = event;
-    const { value } = target;
+    const origValue = target.value;
+    const value = this.getCorrectedValue(origValue);
     this.setState({ value });
   }
 
   onClearClick = () => {
-    this.setState({ value: '' });
+    const { allowEmpty, numericValue } = this.props;
+    const value = (numericValue && !allowEmpty) ? 0 : '';
+    this.setState({ value });
   }
 
   onFocusIn = () => {
@@ -151,15 +226,17 @@ class FormTextInput extends React.PureComponent /** @lends @FormTextInput.protot
       clearIcon,
       clearIconTitle,
       // onClearClick,
+      lang,
     } = this.props;
     const hasValue = this.hasValue();
     const hasClearActive = hasClear && hasValue;
+    const title = clearIconTitle || getCommonLangText('clearButton', 'Clear', lang);
     return hasClearActive && (
       <InlineIcon
         icon={clearIcon || 'faTimes'}
         className={cnFormTextInput('Icon', { mode: 'Clear' })}
         onClick={this.onClearClick}
-        title={clearIconTitle || 'Clear content'}
+        title={title}
       />
     );
   }
@@ -247,10 +324,6 @@ class FormTextInput extends React.PureComponent /** @lends @FormTextInput.protot
       </div>
     );
 
-  }
-
-  static propTypes = {
-    id: PropTypes.string,
   }
 
 }

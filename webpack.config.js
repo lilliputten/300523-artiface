@@ -1,6 +1,6 @@
 /** @desc Webpack configuration
  *  @since 2020.05.18, 12:00
- *  @changed 2021.04.10, 00:09
+ *  @changed 2021.04.12, 14:42
  */
 /* eslint-disable no-console */
 
@@ -294,6 +294,7 @@ module.exports = (env, argv) => {
   return {
     devtool: 'source-map',
     entry: path.resolve(srcPath, jsEntryFile),
+    target: 'web', // 2021.04.12, 14:42 -- Fix-up for webpack 5 hot-reload feature.
     performance: { hints: false },
     watch: isWatch,
     watchOptions: {

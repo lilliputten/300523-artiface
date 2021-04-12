@@ -18,6 +18,14 @@ import { FormContextProvider } from 'helpers/FormContext';
 // export const DemoWrapper = FormGroup // ({ children }) => {
 export const DemoWrapper = <FormGroup stack id="Wrapper" />; // ({ children }) => {
 
+const onChange = ({ id, value }) => {
+  console.log('FormTextInput:fixture:onChange', {
+    id,
+    value,
+  });
+  // debugger;
+};
+
 class WithFormContext extends React.PureComponent /** @lends @ModalsContainer.prototype */ {
   onInputEnterPressed = ({ id }) => {
     console.log('FormTextInput.fixture:onInputEnterPressed', id); // eslint-disable-line no-console
@@ -88,6 +96,21 @@ const withLabel = (
     />
   </FormGroup>
 );
+const numeric = (
+  <FormTextInput
+    className="addClassName"
+    type="text"
+    name="name"
+    id="numeric"
+    // inputId="simpleInputControl"
+    value="1"
+    hasClear
+    allowEmpty={false}
+    fullWidth
+    numericValue
+    onChange={onChange}
+  />
+);
 
 export default {
   simple,
@@ -95,4 +118,5 @@ export default {
   fullWidth,
   withLabel,
   wrappedWithFormContext,
+  numeric,
 };
