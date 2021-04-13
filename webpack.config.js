@@ -32,7 +32,7 @@ module.exports = (env, argv) => {
   const isStats = !!argv.profile;
   const isWatch = !!argv.watch;
   const useDevTool = true && isDev; // Need server restart
-  const minimizeBundles = false && isProd; // To minimize production bundles
+  const minimizeBundles = true && isProd; // To minimize production bundles
   // const preprocessBundles = false && isProd; // To minimize production bundles
   const sourceMaps = true && isDev; // !preprocessBundles // To minimize production bundles
   // const extemeUglify = false // Use mangling (WARNING: May broke some code! Don't use without testing!)
@@ -294,7 +294,7 @@ module.exports = (env, argv) => {
   return {
     devtool: 'source-map',
     entry: path.resolve(srcPath, jsEntryFile),
-    target: 'web', // 2021.04.12, 14:42 -- Fix-up for webpack 5 hot-reload feature.
+    target: ['web', 'es5'], // 2021.04.12, 14:42 -- Fix-up for webpack 5 hot-reload feature.
     performance: { hints: false },
     watch: isWatch,
     watchOptions: {

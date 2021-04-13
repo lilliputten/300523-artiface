@@ -35,6 +35,10 @@
     margin-bottom: $(formItemSpacing)px;
   }
 
+  .FormGroup > .FormRadio + .FormLabel { // Adjust inner spacing for radio + label pairs
+    margin-left: -6px;
+  }
+
   &_flow {
     & > .FormItem {
       &:not(.FormSeparator) {

@@ -1,7 +1,7 @@
 /** @module babel.config
  *  @desc Babel configuration
  *  @since 2019.03.06, 12:00
- *  @changed 2020.05.19, 19:09
+ *  @changed 2021.04.13, 15:02
  */
 
 const srcPath = './src';
@@ -38,8 +38,8 @@ module.exports = {
       root: [srcPath],
       extenstions: ['.ts', '.tsx', '.js', '.jsx'],
       alias: srcFolders.reduce((aliases, dir) => {
-        return { ...aliases, [dir]: [srcPath + '/' + dir] };
-      }, { '~': [srcPath] }),
+        return { ...aliases, [dir]: srcPath + '/' + dir };
+      }, { '~': srcPath }),
     }],
     ['directory-resolver', { moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'] }], // https://github.com/mgcrea/babel-plugin-directory-resolver
   ],
