@@ -1,5 +1,6 @@
 # CHANGELOG
 
+- 2021.04.13, 15:24 -- v.0.3.2. Minor changes. Build environment: downgraded poscss-csso (for matching postcss version). Added es5 target to webpack. Babel: fixed upgraded module-resolver config.
 - 2021.04.12, 14:46 -- Fix-up for webpack 5 hot-reload feature. FormTextInput fix-ups
 - 2021.04.10, 00:27 -- v.0.3.1.
 - 2021.04.10, 00:24 -- PD-3623: Fixed ts/js index exports (using `export { default as XXX }`). Updated webpack dev-server detection.
