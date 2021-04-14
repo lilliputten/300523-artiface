@@ -1,6 +1,6 @@
 /** @desc Webpack configuration
  *  @since 2020.05.18, 12:00
- *  @changed 2021.04.12, 14:42
+ *  @changed 2021.04.13, 15:53
  */
 /* eslint-disable no-console */
 
@@ -294,7 +294,9 @@ module.exports = (env, argv) => {
   return {
     devtool: 'source-map',
     entry: path.resolve(srcPath, jsEntryFile),
-    target: ['web', 'es5'], // 2021.04.12, 14:42 -- Fix-up for webpack 5 hot-reload feature.
+    target: isDevServer ? 'web' : ['web', 'es5'], // 2021.04.12, 14:42 -- Fix-up for webpack 5 hot-reload / es5 transpilling.
+    // target: 'web', // 2021.04.12, 14:42 -- Fix-up for webpack 5 hot-reload feature.
+    // target: ['web', 'es5'], // 2021.04.13, 15:47 -- Fix-up for es5 transpilling?
     performance: { hints: false },
     watch: isWatch,
     watchOptions: {
