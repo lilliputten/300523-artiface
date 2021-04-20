@@ -1,7 +1,7 @@
 /** @module MenuItem
  *  @class MenuItem
  *  @since 2020.10.27, 03:05
- *  @changed 2021.02.20, 14:20
+ *  @changed 2021.04.20, 12:30
  */
 
 import React from 'react';
@@ -158,13 +158,14 @@ class MenuItem extends React.PureComponent /** @lends @MenuItem.prototype */ {
   render() {
 
     const {
+      id,
       htmlId,
       setDomRef, // From FormItemHOC
     } = this.props;
 
     const renderProps = {
       // id,
-      id: htmlId,
+      id: htmlId || id,
       className: this.getClassName(),
       onClick: this.onClick,
       ref: setDomRef, // Init ref for FormItemHOC
