@@ -205,9 +205,9 @@ module.exports = { // Common-used build variables...
   DEV_DEBUG: DEV_DEBUG,
 
   THEME: "default",
-  buildTag: "v.0.3.2-210413-1524-build-dev-default",
-  timestamp: "2021.04.13, 15:24",
-  timetag: "210413-1524",
+  buildTag: "v.0.3.2-210420-1230-build-dev-default",
+  timestamp: "2021.04.20, 12:30",
+  timetag: "210420-1230",
   version: "0.3.2" };
 
 /***/ }),
@@ -1360,7 +1360,7 @@ __webpack_require__.r(__webpack_exports__);
  /** @module MenuItem
  *  @class MenuItem
  *  @since 2020.10.27, 03:05
- *  @changed 2021.02.20, 14:20
+ *  @changed 2021.04.20, 12:30
  */
 
 
@@ -1519,11 +1519,12 @@ MenuItem = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_helpe
 
 
 
-    this.props,htmlId = _this$props5.htmlId,setDomRef = _this$props5.setDomRef;
+
+    this.props,id = _this$props5.id,htmlId = _this$props5.htmlId,setDomRef = _this$props5.setDomRef;
 
     var renderProps = {
       // id,
-      id: htmlId,
+      id: htmlId || id,
       className: this.getClassName(),
       onClick: this.onClick,
       ref: setDomRef // Init ref for FormItemHOC
