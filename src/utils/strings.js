@@ -135,3 +135,10 @@ export function periodizeNumber(num, periodChar) {
   return num;
 }
 
+/** humanizeId -- Make human-readable string from id (eg, 'thisId' -> 'This Id')
+ * @param {String} id
+ * @return {String}
+ */
+export function humanizeId(id) {
+  return ucFirst(String(id)).replace(/\B([A-Z])/g, ' $1');
+}
