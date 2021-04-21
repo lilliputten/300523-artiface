@@ -205,9 +205,9 @@ module.exports = { // Common-used build variables...
   DEV_DEBUG: DEV_DEBUG,
 
   THEME: "default",
-  buildTag: "v.0.3.2-210420-1230-build-dev-default",
-  timestamp: "2021.04.20, 12:30",
-  timetag: "210420-1230",
+  buildTag: "v.0.3.2-210421-1433-build-dev-default",
+  timestamp: "2021.04.21, 14:33",
+  timetag: "210421-1433",
   version: "0.3.2" };
 
 /***/ }),
@@ -8856,7 +8856,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "html2string": function() { return /* binding */ html2string; },
 /* harmony export */   "splitMultiline": function() { return /* binding */ splitMultiline; },
 /* harmony export */   "padNumber": function() { return /* binding */ padNumber; },
-/* harmony export */   "periodizeNumber": function() { return /* binding */ periodizeNumber; }
+/* harmony export */   "periodizeNumber": function() { return /* binding */ periodizeNumber; },
+/* harmony export */   "humanizeId": function() { return /* binding */ humanizeId; }
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
@@ -8995,6 +8996,14 @@ function periodizeNumber(num, periodChar) {
     num = num.replace(/\B(?=(\d{3})+(?!\d))/g, periodChar);
   }
   return num;
+}
+
+/** humanizeId -- Make human-readable string from id (eg, 'thisId' -> 'This Id')
+ * @param {String} id
+ * @return {String}
+ */
+function humanizeId(id) {
+  return ucFirst(String(id)).replace(/\B([A-Z])/g, ' $1');
 }
 
 /***/ }),
