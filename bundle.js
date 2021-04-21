@@ -205,9 +205,9 @@ module.exports = { // Common-used build variables...
   DEV_DEBUG: DEV_DEBUG,
 
   THEME: "default",
-  buildTag: "v.0.3.2-210421-1433-build-dev-default",
-  timestamp: "2021.04.21, 14:33",
-  timetag: "210421-1433",
+  buildTag: "v.0.3.2-210421-2246-build-dev-default",
+  timestamp: "2021.04.21, 22:46",
+  timetag: "210421-2246",
   version: "0.3.2" };
 
 /***/ }),
@@ -321,6 +321,8 @@ var cssConfig = { // Common-used css variables...
 
   // Neutral colors...
 
+  neutralSuperDarkestColor: '#222',
+  neutralDarkestColor: '#333',
   neutralExtraDarkColor: '#666',
   neutralSuperDarkColor: '#777',
   neutralDarkColor: '#999',
@@ -331,6 +333,8 @@ var cssConfig = { // Common-used css variables...
   neutralLightColor: '#e0e0e0',
   neutralSuperLightColor: '#eee',
   neutralExtraLightColor: '#f0f0f0',
+
+  bootstrapDarkColor: '#212529',
 
   // Theme colors...
 
@@ -345,7 +349,9 @@ var cssConfig = { // Common-used css variables...
 
     // ??? TODO: See buttons themes
     primary: theme.primaryColor,
-    secondary: theme.primaryColor,
+    secondary: theme.secondaryColor,
+
+    neutral: '#666',
 
     error: errorColor,
     warn: warnColor,
