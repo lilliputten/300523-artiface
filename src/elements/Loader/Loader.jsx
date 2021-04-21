@@ -1,6 +1,6 @@
 /** @module Loader
  *  @since 2020.10.27, 00:39
- *  @changed 2020.12.25, 00:29
+ *  @changed 2021.04.22, 00:24
  *
  *  TODO: Place block (and local?) loaders into `ModalsContainer`?
  */
@@ -32,6 +32,7 @@ import './Loader-themes.pcss';
  */
 const Loader = (props) => {
   const {
+    id,
     lang,
     className/*  = 'preloader' */,
     mode,
@@ -47,7 +48,7 @@ const Loader = (props) => {
       <FormGroup flow alignItems="center">
         <FormButton
           plain
-          onDark
+          onDark={theme && theme.includes('Dark')}
           text={cancelText || getCommonLangText('cancelButton', 'Cancel', lang)}
           icon="faTimes"
           onClick={onCancel}
@@ -58,7 +59,7 @@ const Loader = (props) => {
   const thisClassName = cnLoader({ mode, theme, show }, [ className, /* showClass */ ]);
   const showText = (text != null) ? text : getCommonLangText('loading', 'Loading...', lang);
   return (
-    <div className={thisClassName}>
+    <div id={id} className={thisClassName}>
       <div className={cnLoader('Container')}>
         <div className={cnLoader('Spinner')} />
         <div className={cnLoader('Text')}>{showText}</div>

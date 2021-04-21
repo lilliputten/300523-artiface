@@ -56,6 +56,8 @@ const cssConfig = { // Common-used css variables...
 
   // Neutral colors...
 
+  neutralSuperDarkestColor: '#222',
+  neutralDarkestColor: '#333',
   neutralExtraDarkColor: '#666',
   neutralSuperDarkColor: '#777',
   neutralDarkColor: '#999',
@@ -66,6 +68,8 @@ const cssConfig = { // Common-used css variables...
   neutralLightColor: '#e0e0e0',
   neutralSuperLightColor: '#eee',
   neutralExtraLightColor: '#f0f0f0',
+
+  bootstrapDarkColor: '#212529',
 
   // Theme colors...
 
@@ -80,7 +84,9 @@ const cssConfig = { // Common-used css variables...
 
     // ??? TODO: See buttons themes
     primary: theme.primaryColor,
-    secondary: theme.primaryColor,
+    secondary: theme.secondaryColor,
+
+    neutral: '#666',
 
     error: errorColor,
     warn: warnColor,

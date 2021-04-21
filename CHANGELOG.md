@@ -1,5 +1,6 @@
 # CHANGELOG
 
+- 2021.04.22, 00:26 -- Fixed Loader actions button theme (depends on Loader's theme).
 - 2021.04.13, 15:24 -- WebUiCore v.0.3.2. Added es5 target to webpack. Babel: fixed upgraded module-resolver config. Build environment: removed PrintXpertWebServer existency in deploy script `util-upload-bundle.ps1`, upgraded babel versions to match WebUiCore.
 - 2021.04.12, 14:46 -- Fix-up for webpack 5 hot-reload feature. FormTextInput fix-ups
 - 2021.04.10, 00:27 -- v.0.3.1.
@@ -120,5 +121,5 @@
 - 2020.10.05, 20:38 -- v.0.0.15: Extracted `demoSupport.jsx` routines, fixture selection from url query (parameter `fixture`), added avaialble fixtures list if fixture to display is not specified, added DemoWrapper & demoTitle exportable ficture parameters for demo rendering.
 
 <!--
- @changed 2021.04.13, 15:27
+ @changed 2021.04.22, 00:26
 -->
