@@ -205,9 +205,9 @@ module.exports = { // Common-used build variables...
   DEV_DEBUG: DEV_DEBUG,
 
   THEME: "default",
-  buildTag: "v.0.3.2-210421-2246-build-dev-default",
-  timestamp: "2021.04.21, 22:46",
-  timetag: "210421-2246",
+  buildTag: "v.0.3.2-210422-0026-build-dev-default",
+  timestamp: "2021.04.22, 00:26",
+  timetag: "210422-0026",
   version: "0.3.2" };
 
 /***/ }),
@@ -1236,7 +1236,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Loader_themes_pcss__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Loader-themes.pcss */ "./src/elements/Loader/Loader-themes.pcss");
 /** @module Loader
  *  @since 2020.10.27, 00:39
- *  @changed 2020.12.25, 00:29
+ *  @changed 2021.04.22, 00:24
  *
  *  TODO: Place block (and local?) loaders into `ModalsContainer`?
  */
@@ -1264,7 +1264,7 @@ var cnLoader = (0,_utils_configure__WEBPACK_IMPORTED_MODULE_1__.cn)('Loader');
  */
 var Loader = function Loader(props) {var
 
-  lang =
+  id =
 
 
 
@@ -1273,13 +1273,14 @@ var Loader = function Loader(props) {var
 
 
 
-  props.lang,className = props.className,mode = props.mode,show = props.show,theme = props.theme,text = props.text,onCancel = props.onCancel,cancelText = props.cancelText;
+
+  props.id,lang = props.lang,className = props.className,mode = props.mode,show = props.show,theme = props.theme,text = props.text,onCancel = props.onCancel,cancelText = props.cancelText;
   var actions = typeof onCancel === 'function' && /*#__PURE__*/
   react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", { className: cnLoader('Actions') }, /*#__PURE__*/
   react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_forms_index_js__WEBPACK_IMPORTED_MODULE_3__.FormGroup, { flow: true, alignItems: "center" }, /*#__PURE__*/
   react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_forms_index_js__WEBPACK_IMPORTED_MODULE_3__.FormButton, {
     plain: true,
-    onDark: true,
+    onDark: theme && theme.includes('Dark'),
     text: cancelText || (0,_utils_lang__WEBPACK_IMPORTED_MODULE_2__.getCommonLangText)('cancelButton', 'Cancel', lang),
     icon: "faTimes",
     onClick: onCancel })));
@@ -1290,7 +1291,7 @@ var Loader = function Loader(props) {var
   var thisClassName = cnLoader({ mode: mode, theme: theme, show: show }, [className /* showClass */]);
   var showText = text != null ? text : (0,_utils_lang__WEBPACK_IMPORTED_MODULE_2__.getCommonLangText)('loading', 'Loading...', lang);
   return /*#__PURE__*/(
-    react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", { className: thisClassName }, /*#__PURE__*/
+    react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", { id: id, className: thisClassName }, /*#__PURE__*/
     react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", { className: cnLoader('Container') }, /*#__PURE__*/
     react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", { className: cnLoader('Spinner') }), /*#__PURE__*/
     react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", { className: cnLoader('Text') }, showText),
