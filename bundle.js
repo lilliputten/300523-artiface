@@ -205,9 +205,9 @@ module.exports = { // Common-used build variables...
   DEV_DEBUG: DEV_DEBUG,
 
   THEME: "default",
-  buildTag: "v.0.3.2-210422-0026-build-dev-default",
-  timestamp: "2021.04.22, 00:26",
-  timetag: "210422-0026",
+  buildTag: "v.0.3.2-210422-1349-build-dev-default",
+  timestamp: "2021.04.22, 13:49",
+  timetag: "210422-1349",
   version: "0.3.2" };
 
 /***/ }),
@@ -8774,18 +8774,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "domUtils": function() { return /* reexport module object */ _domUtils__WEBPACK_IMPORTED_MODULE_2__; },
 /* harmony export */   "lang": function() { return /* reexport module object */ _lang__WEBPACK_IMPORTED_MODULE_3__; },
 /* harmony export */   "strings": function() { return /* reexport module object */ _strings__WEBPACK_IMPORTED_MODULE_4__; },
-/* harmony export */   "forms": function() { return /* reexport module object */ _forms__WEBPACK_IMPORTED_MODULE_5__; }
+/* harmony export */   "objects": function() { return /* reexport module object */ _objects__WEBPACK_IMPORTED_MODULE_5__; },
+/* harmony export */   "forms": function() { return /* reexport module object */ _forms__WEBPACK_IMPORTED_MODULE_6__; }
 /* harmony export */ });
 /* harmony import */ var _configure__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./configure */ "./src/utils/configure.js");
 /* harmony import */ var _dates__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./dates */ "./src/utils/dates.js");
 /* harmony import */ var _domUtils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./domUtils */ "./src/utils/domUtils.js");
 /* harmony import */ var _lang__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./lang */ "./src/utils/lang.js");
 /* harmony import */ var _strings__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./strings */ "./src/utils/strings.js");
-/* harmony import */ var _forms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./forms */ "./src/utils/forms.js");
+/* harmony import */ var _objects__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./objects */ "./src/utils/objects.js");
+/* harmony import */ var _forms__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./forms */ "./src/utils/forms.js");
 /** @module utils
  *  @desc Library utilities
  *  @since 2020.05.19, 17:16
- *  @changed 2021.03.11, 20:00
+ *  @changed 2021.04.22, 13:48
  */
 
 // export * from './configure'
@@ -8839,6 +8841,34 @@ function getCommonLangText(id, defaultText, propsLang) {
   // console.log('WebUiCore:utils:lang:getCommonLangText', id, lang)
   // debugger
   return text != null ? text : defaultText || id;
+}
+
+/***/ }),
+
+/***/ "./src/utils/objects.js":
+/*!******************************!*\
+  !*** ./src/utils/objects.js ***!
+  \******************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "reverseKeyAndValue": function() { return /* binding */ reverseKeyAndValue; },
+/* harmony export */   "reverseDataHash": function() { return /* binding */ reverseDataHash; }
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
+ /** @module objects
+ *  @description Objects utilities
+ *  @since 2021.04.22, 13:47
+ *  @changed 2021.04.22, 13:47
+ */
+
+function reverseKeyAndValue(result, _ref) {var _extends2;var key = _ref[0],val = _ref[1];
+  return (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__.default)({}, result, (_extends2 = {}, _extends2[val] = key, _extends2));
+}
+function reverseDataHash(hash) {
+  return Object.entries(hash).reduce(reverseKeyAndValue, {});
 }
 
 /***/ }),
