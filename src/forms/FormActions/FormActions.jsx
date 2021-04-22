@@ -210,7 +210,7 @@ class FormActions extends React.PureComponent /** @lends @FormActions.prototype 
     } = this.props;
     let content = actions || children;
     if (Array.isArray(content)) {
-      content = content.map(this.renderActionItem, this);
+      content = content.filter(Boolean).map(this.renderActionItem, this);
     }
     return (
       <FormGroup {...restProps} className={this.getClassName()}>
