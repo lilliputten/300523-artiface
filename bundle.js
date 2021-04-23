@@ -205,9 +205,9 @@ module.exports = { // Common-used build variables...
   DEV_DEBUG: DEV_DEBUG,
 
   THEME: "default",
-  buildTag: "v.0.3.2-210422-1349-build-dev-default",
-  timestamp: "2021.04.22, 13:49",
-  timetag: "210422-1349",
+  buildTag: "v.0.3.2-210423-1829-build-dev-default",
+  timestamp: "2021.04.23, 18:29",
+  timetag: "210423-1829",
   version: "0.3.2" };
 
 /***/ }),
@@ -4357,7 +4357,7 @@ FormActions = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_he
     this.props,actions = _this$props4.actions,children = _this$props4.children,className = _this$props4.className,withMenu = _this$props4.withMenu,menu = _this$props4.menu,setPopupNodeRef = _this$props4.setPopupNodeRef,restProps = (0,_babel_runtime_helpers_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_0__.default)(_this$props4, ["actions", "children", "className", "withMenu", "menu", "setPopupNodeRef"]);
     var content = actions || children;
     if (Array.isArray(content)) {
-      content = content.map(this.renderActionItem, this);
+      content = content.filter(Boolean).map(this.renderActionItem, this);
     }
     return /*#__PURE__*/(
       react__WEBPACK_IMPORTED_MODULE_5___default().createElement(_FormGroup_index_ts__WEBPACK_IMPORTED_MODULE_11__.default, (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_1__.default)({}, restProps, { className: this.getClassName() }), /*#__PURE__*/
