@@ -205,9 +205,9 @@ module.exports = { // Common-used build variables...
   DEV_DEBUG: DEV_DEBUG,
 
   THEME: "default",
-  buildTag: "v.0.3.2-210423-1829-build-dev-default",
-  timestamp: "2021.04.23, 18:29",
-  timetag: "210423-1829",
+  buildTag: "v.0.3.2-210430-1432-build-dev-default",
+  timestamp: "2021.04.30, 14:32",
+  timetag: "210430-1432",
   version: "0.3.2" };
 
 /***/ }),
@@ -8486,12 +8486,15 @@ __webpack_require__.r(__webpack_exports__);
 /** @module dates
  *  @description Objects utilities
  *  @since 2021.01.23, 20:29
- *  @changed 2021.03.11, 21:00
+ *  @changed 2021.04.30, 14:28
  */
 
 
 
 
+
+var msDatePrefix = '/Date(';
+var msDatePostfix = ')/';
 
 // Export constants...
 
@@ -8514,7 +8517,7 @@ function detectDateValueType(date) {
     }
   } else
   if (dateType === 'string') {
-    if (date.startsWith('Date(')) {
+    if (date.startsWith(msDatePrefix)) {
       return 'msDateStr';
     }
   }
@@ -8525,15 +8528,16 @@ function convertToDateObject(date) {
   var dateType = detectDateValueType(date);
   var result = date;
   if (dateType !== 'object') {
-    if (dateType === 'msDateStr') {
-      result = parseInt(result.substr(5)); // 'Date(*' -> number
-    } else
-    if (dateType === 'number' || dateType === 'msDateStr') {
+    if (dateType === 'msDateStr') {// Convert to number...
+      result = parseInt(result.substr(msDatePrefix.length)); // '/Date(*' -> number
+    }
+    if (dateType === 'number' || dateType === 'msDateStr') {// Convert to date object...
       result = new Date(result);
     } else
-    if (dateType === 'moment') {
+    if (dateType === 'moment') {// Convert form moment date...
       result = date.toDate();
     }
+    // else -- error?
   }
   return result;
 }
@@ -8555,7 +8559,7 @@ function toMicrosoftDateTime(date) {
   var match = date.toString().match(/GMT\s*([+-]\d+)/);
   var offset = match && match[1] || '';
   var format = String(date.getTime()) + offset;
-  return '/Date(' + format + ')/';
+  return msDatePrefix + format + msDatePostfix; // -> '/Date(...)/'
   /* // OLD CODE:
    * const offset = () => {
    *   const hours = date.getTimezoneOffset() / 60
@@ -8566,7 +8570,7 @@ function toMicrosoftDateTime(date) {
    *   return doubleOrNot
    * }
    * const format = () => String(date.getTime()) + String(offset())
-   * return `/Date(${format()})/`
+   * return `//Date(${format()})/`
    */
 }
 
@@ -8956,7 +8960,8 @@ var getCommonLength = function getCommonLength(a, b) {
  * @return {str}
  */
 var ucFirst = function ucFirst(str) {
-  return str.charAt(0).toUpperCase() + str.slice(1); // .toLowerCase();
+  str = String(str);
+  return str && str.charAt(0).toUpperCase() + str.slice(1); // .toLowerCase();
 };
 
 /** Convert string to desired type
