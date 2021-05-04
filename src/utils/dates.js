@@ -1,7 +1,7 @@
 /** @module dates
  *  @description Objects utilities
  *  @since 2021.01.23, 20:29
- *  @changed 2021.03.11, 21:00
+ *  @changed 2021.04.30, 14:28
  */
 
 import moment from 'moment';
@@ -10,6 +10,9 @@ import { // date-fns
   format,
 } from 'date-fns';
 import config from 'config';
+
+const msDatePrefix = '/Date(';
+const msDatePostfix = ')/';
 
 // Export constants...
 
@@ -32,7 +35,7 @@ export function detectDateValueType(date) {
     }
   }
   else if (dateType === 'string') {
-    if (date.startsWith('Date(')) {
+    if (date.startsWith(msDatePrefix)) {
       return 'msDateStr';
     }
   }
@@ -43,15 +46,16 @@ export function convertToDateObject(date) {
   const dateType = detectDateValueType(date);
   let result = date;
   if (dateType !== 'object') {
-    if (dateType === 'msDateStr') {
-      result = parseInt(result.substr(5)); // 'Date(*' -> number
+    if (dateType === 'msDateStr') { // Convert to number...
+      result = parseInt(result.substr(msDatePrefix.length)); // '/Date(*' -> number
     }
-    else if (dateType === 'number' || dateType === 'msDateStr') {
+    if (dateType === 'number' || dateType === 'msDateStr') { // Convert to date object...
       result = new Date(result);
     }
-    else if (dateType === 'moment') {
+    else if (dateType === 'moment') { // Convert form moment date...
       result = date.toDate();
     }
+    // else -- error?
   }
   return result;
 }
@@ -73,7 +77,7 @@ export function toMicrosoftDateTime(date) {
   const match = date.toString().match(/GMT\s*([+-]\d+)/);
   const offset = match && match[1] || '';
   const format = String(date.getTime()) + offset;
-  return '/Date(' + format + ')/';
+  return msDatePrefix + format + msDatePostfix; // -> '/Date(...)/'
   /* // OLD CODE:
    * const offset = () => {
    *   const hours = date.getTimezoneOffset() / 60
@@ -84,7 +88,7 @@ export function toMicrosoftDateTime(date) {
    *   return doubleOrNot
    * }
    * const format = () => String(date.getTime()) + String(offset())
-   * return `/Date(${format()})/`
+   * return `//Date(${format()})/`
    */
 }
 

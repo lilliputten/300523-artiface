@@ -1,5 +1,6 @@
 # CHANGELOG
 
+- 2021.05.04, 18:09 -- utils: Safe ucFirst, dates: msDate bugs fixed.
 - 2021.04.22, 21:24 -- utils/objects: data manipulation utilities.
 - 2021.04.22, 00:26 -- Fixed Loader actions button theme (depends on Loader's theme).
 - 2021.04.13, 15:24 -- WebUiCore v.0.3.2. Added es5 target to webpack. Babel: fixed upgraded module-resolver config. Build environment: removed PrintXpertWebServer existency in deploy script `util-upload-bundle.ps1`, upgraded babel versions to match WebUiCore.

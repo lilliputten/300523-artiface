@@ -56,7 +56,8 @@ export const getCommonLength = (a, b) => {
  * @return {str}
  */
 export const ucFirst = (str) => {
-  return str.charAt(0).toUpperCase() + str.slice(1); // .toLowerCase();
+  str = String(str);
+  return str && (str.charAt(0).toUpperCase() + str.slice(1)); // .toLowerCase();
 };
 
 /** Convert string to desired type
