@@ -1,9 +1,12 @@
 /** @module FormText.styles
  *  @since 2020.10.29, 21:25
- *  @changed 2020.10.29, 22:42
+ *  @changed 2021.05.07, 15:13
  */
 
 .FormText {
   // height: $(formItemHeight)px;
   line-height: $(formItemHeight)px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
