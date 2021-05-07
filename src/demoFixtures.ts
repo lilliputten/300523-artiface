@@ -1,7 +1,7 @@
 /** @module demoFixtures
  *  @desc Demo fixtures list
  *  @since 2021.02.15, 18:05
- *  @changed 2021.02.20, 16:56
+ *  @changed 2021.05.07, 15:32
  */
 
 // import * as build from './build'
@@ -22,6 +22,7 @@ const demoFixtures: TFixturesList = {
   Loader: require('elements/Loader/Loader.fixture'),
 
   ModalWindow: require('elements/ModalWindow/ModalWindow.fixture'),
+  ModalWindowWithController: require('elements/ModalWindow/ModalWindow-WithController.fixture'),
   ModalPopup: require('elements/ModalPopup/ModalPopup.fixture'),
 
   FormSeparator: require('forms/FormSeparator/FormSeparator.fixture'),

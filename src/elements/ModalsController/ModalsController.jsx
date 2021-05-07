@@ -2,23 +2,18 @@
  *  @class ModalsController
  *  @desc Modals dom container & controller interface object
  *  @since 2020.12.21, 23:37
- *  @changed 2020.12.21, 23:37
+ *  @changed 2021.05.07, 14:49
  */
 
-// import React from 'react';
 import * as React from 'react';
-// import ReactDOM from 'react-dom';
-// import PropTypes from 'prop-types';
 import * as PropTypes from 'prop-types';
 import { Portal } from 'react-portal';
-// import { cssMapping } from 'utils/configure';
-// import { cn } from '../../utils/configure';
 import { cn } from 'utils/configure';
-// import { cn } from '~/utils/configure.js';
 import * as config from 'config';
-// import * as config from '../../config/config';
-// import config from 'config/config';
-// import { ModalsContextProvider } from 'helpers/ModalsContext';
+import ErrorContainer from 'elements/ErrorContainer';
+import { ErrorBoundary } from 'react-error-boundary';
+
+import ModalWindow from 'elements/ModalWindow';
 
 import './ModalsController.pcss';
 
@@ -36,26 +31,25 @@ class ModalsController extends React.PureComponent /** @lends @ModalsController.
 
   domNode = undefined;
   modalsStack = [];
-  modalWidnows = [];
+  modalWindows = [];
 
   // Lifecycle...
 
-  /* // UNUSED lifecycle methods
-   * constructor(props) {
-   *   super(props);
-   *   // ???
-   *   // const {
-   *   //   modalsContainerNode, // ModalsContext Provider
-   *   // } = props
-   *   // console.log(modalsContainerNode)
-   *   // debugger
-   * }
-   * componentWillUnmount() {
-   *   // this.unregisterGlobalHandlers()
-   * }
-   */
+  // UNUSED lifecycle methods
+  constructor(props) {
+    super(props);
+    this.state = {
+      proxyModalsList: [], // Active proxy modals list; see `...ProxyModal...` functionality below
+    };
+  }
 
   componentDidMount() {
+    // Uncaught errors handler...
+    this.__saved_onunhandledrejection = window.onunhandledrejection;
+    this.__saved_onerror = window.onerror;
+    window.onunhandledrejection = this.onCatchedError;
+    window.onerror = this.onCatchedError;
+
     // this.registerGlobalHandlers()
     // Initialize global references & parameters...
     if (typeof config.modals.__initPromiseResolve == 'function') {
@@ -72,12 +66,29 @@ class ModalsController extends React.PureComponent /** @lends @ModalsController.
      */
   }
 
+  componentWillUnmount() {
+    // this.unregisterGlobalHandlers()
+
+    // Reset uncaught errors handler...
+    window.onunhandledrejection = this.__saved_onunhandledrejection;
+    window.onerror = this.__saved_onerror;
+  }
+
   // Handlers...
 
   setRef = (domNode) => { // Get dom node reference. Used as portals root (with `config.modals.controller.getDomNode()`).
     // console.log('ModalsController:setRef', { domNode });
     this.domNode = domNode;
     // config.modals.domNode = domNode;
+  }
+
+  onCatchedError = (error) => { // Error handler
+    const errorMessage = error && (error.message || error.reason);
+    console.error('ModalsController:onCatchedError', errorMessage, error); // eslint-disable-line no-console
+    debugger; // eslint-disable-line no-debugger
+    // this.setState({ errors: error });
+    // this.props.setErrorNotify(error);
+    throw error;
   }
 
   // External methods...
@@ -87,7 +98,7 @@ class ModalsController extends React.PureComponent /** @lends @ModalsController.
   }
 
   registerModal = (modal/*: React.ReactNode*/) => { // Add item to modals stack
-    // console.log('ModalsController:registerModal', modal.props.type, modal.props.id);
+    console.log('ModalsController:registerModal', modal.props.type, modal.props.id);
     // debugger;
     if (!this.modalsStack.includes(modal)) { // Add to stack if not exist
       this.modalsStack.push(modal);
@@ -95,7 +106,8 @@ class ModalsController extends React.PureComponent /** @lends @ModalsController.
   }
 
   unregisterModal = (modal/*: React.ReactNode*/) => { // Remove item from modals stack
-    // console.log('ModalsController:unregisterModal', modal.props.type, modal.props.id)
+    console.log('ModalsController:unregisterModal', modal.props.type, modal.props.id)
+    // debugger;
     const idx = this.modalsStack.indexOf(modal);
     if (idx !== -1) { // Remove if found...
       this.modalsStack.splice(idx, 1);
@@ -129,6 +141,101 @@ class ModalsController extends React.PureComponent /** @lends @ModalsController.
     return (modal === topmost);
   }
 
+  // Proxy modals functionality...
+
+  setPortalProxyRef = (ref) => {
+    this.PortalProxy = ref;
+  }
+
+  // External proxy methods...
+
+  addProxyModal(modalData) {
+    const id = modalData.modalId; // || 'modal' + n;
+    // TODO: Check not-empty id and id uniqueness
+    if (!id || this.getProxyModal(id)) {
+      const error = new Error('An unique modalId must be specified');
+      console.error('ModalsController:addProxyModal: error', { error, modalData }); // eslint-disable-line no-console
+      debugger; // eslint-disable-line no-debugger
+      throw error;
+    }
+    this.setState(({ proxyModalsList }) => {
+      return { proxyModalsList: proxyModalsList.concat(modalData) };
+    });
+  }
+
+  removeProxyModal(modalId) {
+    // TODO: Call some actions (on close modal)?
+    this.setState(({ proxyModalsList }) => {
+      proxyModalsList = proxyModalsList.filter(modalData => modalData.modalId !== modalId);
+      return { proxyModalsList };
+    });
+  }
+
+  getProxyModal(modalId) {
+    const { proxyModalsList } = this.state;
+    const found = proxyModalsList.find(modalData => modalData.modalId === modalId);
+    return found;
+  }
+
+  isProxyModalExists(modalId) {
+    const found = this.getProxyModal(modalId);
+    return !!found;
+  }
+
+  updateProxyModal(modalId, options) {
+    this.setState(({ proxyModalsList }) => {
+      const foundIdx = proxyModalsList.findIndex(modalData => modalData.modalId === modalId);
+      if (foundIdx !== -1) {
+        const modalData = proxyModalsList[foundIdx];
+        // Clone array...
+        const newModals = proxyModalsList.slice();
+        const newModalData = { ...modalData, ...options };
+        newModals[foundIdx] = newModalData;
+        return { proxyModalsList: newModals };
+      }
+    });
+  }
+
+  onProxyModalDeactivate = (data) => {
+    let { modalId, id } = data;
+    modalId = modalId || id;
+    const modal = this.getProxyModal(modalId);
+    if (!modal) {
+      const error = new Error('Proxy modal not found for modalId="' + modalId + '"');
+      console.error('ModalsController:onProxyModalDeactivate: error', { error, modalId }); // eslint-disable-line no-console
+      debugger; // eslint-disable-line no-debugger
+      throw error;
+    }
+    const { onDeactivate, onModalDeactivate } = modal;
+    console.log('RulesModals:onModalDeactivate', { modalId, modal });
+    // debugger;
+    this.removeProxyModal(modalId);
+    // Use try/catch?
+    if (typeof onDeactivate === 'function') {
+      onDeactivate(data);
+    }
+    if (typeof onModalDeactivate === 'function') {
+      onModalDeactivate(data);
+    }
+  }
+
+  renderProxyModal(modalData/* , n */) {
+    const id = modalData.modalId; // || 'modal' + n;
+    // Non-empty unique id ensured in `addProxyModal`
+    const modalProps = {
+      key: id,
+      id: id,
+      ...modalData,
+      onDeactivate: this.onProxyModalDeactivate,
+    };
+    return <ModalWindow {...modalProps} />;
+  }
+
+  renderProxyModals() {
+    const { proxyModalsList } = this.state;
+    return proxyModalsList.map(this.renderProxyModal, this);
+  }
+
   // Render...
 
   renderModalsController() {
@@ -148,15 +255,21 @@ class ModalsController extends React.PureComponent /** @lends @ModalsController.
      * )
      */
     return (
-      <div {...renderProps} />
+      <ErrorBoundary FallbackComponent={ErrorContainer} onError={this.onCatchedError}>
+        <div {...renderProps}>
+          <div className={cnModalsController('PortalProxy')} ref={this.setPortalProxyRef}>
+            {this.renderProxyModals()}
+          </div>
+        </div>
+      </ErrorBoundary>
     );
   }
 
   render() {
     const node = document.body; // Render as new node in top level of dom tree
-    const container = this.renderModalsController();
+    const controller = this.renderModalsController();
     const { usePortal } = this.props;
-    const content = usePortal ? <Portal node={node}>{container}</Portal> : container;
+    const content = usePortal ? <Portal node={node}>{controller}</Portal> : controller;
     return content;
   }
 

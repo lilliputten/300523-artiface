@@ -1,7 +1,7 @@
 /** @module ModalPortal
  *  @class ModalPortal
  *  @since 2020.12.21, 22:58
- *  @changed 2020.12.29, 19:58
+ *  @changed 2021.05.07, 14:49
  *
  *  External methods (for PopupStack, ModalWindow etc):
  *
@@ -52,8 +52,9 @@ const globalKeyPressEventName = 'keydown';
 
 const delayedHandlerTimeout = 50;
 
-export const passModalPortalProps = [
+export const passModalPortalProps = [ // Used to pass outside props (eg, from `ModalWindow`)
   'id',
+  'modalId',
   'className',
   'closeOnClickOutside',
   'closeOnEscPressed',
@@ -211,28 +212,29 @@ class ModalPortal extends React.PureComponent /** @lends @ModalPortal.prototype 
   isVisible = () => this.state.open
 
   activate = (cb) => {
-    const { id, onActivate } = this.props;
+    const { id, modalId, onActivate } = this.props;
     const { activated } = this.state;
+    const done = () => {
+      if (typeof cb === 'function') {
+        cb({ id, modalId });
+      }
+      if (typeof onActivate === 'function') {
+        onActivate({ id, modalId });
+      }
+    };
     if (!activated) {
       // this.resolvingResult = null // Activating in `open` method
       // console.log('ModalPortal:activate', id, activated)
-      this.setState({ activated: true }, () => {
-        if (typeof cb === 'function') {
-          cb();
-        }
-        if (typeof onActivate === 'function') {
-          onActivate({ id });
-        }
-      });
+      this.setState({ activated: true }, done);
       config.modals.controller.registerModal(this);
     }
-    else if (typeof cb === 'function') {
-      cb();
+    else {
+      done();
     }
   }
 
   deactivate = () => {
-    const { id, onDeactivate } = this.props;
+    const { id, modalId, onDeactivate } = this.props;
     const { activated } = this.state;
     if (activated) {
       // console.log('ModalPortal:deactivate', id)
@@ -241,7 +243,7 @@ class ModalPortal extends React.PureComponent /** @lends @ModalPortal.prototype 
         this.setState({ activated: false });
       }
       if (typeof onDeactivate === 'function') {
-        onDeactivate({ id });
+        onDeactivate({ id, modalId });
       }
       config.modals.controller.unregisterModal(this);
     }
@@ -350,22 +352,22 @@ class ModalPortal extends React.PureComponent /** @lends @ModalPortal.prototype 
 
   updateShowWithState = (state) => {
     const { open } = state || this.state;
-    const { id, onOpen, onClose, handleOpenState } = this.props;
+    const { id, modalId, onOpen, onClose, handleOpenState } = this.props;
     if (open) {
       this.registerGlobalHandlers();
       if (typeof onOpen === 'function') {
-        onOpen({ id });
+        onOpen({ id, modalId });
       }
     }
     else {
       this.unregisterGlobalHandlers();
       if (typeof onClose === 'function') {
-        onClose({ id });
+        onClose({ id, modalId });
       }
       setTimeout(this.deactivate, this.transitionTime); // TODO?
     }
     if (typeof handleOpenState === 'function') {
-      handleOpenState({ id, open });
+      handleOpenState({ id, modalId, open });
     }
   }
 
@@ -392,9 +394,9 @@ class ModalPortal extends React.PureComponent /** @lends @ModalPortal.prototype 
      *   throw error // ???
      * }
      */
-    const { id, onAction } = this.props;
+    const { id, modalId, onAction } = this.props;
     if (typeof onAction === 'function') {
-      onAction({ id: actionId, modalId: id });
+      onAction({ id: actionId, modalId: modalId || id });
     }
     this.resolvingResult = null; // Reset action back
   }
@@ -403,7 +405,7 @@ class ModalPortal extends React.PureComponent /** @lends @ModalPortal.prototype 
 
   onAction = (actionProps) => { // Event handler for ActionContext consumed children
     const actionId = actionProps.id;
-    const { id, actionsContextNode, autoClose, closeOnCancelAction } = this.props;
+    const { id, modalId, actionsContextNode, autoClose, closeOnCancelAction } = this.props;
     this.setResult(actionId);
     // console.log('ModalPortal:onAction', id, actionId)
     if (autoClose || (closeOnCancelAction && actionId === 'cancel')) { // Close and call `resolveResult` when window is closed
@@ -413,7 +415,7 @@ class ModalPortal extends React.PureComponent /** @lends @ModalPortal.prototype 
       this.resolveResult();
     }
     if (actionsContextNode && typeof actionsContextNode.onAction === 'function') { // Use chaining ActionsContext?
-      actionsContextNode.onAction({ ...actionProps, modalPortalId: id });
+      actionsContextNode.onAction({ ...actionProps, modalPortalId: id, modalId });
     }
   }
 
@@ -425,13 +427,14 @@ class ModalPortal extends React.PureComponent /** @lends @ModalPortal.prototype 
     } = event;
     const {
       id,
+      modalId,
       onEscPressed,
       closeOnEscPressed,
       loading,
     } = this.props;
     // @see https://keycode.info/
     const isEscPressed = (key === 'Escape'); // (keyCode === 27);
-    const cbProps = { event, id, key, keyCode, charCode };
+    const cbProps = { event, id, modalId, key, keyCode, charCode };
     // console.log('ModalPortal:onKeyPress', cbProps);
     if (isEscPressed && !loading) {
       const isTopmost = config.modals.controller.isModalTopmostVisible(this);
@@ -491,10 +494,10 @@ class ModalPortal extends React.PureComponent /** @lends @ModalPortal.prototype 
     }
   }
   onOutsideClickCatched = () => { // Mouse released on wrapper --> close modal
-    const { id, closeOnClickOutside, onClickOutside, preventCloseOnOutsideClick } = this.props;
+    const { id, modalId, closeOnClickOutside, onClickOutside, preventCloseOnOutsideClick } = this.props;
     // console.log('ModalPortal:onOutsideClickCatched', id);
     if (typeof onClickOutside === 'function') {
-      onClickOutside({ id });
+      onClickOutside({ id, modalId });
     }
     if (closeOnClickOutside) {
       const preventClose = (typeof preventCloseOnOutsideClick === 'function' && preventCloseOnOutsideClick());
@@ -515,14 +518,14 @@ class ModalPortal extends React.PureComponent /** @lends @ModalPortal.prototype 
   }
 
   onCloseButtonClick = () => { // Mouse released on wrapper --> close modal
-    const { id, closeWithCloseButton, onCloseButtonClick } = this.props;
+    const { id, modalId, closeWithCloseButton, onCloseButtonClick } = this.props;
     // console.log('ModalPortal:onCloseButtonClick')
     if (closeWithCloseButton) {
       this.setResult(selfCloseActionId);
       this.close();
     }
     if (typeof onCloseButtonClick === 'function') {
-      onCloseButtonClick({ id });
+      onCloseButtonClick({ id, modalId });
     }
   }
 
