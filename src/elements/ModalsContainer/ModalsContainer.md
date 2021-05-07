@@ -1,3 +1,0 @@
-﻿# ModalsContainer
-
-TODO: Reference!

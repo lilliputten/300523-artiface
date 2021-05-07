@@ -2,7 +2,7 @@
  *  @since 2020.10.27, 00:39
  *  @changed 2021.04.22, 00:24
  *
- *  TODO: Place block (and local?) loaders into `ModalsContainer`?
+ *  TODO: Place block (and local?) loaders into `ModalsController`?
  */
 
 import React from 'react';

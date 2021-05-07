@@ -7,9 +7,9 @@
 const modalsConfig = { // Common-used app variables...
 
   // Id for modals & modals wrapper
-  containerId: 'ModalsContainer',
+  containerId: 'ModalsController',
 
-  // Controller reference (`ModalsContainer` instance)
+  // Controller reference (`ModalsController` instance)
   controller: undefined, // Was (before 2021.03.18): `containerNode`
 
   // Initialized flag
@@ -21,7 +21,7 @@ const modalsConfig = { // Common-used app variables...
 };
 
 
-// Delayed initialization (resolving in `ModalsContainer`)...
+// Delayed initialization (resolving in `ModalsController`)...
 modalsConfig.initPromise = new Promise(function(resolve) {
   modalsConfig.__initPromiseResolve = resolve;
 });

@@ -659,7 +659,7 @@ class ModalPopup extends React.PureComponent /** @lends @ModalPopup.prototype */
           }
         }
         this.setState({ open: nextOpen }, this.updateOpenOrCloseWithState); // Update own open state
-        // TODO: Notify `ModalModalsContainer` when popup opens for closing all other popups from same level (before first modal in popups stack). (Now user can open several popups at the same time.
+        // TODO: Notify `ModalsController` when popup opens for closing all other popups from same level (before first modal in popups stack). (Now user can open several popups at the same time.
         const { onControlClick } = this.props;
         if (typeof onControlClick === 'function') {
           onControlClick({ id, open: nextOpen });

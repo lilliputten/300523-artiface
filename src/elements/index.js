@@ -13,4 +13,4 @@ export { default as MenuItemSeparator } from './MenuItemSeparator';
 export { default as ModalWindow } from './ModalWindow';
 export { default as ModalPopup } from './ModalPopup';
 export { default as ModalPortal } from './ModalPortal';
-export { default as ModalsContainer } from './ModalsContainer';
+export { default as ModalsController } from './ModalsController';

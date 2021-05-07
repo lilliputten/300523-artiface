@@ -26,7 +26,7 @@ const onChange = ({ id, value }) => {
   // debugger;
 };
 
-class WithFormContext extends React.PureComponent /** @lends @ModalsContainer.prototype */ {
+class WithFormContext extends React.PureComponent {
   onInputEnterPressed = ({ id }) => {
     console.log('FormTextInput.fixture:onInputEnterPressed', id); // eslint-disable-line no-console
     debugger; // eslint-disable-line no-debugger

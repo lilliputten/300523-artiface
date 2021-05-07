@@ -25,14 +25,14 @@ export { Hello };
 // Basic styles
 import './build.pcss';
 
-import ModalsContainer from 'elements/ModalsContainer';
+import ModalsController from 'elements/ModalsController';
 
 // TODO: Use WebUiCoreContext?
-const WebUiCoreRoot = ({ children, autoModalsContainer }) => {
+const WebUiCoreRoot = ({ children, autoModalsController }) => {
   return (
     <React.Fragment>
       {children}
-      {autoModalsContainer && <ModalsContainer />}
+      {autoModalsController && <ModalsController />}
     </React.Fragment>
   );
 };

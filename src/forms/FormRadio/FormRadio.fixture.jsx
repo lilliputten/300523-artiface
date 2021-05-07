@@ -46,7 +46,7 @@ class DemoFormRadio extends React.PureComponent /** @lends @FormRadio.prototype 
   }
 }
 
-class WithFormContext extends React.PureComponent /** @lends @ModalsContainer.prototype */ {
+class WithFormContext extends React.PureComponent {
   onInputEnterPressed = ({ id }) => {
     console.log('FormRadio.fixture:onInputEnterPressed', id); // eslint-disable-line no-console
     debugger; // eslint-disable-line no-debugger

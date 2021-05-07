@@ -167,7 +167,7 @@ const content = getFixtureContent();
  */
 
 const demoContent = (
-  <WebUiCoreRoot autoModalsContainer>
+  <WebUiCoreRoot autoModalsController>
     <div className="demo">
       {content}
     </div>

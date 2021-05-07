@@ -621,7 +621,7 @@ class ModalPortal extends React.PureComponent /** @lends @ModalPortal.prototype 
     }
     const node = config.modals.controller.getDomNode();
     if (!node) {
-      const error = new Error('ModalPortal: Modals domNode is undefined. Don\'t forget to use WebUiCoreRoot with autoModalsContainer mode or render ModalsContainer manually.');
+      const error = new Error('ModalPortal: Modals domNode is undefined. Don\'t forget to use WebUiCoreRoot with autoModalsController mode or render ModalsController manually.');
       console.error(error); // eslint-disable-line no-console
       /*DEBUG*/ debugger; // eslint-disable-line no-debugger
       throw error; // ???

@@ -1,5 +1,5 @@
-/** @module ModalsContainer
- *  @class ModalsContainer
+/** @module ModalsController
+ *  @class ModalsController
  *  @desc Modals dom container & controller interface object
  *  @since 2020.12.21, 23:37
  *  @changed 2020.12.21, 23:37
@@ -20,13 +20,13 @@ import * as config from 'config';
 // import config from 'config/config';
 // import { ModalsContextProvider } from 'helpers/ModalsContext';
 
-import './ModalsContainer.pcss';
+import './ModalsController.pcss';
 
-const cnModalsContainer = cn('ModalsContainer');
+const cnModalsController = cn('ModalsController');
 
 // const doDebug = false // DEBUG!
 
-class ModalsContainer extends React.PureComponent /** @lends @ModalsContainer.prototype */ {
+class ModalsController extends React.PureComponent /** @lends @ModalsController.prototype */ {
 
   static propTypes = {
     usePortal: PropTypes.bool, // Render container at end of dom tree root level
@@ -66,7 +66,7 @@ class ModalsContainer extends React.PureComponent /** @lends @ModalsContainer.pr
     /* // UNUSED: Old method to obtain dom node re3ference (see setRef below).
      * // eslint-disable-next-line react/no-find-dom-node
      * const domNode = ReactDOM.findDOMNode(this); // TODO: Find alternate legal method to get dom node? (refs doesn't works due to high-level element (`TransitionGroup`) rendering)
-     * // console.log('ModalsContainer:componentDidMount', { domNode });
+     * // console.log('ModalsController:componentDidMount', { domNode });
      * this.domNode = domNode;
      * config.modals.domNode = domNode;
      */
@@ -75,7 +75,7 @@ class ModalsContainer extends React.PureComponent /** @lends @ModalsContainer.pr
   // Handlers...
 
   setRef = (domNode) => { // Get dom node reference. Used as portals root (with `config.modals.controller.getDomNode()`).
-    // console.log('ModalsContainer:setRef', { domNode });
+    // console.log('ModalsController:setRef', { domNode });
     this.domNode = domNode;
     // config.modals.domNode = domNode;
   }
@@ -87,7 +87,7 @@ class ModalsContainer extends React.PureComponent /** @lends @ModalsContainer.pr
   }
 
   registerModal = (modal/*: React.ReactNode*/) => { // Add item to modals stack
-    // console.log('ModalsContainer:registerModal', modal.props.type, modal.props.id);
+    // console.log('ModalsController:registerModal', modal.props.type, modal.props.id);
     // debugger;
     if (!this.modalsStack.includes(modal)) { // Add to stack if not exist
       this.modalsStack.push(modal);
@@ -95,7 +95,7 @@ class ModalsContainer extends React.PureComponent /** @lends @ModalsContainer.pr
   }
 
   unregisterModal = (modal/*: React.ReactNode*/) => { // Remove item from modals stack
-    // console.log('ModalsContainer:unregisterModal', modal.props.type, modal.props.id)
+    // console.log('ModalsController:unregisterModal', modal.props.type, modal.props.id)
     const idx = this.modalsStack.indexOf(modal);
     if (idx !== -1) { // Remove if found...
       this.modalsStack.splice(idx, 1);
@@ -131,11 +131,11 @@ class ModalsContainer extends React.PureComponent /** @lends @ModalsContainer.pr
 
   // Render...
 
-  renderModalsContainer() {
+  renderModalsController() {
     const { containerId } = config.modals;
-    const className = cnModalsContainer(null, [this.props.className/* , cnModalsContainer('TransitionGroup') */]);
+    const className = cnModalsController(null, [this.props.className/* , cnModalsController('TransitionGroup') */]);
     const renderProps = {
-      key: containerId || 'ModalsContainer',
+      key: containerId || 'ModalsController',
       id: containerId,
       className,
       ref: this.setRef, // Get dom node handler
@@ -154,7 +154,7 @@ class ModalsContainer extends React.PureComponent /** @lends @ModalsContainer.pr
 
   render() {
     const node = document.body; // Render as new node in top level of dom tree
-    const container = this.renderModalsContainer();
+    const container = this.renderModalsController();
     const { usePortal } = this.props;
     const content = usePortal ? <Portal node={node}>{container}</Portal> : container;
     return content;
@@ -162,4 +162,4 @@ class ModalsContainer extends React.PureComponent /** @lends @ModalsContainer.pr
 
 }
 
-export default ModalsContainer;
+export default ModalsController;
