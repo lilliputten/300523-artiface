@@ -1,5 +1,8 @@
 # CHANGELOG
 
+- 2021.05.07, 15:40 -- PD-3621: Modal windows controller: Added `ModalWindowWithController` fixture. ModalPortal: Pass `modalId` (alongside `id`) property for event handlers. ModalsController: using `proxyModalsList` state parameter for active proxy modals list, added `...ProxyModal...` functionality, added uncaught errors processing.
+- 2021.05.07, 12:30 -- v.0.3.3: (ModalsContainer -> ModalsController).
+- 2021.05.04, 18:09 -- utils: Safe ucFirst, dates: msDate bugs fixed.
 - 2021.04.22, 21:24 -- utils/objects: data manipulation utilities.
 - 2021.04.22, 00:26 -- Fixed Loader actions button theme (depends on Loader's theme).
 - 2021.04.13, 15:24 -- WebUiCore v.0.3.2. Added es5 target to webpack. Babel: fixed upgraded module-resolver config. Build environment: removed PrintXpertWebServer existency in deploy script `util-upload-bundle.ps1`, upgraded babel versions to match WebUiCore.
@@ -122,5 +125,5 @@
 - 2020.10.05, 20:38 -- v.0.0.15: Extracted `demoSupport.jsx` routines, fixture selection from url query (parameter `fixture`), added avaialble fixtures list if fixture to display is not specified, added DemoWrapper & demoTitle exportable ficture parameters for demo rendering.
 
 <!--
- @changed 2021.04.22, 21:24
+ @changed 2021.05.07, 12:31
 -->

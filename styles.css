@@ -3878,12 +3878,15 @@ label.FormLabel-Control[for] {
 
 /** @module FormText.styles
  *  @since 2020.10.29, 21:25
- *  @changed 2020.10.29, 22:42
+ *  @changed 2021.05.07, 15:13
  */
 
 .FormText {
   /* height: $(formItemHeight)px;*/
   line-height: 32px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /** @module ModalPortal-Geometry.styles
@@ -8719,13 +8722,35 @@ input.FormTextInput-Control:-internal-autofill-previewed,
       margin-top: 10px;
     }
 
-/** @module ModalsContainer.pcss
- *  @class ModalsContainer
+/** @module ErrorContainer.pcss
+ *  @desc Displays error messages
+ *  @since 2019.06.20, 13:11
+ *  @changed 2021.04.09, 20:43
+ */
+
+.ErrorContainer {
+  padding: 5px 15px;
+  border-radius: 5px;
+  background-color: #c33;
+  color: #fff;
+  line-height: 1.2;
+}
+
+.ErrorContainer .Text {
+    margin: 10px 0;
+  }
+
+.ErrorContainer .TextLine {
+      margin: 10px 0;
+    }
+
+/** @module ModalsController.pcss
+ *  @class ModalsController
  *  @since 2020.12.21, 23:37
  *  @changed 2020.12.24, 04:30
  */
 
-.ModalsContainer {
+.ModalsController {
   z-index: 300; /* Lift ip to top-most level (but below footer which located at 300 z-level).*/
   position: absolute;
   top: 0;

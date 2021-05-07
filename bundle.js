@@ -205,10 +205,10 @@ module.exports = { // Common-used build variables...
   DEV_DEBUG: DEV_DEBUG,
 
   THEME: "default",
-  buildTag: "v.0.3.2-210430-1432-build-dev-default",
-  timestamp: "2021.04.30, 14:32",
-  timetag: "210430-1432",
-  version: "0.3.2" };
+  buildTag: "v.0.3.3-210507-1544-build-dev-default",
+  timestamp: "2021.05.07, 15:44",
+  timetag: "210507-1544",
+  version: "0.3.3" };
 
 /***/ }),
 
@@ -567,9 +567,9 @@ module.exports = config;
 var modalsConfig = { // Common-used app variables...
 
   // Id for modals & modals wrapper
-  containerId: 'ModalsContainer',
+  containerId: 'ModalsController',
 
-  // Controller reference (`ModalsContainer` instance)
+  // Controller reference (`ModalsController` instance)
   controller: undefined, // Was (before 2021.03.18): `containerNode`
 
   // Initialized flag
@@ -581,7 +581,7 @@ var modalsConfig = { // Common-used app variables...
 
 
 
-// Delayed initialization (resolving in `ModalsContainer`)...
+// Delayed initialization (resolving in `ModalsController`)...
 modalsConfig.initPromise = new Promise(function (resolve) {
   modalsConfig.__initPromiseResolve = resolve;
 });
@@ -1090,6 +1090,80 @@ DateTimeSelector = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runti
 
 /***/ }),
 
+/***/ "./src/elements/ErrorContainer/ErrorContainer.jsx":
+/*!********************************************************!*\
+  !*** ./src/elements/ErrorContainer/ErrorContainer.jsx ***!
+  \********************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_helpers_inheritsLoose__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/inheritsLoose */ "./node_modules/@babel/runtime/helpers/esm/inheritsLoose.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _utils_configure__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../utils/configure */ "./src/utils/configure.js");
+/* harmony import */ var _utils_strings__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../utils/strings */ "./src/utils/strings.js");
+/* harmony import */ var _ErrorContainer_pcss__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./ErrorContainer.pcss */ "./src/elements/ErrorContainer/ErrorContainer.pcss");
+ /** @module ErrorContainer
+ *  @desc Displays error messages
+ *  @since 2021.05.07, 14:10
+ *  @changed 2021.05.07, 14:10
+ */
+
+
+// import { cn } from '@bem-react/classname';
+
+
+
+
+
+var cnErrorContainer = (0,_utils_configure__WEBPACK_IMPORTED_MODULE_2__.cn)('ErrorContainer');var
+
+ErrorContainer = /*#__PURE__*/function (_PureComponent) {(0,_babel_runtime_helpers_inheritsLoose__WEBPACK_IMPORTED_MODULE_0__.default)(ErrorContainer, _PureComponent);function ErrorContainer() {return _PureComponent.apply(this, arguments) || this;}var _proto = ErrorContainer.prototype;_proto.
+
+  getErrorContent = function getErrorContent(error) {
+    // const _origError = error;
+    if (Array.isArray(error)) {
+      error = error.map(this.getErrorContent, this);
+    } else
+    if (typeof error !== 'object' || ! /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().isValidElement(error)) {// If not react element...
+      // ...prepare text...
+      if (error instanceof Error && error.message) {
+        error = error.message;
+      }
+      if (error && typeof error !== 'string') {
+        error = String(error);
+      }
+      if (!error) {// Default message
+        error = 'Undefined error'; // TODO: To get error text from languages
+      }
+      // TODO: To process html text?
+      // `strings.html2string`?
+      error = _utils_strings__WEBPACK_IMPORTED_MODULE_3__.splitMultiline(error);
+    }
+    return error;
+  };_proto.
+
+  render = function render() {
+    var errors = this.props.error || this.props.message || this.props.children;
+    if (errors) {
+      console.error('ErrorContainer: error', errors); // eslint-disable-line no-console
+      // debugger; // eslint-disable-line no-debugger
+    }
+    var error = this.getErrorContent(errors);
+    var className = cnErrorContainer(null, [this.props.className]); // null, ['col-12 bg-danger p-2 mt-2 text-light']);
+    return /*#__PURE__*/(
+      react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", { className: className },
+      error));
+
+
+  };return ErrorContainer;}(react__WEBPACK_IMPORTED_MODULE_1__.PureComponent);
+
+
+/* harmony default export */ __webpack_exports__["default"] = (ErrorContainer);
+
+/***/ }),
+
 /***/ "./src/elements/InlineIcon/InlineIcon.jsx":
 /*!************************************************!*\
   !*** ./src/elements/InlineIcon/InlineIcon.jsx ***!
@@ -1238,7 +1312,7 @@ __webpack_require__.r(__webpack_exports__);
  *  @since 2020.10.27, 00:39
  *  @changed 2021.04.22, 00:24
  *
- *  TODO: Place block (and local?) loaders into `ModalsContainer`?
+ *  TODO: Place block (and local?) loaders into `ModalsController`?
  */
 
 
@@ -2555,7 +2629,7 @@ ModalPopup = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_hel
             }
           }
           _this.setState({ open: nextOpen }, _this.updateOpenOrCloseWithState); // Update own open state
-          // TODO: Notify `ModalModalsContainer` when popup opens for closing all other popups from same level (before first modal in popups stack). (Now user can open several popups at the same time.
+          // TODO: Notify `ModalsController` when popup opens for closing all other popups from same level (before first modal in popups stack). (Now user can open several popups at the same time.
           var onControlClick = _this.props.onControlClick;
           if (typeof onControlClick === 'function') {
             onControlClick({ id: id, open: nextOpen });
@@ -2824,7 +2898,7 @@ __webpack_require__.r(__webpack_exports__);
  /** @module ModalPortal
  *  @class ModalPortal
  *  @since 2020.12.21, 22:58
- *  @changed 2020.12.29, 19:58
+ *  @changed 2021.05.07, 14:49
  *
  *  External methods (for PopupStack, ModalWindow etc):
  *
@@ -2871,8 +2945,9 @@ var globalKeyPressEventName = 'keydown';
 
 var delayedHandlerTimeout = 50;
 
-var passModalPortalProps = [
+var passModalPortalProps = [// Used to pass outside props (eg, from `ModalWindow`)
 'id',
+'modalId',
 'className',
 'closeOnClickOutside',
 'closeOnEscPressed',
@@ -3030,28 +3105,29 @@ ModalPortal = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_he
     function () {return _this.state.open;});(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3__.default)((0,_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1__.default)(_this), "activate",
 
     function (cb) {var _this$props =
-      _this.props,id = _this$props.id,onActivate = _this$props.onActivate;var
+      _this.props,id = _this$props.id,modalId = _this$props.modalId,onActivate = _this$props.onActivate;var
       activated = _this.state.activated;
+      var done = function done() {
+        if (typeof cb === 'function') {
+          cb({ id: id, modalId: modalId });
+        }
+        if (typeof onActivate === 'function') {
+          onActivate({ id: id, modalId: modalId });
+        }
+      };
       if (!activated) {
         // this.resolvingResult = null // Activating in `open` method
         // console.log('ModalPortal:activate', id, activated)
-        _this.setState({ activated: true }, function () {
-          if (typeof cb === 'function') {
-            cb();
-          }
-          if (typeof onActivate === 'function') {
-            onActivate({ id: id });
-          }
-        });
+        _this.setState({ activated: true }, done);
         _config_index_js__WEBPACK_IMPORTED_MODULE_9___default().modals.controller.registerModal((0,_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1__.default)(_this));
       } else
-      if (typeof cb === 'function') {
-        cb();
+      {
+        done();
       }
     });(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3__.default)((0,_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1__.default)(_this), "deactivate",
 
     function () {var _this$props2 =
-      _this.props,id = _this$props2.id,onDeactivate = _this$props2.onDeactivate;var
+      _this.props,id = _this$props2.id,modalId = _this$props2.modalId,onDeactivate = _this$props2.onDeactivate;var
       activated = _this.state.activated;
       if (activated) {
         // console.log('ModalPortal:deactivate', id)
@@ -3060,7 +3136,7 @@ ModalPortal = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_he
           _this.setState({ activated: false });
         }
         if (typeof onDeactivate === 'function') {
-          onDeactivate({ id: id });
+          onDeactivate({ id: id, modalId: modalId });
         }
         _config_index_js__WEBPACK_IMPORTED_MODULE_9___default().modals.controller.unregisterModal((0,_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1__.default)(_this));
       }
@@ -3169,22 +3245,22 @@ ModalPortal = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_he
 
     function (state) {var _ref =
       state || _this.state,open = _ref.open;var _this$props3 =
-      _this.props,id = _this$props3.id,onOpen = _this$props3.onOpen,onClose = _this$props3.onClose,handleOpenState = _this$props3.handleOpenState;
+      _this.props,id = _this$props3.id,modalId = _this$props3.modalId,onOpen = _this$props3.onOpen,onClose = _this$props3.onClose,handleOpenState = _this$props3.handleOpenState;
       if (open) {
         _this.registerGlobalHandlers();
         if (typeof onOpen === 'function') {
-          onOpen({ id: id });
+          onOpen({ id: id, modalId: modalId });
         }
       } else
       {
         _this.unregisterGlobalHandlers();
         if (typeof onClose === 'function') {
-          onClose({ id: id });
+          onClose({ id: id, modalId: modalId });
         }
         setTimeout(_this.deactivate, _this.transitionTime); // TODO?
       }
       if (typeof handleOpenState === 'function') {
-        handleOpenState({ id: id, open: open });
+        handleOpenState({ id: id, modalId: modalId, open: open });
       }
     });(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3__.default)((0,_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1__.default)(_this), "onPopupsInited",
 
@@ -3222,7 +3298,7 @@ ModalPortal = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_he
 
     function (actionProps) {// Event handler for ActionContext consumed children
       var actionId = actionProps.id;var _this$props4 =
-      _this.props,id = _this$props4.id,actionsContextNode = _this$props4.actionsContextNode,autoClose = _this$props4.autoClose,closeOnCancelAction = _this$props4.closeOnCancelAction;
+      _this.props,id = _this$props4.id,modalId = _this$props4.modalId,actionsContextNode = _this$props4.actionsContextNode,autoClose = _this$props4.autoClose,closeOnCancelAction = _this$props4.closeOnCancelAction;
       _this.setResult(actionId);
       // console.log('ModalPortal:onAction', id, actionId)
       if (autoClose || closeOnCancelAction && actionId === 'cancel') {// Close and call `resolveResult` when window is closed
@@ -3232,7 +3308,7 @@ ModalPortal = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_he
         _this.resolveResult();
       }
       if (actionsContextNode && typeof actionsContextNode.onAction === 'function') {// Use chaining ActionsContext?
-        actionsContextNode.onAction((0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__.default)({}, actionProps, { modalPortalId: id }));
+        actionsContextNode.onAction((0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__.default)({}, actionProps, { modalPortalId: id, modalId: modalId }));
       }
     });(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3__.default)((0,_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1__.default)(_this), "onKeyPress",
 
@@ -3247,10 +3323,11 @@ ModalPortal = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_he
 
 
 
-      _this.props,id = _this$props5.id,onEscPressed = _this$props5.onEscPressed,closeOnEscPressed = _this$props5.closeOnEscPressed,loading = _this$props5.loading;
+
+      _this.props,id = _this$props5.id,modalId = _this$props5.modalId,onEscPressed = _this$props5.onEscPressed,closeOnEscPressed = _this$props5.closeOnEscPressed,loading = _this$props5.loading;
       // @see https://keycode.info/
       var isEscPressed = key === 'Escape'; // (keyCode === 27);
-      var cbProps = { event: event, id: id, key: key, keyCode: keyCode, charCode: charCode };
+      var cbProps = { event: event, id: id, modalId: modalId, key: key, keyCode: keyCode, charCode: charCode };
       // console.log('ModalPortal:onKeyPress', cbProps);
       if (isEscPressed && !loading) {
         var isTopmost = _config_index_js__WEBPACK_IMPORTED_MODULE_9___default().modals.controller.isModalTopmostVisible((0,_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1__.default)(_this));
@@ -3310,10 +3387,10 @@ ModalPortal = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_he
       }
     });(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3__.default)((0,_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1__.default)(_this), "onOutsideClickCatched",
     function () {// Mouse released on wrapper --> close modal
-      var _this$props7 = _this.props,id = _this$props7.id,closeOnClickOutside = _this$props7.closeOnClickOutside,onClickOutside = _this$props7.onClickOutside,preventCloseOnOutsideClick = _this$props7.preventCloseOnOutsideClick;
+      var _this$props7 = _this.props,id = _this$props7.id,modalId = _this$props7.modalId,closeOnClickOutside = _this$props7.closeOnClickOutside,onClickOutside = _this$props7.onClickOutside,preventCloseOnOutsideClick = _this$props7.preventCloseOnOutsideClick;
       // console.log('ModalPortal:onOutsideClickCatched', id);
       if (typeof onClickOutside === 'function') {
-        onClickOutside({ id: id });
+        onClickOutside({ id: id, modalId: modalId });
       }
       if (closeOnClickOutside) {
         var preventClose = typeof preventCloseOnOutsideClick === 'function' && preventCloseOnOutsideClick();
@@ -3334,14 +3411,14 @@ ModalPortal = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_he
     });(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3__.default)((0,_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1__.default)(_this), "onCloseButtonClick",
 
     function () {// Mouse released on wrapper --> close modal
-      var _this$props8 = _this.props,id = _this$props8.id,closeWithCloseButton = _this$props8.closeWithCloseButton,onCloseButtonClick = _this$props8.onCloseButtonClick;
+      var _this$props8 = _this.props,id = _this$props8.id,modalId = _this$props8.modalId,closeWithCloseButton = _this$props8.closeWithCloseButton,onCloseButtonClick = _this$props8.onCloseButtonClick;
       // console.log('ModalPortal:onCloseButtonClick')
       if (closeWithCloseButton) {
         _this.setResult(selfCloseActionId);
         _this.close();
       }
       if (typeof onCloseButtonClick === 'function') {
-        onCloseButtonClick({ id: id });
+        onCloseButtonClick({ id: id, modalId: modalId });
       }
     });(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3__.default)((0,_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1__.default)(_this), "setWindowDomRef",
 
@@ -3410,7 +3487,7 @@ ModalPortal = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_he
      *   debugger // eslint-disable-line no-debugger
      *   throw error // ???
      * }
-     */var _this$props9 = this.props,id = _this$props9.id,onAction = _this$props9.onAction;if (typeof onAction === 'function') {onAction({ id: actionId, modalId: id });}this.resolvingResult = null; // Reset action back
+     */var _this$props9 = this.props,id = _this$props9.id,modalId = _this$props9.modalId,onAction = _this$props9.onAction;if (typeof onAction === 'function') {onAction({ id: actionId, modalId: modalId || id });}this.resolvingResult = null; // Reset action back
   } // Handlers...
   ; // Render...
   _proto.renderWindow = function renderWindow() {var _this$props10 = this.props,windowWidth = _this$props10.windowWidth,windowTheme = _this$props10.windowTheme,theme = _this$props10.theme,windowClassName = _this$props10.windowClassName,children = _this$props10.children;var wrapperDomNode = this.wrapperDomNode,windowDomNode = this.windowDomNode; // console.log('ModalPortal:renderWindow', { windowWidth })
@@ -3440,7 +3517,7 @@ ModalPortal = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_he
     }
     var node = _config_index_js__WEBPACK_IMPORTED_MODULE_9___default().modals.controller.getDomNode();
     if (!node) {
-      var error = new Error('ModalPortal: Modals domNode is undefined. Don\'t forget to use WebUiCoreRoot with autoModalsContainer mode or render ModalsContainer manually.');
+      var error = new Error('ModalPortal: Modals domNode is undefined. Don\'t forget to use WebUiCoreRoot with autoModalsController mode or render ModalsController manually.');
       console.error(error); // eslint-disable-line no-console
       /*DEBUG*/debugger; // eslint-disable-line no-debugger
       throw error; // ???
@@ -3881,66 +3958,73 @@ ModalWindow = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_he
 
 /***/ }),
 
-/***/ "./src/elements/ModalsContainer/ModalsContainer.jsx":
-/*!**********************************************************!*\
-  !*** ./src/elements/ModalsContainer/ModalsContainer.jsx ***!
-  \**********************************************************/
+/***/ "./src/elements/ModalsController/ModalsController.jsx":
+/*!************************************************************!*\
+  !*** ./src/elements/ModalsController/ModalsController.jsx ***!
+  \************************************************************/
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/assertThisInitialized */ "./node_modules/@babel/runtime/helpers/esm/assertThisInitialized.js");
-/* harmony import */ var _babel_runtime_helpers_inheritsLoose__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/inheritsLoose */ "./node_modules/@babel/runtime/helpers/esm/inheritsLoose.js");
-/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/esm/defineProperty.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var react_portal__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-portal */ "react-portal");
-/* harmony import */ var react_portal__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react_portal__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _utils_configure__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../utils/configure */ "./src/utils/configure.js");
-/* harmony import */ var _config_index_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../config/index.js */ "./src/config/index.js");
-/* harmony import */ var _config_index_js__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_config_index_js__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _ModalsContainer_pcss__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./ModalsContainer.pcss */ "./src/elements/ModalsContainer/ModalsContainer.pcss");
- /** @module ModalsContainer
- *  @class ModalsContainer
+/* harmony import */ var _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
+/* harmony import */ var _babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/assertThisInitialized */ "./node_modules/@babel/runtime/helpers/esm/assertThisInitialized.js");
+/* harmony import */ var _babel_runtime_helpers_inheritsLoose__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime/helpers/inheritsLoose */ "./node_modules/@babel/runtime/helpers/esm/inheritsLoose.js");
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/esm/defineProperty.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var react_portal__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-portal */ "react-portal");
+/* harmony import */ var react_portal__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react_portal__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _utils_configure__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../utils/configure */ "./src/utils/configure.js");
+/* harmony import */ var _config_index_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../config/index.js */ "./src/config/index.js");
+/* harmony import */ var _config_index_js__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_config_index_js__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _ErrorContainer_ErrorContainer__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../ErrorContainer/ErrorContainer */ "./src/elements/ErrorContainer/ErrorContainer.jsx");
+/* harmony import */ var react_error_boundary__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react-error-boundary */ "react-error-boundary");
+/* harmony import */ var react_error_boundary__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(react_error_boundary__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var _ModalWindow_index_ts__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../ModalWindow/index.ts */ "./src/elements/ModalWindow/index.ts");
+/* harmony import */ var _ModalsController_pcss__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./ModalsController.pcss */ "./src/elements/ModalsController/ModalsController.pcss");
+ /** @module ModalsController
+ *  @class ModalsController
  *  @desc Modals dom container & controller interface object
  *  @since 2020.12.21, 23:37
- *  @changed 2020.12.21, 23:37
+ *  @changed 2021.05.07, 14:49
  */
 
-// import React from 'react';
-
-// import ReactDOM from 'react-dom';
-// import PropTypes from 'prop-types';
-
-
-// import { cssMapping } from 'utils/configure';
-// import { cn } from '../../utils/configure';
-
-// import { cn } from '~/utils/configure.js';
-
-// import * as config from '../../config/config';
-// import config from 'config/config';
-// import { ModalsContextProvider } from 'helpers/ModalsContext';
 
 
 
-var cnModalsContainer = (0,_utils_configure__WEBPACK_IMPORTED_MODULE_6__.cn)('ModalsContainer');
+
+
+
+
+
+
+
+
+
+var cnModalsController = (0,_utils_configure__WEBPACK_IMPORTED_MODULE_7__.cn)('ModalsController');
 
 // const doDebug = false // DEBUG!
 var
-ModalsContainer = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_helpers_inheritsLoose__WEBPACK_IMPORTED_MODULE_1__.default)(ModalsContainer, _React$PureComponent);function ModalsContainer() {var _this;for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {args[_key] = arguments[_key];}_this = _React$PureComponent.call.apply(_React$PureComponent, [this].concat(args)) || this;(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2__.default)((0,_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_0__.default)(_this), "domNode",
+ModalsController = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_helpers_inheritsLoose__WEBPACK_IMPORTED_MODULE_2__.default)(ModalsController, _React$PureComponent);
 
 
 
 
 
+  // Internal variables...
 
 
-    undefined);(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2__.default)((0,_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_0__.default)(_this), "modalsStack",
-    []);(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2__.default)((0,_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_0__.default)(_this), "modalWidnows",
-    []);(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2__.default)((0,_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_0__.default)(_this), "setRef",
+
+
+
+  // Lifecycle...
+
+  // UNUSED lifecycle methods
+  function ModalsController(props) {var _this;
+    _this = _React$PureComponent.call(this, props) || this;(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3__.default)((0,_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1__.default)(_this), "domNode", undefined);(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3__.default)((0,_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1__.default)(_this), "modalsStack", []);(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3__.default)((0,_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1__.default)(_this), "modalWindows", []);(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3__.default)((0,_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1__.default)(_this), "setRef",
+
 
 
 
@@ -3979,10 +4063,19 @@ ModalsContainer = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtim
 
 
     function (domNode) {// Get dom node reference. Used as portals root (with `config.modals.controller.getDomNode()`).
-      // console.log('ModalsContainer:setRef', { domNode });
+      // console.log('ModalsController:setRef', { domNode });
       _this.domNode = domNode;
       // config.modals.domNode = domNode;
-    });(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2__.default)((0,_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_0__.default)(_this), "registerModal",
+    });(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3__.default)((0,_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1__.default)(_this), "onCatchedError",
+
+    function (error) {// Error handler
+      var errorMessage = error && (error.message || error.reason);
+      console.error('ModalsController:onCatchedError', errorMessage, error); // eslint-disable-line no-console
+      debugger; // eslint-disable-line no-debugger
+      // this.setState({ errors: error });
+      // this.props.setErrorNotify(error);
+      throw error;
+    });(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3__.default)((0,_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1__.default)(_this), "registerModal",
 
 
 
@@ -3991,20 +4084,21 @@ ModalsContainer = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtim
 
 
     function (modal /*: React.ReactNode*/) {// Add item to modals stack
-      // console.log('ModalsContainer:registerModal', modal.props.type, modal.props.id);
+      console.log('ModalsController:registerModal', modal.props.type, modal.props.id);
       // debugger;
       if (!_this.modalsStack.includes(modal)) {// Add to stack if not exist
         _this.modalsStack.push(modal);
       }
-    });(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2__.default)((0,_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_0__.default)(_this), "unregisterModal",
+    });(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3__.default)((0,_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1__.default)(_this), "unregisterModal",
 
     function (modal /*: React.ReactNode*/) {// Remove item from modals stack
-      // console.log('ModalsContainer:unregisterModal', modal.props.type, modal.props.id)
+      console.log('ModalsController:unregisterModal', modal.props.type, modal.props.id);
+      // debugger;
       var idx = _this.modalsStack.indexOf(modal);
       if (idx !== -1) {// Remove if found...
         _this.modalsStack.splice(idx, 1);
       }
-    });(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2__.default)((0,_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_0__.default)(_this), "getModalById",
+    });(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3__.default)((0,_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1__.default)(_this), "getModalById",
 
     /*: React.ReactNode*/function (id) {
       for (var n = _this.modalsStack.length - 1; n >= 0; n--) {
@@ -4015,7 +4109,7 @@ ModalsContainer = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtim
         }
       }
       return true;
-    });(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2__.default)((0,_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_0__.default)(_this), "getTopmostVisibleModal",
+    });(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3__.default)((0,_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1__.default)(_this), "getTopmostVisibleModal",
 
     function () {// Get topmost modal element
       // Look for items from last (topmost) to first (bottommost) for first visible
@@ -4026,47 +4120,148 @@ ModalsContainer = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtim
           return modal;
         }
       }
-    });(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2__.default)((0,_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_0__.default)(_this), "isModalTopmostVisible",
+    });(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3__.default)((0,_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1__.default)(_this), "isModalTopmostVisible",
 
     function (modal) {// Is modal modal element is top-most visible?
       var topmost = _this.getTopmostVisibleModal();
       return modal === topmost;
-    });return _this;}var _proto = ModalsContainer.prototype; // Lifecycle...
-  /* // UNUSED lifecycle methods
-   * constructor(props) {
-   *   super(props);
-   *   // ???
-   *   // const {
-   *   //   modalsContainerNode, // ModalsContext Provider
-   *   // } = props
-   *   // console.log(modalsContainerNode)
-   *   // debugger
-   * }
-   * componentWillUnmount() {
-   *   // this.unregisterGlobalHandlers()
-   * }
-   */_proto.componentDidMount = function componentDidMount() {// this.registerGlobalHandlers()
+    });(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3__.default)((0,_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1__.default)(_this), "setPortalProxyRef",
+
+
+
+    function (ref) {
+      _this.PortalProxy = ref;
+    });(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3__.default)((0,_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1__.default)(_this), "onProxyModalDeactivate",
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    function (data) {var
+      modalId = data.modalId,id = data.id;
+      modalId = modalId || id;
+      var modal = _this.getProxyModal(modalId);
+      if (!modal) {
+        var error = new Error('Proxy modal not found for modalId="' + modalId + '"');
+        console.error('ModalsController:onProxyModalDeactivate: error', { error: error, modalId: modalId }); // eslint-disable-line no-console
+        debugger; // eslint-disable-line no-debugger
+        throw error;
+      }var
+      onDeactivate = modal.onDeactivate,onModalDeactivate = modal.onModalDeactivate;
+      console.log('RulesModals:onModalDeactivate', { modalId: modalId, modal: modal });
+      // debugger;
+      _this.removeProxyModal(modalId);
+      // Use try/catch?
+      if (typeof onDeactivate === 'function') {
+        onDeactivate(data);
+      }
+      if (typeof onModalDeactivate === 'function') {
+        onModalDeactivate(data);
+      }
+    });_this.state = { proxyModalsList: [] // Active proxy modals list; see `...ProxyModal...` functionality below
+    };return _this;}var _proto = ModalsController.prototype;_proto.componentDidMount = function componentDidMount() {// Uncaught errors handler...
+    this.__saved_onunhandledrejection = window.onunhandledrejection;this.__saved_onerror = window.onerror;window.onunhandledrejection = this.onCatchedError;window.onerror = this.onCatchedError; // this.registerGlobalHandlers()
     // Initialize global references & parameters...
-    if (typeof _config_index_js__WEBPACK_IMPORTED_MODULE_7__.modals.__initPromiseResolve == 'function') {_config_index_js__WEBPACK_IMPORTED_MODULE_7__.modals.__initPromiseResolve();}_config_index_js__WEBPACK_IMPORTED_MODULE_7__.modals.isInited = true;_config_index_js__WEBPACK_IMPORTED_MODULE_7__.modals.controller = this; /* // UNUSED: Old method to obtain dom node re3ference (see setRef below).
+    if (typeof _config_index_js__WEBPACK_IMPORTED_MODULE_8__.modals.__initPromiseResolve == 'function') {_config_index_js__WEBPACK_IMPORTED_MODULE_8__.modals.__initPromiseResolve();}_config_index_js__WEBPACK_IMPORTED_MODULE_8__.modals.isInited = true;_config_index_js__WEBPACK_IMPORTED_MODULE_8__.modals.controller = this; /* // UNUSED: Old method to obtain dom node re3ference (see setRef below).
      * // eslint-disable-next-line react/no-find-dom-node
      * const domNode = ReactDOM.findDOMNode(this); // TODO: Find alternate legal method to get dom node? (refs doesn't works due to high-level element (`TransitionGroup`) rendering)
-     * // console.log('ModalsContainer:componentDidMount', { domNode });
+     * // console.log('ModalsController:componentDidMount', { domNode });
      * this.domNode = domNode;
      * config.modals.domNode = domNode;
-     */} // Handlers...
+     */};_proto.componentWillUnmount = function componentWillUnmount() {// this.unregisterGlobalHandlers()
+    // Reset uncaught errors handler...
+    window.onunhandledrejection = this.__saved_onunhandledrejection;window.onerror = this.__saved_onerror;} // Handlers...
   ; // External methods...
   _proto.getDomNode = function getDomNode() {// Get dom node
-    return this.domNode || document.body;}; // Render...
-  _proto.renderModalsContainer = function renderModalsContainer() {var containerId = _config_index_js__WEBPACK_IMPORTED_MODULE_7__.modals.containerId;var className = cnModalsContainer(null, [this.props.className /* , cnModalsContainer('TransitionGroup') */]);var renderProps = { key: containerId || 'ModalsContainer', id: containerId, className: className, ref: this.setRef // Get dom node handler
-    }; /* // UNUSED: Failed `ModalsContext` test implementation
+    return this.domNode || document.body;}; // External proxy methods...
+  _proto.addProxyModal = function addProxyModal(modalData) {var id = modalData.modalId; // || 'modal' + n;
+    // TODO: Check not-empty id and id uniqueness
+    if (!id || this.getProxyModal(id)) {var error = new Error('An unique modalId must be specified');console.error('ModalsController:addProxyModal: error', { error: error, modalData: modalData }); // eslint-disable-line no-console
+      debugger; // eslint-disable-line no-debugger
+      throw error;}this.setState(function (_ref) {var proxyModalsList = _ref.proxyModalsList;return { proxyModalsList: proxyModalsList.concat(modalData) };});};_proto.removeProxyModal = function removeProxyModal(modalId) {// TODO: Call some actions (on close modal)?
+    this.setState(function (_ref2) {var proxyModalsList = _ref2.proxyModalsList;proxyModalsList = proxyModalsList.filter(function (modalData) {return modalData.modalId !== modalId;});return { proxyModalsList: proxyModalsList };});};_proto.getProxyModal = function getProxyModal(modalId) {var proxyModalsList = this.state.proxyModalsList;var found = proxyModalsList.find(function (modalData) {return modalData.modalId === modalId;});return found;};_proto.isProxyModalExists = function isProxyModalExists(modalId) {var found = this.getProxyModal(modalId);return !!found;};_proto.updateProxyModal = function updateProxyModal(modalId, options) {this.setState(function (_ref3) {var proxyModalsList = _ref3.proxyModalsList;var foundIdx = proxyModalsList.findIndex(function (modalData) {return modalData.modalId === modalId;});if (foundIdx !== -1) {var modalData = proxyModalsList[foundIdx]; // Clone array...
+        var newModals = proxyModalsList.slice();var newModalData = (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__.default)({}, modalData, options);newModals[foundIdx] = newModalData;return { proxyModalsList: newModals };}});};_proto.renderProxyModal = function renderProxyModal(modalData /* , n */) {var id = modalData.modalId; // || 'modal' + n;
+    // Non-empty unique id ensured in `addProxyModal`
+    var modalProps = (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__.default)({ key: id, id: id }, modalData, { onDeactivate: this.onProxyModalDeactivate });return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createElement(_ModalWindow_index_ts__WEBPACK_IMPORTED_MODULE_11__.default, modalProps);};_proto.renderProxyModals = function renderProxyModals() {var proxyModalsList = this.state.proxyModalsList;return proxyModalsList.map(this.renderProxyModal, this);} // Render...
+  ;_proto.renderModalsController = function renderModalsController() {var containerId = _config_index_js__WEBPACK_IMPORTED_MODULE_8__.modals.containerId;var className = cnModalsController(null, [this.props.className /* , cnModalsController('TransitionGroup') */]);var renderProps = { key: containerId || 'ModalsController',
+      id: containerId,
+      className: className,
+      ref: this.setRef // Get dom node handler
+    };
+    /* // UNUSED: Failed `ModalsContext` test implementation
      * return (
      *   <ModalsContextProvider value={this}>
      *     <div {...renderProps} />
      *   </ModalsContextProvider>
      * )
-     */return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.createElement("div", renderProps);};_proto.render = function render() {var node = document.body; // Render as new node in top level of dom tree
-    var container = this.renderModalsContainer();var usePortal = this.props.usePortal;var content = usePortal ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.createElement(react_portal__WEBPACK_IMPORTED_MODULE_5__.Portal, { node: node }, container) : container;return content;};return ModalsContainer;}(react__WEBPACK_IMPORTED_MODULE_3__.PureComponent /** @lends @ModalsContainer.prototype */);(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2__.default)(ModalsContainer, "propTypes", { usePortal: prop_types__WEBPACK_IMPORTED_MODULE_4__.bool // Render container at end of dom tree root level
-});/* harmony default export */ __webpack_exports__["default"] = (ModalsContainer);
+     */
+    return /*#__PURE__*/(
+      react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_error_boundary__WEBPACK_IMPORTED_MODULE_10__.ErrorBoundary, { FallbackComponent: _ErrorContainer_ErrorContainer__WEBPACK_IMPORTED_MODULE_9__.default, onError: this.onCatchedError }, /*#__PURE__*/
+      react__WEBPACK_IMPORTED_MODULE_4__.createElement("div", renderProps, /*#__PURE__*/
+      react__WEBPACK_IMPORTED_MODULE_4__.createElement("div", { className: cnModalsController('PortalProxy'), ref: this.setPortalProxyRef },
+      this.renderProxyModals()))));
+
+
+
+
+  };_proto.
+
+  render = function render() {
+    var node = document.body; // Render as new node in top level of dom tree
+    var controller = this.renderModalsController();var
+    usePortal = this.props.usePortal;
+    var content = usePortal ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_portal__WEBPACK_IMPORTED_MODULE_6__.Portal, { node: node }, controller) : controller;
+    return content;
+  };return ModalsController;}(react__WEBPACK_IMPORTED_MODULE_4__.PureComponent /** @lends @ModalsController.prototype */);(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3__.default)(ModalsController, "propTypes", { usePortal: prop_types__WEBPACK_IMPORTED_MODULE_5__.bool // Render container at end of dom tree root level
+});
+
+
+/* harmony default export */ __webpack_exports__["default"] = (ModalsController);
 
 /***/ }),
 
@@ -4088,7 +4283,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "ModalWindow": function() { return /* reexport safe */ _ModalWindow_index_ts__WEBPACK_IMPORTED_MODULE_6__.default; },
 /* harmony export */   "ModalPopup": function() { return /* reexport safe */ _ModalPopup_index_ts__WEBPACK_IMPORTED_MODULE_7__.default; },
 /* harmony export */   "ModalPortal": function() { return /* reexport safe */ _ModalPortal_index_ts__WEBPACK_IMPORTED_MODULE_8__.default; },
-/* harmony export */   "ModalsContainer": function() { return /* reexport safe */ _ModalsContainer_index_ts__WEBPACK_IMPORTED_MODULE_9__.default; }
+/* harmony export */   "ModalsController": function() { return /* reexport safe */ _ModalsController_index_ts__WEBPACK_IMPORTED_MODULE_9__.default; }
 /* harmony export */ });
 /* harmony import */ var _DateTimeSelector_index_ts__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DateTimeSelector/index.ts */ "./src/elements/DateTimeSelector/index.ts");
 /* harmony import */ var _InlineIcon_index_ts__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./InlineIcon/index.ts */ "./src/elements/InlineIcon/index.ts");
@@ -4099,7 +4294,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ModalWindow_index_ts__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./ModalWindow/index.ts */ "./src/elements/ModalWindow/index.ts");
 /* harmony import */ var _ModalPopup_index_ts__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./ModalPopup/index.ts */ "./src/elements/ModalPopup/index.ts");
 /* harmony import */ var _ModalPortal_index_ts__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./ModalPortal/index.ts */ "./src/elements/ModalPortal/index.ts");
-/* harmony import */ var _ModalsContainer_index_ts__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./ModalsContainer/index.ts */ "./src/elements/ModalsContainer/index.ts");
+/* harmony import */ var _ModalsController_index_ts__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./ModalsController/index.ts */ "./src/elements/ModalsController/index.ts");
 /** @module elements
  *  @desc Basic elements
  *  @since 2020.10.07, 02:12
@@ -10136,6 +10331,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./src/elements/ErrorContainer/ErrorContainer.pcss":
+/*!*********************************************************!*\
+  !*** ./src/elements/ErrorContainer/ErrorContainer.pcss ***!
+  \*********************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
 /***/ "./src/elements/InlineIcon/InlineIcon.pcss":
 /*!*************************************************!*\
   !*** ./src/elements/InlineIcon/InlineIcon.pcss ***!
@@ -10344,10 +10552,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./src/elements/ModalsContainer/ModalsContainer.pcss":
-/*!***********************************************************!*\
-  !*** ./src/elements/ModalsContainer/ModalsContainer.pcss ***!
-  \***********************************************************/
+/***/ "./src/elements/ModalsController/ModalsController.pcss":
+/*!*************************************************************!*\
+  !*** ./src/elements/ModalsController/ModalsController.pcss ***!
+  \*************************************************************/
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -11972,22 +12180,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./src/elements/ModalsContainer/index.ts":
-/*!***********************************************!*\
-  !*** ./src/elements/ModalsContainer/index.ts ***!
-  \***********************************************/
+/***/ "./src/elements/ModalsController/index.ts":
+/*!************************************************!*\
+  !*** ./src/elements/ModalsController/index.ts ***!
+  \************************************************/
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": function() { return /* reexport safe */ _ModalsContainer__WEBPACK_IMPORTED_MODULE_0__.default; }
+/* harmony export */   "default": function() { return /* reexport safe */ _ModalsController__WEBPACK_IMPORTED_MODULE_0__.default; }
 /* harmony export */ });
-/* harmony import */ var _ModalsContainer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ModalsContainer */ "./src/elements/ModalsContainer/ModalsContainer.jsx");
+/* harmony import */ var _ModalsController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ModalsController */ "./src/elements/ModalsController/ModalsController.jsx");
 
 // NOTE: Workaround for directory index in TS
-// import ModalsContainer from './ModalsContainer';
-// export default ModalsContainer;
+// import ModalsController from './ModalsController';
+// export default ModalsController;
 
 
 /***/ }),
@@ -12494,6 +12702,17 @@ module.exports = require("react-datepicker");;
 
 /***/ }),
 
+/***/ "react-error-boundary":
+/*!***************************************!*\
+  !*** external "react-error-boundary" ***!
+  \***************************************/
+/***/ (function(module) {
+
+"use strict";
+module.exports = require("react-error-boundary");;
+
+/***/ }),
+
 /***/ "react-portal":
 /*!*******************************!*\
   !*** external "react-portal" ***!
@@ -12639,7 +12858,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "ModalPopup": function() { return /* reexport safe */ _elements_index_js__WEBPACK_IMPORTED_MODULE_4__.ModalPopup; },
 /* harmony export */   "ModalPortal": function() { return /* reexport safe */ _elements_index_js__WEBPACK_IMPORTED_MODULE_4__.ModalPortal; },
 /* harmony export */   "ModalWindow": function() { return /* reexport safe */ _elements_index_js__WEBPACK_IMPORTED_MODULE_4__.ModalWindow; },
-/* harmony export */   "ModalsContainer": function() { return /* reexport safe */ _elements_index_js__WEBPACK_IMPORTED_MODULE_4__.ModalsContainer; },
+/* harmony export */   "ModalsController": function() { return /* reexport safe */ _elements_index_js__WEBPACK_IMPORTED_MODULE_4__.ModalsController; },
 /* harmony export */   "FormActions": function() { return /* reexport safe */ _forms_index_js__WEBPACK_IMPORTED_MODULE_5__.FormActions; },
 /* harmony export */   "FormButton": function() { return /* reexport safe */ _forms_index_js__WEBPACK_IMPORTED_MODULE_5__.FormButton; },
 /* harmony export */   "FormButtonGroup": function() { return /* reexport safe */ _forms_index_js__WEBPACK_IMPORTED_MODULE_5__.FormButtonGroup; },
@@ -12673,7 +12892,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _forms_index_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./forms/index.js */ "./src/forms/index.js");
 /* harmony import */ var _demo_Hello_index_ts__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./demo/Hello/index.ts */ "./src/demo/Hello/index.ts");
 /* harmony import */ var _build_pcss__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./build.pcss */ "./src/build.pcss");
-/* harmony import */ var _elements_ModalsContainer_index_ts__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./elements/ModalsContainer/index.ts */ "./src/elements/ModalsContainer/index.ts");
+/* harmony import */ var _elements_ModalsController_index_ts__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./elements/ModalsController/index.ts */ "./src/elements/ModalsController/index.ts");
 /** @module build
  *  @desc Library exportable ditributive
  *  @since 2020.05.19, 17:16
@@ -12702,11 +12921,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 // TODO: Use WebUiCoreContext?
-var WebUiCoreRoot = function WebUiCoreRoot(_ref) {var children = _ref.children,autoModalsContainer = _ref.autoModalsContainer;
+var WebUiCoreRoot = function WebUiCoreRoot(_ref) {var children = _ref.children,autoModalsController = _ref.autoModalsController;
   return /*#__PURE__*/(
     react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null,
     children,
-    autoModalsContainer && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_elements_ModalsContainer_index_ts__WEBPACK_IMPORTED_MODULE_8__.default, null)));
+    autoModalsController && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_elements_ModalsController_index_ts__WEBPACK_IMPORTED_MODULE_8__.default, null)));
 
 
 };
