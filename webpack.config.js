@@ -1,6 +1,6 @@
 /** @desc Webpack configuration
  *  @since 2020.05.18, 12:00
- *  @changed 2021.04.13, 15:53
+ *  @changed 2021.05.12, 14:05
  */
 /* eslint-disable no-console */
 
@@ -42,13 +42,17 @@ module.exports = (env, argv) => {
   // const debugDataPath = path.resolve(__dirname, 'debug-data') // Debug-time data stubs
   const mixinsPath = path.resolve(srcPath, '!mixins');
 
-  // Additional configuration params from `webpack.env.js` and `webpack.env.local.js`
-  const webpackEnvFile = path.resolve(rootPath, 'webpack.env.js');
-  const webpackEnvLocalFile = path.resolve(rootPath,'webpack.env.local.js');
+  // Additional configuration params from `webpack.env.js`, `webpack.env.local.js` and `webpack.env.debug.js`
+  const webpackEnvFile = './webpack.env.js';
+  const webpackEnvLocalFile = './webpack.env.local.js';
+  const webpackEnvDebugFile = './webpack.env.debug.js';
   const webpackEnv = fs.existsSync(webpackEnvFile) && require(webpackEnvFile);
+  // Extend webpack config with local & debug (only for dev-server!) settings
   const webpackEnvLocal = fs.existsSync(webpackEnvLocalFile) && require(webpackEnvLocalFile);
+  const webpackEnvDebug = isDevServer && fs.existsSync(webpackEnvDebugFile) && require(webpackEnvDebugFile);
   // Merge parameters from config files and command line (eg `--env.DEMO=true`)
-  env = Object.assign({}, webpackEnv, webpackEnvLocal, env);
+  // Ovverride sequence: env, env.local, env.debug, command line paraeters.
+  env = Object.assign({}, webpackEnv, webpackEnvLocal, webpackEnvDebug, env);
 
   const THEME = env.THEME || 'default';
   const THEME_FILE = './themes/' + THEME; // For including in `src/config/css.js`
