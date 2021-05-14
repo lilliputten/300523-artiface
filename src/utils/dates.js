@@ -116,7 +116,7 @@ export function formatDateToString(date, fmt, opt = {}) {
 }
 
 export function formatDateTimeToString(date, opt = {}) {
-  const fmt = opt.showTime ? config.constants.dateTimeFormat : config.constants.dateFormat;
+  const fmt = opt.format || (opt.showTime ? config.constants.dateTimeFormat : config.constants.dateFormat);
   // @see https://date-fns.org/v2.16.1/docs/format
   return format(convertToDateObject(date), fmt, opt);
 }

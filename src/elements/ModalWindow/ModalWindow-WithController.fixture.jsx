@@ -1,11 +1,12 @@
 /** @module ModalWindow-WithController.fixture
  *  @since 2021.05.07, 13:04
- *  @changed 2021.05.07, 13:04
+ *  @changed 2021.05.14, 16:00
  */
 /* eslint-disable react/jsx-max-depth, react/no-multi-comp, no-console */
 
 import React from 'react';
 
+import ModalsProxy from 'elements/ModalsProxy';
 import ModalWindow from './ModalWindow';
 import FormGroup from 'forms/FormGroup';
 import FormActions from 'forms/FormActions';
@@ -28,21 +29,21 @@ import * as dates from 'utils/dates';
 export const DemoWrapper = <FormGroup flow wrap />; // ({ children }) => {
 
 const onAction = (params) => {
-  console.log('ModalWindow-WithController.fixture:onAction', params);
+  const { id, modalId } = params;
+  console.log('ModalWindow-WithController.fixture:onAction', { id, modalId, params });
 };
 
-const onTest = (params) => {
+const updateModalTest = (params) => {
   const { id: actionId } = params;
-  const ModalsController = config.modals.controller;
-  const dateStr = dates.formatDateTimeToString(new Date(), { showTime: true });
+  // const modalsController = ModalsProxy.getModalsController();
+  const dateStr = dates.formatDateTimeToString(new Date(), { format: config.constants.dateTimeMsFormat, showTime: true });
   const newContent = 'Test: ' + dateStr;
-  console.log('ModalWindow-WithController.fixture:onTest', {
+  console.log('ModalWindow-WithController.fixture:updateModalTest', {
     actionId,
-    ModalsController,
+    // modalsController,
     newContent,
   });
-  debugger;
-  ModalsController.updateProxyModal(controlledModalId, {
+  ModalsProxy.updateModal(controlledModalId, {
     children: newContent,
   });
   return false; // Don't close window
@@ -63,7 +64,7 @@ const controlledModalActions = (
         icon="faExclamationCircle"
         text="Test"
         theme="primary"
-        onClick={onTest}
+        onClick={updateModalTest}
         inline
       />
     </FormGroup>
@@ -102,18 +103,15 @@ const controlledModalProps = {
   open: true,
 };
 
-/* // Test ModalsController initialization...
- * config.modals.initPromise.then(() => {
- *   const ModalsController = config.modals.controller;
+/* // Test modalsController initialization...
+ * ModalsProxy.getInitPromise().then(() => {
+ *   // const modalsController = ModalsProxy.getModalsController();
  *   console.log('ModalWindow-WithController.fixture: test', {
- *     'config.modals.initPromise': config.modals.initPromise,
- *     'config.modals.isInited': config.modals.isInited,
- *     // 'config.modals.controller': config.modals.controller,
- *     ModalsController: ModalsController,
+ *     // modalsController,
  *   });
- *   ModalsController.addProxyModal(controlledModalProps);
+ *   ModalsProxy.addModal(controlledModalProps);
  *   setTimeout(() => {
- *     ModalsController.updateProxyModal(controlledModalId, {
+ *     ModalsProxy.updateModal(controlledModalId, {
  *       children: 'Test 2',
  *       loading: false,
  *     });
@@ -130,13 +128,13 @@ class ControlModal extends React.PureComponent {
     };
   }
   showModal = () => {
-    const ModalsController = config.modals.controller;
-    console.log('ModalWindow-WithController.fixture:onAction', {
-      ModalsController,
+    // const modalsController = ModalsProxy.getModalsController(); // config.modals.controller;
+    console.log('ModalWindow-WithController.fixture:showModal', {
+      // modalsController,
       controlledModalProps,
       'this.state': this.state,
     });
-    ModalsController.addProxyModal(controlledModalProps);
+    ModalsProxy.addModal(controlledModalProps);
   }
   render() {
     return (

@@ -149,7 +149,18 @@ class ModalsController extends React.PureComponent /** @lends @ModalsController.
 
   // External proxy methods...
 
+  updateProxyModalsList(proxyModalsList) {
+    this.setState({ proxyModalsList });
+  }
+
+  /* DEPRECATED: Moved to ModalProxy...
   addProxyModal(modalData) {
+    modalData = {
+      key: id,
+      id: id,
+      ...modalData,
+      onDeactivate: this.onProxyModalDeactivate,
+    };
     const id = modalData.modalId; // || 'modal' + n;
     // TODO: Check not-empty id and id uniqueness
     if (!id || this.getProxyModal(id)) {
@@ -162,7 +173,6 @@ class ModalsController extends React.PureComponent /** @lends @ModalsController.
       return { proxyModalsList: proxyModalsList.concat(modalData) };
     });
   }
-
   removeProxyModal(modalId) {
     // TODO: Call some actions (on close modal)?
     this.setState(({ proxyModalsList }) => {
@@ -170,18 +180,15 @@ class ModalsController extends React.PureComponent /** @lends @ModalsController.
       return { proxyModalsList };
     });
   }
-
   getProxyModal(modalId) {
     const { proxyModalsList } = this.state;
     const found = proxyModalsList.find(modalData => modalData.modalId === modalId);
     return found;
   }
-
   isProxyModalExists(modalId) {
     const found = this.getProxyModal(modalId);
     return !!found;
   }
-
   updateProxyModal(modalId, options) {
     this.setState(({ proxyModalsList }) => {
       const foundIdx = proxyModalsList.findIndex(modalData => modalData.modalId === modalId);
@@ -195,7 +202,6 @@ class ModalsController extends React.PureComponent /** @lends @ModalsController.
       }
     });
   }
-
   onProxyModalDeactivate = (data) => {
     let { modalId, id } = data;
     modalId = modalId || id;
@@ -218,17 +224,19 @@ class ModalsController extends React.PureComponent /** @lends @ModalsController.
       onModalDeactivate(data);
     }
   }
+  */
 
   renderProxyModal(modalData/* , n */) {
-    const id = modalData.modalId; // || 'modal' + n;
-    // Non-empty unique id ensured in `addProxyModal`
-    const modalProps = {
-      key: id,
-      id: id,
-      ...modalData,
-      onDeactivate: this.onProxyModalDeactivate,
-    };
-    return <ModalWindow {...modalProps} />;
+    // const id = modalData.modalId; // || 'modal' + n;
+    // // Non-empty unique id ensured in `addProxyModal`
+    // const modalProps = {
+    //   key: id,
+    //   id: id,
+    //   ...modalData,
+    //   onDeactivate: this.onProxyModalDeactivate,
+    // };
+    // return <ModalWindow {...modalProps} />;
+    return <ModalWindow {...modalData} />;
   }
 
   renderProxyModals() {
