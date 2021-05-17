@@ -205,9 +205,9 @@ module.exports = { // Common-used build variables...
   DEV_DEBUG: DEV_DEBUG,
 
   THEME: "default",
-  buildTag: "v.0.3.4-210514-1611-build-dev-default",
-  timestamp: "2021.05.14, 16:11",
-  timetag: "210514-1611",
+  buildTag: "v.0.3.4-210517-1558-build-dev-default",
+  timestamp: "2021.05.17, 15:58",
+  timetag: "210517-1558",
   version: "0.3.4" };
 
 /***/ }),
@@ -2898,11 +2898,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_transition_group__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(react_transition_group__WEBPACK_IMPORTED_MODULE_8__);
 /* harmony import */ var _config_index_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../config/index.js */ "./src/config/index.js");
 /* harmony import */ var _config_index_js__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_config_index_js__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var _Loader_index_ts__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../Loader/index.ts */ "./src/elements/Loader/index.ts");
-/* harmony import */ var _ModalPortal_Geometry_pcss__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./ModalPortal-Geometry.pcss */ "./src/elements/ModalPortal/ModalPortal-Geometry.pcss");
-/* harmony import */ var _ModalPortal_Themes_pcss__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./ModalPortal-Themes.pcss */ "./src/elements/ModalPortal/ModalPortal-Themes.pcss");
-/* harmony import */ var _ModalPortal_Transitions_pcss__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./ModalPortal-Transitions.pcss */ "./src/elements/ModalPortal/ModalPortal-Transitions.pcss");
-/* harmony import */ var _ModalPortal_Variants_pcss__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./ModalPortal-Variants.pcss */ "./src/elements/ModalPortal/ModalPortal-Variants.pcss");
+/* harmony import */ var _utils_strings__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../utils/strings */ "./src/utils/strings.js");
+/* harmony import */ var _helpers_ActionsContext__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../helpers/ActionsContext */ "./src/helpers/ActionsContext.jsx");
+/* harmony import */ var _Loader_index_ts__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../Loader/index.ts */ "./src/elements/Loader/index.ts");
+/* harmony import */ var _ModalPortal_Geometry_pcss__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./ModalPortal-Geometry.pcss */ "./src/elements/ModalPortal/ModalPortal-Geometry.pcss");
+/* harmony import */ var _ModalPortal_Themes_pcss__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./ModalPortal-Themes.pcss */ "./src/elements/ModalPortal/ModalPortal-Themes.pcss");
+/* harmony import */ var _ModalPortal_Transitions_pcss__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./ModalPortal-Transitions.pcss */ "./src/elements/ModalPortal/ModalPortal-Transitions.pcss");
+/* harmony import */ var _ModalPortal_Variants_pcss__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./ModalPortal-Variants.pcss */ "./src/elements/ModalPortal/ModalPortal-Variants.pcss");
  /** @module ModalPortal
  *  @class ModalPortal
  *  @since 2020.12.21, 22:58
@@ -2930,13 +2932,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-// import { withModalsContext } from 'helpers/ModalsContext'
+
+
+// import { withModalsContext } from 'helpers/ModalsContext';
 
 // import InlineIcon from 'elements/InlineIcon'
 
 // import FormButton from 'forms/FormButton'
-
-// import { ActionsContextProvider } from 'helpers/ActionsContext' // TODO?
 
 
 
@@ -2973,6 +2975,8 @@ var passModalPortalProps = [// Used to pass outside props (eg, from `ModalWindow
 'onClose',
 'onActivate',
 'onDeactivate',
+'onChildAction',
+// Additionally all other 'on...' handlers must/can be passed. See `resolveResult`.
 'open',
 'theme',
 'windowClassName',
@@ -3304,6 +3308,12 @@ ModalPortal = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_he
 
 
 
+
+
+
+
+
+
     function (actionProps) {// Event handler for ActionContext consumed children
       var actionId = actionProps.id;var _this$props4 =
       _this.props,id = _this$props4.id,modalId = _this$props4.modalId,actionsContextNode = _this$props4.actionsContextNode,autoClose = _this$props4.autoClose,closeOnCancelAction = _this$props4.closeOnCancelAction;
@@ -3495,19 +3505,26 @@ ModalPortal = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_he
      *   debugger // eslint-disable-line no-debugger
      *   throw error // ???
      * }
-     */var _this$props9 = this.props,id = _this$props9.id,modalId = _this$props9.modalId,onAction = _this$props9.onAction;if (typeof onAction === 'function') {onAction({ id: actionId, modalId: modalId || id });}this.resolvingResult = null; // Reset action back
-  } // Handlers...
+     */var _this$props9 = this.props,id = _this$props9.id,modalId = _this$props9.modalId,onAction = _this$props9.onAction;var cbData = { id: actionId, modalId: modalId || id };if (typeof onAction === 'function') {onAction(cbData);}this.resolvingResult = null; // Reset action back
+    var cbName = 'on' + _utils_strings__WEBPACK_IMPORTED_MODULE_10__.ucFirst(actionId);var cb = this.props[cbName];if (typeof cb === 'function') {cb(cbData);}} // Handlers...
   ; // Render...
-  _proto.renderWindow = function renderWindow() {var _this$props10 = this.props,windowWidth = _this$props10.windowWidth,windowTheme = _this$props10.windowTheme,theme = _this$props10.theme,windowClassName = _this$props10.windowClassName,children = _this$props10.children;var wrapperDomNode = this.wrapperDomNode,windowDomNode = this.windowDomNode; // console.log('ModalPortal:renderWindow', { windowWidth })
+  _proto.renderWindow = function renderWindow() {var _this$props10 = this.props,onChildAction = _this$props10.onChildAction,windowWidth = _this$props10.windowWidth,windowTheme = _this$props10.windowTheme,theme = _this$props10.theme,windowClassName = _this$props10.windowClassName,children = _this$props10.children;var wrapperDomNode = this.wrapperDomNode,windowDomNode = this.windowDomNode; // console.log('ModalPortal:renderWindow', { windowWidth })
     // TODO: Pass windowDomNode to children?
     var childrenProps = { ModalPortal: this, windowDomNode: windowDomNode, wrapperDomNode: wrapperDomNode };var isElement = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default().isValidElement(children);var childrenType = typeof children;var isFunction = childrenType === 'function'; // Extend element or call function with children' props
-    var content = isElement ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default().cloneElement(children, childrenProps) : isFunction ? children(childrenProps) : children;return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default().createElement("div", { className: cnModalPortal('Window', { width: windowWidth, theme: windowTheme || theme }, [windowClassName]), ref: this.setWindowDomRef }, content);};_proto.renderLoader = function renderLoader() {var _this$props11 = this.props,loading = _this$props11.loading,loaderTheme = _this$props11.loaderTheme,handleLoaderCancel = _this$props11.handleLoaderCancel;return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default().createElement(_Loader_index_ts__WEBPACK_IMPORTED_MODULE_10__.default, { mode: "local", theme: loaderTheme, show: loading, onCancel: handleLoaderCancel });};_proto.renderModalPortal = function renderModalPortal() {var _this$props12 = this.props,type = _this$props12.type,id = _this$props12.id,theme = _this$props12.theme,wrapperTheme = _this$props12.wrapperTheme,className = _this$props12.className,wrapperClassName = _this$props12.wrapperClassName,useLoader = _this$props12.useLoader,loading = _this$props12.loading,noWrapper = _this$props12.noWrapper;if (loading && !useLoader) {var error = new Error('ModalPortal: `useLoader` must be enabled for using `loading` prop');console.error(error); // eslint-disable-line no-console
+    var content = isElement ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default().cloneElement(children, childrenProps) : isFunction ? children(childrenProps) : children;if (typeof onChildAction === 'function') {content = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default().createElement(_helpers_ActionsContext__WEBPACK_IMPORTED_MODULE_11__.ActionsContextProvider, { value: { onAction: onChildAction } }, content);}return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default().createElement("div", { className: cnModalPortal('Window', { width: windowWidth, theme: windowTheme || theme }, [windowClassName]), ref: this.setWindowDomRef }, content);};_proto.renderLoader = function renderLoader() {var _this$props11 = this.props,loading = _this$props11.loading,loaderTheme = _this$props11.loaderTheme,handleLoaderCancel = _this$props11.handleLoaderCancel;return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default().createElement(_Loader_index_ts__WEBPACK_IMPORTED_MODULE_12__.default, { mode: "local", theme: loaderTheme, show: loading, onCancel: handleLoaderCancel });};_proto.renderModalPortal = function renderModalPortal() {var _this$props12 = this.props,type = _this$props12.type,id = _this$props12.id,theme = _this$props12.theme,wrapperTheme = _this$props12.wrapperTheme,className = _this$props12.className,wrapperClassName = _this$props12.wrapperClassName,useLoader = _this$props12.useLoader,loading = _this$props12.loading,noWrapper = _this$props12.noWrapper;if (loading && !useLoader) {var error = new Error('ModalPortal: `useLoader` must be enabled for using `loading` prop');console.error(error); // eslint-disable-line no-console
       /*DEBUG*/debugger; // eslint-disable-line no-debugger
       throw error; // ???
     }var open = this.state.open;var realWrapperTheme = noWrapper ? false : wrapperTheme || theme;return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default().createElement(react_transition_group__WEBPACK_IMPORTED_MODULE_8__.CSSTransition, { key: id // id={id}
       , timeout: this.transitionTime, in: open, classNames: cnModalPortal() // Generate animation classes
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default().createElement("div", { key: id, className: cnModalPortal({ type: type, id: id, noWrapper: noWrapper }, [className]) // Root node
-      , ref: this.setRootDomRef }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default().createElement("div", { className: cnModalPortal('Wrapper', { theme: realWrapperTheme }, [wrapperClassName]), ref: this.setWrapperDomRef },
+    }, /*#__PURE__*/
+    react__WEBPACK_IMPORTED_MODULE_4___default().createElement("div", {
+      key: id,
+      className: cnModalPortal({ type: type, id: id, noWrapper: noWrapper }, [className]) // Root node
+      , ref: this.setRootDomRef }, /*#__PURE__*/
+
+    react__WEBPACK_IMPORTED_MODULE_4___default().createElement("div", {
+      className: cnModalPortal('Wrapper', { theme: realWrapperTheme }, [wrapperClassName]),
+      ref: this.setWrapperDomRef },
 
     this.renderWindow(),
     useLoader && this.renderLoader())));
@@ -3607,7 +3624,7 @@ __webpack_require__.r(__webpack_exports__);
  /** @module ModalWindow
  *  @class ModalWindow
  *  @since 2020.12.21, 22:58
- *  @changed 2020.12.29, 20:05
+ *  @changed 2021.05.17, 15:33
  *
  *  External methods (for PopupStack):
  *  - close
@@ -3909,7 +3926,17 @@ ModalWindow = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_he
       , onClick: this.onCloseButtonClick }));};_proto.renderHeader = function renderHeader() {var _this$props5 = this.props,headerTheme = _this$props5.headerTheme,theme = _this$props5.theme;var content = [this.renderHeaderIcon(), this.renderHeaderTitle(), this.renderHeaderCloseButton()].filter(Boolean);var hasHeader = !!(content && content.length);return hasHeader && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default().createElement("div", { className: cnModalWindow('Header', { theme: headerTheme || theme }) }, content);};_proto.renderLeftContent = function renderLeftContent() {var leftContent = this.props.leftContent;return leftContent && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default().createElement("div", { className: cnModalWindow('LeftContent') }, leftContent);};_proto.renderContent = function renderContent() {var _this$props6 = this.props,children = _this$props6.children,contentClassName = _this$props6.contentClassName,error = _this$props6.error; // console.log('ModalWindow:renderContent', children)
     // debugger
     var errorContent = error && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default().createElement("div", { className: cnModalWindow('Error') }, this.renderContentError(error));return children && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default().createElement("div", { className: cnModalWindow('Content', [contentClassName]) }, errorContent, children);};_proto.renderActions = function renderActions() {var actions = this.props.actions; // Allow to treat actions as ids/texts/ list see `FromActions`.
-    return actions && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default().createElement(_helpers_ActionsContext__WEBPACK_IMPORTED_MODULE_12__.ActionsContextProvider, { value: this }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default().createElement(_forms_FormActions_index_ts__WEBPACK_IMPORTED_MODULE_11__.default, { className: cnModalWindow('Actions') }, actions));};_proto.render = function render() {var _this2 = this;var portalProps = _ModalPortal_index_ts__WEBPACK_IMPORTED_MODULE_8__.passModalPortalProps.reduce(function (data, id) {var _extends2;return (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__.default)({}, data, (_extends2 = {}, _extends2[id] = _this2.props[id], _extends2));}, {});Object.assign(portalProps, {
+    return actions && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default().createElement(_helpers_ActionsContext__WEBPACK_IMPORTED_MODULE_12__.ActionsContextProvider, { value: this }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default().createElement(_forms_FormActions_index_ts__WEBPACK_IMPORTED_MODULE_11__.default, { className: cnModalWindow('Actions') }, actions));};_proto.render = function render() {var _this2 = this; // Add all custom handler props ('on*')...
+    var handlerKeys = Object.keys(this.props).filter(function (id) {return id.startsWith('on') && !_ModalPortal_index_ts__WEBPACK_IMPORTED_MODULE_8__.passModalPortalProps.includes(id);});var portalProps = _ModalPortal_index_ts__WEBPACK_IMPORTED_MODULE_8__.passModalPortalProps.concat(handlerKeys).reduce(function (data, id) {var _extends2;
+      return (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__.default)({}, data, (_extends2 = {}, _extends2[id] = _this2.props[id], _extends2));
+    }, {});
+    Object.keys(this.props).
+    filter(function (id) {return id.startsWith('on');}).
+    forEach(function (id) {
+      portalProps[id] = _this2.props[id];
+    });
+
+    Object.assign(portalProps, {
       handleOpenState: this.handleOpenState
       // onActivate: this.onActivate,
       // onDeactivate: this.onDeactivate,
