@@ -28,14 +28,14 @@ import { // Transitions...
   // TransitionGroup,
 } from 'react-transition-group';
 import config from 'config';
+import * as stringUtils from 'utils/strings';
 
-// import { withModalsContext } from 'helpers/ModalsContext'
+import { ActionsContextProvider } from 'helpers/ActionsContext';
+// import { withModalsContext } from 'helpers/ModalsContext';
 
 // import InlineIcon from 'elements/InlineIcon'
 import Loader from 'elements/Loader';
 // import FormButton from 'forms/FormButton'
-
-// import { ActionsContextProvider } from 'helpers/ActionsContext' // TODO?
 
 import './ModalPortal-Geometry.pcss';
 import './ModalPortal-Themes.pcss';
@@ -72,6 +72,8 @@ export const passModalPortalProps = [ // Used to pass outside props (eg, from `M
   'onClose',
   'onActivate',
   'onDeactivate',
+  'onChildAction',
+  // Additionally all other 'on...' handlers must/can be passed. See `resolveResult`.
   'open',
   'theme',
   'windowClassName',
@@ -395,10 +397,16 @@ class ModalPortal extends React.PureComponent /** @lends @ModalPortal.prototype 
      * }
      */
     const { id, modalId, onAction } = this.props;
+    const cbData = { id: actionId, modalId: modalId || id };
     if (typeof onAction === 'function') {
-      onAction({ id: actionId, modalId: modalId || id });
+      onAction(cbData);
     }
     this.resolvingResult = null; // Reset action back
+    const cbName = 'on' + stringUtils.ucFirst(actionId);
+    const cb = this.props[cbName];
+    if (typeof cb === 'function') {
+      cb(cbData);
+    }
   }
 
   // Handlers...
@@ -540,7 +548,7 @@ class ModalPortal extends React.PureComponent /** @lends @ModalPortal.prototype 
   // Render...
 
   renderWindow() {
-    const { windowWidth, windowTheme, theme, windowClassName, children } = this.props;
+    const { onChildAction, windowWidth, windowTheme, theme, windowClassName, children } = this.props;
     const { wrapperDomNode, windowDomNode } = this;
     // console.log('ModalPortal:renderWindow', { windowWidth })
     // TODO: Pass windowDomNode to children?
@@ -553,8 +561,15 @@ class ModalPortal extends React.PureComponent /** @lends @ModalPortal.prototype 
     const childrenType = typeof children;
     const isFunction = childrenType === 'function';
     // Extend element or call function with children' props
-    const content = isElement ? React.cloneElement(children, childrenProps) :
+    let content = isElement ? React.cloneElement(children, childrenProps) :
       isFunction ? children(childrenProps) : children;
+    if (typeof onChildAction === 'function') {
+      content = (
+        <ActionsContextProvider value={{ onAction: onChildAction }}>
+          {content}
+        </ActionsContextProvider>
+      );
+    }
     return (
       <div
         className={cnModalPortal('Window', { width: windowWidth, theme: windowTheme || theme }, [windowClassName])}

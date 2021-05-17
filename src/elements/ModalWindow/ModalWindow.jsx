@@ -1,7 +1,7 @@
 /** @module ModalWindow
  *  @class ModalWindow
  *  @since 2020.12.21, 22:58
- *  @changed 2020.12.29, 20:05
+ *  @changed 2021.05.17, 15:33
  *
  *  External methods (for PopupStack):
  *  - close
@@ -300,9 +300,19 @@ class ModalWindow extends React.PureComponent /** @lends @ModalWindow.prototype 
   }
 
   render() {
-    const portalProps = passModalPortalProps.reduce((data, id) => {
+    // Add all custom handler props ('on*')...
+    const handlerKeys = Object.keys(this.props)
+      .filter(id => id.startsWith('on') && !passModalPortalProps.includes(id))
+    ;
+    const portalProps = passModalPortalProps.concat(handlerKeys).reduce((data, id) => {
       return { ...data, [id]: this.props[id] };
     }, {});
+    Object.keys(this.props)
+      .filter(id => id.startsWith('on'))
+      .forEach(id => {
+        portalProps[id] = this.props[id];
+      })
+    ;
     Object.assign(portalProps, {
       handleOpenState: this.handleOpenState,
       // onActivate: this.onActivate,

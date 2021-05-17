@@ -1,6 +1,6 @@
 /** @module MenuItem.styles
  *  @since 2020.10.27, 03:05
- *  @changed 2020.10.27, 03:06
+ *  @changed 2021.05.17, 14:38
  */
 
 .MenuItem {
@@ -44,7 +44,10 @@
           opacity: .5;
         }
       }
-      &.MenuItem_checked.FormItem_hovered { // Use theme background color for checked items?
+      &.FormItem_hovered {
+        background-color: color($color shade(10));
+      }
+      &.MenuItem_checked.FormItem_hovered {
         background-color: color($color shade(20));
         // & .MenuItem-Icon {
         //   color: $primaryContrastColor;

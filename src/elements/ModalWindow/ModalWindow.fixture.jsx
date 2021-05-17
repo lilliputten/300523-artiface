@@ -11,7 +11,7 @@ import FormGroup from 'forms/FormGroup';
 import FormButton from 'forms/FormButton';
 import FormSelect from 'forms/FormSelect';
 import FormTextInput from 'forms/FormTextInput';
-// import Menu from 'elements/Menu'
+import Menu from 'elements/Menu'
 
 // Demo styles for cosmos engine
 // import 'demo.pcss';
@@ -328,6 +328,146 @@ class WithInput extends React.PureComponent {
 }
 const withInput = <WithInput />;
 
+const menuItems = [
+  {
+    id: 'selectValue',
+    val: 1,
+    text: 'Variant 1',
+    data: { key: 'var.1' }, // Data passed to event
+  },
+  {
+    id: 'selectValue',
+    val: 2,
+    text: 'Variant 2',
+    data: { key: 'var.2' }, // Data passed to event
+  },
+];
+class WithMenu extends React.PureComponent {
+  constructor(props) {
+    super(props);
+    this.state = {
+      open: true,
+      value: '',
+      // loading: true, // Use `useLoader` for ability to controlling Loader
+    };
+    // setTimeout(this.close, 3000)
+    // setInterval(this.toggle, 5000)
+  }
+  open = () => this.setState({ open: true })
+  close = () => this.setState({ open: false })
+  handleOpenState = ({ open }) => this.setState({ open })
+  toggle = () => {
+    this.modalRef && this.modalRef.toggle();
+  }
+  setModalWindowRef = (ref) => {
+    this.modalRef = ref;
+  }
+  handleLoaderCancel = () => {
+    console.log('ModalWindow.fixture:handleLoaderCancel');
+    this.setState(({ loading }) => ({ loading: !loading }));
+  }
+  onChange = ({ value }) => {
+    // console.log('withMenu:onChange', value)
+    this.setState({ value });
+  }
+  onChildAction = (params) => {
+    const { id } = params;
+    console.log('ModalWindow.fixture:onChildAction', id, params);
+    debugger;
+  }
+  onAction = (params) => {
+    const { id } = params;
+    console.log('ModalWindow.fixture:onAction', id, params);
+    debugger;
+  }
+  onOk = ({ id }) => {
+    console.log('ModalWindow.fixture:onOk', id);
+    debugger;
+  }
+  renderActions() {
+    return (
+      <FormGroup id="Actions" flow fullWidth>
+        <FormGroup id="ActionsMain" flow>
+          <FormButton
+            id="ok"
+            icon="faCheck"
+            text="Ok"
+            theme="primary"
+            inline
+          />
+        </FormGroup>
+        <FormGroup id="ActionsRight" flow align="right">
+          <FormButton
+            id="cancel"
+            icon="faTimes"
+            text="Cancel"
+            inline
+          />
+        </FormGroup>
+      </FormGroup>
+    );
+  }
+  renderContent() {
+    const { value } = this.state;
+    return (
+      <Menu
+        id="menu1"
+        selectable
+        singleChoice
+        // checkedItemTheme="primary"
+        itemTheme="primary"
+      >
+        {menuItems}
+      </Menu>
+    );
+  }
+  render() {
+    const { value, open } = this.state;
+    // console.log('withMenu:render', value);
+    const actions = this.renderActions();
+    // const isElement = React.isValidElement(actions)
+    return (
+      <React.Fragment>
+        <ModalWindow
+          id="simple"
+          theme="info"
+          // icon="faExclamationCircle"
+          open={open}
+          className="ModalWindowClass"
+          contentClassName="XXX"
+          windowClassName="WindowClass"
+          wrapperClassName="WrapperClass"
+          onChildAction={this.onChildAction}
+          onAction={this.onAction}
+          onOk={this.onOk} // Custom handlers
+          onClose={this.close}
+          onOpen={this.open}
+          handleOpenState={this.handleOpenState}
+          ref={this.setModalWindowRef}
+          actions={actions}
+          title="WithMenu"
+          windowWidth="sm"
+          // leftContent="left" // Left column (with icon visual, eg)
+          showCloseButton
+          autoClose
+          useLoader
+          loading={this.state.loading}
+          // loaderTheme="Dark"
+          handleLoaderCancel={this.handleLoaderCancel}
+        >
+          {this.renderContent()}
+        </ModalWindow>
+        <FormButton
+          text="Toggle WithMenu"
+          onClick={this.toggle}
+          inline
+        />
+      </React.Fragment>
+    );
+  }
+}
+const withMenu = <WithMenu />;
+
 // Non interactive: without controller
 const simple = (
   <ModalWindow
@@ -346,4 +486,5 @@ export default {
   interactive,
   withSelect,
   withInput,
+  withMenu,
 };
