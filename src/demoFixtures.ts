@@ -22,6 +22,7 @@ const demoFixtures: TFixturesList = {
   Loader: require('elements/Loader/Loader.fixture'),
 
   ModalWindow: require('elements/ModalWindow/ModalWindow.fixture'),
+  ModalProxifiedWindow: require('elements/ModalProxifiedWindow/ModalProxifiedWindow.fixture'),
   ModalWindowWithController: require('elements/ModalWindow/ModalWindow-WithController.fixture'),
   ModalPopup: require('elements/ModalPopup/ModalPopup.fixture'),
 

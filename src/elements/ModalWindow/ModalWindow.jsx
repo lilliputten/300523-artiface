@@ -101,6 +101,15 @@ class ModalWindow extends React.PureComponent /** @lends @ModalWindow.prototype 
 
   // Lifecycle...
 
+  componentDidUpdate(prevProps, prevState) {
+    const node = this;
+    const { props, state } = this;
+    const { onComponentDidUpdate } = this.props;
+    if (typeof onComponentDidUpdate === 'function') {
+      onComponentDidUpdate({ node, props, state, prevProps, prevState })
+    }
+  }
+
   // Helpers...
 
   // Handlers...

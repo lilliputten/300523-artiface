@@ -2,7 +2,7 @@
  *  @class ModalsController
  *  @desc Modals dom container & controller interface object
  *  @since 2020.12.21, 23:37
- *  @changed 2021.05.07, 14:49
+ *  @changed 2021.05.27, 14:03
  */
 
 import * as React from 'react';
@@ -32,6 +32,7 @@ class ModalsController extends React.PureComponent /** @lends @ModalsController.
   domNode = undefined;
   modalsStack = [];
   modalWindows = [];
+  proxyModalNodes = {};
 
   // Lifecycle...
 
@@ -226,6 +227,37 @@ class ModalsController extends React.PureComponent /** @lends @ModalsController.
   }
   */
 
+  saveProxyModalNode = (node) => {
+    const props = node && node.props || {};
+    const id = props.modalId || props.id;
+    if (id) {
+      this.proxyModalNodes[id] = node;
+    }
+    // console.log('ModalsController:saveProxyModalNode', id, node);
+    // debugger;
+  }
+
+  removeProxyModalNode = (id) => {
+    if (typeof id === 'object' && id.props) {
+      id = id.props.modalId || id.props.id;
+    }
+    console.log('ModalsController:removeProxyModalNode', id);
+    debugger;
+    const modalNode = this.proxyModalNodes[id];
+    if (modalNode) {
+      if (typeof modalNode.onRemove === 'function') {
+        modalNode.onRemove();
+      }
+      delete this.proxyModalNodes[id];
+    }
+  }
+
+  getProxyModalNode = (id) => {
+    if (this.proxyModalNodes[id]) {
+      return this.proxyModalNodes[id];
+    }
+  }
+
   renderProxyModal(modalData/* , n */) {
     // const id = modalData.modalId; // || 'modal' + n;
     // // Non-empty unique id ensured in `addProxyModal`
@@ -236,7 +268,7 @@ class ModalsController extends React.PureComponent /** @lends @ModalsController.
     //   onDeactivate: this.onProxyModalDeactivate,
     // };
     // return <ModalWindow {...modalProps} />;
-    return <ModalWindow {...modalData} />;
+    return <ModalWindow {...modalData} ref={this.saveProxyModalNode} />;
   }
 
   renderProxyModals() {

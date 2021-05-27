@@ -11,6 +11,7 @@ export { default as Menu } from './Menu';
 export { default as MenuItem } from './MenuItem';
 export { default as MenuItemSeparator } from './MenuItemSeparator';
 export { default as ModalWindow } from './ModalWindow';
+export { default as ModalProxifiedWindow } from './ModalProxifiedWindow';
 export { default as ModalPopup } from './ModalPopup';
 export { default as ModalPortal } from './ModalPortal';
 export { default as ModalsProxy } from './ModalsProxy';

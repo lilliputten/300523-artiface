@@ -1,7 +1,7 @@
 /** @module ModalsProxy
  *  @class ModalsProxy
  *  @since 2021.05.14, 14:38
- *  @changed 2021.05.14, 15:56
+ *  @changed 2021.05.27, 14:03
  */
 
 import config from 'config';
@@ -12,8 +12,12 @@ class ModalsProxy {
   proxyModalsList = []; // List of modals (passed to `ModalsController` state to direct render
   modalsController = null; // Will be initialized with `ModalsController` instance reference promise in `config/modals`.
 
+  getProxyModalNode(id) {
+    return this.modalsController.getProxyModalNode(id);
+  }
+
   updateProxyModalsList() {
-    this.modalsController.updateProxyModalsList(this.proxyModalsList);
+    return this.modalsController.updateProxyModalsList(this.proxyModalsList);
   }
 
   initialize = () => {
@@ -37,14 +41,16 @@ class ModalsProxy {
     return this.modalsController;
   }
 
-
   /* External modal proxy interface...
-   * \<\(addModal\|removeModal\|getModal\|isModalExists\|updateModal\)\>
+   *
    * - addModal
    * - removeModal
    * - getModal
    * - isModalExists
    * - updateModal
+   *
+   * regexp: \<\(addModal\|removeModal\|getModal\|isModalExists\|updateModal\)\>
+   *
    */
 
   addModal(modalData) {
@@ -71,6 +77,7 @@ class ModalsProxy {
     // TODO: Call some actions (on close modal)?
     this.proxyModalsList = this.proxyModalsList.filter(modalData => modalData.modalId !== modalId);
     this.updateProxyModalsList();
+    this.modalsController.removeProxyModalNode(modalId);
   }
   getModal(modalId) {
     const { proxyModalsList } = this;
