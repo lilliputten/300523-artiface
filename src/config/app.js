@@ -2,6 +2,11 @@
  *  @description Core app config
  *  @since 2019.09.10, 14:25
  *  @changed 2021.01.24, 21:42
+ *
+ *  NOTE: All config params may be updated with `utils.configure.setConfigOptions`, eg:
+ *  ```
+ *  WebUiCoreUtils.configure.setConfigOptions({ useCssModules: true, cssMappings: webUiCoreCssMappings, store });
+ *  ```
  */
 
 module.exports = { // Common-used app variables...
@@ -20,4 +25,7 @@ module.exports = { // Common-used app variables...
   // Mostly using texts from `lang.components.common`
 
   defaultLocale: 'ru-RU', // One of: 'ru-RU', 'en-US'
+
+  store: null, // Target app redux store (???)
+
 };

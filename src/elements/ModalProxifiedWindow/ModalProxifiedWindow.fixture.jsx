@@ -1,6 +1,6 @@
 /** @module ModalProxifiedWindow.fixture
  *  @since 2021.05.07, 13:04
- *  @changed 2021.05.14, 16:00
+ *  @changed 2021.05.31, 21:32
  */
 /* eslint-disable react/jsx-max-depth, react/no-multi-comp, no-console */
 
@@ -39,11 +39,12 @@ class ProxifiedModal extends ModalProxifiedWindow {
       modalId: this.modalId,
     });
     this.state = {
-      test: 'Initial value',
+      test: 'Initial state value',
     };
-    setTimeout(() => {
-      this.setProps({ open: true });
-    }, 1000);
+    // setTimeout(() => {
+    //   this.setProps({ open: true });
+    // }, 0); // DEBUG: Open with delay
+    this.setProps({ open: true });
   }
   componentWillUnmount() {
     console.log('ModalProxifiedWindow:fixture:componentWillUnmount');
@@ -60,6 +61,15 @@ class ProxifiedModal extends ModalProxifiedWindow {
       prevState,
     });
   }
+  mapStateToProps(store) {
+    console.log('ModalProxifiedWindow:mapStateToProps', {
+      store,
+    });
+    return {
+      store,
+      test: store.demo.stateTest,
+    };
+  }
   updateModal = () => {
     const test = dates.formatDateTimeToString(new Date(), { format: config.constants.dateTimeMsFormat });
     console.log('ModalProxifiedWindow:fixture:updateModal', {
@@ -72,6 +82,8 @@ class ProxifiedModal extends ModalProxifiedWindow {
       });
       // debugger;
     });
+    const { store } = config.app;
+    store && store.dispatch({ type: 'SET_TEST', payload: test });
   }
   render() {
     const { test } = this.state;
@@ -80,8 +92,12 @@ class ProxifiedModal extends ModalProxifiedWindow {
     });
     return (
       <FormGroup flow wrap>
-        <FormText>
-          ModalProxifiedWindow: {this.state.test}
+        <FormText wrap>
+          ModalProxifiedWindow
+          {'; '}
+          props: {this.props.test}
+          {'; '}
+          state: {this.state.test}
         </FormText>
         <FormButton
           text="Update"
@@ -97,7 +113,10 @@ class ProxifiedModal extends ModalProxifiedWindow {
 // eslint-disable-next-line react/require-optimization
 class Test extends React.Component {
   createProxyModal = () => {
-    this.proxifiedModal = new ProxifiedModal({ open: false });
+    this.proxifiedModal = new ProxifiedModal({
+      open: false,
+      windowWidth: 'md',
+    });
   }
   render() {
     return (

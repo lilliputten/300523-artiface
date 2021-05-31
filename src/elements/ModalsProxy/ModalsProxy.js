@@ -1,31 +1,35 @@
 /** @module ModalsProxy
  *  @class ModalsProxy
  *  @since 2021.05.14, 14:38
- *  @changed 2021.05.27, 14:03
+ *  @changed 2021.05.31, 16:57
  */
 
 import config from 'config';
 
 class ModalsProxy {
 
-  inited = false; // 'Was initialized' flag
-  proxyModalsList = []; // List of modals (passed to `ModalsController` state to direct render
-  modalsController = null; // Will be initialized with `ModalsController` instance reference promise in `config/modals`.
+  _inited = false; // 'Was initialized' flag
+  _proxyModalsList = []; // List of modals (passed to `ModalsController` state to direct render
+  _modalsController = null; // Will be initialized with `ModalsController` instance reference promise in `config/modals`.
+  _storeHandlers = [];
 
   getProxyModalNode(id) {
-    return this.modalsController.getProxyModalNode(id);
+    return this._modalsController.getProxyModalNode(id);
   }
 
-  updateProxyModalsList() {
-    return this.modalsController.updateProxyModalsList(this.proxyModalsList);
+  updateProxyModalsList() { // Using `this._modalsController.updateProxyModalsList`
+    if (this._modalsController) {
+      return this._modalsController.updateProxyModalsList(this._proxyModalsList);
+    }
   }
 
   initialize = () => {
-    this.modalsController = config.modals.controller;
-    this.inited = true;
-    if (this.proxyModalsList.length) {
-      this.updateProxyModalsList();
+    this._modalsController = config.modals.controller;
+    this._inited = true;
+    if (this._proxyModalsList.length) {
+      this.updateProxyModalsList(); // Using `this._modalsController.updateProxyModalsList`
     }
+    this._initStore();
   }
 
   constructor() {
@@ -38,7 +42,35 @@ class ModalsProxy {
   }
 
   getModalsController() {
-    return this.modalsController;
+    return this._modalsController;
+  }
+
+  // Store methods...
+
+  _initStore() {
+    const { store } = config.app;
+    if (store) {
+      store.subscribe(this._onStoreChange);
+    }
+  }
+
+  _onStoreChange = () => {
+    const { store } = config.app;
+    const state = store.getState();
+    this._storeHandlers.forEach(cb => {
+      (typeof cb === 'function') && cb(state);
+    });
+  }
+
+  addStoreChangesHandler(cb) {
+    this._storeHandlers.push(cb);
+  }
+
+  removeStoreChangesHandler(cb) {
+    const idx = this._storeHandlers.indexOf(cb);
+    if (idx !== -1) {
+      this._storeHandlers.splice(idx, 1);
+    }
   }
 
   /* External modal proxy interface...
@@ -54,9 +86,9 @@ class ModalsProxy {
    */
 
   addModal(modalData) {
-    const id = modalData.modalId || modalData.id; // || 'modal' + n;
+    const modalId = modalData.modalId || modalData.id; // || 'modal' + n;
     // Check not-empty id and id uniqueness
-    if (!id || this.getModal(id)) {
+    if (!modalId || this.getModal(modalId)) {
       const error = new Error('An unique modalId must be specified');
       console.error('ModalsController:addModal: error', { error, modalData }); // eslint-disable-line no-console
       debugger; // eslint-disable-line no-debugger
@@ -64,24 +96,32 @@ class ModalsProxy {
     }
     // Extend modal data...
     modalData = {
-      key: id,
-      id: id,
+      key: modalId,
+      id: modalId,
       ...modalData,
       __saved__OnDeactivate: modalData.onDeactivate, // Save passed handler, using in `onModalDeactivate` handler, see below
       onDeactivate: this.onModalDeactivate, // Overwrite with our own deactivate handler
     };
-    this.proxyModalsList = this.proxyModalsList.concat(modalData);
-    this.updateProxyModalsList();
+    // console.log('ModalsProxy:addModal', {
+    //   modalId,
+    //   modalData,
+    // });
+    this._proxyModalsList = this._proxyModalsList.concat(modalData);
+    this.updateProxyModalsList(); // Using `this._modalsController.updateProxyModalsList`
   }
   removeModal(modalId) {
+    // console.log('ModalsProxy:addModal', {
+    //   modalId,
+    //   'this._proxyModalsList': this._proxyModalsList,
+    // });
     // TODO: Call some actions (on close modal)?
-    this.proxyModalsList = this.proxyModalsList.filter(modalData => modalData.modalId !== modalId);
-    this.updateProxyModalsList();
-    this.modalsController.removeProxyModalNode(modalId);
+    this._proxyModalsList = this._proxyModalsList.filter(modalData => modalData.modalId !== modalId);
+    this.updateProxyModalsList(); // Using `this._modalsController.updateProxyModalsList`
+    this._modalsController.removeProxyModalNode(modalId);
   }
   getModal(modalId) {
-    const { proxyModalsList } = this;
-    const found = proxyModalsList.find(modalData => modalData.modalId === modalId);
+    const { _proxyModalsList } = this;
+    const found = _proxyModalsList.find(modalData => modalData.modalId === modalId);
     return found;
   }
   isModalExists(modalId) {
@@ -89,14 +129,14 @@ class ModalsProxy {
     return !!found;
   }
   updateModal(modalId, options) {
-    const newModals = this.proxyModalsList.map(modalData => {
+    const newModals = this._proxyModalsList.map(modalData => {
       if (modalData.modalId === modalId) {
         modalData = { ...modalData, ...options };
       }
       return modalData;
     });
-    this.proxyModalsList = newModals;
-    this.updateProxyModalsList();
+    this._proxyModalsList = newModals;
+    this.updateProxyModalsList(); // Using `this._modalsController.updateProxyModalsList`
   }
   onModalDeactivate = (data) => {
     let { modalId, id } = data;
@@ -122,6 +162,8 @@ class ModalsProxy {
       onModalDeactivate(data);
     }
   }
+
+  // TODO: Implement `mapStateToProps` (as method of `ModalProxifiedWindow`?)
 
 }
 

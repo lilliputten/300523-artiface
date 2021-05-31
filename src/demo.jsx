@@ -1,7 +1,7 @@
 /** @module demo
  *  @desc Demo app entry point
  *  @since 2020.05.19, 17:16
- *  @changed 2021.02.15, 18:05
+ *  @changed 2021.05.31, 16:24
  */
 /* eslint-disable react/jsx-max-depth */
 
@@ -13,15 +13,18 @@ import 'react-app-polyfill/stable';
 import React from 'react';
 import { render } from 'react-dom';
 
-/* // UNUSED: redux
- * import { Provider } from 'react-redux'
- * import {
- *   createStore,
- *   combineReducers,
- *   // compose,
- *   // applyMiddleware, // Not used (see `middlewares`)
- * } from 'redux'
- */
+// DEBUG: redux
+import { Provider } from 'react-redux';
+import {
+  createStore,
+  combineReducers,
+  // compose,
+  // applyMiddleware, // Not used (see `middlewares`)
+} from 'redux';
+// console.log('demo:DEBUG', {
+//   createStore,
+// });
+// debugger;
 
 // import Loader from 'elements/Loader'
 
@@ -139,39 +142,50 @@ function getFixtureContent() {
 
 const content = getFixtureContent();
 
-/* // Demo redux state...
- * export function demoReducer(state = {}, action) {
- *   switch (action.type) {
- *     case 'LOAD_RESPONSE':
- *       return { ...action.payload }
- *     default:
- *       return state
- *   }
- * }
- * const appReducer = combineReducers({
- *   demo: demoReducer,
- * })
- * const rootReducer = (state, action) => {
- *   if (action.type === 'DESTROY_STORE') {
- *     state = undefined
- *   }
- *   return appReducer(state, action)
- * }
- * const store = createStore(
- *   rootReducer,
- *   // composeEnhancers(mountedMiddleware [> applyMiddleware(...middlewares) <]),
- * )
- * const demoContent = (
- *   <Provider store={store}>
- * // ...
- */
+// DEBUG: Demo redux state...
+const demoInitialState = { stateTest: 'Zero' };
+export function demoReducer(state = demoInitialState, action) {
+  console.log('demo:demoReducer', { state, action });
+  // debugger;
+  switch (action.type) {
+    case 'LOAD_RESPONSE':
+      return { ...action.payload };
+    case 'SET_TEST':
+      return { stateTest: action.payload };
+    default:
+      return state;
+  }
+}
+const appReducer = combineReducers({
+  demo: demoReducer,
+});
+const rootReducer = (state, action) => {
+  if (action.type === 'DESTROY_STORE') {
+    state = undefined;
+  }
+  return appReducer(state, action);
+};
+const store = createStore(
+  rootReducer,
+  // composeEnhancers(mountedMiddleware /* applyMiddleware(...middlewares) */),
+);
+// const demoContent = (
+//   <Provider store={store}>
+//   // ...
+store.dispatch({ type: 'SET_TEST', payload: 'Initial value' });
+// Set `store` to config...
+utils.configure.setConfigOptions({
+  store,
+});
 
 const demoContent = (
-  <WebUiCoreRoot autoModalsController>
-    <div className="demo">
-      {content}
-    </div>
-  </WebUiCoreRoot>
+  <Provider store={store}>
+    <WebUiCoreRoot autoModalsController>
+      <div className="demo">
+        {content}
+      </div>
+    </WebUiCoreRoot>
+  </Provider>
 );
 
 render(demoContent, document.getElementById('Root'));
