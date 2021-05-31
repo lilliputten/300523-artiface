@@ -19,6 +19,9 @@ import config from 'config';
 
 import ModalPortal, { passModalPortalProps } from 'elements/ModalPortal';
 
+// import { Provider } from 'react-redux';
+// import { app as appConfig } from 'config';
+
 import InlineIcon from 'elements/InlineIcon';
 import FormButton from 'forms/FormButton';
 import FormActions from 'forms/FormActions';
@@ -43,43 +46,43 @@ class ModalWindow extends React.PureComponent /** @lends @ModalWindow.prototype 
   // Props...
 
   static propTypes = {
-    useLoader: PropTypes.bool,
-    loading: PropTypes.bool, // Show Loader flashback
-    onAction: PropTypes.func, // Event fired on action invoked (see `actions` prop)
     // registerCallback: PropTypes.func, // ??? registerCallback(handler = this.someMethod) -- handler stored by parent component and called when detected click on pulldown menu -- prevents popup content closing
     // setModalNodeRef: PropTypes.func, // ??? Demo?
-    width: PropTypes.string, // ModalWindow window width (predefined variants: xs, sm, md, lg, xl, xxl)
-    handleLoaderCancel: PropTypes.func, // Loader onCancel event handler
-    error: PropTypes.oneOfType([ PropTypes.string, PropTypes.arrayOf(PropTypes.string) ]), // Error(s) strings to display above content
     actions: PropTypes.oneOfType([ PropTypes.array, PropTypes.object ]), // Actions component(s) (TODO: `ActionsContext` must be used)
+    className: PropTypes.string, // ModalWindow class name
     closeOnCancelAction: PropTypes.bool, // Auto-close on `cancel` action event
     closeOnClickOutside: PropTypes.bool, // Close (cancel) modal by click outside modal window (on 'curtain')
     closeOnEscPressed: PropTypes.bool, // Close (cancel) modal on esc key pressed
     closeWithCloseButton: PropTypes.bool, // Close (cancel) modal by click on header 'Close' button
-    showCloseButton: PropTypes.bool, // Display close button in header
+    contentClassName: PropTypes.string, // Content element class name
+    error: PropTypes.oneOfType([ PropTypes.string, PropTypes.arrayOf(PropTypes.string) ]), // Error(s) strings to display above content
+    handleLoaderCancel: PropTypes.func, // Loader onCancel event handler
+    handleOpenState: PropTypes.func, // Event fired on modal open state change (update external open/close state) ({ open, id } => void)
+    headerTheme: PropTypes.string, // Header theme (using `theme` if not specified)
     icon: PropTypes.oneOfType([ PropTypes.string, PropTypes.object ]), // Show icon in header
+    iconTheme: PropTypes.string, // Icon theme (using `theme` if not specified)
     id: PropTypes.string, // ModalWindow id
     leftContent: PropTypes.oneOfType([ PropTypes.string, PropTypes.object ]), // Content at left of main content and actions (ideal place for large visual icon)
+    loaderTheme: PropTypes.string, // Loader theme ('MediumDark' is default)
+    loading: PropTypes.bool, // Show Loader flashback
+    onAction: PropTypes.func, // Event fired on action invoked (see `actions` prop)
     onActivate: PropTypes.func, // Event fired on activate (before open)
     onClickOutside: PropTypes.func, // Event fired on click outside modal
+    onClose: PropTypes.func, // Event fired on modal close
     onCloseButtonClick: PropTypes.func, // Event fired on header 'Close' button click
     onDeactivate: PropTypes.func, // Event fired on deactivate (unmounting from dom)
     onEscPressed: PropTypes.func, // Event fired on esc key pressed
     onOpen: PropTypes.func, // Event fired on modal open
-    onClose: PropTypes.func, // Event fired on modal close
-    handleOpenState: PropTypes.func, // Event fired on modal open state change (update external open/close state) ({ open, id } => void)
     open: PropTypes.bool, // Show modal by default
-    title: PropTypes.string, // ModalWindow title
-    className: PropTypes.string, // ModalWindow class name
-    contentClassName: PropTypes.string, // Content element class name
-    windowClassName: PropTypes.string, // ModalWindow window class name
-    wrapperClassName: PropTypes.string, // ModalWindow wrapper class name
+    showCloseButton: PropTypes.bool, // Display close button in header
     theme: PropTypes.string, // ModalWindow theme (default theme for all other themed elements, see `*Theme`)
-    iconTheme: PropTypes.string, // Icon theme (using `theme` if not specified)
+    title: PropTypes.string, // ModalWindow title
+    useLoader: PropTypes.bool,
+    width: PropTypes.string, // ModalWindow window width (predefined variants: xs, sm, md, lg, xl, xxl)
+    windowClassName: PropTypes.string, // ModalWindow window class name
     windowTheme: PropTypes.string, // Window theme (using `theme` if not specified)
-    headerTheme: PropTypes.string, // Header theme (using `theme` if not specified)
+    wrapperClassName: PropTypes.string, // ModalWindow wrapper class name
     wrapperTheme: PropTypes.string, // Wrapper (back-curtain) theme (using `theme` if not specified)
-    loaderTheme: PropTypes.string, // Loader theme ('MediumDark' is default)
   }
 
   static defaultProps = {
@@ -106,7 +109,7 @@ class ModalWindow extends React.PureComponent /** @lends @ModalWindow.prototype 
     const { props, state } = this;
     const { onComponentDidUpdate } = this.props;
     if (typeof onComponentDidUpdate === 'function') {
-      onComponentDidUpdate({ node, props, state, prevProps, prevState })
+      onComponentDidUpdate({ node, props, state, prevProps, prevState });
     }
   }
 
@@ -293,7 +296,7 @@ class ModalWindow extends React.PureComponent /** @lends @ModalWindow.prototype 
     // const { ModalPortal } = portalProps || {} // !!!
     // this.ModalPortal = ModalPortal // Save ModalPortal handler
     // console.log('ModalWindow:renderWindow', this.props.children)
-    return (
+    let content = (
       <React.Fragment>
         {this.renderHeader()}
         <div className={cnModalWindow('Layout')}>
@@ -306,6 +309,12 @@ class ModalWindow extends React.PureComponent /** @lends @ModalWindow.prototype 
         </div>
       </React.Fragment>
     );
+    // // XXX: Wrap with redux provider?
+    // const { store } = appConfig; // TODO: Move to `ModalPortal`?
+    // if (store) {
+    //   content = <Provider store={store}>{content}</Provider>;
+    // }
+    return content;
   }
 
   render() {

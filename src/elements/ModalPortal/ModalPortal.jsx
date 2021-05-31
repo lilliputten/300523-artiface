@@ -52,7 +52,7 @@ const globalKeyPressEventName = 'keydown';
 
 const delayedHandlerTimeout = 50;
 
-export const passModalPortalProps = [ // Used to pass outside props (eg, from `ModalWindow`)
+export const passModalPortalProps = [ // Used to pass external props (eg, from `ModalWindow`)
   'id',
   'modalId',
   'className',
@@ -80,6 +80,7 @@ export const passModalPortalProps = [ // Used to pass outside props (eg, from `M
   'windowWidth',
   'wrapperClassName',
   'wrapperTheme',
+  'width', // ???
   'startOutsideClickWaiting',
   'stopOutsideClickWaiting',
   'preventCloseOnOutsideClick',

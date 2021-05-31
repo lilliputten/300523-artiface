@@ -121,17 +121,19 @@ class Menu extends React.PureComponent /** @lends @Menu.prototype */ {
     //   children,
     // })
     let children = this.props.children;
+    let selectedList;
     if (Array.isArray(children)) {
       children = children.map(this.createItemElement, this);
+      selectedList = children
+        .filter(({ props }) => {
+          return props.checked;
+        })
+        .map(({ props }) => {
+          return props.val;
+        })
+      ;
     }
-    const selectedList = children
-      .filter(({ props }) => {
-        return props.checked;
-      })
-      .map(({ props }) => {
-        return props.val;
-      })
-    ;
+    // else {} // If rendered react element?
     this.setState({
       items: children,
       selectedList,

@@ -12,6 +12,8 @@ import { cn } from 'utils/configure';
 import * as config from 'config';
 import ErrorContainer from 'elements/ErrorContainer';
 import { ErrorBoundary } from 'react-error-boundary';
+// import { Provider } from 'react-redux';
+// import { app as appConfig } from 'config';
 
 import ModalWindow from 'elements/ModalWindow';
 
@@ -99,7 +101,7 @@ class ModalsController extends React.PureComponent /** @lends @ModalsController.
   }
 
   registerModal = (modal/*: React.ReactNode*/) => { // Add item to modals stack
-    console.log('ModalsController:registerModal', modal.props.type, modal.props.id);
+    // console.log('ModalsController:registerModal', modal.props.type, modal.props.id);
     // debugger;
     if (!this.modalsStack.includes(modal)) { // Add to stack if not exist
       this.modalsStack.push(modal);
@@ -107,7 +109,7 @@ class ModalsController extends React.PureComponent /** @lends @ModalsController.
   }
 
   unregisterModal = (modal/*: React.ReactNode*/) => { // Remove item from modals stack
-    console.log('ModalsController:unregisterModal', modal.props.type, modal.props.id)
+    // console.log('ModalsController:unregisterModal', modal.props.type, modal.props.id)
     // debugger;
     const idx = this.modalsStack.indexOf(modal);
     if (idx !== -1) { // Remove if found...
@@ -241,8 +243,8 @@ class ModalsController extends React.PureComponent /** @lends @ModalsController.
     if (typeof id === 'object' && id.props) {
       id = id.props.modalId || id.props.id;
     }
-    console.log('ModalsController:removeProxyModalNode', id);
-    debugger;
+    // console.log('ModalsController:removeProxyModalNode', id);
+    // debugger;
     const modalNode = this.proxyModalNodes[id];
     if (modalNode) {
       if (typeof modalNode.onRemove === 'function') {
@@ -306,10 +308,20 @@ class ModalsController extends React.PureComponent /** @lends @ModalsController.
   }
 
   render() {
-    const node = document.body; // Render as new node in top level of dom tree
-    const controller = this.renderModalsController();
+    let content = this.renderModalsController();
     const { usePortal } = this.props;
-    const content = usePortal ? <Portal node={node}>{controller}</Portal> : controller;
+    // const { store } = appConfig;
+    // if (store) {
+    //   content = <Provider store={store}>{content}</Provider>;
+    // }
+    if (usePortal) {
+      // console.log('ModalsController:render', {
+      //   store,
+      //   Provider,
+      // });
+      const node = document.body; // Render as new node in top level of dom tree
+      content = <Portal node={node}>{content}</Portal>;
+    }
     return content;
   }
 

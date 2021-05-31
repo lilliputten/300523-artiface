@@ -25,9 +25,11 @@ class FormText extends React.PureComponent /** @lends @FormText.prototype */ {
   getClassName() {
     const {
       id,
+      wrap,
     } = this.props;
     const classList = cnFormText({
       id,
+      wrap,
     }, [this.props.className]);
     return classList;
   }

@@ -22,17 +22,19 @@
       position: relative;
       box-sizing: border-box;
       overflow: hidden;
-      margin: $(modalWindowPadding)px auto; // Auto size & center window horizontally
+      margin: $(modalWindowPadding)px; // Auto size & center window horizontally
+      // margin: $(modalWindowPadding)px auto; // Auto size & center window horizontally
+      // min-width: auto;
+      // min-width: $(modalMinWidth)px;
       // Center window vertically:
       // top: 50%;
       // transform: translate(0, -50%);
       // Default ('auto') size...
-      min-width: $(modalMinWidth)px;
-      @media (max-width: @calc($modalMinWidth + $modalWindowPadding * 2)px) {
-        margin: $(modalWindowPadding)px;
-        min-width: auto;
-      }
-      // Window widths (based on `config.css.modalSizes`: xs, sm, md, ...)...
+      // @media (max-width: @calc($modalMinWidth + $modalWindowPadding * 2)px) {
+      //   margin: $(modalWindowPadding)px;
+      //   min-width: auto;
+      // }
+      // Window widths (based on `config.css.modalSizes`: xs, sm, md, lg, xl, xxl)...
       &_width {
         @each $width $id in $modalSizes {
           &_$(id) {
