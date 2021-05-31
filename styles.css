@@ -3889,6 +3889,12 @@ label.FormLabel-Control[for] {
   text-overflow: ellipsis;
 }
 
+.FormText_wrap {
+    overflow: auto;
+    white-space: normal;
+    /* text-overflow: initial;*/
+  }
+
 /** @module ModalPortal-Geometry.styles
  *  @desc Basic modal layout styles
  *  @since 2020.12.21, 22:58
@@ -8575,23 +8581,21 @@ input.FormTextInput-Control:-internal-autofill-previewed,
       -webkit-box-sizing: border-box;
               box-sizing: border-box;
       overflow: hidden;
-      margin: 20px auto; /* Auto size & center window horizontally*/
+      margin: 20px; /* Auto size & center window horizontally*/
+      /* margin: $(modalWindowPadding)px auto; // Auto size & center window horizontally*/
+      /* min-width: auto;*/
+      /* min-width: $(modalMinWidth)px;*/
       /* Center window vertically:*/
       /* top: 50%;*/
       /* transform: translate(0, -50%);*/
       /* Default ('auto') size...*/
-      min-width: 300px;
+      /* @media (max-width: @calc($modalMinWidth + $modalWindowPadding * 2)px) {*/
+      /*   margin: $(modalWindowPadding)px;*/
+      /*   min-width: auto;*/
+      /* }*/
     }
 
-@media (max-width: 340px) {
-
-.ModalPortal_type_Window .ModalPortal-Window {
-        margin: 20px;
-        min-width: auto
-    }
-      }
-
-/* Window widths (based on `config.css.modalSizes`: xs, sm, md, ...)...*/
+/* Window widths (based on `config.css.modalSizes`: xs, sm, md, lg, xl, xxl)...*/
 
 .ModalPortal_type_Window .ModalPortal-Window_width_xs {
             margin: 20px;

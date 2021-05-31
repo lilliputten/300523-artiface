@@ -3,8 +3,8 @@
   "description": "Arti UI Components Library",
   "NOTE": "All version and time stamp properties are updated automatically (see `util-update-build-variables.sh`, `util-increment-version.sh`)!",
   "version": "0.3.5",
-  "timetag": "210527-1659",
-  "timestamp": "2021.05.27, 16:59",
+  "timetag": "210531-2239",
+  "timestamp": "2021.05.31, 22:39",
   "changed": "2021.03.24, 17:37",
   "main": "bundle.js",
   "keywords": [
@@ -54,6 +54,7 @@
     "react-error-boundary": "^3.1.3",
     "react-portal": "^4.2.1",
     "react-transition-group": "^4.4.1",
+    "react-redux": "^5.1.2",
     "redux": "^4.0.5",
     "throttle-debounce": "^3.0.1"
   }

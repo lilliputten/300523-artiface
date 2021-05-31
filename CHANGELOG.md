@@ -1,5 +1,8 @@
 # CHANGELOG
 
+- 2021.05.31, 22:03 -- Use redux store (added package dependency), emulate store in demo mode, test store in ModalProxifiedWindow fixture. ModalProxifiedWindow: added state activate/deactivate methods, added `passStateToProps`, `onStateChangeHandler` (based on client method `mapStateToProps`), fixed minor bugs.
+- 2021.05.31, 21:58 -- Minor changes: Menu: safe options list processing (in `setChildrenItemsFromProps`). FormText: wrap modifier. ModalWindow: fixed modal width styles.
+- 2021.05.27, 17:00 -- v.0.3.5: Added ModalProxifiedWindow component.
 - 2021.05.17, 15:55 -- MenuItem: Fix styles for hovered\checked states. ModalWindow: Pass all custom handler props ('on...') to `ModalPortal`. ModalPortal: Process `onChildAction` for child content actions (via `ActionsContextProvider`). Process custom action callbacks (with method name masks 'on...').
 - 2021.05.14, 15:19 -- v.0.3.4: Using `ModalProxy`.
 - 2021.05.07, 15:40 -- PD-3621: Modal windows controller: Added `ModalWindowWithController` fixture. ModalPortal: Pass `modalId` (alongside `id`) property for event handlers. ModalsController: using `proxyModalsList` state parameter for active proxy modals list, added `...ProxyModal...` functionality, added uncaught errors processing.
@@ -127,5 +130,5 @@
 - 2020.10.05, 20:38 -- v.0.0.15: Extracted `demoSupport.jsx` routines, fixture selection from url query (parameter `fixture`), added avaialble fixtures list if fixture to display is not specified, added DemoWrapper & demoTitle exportable ficture parameters for demo rendering.
 
 <!--
- @changed 2021.05.17, 15:55
+ @changed 2021.05.27, 17:00
 -->

@@ -162,6 +162,11 @@ function _setPrototypeOf(o, p) {
  *  @description Core app config
  *  @since 2019.09.10, 14:25
  *  @changed 2021.01.24, 21:42
+ *
+ *  NOTE: All config params may be updated with `utils.configure.setConfigOptions`, eg:
+ *  ```
+ *  WebUiCoreUtils.configure.setConfigOptions({ useCssModules: true, cssMappings: webUiCoreCssMappings, store });
+ *  ```
  */
 
 module.exports = { // Common-used app variables...
@@ -179,7 +184,9 @@ module.exports = { // Common-used app variables...
   lang: null, // i18n language texts provider (from target project) // TODO
   // Mostly using texts from `lang.components.common`
 
-  defaultLocale: 'ru-RU' // One of: 'ru-RU', 'en-US'
+  defaultLocale: 'ru-RU', // One of: 'ru-RU', 'en-US'
+
+  store: null // Target app redux store (???)
 };
 
 /***/ }),
@@ -205,9 +212,9 @@ module.exports = { // Common-used build variables...
   DEV_DEBUG: DEV_DEBUG,
 
   THEME: "default",
-  buildTag: "v.0.3.5-210527-1659-build-dev-default",
-  timestamp: "2021.05.27, 16:59",
-  timetag: "210527-1659",
+  buildTag: "v.0.3.5-210531-2239-build-dev-default",
+  timestamp: "2021.05.31, 22:39",
+  timetag: "210531-2239",
   version: "0.3.5" };
 
 /***/ }),
@@ -1785,17 +1792,19 @@ Menu = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_helpers_i
     //   children,
     // })
     var children = this.props.children;
+    var selectedList;
     if (Array.isArray(children)) {
       children = children.map(this.createItemElement, this);
-    }
-    var selectedList = children.
-    filter(function (_ref) {var props = _ref.props;
-      return props.checked;
-    }).
-    map(function (_ref2) {var props = _ref2.props;
-      return props.val;
-    });
+      selectedList = children.
+      filter(function (_ref) {var props = _ref.props;
+        return props.checked;
+      }).
+      map(function (_ref2) {var props = _ref2.props;
+        return props.val;
+      });
 
+    }
+    // else {} // If rendered react element?
     this.setState({
       items: children,
       selectedList: selectedList });
@@ -2955,7 +2964,7 @@ var globalKeyPressEventName = 'keydown';
 
 var delayedHandlerTimeout = 50;
 
-var passModalPortalProps = [// Used to pass outside props (eg, from `ModalWindow`)
+var passModalPortalProps = [// Used to pass external props (eg, from `ModalWindow`)
 'id',
 'modalId',
 'className',
@@ -2983,6 +2992,7 @@ var passModalPortalProps = [// Used to pass outside props (eg, from `ModalWindow
 'windowWidth',
 'wrapperClassName',
 'wrapperTheme',
+'width', // ???
 'startOutsideClickWaiting',
 'stopOutsideClickWaiting',
 'preventCloseOnOutsideClick'];
@@ -3601,6 +3611,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
 /* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/esm/defineProperty.js");
 /* harmony import */ var _ModalsProxy_index_ts__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../ModalsProxy/index.ts */ "./src/elements/ModalsProxy/index.ts");
+/* harmony import */ var _config_index_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../config/index.js */ "./src/config/index.js");
+/* harmony import */ var _config_index_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_config_index_js__WEBPACK_IMPORTED_MODULE_3__);
  /** @module ModalProxifiedWindow
  *  @class ModalProxifiedWindow
  *  @since 2021.05.27, 14:44
@@ -3609,8 +3621,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-// import config from 'config';
 var
+
 ModalProxifiedWindow = /*#__PURE__*/function () {
 
 
@@ -3628,9 +3640,11 @@ ModalProxifiedWindow = /*#__PURE__*/function () {
 
 
 
+
+
     function (params) {
+      _this.__deactivateStateHandler();
       // console.log('ModalProxifiedWindow:onDeactivate', { modalId: this.modalId });
-      // debugger;
       if (typeof _this.componentWillUnmount == 'function') {
         setTimeout(_this.componentWillUnmount.bind(_this), 0);
       }var
@@ -3639,7 +3653,69 @@ ModalProxifiedWindow = /*#__PURE__*/function () {
         // setTimeout(onDeactivate, 0, params);
         onDeactivate(params);
       }
+      _ModalsProxy_index_ts__WEBPACK_IMPORTED_MODULE_2__.default.removeModal(_this.modalId);
     });(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1__.default)(this, "__update",
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -3687,13 +3763,13 @@ ModalProxifiedWindow = /*#__PURE__*/function () {
       // Save old & set new props...
       var prevProps = _this.props;
       if (_this.__newProps) {
-        _this.props = _this.__newProps;
+        _this.props = (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__.default)({}, prevProps, _this.__newProps);
         _this.__newProps = undefined;
       }
       // Save old & set new state...
       var prevState = _this.state;
       if (_this.__newState) {
-        _this.state = _this.__newState;
+        _this.state = (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__.default)({}, prevState, _this.__newState);
         _this.__newState = undefined;
       }
       // console.log('ModalProxifiedWindow:__update', {
@@ -3703,7 +3779,6 @@ ModalProxifiedWindow = /*#__PURE__*/function () {
       //   state: this.state,
       //   prevState,
       // });
-      // debugger;
       // Call all callbacks...
       var cb;
       while ((cb = _this.__updateCbQueue.shift()) != null) {
@@ -3711,47 +3786,53 @@ ModalProxifiedWindow = /*#__PURE__*/function () {
       }
       // Call update handler...
       if (typeof _this.componentDidUpdate === 'function') {
-        _this.componentDidUpdate(prevProps, prevState); // TODO: Use `bind`?
+        _this.componentDidUpdate(prevProps, prevState); // TODO: Use `bind`, use `setTimeout`?
       }
       // Make render...
       _this.__render();
-    });this.props = props || {};var modalId = this.props.modalId || this.props.id || this.modalId;this.modalId = modalId; // console.log('ModalProxifiedWindow:constructor', { modalId, props });
-    // debugger;
-    this.__restartUpdateTimer();}var _proto = ModalProxifiedWindow.prototype; // onRemove = () => { // Called from `ModalsController:removeProxyModalNode`
-  //   console.log('ModalProxifiedWindow:onRemove', { modalId: this.modalId });
-  //   debugger;
-  //   if (typeof this.componentWillUnmount == 'function') {
-  //     setTimeout(this.componentWillUnmount.bind(this), 0);
-  //   }
-  // }
-  _proto.__render = function __render() {var children;if (typeof this.render === 'function') {children = this.render();}var updateProps = (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__.default)({}, this.props, { onDeactivate: this.onDeactivate, children: children }); // console.log('ModalProxifiedWindow:__render', {
+    });this.props = props || {};this.modalId = this.props.modalId || this.props.id || this.modalId; // console.log('ModalProxifiedWindow:constructor', {
+    //   modalId: this.modalId,
+    //   props,
+    // });
+    setTimeout(this.__activateStateHandler.bind(this), 0); // Initialize state change handler after constructor finished
+    this.__restartUpdateTimer(); // Start initial update timer
+  }var _proto = ModalProxifiedWindow.prototype; // Store state control...
+  _proto.passStateToProps = function passStateToProps(state, mapStateToProps) {if (typeof mapStateToProps !== 'function') {return;}var stateProps = mapStateToProps.call(this, state);var props = this.props; // Detect changes...
+    var hasChanges = false;for (var id in stateProps) {if (stateProps[id] !== props[id]) {hasChanges = true;break;}} // console.log('ModalProxifiedWindow:passStateToProps', {
+    //   modalId: this.modalId,
+    //   state,
+    //   props,
+    //   hasChanges,
+    //   stateProps,
+    // });
+    if (hasChanges) {this.setProps(stateProps);}};_proto.onStateChangeHandler = function onStateChangeHandler(state) {// console.log('ModalProxifiedWindow:onStateChangeHandler', {
+    //   modalId: this.modalId,
+    //   mapStateToProps: this.mapStateToProps,
+    //   state,
+    // });
+    this.passStateToProps(state, this.mapStateToProps);};_proto.__activateStateHandler = function __activateStateHandler() {var store = (_config_index_js__WEBPACK_IMPORTED_MODULE_3___default().app.store); // console.log('ModalProxifiedWindow:__activateStateHandler', {
+    //   store,
+    //   modalId: this.modalId,
+    //   mapStateToProps: this.mapStateToProps,
+    // });
+    if (typeof this.mapStateToProps === 'function') {// Register update handler...
+      this.__registered_onStateChangeHandler = this.onStateChangeHandler.bind(this);_ModalsProxy_index_ts__WEBPACK_IMPORTED_MODULE_2__.default.addStoreChangesHandler(this.__registered_onStateChangeHandler); // Set initial state props...
+      if (store) {var state = store.getState();this.passStateToProps(state, this.mapStateToProps);}}};_proto.__deactivateStateHandler = function __deactivateStateHandler() {// console.log('ModalProxifiedWindow:__activateStateHandler', {
+    //   modalId: this.modalId,
+    //   __registered_onStateChangeHandler: this.__registered_onStateChangeHandler,
+    // });
+    if (this.__registered_onStateChangeHandler) {_ModalsProxy_index_ts__WEBPACK_IMPORTED_MODULE_2__.default.removeStoreChangesHandler(this.__registered_onStateChangeHandler);}} // Render...
+  ;_proto.__render = function __render() {var children;if (typeof this.render === 'function') {children = this.render();}var updateProps = (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__.default)({}, this.props, { onDeactivate: this.onDeactivate, children: children }); // console.log('ModalProxifiedWindow:__render', {
     //   modalId: this.modalId,
     //   props: this.props,
     //   updateProps,
     // });
-    // debugger;
     if (!this.__mounted) {_ModalsProxy_index_ts__WEBPACK_IMPORTED_MODULE_2__.default.addModal(updateProps); // TODO: Use `ModalsProxy.getProxyModalNode(modalId)` & overrided `onComponentDidUpdate`?
-      if (typeof this.componentDidMount === 'function') {setTimeout(this.componentDidMount.bind(this), 0);}this.__mounted = true;} else {_ModalsProxy_index_ts__WEBPACK_IMPORTED_MODULE_2__.default.updateModal(this.modalId, updateProps);}};_proto.__restartUpdateTimer = function __restartUpdateTimer() {if (this.__updateTimer) {clearTimeout(this.__updateTimer);this.__updateTimer = null;}this.__updateTimer = setTimeout(this.__update, 20);};_proto.setState = function setState(data, cb) {// console.log('ModalProxifiedWindow:setState', { modalId: this.modalId, data, cb });
-    if (typeof data === 'function') {data = data(this.state);}Object.assign(this.__newState || (this.__newState = {}), data);if (typeof cb === 'function') {this.__updateCbQueue.push(cb);
-    }
-    this.__restartUpdateTimer();
-  };_proto.
-
-  setProps = function setProps(data, cb) {
-    // console.log('ModalProxifiedWindow:setProps', { modalId: this.modalId, data, cb });
-    if (typeof data === 'function') {
-      data = data(this.props);
-    }
-    Object.assign(this.__newProps || (this.__newProps = {}), data);
-    if (typeof cb === 'function') {
-      this.__updateCbQueue.push(cb);
-    }
-    this.__restartUpdateTimer();
-  };return ModalProxifiedWindow;}();
-
-
-
-/* harmony default export */ __webpack_exports__["default"] = (ModalProxifiedWindow);
+      if (typeof this.componentDidMount === 'function') {setTimeout(this.componentDidMount.bind(this), 0);}this.__mounted = true;} else {_ModalsProxy_index_ts__WEBPACK_IMPORTED_MODULE_2__.default.updateModal(this.modalId, updateProps);}} // Update...
+  ;_proto.__restartUpdateTimer = function __restartUpdateTimer() {// TODO: Control multiple subsequenced timer restarts? (Force update for n sequential restarts?)
+    if (this.__updateTimer) {clearTimeout(this.__updateTimer);this.__updateTimer = null;}this.__updateTimer = setTimeout(this.__update, 20);};_proto.setState = function setState(data, cb) {// console.log('ModalProxifiedWindow:setState', { modalId: this.modalId, data, cb });
+    if (typeof data === 'function') {data = data(this.state);}Object.assign(this.__newState || (this.__newState = {}), data);if (typeof cb === 'function') {this.__updateCbQueue.push(cb);}this.__restartUpdateTimer();};_proto.setProps = function setProps(data, cb) {// console.log('ModalProxifiedWindow:setProps', { modalId: this.modalId, data, cb });
+    if (typeof data === 'function') {data = data(this.props);}Object.assign(this.__newProps || (this.__newProps = {}), data);if (typeof cb === 'function') {this.__updateCbQueue.push(cb);}this.__restartUpdateTimer();};return ModalProxifiedWindow;}();/* harmony default export */ __webpack_exports__["default"] = (ModalProxifiedWindow);
 
 /***/ }),
 
@@ -3806,6 +3887,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+// import { Provider } from 'react-redux';
+// import { app as appConfig } from 'config';
 
 
 
@@ -4081,19 +4165,25 @@ ModalWindow = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_he
       // const { ModalPortal } = portalProps || {} // !!!
       // this.ModalPortal = ModalPortal // Save ModalPortal handler
       // console.log('ModalWindow:renderWindow', this.props.children)
-      return /*#__PURE__*/(
-        react__WEBPACK_IMPORTED_MODULE_4___default().createElement((react__WEBPACK_IMPORTED_MODULE_4___default().Fragment), null,
-        _this.renderHeader(), /*#__PURE__*/
-        react__WEBPACK_IMPORTED_MODULE_4___default().createElement("div", { className: cnModalWindow('Layout') },
-        _this.renderLeftContent(), /*#__PURE__*/
-        react__WEBPACK_IMPORTED_MODULE_4___default().createElement("div", { className: cnModalWindow('Main') },
-        _this.renderContent(),
-        _this.renderActions()))));
+      var content = /*#__PURE__*/
+      react__WEBPACK_IMPORTED_MODULE_4___default().createElement((react__WEBPACK_IMPORTED_MODULE_4___default().Fragment), null,
+      _this.renderHeader(), /*#__PURE__*/
+      react__WEBPACK_IMPORTED_MODULE_4___default().createElement("div", { className: cnModalWindow('Layout') },
+      _this.renderLeftContent(), /*#__PURE__*/
+      react__WEBPACK_IMPORTED_MODULE_4___default().createElement("div", { className: cnModalWindow('Main') },
+      _this.renderContent(),
+      _this.renderActions())));
 
 
 
 
 
+      // // XXX: Wrap with redux provider?
+      // const { store } = appConfig; // TODO: Move to `ModalPortal`?
+      // if (store) {
+      //   content = <Provider store={store}>{content}</Provider>;
+      // }
+      return content;
     });return _this;}var _proto = ModalWindow.prototype; // Lifecycle...
   _proto.componentDidUpdate = function componentDidUpdate(prevProps, prevState) {var node = this;var props = this.props,state = this.state;var onComponentDidUpdate = this.props.onComponentDidUpdate;if (typeof onComponentDidUpdate === 'function') {onComponentDidUpdate({ node: node, props: props, state: state, prevProps: prevProps, prevState: prevState });}} // Helpers...
   // Handlers...
@@ -4123,42 +4213,42 @@ ModalWindow = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_he
       this.renderWindow()));
 
 
-  };return ModalWindow;}((react__WEBPACK_IMPORTED_MODULE_4___default().PureComponent) /** @lends @ModalWindow.prototype */);(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3__.default)(ModalWindow, "propTypes", { useLoader: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().bool), loading: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().bool), // Show Loader flashback
-  onAction: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().func), // Event fired on action invoked (see `actions` prop)
-  // registerCallback: PropTypes.func, // ??? registerCallback(handler = this.someMethod) -- handler stored by parent component and called when detected click on pulldown menu -- prevents popup content closing
+  };return ModalWindow;}((react__WEBPACK_IMPORTED_MODULE_4___default().PureComponent) /** @lends @ModalWindow.prototype */);(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3__.default)(ModalWindow, "propTypes", { // registerCallback: PropTypes.func, // ??? registerCallback(handler = this.someMethod) -- handler stored by parent component and called when detected click on pulldown menu -- prevents popup content closing
   // setModalNodeRef: PropTypes.func, // ??? Demo?
-  width: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().string), // ModalWindow window width (predefined variants: xs, sm, md, lg, xl, xxl)
-  handleLoaderCancel: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().func), // Loader onCancel event handler
-  error: prop_types__WEBPACK_IMPORTED_MODULE_5___default().oneOfType([(prop_types__WEBPACK_IMPORTED_MODULE_5___default().string), prop_types__WEBPACK_IMPORTED_MODULE_5___default().arrayOf((prop_types__WEBPACK_IMPORTED_MODULE_5___default().string))]), // Error(s) strings to display above content
   actions: prop_types__WEBPACK_IMPORTED_MODULE_5___default().oneOfType([(prop_types__WEBPACK_IMPORTED_MODULE_5___default().array), (prop_types__WEBPACK_IMPORTED_MODULE_5___default().object)]), // Actions component(s) (TODO: `ActionsContext` must be used)
+  className: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().string), // ModalWindow class name
   closeOnCancelAction: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().bool), // Auto-close on `cancel` action event
   closeOnClickOutside: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().bool), // Close (cancel) modal by click outside modal window (on 'curtain')
   closeOnEscPressed: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().bool), // Close (cancel) modal on esc key pressed
   closeWithCloseButton: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().bool), // Close (cancel) modal by click on header 'Close' button
-  showCloseButton: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().bool), // Display close button in header
+  contentClassName: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().string), // Content element class name
+  error: prop_types__WEBPACK_IMPORTED_MODULE_5___default().oneOfType([(prop_types__WEBPACK_IMPORTED_MODULE_5___default().string), prop_types__WEBPACK_IMPORTED_MODULE_5___default().arrayOf((prop_types__WEBPACK_IMPORTED_MODULE_5___default().string))]), // Error(s) strings to display above content
+  handleLoaderCancel: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().func), // Loader onCancel event handler
+  handleOpenState: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().func), // Event fired on modal open state change (update external open/close state) ({ open, id } => void)
+  headerTheme: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().string), // Header theme (using `theme` if not specified)
   icon: prop_types__WEBPACK_IMPORTED_MODULE_5___default().oneOfType([(prop_types__WEBPACK_IMPORTED_MODULE_5___default().string), (prop_types__WEBPACK_IMPORTED_MODULE_5___default().object)]), // Show icon in header
+  iconTheme: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().string), // Icon theme (using `theme` if not specified)
   id: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().string), // ModalWindow id
   leftContent: prop_types__WEBPACK_IMPORTED_MODULE_5___default().oneOfType([(prop_types__WEBPACK_IMPORTED_MODULE_5___default().string), (prop_types__WEBPACK_IMPORTED_MODULE_5___default().object)]), // Content at left of main content and actions (ideal place for large visual icon)
+  loaderTheme: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().string), // Loader theme ('MediumDark' is default)
+  loading: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().bool), // Show Loader flashback
+  onAction: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().func), // Event fired on action invoked (see `actions` prop)
   onActivate: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().func), // Event fired on activate (before open)
   onClickOutside: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().func), // Event fired on click outside modal
+  onClose: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().func), // Event fired on modal close
   onCloseButtonClick: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().func), // Event fired on header 'Close' button click
   onDeactivate: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().func), // Event fired on deactivate (unmounting from dom)
   onEscPressed: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().func), // Event fired on esc key pressed
   onOpen: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().func), // Event fired on modal open
-  onClose: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().func), // Event fired on modal close
-  handleOpenState: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().func), // Event fired on modal open state change (update external open/close state) ({ open, id } => void)
   open: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().bool), // Show modal by default
-  title: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().string), // ModalWindow title
-  className: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().string), // ModalWindow class name
-  contentClassName: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().string), // Content element class name
-  windowClassName: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().string), // ModalWindow window class name
-  wrapperClassName: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().string), // ModalWindow wrapper class name
+  showCloseButton: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().bool), // Display close button in header
   theme: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().string), // ModalWindow theme (default theme for all other themed elements, see `*Theme`)
-  iconTheme: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().string), // Icon theme (using `theme` if not specified)
+  title: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().string), // ModalWindow title
+  useLoader: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().bool), width: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().string), // ModalWindow window width (predefined variants: xs, sm, md, lg, xl, xxl)
+  windowClassName: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().string), // ModalWindow window class name
   windowTheme: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().string), // Window theme (using `theme` if not specified)
-  headerTheme: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().string), // Header theme (using `theme` if not specified)
-  wrapperTheme: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().string), // Wrapper (back-curtain) theme (using `theme` if not specified)
-  loaderTheme: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().string) // Loader theme ('MediumDark' is default)
+  wrapperClassName: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().string), // ModalWindow wrapper class name
+  wrapperTheme: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().string) // Wrapper (back-curtain) theme (using `theme` if not specified)
 });(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3__.default)(ModalWindow, "defaultProps", { closeOnClickOutside: true, // Close (with `selfCloseActionId` action id) modal by outisde-click.
   closeOnEscPressed: true, // Close (with `selfCloseActionId` action id) modal by esc-key.
   closeWithCloseButton: true, // Close (with `selfCloseActionId` action id) with 'Close button' (if present in layout -- see `showCloseButton`)
@@ -4207,6 +4297,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+// import { Provider } from 'react-redux';
+// import { app as appConfig } from 'config';
 
 
 
@@ -4294,7 +4386,7 @@ ModalsController = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runti
 
 
     function (modal /*: React.ReactNode*/) {// Add item to modals stack
-      console.log('ModalsController:registerModal', modal.props.type, modal.props.id);
+      // console.log('ModalsController:registerModal', modal.props.type, modal.props.id);
       // debugger;
       if (!_this.modalsStack.includes(modal)) {// Add to stack if not exist
         _this.modalsStack.push(modal);
@@ -4302,7 +4394,7 @@ ModalsController = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runti
     });(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3__.default)((0,_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1__.default)(_this), "unregisterModal",
 
     function (modal /*: React.ReactNode*/) {// Remove item from modals stack
-      console.log('ModalsController:unregisterModal', modal.props.type, modal.props.id);
+      // console.log('ModalsController:unregisterModal', modal.props.type, modal.props.id)
       // debugger;
       var idx = _this.modalsStack.indexOf(modal);
       if (idx !== -1) {// Remove if found...
@@ -4436,8 +4528,8 @@ ModalsController = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runti
       if (typeof id === 'object' && id.props) {
         id = id.props.modalId || id.props.id;
       }
-      console.log('ModalsController:removeProxyModalNode', id);
-      debugger;
+      // console.log('ModalsController:removeProxyModalNode', id);
+      // debugger;
       var modalNode = _this.proxyModalNodes[id];
       if (modalNode) {
         if (typeof modalNode.onRemove === 'function') {
@@ -4555,8 +4647,16 @@ ModalsController = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runti
      *     <div {...renderProps} />
      *   </ModalsContextProvider>
      * )
-     */return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_error_boundary__WEBPACK_IMPORTED_MODULE_10__.ErrorBoundary, { FallbackComponent: _ErrorContainer_ErrorContainer__WEBPACK_IMPORTED_MODULE_9__.default, onError: this.onCatchedError }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createElement("div", renderProps, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createElement("div", { className: cnModalsController('PortalProxy'), ref: this.setPortalProxyRef }, this.renderProxyModals())));};_proto.render = function render() {var node = document.body; // Render as new node in top level of dom tree
-    var controller = this.renderModalsController();var usePortal = this.props.usePortal;var content = usePortal ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_portal__WEBPACK_IMPORTED_MODULE_6__.Portal, { node: node }, controller) : controller;return content;};return ModalsController;}(react__WEBPACK_IMPORTED_MODULE_4__.PureComponent /** @lends @ModalsController.prototype */);(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3__.default)(ModalsController, "propTypes", { usePortal: prop_types__WEBPACK_IMPORTED_MODULE_5__.bool // Render container at end of dom tree root level
+     */return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_error_boundary__WEBPACK_IMPORTED_MODULE_10__.ErrorBoundary, { FallbackComponent: _ErrorContainer_ErrorContainer__WEBPACK_IMPORTED_MODULE_9__.default, onError: this.onCatchedError }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createElement("div", renderProps, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createElement("div", { className: cnModalsController('PortalProxy'), ref: this.setPortalProxyRef }, this.renderProxyModals())));};_proto.render = function render() {var content = this.renderModalsController();var usePortal = this.props.usePortal; // const { store } = appConfig;
+    // if (store) {
+    //   content = <Provider store={store}>{content}</Provider>;
+    // }
+    if (usePortal) {// console.log('ModalsController:render', {
+      //   store,
+      //   Provider,
+      // });
+      var node = document.body; // Render as new node in top level of dom tree
+      content = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_portal__WEBPACK_IMPORTED_MODULE_6__.Portal, { node: node }, content);}return content;};return ModalsController;}(react__WEBPACK_IMPORTED_MODULE_4__.PureComponent /** @lends @ModalsController.prototype */);(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3__.default)(ModalsController, "propTypes", { usePortal: prop_types__WEBPACK_IMPORTED_MODULE_5__.bool // Render container at end of dom tree root level
 });/* harmony default export */ __webpack_exports__["default"] = (ModalsController);
 
 /***/ }),
@@ -4576,7 +4676,7 @@ __webpack_require__.r(__webpack_exports__);
  /** @module ModalsProxy
  *  @class ModalsProxy
  *  @since 2021.05.14, 14:38
- *  @changed 2021.05.27, 14:03
+ *  @changed 2021.05.31, 16:57
  */
 
 var
@@ -4587,12 +4687,15 @@ ModalsProxy = /*#__PURE__*/function () {var _proto = ModalsProxy.prototype;
   // List of modals (passed to `ModalsController` state to direct render
   // Will be initialized with `ModalsController` instance reference promise in `config/modals`.
   _proto.
+
   getProxyModalNode = function getProxyModalNode(id) {
-    return this.modalsController.getProxyModalNode(id);
+    return this._modalsController.getProxyModalNode(id);
   };_proto.
 
-  updateProxyModalsList = function updateProxyModalsList() {
-    return this.modalsController.updateProxyModalsList(this.proxyModalsList);
+  updateProxyModalsList = function updateProxyModalsList() {// Using `this._modalsController.updateProxyModalsList`
+    if (this._modalsController) {
+      return this._modalsController.updateProxyModalsList(this._proxyModalsList);
+    }
   };
 
 
@@ -4603,7 +4706,44 @@ ModalsProxy = /*#__PURE__*/function () {var _proto = ModalsProxy.prototype;
 
 
 
-  function ModalsProxy() {var _this = this;(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1__.default)(this, "inited", false);(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1__.default)(this, "proxyModalsList", []);(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1__.default)(this, "modalsController", null);(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1__.default)(this, "initialize", function () {_this.modalsController = (_config_index_js__WEBPACK_IMPORTED_MODULE_2___default().modals.controller);_this.inited = true;if (_this.proxyModalsList.length) {_this.updateProxyModalsList();}});(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1__.default)(this, "onModalDeactivate",
+
+  function ModalsProxy() {var _this = this;(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1__.default)(this, "_inited", false);(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1__.default)(this, "_proxyModalsList", []);(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1__.default)(this, "_modalsController", null);(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1__.default)(this, "_storeHandlers", []);(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1__.default)(this, "initialize", function () {_this._modalsController = (_config_index_js__WEBPACK_IMPORTED_MODULE_2___default().modals.controller);_this._inited = true;if (_this._proxyModalsList.length) {_this.updateProxyModalsList(); // Using `this._modalsController.updateProxyModalsList`
+      }_this._initStore();});(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1__.default)(this, "_onStoreChange",
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    function () {var
+      store = (_config_index_js__WEBPACK_IMPORTED_MODULE_2___default().app.store);
+      var state = store.getState();
+      _this._storeHandlers.forEach(function (cb) {
+        typeof cb === 'function' && cb(state);
+      });
+    });(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1__.default)(this, "onModalDeactivate",
+
+
+
+
+
+
+
+
 
 
 
@@ -4696,7 +4836,8 @@ ModalsProxy = /*#__PURE__*/function () {var _proto = ModalsProxy.prototype;
       if (typeof onModalDeactivate === 'function') {
         onModalDeactivate(data);
       }
-    });var initPromise = this.getInitPromise();initPromise.then(this.initialize);}_proto.getInitPromise = function getInitPromise() {return (_config_index_js__WEBPACK_IMPORTED_MODULE_2___default().modals.initPromise);};_proto.getModalsController = function getModalsController() {return this.modalsController;} /* External modal proxy interface...
+    });var initPromise = this.getInitPromise();initPromise.then(this.initialize);}_proto.getInitPromise = function getInitPromise() {return (_config_index_js__WEBPACK_IMPORTED_MODULE_2___default().modals.initPromise);};_proto.getModalsController = function getModalsController() {return this._modalsController;} // Store methods...
+  ;_proto._initStore = function _initStore() {var store = (_config_index_js__WEBPACK_IMPORTED_MODULE_2___default().app.store);if (store) {store.subscribe(this._onStoreChange);}};_proto.addStoreChangesHandler = function addStoreChangesHandler(cb) {this._storeHandlers.push(cb);};_proto.removeStoreChangesHandler = function removeStoreChangesHandler(cb) {var idx = this._storeHandlers.indexOf(cb);if (idx !== -1) {this._storeHandlers.splice(idx, 1);}} /* External modal proxy interface...
    *
    * - addModal
    * - removeModal
@@ -4706,15 +4847,27 @@ ModalsProxy = /*#__PURE__*/function () {var _proto = ModalsProxy.prototype;
    *
    * regexp: \<\(addModal\|removeModal\|getModal\|isModalExists\|updateModal\)\>
    *
-   */;_proto.addModal = function addModal(modalData) {var id = modalData.modalId || modalData.id; // || 'modal' + n;
+   */;_proto.addModal = function addModal(modalData) {var modalId = modalData.modalId || modalData.id; // || 'modal' + n;
     // Check not-empty id and id uniqueness
-    if (!id || this.getModal(id)) {var error = new Error('An unique modalId must be specified');console.error('ModalsController:addModal: error', { error: error, modalData: modalData }); // eslint-disable-line no-console
+    if (!modalId || this.getModal(modalId)) {var error = new Error('An unique modalId must be specified');console.error('ModalsController:addModal: error', { error: error, modalData: modalData }); // eslint-disable-line no-console
       debugger; // eslint-disable-line no-debugger
       throw error;} // Extend modal data...
-    modalData = (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__.default)({ key: id, id: id }, modalData, { __saved__OnDeactivate: modalData.onDeactivate, // Save passed handler, using in `onModalDeactivate` handler, see below
+    modalData = (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__.default)({ key: modalId, id: modalId }, modalData, { __saved__OnDeactivate: modalData.onDeactivate, // Save passed handler, using in `onModalDeactivate` handler, see below
       onDeactivate: this.onModalDeactivate // Overwrite with our own deactivate handler
-    });this.proxyModalsList = this.proxyModalsList.concat(modalData);this.updateProxyModalsList();};_proto.removeModal = function removeModal(modalId) {// TODO: Call some actions (on close modal)?
-    this.proxyModalsList = this.proxyModalsList.filter(function (modalData) {return modalData.modalId !== modalId;});this.updateProxyModalsList();this.modalsController.removeProxyModalNode(modalId);};_proto.getModal = function getModal(modalId) {var proxyModalsList = this.proxyModalsList;var found = proxyModalsList.find(function (modalData) {return modalData.modalId === modalId;});return found;};_proto.isModalExists = function isModalExists(modalId) {var found = this.getModal(modalId);return !!found;};_proto.updateModal = function updateModal(modalId, options) {var newModals = this.proxyModalsList.map(function (modalData) {if (modalData.modalId === modalId) {modalData = (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__.default)({}, modalData, options);}return modalData;});this.proxyModalsList = newModals;this.updateProxyModalsList();};return ModalsProxy;}();var ModalsProxySingleton = new ModalsProxy();/* harmony default export */ __webpack_exports__["default"] = (ModalsProxySingleton);
+    }); // console.log('ModalsProxy:addModal', {
+    //   modalId,
+    //   modalData,
+    // });
+    this._proxyModalsList = this._proxyModalsList.concat(modalData);this.updateProxyModalsList(); // Using `this._modalsController.updateProxyModalsList`
+  };_proto.removeModal = function removeModal(modalId) {// console.log('ModalsProxy:addModal', {
+    //   modalId,
+    //   'this._proxyModalsList': this._proxyModalsList,
+    // });
+    // TODO: Call some actions (on close modal)?
+    this._proxyModalsList = this._proxyModalsList.filter(function (modalData) {return modalData.modalId !== modalId;});this.updateProxyModalsList(); // Using `this._modalsController.updateProxyModalsList`
+    this._modalsController.removeProxyModalNode(modalId);};_proto.getModal = function getModal(modalId) {var _proxyModalsList = this._proxyModalsList;var found = _proxyModalsList.find(function (modalData) {return modalData.modalId === modalId;});return found;};_proto.isModalExists = function isModalExists(modalId) {var found = this.getModal(modalId);return !!found;};_proto.updateModal = function updateModal(modalId, options) {var newModals = this._proxyModalsList.map(function (modalData) {if (modalData.modalId === modalId) {modalData = (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__.default)({}, modalData, options);}return modalData;});this._proxyModalsList = newModals;this.updateProxyModalsList(); // Using `this._modalsController.updateProxyModalsList`
+  } // TODO: Implement `mapStateToProps` (as method of `ModalProxifiedWindow`?)
+  ;return ModalsProxy;}();var ModalsProxySingleton = new ModalsProxy();/* harmony default export */ __webpack_exports__["default"] = (ModalsProxySingleton);
 
 /***/ }),
 
@@ -8732,6 +8885,8 @@ FormText = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_helpe
 
 
 
+
+
     function (event) {var _this$props =
 
 
@@ -8740,11 +8895,11 @@ FormText = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_helpe
       if (!disabled && onClick && typeof onClick === 'function') {
         onClick(event);
       }
-    });return _this;}var _proto = FormText.prototype;_proto.getClassName = function getClassName() {var id = this.props.id;var classList = cnFormText({ id: id }, [this.props.className]);return classList;} // Handlers...
+    });return _this;}var _proto = FormText.prototype;_proto.getClassName = function getClassName() {var _this$props2 = this.props,id = _this$props2.id,wrap = _this$props2.wrap;var classList = cnFormText({ id: id, wrap: wrap }, [this.props.className]);return classList;} // Handlers...
   ;
   // Render...
   _proto.
-  render = function render() {var _this$props2 =
+  render = function render() {var _this$props3 =
 
 
 
@@ -8752,7 +8907,7 @@ FormText = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_helpe
 
 
 
-    this.props,id = _this$props2.id,disabled = _this$props2.disabled,text = _this$props2.text,children = _this$props2.children,title = _this$props2.title;
+    this.props,id = _this$props3.id,disabled = _this$props3.disabled,text = _this$props3.text,children = _this$props3.children,title = _this$props3.title;
 
     var renderProps = {
       id: id,
@@ -13374,10 +13529,11 @@ __webpack_require__.r(__webpack_exports__);
 /** @module build
  *  @desc Library exportable ditributive
  *  @since 2020.05.19, 17:16
- *  @changed 2020.12.28, 01:09
+ *  @changed 2021.05.31, 16:24
  */
 
 
+// import connect from 'react-redux/lib/connect/connect'; // DEBUG: Test redux state
 
 // export config from 'config';
 
@@ -13399,7 +13555,20 @@ __webpack_require__.r(__webpack_exports__);
 
 
 // TODO: Use WebUiCoreContext?
-var WebUiCoreRoot = function WebUiCoreRoot(_ref) {var children = _ref.children,autoModalsController = _ref.autoModalsController;
+var WebUiCoreRoot = function WebUiCoreRoot(_ref)
+
+
+
+
+
+{var children = _ref.children,autoModalsController = _ref.autoModalsController;
+  // console.log('WebUiCoreRoot', { // DEBUG: Test redux state
+  //   'config.app.store': config.app.store,
+  //   // store,
+  //   stateTest,
+  //   models,
+  // });
+  // debugger;
   return /*#__PURE__*/(
     react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null,
     children,
@@ -13407,6 +13576,17 @@ var WebUiCoreRoot = function WebUiCoreRoot(_ref) {var children = _ref.children,a
 
 
 };
+
+// // DEBUG: Test redux state
+// const mapStateToProps = store => ({
+//   // language: store.language.components.adminPage.terminals,
+//   // user: store.user,
+//   // models: store.printerModels.models,
+//   // store: store,
+//   stateTest: store && store.demo && store.demo.stateTest,
+//   models: store && store.printerModels && store.printerModels.models,
+// });
+// export default connect(mapStateToProps)(WebUiCoreRoot);
 /* harmony default export */ __webpack_exports__["default"] = (WebUiCoreRoot);
 }();
 module.exports = __webpack_exports__;
