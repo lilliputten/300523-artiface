@@ -1,5 +1,7 @@
 # CHANGELOG
 
+- 2021.05.31, 22:03 -- Use redux store (added package dependency), emulate store in demo mode, test store in ModalProxifiedWindow fixture. ModalProxifiedWindow: added state activate/deactivate methods, added `passStateToProps`, `onStateChangeHandler` (based on client method `mapStateToProps`), fixed minor bugs.
+- 2021.05.31, 21:58 -- Minor changes: Menu: safe options list processing (in `setChildrenItemsFromProps`). FormText: wrap modifier. ModalWindow: fixed modal width styles.
 - 2021.05.27, 17:00 -- v.0.3.5: Added ModalProxifiedWindow component.
 - 2021.05.17, 15:55 -- MenuItem: Fix styles for hovered\checked states. ModalWindow: Pass all custom handler props ('on...') to `ModalPortal`. ModalPortal: Process `onChildAction` for child content actions (via `ActionsContextProvider`). Process custom action callbacks (with method name masks 'on...').
 - 2021.05.14, 15:19 -- v.0.3.4: Using `ModalProxy`.
