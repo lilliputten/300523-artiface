@@ -3774,6 +3774,205 @@
           opacity: .9;
         }
 
+/** @module FormSeparator.styles
+ *  @class FormSeparator
+ *  @since 2021.02.20, 13:40
+ *  @changed 2021.02.20, 13:40
+ */
+
+.FormSeparator {
+  position: relative;
+  vertical-align: bottom;
+  height: 32px;
+  line-height: 32px;
+  background-color: #999;
+  /* background: repeating-linear-gradient(90deg, #fff 3px, #fff 4px, #000 4px, #000 7px);*/
+  /* background: repeating-linear-gradient(0deg, #fff 3px, #fff 4px, #000 4px, #000 7px);*/
+  /* background: repeating-linear-gradient(90deg, #fff, #fff 1px, #000 1px, #000 2px);*/
+  background: repeating-linear-gradient(180deg, #fff 1px, #fff 2px, #000 2px, #000 3px);
+  opacity: .15;
+  width: 5px;
+}
+
+/** @module FormContainer.pcss
+ *  @class FormContainer
+ *  @since 2021.02.20, 16:55
+ *  @changed 2021.02.20, 16:56
+ */
+
+.FormContainer {
+
+  position: relative;
+
+  margin-left: 4px;
+  margin-right: 4px;
+
+}
+
+/** @module FormGroup.pcss
+ *  @class FormGroup
+ *  @since 2020.07.20, 19:24
+ *  @changed 2021.01.20, 22:00
+ */
+
+.FormGroup {
+}
+
+/** @module FormGroup-Layout.pcss
+ *  @class FormGroup
+ *  @since 2021.02.20, 16:45
+ *  @changed 2021.02.20, 16:45
+ */
+
+.FormGroup {
+
+  position: relative;
+
+  margin-left: -4px;
+  margin-right: -4px;
+
+}
+
+/* Nested items/groups...*/
+
+.FormGroup > .FormItem { /* ???*/
+    margin: 4px;
+  }
+
+/* No margins for nested groups*/
+
+.FormGroup > .FormGroup.FormItem {
+    margin: 0;
+  }
+
+.FormGroup_noSpace {
+    margin: 0;
+  }
+
+/* &_separated {} // ???*/
+
+.FormGroup_padded { /* With inner space*/
+    padding: 4px;
+  }
+
+.FormGroup_spaced { /* With outer space*/
+    /* Vertical only?*/
+    margin-top: 4px;
+    margin-bottom: 4px;
+  }
+
+.FormGroup .FormGroup > .FormRadio + .FormLabel { /* Adjust inner spacing for radio + label pairs*/
+    margin-left: -6px;
+  }
+
+.FormGroup_flow > .FormItem:not(.FormSeparator) {
+        min-width: 32px; /* ??? Hint for limiting the maximum width (overflow causes cropping items outer glow on interactive control events).*/
+      }
+
+.FormGroup_flow > .FormItem {
+      display: block;
+
+}
+
+.FormGroup_flow > .FormItem_fill {
+      -ms-flex: 1 1;
+          flex: 1 1;
+    }
+
+.FormGroup_flow.FormGroup_alignItems_center {
+        -ms-flex-pack: center;
+            justify-content: center;
+      }
+
+.FormGroup_flow.FormGroup_wrap {
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap;
+    }
+
+.FormGroup_flow, .FormGroup_flow.FormItem { /* Override nested FormItem display:block rule*/
+      display: -ms-flexbox;
+      display: flex;
+    }
+
+.FormGroup > .FormGroup_align_right { /* flow*/
+      /* Align to right*/
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+      /* align-self: flex-end;*/
+      -ms-flex: 1 1;
+          flex: 1 1;
+    }
+
+/** @module FormGroup-Variations.pcss
+ *  @class FormGroup
+ *  @since 2021.02.20, 16:45
+ *  @changed 2021.02.20, 16:45
+ */
+
+.FormGroup_shaded {
+    /* background-color: $neutralExtraLightColor;*/
+    background-color: rgba(204, 204, 204, 0.3);
+  }
+
+.FormGroup_stack {
+    -ms-flex-wrap: nowrap;
+        flex-wrap: nowrap;
+    -ms-flex-align: stretch;
+        align-items: stretch;
+    -ms-flex-direction: column;
+        flex-direction: column;
+  }
+
+.FormGroup_stack, .FormGroup_stack.FormItem { /* Override nested FormItem display:block rule*/
+      display: -ms-flexbox;
+      display: flex;
+    }
+
+.FormGroup_noWrap {
+    white-space: nowrap;
+    -ms-flex-wrap: nowrap;
+        flex-wrap: nowrap;
+  }
+
+/** @module FormPager.styles
+ *  @class FormPager
+ *  @since 2021.06.07, 14:46
+ *  @changed 2021.06.07, 15:31
+ */
+
+/* border: 1px solid red;*/
+
+.FormPager_fullWidth {
+    width: 100%;
+  }
+
+/* Default align: center*/
+
+.FormPager .FormGroup { /* Inner form group*/
+    display: block;
+    text-align: center;
+    /* margin-top: 10px; // ???*/
+  }
+
+.FormPager_align_left .FormGroup {
+      text-align: left;
+    }
+
+.FormPager_align_right .FormGroup {
+      text-align: right;
+    }
+
+.FormPager-Item {
+    min-width: 32px;
+    text-align: center;
+  }
+
+.FormPager-Item_type_specialMore .FormButton-Text {
+          color: #ccc;
+        }
+
 /** @module FormLabel.styles
  *  @since 2020.10.06, 23:45
  *  @changed 2020.10.06, 23:46
@@ -3854,26 +4053,6 @@ label.FormLabel-Control[for] {
 
 .FormSpacer {
   height: 15px;
-}
-
-/** @module FormSeparator.styles
- *  @class FormSeparator
- *  @since 2021.02.20, 13:40
- *  @changed 2021.02.20, 13:40
- */
-
-.FormSeparator {
-  position: relative;
-  vertical-align: bottom;
-  height: 32px;
-  line-height: 32px;
-  background-color: #999;
-  /* background: repeating-linear-gradient(90deg, #fff 3px, #fff 4px, #000 4px, #000 7px);*/
-  /* background: repeating-linear-gradient(0deg, #fff 3px, #fff 4px, #000 4px, #000 7px);*/
-  /* background: repeating-linear-gradient(90deg, #fff, #fff 1px, #000 1px, #000 2px);*/
-  background: repeating-linear-gradient(180deg, #fff 1px, #fff 2px, #000 2px, #000 3px);
-  opacity: .15;
-  width: 5px;
 }
 
 /** @module FormText.styles
@@ -8030,144 +8209,6 @@ input.FormTextInput-Control:-internal-autofill-previewed,
     border: none;
     display: block;
     /* NOTE: Use DateTimeSelector styles for tunings*/
-  }
-
-/** @module FormContainer.pcss
- *  @class FormContainer
- *  @since 2021.02.20, 16:55
- *  @changed 2021.02.20, 16:56
- */
-
-.FormContainer {
-
-  position: relative;
-
-  margin-left: 4px;
-  margin-right: 4px;
-
-}
-
-/** @module FormGroup.pcss
- *  @class FormGroup
- *  @since 2020.07.20, 19:24
- *  @changed 2021.01.20, 22:00
- */
-
-.FormGroup {
-}
-
-/** @module FormGroup-Layout.pcss
- *  @class FormGroup
- *  @since 2021.02.20, 16:45
- *  @changed 2021.02.20, 16:45
- */
-
-.FormGroup {
-
-  position: relative;
-
-  margin-left: -4px;
-  margin-right: -4px;
-
-}
-
-/* Nested items/groups...*/
-
-.FormGroup > .FormItem { /* ???*/
-    margin: 4px;
-  }
-
-/* No margins for nested groups*/
-
-.FormGroup > .FormGroup.FormItem {
-    margin: 0;
-  }
-
-/* &_separated {} // ???*/
-
-.FormGroup_padded { /* With inner space*/
-    padding: 4px;
-  }
-
-.FormGroup_spaced { /* With outer space*/
-    /* Vertical only?*/
-    margin-top: 4px;
-    margin-bottom: 4px;
-  }
-
-.FormGroup .FormGroup > .FormRadio + .FormLabel { /* Adjust inner spacing for radio + label pairs*/
-    margin-left: -6px;
-  }
-
-.FormGroup_flow > .FormItem:not(.FormSeparator) {
-        min-width: 32px; /* ??? Hint for limiting the maximum width (overflow causes cropping items outer glow on interactive control events).*/
-      }
-
-.FormGroup_flow > .FormItem {
-      display: block;
-
-}
-
-.FormGroup_flow > .FormItem_fill {
-      -ms-flex: 1 1;
-          flex: 1 1;
-    }
-
-.FormGroup_flow.FormGroup_alignItems_center {
-        -ms-flex-pack: center;
-            justify-content: center;
-      }
-
-.FormGroup_flow.FormGroup_wrap {
-      -ms-flex-wrap: wrap;
-          flex-wrap: wrap;
-    }
-
-.FormGroup_flow, .FormGroup_flow.FormItem { /* Override nested FormItem display:block rule*/
-      display: -ms-flexbox;
-      display: flex;
-    }
-
-.FormGroup > .FormGroup_align_right { /* flow*/
-      /* Align to right*/
-      -ms-flex-pack: end;
-          justify-content: flex-end;
-      -ms-flex-align: end;
-          align-items: flex-end;
-      /* align-self: flex-end;*/
-      -ms-flex: 1 1;
-          flex: 1 1;
-    }
-
-/** @module FormGroup-Variations.pcss
- *  @class FormGroup
- *  @since 2021.02.20, 16:45
- *  @changed 2021.02.20, 16:45
- */
-
-.FormGroup_shaded {
-    /* background-color: $neutralExtraLightColor;*/
-    background-color: rgba(204, 204, 204, 0.3);
-  }
-
-.FormGroup_stack {
-    -ms-flex-wrap: nowrap;
-        flex-wrap: nowrap;
-    -ms-flex-align: stretch;
-        align-items: stretch;
-    -ms-flex-direction: column;
-        flex-direction: column;
-  }
-
-.FormGroup_stack, .FormGroup_stack.FormItem { /* Override nested FormItem display:block rule*/
-      display: -ms-flexbox;
-      display: flex;
-    }
-
-.FormGroup_noWrap {
-    white-space: nowrap;
-    -ms-flex-wrap: nowrap;
-        flex-wrap: nowrap;
   }
 
 /** @module FormDateRange.styles
