@@ -84,6 +84,7 @@ const lang = {
     // lang: 'en',
     // lang: 'ru',
     common: {
+      test: 'Lang: Test string',
       okButton: 'Lang: Ok',
       cancelButton: 'Lang: Cancel',
       loading: 'Lang: Loading',
@@ -158,6 +159,7 @@ export function demoReducer(state = demoInitialState, action) {
 }
 const appReducer = combineReducers({
   demo: demoReducer,
+  language: () => lang,
 });
 const rootReducer = (state, action) => {
   if (action.type === 'DESTROY_STORE') {

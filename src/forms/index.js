@@ -1,7 +1,7 @@
 /** @module forms
  *  @desc Form components
  *  @since 2020.07.20, 19:21
- *  @changed 2021.04.09, 23:48
+ *  @changed 2021.06.07, 14:46
  */
 
 // Form elements...
@@ -14,6 +14,8 @@ export { default as FormButton } from './FormButton';
 export { default as FormItemHOC } from './FormItemHOC';
 
 export { default as FormItemDummy } from './FormItemDummy'; // DEBUG: Demo element
+
+export { default as FormPager } from './FormPager';
 
 export { default as FormLabel } from './FormLabel';
 

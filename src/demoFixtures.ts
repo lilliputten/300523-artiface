@@ -1,7 +1,7 @@
 /** @module demoFixtures
  *  @desc Demo fixtures list
  *  @since 2021.02.15, 18:05
- *  @changed 2021.05.07, 15:32
+ *  @changed 2021.06.07, 14:48
  */
 
 // import * as build from './build'
@@ -32,6 +32,8 @@ const demoFixtures: TFixturesList = {
   Menu: require('elements/Menu/Menu.fixture'),
   MenuItem: require('elements/MenuItem/MenuItem.fixture'),
   MenuItemSeparator: require('elements/MenuItemSeparator/MenuItemSeparator.fixture'),
+
+  FormPager: require('forms/FormPager/FormPager.fixture'),
 
   FormButton: require('forms/FormButton/FormButton.fixture'),
   FormButtonThemes: require('forms/FormButton/FormButton-Themes.fixture'),

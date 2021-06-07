@@ -1,0 +1,39 @@
+/** @module FormPager.styles
+ *  @class FormPager
+ *  @since 2021.06.07, 14:46
+ *  @changed 2021.06.07, 15:31
+ */
+
+.FormPager {
+  border: 1px solid red;
+  &_fullWidth {
+    width: 100%;
+  }
+  // Default align: center
+  .FormGroup { // Inner form group
+    display: block;
+    text-align: center;
+    // margin-top: 10px; // ???
+  }
+  &_align_left {
+    .FormGroup {
+      text-align: left;
+    }
+  }
+  &_align_right {
+    .FormGroup {
+      text-align: right;
+    }
+  }
+  &-Item {
+    min-width: $(formItemHeight)px;
+    text-align: center;
+    &_type {
+      &_specialMore {
+        .FormButton-Text {
+          color: $neutralColor;
+        }
+      }
+    }
+  }
+}
