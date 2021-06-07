@@ -57,7 +57,7 @@ class FormPager extends React.PureComponent /** @lends @FormPager.prototype */ {
 
   static propTypes = {
     onPageSelect: PropTypes.func,
-    lang: PropTypes.objectOf(PropTypes.object), // From state
+    // lang: PropTypes.objectOf(PropTypes.object), // From state
     showPage: PropTypes.number,
     totalPages: PropTypes.number,
     noSpace: PropTypes.bool,
