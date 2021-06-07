@@ -440,9 +440,9 @@ module.exports = { // Common-used build variables...
   DEV_DEBUG: DEV_DEBUG,
 
   THEME: "default",
-  buildTag: "v.0.3.6-210607-1558-build-dev-default",
-  timestamp: "2021.06.07, 15:58",
-  timetag: "210607-1558",
+  buildTag: "v.0.3.6-210607-1616-build-dev-default",
+  timestamp: "2021.06.07, 16:16",
+  timetag: "210607-1616",
   version: "0.3.6" };
 
 /***/ }),
@@ -8334,7 +8334,7 @@ FormPager = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_help
 
 
 
-  };return FormPager;}((react__WEBPACK_IMPORTED_MODULE_4___default().PureComponent) /** @lends @FormPager.prototype */);(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2__.default)(FormPager, "propTypes", { onPageSelect: (prop_types__WEBPACK_IMPORTED_MODULE_7___default().func), lang: prop_types__WEBPACK_IMPORTED_MODULE_7___default().objectOf((prop_types__WEBPACK_IMPORTED_MODULE_7___default().object)), // From state
+  };return FormPager;}((react__WEBPACK_IMPORTED_MODULE_4___default().PureComponent) /** @lends @FormPager.prototype */);(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2__.default)(FormPager, "propTypes", { onPageSelect: (prop_types__WEBPACK_IMPORTED_MODULE_7___default().func), // lang: PropTypes.objectOf(PropTypes.object), // From state
   showPage: (prop_types__WEBPACK_IMPORTED_MODULE_7___default().number), totalPages: (prop_types__WEBPACK_IMPORTED_MODULE_7___default().number), noSpace: (prop_types__WEBPACK_IMPORTED_MODULE_7___default().bool), fullWidth: (prop_types__WEBPACK_IMPORTED_MODULE_7___default().bool), align: (prop_types__WEBPACK_IMPORTED_MODULE_7___default().string), className: (prop_types__WEBPACK_IMPORTED_MODULE_7___default().string) });
 
 
