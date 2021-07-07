@@ -1,7 +1,7 @@
 /** @module FormSelect
  *  @class FormSelect
  *  @since 2020.10.28, 22:49
- *  @changed 2021.02.15, 18:28
+ *  @changed 2021.07.07, 19:54
  *
  *  TODO 2020.12.16, 23:07 -- Add hidden html form element (for form submission)
  */
@@ -48,6 +48,7 @@ class FormSelect extends React.PureComponent /** @lends @FormSelect.prototype */
     text: PropTypes.string,
     title: PropTypes.string,
     value: PropTypes.oneOfType([ PropTypes.string, PropTypes.number ]),
+    style: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
   }
 
   // Lifecycle methods...
@@ -139,11 +140,11 @@ class FormSelect extends React.PureComponent /** @lends @FormSelect.prototype */
       fullWidth = true,
       disabled,
       inputId,
+      maxWidth,
     } = this.props;
-    const {
-      open,
-    } = this.state;
+    const { open } = this.state;
     const buttonText = this.getItemsText() || placeholder || text;
+    const style = { maxWidth };
     return (
       <FormButton
         inputId={inputId}
@@ -158,6 +159,7 @@ class FormSelect extends React.PureComponent /** @lends @FormSelect.prototype */
         disabled={disabled}
         checkable
         checked={open}
+        style={style}
       />
     );
   }

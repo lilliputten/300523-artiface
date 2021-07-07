@@ -1,7 +1,7 @@
 /** @module FormButton
  *  @class FormButton
  *  @since 2020.07.20, 19:07
- *  @changed 2021.02.19, 17:51
+ *  @changed 2021.07.07, 19:52
  */
 
 import React from 'react';
@@ -44,6 +44,7 @@ class FormButton extends React.PureComponent /** @lends @FormButton.prototype */
     rightIcon: PropTypes.bool, // Icon placed at right side
     text: PropTypes.string, // Text content (may be passed as node children)
     theme: PropTypes.string, // Button style (plain, default, primary, secondary, error, warn, success, info, etc -- some are in progress -- see styles file)
+    style: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
     // setDomRef: PropTypes.func,
     // setNodeRef: PropTypes.func,
   }
@@ -217,6 +218,7 @@ class FormButton extends React.PureComponent /** @lends @FormButton.prototype */
       title,
       setDomRef, // From FormItemHOC
       // actionsContextNode,
+      style,
     } = this.props;
 
     const iconElem = this.renderIcon(); // Icon element
@@ -233,6 +235,7 @@ class FormButton extends React.PureComponent /** @lends @FormButton.prototype */
       onClick: this.onClick,
       ref: setDomRef, // Init ref for FormItemHOC
       tabIndex: 0,
+      style,
     };
 
     const content = (
