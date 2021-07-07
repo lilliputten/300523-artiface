@@ -779,7 +779,8 @@ Object.assign(cssConfig, { // Form properties...
 
 module.exports = cssConfig;
 
-/***/ }),
+  // Controller reference (`ModalsController` instance)
+  controller: undefined, // Was (before 2021.03.18): `containerNode`
 
 /***/ "./src/config/index.js":
 /*!*****************************!*\
@@ -869,7 +870,11 @@ module.exports = {
   secondaryLightColor: '#abb',
   secondaryContrastColor: '#fff' };
 
-/***/ }),
+/** Prefix to add for each body agent class.
+ * Adding `{cssAgentPrefix}BrowserId` class for each detected browser feature).
+ * E.g.: 'ua_Chrome', 'ua_IE' etc...
+ */
+var cssAgentPrefix = 'ua_';
 
 /***/ "./src/config/ui.js":
 /*!**************************!*\
@@ -896,7 +901,7 @@ var defaultIcons = {
   confirm: 'faQuestionCircle',
   select: 'faListOl' };
 
-/***/ }),
+function detectUserAgent() {
 
 /***/ "./src/config/userAgent.js":
 /*!*********************************!*\
@@ -1002,7 +1007,7 @@ var userAgent = detectUserAgent();
 
 module.exports = userAgent;
 
-/***/ }),
+var defaultDateType = 'number';var
 
 /***/ "./src/elements/DateTimeSelector/DateTimeSelector.jsx":
 /*!************************************************************!*\
@@ -1211,6 +1216,7 @@ DateTimeSelector = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runti
 
 
 
+// import { cn } from '@bem-react/classname';
 
 
       _this.props,selectsRange = _this$props2.selectsRange,onChange = _this$props2.onChange,showTime = _this$props2.showTime,timeIntervals = _this$props2.timeIntervals,isEndDate = _this$props2.isEndDate;var
@@ -1343,7 +1349,6 @@ DateTimeSelector = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runti
 
 /* harmony default export */ __webpack_exports__["default"] = (DateTimeSelector);
 
-/***/ }),
 
 /***/ "./src/elements/ErrorContainer/ErrorContainer.jsx":
 /*!********************************************************!*\
@@ -1417,7 +1422,6 @@ ErrorContainer = /*#__PURE__*/function (_PureComponent) {(0,_babel_runtime_helpe
 
 /* harmony default export */ __webpack_exports__["default"] = (ErrorContainer);
 
-/***/ }),
 
 /***/ "./src/elements/InlineIcon/InlineIcon.jsx":
 /*!************************************************!*\
@@ -1449,6 +1453,7 @@ __webpack_require__.r(__webpack_exports__);
  *  @changed 2021.01.25, 03:35
  */
 
+  getClassName = function getClassName() {var _this$props =
 
 
 // import connect from 'react-redux/es/connect/connect'
@@ -1544,7 +1549,6 @@ InlineIcon = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_hel
 
 /* harmony default export */ __webpack_exports__["default"] = (InlineIcon);
 
-/***/ }),
 
 /***/ "./src/elements/Loader/Loader.jsx":
 /*!****************************************!*\
@@ -1666,7 +1670,6 @@ var MenuItemSeparator = function MenuItemSeparator(props) {
 
 /* harmony default export */ __webpack_exports__["default"] = (MenuItemSeparator);
 
-/***/ }),
 
 /***/ "./src/elements/MenuItem/MenuItem.jsx":
 /*!********************************************!*\
@@ -1751,6 +1754,10 @@ MenuItem = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_helpe
 
 
 
+    this.props,children = _this$props4.children,text = _this$props4.text;
+    return /*#__PURE__*/(
+      react__WEBPACK_IMPORTED_MODULE_4___default().createElement("div", { className: cnMenuItem('Text') },
+      children || text));
 
 
     function () /* event */{var _this$props =
@@ -1760,6 +1767,7 @@ MenuItem = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_helpe
 
 
 
+    this.props,id = _this$props5.id,htmlId = _this$props5.htmlId,setDomRef = _this$props5.setDomRef;
 
       _this.props,id = _this$props.id,val = _this$props.val,onClick = _this$props.onClick,actionsContextNode = _this$props.actionsContextNode,disabled = _this$props.disabled,data = _this$props.data;
       if (!disabled) {
@@ -1886,7 +1894,6 @@ _helpers_ActionsContext__WEBPACK_IMPORTED_MODULE_9__.withActionsContext,
 (0,_forms_FormItemHOC_index_ts__WEBPACK_IMPORTED_MODULE_11__.default)({ solid: true, hoverable: true, focusable: true }))(
 MenuItem));
 
-/***/ }),
 
 /***/ "./src/elements/Menu/Menu.jsx":
 /*!************************************!*\
@@ -1944,6 +1951,10 @@ Menu = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_helpers_i
 
 
 
+  // Lifecycle...
+  ;
+  function Menu(props) {var _this;
+    _this = _React$PureComponent.call(this, props) || this;(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3__.default)((0,_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1__.default)(_this), "onAction",
 
 
 
@@ -2166,7 +2177,24 @@ Menu = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_helpers_i
 
   render = function render() {var _this$props6 =
 
+// const globalClickEventName = 'mousedown'
+// const globalKeyPressEventName = 'keydown'
+var globalScrollEventName = 'scroll';
+var globalResizeEventName = 'resize';
 
+/* // DEBUG: Demo for prevent closing underlaying popups. (Can be used for modal windows. See crrsp styles & html layout.)
+ * const debugHide = document.getElementById('DebugHide')
+ * setTimeout(() => {
+ *   if (debugHide) {
+ *     debugHide.style.display = 'block'
+ *   }
+ * }, 3000)
+ * const debugHideListener = (ev) => {
+ *   // ev.stopImmediatePropagation()
+ *   ev.stopPropagation()
+ * }
+ * debugHide && debugHide.addEventListener('click', debugHideListener)
+ */var
 
 
     this.props,id = _this$props6.id,setDomRef = _this$props6.setDomRef;
@@ -2195,7 +2223,6 @@ _helpers_ActionsContext__WEBPACK_IMPORTED_MODULE_8__.withActionsContext)(
 Menu));
 // export default Menu;
 
-/***/ }),
 
 /***/ "./src/elements/ModalPopup/ModalPopup.jsx":
 /*!************************************************!*\
@@ -2350,6 +2377,7 @@ var axisKeys = { // Used in `updateOneAxisContentPos`
     storedContentSize: 'storedContentWidth' // Stored in dom node
   } };
 
+  // Properties...
 
 // const globalClickEventName = 'mousedown'
 // const globalKeyPressEventName = 'keydown'
@@ -2380,7 +2408,10 @@ ModalPopup = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_hel
 
 
 
+  // Lifecycle...
 
+  function ModalPopup(props) {var _this;
+    _this = _React$PureComponent.call(this, props) || this;(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3__.default)((0,_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1__.default)(_this), "delayedClickTimerHandler", null);(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3__.default)((0,_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1__.default)(_this), "globalHandlersRegistered", false);(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3__.default)((0,_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1__.default)(_this), "controlNode", null);(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3__.default)((0,_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1__.default)(_this), "controlDomNode", null);(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3__.default)((0,_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1__.default)(_this), "contentDomNode", null);(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3__.default)((0,_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1__.default)(_this), "geometry", {});(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3__.default)((0,_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1__.default)(_this), "windowDomNode", null);(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3__.default)((0,_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1__.default)(_this), "wrapperDomNode", null);(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3__.default)((0,_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1__.default)(_this), "ModalPortal", null);(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3__.default)((0,_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1__.default)(_this), "updateGeometryInstant",
 
 
 
@@ -2755,8 +2786,26 @@ ModalPopup = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_hel
 
 
 
+    function () {
+      if (_this.state.open) {
+        _this.handlePortalOpen();
+      } else
+      {
+        _this.handlePortalClose();
+      }
+    });(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3__.default)((0,_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1__.default)(_this), "startOutsideClickWaiting",
 
+    function () {
+      _this.isOutsideClickWaiting = true;
+      // console.log('ModalPopup:startOutsideClickWaiting');
+    });(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3__.default)((0,_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1__.default)(_this), "stopOutsideClickWaiting",
+    function () {
+      _this.isOutsideClickWaiting = false;
+      _this.hasControlClicked = false;
+      // console.log('ModalPopup:stopOutsideClickWaiting');
+    });(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3__.default)((0,_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1__.default)(_this), "preventCloseOnOutsideClick",
 
+    function () {var
 
 
 
@@ -2923,6 +2972,7 @@ ModalPopup = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_hel
 
 
 
+// import FormButton from 'forms/FormButton'
 
 
 
@@ -2937,7 +2987,13 @@ ModalPopup = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_hel
       }var _this$props3 =
 
 
+var cnModalPortal = (0,_utils_configure__WEBPACK_IMPORTED_MODULE_6__.cn)('ModalPortal');
 
+// Event names...
+var mouseDownEvent = 'mousedown';
+var mouseUpEvent = 'mouseup';
+var mouseLeaveEvent = 'mouseleave';
+var globalKeyPressEventName = 'keydown';
 
       _this.props,id = _this$props3.id,popupContent = _this$props3.popupContent,className = _this$props3.contentClassName;
       var renderProps = {
@@ -3117,7 +3173,8 @@ ModalPopup = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_hel
   closeOnEscPressed: true, // For ModalPortal
   noWrapper: true, open: false });/* harmony default export */ __webpack_exports__["default"] = (ModalPopup);var FormItemModalPopup = (0,_forms_FormItemHOC_index_ts__WEBPACK_IMPORTED_MODULE_9__.default)(ModalPopup);
 
-/***/ }),
+var selfCloseActionId = '--modal-portal-self-close--';
+var externalCloseActionId = '--modal-portal-external-close--';var
 
 /***/ "./src/elements/ModalPortal/ModalPortal.jsx":
 /*!**************************************************!*\
@@ -3563,6 +3620,7 @@ ModalPortal = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_he
 
 
 
+  // Unused (no way to receive new props)?
 
     function (actionProps) {// Event handler for ActionContext consumed children
       var actionId = actionProps.id;var _this$props4 =
@@ -3838,7 +3896,6 @@ ModalPortal = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_he
  * )(ModalPortal)
  */
 
-/***/ }),
 
 /***/ "./src/elements/ModalProxifiedWindow/ModalProxifiedWindow.js":
 /*!*******************************************************************!*\
@@ -4178,6 +4235,7 @@ ModalWindow = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_he
 
 
 
+    null);(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3__.default)((0,_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1__.default)(_this), "handleOpenState",
 
 
 
@@ -4194,12 +4252,67 @@ ModalWindow = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_he
 
 
 
+    function (_ref) {var open = _ref.open;
+      // this.setState({ open })
+      var _this$props = _this.props,id = _this$props.id,handleOpenState = _this$props.handleOpenState;
+      if (typeof handleOpenState === 'function') {
+        handleOpenState({ id: id, open: open });
+      }
+    });(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3__.default)((0,_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1__.default)(_this), "onAction",
+
+    function (actionProps) {// Event handler for ActionContext consumed children
+      var _assertThisInitialize = (0,_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1__.default)(_this),ModalPortal = _assertThisInitialize.ModalPortal;
+      if (!ModalPortal) {
+        var error = new Error('ModalWindow:onAction: ModalPortal must be defined');
+        console.error(error); // eslint-disable-line no-console
+        /*DEBUG*/debugger; // eslint-disable-line no-debugger
+        throw error; // ???
+      }
+      var actionId = actionProps.id;var _this$props2 =
+      _this.props,open = _this$props2.open,actionsContextNode = _this$props2.actionsContextNode,autoClose = _this$props2.autoClose,closeOnCancelAction = _this$props2.closeOnCancelAction;
+      // console.log('ModalWindow:onAction', this.props.id, actionId);
+      ModalPortal.setResult(actionId);
+      if (open && (autoClose || closeOnCancelAction && actionId === 'cancel')) {// Close and call `resolveResult` when window is closed
+        ModalPortal.close();
+      } else
+      {// ...Or all `resolveResult` immediatelly
+        ModalPortal.resolveResult();
+      }
+      if (actionsContextNode && typeof actionsContextNode.onAction === 'function') {
+        actionsContextNode.onAction(actionProps);
+      }
+    });(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3__.default)((0,_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1__.default)(_this), "onCloseButtonClick",
+
+    function () {// Mouse released on wrapper --> close modal
+      var _assertThisInitialize2 = (0,_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1__.default)(_this),ModalPortal = _assertThisInitialize2.ModalPortal;
+      if (!ModalPortal) {
+        var error = new Error('ModalWindow:onCloseButtonClick: ModalPortal must be defined');
+        console.error(error); // eslint-disable-line no-console
+        /*DEBUG*/debugger; // eslint-disable-line no-debugger
+        throw error; // ???
+      }var _this$props3 =
+      _this.props,id = _this$props3.id,closeWithCloseButton = _this$props3.closeWithCloseButton,onCloseButtonClick = _this$props3.onCloseButtonClick;
+      // console.log('ModalWindow: onCloseButtonClick', id)
+      // debugger;
+      if (closeWithCloseButton) {
+        ModalPortal.setResult(selfCloseActionId);
+        ModalPortal.close();
+      }
+      if (typeof onCloseButtonClick === 'function') {
+        onCloseButtonClick({ id: id });
+      }
+    });(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3__.default)((0,_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1__.default)(_this), "setPortalNode",
+
+    function (node) {// Save reference to ModalPortal node
+      _this.ModalPortal = node;
+    });(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3__.default)((0,_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1__.default)(_this), "open",
 
 
 
-
-
-
+    function () {return _this.ModalPortal && _this.ModalPortal.open();});(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3__.default)((0,_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1__.default)(_this), "close",
+    function () {return _this.ModalPortal && _this.ModalPortal.close();});(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3__.default)((0,_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1__.default)(_this), "toggle",
+    function (open) {return _this.ModalPortal && _this.ModalPortal.toggle(open);});(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3__.default)((0,_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1__.default)(_this), "isVisible",
+    function () {return _this.ModalPortal && _this.ModalPortal.isVisible();});(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3__.default)((0,_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1__.default)(_this), "renderContentError",
 
 
 
@@ -4495,7 +4608,6 @@ ModalWindow = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_he
   loaderTheme: 'MediumDark', loading: false, open: false, showCloseButton: false, // Display 'Close button'?
   useLoader: false, wrapperTheme: 'MediumDark' });/* harmony default export */ __webpack_exports__["default"] = (ModalWindow);
 
-/***/ }),
 
 /***/ "./src/elements/ModalsController/ModalsController.jsx":
 /*!************************************************************!*\
@@ -4550,8 +4662,32 @@ var cnModalsController = (0,_utils_configure__WEBPACK_IMPORTED_MODULE_7__.cn)('M
 var
 ModalsController = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_helpers_inheritsLoose__WEBPACK_IMPORTED_MODULE_2__.default)(ModalsController, _React$PureComponent);
 
+    /*: React.ReactNode*/function (id) {
+      for (var n = _this.modalsStack.length - 1; n >= 0; n--) {
+        var modal = _this.modalsStack[n];
+        var modalId = modal && modal.props && modal.props.id;
+        if (modalId && modalId === id) {
+          return modal;
+        }
+      }
+      return true;
+    });(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3__.default)((0,_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1__.default)(_this), "getTopmostVisibleModal",
 
+    function () {// Get topmost modal element
+      // Look for items from last (topmost) to first (bottommost) for first visible
+      for (var n = _this.modalsStack.length - 1; n >= 0; n--) {
+        var modal = _this.modalsStack[n];
+        var isVisible = modal.isVisible();
+        if (isVisible) {
+          return modal;
+        }
+      }
+    });(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3__.default)((0,_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1__.default)(_this), "isModalTopmostVisible",
 
+    function (modal) {// Is modal modal element is top-most visible?
+      var topmost = _this.getTopmostVisibleModal();
+      return modal === topmost;
+    });(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3__.default)((0,_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1__.default)(_this), "setPortalProxyRef",
 
 
   // Internal variables...
@@ -4697,9 +4833,18 @@ ModalsController = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runti
 
 
 
+var
 
+ModalsProxy = /*#__PURE__*/function () {var _proto = ModalsProxy.prototype;
 
+  // 'Was initialized' flag
+  // List of modals (passed to `ModalsController` state to direct render
+  // Will be initialized with `ModalsController` instance reference promise in `config/modals`.
+  _proto.
 
+  getProxyModalNode = function getProxyModalNode(id) {
+    return this._modalsController.getProxyModalNode(id);
+  };_proto.
 
 
 
@@ -4899,7 +5044,6 @@ ModalsController = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runti
       content = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createElement(react_portal__WEBPACK_IMPORTED_MODULE_6__.Portal, { node: node }, content);}return content;};return ModalsController;}(react__WEBPACK_IMPORTED_MODULE_4__.PureComponent /** @lends @ModalsController.prototype */);(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3__.default)(ModalsController, "propTypes", { usePortal: prop_types__WEBPACK_IMPORTED_MODULE_5__.bool // Render container at end of dom tree root level
 });/* harmony default export */ __webpack_exports__["default"] = (ModalsController);
 
-/***/ }),
 
 /***/ "./src/elements/ModalsProxy/ModalsProxy.js":
 /*!*************************************************!*\
@@ -5005,6 +5149,7 @@ ModalsProxy = /*#__PURE__*/function () {var _proto = ModalsProxy.prototype;
 
 
 
+// import connect from 'react-redux/es/connect/connect'
 
 
 
@@ -5047,6 +5192,26 @@ ModalsProxy = /*#__PURE__*/function () {var _proto = ModalsProxy.prototype;
 
 
 
+      _this.props,id = _this$props.id,onAction = _this$props.onAction,actionsContextNode = _this$props.actionsContextNode,disabled = _this$props.disabled;
+      // Throw action up...
+      if (!disabled) {
+        if (id) {
+          actionProps = (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_1__.default)({}, actionProps, { actionsId: id });
+        }
+        // console.log('FormActions:onAction', {
+        //   actionProps,
+        //   onAction,
+        //   actionsContextNode,
+        // });
+        // debugger;
+        if (actionsContextNode && typeof actionsContextNode.onAction === 'function') {
+          actionsContextNode.onAction(actionProps);
+        }
+        if (typeof onAction === 'function') {
+          onAction(actionProps);
+        }
+      }
+    });(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_4__.default)((0,_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_2__.default)(_this), "onMenuAction",
 
 
 
@@ -5109,7 +5274,6 @@ ModalsProxy = /*#__PURE__*/function () {var _proto = ModalsProxy.prototype;
   } // TODO: Implement `mapStateToProps` (as method of `ModalProxifiedWindow`?)
   ;return ModalsProxy;}();var ModalsProxySingleton = new ModalsProxy();/* harmony default export */ __webpack_exports__["default"] = (ModalsProxySingleton);
 
-/***/ }),
 
 /***/ "./src/elements/index.js":
 /*!*******************************!*\
@@ -5167,7 +5331,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-/***/ }),
 
 /***/ "./src/forms/FormActions/FormActions.jsx":
 /*!***********************************************!*\
@@ -5242,7 +5405,9 @@ FormActions = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_he
 
 
 
+var cnFormBooleanHOC = (0,_utils_configure__WEBPACK_IMPORTED_MODULE_6__.cn)('FormBoolean');
 
+var wrapFormBooleanHOC = function wrapFormBooleanHOC(WrappedComponent, params) {var _class, _temp;if (params === void 0) {params = {};}return _temp = _class = /*#__PURE__*/function (_React$Component) {(0,_babel_runtime_helpers_inheritsLoose__WEBPACK_IMPORTED_MODULE_2__.default)(FormBoolean, _React$Component);
 
 
 
@@ -5427,7 +5592,6 @@ _FormItemHOC_index_ts__WEBPACK_IMPORTED_MODULE_10__.default)(
 FormActions));
 // export default FormItemHOC(FormActions);
 
-/***/ }),
 
 /***/ "./src/forms/FormBooleanHOC/FormBooleanHOC.jsx":
 /*!*****************************************************!*\
@@ -5507,6 +5671,18 @@ var wrapFormBooleanHOC = function wrapFormBooleanHOC(WrappedComponent, params) {
 
 
 
+      function (params) {
+        _this.setState(function (_ref) {var stateValue = _ref.value;
+          var value = params && params.value;
+          if (value == null) {
+            value = !stateValue;
+          }
+          return { active: true, value: value };
+        });
+        setTimeout(function () {
+          _this.setState({ active: false });
+        }, (_config_index_js__WEBPACK_IMPORTED_MODULE_7___default().css.transitionTime));
+      });(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3__.default)((0,_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1__.default)(_this), "setDomRef",
 
 
 
@@ -5514,6 +5690,7 @@ var wrapFormBooleanHOC = function wrapFormBooleanHOC(WrappedComponent, params) {
 
 
 
+// import connect from 'react-redux/es/connect/connect'
 
 
 
@@ -5637,7 +5814,6 @@ var FormBooleanHOC = function FormBooleanHOC(params) {
 // export default FormItemHOC({ hoverable: true, focusable: true, framed: false })(FormBooleanHOC)
 /* harmony default export */ __webpack_exports__["default"] = (FormBooleanHOC);
 
-/***/ }),
 
 /***/ "./src/forms/FormButtonGroup/FormButtonGroup.jsx":
 /*!*******************************************************!*\
@@ -5725,7 +5901,6 @@ FormButtonGroup = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtim
 
 /* harmony default export */ __webpack_exports__["default"] = ((0,_FormItemHOC_index_ts__WEBPACK_IMPORTED_MODULE_6__.default)(FormButtonGroup));
 
-/***/ }),
 
 /***/ "./src/forms/FormButton/FormButton.jsx":
 /*!*********************************************!*\
@@ -5831,6 +6006,20 @@ FormButton = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_hel
 
 
 
+    }
+  };_proto.
+
+  renderText = function renderText() {
+    var hasText = this.hasText(); // !onlyIcon && !!(hasText || text || children
+    if (hasText) {var _this$props5 =
+      this.props,text = _this$props5.text,children = _this$props5.children;
+      return hasText && /*#__PURE__*/
+      react__WEBPACK_IMPORTED_MODULE_4___default().createElement("span", { className: cnFormButton('Text') },
+      text || children);
+
+
+    }
+  };_proto.
 
 
 
@@ -5864,9 +6053,7 @@ FormButton = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_hel
 
 
 
-
-
-
+// import connect from 'react-redux/es/connect/connect'
 
 
 
@@ -6027,7 +6214,8 @@ FormButton = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_hel
   // setNodeRef: PropTypes.func,
 });/* harmony default export */ __webpack_exports__["default"] = ((0,redux__WEBPACK_IMPORTED_MODULE_5__.compose)(_helpers_ActionsContext__WEBPACK_IMPORTED_MODULE_8__.withActionsContext, (0,_FormItemHOC_index_ts__WEBPACK_IMPORTED_MODULE_10__.default)({ solid: true, hoverable: true, focusable: true, framed: true }))(FormButton));
 
-/***/ }),
+  function FormDateRangeSingleBox(props) {var _this;
+    _this = _React$PureComponent.call(this, props) || this;(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2__.default)((0,_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_0__.default)(_this), "onControlClick",
 
 /***/ "./src/forms/FormContainer/FormContainer.jsx":
 /*!***************************************************!*\
@@ -6068,7 +6256,6 @@ var FormContainer = function FormContainer(props) {var
 
 /* harmony default export */ __webpack_exports__["default"] = (FormContainer);
 
-/***/ }),
 
 /***/ "./src/forms/FormDateRangeSingleBox/FormDateRangeSingleBox.jsx":
 /*!*********************************************************************!*\
@@ -6177,14 +6364,30 @@ FormDateRangeSingleBox = /*#__PURE__*/function (_React$PureComponent) {(0,_babel
 
 
 
+    this.state,startDate = _this$state.startDate,endDate = _this$state.endDate;var _this$props3 =
 
 
 
 
 
 
+    this.props,calendarClassName = _this$props3.calendarClassName,id = _this$props3.id,inputId = _this$props3.inputId,showTime = _this$props3.showTime,timeIntervals = _this$props3.timeIntervals;
+    var dateSelectorProps = {
+      id: id,
+      inputId: inputId,
+      onChange: this.onChange,
+      startDate: startDate,
+      endDate: endDate,
+      inline: true,
+      calendarClassName: calendarClassName,
+      showTime: showTime,
+      timeIntervals: timeIntervals,
+      selectsRange: true };
 
+    return /*#__PURE__*/(
+      react__WEBPACK_IMPORTED_MODULE_3___default().createElement(_elements_DateTimeSelector_index_ts__WEBPACK_IMPORTED_MODULE_10__.default, dateSelectorProps));
 
+  };_proto.
 
 
 
@@ -6361,7 +6564,6 @@ FormDateRangeSingleBox = /*#__PURE__*/function (_React$PureComponent) {(0,_babel
   calendarClassName: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), className: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), closeOnSelect: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), controlButtonTheme: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), disabled: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), endDate: prop_types__WEBPACK_IMPORTED_MODULE_4___default().oneOfType([(prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), (prop_types__WEBPACK_IMPORTED_MODULE_4___default().number), prop_types__WEBPACK_IMPORTED_MODULE_4___default().instanceOf(Date)]), fullWidth: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), id: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), inputId: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), onChange: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func), onStartDateChange: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func), onEndDateChange: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func), onControlClick: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func), open: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), placeholder: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), setDomRef: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func), setPopupNodeRef: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func), showTime: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), startDate: prop_types__WEBPACK_IMPORTED_MODULE_4___default().oneOfType([(prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), (prop_types__WEBPACK_IMPORTED_MODULE_4___default().number), prop_types__WEBPACK_IMPORTED_MODULE_4___default().instanceOf(Date)]), timeIntervals: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().number), title: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string) });
 /* harmony default export */ __webpack_exports__["default"] = ((0,_FormItemHOC_index_ts__WEBPACK_IMPORTED_MODULE_7__.default)({ solid: true, hoverable: true })(FormDateRangeSingleBox));
 
-/***/ }),
 
 /***/ "./src/forms/FormDateRange/FormDateRange.jsx":
 /*!***************************************************!*\
@@ -6439,6 +6641,7 @@ FormDateRange = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_
 
 
 
+    function (params) {var
 
 
 
@@ -6457,7 +6660,54 @@ FormDateRange = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_
   function FormDateRange(props) {var _this;
     _this = _React$PureComponent.call(this, props) || this;(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3__.default)((0,_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1__.default)(_this), "handleChange",
 
+      stateParams[id] = value;
+      var cbParams = (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__.default)({},
+      stateParams, {
+        id: _this.id,
+        selectedStart: selectedStart,
+        valueId: id,
+        value: value,
+        valueObj: valueObj });
 
+      // console.log('FormDateRange:handleChange', {
+      //   stateParams,
+      //   cbParams,
+      // });
+      _this.setState(stateParams);
+      if (typeof onChange === 'function') {
+        onChange(cbParams);
+      }
+      if (selectedStart && typeof onStartDateChange === 'function') {
+        onStartDateChange(cbParams);
+      }
+      if (!selectedStart && typeof onEndDateChange === 'function') {
+        onEndDateChange(cbParams);
+      }
+    });var _startDate = props.startDate,_endDate = props.endDate,showTime = props.showTime,_props$timeIntervals = props.timeIntervals,timeIntervals = _props$timeIntervals === void 0 ? (_config_index_js__WEBPACK_IMPORTED_MODULE_7___default().constants.timeIntervals) : _props$timeIntervals;_this.id = props.id || props.inputId;_this.uniqFormId = props.inputId || props.id || _utils_forms__WEBPACK_IMPORTED_MODULE_8__.getUniqFormId({ prefix: 'FormDateRange' }); // identifier for local labels refering to local inputs
+    // const dateType = props.dateType || dateUtils.detectDateValueType(startDate || endDate) || defaultDateType;
+    // Default date (now)
+    _this.now = new Date(props.now || Date.now()); // Date.now()
+    // Default start date (beginning of the day)
+    _this.startNow = _utils_dates__WEBPACK_IMPORTED_MODULE_9__.adjustDateValue(_this.now, false, showTime, timeIntervals); // this.startNow = new Date(this.now);
+    // this.startNow.setHours(0);
+    // this.startNow.setMinutes(0);
+    // this.startNow.setSeconds(0);
+    // this.startNow.setMilliseconds(0);
+    // Default end date (end of the day)
+    _this.endNow = _utils_dates__WEBPACK_IMPORTED_MODULE_9__.adjustDateValue(_this.now, true, showTime, timeIntervals); // this.endNow = new Date(this.now);
+    // this.endNow.setHours(23);
+    // this.endNow.setMinutes(59);
+    // this.endNow.setSeconds(59);
+    // this.endNow.setMilliseconds(999);
+    _this.state = { // dateType,
+      startDate: _startDate, // : startDate && dateUtils.convertToDateObject(startDate),
+      endDate: _endDate // : endDate && dateUtils.convertToDateObject(endDate),
+    }; // this.state.displayValue = this.getDisplayValue(this.state);
+    return _this;} // Helper methods...
+  var _proto = FormDateRange.prototype;_proto.getClassName = function getClassName() {var id = this.id;var fullWidth = this.props.fullWidth;var className = cnFormDateRange({ id: id, fullWidth: fullWidth // ???
+    }, [this.props.className]);return className;} // Handlers...
+  ; // Render...
+  _proto.render = function render() {var _this$props2 =
 
 
 
@@ -6671,7 +6921,6 @@ FormDateRange = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_
 
 /* harmony default export */ __webpack_exports__["default"] = ((0,_FormItemHOC_index_ts__WEBPACK_IMPORTED_MODULE_14__.default)({ solid: true, hoverable: true })(FormDateRange));
 
-/***/ }),
 
 /***/ "./src/forms/FormDateTime/FormDateTime.jsx":
 /*!*************************************************!*\
@@ -6746,6 +6995,18 @@ FormDateTime = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_h
 
 
 
+      _this.props,onChange = _this$props.onChange,closeOnSelect = _this$props.closeOnSelect;
+      var setParams = { id: _this.id, value: value, valueObj: valueObj };
+      setParams.displayValue = _this.getDisplayValue(setParams); // dateUtils.formatDateToString(value); // TODO: showTime option
+      // console.log('FormDateTime:onChange', setParams);
+      _this.setState(setParams);
+      if (typeof onChange === 'function') {
+        onChange(setParams);
+      }
+      if (closeOnSelect && _this.popupNode) {
+        _this.popupNode.close();
+      }
+    });(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2__.default)((0,_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_0__.default)(_this), "setPopupRef",
 
 
 
@@ -6800,8 +7061,11 @@ FormDateTime = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_h
       }
     });(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2__.default)((0,_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_0__.default)(_this), "onChange",
 
+    return /*#__PURE__*/(
+      react__WEBPACK_IMPORTED_MODULE_3___default().createElement(_elements_ModalPopup_index_ts__WEBPACK_IMPORTED_MODULE_8__.default, popupProps));
 
 
+  };return FormDateTime;}((react__WEBPACK_IMPORTED_MODULE_3___default().PureComponent) /** @lends @FormDateTime.prototype */);(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2__.default)(FormDateTime, "propTypes", { calendarClassName: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), className: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), closeOnSelect: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), controlButtonTheme: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), disabled: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), fullWidth: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), id: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), inputId: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), onChange: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func), onControlClick: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func), open: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), placeholder: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), selectsEnd: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), selectsRange: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), selectsStart: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), setDomRef: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func), setPopupNodeRef: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func), showTime: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), title: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), value: prop_types__WEBPACK_IMPORTED_MODULE_4___default().oneOfType([(prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), (prop_types__WEBPACK_IMPORTED_MODULE_4___default().number), prop_types__WEBPACK_IMPORTED_MODULE_4___default().instanceOf(Date)]) });
 
 
 
@@ -6882,6 +7146,7 @@ FormDateTime = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_h
 
 
 
+FormGroup = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_helpers_inheritsLoose__WEBPACK_IMPORTED_MODULE_1__.default)(FormGroup, _React$PureComponent);
 
 
 
@@ -6961,7 +7226,6 @@ FormDateTime = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_h
 
 /* harmony default export */ __webpack_exports__["default"] = ((0,_FormItemHOC_index_ts__WEBPACK_IMPORTED_MODULE_7__.default)({ solid: true, hoverable: true })(FormDateTime));
 
-/***/ }),
 
 /***/ "./src/forms/FormDelim/FormDelim.jsx":
 /*!*******************************************!*\
@@ -6996,7 +7260,6 @@ var FormDelim = function FormDelim(props) {var
 
 /* harmony default export */ __webpack_exports__["default"] = (FormDelim);
 
-/***/ }),
 
 /***/ "./src/forms/FormGroup/FormGroup.jsx":
 /*!*******************************************!*\
@@ -7066,7 +7329,9 @@ FormGroup = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_help
 
 
 
+// import { compose } from 'redux';
 
+// import { cn } from 'utils/configure';
 
 
 
@@ -7141,7 +7406,6 @@ FormGroup = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_help
 'flow', 'fullWidth', 'noSpace', 'noWrap', 'padded', 'separated', 'shaded', 'spaced', 'stack', 'wrap' // 'disabled',
 ]);/* harmony default export */ __webpack_exports__["default"] = ((0,_FormItemHOC_index_ts__WEBPACK_IMPORTED_MODULE_6__.default)(FormGroup));
 
-/***/ }),
 
 /***/ "./src/forms/FormInputGroup/FormInputGroup.jsx":
 /*!*****************************************************!*\
@@ -7225,7 +7489,6 @@ FormInputGroup = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime
   // flow: PropTypes.bool,
 });/* harmony default export */ __webpack_exports__["default"] = ((0,_FormItemHOC_index_ts__WEBPACK_IMPORTED_MODULE_6__.default)(FormInputGroup));
 
-/***/ }),
 
 /***/ "./src/forms/FormInteractiveItemHOC/FormInteractiveItemHOC.jsx":
 /*!*********************************************************************!*\
@@ -7428,7 +7691,6 @@ var FormInteractiveItemHOC = function FormInteractiveItemHOC(params) {
 // export default FormItemHOC({ hoverable: true, focusable: true, framed: false })(FormInteractiveItemHOC)
 /* harmony default export */ __webpack_exports__["default"] = (FormInteractiveItemHOC);
 
-/***/ }),
 
 /***/ "./src/forms/FormItemDummy/FormItemDummy.jsx":
 /*!***************************************************!*\
@@ -7617,7 +7879,6 @@ FormItemDummy = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_
 
 /* harmony default export */ __webpack_exports__["default"] = ((0,_FormItemHOC_index_ts__WEBPACK_IMPORTED_MODULE_5__.default)(FormItemDummy));
 
-/***/ }),
 
 /***/ "./src/forms/FormItemHOC/FormItemHOC.jsx":
 /*!***********************************************!*\
@@ -7822,6 +8083,7 @@ var wrapFormItemHOC = function wrapFormItemHOC(WrappedComponent, params) {var _c
 
 
 
+var FormLabeledGroup = function FormLabeledGroup(props) /** @lends @FormLabeledGroup.prototype */{var
 
 
 
@@ -7926,7 +8188,6 @@ var FormItemHOC = function FormItemHOC(params) {
 
 /* harmony default export */ __webpack_exports__["default"] = (FormItemHOC);
 
-/***/ }),
 
 /***/ "./src/forms/FormLabel/FormLabel.jsx":
 /*!*******************************************!*\
@@ -7954,6 +8215,15 @@ __webpack_require__.r(__webpack_exports__);
 /* eslint-disable react/require-default-props */
 
 
+  props.className,children = props.children,id = props.id,fullWidth = props.fullWidth,innerFlex = props.innerFlex,htmlFor = props.htmlFor,title = props.title,text = props.text,flow = props.flow;
+  // const thisClassName = cnFormLabeledGroup({ flow, full })
+  return /*#__PURE__*/(
+    react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_FormGroup_index_ts__WEBPACK_IMPORTED_MODULE_1__.default, {
+      className: className,
+      fullWidth: fullWidth,
+      innerFlex: innerFlex,
+      flow: flow,
+      id: id }, /*#__PURE__*/
 
 // import connect from 'react-redux/es/connect/connect'
 
@@ -7990,6 +8260,13 @@ FormLabel = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_help
 
     function (event) {var _this$props =
 
+  props.type,onClick = props.onClick,action = props.action;
+  return /*#__PURE__*/(
+    react__WEBPACK_IMPORTED_MODULE_4___default().createElement(_FormButton_index_ts__WEBPACK_IMPORTED_MODULE_12__.default, (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_3__.default)({
+      theme: "default" },
+    props, {
+      className: cnFormPager('Item', { type: type }),
+      onClick: onClick && onClick.bind(null, action) })));
 
 
 
@@ -8040,7 +8317,7 @@ FormLabel = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_help
 
 /* harmony default export */ __webpack_exports__["default"] = ((0,_FormItemHOC_index_ts__WEBPACK_IMPORTED_MODULE_6__.default)({ hoverable: true, solid: true })(FormLabel));
 
-/***/ }),
+  // Lifecycle...
 
 /***/ "./src/forms/FormLabeledGroup/FormLabeledGroup.jsx":
 /*!*********************************************************!*\
@@ -8151,11 +8428,26 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+      showFirst && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default().createElement(FormPagerItem, {
+        type: "specialBound",
+        onlyIcon: true, icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_9__.faAngleDoubleLeft,
+        title: (0,_utils_lang__WEBPACK_IMPORTED_MODULE_13__.getCommonLangText)('firstPage', lang),
+        onClick: this.onPageClick,
+        action: { id: id, page: 1 },
+        theme: "plain" }),
 
 
 
 
+      showPrevGroup && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default().createElement(FormPagerItem, {
+        type: "specialMore",
+        text: "...",
+        title: (0,_utils_lang__WEBPACK_IMPORTED_MODULE_13__.getCommonLangText)('prevGroup', lang),
+        onClick: this.onPageClick,
+        action: { id: id, page: prevGroupPage },
+        theme: "plain" }),
 
+      pages,
 
 // import * as langUtils from 'utils/lang';
 
@@ -8175,6 +8467,8 @@ var FormPagerItem = function FormPagerItem(props) {var
 
   type =
 
+  };return FormPager;}((react__WEBPACK_IMPORTED_MODULE_4___default().PureComponent) /** @lends @FormPager.prototype */);(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2__.default)(FormPager, "propTypes", { onPageSelect: (prop_types__WEBPACK_IMPORTED_MODULE_7___default().func), // lang: PropTypes.objectOf(PropTypes.object), // From state
+  showPage: (prop_types__WEBPACK_IMPORTED_MODULE_7___default().number), totalPages: (prop_types__WEBPACK_IMPORTED_MODULE_7___default().number), noSpace: (prop_types__WEBPACK_IMPORTED_MODULE_7___default().bool), fullWidth: (prop_types__WEBPACK_IMPORTED_MODULE_7___default().bool), align: (prop_types__WEBPACK_IMPORTED_MODULE_7___default().string), className: (prop_types__WEBPACK_IMPORTED_MODULE_7___default().string) });
 
   props.type,onClick = props.onClick,action = props.action;
   return /*#__PURE__*/(
@@ -8184,6 +8478,11 @@ var FormPagerItem = function FormPagerItem(props) {var
       className: cnFormPager('Item', { type: type }),
       onClick: onClick && onClick.bind(null, action) })));
 
+var mapStateToProps = function mapStateToProps(store) {return {
+    lang: store.language
+    // language: store.language,
+    // commonLang: store && store.language && store.language && store.language.components.common || {},
+  };};
 
 };var
 
@@ -8349,6 +8648,11 @@ FormPager = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_help
         action: { id: id, page: totalPages },
         theme: "plain" }))));
 
+/***/ "./src/forms/FormRadio/FormRadio.jsx":
+/*!*******************************************!*\
+  !*** ./src/forms/FormRadio/FormRadio.jsx ***!
+  \*******************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 
 
@@ -8484,7 +8788,7 @@ FormPasswordInput = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runt
  */
 /* harmony default export */ __webpack_exports__["default"] = (/* FormItemHOC({ hoverable: true, framed: true })( */FormPasswordInput);
 
-/***/ }),
+var cnFormSelect = (0,_utils_configure__WEBPACK_IMPORTED_MODULE_5__.cn)('FormSelect');var
 
 /***/ "./src/forms/FormRadio/FormRadio.jsx":
 /*!*******************************************!*\
@@ -8634,7 +8938,23 @@ FormRadio = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_help
 
   };return FormRadio;}((react__WEBPACK_IMPORTED_MODULE_2___default().PureComponent) /** @lends @FormRadio.prototype */);
 
+    function (node) {var
+      setPopupNodeRef = _this.props.setPopupNodeRef;
+      _this.popupNode = node;
+      if (setPopupNodeRef && typeof setPopupNodeRef === 'function') {
+        setPopupNodeRef(node);
+      }
+    });(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2__.default)((0,_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_0__.default)(_this), "handleOpenState",
 
+    function (_ref) {var open = _ref.open;
+      _this.setState({ open: open });
+    });_this.id = props.id || props.inputId || props.name;var _selected = props.selected,_value = props.value;_this.state = { selected: Array.isArray(_selected) ? _selected : _value && [_value] || [] }; // if (props.setNodeRef) {
+    //   props.setNodeRef(this);
+    // }
+    return _this;} // Helper methods...
+  var _proto = FormSelect.prototype;_proto.getClassName = function getClassName() {var id = this.id;var classList = cnFormSelect({ id: id }, [this.props.className]);return classList;};_proto.getItemsText = function getItemsText() {var selected = this.state.selected;var options = this.props.options;var text = Array.isArray(options) && Array.isArray(selected) && options.map(function (_ref2) {var val = _ref2.val,text = _ref2.text;if (selected.includes(val)) {return text;}}).filter(Boolean).join(', ');return text;} // Handlers...
+  ; // Render...
+  _proto.renderControlContent = function renderControlContent() {var _this$props3 =
 
 // export default FormItemHOC({ hoverable: true, focusable: true, framed: false })(FormRadio)
 (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1__.default)(FormRadio, "propTypes", { active: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().bool), disabled: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().bool), handleChange: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().func), id: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().string), name: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().string), onChange: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().func), setDomRef: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().func), // From FormItemHOC
@@ -8678,10 +8998,30 @@ __webpack_require__.r(__webpack_exports__);
 /* eslint-disable react/require-default-props */
 
 
+    this.props,text = _this$props3.text,placeholder = _this$props3.placeholder,title = _this$props3.title,controlButtonTheme = _this$props3.controlButtonTheme,_this$props3$fullWidt = _this$props3.fullWidth,fullWidth = _this$props3$fullWidt === void 0 ? true : _this$props3$fullWidt,disabled = _this$props3.disabled,inputId = _this$props3.inputId;var
+
+    open =
+    this.state.open;
+    var buttonText = this.getItemsText() || placeholder || text;
+    return /*#__PURE__*/(
+      react__WEBPACK_IMPORTED_MODULE_3___default().createElement(_FormButton_index_ts__WEBPACK_IMPORTED_MODULE_9__.default, {
+        inputId: inputId,
+        icon: "faChevronDown",
+        rightIcon: true,
+        theme: controlButtonTheme || 'primary',
+        variation: "popupControl",
+        rotatedIcon: true,
+        text: buttonText,
+        title: title,
+        fullWidth: fullWidth,
+        disabled: disabled,
+        checkable: true,
+        checked: open }));
 
 
+  };_proto.
 
-
+  renderMenuContent = function renderMenuContent() {var _this$props4 =
 
 
 
@@ -8693,6 +9033,27 @@ var cnFormSelect = (0,_utils_configure__WEBPACK_IMPORTED_MODULE_5__.cn)('FormSel
 
 FormSelect = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_helpers_inheritsLoose__WEBPACK_IMPORTED_MODULE_1__.default)(FormSelect, _React$PureComponent);
 
+    selected =
+    this.state.selected;
+    return /*#__PURE__*/(
+      react__WEBPACK_IMPORTED_MODULE_3___default().createElement(_elements_Menu_index_ts__WEBPACK_IMPORTED_MODULE_8__.default, {
+        selectable: true,
+        singleChoice: singleChoice,
+        onChange: this.onMenuChange,
+        onClick: this.onMenuItemClick,
+        selected: selected
+        // value={value}
+        , disabled: disabled,
+        itemTheme: itemTheme
+        // itemSelectedTheme={itemSelectedTheme}
+        , wrapContent: wrapContent },
+
+      options));
+
+
+  };_proto.
+
+  render = function render() {var _this$props5 =
 
 
 
@@ -8701,25 +9062,54 @@ FormSelect = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_hel
 
 
 
+    this.props,id = _this$props5.id,disabled = _this$props5.disabled,title = _this$props5.title,open = _this$props5.open,fullWidth = _this$props5.fullWidth,setDomRef = _this$props5.setDomRef;
+
+
+    var popupProps = {
+      id: id,
+      className: this.getClassName(),
+      // contentClassName: 'XXX', // ???
+      disabled: disabled,
+      title: title,
+      open: open,
+      popupControl: controlContent,
+      popupContent: menuContent,
+      onControlClick: this.onControlClick,
+      fullWidth: fullWidth,
+      ref: this.setPopupRef,
+      setDomRef: setDomRef,
+      handleOpenState: this.handleOpenState };
+
+
+    return /*#__PURE__*/(
+      react__WEBPACK_IMPORTED_MODULE_3___default().createElement(_elements_ModalPopup_index_ts__WEBPACK_IMPORTED_MODULE_7__.default, popupProps));
+
+
+
+
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _utils_configure__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../utils/configure */ "./src/utils/configure.js");
+/* harmony import */ var _FormSeparator_pcss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./FormSeparator.pcss */ "./src/forms/FormSeparator/FormSeparator.pcss");
+/** @module FormSeparator
+ *  @class FormSeparator
+ *  @since 2021.02.20, 13:40
+ *  @changed 2021.02.20, 13:40
+ */
 
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+var FormSeparator = function FormSeparator(props) {var
+  id = props.id;
+  var className = (0,_utils_configure__WEBPACK_IMPORTED_MODULE_1__.cn)('FormSeparator')({ id: id }, [props.className, 'FormItem']);
+  return /*#__PURE__*/(
+    react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", { className: className }));
 
   // Lifecycle methods...
 
@@ -8728,6 +9118,7 @@ FormSelect = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_hel
     // this.formItemRef = React.createRef()
     (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2__.default)((0,_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_0__.default)(_this), "onControlClick",
 
+/***/ }),
 
 
 
@@ -8746,6 +9137,7 @@ FormSelect = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_hel
 
 
 
+// import * as langUtils from 'utils/lang';
 
 
 
@@ -8905,7 +9297,6 @@ FormSelect = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_hel
   wrapContent: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), disabled: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), fullWidth: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), id: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), inputId: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), name: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), onChange: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func), onControlClick: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func), onMenuItemClick: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func), open: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), options: prop_types__WEBPACK_IMPORTED_MODULE_4___default().arrayOf(prop_types__WEBPACK_IMPORTED_MODULE_4___default().shape({ val: prop_types__WEBPACK_IMPORTED_MODULE_4___default().oneOfType([(prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), (prop_types__WEBPACK_IMPORTED_MODULE_4___default().number)]), text: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string) })), placeholder: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), selected: prop_types__WEBPACK_IMPORTED_MODULE_4___default().arrayOf(prop_types__WEBPACK_IMPORTED_MODULE_4___default().oneOfType([(prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), (prop_types__WEBPACK_IMPORTED_MODULE_4___default().number)])), setDomRef: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func), setPopupNodeRef: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func), singleChoice: prop_types__WEBPACK_IMPORTED_MODULE_4___default().oneOfType([(prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool)]), text: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), title: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), value: prop_types__WEBPACK_IMPORTED_MODULE_4___default().oneOfType([(prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), (prop_types__WEBPACK_IMPORTED_MODULE_4___default().number)]), style: prop_types__WEBPACK_IMPORTED_MODULE_4___default().oneOfType([(prop_types__WEBPACK_IMPORTED_MODULE_4___default().object), (prop_types__WEBPACK_IMPORTED_MODULE_4___default().array)]) });
 /* harmony default export */ __webpack_exports__["default"] = ((0,_FormItemHOC_index_ts__WEBPACK_IMPORTED_MODULE_6__.default)({ solid: true, hoverable: true })(FormSelect));
 
-/***/ }),
 
 /***/ "./src/forms/FormSeparator/FormSeparator.jsx":
 /*!***************************************************!*\
@@ -9086,6 +9477,144 @@ FormTextInput = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_
 
 
 
+    function (event) {var
+      target = event.target;
+      var origValue = target.value;
+      var value = _this.getCorrectedValue(origValue);
+      _this.setState({ value: value });
+    });(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2__.default)((0,_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_0__.default)(_this), "onClearClick",
+
+    function () {var _this$props2 =
+      _this.props,allowEmpty = _this$props2.allowEmpty,numericValue = _this$props2.numericValue;
+      var value = numericValue && !allowEmpty ? 0 : '';
+      _this.setState({ value: value });
+    });(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2__.default)((0,_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_0__.default)(_this), "onFocusIn",
+
+    function () {
+      if (_this.mounted) {
+        if (_this.inputDomElem) {
+          _this.inputDomElem.style.backgroundColor = '#fff'; // Try to override standard html autofill styles
+        }
+        _this.setState({ focused: true });
+      }
+      // window.addEventListener('keypress', this.onKeyPress);
+      if (typeof _this.props.onFocusIn === 'function') {// Propogate event if handler passed
+        _this.props.onFocusIn(event);
+      }
+    });(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2__.default)((0,_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_0__.default)(_this), "onFocusOut",
+    function (event) {
+      _this.mounted && _this.setState({ focused: false });
+      // window.removeEventListener('keypress', this.onKeyPress);
+      if (typeof _this.props.onFocusOut === 'function') {// Propogate event if handler passed
+        _this.props.onFocusOut(event);
+      }
+    });(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2__.default)((0,_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_0__.default)(_this), "setInputDomRef",
+
+    function (inputDomElem) {
+      _this.inputDomElem = inputDomElem;
+      if (typeof _this.props.setInputDomRef === 'function') {
+        _this.props.setInputDomRef(inputDomElem);
+      }
+    });var _value = _this.getCorrectedValue(props.value || props.defaultValue || (props.numericValue && !props.allowEmpty ? 0 : ''));_this.state = { value: _value };return _this;} /* // UNUSED: componentDidMount
+   * componentDidMount() {
+   *   const { registerKeyPressHandler } = this.props;
+   *   if (typeof registerKeyPressHandler === 'function') { // From `FormInteractiveItemHOC`
+   *     // Register callback with `FormInteractiveItemHOC`
+   *     this.interactiveKeyPressHandler && registerKeyPressHandler(this.interactiveKeyPressHandler);
+   *   }
+   * }
+   */var _proto = FormTextInput.prototype;_proto.componentDidUpdate = function componentDidUpdate(prevProps, prevState) {var prevPropsValue = prevProps.value; // const propsValue = this.getCorrectedValue(this.props.value);
+    var propsValue = this.props.value;var stateValue = this.state.value;var prevStateValue = prevState.value;if (propsValue !== prevPropsValue && propsValue !== prevStateValue) {// New value from props
+      // console.log('FormTextInput:componentDidUpdate (propsValue)', {
+      //   prevPropsValue,
+      //   propsValue,
+      //   stateValue,
+      //   prevStateValue,
+      // });
+      this.setState({ value: this.getCorrectedValue(propsValue) }, this.updateValueWithState);} else if (stateValue !== prevStateValue) {// New value from state
+      // console.log('FormTextInput:componentDidUpdate (stateValue)', {
+      //   prevPropsValue,
+      //   propsValue,
+      //   stateValue,
+      //   prevStateValue,
+      // });
+      this.setState({ value: stateValue }, this.updateValueWithState); // this.updateValueWithState(this.state);
+    }} // Helper methods...
+  ;_proto.getCorrectedValue = function getCorrectedValue(value) {// const origValue = value;
+    var _this$props3 = this.props,numericValue = _this$props3.numericValue,defaultValue = _this$props3.defaultValue,allowEmpty = _this$props3.allowEmpty;if (numericValue && typeof value !== 'number') {value = String(value).replace(/[^0-9.,-]/g, '');value = parseInt(value, 10);if (isNaN(value)) {value = defaultValue || allowEmpty ? '' : 0;}} // console.log('FormTextInput:getCorrectedValue', {
+    //   origValue,
+    //   value,
+    //   numericValue,
+    // });
+    return value;};_proto.hasValue = function hasValue() {var value = this.state.value;return value != null && value !== '';};_proto.hasIcon = function hasIcon() {var _this$props4 = this.props,icon = _this$props4.icon,hasIcon = _this$props4.hasIcon,hasClear = _this$props4.hasClear;return hasIcon || !!icon || hasClear && this.hasValue();};_proto.getClassName = function getClassName() {var _this$props5 = this.props,id = _this$props5.id,hasClear = _this$props5.hasClear,className = _this$props5.className;var hasValue = this.hasValue();var hasClearActive = hasClear && hasValue;var classList = cnFormTextInput({ id: id, hasIcon: this.hasIcon(), hasValue: this.hasValue(), hasClear: hasClear, hasClearActive: hasClearActive }, [className]);return classList;} // Event handlers...
+  ; // Render...
+  _proto.renderClearIcon = function renderClearIcon() {// DELETE
+    var _this$props6 = this.props,hasClear = _this$props6.hasClear,clearIcon = _this$props6.clearIcon,clearIconTitle = _this$props6.clearIconTitle,lang = _this$props6.lang;var hasValue = this.hasValue();var hasClearActive = hasClear && hasValue;var title = clearIconTitle || (0,_utils_lang__WEBPACK_IMPORTED_MODULE_7__.getCommonLangText)('clearButton', 'Clear', lang);return hasClearActive && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3___default().createElement(_elements_InlineIcon_index_ts__WEBPACK_IMPORTED_MODULE_8__.default, { icon: clearIcon || 'faTimes', className: cnFormTextInput('Icon', { mode: 'Clear' }), onClick: this.onClearClick, title: title });};_proto.renderIcon = function renderIcon() {// DELETE
+    var _this$props7 = this.props,icon = _this$props7.icon,iconTitle = _this$props7.iconTitle,onIconClick = _this$props7.onIconClick;return icon && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3___default().createElement(_elements_InlineIcon_index_ts__WEBPACK_IMPORTED_MODULE_8__.default, { icon: icon,
+      className: cnFormTextInput('Icon'),
+      onClick: onIconClick,
+      title: iconTitle });
+
+
+  };_proto.
+
+  renderInput = function renderInput() {var
+
+    value =
+    this.state.value;var _this$props8 =
+
+
+
+
+
+
+
+
+    this.props,id = _this$props8.id,inputId = _this$props8.inputId,name = _this$props8.name,disabled = _this$props8.disabled,placeholder = _this$props8.placeholder,_this$props8$type = _this$props8.type,type = _this$props8$type === void 0 ? 'text' : _this$props8$type;
+
+    var inputProps = {
+      key: 'Input',
+      type: type,
+      className: cnFormTextInput('Control', ['FormItem-Control']),
+      id: inputId || id || name,
+      name: name || inputId || id,
+      disabled: disabled,
+      placeholder: placeholder,
+      ref: this.setInputDomRef,
+      onChange: this.handleChange,
+      onKeyPress: this.onKeyPress,
+      value: value
+      // onFocus: this.onFocusIn,
+      // onBlur: this.onFocusOut,
+    };
+    return /*#__PURE__*/(
+      react__WEBPACK_IMPORTED_MODULE_3___default().createElement("input",
+      inputProps));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import connect from 'react-redux/es/connect/connect'
+
+
+
+
+
+
+var cnFormText = (0,_utils_configure__WEBPACK_IMPORTED_MODULE_5__.cn)('FormText');var
+
+FormText = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_helpers_inheritsLoose__WEBPACK_IMPORTED_MODULE_1__.default)(FormText, _React$PureComponent);function FormText() {var _this;for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {args[_key] = arguments[_key];}_this = _React$PureComponent.call.apply(_React$PureComponent, [this].concat(args)) || this;(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2__.default)((0,_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_0__.default)(_this), "onClick",
 
 
 
@@ -9105,46 +9634,19 @@ FormTextInput = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_
 
 
 
+    function (event) {var _this$props =
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+      _this.props,disabled = _this$props.disabled,onClick = _this$props.onClick;
+      if (!disabled && onClick && typeof onClick === 'function') {
+        onClick(event);
+      }
+    });return _this;}var _proto = FormText.prototype;_proto.getClassName = function getClassName() {var _this$props2 = this.props,id = _this$props2.id,wrap = _this$props2.wrap;var classList = cnFormText({ id: id, wrap: wrap }, [this.props.className]);return classList;} // Handlers...
+  ;
+  // Render...
+  _proto.
+  render = function render() {var _this$props3 =
 
 
     function (state) {
@@ -9164,19 +9666,92 @@ FormTextInput = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_
 
 
 
+    this.props,id = _this$props3.id,disabled = _this$props3.disabled,text = _this$props3.text,children = _this$props3.children,title = _this$props3.title;
+
+    var renderProps = {
+      id: id,
+      className: this.getClassName(),
+      disabled: disabled,
+      title: title };
+
+
+    return /*#__PURE__*/(
+      react__WEBPACK_IMPORTED_MODULE_3___default().createElement("div", renderProps,
+      children || text || title));
 
 
 
+  };return FormText;}((react__WEBPACK_IMPORTED_MODULE_3___default().PureComponent) /** @lends @FormText.prototype */);(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2__.default)(FormText, "propTypes", { id: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string) });
 
 
 
+/* harmony default export */ __webpack_exports__["default"] = ((0,_FormItemHOC_index_ts__WEBPACK_IMPORTED_MODULE_6__.default)({ hoverable: true })(FormText));
 
 
+/***/ "./src/forms/index.js":
+/*!****************************!*\
+  !*** ./src/forms/index.js ***!
+  \****************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "FormButton": function() { return /* reexport safe */ _FormButton_index_ts__WEBPACK_IMPORTED_MODULE_0__.default; },
+/* harmony export */   "FormItemHOC": function() { return /* reexport safe */ _FormItemHOC_index_ts__WEBPACK_IMPORTED_MODULE_1__.default; },
+/* harmony export */   "FormItemDummy": function() { return /* reexport safe */ _FormItemDummy_index_ts__WEBPACK_IMPORTED_MODULE_2__.default; },
+/* harmony export */   "FormPager": function() { return /* reexport safe */ _FormPager_index_ts__WEBPACK_IMPORTED_MODULE_3__.default; },
+/* harmony export */   "FormLabel": function() { return /* reexport safe */ _FormLabel_index_ts__WEBPACK_IMPORTED_MODULE_4__.default; },
+/* harmony export */   "FormDelim": function() { return /* reexport safe */ _FormDelim_index_ts__WEBPACK_IMPORTED_MODULE_5__.default; },
+/* harmony export */   "FormSpacer": function() { return /* reexport safe */ _FormSpacer_index_ts__WEBPACK_IMPORTED_MODULE_6__.default; },
+/* harmony export */   "FormSeparator": function() { return /* reexport safe */ _FormSeparator_index_ts__WEBPACK_IMPORTED_MODULE_7__.default; },
+/* harmony export */   "FormText": function() { return /* reexport safe */ _FormText_index_ts__WEBPACK_IMPORTED_MODULE_8__.default; },
+/* harmony export */   "FormSelect": function() { return /* reexport safe */ _FormSelect_index_ts__WEBPACK_IMPORTED_MODULE_9__.default; },
+/* harmony export */   "FormTextInput": function() { return /* reexport safe */ _FormTextInput_index_ts__WEBPACK_IMPORTED_MODULE_10__.default; },
+/* harmony export */   "FormPasswordInput": function() { return /* reexport safe */ _FormPasswordInput_index_ts__WEBPACK_IMPORTED_MODULE_11__.default; },
+/* harmony export */   "FormRadio": function() { return /* reexport safe */ _FormRadio_index_ts__WEBPACK_IMPORTED_MODULE_12__.default; },
+/* harmony export */   "FormDateTime": function() { return /* reexport safe */ _FormDateTime_index_ts__WEBPACK_IMPORTED_MODULE_13__.default; },
+/* harmony export */   "FormDateRange": function() { return /* reexport safe */ _FormDateRange_index_ts__WEBPACK_IMPORTED_MODULE_14__.default; },
+/* harmony export */   "FormDateRangeSingleBox": function() { return /* reexport safe */ _FormDateRangeSingleBox_index_ts__WEBPACK_IMPORTED_MODULE_15__.default; },
+/* harmony export */   "FormActions": function() { return /* reexport safe */ _FormActions_index_ts__WEBPACK_IMPORTED_MODULE_16__.default; },
+/* harmony export */   "FormContainer": function() { return /* reexport safe */ _FormContainer_index_ts__WEBPACK_IMPORTED_MODULE_17__.default; },
+/* harmony export */   "FormGroup": function() { return /* reexport safe */ _FormGroup_index_ts__WEBPACK_IMPORTED_MODULE_18__.default; },
+/* harmony export */   "FormLabeledGroup": function() { return /* reexport safe */ _FormLabeledGroup_index_ts__WEBPACK_IMPORTED_MODULE_19__.default; },
+/* harmony export */   "FormButtonGroup": function() { return /* reexport safe */ _FormButtonGroup_index_ts__WEBPACK_IMPORTED_MODULE_20__.default; },
+/* harmony export */   "FormInputGroup": function() { return /* reexport safe */ _FormInputGroup_index_ts__WEBPACK_IMPORTED_MODULE_21__.default; }
+/* harmony export */ });
+/* harmony import */ var _FormButton_index_ts__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./FormButton/index.ts */ "./src/forms/FormButton/index.ts");
+/* harmony import */ var _FormItemHOC_index_ts__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./FormItemHOC/index.ts */ "./src/forms/FormItemHOC/index.ts");
+/* harmony import */ var _FormItemDummy_index_ts__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./FormItemDummy/index.ts */ "./src/forms/FormItemDummy/index.ts");
+/* harmony import */ var _FormPager_index_ts__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./FormPager/index.ts */ "./src/forms/FormPager/index.ts");
+/* harmony import */ var _FormLabel_index_ts__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./FormLabel/index.ts */ "./src/forms/FormLabel/index.ts");
+/* harmony import */ var _FormDelim_index_ts__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./FormDelim/index.ts */ "./src/forms/FormDelim/index.ts");
+/* harmony import */ var _FormSpacer_index_ts__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./FormSpacer/index.ts */ "./src/forms/FormSpacer/index.ts");
+/* harmony import */ var _FormSeparator_index_ts__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./FormSeparator/index.ts */ "./src/forms/FormSeparator/index.ts");
+/* harmony import */ var _FormText_index_ts__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./FormText/index.ts */ "./src/forms/FormText/index.ts");
+/* harmony import */ var _FormSelect_index_ts__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./FormSelect/index.ts */ "./src/forms/FormSelect/index.ts");
+/* harmony import */ var _FormTextInput_index_ts__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./FormTextInput/index.ts */ "./src/forms/FormTextInput/index.ts");
+/* harmony import */ var _FormPasswordInput_index_ts__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./FormPasswordInput/index.ts */ "./src/forms/FormPasswordInput/index.ts");
+/* harmony import */ var _FormRadio_index_ts__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./FormRadio/index.ts */ "./src/forms/FormRadio/index.ts");
+/* harmony import */ var _FormDateTime_index_ts__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./FormDateTime/index.ts */ "./src/forms/FormDateTime/index.ts");
+/* harmony import */ var _FormDateRange_index_ts__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./FormDateRange/index.ts */ "./src/forms/FormDateRange/index.ts");
+/* harmony import */ var _FormDateRangeSingleBox_index_ts__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./FormDateRangeSingleBox/index.ts */ "./src/forms/FormDateRangeSingleBox/index.ts");
+/* harmony import */ var _FormActions_index_ts__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./FormActions/index.ts */ "./src/forms/FormActions/index.ts");
+/* harmony import */ var _FormContainer_index_ts__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./FormContainer/index.ts */ "./src/forms/FormContainer/index.ts");
+/* harmony import */ var _FormGroup_index_ts__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./FormGroup/index.ts */ "./src/forms/FormGroup/index.ts");
+/* harmony import */ var _FormLabeledGroup_index_ts__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./FormLabeledGroup/index.ts */ "./src/forms/FormLabeledGroup/index.ts");
+/* harmony import */ var _FormButtonGroup_index_ts__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./FormButtonGroup/index.ts */ "./src/forms/FormButtonGroup/index.ts");
+/* harmony import */ var _FormInputGroup_index_ts__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./FormInputGroup/index.ts */ "./src/forms/FormInputGroup/index.ts");
+/** @module forms
+ *  @desc Form components
+ *  @since 2020.07.20, 19:21
+ *  @changed 2021.06.07, 14:46
+ */
 
+// Form elements...
 
-
-
+// export * as FormButton from './FormButton';  // Old (non-ts) export style
+// NOTE: This re-export format doesnt works in TS!
 
 
 
@@ -9300,6 +9875,8 @@ FormTextInput = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_
   render = function render() {var _this$props9 =
 
 
+// export * as FormCheck from './FormCheck';
+// export * as FormSwitch from './FormSwitch';
 
 
 
@@ -9368,7 +9945,15 @@ __webpack_require__.r(__webpack_exports__);
 
 // import connect from 'react-redux/es/connect/connect'
 
+var ActionsContextProvider = ActionsContext.Provider;
+var ActionsContextConsumer = ActionsContext.Consumer;
 
+var withActionsContext = function withActionsContext(WrappedComponent) {return function withActionsContext(props) {
+    return /*#__PURE__*/(
+      react__WEBPACK_IMPORTED_MODULE_1___default().createElement(ActionsContextConsumer, null,
+      function (actions) {
+        return /*#__PURE__*/(
+          react__WEBPACK_IMPORTED_MODULE_1___default().createElement(WrappedComponent, (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__.default)({}, props, { actionsContextNode: actions })));
 
 
 
@@ -9509,114 +10094,6 @@ __webpack_require__.r(__webpack_exports__);
 
  // DEBUG: Demo element
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// export * as FormCheck from './FormCheck';
-// export * as FormSwitch from './FormSwitch';
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// TODO...
-
-// export * as FormPager from './FormPager';
-
-/***/ }),
-
-/***/ "./src/helpers/ActionsContext.jsx":
-/*!****************************************!*\
-  !*** ./src/helpers/ActionsContext.jsx ***!
-  \****************************************/
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "ActionsContext": function() { return /* binding */ ActionsContext; },
-/* harmony export */   "ActionsContextProvider": function() { return /* binding */ ActionsContextProvider; },
-/* harmony export */   "ActionsContextConsumer": function() { return /* binding */ ActionsContextConsumer; },
-/* harmony export */   "withActionsContext": function() { return /* binding */ withActionsContext; }
-/* harmony export */ });
-/* harmony import */ var _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
- /** @module ActionsContext
- *  @class ActionsContext
- *  @since 2020.12.24, 19:08
- *  @changed 2020.12.24, 19:08
- */
-
-
-
-var ActionsContext = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createContext();
-
-var ActionsContextProvider = ActionsContext.Provider;
-var ActionsContextConsumer = ActionsContext.Consumer;
-
-var withActionsContext = function withActionsContext(WrappedComponent) {return function withActionsContext(props) {
-    return /*#__PURE__*/(
-      react__WEBPACK_IMPORTED_MODULE_1___default().createElement(ActionsContextConsumer, null,
-      function (actions) {
-        return /*#__PURE__*/(
-          react__WEBPACK_IMPORTED_MODULE_1___default().createElement(WrappedComponent, (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__.default)({}, props, { actionsContextNode: actions })));
-
-      }));
-
-
-  };};
-
-/***/ }),
-
-/***/ "./src/helpers/FormContext.jsx":
-/*!*************************************!*\
-  !*** ./src/helpers/FormContext.jsx ***!
-  \*************************************/
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "FormContext": function() { return /* binding */ FormContext; },
-/* harmony export */   "FormContextProvider": function() { return /* binding */ FormContextProvider; },
-/* harmony export */   "FormContextConsumer": function() { return /* binding */ FormContextConsumer; },
-/* harmony export */   "withFormContext": function() { return /* binding */ withFormContext; }
-/* harmony export */ });
-/* harmony import */ var _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
- /** @module FormContext
- *  @class FormContext
- *  @since 2021.01.19, 15:23
- *  @changed 2021.01.19, 16:08
- */
-
-
-
-var FormContext = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createContext();
-
 var FormContextProvider = FormContext.Provider;
 var FormContextConsumer = FormContext.Consumer;
 
@@ -9655,6 +10132,372 @@ __webpack_require__.r(__webpack_exports__);
  */
 // export * as ModalsContext from './ModalsContext'; // UNUSED
 
+
+/***/ }),
+
+/***/ "./src/utils/configure.js":
+/*!********************************!*\
+  !*** ./src/utils/configure.js ***!
+  \********************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "setConfigOptions": function() { return /* binding */ setConfigOptions; },
+/* harmony export */   "cssMapping": function() { return /* binding */ cssMapping; },
+/* harmony export */   "cn": function() { return /* binding */ cn; }
+/* harmony export */ });
+/* harmony import */ var _config_index_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../config/index.js */ "./src/config/index.js");
+/* harmony import */ var _config_index_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_config_index_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _bem_react_classname__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @bem-react/classname */ "@bem-react/classname");
+/* harmony import */ var _bem_react_classname__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_bem_react_classname__WEBPACK_IMPORTED_MODULE_1__);
+/** @module build
+ *  @desc Library exportable ditributive
+ *  @since 2020.05.19, 17:16
+ *  @changed 2020.12.08, 21:47
+ */
+
+
+
+
+// export * as FormCheck from './FormCheck';
+// export * as FormSwitch from './FormSwitch';
+
+var getConfigMap = function getConfigMap() {
+  if (!configMap) {
+    configMap = {};
+    Object.keys((_config_index_js__WEBPACK_IMPORTED_MODULE_0___default())).forEach(function (scopeId) {
+      var scopeObj = (_config_index_js__WEBPACK_IMPORTED_MODULE_0___default())[scopeId];
+      // const mapObj = configMap[scopeId] || (configMap[scopeId] = {})
+      Object.keys(scopeObj).forEach(function (keyId) {
+        if (configMap[keyId]) {
+          configMap[keyId].push(scopeId);
+          // const error = new Error('Duplicated config key "' + keyId + '" in scope "' + scopeId + '" and "' + configMap[keyId] + '"')
+          // console.error(error) // eslint-disable-line no-console
+          // debugger // eslint-disable-line no-debugger
+          // throw error
+        } else
+        {
+          configMap[keyId] = [scopeId];
+        }
+      });
+    });
+  }
+  return configMap;
+};
+
+var setConfigOptions = function setConfigOptions(options) {
+  var map = getConfigMap();
+  Object.entries(options).map(function (_ref) {var key = _ref[0],val = _ref[1]; // Set entry
+    var scopes = map[key];
+    scopes.map(function (scope) {
+      var obj = (_config_index_js__WEBPACK_IMPORTED_MODULE_0___default())[scope];
+      if (obj) {
+        obj[key] = val;
+      }
+    });
+  });
+};
+
+var cssMapping = function cssMapping(classNames) {var _config$app =
+  (_config_index_js__WEBPACK_IMPORTED_MODULE_0___default().app),useCssModules = _config$app.useCssModules,cssMappings = _config$app.cssMappings;
+  if (!useCssModules || !cssMappings || !Object.keys(cssMappings)) {// No css-module transforms
+    return classNames;
+  }
+  var classNamesList = typeof classNames === 'string' ? classNames.split(' ').map(function (s) {return s.trim();}) : classNames;
+  if (!Array.isArray(classNamesList)) {
+    throw new Error('Class list must be an array!');
+  }
+  var resultList = classNamesList.map(function (className) {
+    var result = cssMappings[className];
+    if (!result) {// Try to make className by similarity (eg: not found 'XXX_*', but found 'XXX')...
+      var pos = [className.indexOf('-'), className.indexOf('_')].filter(function (x) {return x !== -1;});
+      var minPos = pos && pos.length && Math.min.apply(Math, pos);
+      if (minPos) {
+        // const match = className.match(/^(\w+?)([-_].*)$/)
+        // const [, base, rest] = match
+        var base = className.substr(0, minPos);
+        var rest = className.substr(minPos);
+        var baseClassName = cssMappings[base];
+        if (baseClassName) {
+          result = baseClassName + rest;
+        }
+      }
+    }
+    // if (className !== result) {
+    //   console.log('WebUiCore:utils:cssMapping', className, '->', result)
+    //   debugger
+    // }
+    return result || className;
+  });
+  return resultList.join(' ');
+};
+
+// Wrapper for `@bem-react/classname/cn()` function
+// See original method call signatures & usage in `https://github.com/bem/bem-react/tree/master/packages/classname`
+var cn = function cn() {for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {args[_key] = arguments[_key];}
+  var result = _bem_react_classname__WEBPACK_IMPORTED_MODULE_1__.cn.apply(cn, args);
+  if (typeof result === 'string') {// If class name, not fabric
+    return cssMapping(result);
+  } else
+  if (typeof result === 'function') {
+    return function cnCssMapping() {for (var _len2 = arguments.length, args = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {args[_key2] = arguments[_key2];}
+      var res = result.apply(null, args);
+      if (typeof res === 'string') {
+        res = cssMapping(res);
+      }
+      return res;
+    };
+  }
+  return result;
+};
+
+/***/ }),
+
+/***/ "./src/utils/dates.js":
+/*!****************************!*\
+  !*** ./src/utils/dates.js ***!
+  \****************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "dayTicks": function() { return /* binding */ dayTicks; },
+/* harmony export */   "weekTicks": function() { return /* binding */ weekTicks; },
+/* harmony export */   "detectDateValueType": function() { return /* binding */ detectDateValueType; },
+/* harmony export */   "convertToDateObject": function() { return /* binding */ convertToDateObject; },
+/* harmony export */   "toMicrosoftDateTime": function() { return /* binding */ toMicrosoftDateTime; },
+/* harmony export */   "convertDateToType": function() { return /* binding */ convertDateToType; },
+/* harmony export */   "formatDateToString": function() { return /* binding */ formatDateToString; },
+/* harmony export */   "formatDateTimeToString": function() { return /* binding */ formatDateTimeToString; },
+/* harmony export */   "adjustDateValue": function() { return /* binding */ adjustDateValue; },
+/* harmony export */   "startOfTheDay": function() { return /* binding */ startOfTheDay; },
+/* harmony export */   "endOfTheDay": function() { return /* binding */ endOfTheDay; }
+/* harmony export */ });
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! moment */ "moment");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! date-fns */ "date-fns");
+/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(date_fns__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _config_index_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../config/index.js */ "./src/config/index.js");
+/* harmony import */ var _config_index_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_config_index_js__WEBPACK_IMPORTED_MODULE_2__);
+/** @module dates
+ *  @description Objects utilities
+ *  @since 2021.01.23, 20:29
+ *  @changed 2021.04.30, 14:28
+ */
+
+
+
+
+
+var msDatePrefix = '/Date(';
+var msDatePostfix = ')/';
+
+// Export constants...
+
+var dayTicks = (_config_index_js__WEBPACK_IMPORTED_MODULE_2___default().constants.dayTicks); // 1000 * 60 * 60 * 24;
+var weekTicks = (_config_index_js__WEBPACK_IMPORTED_MODULE_2___default().constants.weekTicks); // dayTicks * 7;
+
+// TODO...
+
+// export * as FormPager from './FormPager';
+
+/***/ }),
+
+/***/ "./src/helpers/ActionsContext.jsx":
+/*!****************************************!*\
+  !*** ./src/helpers/ActionsContext.jsx ***!
+  \****************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ActionsContext": function() { return /* binding */ ActionsContext; },
+/* harmony export */   "ActionsContextProvider": function() { return /* binding */ ActionsContextProvider; },
+/* harmony export */   "ActionsContextConsumer": function() { return /* binding */ ActionsContextConsumer; },
+/* harmony export */   "withActionsContext": function() { return /* binding */ withActionsContext; }
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+ /** @module ActionsContext
+ *  @class ActionsContext
+ *  @since 2020.12.24, 19:08
+ *  @changed 2020.12.24, 19:08
+ */
+
+function formatDateTimeToString(date, opt) {if (opt === void 0) {opt = {};}
+  var fmt = opt.format || (opt.showTime ? (_config_index_js__WEBPACK_IMPORTED_MODULE_2___default().constants.dateTimeFormat) : (_config_index_js__WEBPACK_IMPORTED_MODULE_2___default().constants.dateFormat));
+  // @see https://date-fns.org/v2.16.1/docs/format
+  return (0,date_fns__WEBPACK_IMPORTED_MODULE_1__.format)(convertToDateObject(date), fmt, opt);
+}
+
+/** adjustDateValue -- Adjust date to day/interval start/end.
+ * @param {Date|Number|moment|msDateStr} origDate - date (in any format)
+ * @param {Boolean} [toEnd=false] -- Adjust to end
+ * @param {Boolean} [toTime=false] -- Adjust to time periods (timeIntervals)
+ * @param {Number} [timeIntervals] -- Time period to adjust (in minutes, default value = config.constants.timeIntervals)
+ * @return {Date|Number|moment|msDateStr} adjustedDate -- Date in the input format
+ */
+function adjustDateValue(origDate, toEnd, toTime, timeIntervals) {
+  var dateType = detectDateValueType(origDate);
+  var date;
+  if (dateType === 'object') {// Just clone date object
+    date = new Date(origDate.getTime());
+  } else
+  {
+    date = convertToDateObject(origDate);
+  }
+  if (!toTime) {
+    if (toEnd) {
+      date.setHours(23, 59, 59, 999);
+    } else
+    {
+      date.setHours(0, 0, 0, 0);
+    }
+  } else
+  {
+    if (!timeIntervals) {
+      timeIntervals = (_config_index_js__WEBPACK_IMPORTED_MODULE_2___default().constants.timeIntervals);
+    }
+    if (toEnd) {
+      date.setMilliseconds(999);
+      date.setSeconds(59);
+      var minutes = date.getMinutes();
+      // To end of period slot
+      var extraMinutes = timeIntervals - minutes % timeIntervals;
+      var setMinutes = minutes + extraMinutes - 1;
+      date.setMinutes(setMinutes);
+    } else
+    {
+      date.setMilliseconds(0);
+      date.setSeconds(0);
+      var _minutes = date.getMinutes();
+      // To begin of period slot
+      var _extraMinutes = _minutes % timeIntervals;
+      var _setMinutes = _minutes - _extraMinutes;
+      date.setMinutes(_setMinutes);
+    }
+  }
+  return convertDateToType(date, dateType);
+}
+
+var ActionsContext = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createContext();
+
+var ActionsContextProvider = ActionsContext.Provider;
+var ActionsContextConsumer = ActionsContext.Consumer;
+
+var withActionsContext = function withActionsContext(WrappedComponent) {return function withActionsContext(props) {
+    return /*#__PURE__*/(
+      react__WEBPACK_IMPORTED_MODULE_1___default().createElement(ActionsContextConsumer, null,
+      function (actions) {
+        return /*#__PURE__*/(
+          react__WEBPACK_IMPORTED_MODULE_1___default().createElement(WrappedComponent, (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__.default)({}, props, { actionsContextNode: actions })));
+
+      }));
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "getDocumentDomNodeByTag": function() { return /* binding */ getDocumentDomNodeByTag; },
+/* harmony export */   "hasClassName": function() { return /* binding */ hasClassName; },
+/* harmony export */   "addClassName": function() { return /* binding */ addClassName; },
+/* harmony export */   "removeClassName": function() { return /* binding */ removeClassName; }
+/* harmony export */ });
+/** @module domUtils
+ *  @class domUtils
+ *  @since 2019.06.14, 12:20
+ *  @changed 2020.12.21, 18:05
+ */
+
+  };};
+
+/***/ }),
+
+/***/ "./src/helpers/FormContext.jsx":
+/*!*************************************!*\
+  !*** ./src/helpers/FormContext.jsx ***!
+  \*************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "FormContext": function() { return /* binding */ FormContext; },
+/* harmony export */   "FormContextProvider": function() { return /* binding */ FormContextProvider; },
+/* harmony export */   "FormContextConsumer": function() { return /* binding */ FormContextConsumer; },
+/* harmony export */   "withFormContext": function() { return /* binding */ withFormContext; }
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+ /** @module FormContext
+ *  @class FormContext
+ *  @since 2021.01.19, 15:23
+ *  @changed 2021.01.19, 16:08
+ */
+
+/***/ }),
+
+/***/ "./src/utils/forms.js":
+/*!****************************!*\
+  !*** ./src/utils/forms.js ***!
+  \****************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+var FormContext = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createContext();
+
+var FormContextProvider = FormContext.Provider;
+var FormContextConsumer = FormContext.Consumer;
+
+var withFormContext = function withFormContext(WrappedComponent) {return function withFormContext(props) {
+    return /*#__PURE__*/(
+      react__WEBPACK_IMPORTED_MODULE_1___default().createElement(FormContextConsumer, null,
+      function (form) {
+        return /*#__PURE__*/(
+          react__WEBPACK_IMPORTED_MODULE_1___default().createElement(WrappedComponent, (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__.default)({}, props, { formContextNode: form })));
+
+      }));
+
+/***/ "./src/utils/index.js":
+/*!****************************!*\
+  !*** ./src/utils/index.js ***!
+  \****************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+  };};
+
+/***/ }),
+
+/***/ "./src/helpers/index.js":
+/*!******************************!*\
+  !*** ./src/helpers/index.js ***!
+  \******************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ActionsContext": function() { return /* reexport module object */ _ActionsContext__WEBPACK_IMPORTED_MODULE_0__; },
+/* harmony export */   "FormContext": function() { return /* reexport module object */ _FormContext__WEBPACK_IMPORTED_MODULE_1__; }
+/* harmony export */ });
+/* harmony import */ var _ActionsContext__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ActionsContext */ "./src/helpers/ActionsContext.jsx");
+/* harmony import */ var _FormContext__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./FormContext */ "./src/helpers/FormContext.jsx");
+/** @module helpers
+ *  @desc Library helpers
+ *  @since 2020.12.24, 19:06
+ *  @changed 2021.01.19, 16:20
+ */
+// export * as ModalsContext from './ModalsContext'; // UNUSED
+
+/***/ "./src/utils/lang.js":
+/*!***************************!*\
+  !*** ./src/utils/lang.js ***!
+  \***************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 /***/ }),
 
@@ -9810,7 +10653,38 @@ __webpack_require__.r(__webpack_exports__);
  *  @changed 2021.04.30, 14:28
  */
 
+/***/ }),
 
+/***/ "./src/utils/strings.js":
+/*!******************************!*\
+  !*** ./src/utils/strings.js ***!
+  \******************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "toNumber": function() { return /* binding */ toNumber; },
+/* harmony export */   "toString": function() { return /* binding */ toString; },
+/* harmony export */   "toBoolean": function() { return /* binding */ toBoolean; },
+/* harmony export */   "typeTransforms": function() { return /* binding */ typeTransforms; },
+/* harmony export */   "getCommonLength": function() { return /* binding */ getCommonLength; },
+/* harmony export */   "ucFirst": function() { return /* binding */ ucFirst; },
+/* harmony export */   "toType": function() { return /* binding */ toType; },
+/* harmony export */   "randomHexString": function() { return /* binding */ randomHexString; },
+/* harmony export */   "html2string": function() { return /* binding */ html2string; },
+/* harmony export */   "splitMultiline": function() { return /* binding */ splitMultiline; },
+/* harmony export */   "padNumber": function() { return /* binding */ padNumber; },
+/* harmony export */   "periodizeNumber": function() { return /* binding */ periodizeNumber; },
+/* harmony export */   "humanizeId": function() { return /* binding */ humanizeId; }
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+var _this = undefined; /** @module strings
+ *  @description Strings utilities
+ *  @since 2019.04.03, 14:38
+ *  @changed 2021.04.06, 14:00
+ */
 
 
 
@@ -10117,6 +10991,7 @@ __webpack_require__.r(__webpack_exports__);
 
 // export * from './configure'
 
+/***/ }),
 
 /***/ }),
 
@@ -10145,11 +11020,36 @@ __webpack_require__.r(__webpack_exports__);
  *  @changed 2021.06.07, 15:21
  */
 
+  if (isNaN(number)) {
+    return number;
+  }
 
+  return number < 0 ? Math.ceil(number) : Math.floor(number);
+}
 
+/***/ }),
 
+/***/ "./node_modules/date-fns/esm/locale/_lib/buildFormatLongFn/index.js":
+/*!**************************************************************************!*\
+  !*** ./node_modules/date-fns/esm/locale/_lib/buildFormatLongFn/index.js ***!
+  \**************************************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": function() { return /* binding */ buildFormatLongFn; }
+/* harmony export */ });
+function buildFormatLongFn(args) {
+  return function (dirtyOptions) {
+    var options = dirtyOptions || {};
+    var width = options.width ? String(options.width) : args.defaultWidth;
+    var format = args.formats[width] || args.formats[args.defaultWidth];
+    return format;
+  };
+}
 
+/***/ }),
 
 // Initialize locales...
 (0,react_datepicker__WEBPACK_IMPORTED_MODULE_1__.registerLocale)('ru-RU', date_fns_esm_locale__WEBPACK_IMPORTED_MODULE_3__.default);
@@ -10236,7 +11136,22 @@ var _this = undefined; /** @module strings
  *  @changed 2021.04.06, 14:00
  */
 
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": function() { return /* binding */ buildMatchFn; }
+/* harmony export */ });
+function buildMatchFn(args) {
+  return function (dirtyString, dirtyOptions) {
+    var string = String(dirtyString);
+    var options = dirtyOptions || {};
+    var width = options.width;
+    var matchPattern = width && args.matchPatterns[width] || args.matchPatterns[args.defaultMatchWidth];
+    var matchResult = string.match(matchPattern);
 
+    if (!matchResult) {
+      return null;
+    }
 
 /**
  * @param {string} val
@@ -10265,6 +11180,14 @@ var typeTransforms = {
   toString: toString,
   toBoolean: toBoolean };
 
+    value = args.valueCallback ? args.valueCallback(value) : value;
+    value = options.valueCallback ? options.valueCallback(value) : value;
+    return {
+      value: value,
+      rest: string.slice(matchedString.length)
+    };
+  };
+}
 
 /** Returns length of common parts of two strings
  * @param {String} a
@@ -11882,6 +12805,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 // extracted by mini-css-extract-plugin
 
+/***/ }),
 
 /***/ }),
 
@@ -11895,6 +12819,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 // extracted by mini-css-extract-plugin
 
+/***/ }),
 
 /***/ }),
 
@@ -11908,6 +12833,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 // extracted by mini-css-extract-plugin
 
+/***/ }),
 
 /***/ }),
 
@@ -11921,6 +12847,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 // extracted by mini-css-extract-plugin
 
+/***/ }),
 
 /***/ }),
 
@@ -11934,6 +12861,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 // extracted by mini-css-extract-plugin
 
+/***/ }),
 
 /***/ }),
 
@@ -11947,6 +12875,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 // extracted by mini-css-extract-plugin
 
+/***/ }),
 
 /***/ }),
 
@@ -11960,6 +12889,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 // extracted by mini-css-extract-plugin
 
+/***/ }),
 
 /***/ }),
 
@@ -11973,6 +12903,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 // extracted by mini-css-extract-plugin
 
+/***/ }),
 
 /***/ }),
 
@@ -12223,6 +13154,12 @@ object-assign
 @license MIT
 */
 
+"use strict";
+/*
+object-assign
+(c) Sindre Sorhus
+@license MIT
+*/
 
 /* eslint-disable no-unused-vars */
 var getOwnPropertySymbols = Object.getOwnPropertySymbols;
