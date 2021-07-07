@@ -1,10 +1,11 @@
 /** @module elements
  *  @desc Basic elements
  *  @since 2020.10.07, 02:12
- *  @changed 2021.05.14, 14:39
+ *  @changed 2021.07.07, 18:24
  */
 
 export { default as DateTimeSelector } from './DateTimeSelector';
+export { default as ErrorContainer } from './ErrorContainer';
 export { default as InlineIcon } from './InlineIcon';
 export { default as Loader } from './Loader';
 export { default as Menu } from './Menu';
