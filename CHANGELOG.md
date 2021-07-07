@@ -1,5 +1,30 @@
 # CHANGELOG
 
+- 2021.07.07, 19:57 -- config/css -- Explicitly define primary/secondary colors. FormButton/FormSelect: allow `style` propery.
+- 2021.07.07, 18:38 -- ErrorContainer re-export fixed.
+- 2021.06.07, 15:54 -- v.0.3.6: PD-3986: Refactored & integrated (from WebUi:uikit) stock component FormPager. Added demo language store entry.
+- 2021.05.31, 22:03 -- Use redux store (added package dependency), emulate store in demo mode, test store in ModalProxifiedWindow fixture. ModalProxifiedWindow: added state activate/deactivate methods, added `passStateToProps`, `onStateChangeHandler` (based on client method `mapStateToProps`), fixed minor bugs.
+- 2021.05.31, 21:58 -- Minor changes: Menu: safe options list processing (in `setChildrenItemsFromProps`). FormText: wrap modifier. ModalWindow: fixed modal width styles.
+- 2021.05.27, 17:00 -- v.0.3.5: Added ModalProxifiedWindow component.
+- 2021.05.17, 15:55 -- MenuItem: Fix styles for hovered\checked states. ModalWindow: Pass all custom handler props ('on...') to `ModalPortal`. ModalPortal: Process `onChildAction` for child content actions (via `ActionsContextProvider`). Process custom action callbacks (with method name masks 'on...').
+- 2021.05.14, 15:19 -- v.0.3.4: Using `ModalProxy`.
+- 2021.05.07, 15:40 -- PD-3621: Modal windows controller: Added `ModalWindowWithController` fixture. ModalPortal: Pass `modalId` (alongside `id`) property for event handlers. ModalsController: using `proxyModalsList` state parameter for active proxy modals list, added `...ProxyModal...` functionality, added uncaught errors processing.
+- 2021.05.07, 12:30 -- v.0.3.3: (ModalsContainer -> ModalsController).
+- 2021.05.04, 18:09 -- utils: Safe ucFirst, dates: msDate bugs fixed.
+- 2021.04.22, 21:24 -- utils/objects: data manipulation utilities.
+- 2021.04.22, 00:26 -- Fixed Loader actions button theme (depends on Loader's theme).
+- 2021.04.13, 15:24 -- WebUiCore v.0.3.2. Added es5 target to webpack. Babel: fixed upgraded module-resolver config. Build environment: removed PrintXpertWebServer existency in deploy script `util-upload-bundle.ps1`, upgraded babel versions to match WebUiCore.
+- 2021.04.12, 14:46 -- Fix-up for webpack 5 hot-reload feature. FormTextInput fix-ups
+- 2021.04.10, 00:27 -- v.0.3.1.
+- 2021.04.10, 00:24 -- PD-3623: Fixed ts/js index exports (using `export { default as XXX }`). Updated webpack dev-server detection.
+- 2021.04.09, 22:32 -- PD-3623: Temporarily (?) using old (16.13 react version due compatibility with current WebUi due to webpack errors). (TO CHECK!)
+- 2021.03.26, 15:50 -- PD-3623: First ts version: tslint linter added (in progress; need to use tsserver integration).
+- 2021.03.26, 15:00 -- PD-3623: First ts version: Config changes, source code changes.
+- 2021.03.26, 14:37 -- v.0.3.0, PD-3623: Stable ts configuration
+- 2021.03.18, 16:09 -- PD-3621: Minor optimizations in `modals`, `ModalPopup`, `ModalPortal` (use global controller from `config.modals.controller`), ModalsContainer obtain domNode reference from ref, not deprecated `ReactDOM.findDOMNode`.
+- 2021.03.18, 16:03 -- PD-3623: Configuration (use tsserver, aliases -- istead babel module-resolver; in progress), ModalsContainer uses typescript.
+- 2021.03.17, 15:27 -- PD-3603: Update time values to period ends (eg, '00:00' -> '00:59' for 1-hour intervals.
+- 2021.03.11, 22:17 -- PD-2603, v.0.2.14: FormDateRange uses separated input controls for range begin and end.
 - 2021.03.03, 04:04 -- v.0.2.13.
 - 2021.03.03, 04:03 -- Minor changes: removed extra `checked` prop from `FormItem`, fixed prop types in `FormActions`.
 - 2021.03.03, 04:02 -- ModalWindow: Used FormActions for actions block (can be specified as buttons list, not react elements).
@@ -108,5 +133,5 @@
 - 2020.10.05, 20:38 -- v.0.0.15: Extracted `demoSupport.jsx` routines, fixture selection from url query (parameter `fixture`), added avaialble fixtures list if fixture to display is not specified, added DemoWrapper & demoTitle exportable ficture parameters for demo rendering.
 
 <!--
- @changed 2021.03.03, 04:04
+ @changed 2021.07.07, 19:58
 -->
