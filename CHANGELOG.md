@@ -1,5 +1,7 @@
 # CHANGELOG
 
+- 2021.07.07, 19:57 -- config/css -- Explicitly define primary/secondary colors. FormButton/FormSelect: allow `style` propery.
+- 2021.07.07, 18:38 -- ErrorContainer re-export fixed.
 - 2021.06.07, 15:54 -- v.0.3.6: PD-3986: Refactored & integrated (from WebUi:uikit) stock component FormPager. Added demo language store entry.
 - 2021.05.31, 22:03 -- Use redux store (added package dependency), emulate store in demo mode, test store in ModalProxifiedWindow fixture. ModalProxifiedWindow: added state activate/deactivate methods, added `passStateToProps`, `onStateChangeHandler` (based on client method `mapStateToProps`), fixed minor bugs.
 - 2021.05.31, 21:58 -- Minor changes: Menu: safe options list processing (in `setChildrenItemsFromProps`). FormText: wrap modifier. ModalWindow: fixed modal width styles.
@@ -131,5 +133,5 @@
 - 2020.10.05, 20:38 -- v.0.0.15: Extracted `demoSupport.jsx` routines, fixture selection from url query (parameter `fixture`), added avaialble fixtures list if fixture to display is not specified, added DemoWrapper & demoTitle exportable ficture parameters for demo rendering.
 
 <!--
- @changed 2021.06.07, 15:55
+ @changed 2021.07.07, 19:58
 -->
