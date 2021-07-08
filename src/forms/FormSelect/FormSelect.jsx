@@ -136,7 +136,7 @@ class FormSelect extends React.PureComponent /** @lends @FormSelect.prototype */
       placeholder,
       title,
       controlButtonTheme,
-      fullWidth = true,
+      fullWidth, // = true,
       disabled,
       inputId,
     } = this.props;

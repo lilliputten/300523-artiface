@@ -9,6 +9,7 @@ import FormInputGroup from './FormInputGroup';
 import FormButton from '../FormButton';
 import FormTextInput from '../FormTextInput';
 import FormGroup from '../FormGroup';
+import FormSelect from '../FormSelect';
 
 import { // Icons (solid)...
   faCheck,
@@ -22,8 +23,8 @@ import { // Icons (solid)...
 export const demoTitle = 'FormInputGroup component';
 
 export default {
-  default: (
-    <FormGroup id="OuterGroupFixture">
+  simple: (
+    <FormGroup id="simple">
       <FormButton theme="default" text="Outer" id="Outer item" />
       <FormInputGroup id="FormInputGroupFixture">
         <FormTextInput
@@ -33,6 +34,23 @@ export default {
           inputId="InputControl"
         />
         <FormButton icon={faCheck} theme="default" text="Button" />
+      </FormInputGroup>
+    </FormGroup>
+  ),
+  withSelect: (
+    <FormGroup id="withSelect">
+      <FormButton theme="default" text="Outer" id="Outer item" />
+      <FormInputGroup id="FormInputGroupFixture">
+        <FormSelect
+          title="Select title"
+          text="Select"
+          options={[
+            { val: 1, text: 'Ruinning' },
+            { val: 2, text: 'Swimming extra long text item name string value' },
+          ]}
+        />
+        <FormButton icon="faTimes" theme="default" text="Test" />
+        <FormButton icon="faCheck" theme="default" text="Button" />
       </FormInputGroup>
     </FormGroup>
   ),

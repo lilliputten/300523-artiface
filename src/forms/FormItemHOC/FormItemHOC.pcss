@@ -5,6 +5,8 @@
 
 .FormItem {
   @mixin FormItemMixin;
+  transition: box-shadow $(transitionTime)ms, background $(transitionTime)ms;
+  position: relative;
   &_disabled {
     opacity: .5;
     pointer-events: none;
@@ -27,4 +29,9 @@
     //   width: 100%;
     // }
   }
+  &_focused, &_hovered {
+    z-index: 10; // Lift active item up (m.b. used in button-groups? Don't forget to lift modals, popups etc.)
+    // NOTE: Cause bug for FormSelect controller button: It displaying over ModalPopupCurtain
+  }
+
 }
