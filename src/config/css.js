@@ -1,7 +1,7 @@
 /** @module config.css
  *  @description Global styles config
  *  @since 2019.08.29, 10:28
- *  @changed 2020.12.24, 18:19
+ *  @changed 2021.07.07, 19:55
  */
 
 // Theme...
@@ -17,11 +17,23 @@ const textColor = theme.textColor || '#444';
 const defaultTransitionTime = 250;
 const defaultAnimateTime = 500;
 
+const primaryDarkColor = theme.primaryDarkColor || '#06d';
+const primaryColor = theme.primaryColor || '#07f';
+const primaryLightColor = theme.primaryLightColor || '#6af';
+const primaryContrastColor = theme.primaryContrastColor || '#fff';
+
+const secondaryDarkColor = theme.secondaryDarkColor || '#233';
+const secondaryColor = theme.secondaryColor || '#677';
+const secondaryLightColor = theme.secondaryLightColor || '#abb';
+const secondaryContrastColor = theme.secondaryContrastColor || '#fff';
+
+// theme\.\(primaryDarkColor\|primaryColor\|primaryLightColor\|primaryContrastColor\|secondaryDarkColor\|secondaryColor\|secondaryLightColor\|secondaryContrastColor\)\>
+
 const errorColor = theme.errorColor || '#c33';
 const warnColor = theme.warnColor || '#f73'; // '#f96'
 const successColor = theme.successColor || '#593'; // '#ac9'
-const infoColor = theme.infoColor || theme.primaryColor; // '#29a' // '#9bd'
-const confirmColor = theme.confirmColor /* || theme.primaryColor || textColor */ || '#891'; // '#07f'
+const infoColor = theme.infoColor || primaryColor; // '#29a' // '#9bd'
+const confirmColor = theme.confirmColor /* || primaryColor || textColor */ || '#891'; // '#07f'
 const selectColor = theme.selectColor || '#05b';
 
 // module.exports = { // Common-used css variables...
@@ -29,15 +41,15 @@ const cssConfig = { // Common-used css variables...
 
   THEME: THEME,
 
-  primaryColor: theme.primaryColor,
-  primaryLightColor: theme.primaryLightColor,
-  primaryDarkColor: theme.primaryDarkColor,
-  primaryContrastColor: theme.primaryContrastColor || '#fff',
+  primaryColor: primaryColor,
+  primaryLightColor: primaryLightColor,
+  primaryDarkColor: primaryDarkColor,
+  primaryContrastColor: primaryContrastColor || '#fff',
 
-  secondaryColor: theme.secondaryColor,
-  secondaryLightColor: theme.secondaryLightColor,
-  secondaryDarkColor: theme.secondaryDarkColor,
-  secondaryContrastColor: theme.secondaryContrastColor || '#fff',
+  secondaryColor: secondaryColor,
+  secondaryLightColor: secondaryLightColor,
+  secondaryDarkColor: secondaryDarkColor,
+  secondaryContrastColor: secondaryContrastColor || '#fff',
 
   // Colors...
 
@@ -46,7 +58,7 @@ const cssConfig = { // Common-used css variables...
   warnColor, // theme.warnColor || '#f73', // '#f96',
   successColor, // theme.successColor || '#593', // '#ac9',
   infoColor, // theme.infoColor || '#29a', // '#9bd',
-  confirmColor, // theme.confirmColor /* || theme.primaryColor || textColor */ || '#891', // '#07f',
+  confirmColor, // theme.confirmColor /* || primaryColor || textColor */ || '#891', // '#07f',
   selectColor, // theme.selectColor || '#05b',
 
   specialContrastColor: '#fff', // Generic contrast for accenting colors
@@ -83,8 +95,8 @@ const cssConfig = { // Common-used css variables...
   themeColors: { // Generic theming colors...
 
     // ??? TODO: See buttons themes
-    primary: theme.primaryColor,
-    secondary: theme.secondaryColor,
+    primary: primaryColor,
+    secondary: secondaryColor,
 
     neutral: '#666',
 

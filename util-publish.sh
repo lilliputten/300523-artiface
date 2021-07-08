@@ -25,8 +25,9 @@ echo "Publishing build ($VERSION, $TIMESTAMP)..."
 # TODO: Compare actual and previously published versions? (The git is checking for changes itself anyway.)
 
 COMMIT_TEXT="Build dist.$VERSION, $TIMESTAMP ($TIMETAG)"
+# echo "Fetch..." && git fetch && git pull && \
 cd "$PUBLISH_FOLDER" && \
-  echo "Fetch..." && git fetch && git pull && \
+  echo "Fetch..." && git fetch && git pull -Xours && \
   echo "Add files..." && git add . -Av && \
   echo "Commit..." && git commit -am "$COMMIT_TEXT" && \
   echo "Push basic branch..." && git push && \
