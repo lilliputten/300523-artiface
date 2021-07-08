@@ -1,6 +1,6 @@
 /** @module FormLabeledGroup.fixture
  *  @since 2021.07.08, 15:01
- *  @changed 2021.07.08, 15:01
+ *  @changed 2021.07.08, 16:41
  */
 /* eslint-disable react/jsx-max-depth, no-console */
 
@@ -12,12 +12,13 @@ import FormSelect from 'forms/FormSelect';
 import FormGroup from 'forms/FormGroup';
 import FormTextInput from 'forms/FormTextInput';
 
-import InlineIcon from 'elements/InlineIcon';
+// import InlineIcon from 'elements/InlineIcon';
+import FormIcon from 'forms/FormIcon';
 
 // Demo styles for cosmos engine
 // import 'demo.pcss';
 
-// import './FormLabeledGroup.fixture.pcss';
+import './FormLabeledGroup.fixture.pcss';
 
 // export const DemoWrapper = FormGroup // ({ children }) => {
 export const DemoWrapper = <FormGroup stack id="Wrapper" />; // ({ children }) => {
@@ -50,8 +51,14 @@ export default {
   ),
   withInputAndIcon: (
     <FormLabeledGroup id="withInputAndIcon" htmlFor="withInputAndIcon-Label" title="Label" fullWidth flow>
-      <FormTextInput />
-      <InlineIcon icon="faCheck" />
+      <FormTextInput fullWidth />
+      <FormIcon icon="faCheck" />
+    </FormLabeledGroup>
+  ),
+  withInputAndIconFullWidth: (
+    <FormLabeledGroup id="withInputAndIconFullWidth" htmlFor="withInputAndIcon-Label" title="Label" fullWidth flow>
+      <FormTextInput fullWidth />
+      <FormIcon icon="faCheck" />
     </FormLabeledGroup>
   ),
 };

@@ -1,5 +1,6 @@
 # CHANGELOG
 
+- 2021.07.08, 17:09 -- FormLabeledGroup: pass FormGroup props.
 - 2021.07.08, 16:36 -- Added `FormIcon` component. Added `onDark` mode for `InlineIcon`. Also added `plain` and `largeIcon` (both are unused) and `style` modifiers.
 - 2021.07.08, 13:55 -- FormInputGroup: FormSelect adaptations (z-index, animations, disabled default fullWidth for FormSelect).
 - 2021.07.07, 19:57 -- config/css -- Explicitly define primary/secondary colors. FormButton/FormSelect: allow `style` propery.
@@ -135,5 +136,5 @@
 - 2020.10.05, 20:38 -- v.0.0.15: Extracted `demoSupport.jsx` routines, fixture selection from url query (parameter `fixture`), added avaialble fixtures list if fixture to display is not specified, added DemoWrapper & demoTitle exportable ficture parameters for demo rendering.
 
 <!--
- @changed 2021.07.08, 16:36
+ @changed 2021.07.08, 17:09
 -->

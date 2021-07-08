@@ -1,7 +1,7 @@
 /** @module FormGroup
  *  @class FormGroup
  *  @since 2020.07.20, 19:07
- *  @changed 2021.02.20, 19:09
+ *  @changed 2021.07.08, 17:09
  */
 /* eslint-disable react/require-default-props, react/no-unused-prop-types */
 
@@ -21,6 +21,8 @@ const cnFormGroup = cn('FormGroup');
 
 class FormGroup extends React.PureComponent /** @lends @FormGroup.prototype */ {
 
+  // NOTE: Sync props/mods with `FormLabeledGroup.jsx`
+
   static propTypes = {
     // background: PropTypes.string,
     align: PropTypes.string,
@@ -31,6 +33,7 @@ class FormGroup extends React.PureComponent /** @lends @FormGroup.prototype */ {
     flow: PropTypes.bool,
     fullWidth: PropTypes.bool,
     id: PropTypes.string,
+    // autoSize: PropTypes.bool,
     noSpace: PropTypes.bool,
     noWrap: PropTypes.bool,
     padded: PropTypes.bool,
@@ -42,7 +45,7 @@ class FormGroup extends React.PureComponent /** @lends @FormGroup.prototype */ {
     withContainer: PropTypes.bool,
   }
 
-  static classNameModifiers = [
+  static classNameModifiers = [ // TODO: Export public interface props list?
     // Basic element properties
     'id',
     // Style-related modifiers...
@@ -51,6 +54,7 @@ class FormGroup extends React.PureComponent /** @lends @FormGroup.prototype */ {
     // 'background',
     'flow',
     'fullWidth',
+    // 'autoSize',
     'noSpace',
     'noWrap',
     'padded',
