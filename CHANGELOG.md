@@ -1,5 +1,6 @@
 # CHANGELOG
 
+- 2021.07.08, 13:55 -- FormInputGroup: FormSelect adaptations (z-index, animations, disabled default fullWidth for FormSelect).
 - 2021.07.07, 19:57 -- config/css -- Explicitly define primary/secondary colors. FormButton/FormSelect: allow `style` propery.
 - 2021.07.07, 18:38 -- ErrorContainer re-export fixed.
 - 2021.06.07, 15:54 -- v.0.3.6: PD-3986: Refactored & integrated (from WebUi:uikit) stock component FormPager. Added demo language store entry.
@@ -133,5 +134,5 @@
 - 2020.10.05, 20:38 -- v.0.0.15: Extracted `demoSupport.jsx` routines, fixture selection from url query (parameter `fixture`), added avaialble fixtures list if fixture to display is not specified, added DemoWrapper & demoTitle exportable ficture parameters for demo rendering.
 
 <!--
- @changed 2021.07.07, 19:58
+ @changed 2021.07.08, 13:55
 -->

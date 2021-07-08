@@ -972,6 +972,7 @@
   display: inline-block;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
+
 }
 
 .FormItem_solid {
@@ -981,6 +982,15 @@
     text-overflow: ellipsis;
     white-space: nowrap;
   }
+
+.FormItem {
+  -webkit-transition: background 250ms, -webkit-box-shadow 250ms;
+  transition: background 250ms, -webkit-box-shadow 250ms;
+  transition: box-shadow 250ms, background 250ms;
+  transition: box-shadow 250ms, background 250ms, -webkit-box-shadow 250ms;
+  position: relative;
+
+}
 
 .FormItem_disabled {
     opacity: .5;
@@ -1015,11 +1025,25 @@
           flex: 2 1;
     }
 
+.FormItem_focused, .FormItem_hovered {
+    z-index: 10; /* Lift active item up (m.b. used in button-groups? Don't forget to lift modals, popups etc.)*/
+    /* NOTE: Cause bug for FormSelect controller button: It displaying over ModalPopupCurtain*/
+  }
+
 /** @module FormButton.styles
  *  @desc Only basic elements geometry
  *  @since 2020.07.20, 19:24
  *  @changed 2021.02.15, 18:28
  */
+
+.FormButton {
+
+  /* &.FormItem_hovered {*/
+  /*   z-index: 10; // Lift active item up (m.b. used in button-groups? Don't forget to lift modals, popups etc.)*/
+  /*   // NOTE: Cause bug for FormSelect controller button: It displaying over ModalPopupCurtain*/
+  /* }*/
+
+}
 
 /* Override standard html button styles*/
 
@@ -1043,6 +1067,7 @@
   padding: 0 8px;
 
   max-width: 100%;
+
 }
 
 /* ??? Fit in container?*/
@@ -1066,6 +1091,7 @@
 .FormButton {
 
   cursor: default;
+
 }
 
 .FormButton.FormItem_hoverable:not(.FormItem_disabled) {
@@ -1109,11 +1135,6 @@
 .FormButton_hasIcon:not(.FormButton_hasText),
   .FormButton_onlyIcon {
     text-align: center;
-  }
-
-.FormButton.FormItem_hovered {
-    z-index: 10; /* Lift active item up (m.b. used in button-groups? Don't forget to lift modals, popups etc.)*/
-    /* NOTE: Cause bug for FormSelect controller button: It displaying over ModalPopupCurtain*/
   }
 
 /** @module FormButton-Styles.styles
@@ -1206,14 +1227,6 @@
  */
 
 .FormButton {
-
-  -webkit-transition: background 250ms, -webkit-box-shadow 250ms;
-
-  transition: background 250ms, -webkit-box-shadow 250ms;
-
-  transition: box-shadow 250ms, background 250ms;
-
-  transition: box-shadow 250ms, background 250ms, -webkit-box-shadow 250ms;
   /* .FormButton-Text { // Crispy animation text...*/
   /*   transition: color $(transitionTime)ms, opacity $(transitionTime)ms;*/
   /*   // -webkit-font-smoothing: antialised;*/
@@ -5436,35 +5449,39 @@ input.FormTextInput-Control:-internal-autofill-previewed,
   transition: box-shadow 250ms;
 
   transition: box-shadow 250ms, -webkit-box-shadow 250ms;
-  -webkit-box-shadow: inset 0 0 0 1px #ccc,
+  -webkit-box-shadow: inset 0 0 0px 1px #ccc,
     0 0 0 0 transparent;
-          box-shadow: inset 0 0 0 1px #ccc,
+          box-shadow: inset 0 0 0px 1px #ccc,
     0 0 0 0 transparent;
 }
 
-/* color($glowColor shade(10));*/
+/* @define-mixin FormItemFrame $borderColor, $innerSize, $innerGlowSize, $outerGlowColor, $outerSize, $outerGlowSize*/
 
 .FormTextInput.FormItem_hovered {
     -webkit-box-shadow: inset 0 0 1px 1px rgb(184, 184, 184),
     0 0 4px 0px rgb(204, 204, 204);
             box-shadow: inset 0 0 1px 1px rgb(184, 184, 184),
     0 0 4px 0px rgb(204, 204, 204);
+    /* @mixin FormItemFrame $hoveredBorderColor, $(formItemBorderSize)px, 1px, $hoveredGlowColor, 0px, $(formItemOuterGlow)px;*/
   }
 
-/* Frame...*/
+/* color($glowColor shade(10));*/
 
 .FormTextInput.FormItem_focused {
     -webkit-box-shadow: inset 0 0 1px 1px rgb(0, 101, 217),
     0 0 1px 0px rgba(0, 119, 255, 0.8);
             box-shadow: inset 0 0 1px 1px rgb(0, 101, 217),
-    0 0 1px 0px rgba(0, 119, 255, 0.8); /* @calc($formItemOuterGlow - 2)px;*/
+    0 0 1px 0px rgba(0, 119, 255, 0.8);
   }
 
+/* Frame...*/
+
 .FormTextInput.FormItem_focused.FormItem_hovered {
+    /* @mixin FormItemFrame $activeBorderColor, $(formItemBorderSize)px, 1px, $activeGlowColor, 1px, $(formItemOuterGlow)px;*/
     -webkit-box-shadow: inset 0 0 1px 1px rgb(0, 96, 206),
-    0 0 0px 1px rgba(0, 119, 255, 0.8);
+    0 0 4px 1px rgba(0, 119, 255, 0.8);
             box-shadow: inset 0 0 1px 1px rgb(0, 96, 206),
-    0 0 0px 1px rgba(0, 119, 255, 0.8); /* @calc($formItemOuterGlow - 2)px;*/
+    0 0 4px 1px rgba(0, 119, 255, 0.8);
   }
 
 
@@ -8356,16 +8373,19 @@ input.FormTextInput-Control:-internal-autofill-previewed,
 
 .FormInputGroup > .FormItem:not(:last-child) {
     margin-right: 0;
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
+    border-top-right-radius: 1px;
+    border-bottom-right-radius: 1px;
     /* border-right-width: 0;*/
   }
 
 .FormInputGroup > .FormItem:not(:first-child) {
-    margin-left: 0;
     margin-left: -1px;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
+    /* margin-left: 0;*/
+    /* margin-left: -$(formItemBorderRadius)px; // -1px;*/
+    /* border-top-left-radius: 0;*/
+    /* border-bottom-left-radius: 0;*/
     /* border-left-width: 0;*/
   }
 

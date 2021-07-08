@@ -432,7 +432,7 @@ module.exports = { // Common-used app variables...
  */
 
 var DEBUG = true;
-var DEV_DEBUG = undefined;
+var DEV_DEBUG = true;
 
 module.exports = { // Common-used build variables...
 
@@ -440,9 +440,9 @@ module.exports = { // Common-used build variables...
   DEV_DEBUG: DEV_DEBUG,
 
   THEME: "default",
-  buildTag: "v.0.3.6-210707-2015-build-dev-default",
-  timestamp: "2021.07.07, 20:15",
-  timetag: "210707-2015",
+  buildTag: "v.0.3.6-210708-1358-build-dev-default",
+  timestamp: "2021.07.08, 13:58",
+  timetag: "210708-1358",
   version: "0.3.6" };
 
 /***/ }),
@@ -8811,7 +8811,7 @@ FormSelect = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_hel
 
 
 
-    this.props,text = _this$props3.text,placeholder = _this$props3.placeholder,title = _this$props3.title,controlButtonTheme = _this$props3.controlButtonTheme,_this$props3$fullWidt = _this$props3.fullWidth,fullWidth = _this$props3$fullWidt === void 0 ? true : _this$props3$fullWidt,disabled = _this$props3.disabled,inputId = _this$props3.inputId,maxWidth = _this$props3.maxWidth;var
+    this.props,text = _this$props3.text,placeholder = _this$props3.placeholder,title = _this$props3.title,controlButtonTheme = _this$props3.controlButtonTheme,fullWidth = _this$props3.fullWidth,disabled = _this$props3.disabled,inputId = _this$props3.inputId,maxWidth = _this$props3.maxWidth;var
     open = this.state.open;
     var buttonText = this.getItemsText() || placeholder || text;
     var style = { maxWidth: maxWidth };
