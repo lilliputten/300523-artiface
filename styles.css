@@ -895,7 +895,11 @@
  *  @changed 2020.12.24, 04:05
  */
 
-/* TODO: Theme styles*/
+.InlineIcon_onDark {
+    color: #fff;
+  }
+
+/* Theme styles*/
 
 .InlineIcon_theme_primary { color: #07f}
 
@@ -1156,6 +1160,7 @@
 .FormButton_largeIcon .FormButton-Icon svg {
         font-size: 20px; /* 20px;*/
         margin-top: 5px;
+        margin-bottom: -1px;
       }
 
 .FormButton_rotatedIcon .FormButton-Icon {
@@ -3592,6 +3597,65 @@
         background-color: rgb(37, 60, 60);
       }
 
+/** @module FormIcon.styles
+ *  @desc Only basic elements geometry
+ *  @since 2021.07.08, 15:20
+ *  @changed 2021.07.08, 15:44
+ */
+
+/* Override standard html button styles*/
+
+.FormIcon {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    border: none;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 16px;
+    font-weight: normal;
+    line-height: 1.3;
+    vertical-align: bottom;
+    background: none;
+    text-align: left;
+  }
+
+.FormIcon {
+
+  outline: 0;
+
+  padding: 0 8px;
+
+  max-width: 100%;
+}
+
+/* ??? Fit in container?*/
+
+.FormIcon, .FormIcon-Icon {
+    white-space: nowrap;
+    position: relative;
+    line-height: 32px;
+  }
+
+.FormIcon-Icon {
+    display: inline-block;
+    position: relative;
+    vertical-align: bottom;
+    /* ^&:not(button) & { // ???*/
+    /*   margin-top: 1px; // Compensate visual difference between button & regular tag (Attention! To test!)*/
+    /* }*/
+    /* Stylizing copied from `FormButton-Themes.pcss`*/
+    color: #000;
+    opacity: .4;
+    /* transition: color $(transitionTime)ms, opacity $(transitionTime)ms; // For interactive elements only*/
+  }
+
+/* From `FormButton_largeIcon` (see `FormButton-Variations.pcss`)*/
+
+.FormIcon_largeIcon .FormIcon-Icon svg {
+        font-size: 20px; /* 20px;*/
+        margin-top: 5px;
+        margin-bottom: -1px;
+      }
+
 /** @module FormItemDummy.styles
  *  @class FormItemDummy
  *  @since 2020.07.20, 19:24
@@ -3866,6 +3930,9 @@
   margin-left: -4px;
   margin-right: -4px;
 
+  /* &_fullWidth {*/
+  /*   // align-items:*/
+
 }
 
 /* Nested items/groups...*/
@@ -3879,6 +3946,8 @@
 .FormGroup > .FormGroup.FormItem {
     margin: 0;
   }
+
+/* align-items: flex-start;*/
 
 .FormGroup_noSpace {
     margin: 0;
@@ -3929,6 +3998,8 @@
       display: flex;
     }
 
+/* }*/
+
 .FormGroup > .FormGroup_align_right { /* flow*/
       /* Align to right*/
       -ms-flex-pack: end;
@@ -3954,8 +4025,7 @@
 .FormGroup_stack {
     -ms-flex-wrap: nowrap;
         flex-wrap: nowrap;
-    -ms-flex-align: stretch;
-        align-items: stretch;
+    /* align-items: stretch; // ???*/
     -ms-flex-direction: column;
         flex-direction: column;
   }

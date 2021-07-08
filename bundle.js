@@ -440,9 +440,9 @@ module.exports = { // Common-used build variables...
   DEV_DEBUG: DEV_DEBUG,
 
   THEME: "default",
-  buildTag: "v.0.3.6-210708-1506-build-dev-default",
-  timestamp: "2021.07.08, 15:06",
-  timetag: "210708-1506",
+  buildTag: "v.0.3.6-210708-1710-build-dev-default",
+  timestamp: "2021.07.08, 17:10",
+  timetag: "210708-1710",
   version: "0.3.6" };
 
 /***/ }),
@@ -1480,15 +1480,25 @@ InlineIcon = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_hel
 
 
 
+
+
+
+
   getClassName = function getClassName() {var _this$props =
 
 
 
-    this.props,id = _this$props.id,theme = _this$props.theme;
+
+
+
+    this.props,id = _this$props.id,theme = _this$props.theme,plain = _this$props.plain,largeIcon = _this$props.largeIcon,onDark = _this$props.onDark;
     var className = cnInlineIcon({
       id: id,
-      theme: theme },
-    [this.props.className]);
+      theme: theme,
+      plain: plain, // ???
+      largeIcon: largeIcon, // ???
+      onDark: onDark // ???
+    }, [this.props.className]);
     return className;
   };_proto.
 
@@ -1516,7 +1526,8 @@ InlineIcon = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_hel
 
 
 
-    this.props,id = _this$props2.id,tag = _this$props2.tag,title = _this$props2.title,icon = _this$props2.icon,onClick = _this$props2.onClick;
+
+    this.props,id = _this$props2.id,tag = _this$props2.tag,title = _this$props2.title,icon = _this$props2.icon,onClick = _this$props2.onClick,style = _this$props2.style;
 
     var iconType = typeof icon;
     // if (iconType !== 'string') {
@@ -1531,17 +1542,18 @@ InlineIcon = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_hel
       id: id,
       className: this.getClassName(),
       title: title,
-      onClick: onClick
+      onClick: onClick,
+      style: style
       // key,
     };
 
     var tagName = tag || 'span';
     var element = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement(tagName, renderProps, content);
     return element;
-  };return InlineIcon;}((react__WEBPACK_IMPORTED_MODULE_2___default().PureComponent) /** @lends @InlineIcon.prototype */);(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1__.default)(InlineIcon, "propTypes", { id: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().string), theme: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().string), tag: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().string), title: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().string), icon: prop_types__WEBPACK_IMPORTED_MODULE_3___default().oneOfType([(prop_types__WEBPACK_IMPORTED_MODULE_3___default().string), (prop_types__WEBPACK_IMPORTED_MODULE_3___default().object)]), onClick: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().func) });
-
-
-
+  };return InlineIcon;}((react__WEBPACK_IMPORTED_MODULE_2___default().PureComponent) /** @lends @InlineIcon.prototype */);(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1__.default)(InlineIcon, "propTypes", { id: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().string), tag: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().string), title: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().string), icon: prop_types__WEBPACK_IMPORTED_MODULE_3___default().oneOfType([(prop_types__WEBPACK_IMPORTED_MODULE_3___default().string), (prop_types__WEBPACK_IMPORTED_MODULE_3___default().object)]), onClick: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().func), theme: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().string), plain: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().bool), // Is it used???
+  onDark: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().bool), // Is it used???
+  largeIcon: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().bool), // Large icon. Is it used???
+  style: prop_types__WEBPACK_IMPORTED_MODULE_3___default().oneOfType([(prop_types__WEBPACK_IMPORTED_MODULE_3___default().object), (prop_types__WEBPACK_IMPORTED_MODULE_3___default().array)]) });
 /* harmony default export */ __webpack_exports__["default"] = (InlineIcon);
 
 /***/ }),
@@ -7023,7 +7035,7 @@ __webpack_require__.r(__webpack_exports__);
  /** @module FormGroup
  *  @class FormGroup
  *  @since 2020.07.20, 19:07
- *  @changed 2021.02.20, 19:09
+ *  @changed 2021.07.08, 17:09
  */
 /* eslint-disable react/require-default-props, react/no-unused-prop-types */
 
@@ -7042,6 +7054,10 @@ __webpack_require__.r(__webpack_exports__);
 var cnFormGroup = (0,_utils_configure__WEBPACK_IMPORTED_MODULE_5__.cn)('FormGroup');var
 
 FormGroup = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_helpers_inheritsLoose__WEBPACK_IMPORTED_MODULE_1__.default)(FormGroup, _React$PureComponent);
+
+  // NOTE: Sync props/mods with `FormLabeledGroup.jsx`
+
+
 
 
 
@@ -7135,11 +7151,180 @@ FormGroup = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_help
   };return FormGroup;}((react__WEBPACK_IMPORTED_MODULE_3___default().PureComponent) /** @lends @FormGroup.prototype */);(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2__.default)(FormGroup, "propTypes", { // background: PropTypes.string,
   align: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), alignItems: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), className: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), content: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().element), // ???
   disabled: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), // ???
-  flow: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), fullWidth: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), id: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), noSpace: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), noWrap: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), padded: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), separated: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), shaded: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), spaced: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), stack: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), wrap: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), withContainer: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool) });(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2__.default)(FormGroup, "classNameModifiers", [// Basic element properties
+  flow: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), fullWidth: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), id: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), // autoSize: PropTypes.bool,
+  noSpace: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), noWrap: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), padded: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), separated: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), shaded: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), spaced: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), stack: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), wrap: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), withContainer: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool) });(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2__.default)(FormGroup, "classNameModifiers", [// TODO: Export public interface props list?
+// Basic element properties
 'id', // Style-related modifiers...
 'align', 'alignItems', // 'background',
-'flow', 'fullWidth', 'noSpace', 'noWrap', 'padded', 'separated', 'shaded', 'spaced', 'stack', 'wrap' // 'disabled',
+'flow', 'fullWidth', // 'autoSize',
+'noSpace', 'noWrap', 'padded', 'separated', 'shaded', 'spaced', 'stack', 'wrap' // 'disabled',
 ]);/* harmony default export */ __webpack_exports__["default"] = ((0,_FormItemHOC_index_ts__WEBPACK_IMPORTED_MODULE_6__.default)(FormGroup));
+
+/***/ }),
+
+/***/ "./src/forms/FormIcon/FormIcon.jsx":
+/*!*****************************************!*\
+  !*** ./src/forms/FormIcon/FormIcon.jsx ***!
+  \*****************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
+/* harmony import */ var _babel_runtime_helpers_inheritsLoose__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/inheritsLoose */ "./node_modules/@babel/runtime/helpers/esm/inheritsLoose.js");
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/esm/defineProperty.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! redux */ "redux");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(redux__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _utils_configure__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../utils/configure */ "./src/utils/configure.js");
+/* harmony import */ var _FormItemHOC_index_ts__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../FormItemHOC/index.ts */ "./src/forms/FormItemHOC/index.ts");
+/* harmony import */ var _elements_InlineIcon_index_ts__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../elements/InlineIcon/index.ts */ "./src/elements/InlineIcon/index.ts");
+/* harmony import */ var _FormIcon_pcss__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./FormIcon.pcss */ "./src/forms/FormIcon/FormIcon.pcss");
+ /** @module FormIcon
+ *  @class FormIcon
+ *  @since 2021.07.08, 15:20
+ *  @changed 2021.07.08, 15:20
+ */
+
+
+
+
+// import connect from 'react-redux/es/connect/connect';
+
+// import config from 'config';
+
+
+
+
+
+
+
+var cnFormIcon = (0,_utils_configure__WEBPACK_IMPORTED_MODULE_6__.cn)('FormIcon');
+
+var defaultTag = 'div'; // `button` element is 'labelable', @see `https://stackoverflow.com/questions/54792126/html-label-with-for-div-id-to-focus-a-contenteditable-div-does-label-label`
+var
+FormIcon = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_helpers_inheritsLoose__WEBPACK_IMPORTED_MODULE_1__.default)(FormIcon, _React$PureComponent);function FormIcon() {return _React$PureComponent.apply(this, arguments) || this;}var _proto = FormIcon.prototype;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  // Lifecycle...
+
+  // Helpers...
+  _proto.
+  getClassName = function getClassName() {
+    // TODO: Refactor properties!
+    var _this$props =
+
+
+
+
+
+
+
+    this.props,id = _this$props.id,inline = _this$props.inline,disabled = _this$props.disabled,plain = _this$props.plain,largeIcon = _this$props.largeIcon,onDark = _this$props.onDark,theme = _this$props.theme;
+    var mods = {
+      id: id,
+      inline: inline,
+      disabled: disabled,
+      plain: plain, // ???
+      largeIcon: largeIcon, // ???
+      onDark: onDark, // ???
+      theme: theme };
+
+    var staticMods = {
+      solid: true };
+
+    var classList = cnFormIcon((0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__.default)({},
+    staticMods,
+    mods),
+    [this.props.className]);
+    return classList;
+  }
+
+  // Render...
+  ;_proto.
+  renderIcon = function renderIcon() {var _this$props2 =
+
+
+
+
+
+
+    this.props,icon = _this$props2.icon,theme = _this$props2.theme,plain = _this$props2.plain,onDark = _this$props2.onDark,largeIcon = _this$props2.largeIcon;
+    if (icon && icon.type === _elements_InlineIcon_index_ts__WEBPACK_IMPORTED_MODULE_8__.default) {// Already InlineIcon
+      // Extend with updated `className` props
+      var props = (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__.default)({},
+      icon.props, {
+        className: cnFormIcon('Icon', [icon.props.className]),
+        theme: theme,
+        plain: plain,
+        onDark: onDark,
+        largeIcon: largeIcon });
+
+      var newIcon = (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__.default)({}, icon, { props: props });
+      return newIcon;
+    }
+    return /*#__PURE__*/(
+      react__WEBPACK_IMPORTED_MODULE_3___default().createElement(_elements_InlineIcon_index_ts__WEBPACK_IMPORTED_MODULE_8__.default, {
+        icon: icon,
+        theme: theme,
+        plain: plain,
+        onDark: onDark,
+        largeIcon: largeIcon,
+        className: cnFormIcon('Icon') }));
+
+
+  };_proto.
+
+  render = function render() {var _this$props3 =
+
+
+
+
+
+
+
+
+    this.props,id = _this$props3.id,title = _this$props3.title,disabled = _this$props3.disabled,tag = _this$props3.tag,setDomRef = _this$props3.setDomRef,style = _this$props3.style;
+
+    var content = this.renderIcon(); // Icon element
+
+    // const basicRenderProps = this.getRenderProps() // Get from props not from overrided `super`
+    var renderProps = {
+      // ...basicRenderProps,
+      id: id,
+      className: this.getClassName(),
+      disabled: disabled,
+      ref: setDomRef, // Init ref for FormItemHOC
+      tabIndex: 0,
+      title: title,
+      style: style };
+
+
+    var tagName = tag || defaultTag;
+    var element = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3___default().createElement(tagName, renderProps, content);
+    return element;
+  };return FormIcon;}((react__WEBPACK_IMPORTED_MODULE_3___default().PureComponent) /** @lends @FormIcon.prototype */);(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2__.default)(FormIcon, "propTypes", { icon: prop_types__WEBPACK_IMPORTED_MODULE_5___default().oneOfType([(prop_types__WEBPACK_IMPORTED_MODULE_5___default().string), (prop_types__WEBPACK_IMPORTED_MODULE_5___default().object)]), // Icon component. May be as image resource loaded with `file/url-loader` as `FontAwesomeIcon` component.
+  id: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().string), title: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().string), inline: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().bool), disabled: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().bool), plain: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().bool), // Is it used???
+  onDark: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().bool), // Is it used???
+  largeIcon: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().bool), // Large icon Is it used???
+  theme: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().string), // Button style (plain, default, primary, secondary, error, warn, success, info, etc -- some are in progress -- see styles file)
+  style: prop_types__WEBPACK_IMPORTED_MODULE_5___default().oneOfType([(prop_types__WEBPACK_IMPORTED_MODULE_5___default().object), (prop_types__WEBPACK_IMPORTED_MODULE_5___default().array)]) });/* harmony default export */ __webpack_exports__["default"] = ((0,redux__WEBPACK_IMPORTED_MODULE_4__.compose)((0,_FormItemHOC_index_ts__WEBPACK_IMPORTED_MODULE_7__.default)({ solid: true /* , hoverable: true, focusable: true, framed: true */ }))(
+FormIcon));
 
 /***/ }),
 
@@ -8057,7 +8242,7 @@ __webpack_require__.r(__webpack_exports__);
 /** @module FormLabeledGroup
  *  @class FormLabeledGroup
  *  @since 2020.05.10, 09:24
- *  @changed 2020.12.10, 16:20
+ *  @changed 2021.07.08, 17:09
  */
 
 
@@ -8072,7 +8257,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var FormLabeledGroup = function FormLabeledGroup(props) /** @lends @FormLabeledGroup.prototype */{var
 
-  className =
+  children =
 
 
 
@@ -8083,16 +8268,42 @@ var FormLabeledGroup = function FormLabeledGroup(props) /** @lends @FormLabeledG
 
 
 
-  props.className,children = props.children,id = props.id,fullWidth = props.fullWidth,innerFlex = props.innerFlex,htmlFor = props.htmlFor,title = props.title,text = props.text,flow = props.flow;
+
+
+
+
+
+
+
+
+
+
+
+
+  props.children,htmlFor = props.htmlFor,title = props.title,text = props.text,align = props.align,alignItems = props.alignItems,className = props.className,content = props.content,disabled = props.disabled,flow = props.flow,fullWidth = props.fullWidth,id = props.id,noSpace = props.noSpace,noWrap = props.noWrap,padded = props.padded,separated = props.separated,shaded = props.shaded,spaced = props.spaced,stack = props.stack,withContainer = props.withContainer,wrap = props.wrap;
   // const thisClassName = cnFormLabeledGroup({ flow, full })
-  return /*#__PURE__*/(
-    react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_FormGroup_index_ts__WEBPACK_IMPORTED_MODULE_1__.default, {
-      className: className,
-      fullWidth: fullWidth,
-      innerFlex: innerFlex,
-      flow: flow,
-      id: id }, /*#__PURE__*/
+  var groupProps = {
+    align: align,
+    alignItems: alignItems,
+    // autoSize,
+    className: className,
+    content: content,
+    disabled: disabled,
+    flow: flow,
+    fullWidth: fullWidth,
+    id: id,
+    noSpace: noSpace,
+    noWrap: noWrap,
+    padded: padded,
+    separated: separated,
+    shaded: shaded,
+    spaced: spaced,
+    stack: stack,
+    withContainer: withContainer,
+    wrap: wrap };
 
+  return /*#__PURE__*/(
+    react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_FormGroup_index_ts__WEBPACK_IMPORTED_MODULE_1__.default, groupProps, /*#__PURE__*/
     react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_FormLabel_index_ts__WEBPACK_IMPORTED_MODULE_2__.default, {
       htmlFor: htmlFor,
       title: title,
@@ -9448,60 +9659,64 @@ FormText = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_helpe
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "FormButton": function() { return /* reexport safe */ _FormButton_index_ts__WEBPACK_IMPORTED_MODULE_0__.default; },
-/* harmony export */   "FormItemHOC": function() { return /* reexport safe */ _FormItemHOC_index_ts__WEBPACK_IMPORTED_MODULE_1__.default; },
-/* harmony export */   "FormItemDummy": function() { return /* reexport safe */ _FormItemDummy_index_ts__WEBPACK_IMPORTED_MODULE_2__.default; },
-/* harmony export */   "FormPager": function() { return /* reexport safe */ _FormPager_index_ts__WEBPACK_IMPORTED_MODULE_3__.default; },
-/* harmony export */   "FormLabel": function() { return /* reexport safe */ _FormLabel_index_ts__WEBPACK_IMPORTED_MODULE_4__.default; },
-/* harmony export */   "FormDelim": function() { return /* reexport safe */ _FormDelim_index_ts__WEBPACK_IMPORTED_MODULE_5__.default; },
-/* harmony export */   "FormSpacer": function() { return /* reexport safe */ _FormSpacer_index_ts__WEBPACK_IMPORTED_MODULE_6__.default; },
-/* harmony export */   "FormSeparator": function() { return /* reexport safe */ _FormSeparator_index_ts__WEBPACK_IMPORTED_MODULE_7__.default; },
-/* harmony export */   "FormText": function() { return /* reexport safe */ _FormText_index_ts__WEBPACK_IMPORTED_MODULE_8__.default; },
-/* harmony export */   "FormSelect": function() { return /* reexport safe */ _FormSelect_index_ts__WEBPACK_IMPORTED_MODULE_9__.default; },
-/* harmony export */   "FormTextInput": function() { return /* reexport safe */ _FormTextInput_index_ts__WEBPACK_IMPORTED_MODULE_10__.default; },
-/* harmony export */   "FormPasswordInput": function() { return /* reexport safe */ _FormPasswordInput_index_ts__WEBPACK_IMPORTED_MODULE_11__.default; },
-/* harmony export */   "FormRadio": function() { return /* reexport safe */ _FormRadio_index_ts__WEBPACK_IMPORTED_MODULE_12__.default; },
-/* harmony export */   "FormDateTime": function() { return /* reexport safe */ _FormDateTime_index_ts__WEBPACK_IMPORTED_MODULE_13__.default; },
-/* harmony export */   "FormDateRange": function() { return /* reexport safe */ _FormDateRange_index_ts__WEBPACK_IMPORTED_MODULE_14__.default; },
-/* harmony export */   "FormDateRangeSingleBox": function() { return /* reexport safe */ _FormDateRangeSingleBox_index_ts__WEBPACK_IMPORTED_MODULE_15__.default; },
-/* harmony export */   "FormActions": function() { return /* reexport safe */ _FormActions_index_ts__WEBPACK_IMPORTED_MODULE_16__.default; },
-/* harmony export */   "FormContainer": function() { return /* reexport safe */ _FormContainer_index_ts__WEBPACK_IMPORTED_MODULE_17__.default; },
-/* harmony export */   "FormGroup": function() { return /* reexport safe */ _FormGroup_index_ts__WEBPACK_IMPORTED_MODULE_18__.default; },
-/* harmony export */   "FormLabeledGroup": function() { return /* reexport safe */ _FormLabeledGroup_index_ts__WEBPACK_IMPORTED_MODULE_19__.default; },
-/* harmony export */   "FormButtonGroup": function() { return /* reexport safe */ _FormButtonGroup_index_ts__WEBPACK_IMPORTED_MODULE_20__.default; },
-/* harmony export */   "FormInputGroup": function() { return /* reexport safe */ _FormInputGroup_index_ts__WEBPACK_IMPORTED_MODULE_21__.default; }
+/* harmony export */   "FormIcon": function() { return /* reexport safe */ _FormIcon_index_ts__WEBPACK_IMPORTED_MODULE_1__.default; },
+/* harmony export */   "FormItemHOC": function() { return /* reexport safe */ _FormItemHOC_index_ts__WEBPACK_IMPORTED_MODULE_2__.default; },
+/* harmony export */   "FormItemDummy": function() { return /* reexport safe */ _FormItemDummy_index_ts__WEBPACK_IMPORTED_MODULE_3__.default; },
+/* harmony export */   "FormPager": function() { return /* reexport safe */ _FormPager_index_ts__WEBPACK_IMPORTED_MODULE_4__.default; },
+/* harmony export */   "FormLabel": function() { return /* reexport safe */ _FormLabel_index_ts__WEBPACK_IMPORTED_MODULE_5__.default; },
+/* harmony export */   "FormDelim": function() { return /* reexport safe */ _FormDelim_index_ts__WEBPACK_IMPORTED_MODULE_6__.default; },
+/* harmony export */   "FormSpacer": function() { return /* reexport safe */ _FormSpacer_index_ts__WEBPACK_IMPORTED_MODULE_7__.default; },
+/* harmony export */   "FormSeparator": function() { return /* reexport safe */ _FormSeparator_index_ts__WEBPACK_IMPORTED_MODULE_8__.default; },
+/* harmony export */   "FormText": function() { return /* reexport safe */ _FormText_index_ts__WEBPACK_IMPORTED_MODULE_9__.default; },
+/* harmony export */   "FormSelect": function() { return /* reexport safe */ _FormSelect_index_ts__WEBPACK_IMPORTED_MODULE_10__.default; },
+/* harmony export */   "FormTextInput": function() { return /* reexport safe */ _FormTextInput_index_ts__WEBPACK_IMPORTED_MODULE_11__.default; },
+/* harmony export */   "FormPasswordInput": function() { return /* reexport safe */ _FormPasswordInput_index_ts__WEBPACK_IMPORTED_MODULE_12__.default; },
+/* harmony export */   "FormRadio": function() { return /* reexport safe */ _FormRadio_index_ts__WEBPACK_IMPORTED_MODULE_13__.default; },
+/* harmony export */   "FormDateTime": function() { return /* reexport safe */ _FormDateTime_index_ts__WEBPACK_IMPORTED_MODULE_14__.default; },
+/* harmony export */   "FormDateRange": function() { return /* reexport safe */ _FormDateRange_index_ts__WEBPACK_IMPORTED_MODULE_15__.default; },
+/* harmony export */   "FormDateRangeSingleBox": function() { return /* reexport safe */ _FormDateRangeSingleBox_index_ts__WEBPACK_IMPORTED_MODULE_16__.default; },
+/* harmony export */   "FormActions": function() { return /* reexport safe */ _FormActions_index_ts__WEBPACK_IMPORTED_MODULE_17__.default; },
+/* harmony export */   "FormContainer": function() { return /* reexport safe */ _FormContainer_index_ts__WEBPACK_IMPORTED_MODULE_18__.default; },
+/* harmony export */   "FormGroup": function() { return /* reexport safe */ _FormGroup_index_ts__WEBPACK_IMPORTED_MODULE_19__.default; },
+/* harmony export */   "FormLabeledGroup": function() { return /* reexport safe */ _FormLabeledGroup_index_ts__WEBPACK_IMPORTED_MODULE_20__.default; },
+/* harmony export */   "FormButtonGroup": function() { return /* reexport safe */ _FormButtonGroup_index_ts__WEBPACK_IMPORTED_MODULE_21__.default; },
+/* harmony export */   "FormInputGroup": function() { return /* reexport safe */ _FormInputGroup_index_ts__WEBPACK_IMPORTED_MODULE_22__.default; }
 /* harmony export */ });
 /* harmony import */ var _FormButton_index_ts__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./FormButton/index.ts */ "./src/forms/FormButton/index.ts");
-/* harmony import */ var _FormItemHOC_index_ts__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./FormItemHOC/index.ts */ "./src/forms/FormItemHOC/index.ts");
-/* harmony import */ var _FormItemDummy_index_ts__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./FormItemDummy/index.ts */ "./src/forms/FormItemDummy/index.ts");
-/* harmony import */ var _FormPager_index_ts__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./FormPager/index.ts */ "./src/forms/FormPager/index.ts");
-/* harmony import */ var _FormLabel_index_ts__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./FormLabel/index.ts */ "./src/forms/FormLabel/index.ts");
-/* harmony import */ var _FormDelim_index_ts__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./FormDelim/index.ts */ "./src/forms/FormDelim/index.ts");
-/* harmony import */ var _FormSpacer_index_ts__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./FormSpacer/index.ts */ "./src/forms/FormSpacer/index.ts");
-/* harmony import */ var _FormSeparator_index_ts__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./FormSeparator/index.ts */ "./src/forms/FormSeparator/index.ts");
-/* harmony import */ var _FormText_index_ts__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./FormText/index.ts */ "./src/forms/FormText/index.ts");
-/* harmony import */ var _FormSelect_index_ts__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./FormSelect/index.ts */ "./src/forms/FormSelect/index.ts");
-/* harmony import */ var _FormTextInput_index_ts__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./FormTextInput/index.ts */ "./src/forms/FormTextInput/index.ts");
-/* harmony import */ var _FormPasswordInput_index_ts__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./FormPasswordInput/index.ts */ "./src/forms/FormPasswordInput/index.ts");
-/* harmony import */ var _FormRadio_index_ts__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./FormRadio/index.ts */ "./src/forms/FormRadio/index.ts");
-/* harmony import */ var _FormDateTime_index_ts__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./FormDateTime/index.ts */ "./src/forms/FormDateTime/index.ts");
-/* harmony import */ var _FormDateRange_index_ts__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./FormDateRange/index.ts */ "./src/forms/FormDateRange/index.ts");
-/* harmony import */ var _FormDateRangeSingleBox_index_ts__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./FormDateRangeSingleBox/index.ts */ "./src/forms/FormDateRangeSingleBox/index.ts");
-/* harmony import */ var _FormActions_index_ts__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./FormActions/index.ts */ "./src/forms/FormActions/index.ts");
-/* harmony import */ var _FormContainer_index_ts__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./FormContainer/index.ts */ "./src/forms/FormContainer/index.ts");
-/* harmony import */ var _FormGroup_index_ts__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./FormGroup/index.ts */ "./src/forms/FormGroup/index.ts");
-/* harmony import */ var _FormLabeledGroup_index_ts__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./FormLabeledGroup/index.ts */ "./src/forms/FormLabeledGroup/index.ts");
-/* harmony import */ var _FormButtonGroup_index_ts__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./FormButtonGroup/index.ts */ "./src/forms/FormButtonGroup/index.ts");
-/* harmony import */ var _FormInputGroup_index_ts__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./FormInputGroup/index.ts */ "./src/forms/FormInputGroup/index.ts");
+/* harmony import */ var _FormIcon_index_ts__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./FormIcon/index.ts */ "./src/forms/FormIcon/index.ts");
+/* harmony import */ var _FormItemHOC_index_ts__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./FormItemHOC/index.ts */ "./src/forms/FormItemHOC/index.ts");
+/* harmony import */ var _FormItemDummy_index_ts__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./FormItemDummy/index.ts */ "./src/forms/FormItemDummy/index.ts");
+/* harmony import */ var _FormPager_index_ts__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./FormPager/index.ts */ "./src/forms/FormPager/index.ts");
+/* harmony import */ var _FormLabel_index_ts__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./FormLabel/index.ts */ "./src/forms/FormLabel/index.ts");
+/* harmony import */ var _FormDelim_index_ts__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./FormDelim/index.ts */ "./src/forms/FormDelim/index.ts");
+/* harmony import */ var _FormSpacer_index_ts__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./FormSpacer/index.ts */ "./src/forms/FormSpacer/index.ts");
+/* harmony import */ var _FormSeparator_index_ts__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./FormSeparator/index.ts */ "./src/forms/FormSeparator/index.ts");
+/* harmony import */ var _FormText_index_ts__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./FormText/index.ts */ "./src/forms/FormText/index.ts");
+/* harmony import */ var _FormSelect_index_ts__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./FormSelect/index.ts */ "./src/forms/FormSelect/index.ts");
+/* harmony import */ var _FormTextInput_index_ts__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./FormTextInput/index.ts */ "./src/forms/FormTextInput/index.ts");
+/* harmony import */ var _FormPasswordInput_index_ts__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./FormPasswordInput/index.ts */ "./src/forms/FormPasswordInput/index.ts");
+/* harmony import */ var _FormRadio_index_ts__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./FormRadio/index.ts */ "./src/forms/FormRadio/index.ts");
+/* harmony import */ var _FormDateTime_index_ts__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./FormDateTime/index.ts */ "./src/forms/FormDateTime/index.ts");
+/* harmony import */ var _FormDateRange_index_ts__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./FormDateRange/index.ts */ "./src/forms/FormDateRange/index.ts");
+/* harmony import */ var _FormDateRangeSingleBox_index_ts__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./FormDateRangeSingleBox/index.ts */ "./src/forms/FormDateRangeSingleBox/index.ts");
+/* harmony import */ var _FormActions_index_ts__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./FormActions/index.ts */ "./src/forms/FormActions/index.ts");
+/* harmony import */ var _FormContainer_index_ts__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./FormContainer/index.ts */ "./src/forms/FormContainer/index.ts");
+/* harmony import */ var _FormGroup_index_ts__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./FormGroup/index.ts */ "./src/forms/FormGroup/index.ts");
+/* harmony import */ var _FormLabeledGroup_index_ts__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./FormLabeledGroup/index.ts */ "./src/forms/FormLabeledGroup/index.ts");
+/* harmony import */ var _FormButtonGroup_index_ts__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./FormButtonGroup/index.ts */ "./src/forms/FormButtonGroup/index.ts");
+/* harmony import */ var _FormInputGroup_index_ts__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./FormInputGroup/index.ts */ "./src/forms/FormInputGroup/index.ts");
 /** @module forms
  *  @desc Form components
  *  @since 2020.07.20, 19:21
- *  @changed 2021.06.07, 14:46
+ *  @changed 2021.07.08, 15:17
  */
 
 // Form elements...
 
 // export * as FormButton from './FormButton';  // Old (non-ts) export style
 // NOTE: This re-export format doesnt works in TS!
+
+
 
 
 
@@ -12032,6 +12247,19 @@ __webpack_require__.r(__webpack_exports__);
 /*!********************************************!*\
   !*** ./src/forms/FormGroup/FormGroup.pcss ***!
   \********************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/forms/FormIcon/FormIcon.pcss":
+/*!******************************************!*\
+  !*** ./src/forms/FormIcon/FormIcon.pcss ***!
+  \******************************************/
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -14804,6 +15032,23 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./src/forms/FormIcon/index.ts":
+/*!*************************************!*\
+  !*** ./src/forms/FormIcon/index.ts ***!
+  \*************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": function() { return /* reexport safe */ _FormIcon__WEBPACK_IMPORTED_MODULE_0__.default; }
+/* harmony export */ });
+/* harmony import */ var _FormIcon__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./FormIcon */ "./src/forms/FormIcon/FormIcon.jsx");
+
+
+
+/***/ }),
+
 /***/ "./src/forms/FormInputGroup/index.ts":
 /*!*******************************************!*\
   !*** ./src/forms/FormInputGroup/index.ts ***!
@@ -15322,6 +15567,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "FormDateTime": function() { return /* reexport safe */ _forms_index_js__WEBPACK_IMPORTED_MODULE_5__.FormDateTime; },
 /* harmony export */   "FormDelim": function() { return /* reexport safe */ _forms_index_js__WEBPACK_IMPORTED_MODULE_5__.FormDelim; },
 /* harmony export */   "FormGroup": function() { return /* reexport safe */ _forms_index_js__WEBPACK_IMPORTED_MODULE_5__.FormGroup; },
+/* harmony export */   "FormIcon": function() { return /* reexport safe */ _forms_index_js__WEBPACK_IMPORTED_MODULE_5__.FormIcon; },
 /* harmony export */   "FormInputGroup": function() { return /* reexport safe */ _forms_index_js__WEBPACK_IMPORTED_MODULE_5__.FormInputGroup; },
 /* harmony export */   "FormItemDummy": function() { return /* reexport safe */ _forms_index_js__WEBPACK_IMPORTED_MODULE_5__.FormItemDummy; },
 /* harmony export */   "FormItemHOC": function() { return /* reexport safe */ _forms_index_js__WEBPACK_IMPORTED_MODULE_5__.FormItemHOC; },
