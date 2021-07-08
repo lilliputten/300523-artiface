@@ -41,6 +41,7 @@ export default {
     <FormGroup id="withSelect">
       <FormButton theme="default" text="Outer" id="Outer item" />
       <FormInputGroup id="FormInputGroupFixture">
+        <FormButton icon="faTimes" theme="default" text="Test" />
         <FormSelect
           title="Select title"
           text="Select"
@@ -48,8 +49,10 @@ export default {
             { val: 1, text: 'Ruinning' },
             { val: 2, text: 'Swimming extra long text item name string value' },
           ]}
+          singleChoice
+          closeOnSelect
+          maxWidth={200}
         />
-        <FormButton icon="faTimes" theme="default" text="Test" />
         <FormButton icon="faCheck" theme="default" text="Button" />
       </FormInputGroup>
     </FormGroup>
