@@ -1,7 +1,7 @@
 /** @module demoFixtures
  *  @desc Demo fixtures list
  *  @since 2021.02.15, 18:05
- *  @changed 2021.06.07, 14:48
+ *  @changed 2021.07.08, 15:02
  */
 
 // import * as build from './build'
@@ -61,6 +61,7 @@ const demoFixtures: TFixturesList = {
   FormGroup: require('forms/FormGroup/FormGroup.fixture'),
   FormButtonGroup: require('forms/FormButtonGroup/FormButtonGroup.fixture'),
   FormInputGroup: require('forms/FormInputGroup/FormInputGroup.fixture'),
+  FormLabeledGroup: require('forms/FormLabeledGroup/FormLabeledGroup.fixture'),
 
   FormActions: require('forms/FormActions/FormActions.fixture'),
 
