@@ -35,6 +35,7 @@ const demoFixtures: TFixturesList = {
 
   FormPager: require('forms/FormPager/FormPager.fixture'),
 
+  FormIcon: require('forms/FormIcon/FormIcon.fixture'),
   FormButton: require('forms/FormButton/FormButton.fixture'),
   FormButtonThemes: require('forms/FormButton/FormButton-Themes.fixture'),
   FormButtonDark: require('forms/FormButton/FormButton-Dark.fixture'),

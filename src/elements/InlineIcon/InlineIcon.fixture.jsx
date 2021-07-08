@@ -4,8 +4,7 @@
  */
 
 import React from 'react';
-import InlineIcon from './InlineIcon';
-// import FormGroup from '../FormGroup'
+import InlineIcon from 'elements/InlineIcon';
 
 import { // Icons (solid)...
   faCheck,

@@ -1,7 +1,7 @@
 /** @module forms
  *  @desc Form components
  *  @since 2020.07.20, 19:21
- *  @changed 2021.06.07, 14:46
+ *  @changed 2021.07.08, 15:17
  */
 
 // Form elements...
@@ -10,6 +10,8 @@
 // NOTE: This re-export format doesnt works in TS!
 
 export { default as FormButton } from './FormButton';
+
+export { default as FormIcon } from './FormIcon';
 
 export { default as FormItemHOC } from './FormItemHOC';
 

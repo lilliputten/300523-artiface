@@ -1,0 +1,54 @@
+/** @module FormIcon.styles
+ *  @desc Only basic elements geometry
+ *  @since 2021.07.08, 15:20
+ *  @changed 2021.07.08, 15:44
+ */
+
+.FormIcon {
+
+  // Override standard html button styles
+  & {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    border: none;
+    @mixin defaultFont;
+    vertical-align: bottom;
+    background: none;
+    text-align: left;
+  }
+
+  outline: 0;
+
+  padding: 0 $(formItemInnerPaddingH)px;
+
+  max-width: 100%; // ??? Fit in container?
+
+  &, &-Icon {
+    white-space: nowrap;
+    position: relative;
+    line-height: $(formItemInnerHeight)px;
+  }
+
+  &-Icon {
+    display: inline-block;
+    position: relative;
+    vertical-align: bottom;
+    // ^&:not(button) & { // ???
+    //   margin-top: 1px; // Compensate visual difference between button & regular tag (Attention! To test!)
+    // }
+    // Stylizing copied from `FormButton-Themes.pcss`
+    color: #000;
+    opacity: .4;
+    // transition: color $(transitionTime)ms, opacity $(transitionTime)ms; // For interactive elements only
+  }
+
+  &_largeIcon { // From `FormButton_largeIcon` (see `FormButton-Variations.pcss`)
+    ^&-Icon {
+      svg {
+        font-size: $(fontSizeXl)px; // 20px;
+        margin-top: 5px;
+        margin-bottom: -1px;
+      }
+    }
+  }
+}

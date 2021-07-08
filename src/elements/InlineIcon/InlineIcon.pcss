@@ -4,16 +4,16 @@
  */
 
 .InlineIcon {
-  // TODO: Theme styles
+  &_onDark {
+    color: #fff;
+  }
+  // Theme styles
   &_theme {
-
     @define-mixin styledIcon $color {
       color: $color;
     }
-
     &_primary { @mixin styledIcon $primaryColor }
     &_secondary { @mixin styledIcon $secondaryColor }
-
     // Theme colors...
     @each $color $name in $themeColors {
       &_$(name) { @mixin styledIcon $color }

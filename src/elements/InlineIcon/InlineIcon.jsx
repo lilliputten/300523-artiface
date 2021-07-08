@@ -28,21 +28,31 @@ class InlineIcon extends React.PureComponent /** @lends @InlineIcon.prototype */
 
   static propTypes = {
     id: PropTypes.string,
-    theme: PropTypes.string,
     tag: PropTypes.string,
     title: PropTypes.string,
     icon: PropTypes.oneOfType([ PropTypes.string, PropTypes.object ]),
     onClick: PropTypes.func,
+    theme: PropTypes.string,
+    plain: PropTypes.bool, // Is it used???
+    onDark: PropTypes.bool, // Is it used???
+    largeIcon: PropTypes.bool, // Large icon. Is it used???
+    style: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
   }
 
   getClassName() {
     const {
       id,
       theme,
+      plain, // ???
+      largeIcon, // ???
+      onDark, // ???
     } = this.props;
     const className = cnInlineIcon({
       id,
       theme,
+      plain, // ???
+      largeIcon, // ???
+      onDark, // ???
     }, [this.props.className]);
     return className;
   }
@@ -71,6 +81,7 @@ class InlineIcon extends React.PureComponent /** @lends @InlineIcon.prototype */
       icon,
       onClick,
       // key,
+      style,
     } = this.props;
 
     const iconType = typeof icon;
@@ -87,6 +98,7 @@ class InlineIcon extends React.PureComponent /** @lends @InlineIcon.prototype */
       className: this.getClassName(),
       title,
       onClick,
+      style,
       // key,
     };
 

@@ -6,10 +6,13 @@
 
 import React from 'react';
 
-import FormLabeledGroup from './FormLabeledGroup';
+import FormLabeledGroup from 'forms/FormLabeledGroup';
 
-import FormSelect from '../FormSelect';
-import FormGroup from '../FormGroup';
+import FormSelect from 'forms/FormSelect';
+import FormGroup from 'forms/FormGroup';
+import FormTextInput from 'forms/FormTextInput';
+
+import InlineIcon from 'elements/InlineIcon';
 
 // Demo styles for cosmos engine
 // import 'demo.pcss';
@@ -43,6 +46,12 @@ export default {
         controlButtonTheme="default"
         fullWidth
       />
+    </FormLabeledGroup>
+  ),
+  withInputAndIcon: (
+    <FormLabeledGroup id="withInputAndIcon" htmlFor="withInputAndIcon-Label" title="Label" fullWidth flow>
+      <FormTextInput />
+      <InlineIcon icon="faCheck" />
     </FormLabeledGroup>
   ),
 };
