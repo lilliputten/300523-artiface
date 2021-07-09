@@ -15,9 +15,10 @@
       width: 1px;
     }
   }
+  // TODO: Use positive selectors (define defaults & override with `&_layout_horizontal` values)
   &:not(&_layout_horizontal) {
     max-width: 100%;
-    padding: $(menuVPadding)px 0;
+    // padding: $(menuVPadding)px 0; // ???
     .MenuItem {
       display: block;
       &_fullWidth {

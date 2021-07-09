@@ -10,9 +10,9 @@ import PropTypes from 'prop-types';
 import { cn } from 'utils/configure';
 import { compose } from 'redux';
 
-// import FormItem from '../FormItem'
-import FormItemHOC from '../FormItemHOC';
-import FormBooleanHOC from '../FormBooleanHOC';
+// import FormItem from 'forms/FormItem'
+import FormItemHOC from 'forms/FormItemHOC';
+import FormBooleanHOC from 'forms/FormBooleanHOC';
 
 // import { withFormContext } from 'helpers/FormContext';
 import FormInteractiveItemHOC from 'forms/FormInteractiveItemHOC';

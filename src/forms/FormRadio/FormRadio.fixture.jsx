@@ -4,10 +4,10 @@
  */
 
 import React from 'react';
-import FormRadio from './FormRadio';
-import FormGroup from '../FormGroup';
-import FormLabel from '../FormLabel';
-import FormTextInput from '../FormTextInput';
+import FormRadio from 'forms/FormRadio';
+import FormGroup from 'forms/FormGroup';
+import FormLabel from 'forms/FormLabel';
+import FormTextInput from 'forms/FormTextInput';
 
 import { FormContextProvider } from 'helpers/FormContext';
 

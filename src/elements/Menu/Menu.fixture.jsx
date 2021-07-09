@@ -5,8 +5,8 @@
 /* eslint-disable no-console */
 
 import React from 'react';
-import Menu from './Menu';
-import MenuItem from '../MenuItem';
+import Menu from 'elements/Menu';
+import MenuItem from 'elements/MenuItem';
 
 // Demo styles for cosmos engine
 // import 'demo.pcss';

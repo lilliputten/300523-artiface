@@ -68,7 +68,7 @@ const wrapFormBooleanHOC = (WrappedComponent, params = {}) => class FormBoolean 
       }, this.updateValueWithState);
     }
     else if (stateValue !== prevState.value) { // New value from state
-      this.updateValueWithState(this.state);
+      this.updateValueWithState();
     }
     // this.afterUpdate(); // ???
   }
@@ -98,9 +98,10 @@ const wrapFormBooleanHOC = (WrappedComponent, params = {}) => class FormBoolean 
    * }
    */
 
-  updateValueWithState = (state) => {
+  updateValueWithState = (that) => {
     const { onChange, disabled } = this.props;
     if (!disabled && typeof onChange === 'function') {
+      const state = that && that.state || this.state;
       const { value } = state;
       onChange({ id: this.id, value });
     }

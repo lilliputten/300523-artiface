@@ -14,8 +14,8 @@ import { // ActionsContext...
   withActionsContext,
 } from 'helpers/ActionsContext';
 
-import MenuItem from '../MenuItem';
-import MenuItemSeparator from '../MenuItemSeparator';
+import MenuItem from 'elements/MenuItem';
+import MenuItemSeparator from 'elements/MenuItemSeparator';
 
 import './Menu.pcss';
 
