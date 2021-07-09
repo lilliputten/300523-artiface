@@ -440,9 +440,9 @@ module.exports = { // Common-used build variables...
   DEV_DEBUG: DEV_DEBUG,
 
   THEME: "default",
-  buildTag: "v.0.3.6-210708-1710-build-dev-default",
-  timestamp: "2021.07.08, 17:10",
-  timetag: "210708-1710",
+  buildTag: "v.0.3.6-210709-2103-build-dev-default",
+  timestamp: "2021.07.09, 21:03",
+  timetag: "210709-2103",
   version: "0.3.6" };
 
 /***/ }),
@@ -5560,9 +5560,10 @@ var wrapFormBooleanHOC = function wrapFormBooleanHOC(WrappedComponent, params) {
 
 
 
-      function (state) {var _this$props =
+      function (that) {var _this$props =
         _this.props,onChange = _this$props.onChange,disabled = _this$props.disabled;
-        if (!disabled && typeof onChange === 'function') {var
+        if (!disabled && typeof onChange === 'function') {
+          var state = that && that.state || _this.state;var
           value = state.value;
           onChange({ id: _this.id, value: value });
         }
@@ -5610,7 +5611,7 @@ var wrapFormBooleanHOC = function wrapFormBooleanHOC(WrappedComponent, params) {
     };_proto.componentWillUnmount = function componentWillUnmount() {// this.removeEventListeners();
       this.mounted = false;};_proto.componentDidUpdate = function componentDidUpdate(prevProps, prevState) {var prevValue = prevProps.value;var propsValue = this.props.value;var stateValue = this.state.value;if (propsValue !== prevValue && propsValue !== stateValue) {// New value from props
         this.setState({ value: propsValue }, this.updateValueWithState);} else if (stateValue !== prevState.value) {// New value from state
-        this.updateValueWithState(this.state);} // this.afterUpdate(); // ???
+        this.updateValueWithState();} // this.afterUpdate(); // ???
     } // Helper methods...
     ;_proto.getClassName = function getClassName() {var id = this.id; // const { id } = this.props
       var value = this.state.value;var checked = !!value;var mods = { id: id, checked: checked };var classList = cnFormBooleanHOC(mods, [this.props.className]);return classList;} /* // focus, blur -- ???
@@ -8731,7 +8732,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-// import FormItem from '../FormItem'
+// import FormItem from 'forms/FormItem'
 
 
 
