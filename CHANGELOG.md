@@ -1,5 +1,6 @@
 # CHANGELOG
 
+- 2021.07.12, 21:53 -- ModalWindow: Allow to use function reference for actions prop. FormBooleanHOC: fixed bug with `onChange` / `onUpdate` handlers usage.
 - 2021.07.12, 14:15 -- Minor changes for FormButton (inputId prop), FormBooleanHOC (different onUpdate, onChange handlers, inputId prop).
 - 2021.07.09, 22:06 -- Minor fixes: Menu (styling: removed external paddings), FormBooleanHOC (safe value update from state), build info.
 - 2021.07.08, 17:09 -- FormLabeledGroup: pass FormGroup props.
@@ -138,5 +139,5 @@
 - 2020.10.05, 20:38 -- v.0.0.15: Extracted `demoSupport.jsx` routines, fixture selection from url query (parameter `fixture`), added avaialble fixtures list if fixture to display is not specified, added DemoWrapper & demoTitle exportable ficture parameters for demo rendering.
 
 <!--
- @changed 2021.07.12, 14:15
+ @changed 2021.07.12, 21:53
 -->

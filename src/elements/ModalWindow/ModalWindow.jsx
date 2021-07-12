@@ -1,7 +1,7 @@
 /** @module ModalWindow
  *  @class ModalWindow
  *  @since 2020.12.21, 22:58
- *  @changed 2021.05.17, 15:33
+ *  @changed 2021.07.12, 19:25
  *
  *  External methods (for PopupStack):
  *  - close
@@ -48,7 +48,7 @@ class ModalWindow extends React.PureComponent /** @lends @ModalWindow.prototype 
   static propTypes = {
     // registerCallback: PropTypes.func, // ??? registerCallback(handler = this.someMethod) -- handler stored by parent component and called when detected click on pulldown menu -- prevents popup content closing
     // setModalNodeRef: PropTypes.func, // ??? Demo?
-    actions: PropTypes.oneOfType([ PropTypes.array, PropTypes.object ]), // Actions component(s) (TODO: `ActionsContext` must be used)
+    actions: PropTypes.oneOfType([ PropTypes.func, PropTypes.array, PropTypes.object ]), // Actions component(s) (TODO: `ActionsContext` must be used)
     className: PropTypes.string, // ModalWindow class name
     closeOnCancelAction: PropTypes.bool, // Auto-close on `cancel` action event
     closeOnClickOutside: PropTypes.bool, // Close (cancel) modal by click outside modal window (on 'curtain')
@@ -281,7 +281,10 @@ class ModalWindow extends React.PureComponent /** @lends @ModalWindow.prototype 
   }
 
   renderActions() {
-    const { actions } = this.props;
+    let { actions } = this.props;
+    if (typeof actions === 'function') {
+      actions = actions();
+    }
     // Allow to treat actions as ids/texts/ list see `FromActions`.
     return actions && (
       <ActionsContextProvider value={this}>

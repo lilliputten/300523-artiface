@@ -132,7 +132,7 @@ const wrapFormBooleanHOC = (WrappedComponent, params = {}) => class FormBoolean 
         // TODO: Call alternative update handler
         return { active: true, value };
       }, () => {
-        if (typeof onUpdate === 'function') {
+        if (typeof onChange === 'function') {
           const { value } = this.state;
           onChange({ id: inputId || this.id, value });
         }
