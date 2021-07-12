@@ -440,9 +440,9 @@ module.exports = { // Common-used build variables...
   DEV_DEBUG: DEV_DEBUG,
 
   THEME: "default",
-  buildTag: "v.0.3.6-210709-2103-build-dev-default",
-  timestamp: "2021.07.09, 21:03",
-  timetag: "210709-2103",
+  buildTag: "v.0.3.6-210712-1317-build-dev-default",
+  timestamp: "2021.07.12, 13:17",
+  timetag: "210712-1317",
   version: "0.3.6" };
 
 /***/ }),
@@ -5489,6 +5489,7 @@ var wrapFormBooleanHOC = function wrapFormBooleanHOC(WrappedComponent, params) {
 
 
 
+
     // Lifecycle methods...
 
     function FormBoolean(props) {var _this;
@@ -5561,11 +5562,11 @@ var wrapFormBooleanHOC = function wrapFormBooleanHOC(WrappedComponent, params) {
 
 
       function (that) {var _this$props =
-        _this.props,onChange = _this$props.onChange,disabled = _this$props.disabled;
-        if (!disabled && typeof onChange === 'function') {
+        _this.props,onUpdate = _this$props.onUpdate,disabled = _this$props.disabled,inputId = _this$props.inputId;
+        if (!disabled && typeof onUpdate === 'function') {
           var state = that && that.state || _this.state;var
           value = state.value;
-          onChange({ id: _this.id, value: value });
+          onUpdate({ id: inputId || _this.id, value: value });
         }
       });(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3__.default)((0,_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1__.default)(_this), "handleChange",
 
@@ -5581,17 +5582,26 @@ var wrapFormBooleanHOC = function wrapFormBooleanHOC(WrappedComponent, params) {
 
 
 
-      function (params) {
-        _this.setState(function (_ref) {var stateValue = _ref.value;
-          var value = params && params.value;
-          if (value == null) {
-            value = !stateValue;
-          }
-          return { active: true, value: value };
-        });
-        setTimeout(function () {
-          _this.setState({ active: false });
-        }, (_config_index_js__WEBPACK_IMPORTED_MODULE_7___default().css.transitionTime));
+      function (params) {var _this$props2 =
+        _this.props,onChange = _this$props2.onChange,disabled = _this$props2.disabled,inputId = _this$props2.inputId;
+        if (!disabled) {
+          _this.setState(function (_ref) {var stateValue = _ref.value;
+            var value = params && params.value;
+            if (value == null) {
+              value = !stateValue;
+            }
+            // TODO: Call alternative update handler
+            return { active: true, value: value };
+          }, function () {
+            if (typeof onUpdate === 'function') {var
+              value = _this.state.value;
+              onChange({ id: inputId || _this.id, value: value });
+            }
+          });
+          setTimeout(function () {
+            _this.setState({ active: false });
+          }, (_config_index_js__WEBPACK_IMPORTED_MODULE_7___default().css.transitionTime));
+        }
       });(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3__.default)((0,_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1__.default)(_this), "setDomRef",
 
       function (inputDomElem) {
@@ -5626,8 +5636,8 @@ var wrapFormBooleanHOC = function wrapFormBooleanHOC(WrappedComponent, params) {
      *   }
      * }
      */; // Render...
-    _proto.render = function render() {var _this$props2 = this.props,id = _this$props2.id,disabled = _this$props2.disabled;var _this$state = this.state,active = _this$state.active,value = _this$state.value;var renderProps = { id: id, className: this.getClassName(), disabled: disabled, value: value, active: active, handleChange: this.handleChange, setDomRef: this.setDomRef, setInputDomRef: this.setInputDomRef };return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default().createElement(WrappedComponent, (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__.default)({}, this.props, renderProps));
-    };return FormBoolean;}((react__WEBPACK_IMPORTED_MODULE_4___default().Component)), (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3__.default)(_class, "propTypes", { id: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().string), name: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().string), value: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().bool), disabled: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().bool), onChange: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().func) }), (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3__.default)(_class, "defaultProps", { id: params.id, value: false }), _temp;};
+    _proto.render = function render() {var _this$props3 = this.props,id = _this$props3.id,disabled = _this$props3.disabled;var _this$state = this.state,active = _this$state.active,value = _this$state.value;var renderProps = { id: id, className: this.getClassName(), disabled: disabled, value: value, active: active, handleChange: this.handleChange, setDomRef: this.setDomRef, setInputDomRef: this.setInputDomRef };return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default().createElement(WrappedComponent, (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__.default)({}, this.props, renderProps));
+    };return FormBoolean;}((react__WEBPACK_IMPORTED_MODULE_4___default().Component)), (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3__.default)(_class, "propTypes", { inputId: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().string), id: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().string), name: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().string), value: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().bool), disabled: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().bool), onChange: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().func) }), (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3__.default)(_class, "defaultProps", { id: params.id, value: false }), _temp;};
 
 
 
@@ -5919,12 +5929,13 @@ FormButton = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_hel
 
 
 
-      _this.props,id = _this$props.id,actionsContextNode = _this$props.actionsContextNode,disabled = _this$props.disabled,onClick = _this$props.onClick;
+
+      _this.props,id = _this$props.id,inputId = _this$props.inputId,actionsContextNode = _this$props.actionsContextNode,disabled = _this$props.disabled,onClick = _this$props.onClick;
       if (!disabled) {
         var hasOnClick = onClick && typeof onClick === 'function';
         var actionProps = {
           // ...event,
-          id: id };
+          id: inputId || id };
 
         var result = hasOnClick ? onClick(actionProps) : undefined; // true;
         if (result !== false && actionsContextNode && typeof actionsContextNode.onAction === 'function') {
