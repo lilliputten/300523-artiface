@@ -1,7 +1,7 @@
 /** @module FormBooleanHOC
  *  @class FormBooleanHOC
  *  @since 2020.12.10, 22:17
- *  @changed 2021.01.20, 23:28
+ *  @changed 2021.07.12, 13:32
  */
 /* eslint-disable react/require-default-props, react/jsx-max-depth */
 
@@ -15,11 +15,13 @@ const cnFormBooleanHOC = cn('FormBoolean');
 const wrapFormBooleanHOC = (WrappedComponent, params = {}) => class FormBoolean extends React.Component {
 
   static propTypes = {
+    inputId: PropTypes.string,
     id: PropTypes.string,
     name: PropTypes.string,
     value: PropTypes.bool,
     disabled: PropTypes.bool,
-    onChange: PropTypes.func,
+    onChange: PropTypes.func, // Change value handler (only for user changes).
+    onUpdate: PropTypes.func, // Update value handler. Called on any value change (including by an external way).
   }
 
   static defaultProps = {
@@ -99,11 +101,11 @@ const wrapFormBooleanHOC = (WrappedComponent, params = {}) => class FormBoolean 
    */
 
   updateValueWithState = (that) => {
-    const { onChange, disabled } = this.props;
-    if (!disabled && typeof onChange === 'function') {
+    const { onUpdate, disabled, inputId } = this.props;
+    if (!disabled && typeof onUpdate === 'function') {
       const state = that && that.state || this.state;
       const { value } = state;
-      onChange({ id: this.id, value });
+      onUpdate({ id: inputId || this.id, value });
     }
   }
 
@@ -120,16 +122,25 @@ const wrapFormBooleanHOC = (WrappedComponent, params = {}) => class FormBoolean 
    */
 
   handleChange = (params) => {
-    this.setState(({ value: stateValue }) => {
-      let value = params && params.value;
-      if (value == null) {
-        value = !stateValue;
-      }
-      return { active: true, value };
-    });
-    setTimeout(() => {
-      this.setState({ active: false });
-    }, config.css.transitionTime);
+    const { onChange, disabled, inputId } = this.props;
+    if (!disabled) {
+      this.setState(({ value: stateValue }) => {
+        let value = params && params.value;
+        if (value == null) {
+          value = !stateValue;
+        }
+        // TODO: Call alternative update handler
+        return { active: true, value };
+      }, () => {
+        if (typeof onUpdate === 'function') {
+          const { value } = this.state;
+          onChange({ id: inputId || this.id, value });
+        }
+      });
+      setTimeout(() => {
+        this.setState({ active: false });
+      }, config.css.transitionTime);
+    }
   }
 
   setDomRef = (inputDomElem) => {

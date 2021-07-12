@@ -146,6 +146,7 @@ class FormButton extends React.PureComponent /** @lends @FormButton.prototype */
   onClick = (/* event */) => {
     const {
       id,
+      inputId,
       actionsContextNode, // ActionsContext Provider
       disabled,
       onClick,
@@ -155,7 +156,7 @@ class FormButton extends React.PureComponent /** @lends @FormButton.prototype */
       const hasOnClick = onClick && typeof onClick === 'function';
       const actionProps = {
         // ...event,
-        id,
+        id: inputId || id,
       };
       const result = hasOnClick ? onClick(actionProps) : undefined; // true;
       if (result !== false && actionsContextNode && typeof actionsContextNode.onAction === 'function') {
