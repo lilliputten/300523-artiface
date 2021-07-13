@@ -59,7 +59,7 @@ class ModalWindow extends React.PureComponent /** @lends @ModalWindow.prototype 
     handleLoaderCancel: PropTypes.func, // Loader onCancel event handler
     handleOpenState: PropTypes.func, // Event fired on modal open state change (update external open/close state) ({ open, id } => void)
     headerTheme: PropTypes.string, // Header theme (using `theme` if not specified)
-    icon: PropTypes.oneOfType([ PropTypes.string, PropTypes.object ]), // Show icon in header
+    icon: PropTypes.oneOfType([ PropTypes.string, PropTypes.object ]), // Show icon in header, see `config.ui.defaultIcons`: error, warn, success, info, confirm, select -- as on 2021.07.13
     iconTheme: PropTypes.string, // Icon theme (using `theme` if not specified)
     id: PropTypes.string, // ModalWindow id
     leftContent: PropTypes.oneOfType([ PropTypes.string, PropTypes.object ]), // Content at left of main content and actions (ideal place for large visual icon)

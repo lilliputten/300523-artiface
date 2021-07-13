@@ -11,17 +11,4 @@
     background-color: color($neutralColor alpha(.3));
   }
 
-  &_stack {
-    flex-wrap: nowrap;
-    // align-items: stretch; // ???
-    flex-direction: column;
-    &, &.FormItem { // Override nested FormItem display:block rule
-      display: flex;
-    }
-  }
-  &_noWrap {
-    white-space: nowrap;
-    flex-wrap: nowrap;
-  }
-
 }

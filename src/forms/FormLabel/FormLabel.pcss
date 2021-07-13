@@ -13,12 +13,16 @@
     margin-bottom: 0; // Override bootstrap styles
     overflow: hidden;
     text-overflow: ellipsis;
+    white-space: nowrap;
     ^&_firstInBlock & { // First label in block-level (non-flow) group: indent by left side
       padding-left: 0;
     }
     &[for] {
       cursor: pointer;
     }
+  }
+  &_wrap {
+    white-space: normal;
   }
   // &_fixed, &_firstInBlock {
   //   [>!KEEP<]

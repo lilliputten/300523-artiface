@@ -19,7 +19,16 @@ const cnFormLabel = cn('FormLabel');
 class FormLabel extends React.PureComponent /** @lends @FormLabel.prototype */ {
 
   static propTypes = {
+    disabled: PropTypes.bool,
+    firstInBlock: PropTypes.bool,
+    fixed: PropTypes.bool,
+    htmlFor: PropTypes.string,
     id: PropTypes.string,
+    name: PropTypes.string,
+    wrap: PropTypes.bool,
+    onClick: PropTypes.func,
+    text: PropTypes.string,
+    title: PropTypes.string,
   }
 
   getClassName() {
@@ -27,12 +36,14 @@ class FormLabel extends React.PureComponent /** @lends @FormLabel.prototype */ {
       id,
       fixed,
       firstInBlock,
+      wrap,
       // clickable,
     } = this.props;
     const classList = cnFormLabel({
       id,
       fixed,
       firstInBlock,
+      wrap,
       // clickable,
     }, [this.props.className]);
     return classList;

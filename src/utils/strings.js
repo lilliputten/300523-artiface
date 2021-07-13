@@ -1,7 +1,7 @@
 /** @module strings
  *  @description Strings utilities
  *  @since 2019.04.03, 14:38
- *  @changed 2021.04.06, 14:00
+ *  @changed 2021.07.13, 12:34
  */
 
 import React from 'react';
@@ -141,5 +141,5 @@ export function periodizeNumber(num, periodChar) {
  * @return {String}
  */
 export function humanizeId(id) {
-  return ucFirst(String(id)).replace(/\B([A-Z])/g, ' $1');
+  return ucFirst(String(id)).replace(/\B([A-Z][a-z]+)/g, ' $1');
 }

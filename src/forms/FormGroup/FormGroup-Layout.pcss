@@ -44,7 +44,7 @@
     margin-left: -6px;
   }
 
-  &_flow {
+  &_flow { // Horizontal flow layout
     & > .FormItem {
       &:not(.FormSeparator) {
         min-width: $(formItemHeight)px; // ??? Hint for limiting the maximum width (overflow causes cropping items outer glow on interactive control events).
@@ -65,6 +65,19 @@
     &, &.FormItem { // Override nested FormItem display:block rule
       display: flex;
     }
+  }
+
+  &_stack { // Vertical layout
+    flex-wrap: nowrap;
+    // align-items: stretch; // ???
+    flex-direction: column;
+    &, &.FormItem { // Override nested FormItem display:block rule
+      display: flex;
+    }
+  }
+  &_noWrap {
+    white-space: nowrap;
+    flex-wrap: nowrap;
   }
 
   // &_fullWidth {
