@@ -3969,6 +3969,8 @@
     margin-left: -6px;
   }
 
+/* Horizontal flow layout*/
+
 .FormGroup_flow > .FormItem:not(.FormSeparator) {
         min-width: 32px; /* ??? Hint for limiting the maximum width (overflow causes cropping items outer glow on interactive control events).*/
       }
@@ -3998,6 +4000,25 @@
       display: flex;
     }
 
+.FormGroup_stack { /* Vertical layout*/
+    -ms-flex-wrap: nowrap;
+        flex-wrap: nowrap;
+    /* align-items: stretch; // ???*/
+    -ms-flex-direction: column;
+        flex-direction: column;
+  }
+
+.FormGroup_stack, .FormGroup_stack.FormItem { /* Override nested FormItem display:block rule*/
+      display: -ms-flexbox;
+      display: flex;
+    }
+
+.FormGroup_noWrap {
+    white-space: nowrap;
+    -ms-flex-wrap: nowrap;
+        flex-wrap: nowrap;
+  }
+
 /* }*/
 
 .FormGroup > .FormGroup_align_right { /* flow*/
@@ -4020,25 +4041,6 @@
 .FormGroup_shaded {
     /* background-color: $neutralExtraLightColor;*/
     background-color: rgba(204, 204, 204, 0.3);
-  }
-
-.FormGroup_stack {
-    -ms-flex-wrap: nowrap;
-        flex-wrap: nowrap;
-    /* align-items: stretch; // ???*/
-    -ms-flex-direction: column;
-        flex-direction: column;
-  }
-
-.FormGroup_stack, .FormGroup_stack.FormItem { /* Override nested FormItem display:block rule*/
-      display: -ms-flexbox;
-      display: flex;
-    }
-
-.FormGroup_noWrap {
-    white-space: nowrap;
-    -ms-flex-wrap: nowrap;
-        flex-wrap: nowrap;
   }
 
 /** @module FormPager.styles
@@ -4085,7 +4087,6 @@
 
 .FormLabel {
   /*!KEEP*/
-  /* border: 1px solid green;*/
   /* &_fixed, &_firstInBlock {*/
   /*   [>!KEEP<]*/
   /* }*/
@@ -4126,6 +4127,7 @@ label.FormLabel-Control {
     margin-bottom: 0;
     overflow: hidden;
     text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 /* Override bootstrap styles*/
@@ -4137,6 +4139,12 @@ label.FormLabel-Control {
 label.FormLabel-Control[for] {
       cursor: pointer;
     }
+
+/* border: 1px solid green;*/
+
+.FormLabel_wrap {
+    white-space: normal;
+  }
 
 /** @module FormDelim.styles
  *  @class FormDelim

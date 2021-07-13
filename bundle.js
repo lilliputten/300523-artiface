@@ -440,10 +440,10 @@ module.exports = { // Common-used build variables...
   DEV_DEBUG: DEV_DEBUG,
 
   THEME: "default",
-  buildTag: "v.0.3.6-210712-1317-build-dev-default",
-  timestamp: "2021.07.12, 13:17",
-  timetag: "210712-1317",
-  version: "0.3.6" };
+  buildTag: "v.0.3.7-210713-1234-build-dev-default",
+  timestamp: "2021.07.13, 12:34",
+  timetag: "210713-1234",
+  version: "0.3.7" };
 
 /***/ }),
 
@@ -4122,7 +4122,7 @@ __webpack_require__.r(__webpack_exports__);
  /** @module ModalWindow
  *  @class ModalWindow
  *  @since 2020.12.21, 22:58
- *  @changed 2021.05.17, 15:33
+ *  @changed 2021.07.12, 19:25
  *
  *  External methods (for PopupStack):
  *  - close
@@ -4413,6 +4413,9 @@ ModalWindow = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_he
 
 
 
+
+
+
     function () /* portalProps */{
       // const { ModalPortal } = portalProps || {} // !!!
       // this.ModalPortal = ModalPortal // Save ModalPortal handler
@@ -4444,7 +4447,7 @@ ModalWindow = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_he
   _proto.renderHeaderIcon = function renderHeaderIcon() {var _this$props4 = this.props,icon = _this$props4.icon,iconTheme = _this$props4.iconTheme;var theme = iconTheme || this.props.theme;var showIcon = icon || theme && (_config_index_js__WEBPACK_IMPORTED_MODULE_7___default().ui.defaultIcons)[theme];return showIcon && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default().createElement("div", { key: "HeaderIcon", className: cnModalWindow('HeaderIcon', { theme: theme }) }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default().createElement(_InlineIcon_index_ts__WEBPACK_IMPORTED_MODULE_9__.default, { theme: theme, icon: showIcon }));};_proto.renderHeaderTitle = function renderHeaderTitle() {var title = this.props.title;return title && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default().createElement("div", { key: "HeaderTitle", className: cnModalWindow('HeaderTitle') }, title);};_proto.renderHeaderCloseButton = function renderHeaderCloseButton() {var showCloseButton = this.props.showCloseButton;return showCloseButton && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default().createElement("div", { key: "HeaderCloseButton", className: cnModalWindow('HeaderCloseButton') }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default().createElement(_forms_FormButton_index_ts__WEBPACK_IMPORTED_MODULE_10__.default, { icon: "faTimes", largeIcon: true, plain: true, title: "Close window" // TODO; Translate?
       , onClick: this.onCloseButtonClick }));};_proto.renderHeader = function renderHeader() {var _this$props5 = this.props,headerTheme = _this$props5.headerTheme,theme = _this$props5.theme;var content = [this.renderHeaderIcon(), this.renderHeaderTitle(), this.renderHeaderCloseButton()].filter(Boolean);var hasHeader = !!(content && content.length);return hasHeader && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default().createElement("div", { className: cnModalWindow('Header', { theme: headerTheme || theme }) }, content);};_proto.renderLeftContent = function renderLeftContent() {var leftContent = this.props.leftContent;return leftContent && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default().createElement("div", { className: cnModalWindow('LeftContent') }, leftContent);};_proto.renderContent = function renderContent() {var _this$props6 = this.props,children = _this$props6.children,contentClassName = _this$props6.contentClassName,error = _this$props6.error; // console.log('ModalWindow:renderContent', children)
     // debugger
-    var errorContent = error && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default().createElement("div", { className: cnModalWindow('Error') }, this.renderContentError(error));return children && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default().createElement("div", { className: cnModalWindow('Content', [contentClassName]) }, errorContent, children);};_proto.renderActions = function renderActions() {var actions = this.props.actions; // Allow to treat actions as ids/texts/ list see `FromActions`.
+    var errorContent = error && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default().createElement("div", { className: cnModalWindow('Error') }, this.renderContentError(error));return children && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default().createElement("div", { className: cnModalWindow('Content', [contentClassName]) }, errorContent, children);};_proto.renderActions = function renderActions() {var actions = this.props.actions;if (typeof actions === 'function') {actions = actions();} // Allow to treat actions as ids/texts/ list see `FromActions`.
     return actions && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default().createElement(_helpers_ActionsContext__WEBPACK_IMPORTED_MODULE_12__.ActionsContextProvider, { value: this }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default().createElement(_forms_FormActions_index_ts__WEBPACK_IMPORTED_MODULE_11__.default, { className: cnModalWindow('Actions') }, actions));};_proto.render = function render() {var _this2 = this; // Add all custom handler props ('on*')...
     var handlerKeys = Object.keys(this.props).filter(function (id) {return id.startsWith('on') && !_ModalPortal_index_ts__WEBPACK_IMPORTED_MODULE_8__.passModalPortalProps.includes(id);});var portalProps = _ModalPortal_index_ts__WEBPACK_IMPORTED_MODULE_8__.passModalPortalProps.concat(handlerKeys).reduce(function (data, id) {var _extends2;return (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__.default)({}, data, (_extends2 = {}, _extends2[id] = _this2.props[id], _extends2));}, {});Object.keys(this.props).
     filter(function (id) {return id.startsWith('on');}).
@@ -4467,7 +4470,7 @@ ModalWindow = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_he
 
   };return ModalWindow;}((react__WEBPACK_IMPORTED_MODULE_4___default().PureComponent) /** @lends @ModalWindow.prototype */);(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3__.default)(ModalWindow, "propTypes", { // registerCallback: PropTypes.func, // ??? registerCallback(handler = this.someMethod) -- handler stored by parent component and called when detected click on pulldown menu -- prevents popup content closing
   // setModalNodeRef: PropTypes.func, // ??? Demo?
-  actions: prop_types__WEBPACK_IMPORTED_MODULE_5___default().oneOfType([(prop_types__WEBPACK_IMPORTED_MODULE_5___default().array), (prop_types__WEBPACK_IMPORTED_MODULE_5___default().object)]), // Actions component(s) (TODO: `ActionsContext` must be used)
+  actions: prop_types__WEBPACK_IMPORTED_MODULE_5___default().oneOfType([(prop_types__WEBPACK_IMPORTED_MODULE_5___default().func), (prop_types__WEBPACK_IMPORTED_MODULE_5___default().array), (prop_types__WEBPACK_IMPORTED_MODULE_5___default().object)]), // Actions component(s) (TODO: `ActionsContext` must be used)
   className: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().string), // ModalWindow class name
   closeOnCancelAction: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().bool), // Auto-close on `cancel` action event
   closeOnClickOutside: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().bool), // Close (cancel) modal by click outside modal window (on 'curtain')
@@ -5463,7 +5466,7 @@ __webpack_require__.r(__webpack_exports__);
  /** @module FormBooleanHOC
  *  @class FormBooleanHOC
  *  @since 2020.12.10, 22:17
- *  @changed 2021.01.20, 23:28
+ *  @changed 2021.07.12, 13:32
  */
 /* eslint-disable react/require-default-props, react/jsx-max-depth */
 
@@ -5475,6 +5478,7 @@ __webpack_require__.r(__webpack_exports__);
 var cnFormBooleanHOC = (0,_utils_configure__WEBPACK_IMPORTED_MODULE_6__.cn)('FormBoolean');
 
 var wrapFormBooleanHOC = function wrapFormBooleanHOC(WrappedComponent, params) {var _class, _temp;if (params === void 0) {params = {};}return _temp = _class = /*#__PURE__*/function (_React$Component) {(0,_babel_runtime_helpers_inheritsLoose__WEBPACK_IMPORTED_MODULE_2__.default)(FormBoolean, _React$Component);
+
 
 
 
@@ -5593,7 +5597,7 @@ var wrapFormBooleanHOC = function wrapFormBooleanHOC(WrappedComponent, params) {
             // TODO: Call alternative update handler
             return { active: true, value: value };
           }, function () {
-            if (typeof onUpdate === 'function') {var
+            if (typeof onChange === 'function') {var
               value = _this.state.value;
               onChange({ id: inputId || _this.id, value: value });
             }
@@ -5637,9 +5641,9 @@ var wrapFormBooleanHOC = function wrapFormBooleanHOC(WrappedComponent, params) {
      * }
      */; // Render...
     _proto.render = function render() {var _this$props3 = this.props,id = _this$props3.id,disabled = _this$props3.disabled;var _this$state = this.state,active = _this$state.active,value = _this$state.value;var renderProps = { id: id, className: this.getClassName(), disabled: disabled, value: value, active: active, handleChange: this.handleChange, setDomRef: this.setDomRef, setInputDomRef: this.setInputDomRef };return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default().createElement(WrappedComponent, (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__.default)({}, this.props, renderProps));
-    };return FormBoolean;}((react__WEBPACK_IMPORTED_MODULE_4___default().Component)), (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3__.default)(_class, "propTypes", { inputId: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().string), id: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().string), name: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().string), value: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().bool), disabled: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().bool), onChange: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().func) }), (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3__.default)(_class, "defaultProps", { id: params.id, value: false }), _temp;};
-
-
+    };return FormBoolean;}((react__WEBPACK_IMPORTED_MODULE_4___default().Component)), (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3__.default)(_class, "propTypes", { inputId: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().string), id: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().string), name: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().string), value: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().bool), disabled: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().bool), onChange: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().func), // Change value handler (only for user changes).
+    onUpdate: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().func) // Update value handler. Called on any value change (including by an external way).
+  }), (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3__.default)(_class, "defaultProps", { id: params.id, value: false }), _temp;};
 
 /** Usage:
  * FormBooleanHOC(component)
@@ -8185,6 +8189,17 @@ FormLabel = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_help
 
 
 
+
+
+
+
+
+
+
+
+
+
+
     function (event) {var _this$props =
 
 
@@ -8194,7 +8209,7 @@ FormLabel = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_help
       if ( /* clickable && */!disabled && onClick && typeof onClick === 'function') {
         onClick(event);
       }
-    });return _this;}var _proto = FormLabel.prototype;_proto.getClassName = function getClassName() {var _this$props2 = this.props,id = _this$props2.id,fixed = _this$props2.fixed,firstInBlock = _this$props2.firstInBlock;var classList = cnFormLabel({ id: id, fixed: fixed, firstInBlock: firstInBlock // clickable,
+    });return _this;}var _proto = FormLabel.prototype;_proto.getClassName = function getClassName() {var _this$props2 = this.props,id = _this$props2.id,fixed = _this$props2.fixed,firstInBlock = _this$props2.firstInBlock,wrap = _this$props2.wrap;var classList = cnFormLabel({ id: id, fixed: fixed, firstInBlock: firstInBlock, wrap: wrap // clickable,
     }, [this.props.className]);return classList;} // Handlers...
   ; // Render...
   _proto.
@@ -8231,7 +8246,7 @@ FormLabel = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_help
 
 
 
-  };return FormLabel;}((react__WEBPACK_IMPORTED_MODULE_3___default().PureComponent) /** @lends @FormLabel.prototype */);(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2__.default)(FormLabel, "propTypes", { id: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string) });
+  };return FormLabel;}((react__WEBPACK_IMPORTED_MODULE_3___default().PureComponent) /** @lends @FormLabel.prototype */);(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2__.default)(FormLabel, "propTypes", { disabled: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), firstInBlock: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), fixed: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), htmlFor: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), id: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), name: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), wrap: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), onClick: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func), text: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), title: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string) });
 
 
 
@@ -10460,7 +10475,7 @@ __webpack_require__.r(__webpack_exports__);
 var _this = undefined; /** @module strings
  *  @description Strings utilities
  *  @since 2019.04.03, 14:38
- *  @changed 2021.04.06, 14:00
+ *  @changed 2021.07.13, 12:34
  */
 
 
@@ -10600,7 +10615,7 @@ function periodizeNumber(num, periodChar) {
  * @return {String}
  */
 function humanizeId(id) {
-  return ucFirst(String(id)).replace(/\B([A-Z])/g, ' $1');
+  return ucFirst(String(id)).replace(/\B([A-Z][a-z]+)/g, ' $1');
 }
 
 /***/ }),
