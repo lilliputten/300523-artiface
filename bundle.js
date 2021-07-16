@@ -440,9 +440,9 @@ module.exports = { // Common-used build variables...
   DEV_DEBUG: DEV_DEBUG,
 
   THEME: "default",
-  buildTag: "v.0.3.7-210713-1234-build-dev-default",
-  timestamp: "2021.07.13, 12:34",
-  timetag: "210713-1234",
+  buildTag: "v.0.3.7-210716-1910-build-dev-default",
+  timestamp: "2021.07.16, 19:10",
+  timetag: "210716-1910",
   version: "0.3.7" };
 
 /***/ }),
@@ -3296,6 +3296,7 @@ ModalPortal = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_he
 
 
 
+
   // Instance variables...
 
 
@@ -3578,10 +3579,10 @@ ModalPortal = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_he
 
     function (actionProps) {// Event handler for ActionContext consumed children
       var actionId = actionProps.id;var _this$props4 =
-      _this.props,id = _this$props4.id,modalId = _this$props4.modalId,actionsContextNode = _this$props4.actionsContextNode,autoClose = _this$props4.autoClose,closeOnCancelAction = _this$props4.closeOnCancelAction;
+      _this.props,canCloseOnAction = _this$props4.canCloseOnAction,id = _this$props4.id,modalId = _this$props4.modalId,actionsContextNode = _this$props4.actionsContextNode,autoClose = _this$props4.autoClose,closeOnCancelAction = _this$props4.closeOnCancelAction;
       _this.setResult(actionId);
-      // console.log('ModalPortal:onAction', id, actionId)
-      if (autoClose || closeOnCancelAction && actionId === 'cancel') {// Close and call `resolveResult` when window is closed
+      // console.log('ModalPortal:onAction', id, actionId);
+      if (autoClose && typeof canCloseOnAction === 'function' && canCloseOnAction(actionId) || closeOnCancelAction && actionId === 'cancel') {// Close and call `resolveResult` when window is closed
         _this.close();
       } else
       {// ...Or all `resolveResult` immediatelly
@@ -3843,8 +3844,8 @@ ModalPortal = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_he
   wrapperTheme: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().string), // Wrapper (back-curtain) theme (using `theme` if not specified)
   loaderTheme: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().string), // Loader theme ('MediumDark' is default)
   setPortalNode: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().func), // Get reference to `ModalPortal` instance node
-  startOutsideClickWaiting: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().func), stopOutsideClickWaiting: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().func), preventCloseOnOutsideClick: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().func) // onOutsideClickCatched: PropTypes.func,
-});(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3__.default)(ModalPortal, "defaultProps", { loaderTheme: 'MediumDark' });/* harmony default export */ __webpack_exports__["default"] = (ModalPortal); /* // UNUSED: Failed `ModalsContext` test implementation
+  startOutsideClickWaiting: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().func), stopOutsideClickWaiting: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().func), preventCloseOnOutsideClick: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().func), // onOutsideClickCatched: PropTypes.func,
+  canCloseOnAction: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().func) });(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3__.default)(ModalPortal, "defaultProps", { loaderTheme: 'MediumDark' });/* harmony default export */ __webpack_exports__["default"] = (ModalPortal); /* // UNUSED: Failed `ModalsContext` test implementation
  * export default compose(
  *   withModalsContext,
  * )(ModalPortal)
@@ -3868,7 +3869,7 @@ __webpack_require__.r(__webpack_exports__);
  /** @module ModalProxifiedWindow
  *  @class ModalProxifiedWindow
  *  @since 2021.05.27, 14:44
- *  @changed 2021.05.27, 16:57
+ *  @changed 2021.07.16, 17:41
  */
 
 
@@ -4084,7 +4085,10 @@ ModalProxifiedWindow = /*#__PURE__*/function () {
   ;_proto.__restartUpdateTimer = function __restartUpdateTimer() {// TODO: Control multiple subsequenced timer restarts? (Force update for n sequential restarts?)
     if (this.__updateTimer) {clearTimeout(this.__updateTimer);this.__updateTimer = null;}this.__updateTimer = setTimeout(this.__update, 20);};_proto.setState = function setState(data, cb) {// console.log('ModalProxifiedWindow:setState', { modalId: this.modalId, data, cb });
     if (typeof data === 'function') {data = data(this.state);}Object.assign(this.__newState || (this.__newState = {}), data);if (typeof cb === 'function') {this.__updateCbQueue.push(cb);}this.__restartUpdateTimer();};_proto.setProps = function setProps(data, cb) {// console.log('ModalProxifiedWindow:setProps', { modalId: this.modalId, data, cb });
-    if (typeof data === 'function') {data = data(this.props);}Object.assign(this.__newProps || (this.__newProps = {}), data);if (typeof cb === 'function') {this.__updateCbQueue.push(cb);}this.__restartUpdateTimer();};return ModalProxifiedWindow;}();/* harmony default export */ __webpack_exports__["default"] = (ModalProxifiedWindow);
+    if (typeof data === 'function') {data = data(this.props);}Object.assign(this.__newProps || (this.__newProps = {}), data);if (typeof cb === 'function') {this.__updateCbQueue.push(cb);}this.__restartUpdateTimer();} // Actions
+  ;_proto.close = function close() {var controller = _ModalsProxy_index_ts__WEBPACK_IMPORTED_MODULE_2__.default.getModalsController();var modal = controller.getProxyModalNode(this.modalId);modal.close();};return ModalProxifiedWindow;}();
+
+/* harmony default export */ __webpack_exports__["default"] = (ModalProxifiedWindow);
 
 /***/ }),
 
@@ -4122,7 +4126,7 @@ __webpack_require__.r(__webpack_exports__);
  /** @module ModalWindow
  *  @class ModalWindow
  *  @since 2020.12.21, 22:58
- *  @changed 2021.07.12, 19:25
+ *  @changed 2021.07.16, 18:07
  *
  *  External methods (for PopupStack):
  *  - close
@@ -4258,7 +4262,7 @@ ModalWindow = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_he
       _this.props,open = _this$props2.open,actionsContextNode = _this$props2.actionsContextNode,autoClose = _this$props2.autoClose,closeOnCancelAction = _this$props2.closeOnCancelAction;
       // console.log('ModalWindow:onAction', this.props.id, actionId);
       ModalPortal.setResult(actionId);
-      if (open && (autoClose || closeOnCancelAction && actionId === 'cancel')) {// Close and call `resolveResult` when window is closed
+      if (open && (autoClose || closeOnCancelAction && actionId.toLowerCase() === 'cancel')) {// Close and call `resolveResult` when window is closed
         ModalPortal.close();
       } else
       {// ...Or all `resolveResult` immediatelly
@@ -4481,7 +4485,7 @@ ModalWindow = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_he
   handleLoaderCancel: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().func), // Loader onCancel event handler
   handleOpenState: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().func), // Event fired on modal open state change (update external open/close state) ({ open, id } => void)
   headerTheme: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().string), // Header theme (using `theme` if not specified)
-  icon: prop_types__WEBPACK_IMPORTED_MODULE_5___default().oneOfType([(prop_types__WEBPACK_IMPORTED_MODULE_5___default().string), (prop_types__WEBPACK_IMPORTED_MODULE_5___default().object)]), // Show icon in header
+  icon: prop_types__WEBPACK_IMPORTED_MODULE_5___default().oneOfType([(prop_types__WEBPACK_IMPORTED_MODULE_5___default().string), (prop_types__WEBPACK_IMPORTED_MODULE_5___default().object)]), // Show icon in header, see `config.ui.defaultIcons`: error, warn, success, info, confirm, select -- as on 2021.07.13
   iconTheme: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().string), // Icon theme (using `theme` if not specified)
   id: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().string), // ModalWindow id
   leftContent: prop_types__WEBPACK_IMPORTED_MODULE_5___default().oneOfType([(prop_types__WEBPACK_IMPORTED_MODULE_5___default().string), (prop_types__WEBPACK_IMPORTED_MODULE_5___default().object)]), // Content at left of main content and actions (ideal place for large visual icon)
@@ -4794,6 +4798,8 @@ ModalsController = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runti
       }
     });(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3__.default)((0,_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1__.default)(_this), "getProxyModalNode",
 
+
+
     function (id) {
       if (_this.proxyModalNodes[id]) {
         return _this.proxyModalNodes[id];
@@ -4885,7 +4891,8 @@ ModalsController = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runti
       onModalDeactivate(data);
     }
   }
-  */;_proto.renderProxyModal = function renderProxyModal(modalData /* , n */) {// const id = modalData.modalId; // || 'modal' + n;
+  */; // Render...
+  _proto.renderProxyModal = function renderProxyModal(modalData /* , n */) {// const id = modalData.modalId; // || 'modal' + n;
     // // Non-empty unique id ensured in `addProxyModal`
     // const modalProps = {
     //   key: id,
@@ -4894,8 +4901,7 @@ ModalsController = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runti
     //   onDeactivate: this.onProxyModalDeactivate,
     // };
     // return <ModalWindow {...modalProps} />;
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createElement(_ModalWindow_index_ts__WEBPACK_IMPORTED_MODULE_11__.default, (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__.default)({}, modalData, { ref: this.saveProxyModalNode }));};_proto.renderProxyModals = function renderProxyModals() {var proxyModalsList = this.state.proxyModalsList;return proxyModalsList.map(this.renderProxyModal, this);} // Render...
-  ;_proto.renderModalsController = function renderModalsController() {var containerId = _config_index_js__WEBPACK_IMPORTED_MODULE_8__.modals.containerId;var className = cnModalsController(null, [this.props.className /* , cnModalsController('TransitionGroup') */]);var renderProps = { key: containerId || 'ModalsController', id: containerId, className: className, ref: this.setRef // Get dom node handler
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createElement(_ModalWindow_index_ts__WEBPACK_IMPORTED_MODULE_11__.default, (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__.default)({}, modalData, { ref: this.saveProxyModalNode }));};_proto.renderProxyModals = function renderProxyModals() {var proxyModalsList = this.state.proxyModalsList;return proxyModalsList.map(this.renderProxyModal, this);};_proto.renderModalsController = function renderModalsController() {var containerId = _config_index_js__WEBPACK_IMPORTED_MODULE_8__.modals.containerId;var className = cnModalsController(null, [this.props.className /* , cnModalsController('TransitionGroup') */]);var renderProps = { key: containerId || 'ModalsController', id: containerId, className: className, ref: this.setRef // Get dom node handler
     }; /* // UNUSED: Failed `ModalsContext` test implementation
      * return (
      *   <ModalsContextProvider value={this}>
