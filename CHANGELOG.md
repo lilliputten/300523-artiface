@@ -1,5 +1,6 @@
 # CHANGELOG
 
+- 2021.07.16, 19:11 -- ModalPortal: canCloseOnAction. ModalProxifiedWindow: close method. Other minor changes.
 - 2021.07.13, 19:22 -- Minor changes(FormGroup styles, FormLabel prop types).
 - 2021.07.12, 21:53 -- ModalWindow: Allow to use function reference for actions prop. FormBooleanHOC: fixed bug with `onChange` / `onUpdate` handlers usage.
 - 2021.07.12, 14:15 -- Minor changes for FormButton (inputId prop), FormBooleanHOC (different onUpdate, onChange handlers, inputId prop).
@@ -140,5 +141,5 @@
 - 2020.10.05, 20:38 -- v.0.0.15: Extracted `demoSupport.jsx` routines, fixture selection from url query (parameter `fixture`), added avaialble fixtures list if fixture to display is not specified, added DemoWrapper & demoTitle exportable ficture parameters for demo rendering.
 
 <!--
- @changed 2021.07.13, 19:23
+ @changed 2021.07.16, 19:11
 -->

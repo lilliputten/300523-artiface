@@ -254,11 +254,15 @@ class ModalsController extends React.PureComponent /** @lends @ModalsController.
     }
   }
 
+  // TODO: closeProxyModalNode?
+
   getProxyModalNode = (id) => {
     if (this.proxyModalNodes[id]) {
       return this.proxyModalNodes[id];
     }
   }
+
+  // Render...
 
   renderProxyModal(modalData/* , n */) {
     // const id = modalData.modalId; // || 'modal' + n;
@@ -277,8 +281,6 @@ class ModalsController extends React.PureComponent /** @lends @ModalsController.
     const { proxyModalsList } = this.state;
     return proxyModalsList.map(this.renderProxyModal, this);
   }
-
-  // Render...
 
   renderModalsController() {
     const { containerId } = config.modals;

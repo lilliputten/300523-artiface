@@ -1,7 +1,7 @@
 /** @module ModalWindow
  *  @class ModalWindow
  *  @since 2020.12.21, 22:58
- *  @changed 2021.07.12, 19:25
+ *  @changed 2021.07.16, 18:07
  *
  *  External methods (for PopupStack):
  *  - close
@@ -137,7 +137,7 @@ class ModalWindow extends React.PureComponent /** @lends @ModalWindow.prototype 
     const { open, actionsContextNode, autoClose, closeOnCancelAction } = this.props;
     // console.log('ModalWindow:onAction', this.props.id, actionId);
     ModalPortal.setResult(actionId);
-    if (open && (autoClose || (closeOnCancelAction && actionId === 'cancel'))) { // Close and call `resolveResult` when window is closed
+    if (open && (autoClose || (closeOnCancelAction && actionId.toLowerCase() === 'cancel'))) { // Close and call `resolveResult` when window is closed
       ModalPortal.close();
     }
     else { // ...Or all `resolveResult` immediatelly

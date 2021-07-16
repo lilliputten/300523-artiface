@@ -1,7 +1,7 @@
 /** @module ModalProxifiedWindow
  *  @class ModalProxifiedWindow
  *  @since 2021.05.27, 14:44
- *  @changed 2021.05.27, 16:57
+ *  @changed 2021.07.16, 17:41
  */
 
 import ModalsProxy from 'elements/ModalsProxy';
@@ -208,6 +208,14 @@ class ModalProxifiedWindow {
       this.__updateCbQueue.push(cb);
     }
     this.__restartUpdateTimer();
+  }
+
+  // Actions
+
+  close() {
+    const controller = ModalsProxy.getModalsController();
+    const modal = controller.getProxyModalNode(this.modalId);
+    modal.close();
   }
 
 }

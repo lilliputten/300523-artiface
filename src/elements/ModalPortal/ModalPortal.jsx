@@ -126,6 +126,7 @@ class ModalPortal extends React.PureComponent /** @lends @ModalPortal.prototype 
     stopOutsideClickWaiting: PropTypes.func,
     preventCloseOnOutsideClick: PropTypes.func,
     // onOutsideClickCatched: PropTypes.func,
+    canCloseOnAction: PropTypes.func,
   }
 
   static defaultProps = {
@@ -414,10 +415,10 @@ class ModalPortal extends React.PureComponent /** @lends @ModalPortal.prototype 
 
   onAction = (actionProps) => { // Event handler for ActionContext consumed children
     const actionId = actionProps.id;
-    const { id, modalId, actionsContextNode, autoClose, closeOnCancelAction } = this.props;
+    const { canCloseOnAction, id, modalId, actionsContextNode, autoClose, closeOnCancelAction } = this.props;
     this.setResult(actionId);
-    // console.log('ModalPortal:onAction', id, actionId)
-    if (autoClose || (closeOnCancelAction && actionId === 'cancel')) { // Close and call `resolveResult` when window is closed
+    // console.log('ModalPortal:onAction', id, actionId);
+    if ((autoClose && typeof canCloseOnAction === 'function' && canCloseOnAction(actionId)) || (closeOnCancelAction && actionId === 'cancel')) { // Close and call `resolveResult` when window is closed
       this.close();
     }
     else { // ...Or all `resolveResult` immediatelly
