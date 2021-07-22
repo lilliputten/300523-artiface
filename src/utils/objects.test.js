@@ -1,7 +1,6 @@
-/**
- * @module objects.test
- * @since 2021.07.22, 18:21
- * @changed 2021.07.22, 18:36
+/** @module objects.test
+ *  @since 2021.07.22, 18:21
+ *  @changed 2021.07.22, 18:36
  */
 /* eslint-env jest */
 
