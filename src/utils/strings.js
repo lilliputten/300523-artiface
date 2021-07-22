@@ -6,6 +6,8 @@
 
 import React from 'react';
 
+import { defaultQuote } from 'config/constants';
+
 /**
  * @param {string} val
  * @return {number}
@@ -143,3 +145,27 @@ export function periodizeNumber(num, periodChar) {
 export function humanizeId(id) {
   return ucFirst(String(id)).replace(/\B([A-Z][a-z]+)/g, ' $1');
 }
+
+export function safeEscape(str, quote, addQuotes) {
+  // Passed only addQuotes flag
+  if (quote === true && addQuotes == null) {
+    addQuotes = true;
+    quote = null;
+  }
+  quote = (quote && typeof quote === 'string') ? quote : defaultQuote;
+  var quoteReg = new RegExp(quote, 'g');
+  str = String(str)
+    .replace(/\\/g, '\\\\')
+    .replace(quoteReg, '\\' + quote)
+    .replace(/\n/g, '\\n')
+    .replace(/\r/g, '\\r')
+    .replace(/\t/g, '\\t')
+    // .replace(/\b/g, '\\b')
+    .replace(/\f/g, '\\f')
+  ;
+  if (addQuotes === true && quote) {
+    str = quote + str + quote;
+  }
+  return str;
+}
+

@@ -27,3 +27,24 @@ export const weekTicks = dayTicks *7;
 
 /** App title parts delimiter */
 // export const pageDelim = ' – ' // en-dash
+
+export const defaultQuote = '"';
+export const squareOpen = '[';
+export const squareClose = ']';
+export const curlyOpen = '{';
+export const curlyClose = '}';
+
+export const promiseStatusTexts = { // Only for `vow` module
+  0: 'PENDING',
+  1: 'RESOLVED',
+  2: 'FULFILLED',
+  3: 'REJECTED',
+};
+
+export const errRegExp = /^Error[:\n\r\s]*/m;
+export const errDelim = '\n'; // <br/>\n';
+export const errDelim2 = errDelim + errDelim;
+export const ellipsis = '…'; // '...';
+
+
+export const maxShowStringLength = 300;

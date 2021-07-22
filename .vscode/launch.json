@@ -17,7 +17,7 @@
       "program": "${workspaceRoot}/node_modules/jest/bin/jest.js",
       "args": [
         "--verbose",
-        "routes",
+        // "routes",
       ],
       "type": "node",
       "request": "launch",
