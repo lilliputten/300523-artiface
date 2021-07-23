@@ -440,10 +440,10 @@ module.exports = { // Common-used build variables...
   DEV_DEBUG: DEV_DEBUG,
 
   THEME: "default",
-  buildTag: "v.0.3.7-210716-1910-build-dev-default",
-  timestamp: "2021.07.16, 19:10",
-  timetag: "210716-1910",
-  version: "0.3.7" };
+  buildTag: "v.0.3.8-210723-1513-build-dev-default",
+  timestamp: "2021.07.23, 15:13",
+  timetag: "210723-1513",
+  version: "0.3.8" };
 
 /***/ }),
 
@@ -466,7 +466,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "dateRangeDelim": function() { return /* binding */ dateRangeDelim; },
 /* harmony export */   "timeIntervals": function() { return /* binding */ timeIntervals; },
 /* harmony export */   "dayTicks": function() { return /* binding */ dayTicks; },
-/* harmony export */   "weekTicks": function() { return /* binding */ weekTicks; }
+/* harmony export */   "weekTicks": function() { return /* binding */ weekTicks; },
+/* harmony export */   "defaultQuote": function() { return /* binding */ defaultQuote; },
+/* harmony export */   "squareOpen": function() { return /* binding */ squareOpen; },
+/* harmony export */   "squareClose": function() { return /* binding */ squareClose; },
+/* harmony export */   "curlyOpen": function() { return /* binding */ curlyOpen; },
+/* harmony export */   "curlyClose": function() { return /* binding */ curlyClose; },
+/* harmony export */   "promiseStatusTexts": function() { return /* binding */ promiseStatusTexts; },
+/* harmony export */   "errRegExp": function() { return /* binding */ errRegExp; },
+/* harmony export */   "errDelim": function() { return /* binding */ errDelim; },
+/* harmony export */   "errDelim2": function() { return /* binding */ errDelim2; },
+/* harmony export */   "ellipsis": function() { return /* binding */ ellipsis; },
+/* harmony export */   "maxShowStringLength": function() { return /* binding */ maxShowStringLength; }
 /* harmony export */ });
 /** @module config.constants
  *  @description Basic constants
@@ -497,6 +508,27 @@ var weekTicks = dayTicks * 7;
 
 /** App title parts delimiter */
 // export const pageDelim = ' – ' // en-dash
+
+var defaultQuote = '"';
+var squareOpen = '[';
+var squareClose = ']';
+var curlyOpen = '{';
+var curlyClose = '}';
+
+var promiseStatusTexts = { // Only for `vow` module
+  0: 'PENDING',
+  1: 'RESOLVED',
+  2: 'FULFILLED',
+  3: 'REJECTED' };
+
+
+var errRegExp = /^Error[:\n\r\s]*/m;
+var errDelim = '\n'; // <br/>\n';
+var errDelim2 = errDelim + errDelim;
+var ellipsis = '…'; // '...';
+
+
+var maxShowStringLength = 300;
 
 /***/ }),
 
@@ -10435,20 +10467,396 @@ function getCommonLangText(id, defaultText, propsLang) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "reverseKeyAndValue": function() { return /* binding */ reverseKeyAndValue; },
-/* harmony export */   "reverseDataHash": function() { return /* binding */ reverseDataHash; }
+/* harmony export */   "reverseDataHash": function() { return /* binding */ reverseDataHash; },
+/* harmony export */   "isDomElement": function() { return /* binding */ isDomElement; },
+/* harmony export */   "arrayIndexOf": function() { return /* binding */ arrayIndexOf; },
+/* harmony export */   "asyncPromiseState": function() { return /* binding */ asyncPromiseState; },
+/* harmony export */   "errorToPlainString": function() { return /* binding */ errorToPlainString; },
+/* harmony export */   "safeStringify": function() { return /* binding */ safeStringify; }
 /* harmony export */ });
 /* harmony import */ var _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
+/* harmony import */ var _config_constants__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../config/constants */ "./src/config/constants.js");
+/* harmony import */ var _strings__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./strings */ "./src/utils/strings.js");
  /** @module objects
  *  @description Objects utilities
  *  @since 2021.04.22, 13:47
- *  @changed 2021.04.22, 13:47
+ *  @changed 2021.07.22, 17:56
  */
+/* global jQuery, BemEntity */
+
+
+
+
+
 
 function reverseKeyAndValue(result, _ref) {var _extends2;var key = _ref[0],val = _ref[1];
   return (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__.default)({}, result, (_extends2 = {}, _extends2[val] = key, _extends2));
 }
 function reverseDataHash(hash) {
   return Object.entries(hash).reduce(reverseKeyAndValue, {});
+}
+
+function isDomElement(obj) {
+  return !!obj && (typeof HTMLElement === 'object' ? obj instanceof HTMLElement : // DOM2
+  typeof obj === 'object' && obj.nodeType === 1 && typeof obj.nodeName === 'string');
+
+}
+
+function arrayIndexOf(arr, find) {
+  if (!(arr instanceof Array) || !arr.length) {
+    return -1;
+  }
+  // else if (typeof arr.indexOf === 'function') {
+  //   return arr.indexOf(find);
+  // }
+  for (var i = 0; i < arr.length; i++) {
+    if (arr[i] === find) {
+      return i;
+    }
+  }
+  return -1;
+}
+
+function asyncPromiseState(promise) {// See also `config.constants:promiseStatusTexts` -- for `vow` module
+  var temp = {};
+  return Promise.race([promise, temp]).
+  then(function (value) {return value === temp ? 'PENDING' : 'FULFILLED';}, function () {return 'REJECTED';});
+
+}
+
+/**
+ * @param {} errors
+ * @return {object}
+ */
+function errorToPlainString(error /* , opt */) {
+
+  // opt = opt || {};
+
+  var
+  text = '',
+  plusText,
+  // maxShowStringLength = config.app.maxShowStringLength || 300,
+  errType = typeof error,
+  match;
+
+
+  try {
+
+    if (errType === 'string' && (match = error.match(/<soap:Text.*?>([\s\S]*)\s*<\/soap:Text/m)) != null && match[0]) {
+      text = '<b>Ошибка SOAP:</b> ' + match[1];
+    }
+    // Если ошибка уже обработана или пуста, то ничего не показываем
+    else if (!error || error.processed) {
+        return '';
+      }
+      // Если ошибка -- не объект, показываем, как строку
+      else if (errType !== 'object') {
+          text = String(error);
+        } else
+        if (Array.isArray(error)) {
+          text = error.map(this.errorToPlainString, this).join(_config_constants__WEBPACK_IMPORTED_MODULE_1__.errDelim);
+        }
+        // Объект с ошибкой
+        else if (error instanceof Error) {
+            text = /* error.stack ||  */error.message || String(error);
+            if (error.reference || error.description || error.nextError) {
+              plusText = this.errorToPlainString(error.reference || error.description || error.nextError);
+              if (plusText && plusText !== text) {
+                text = text + ': ' + plusText;
+              }
+            }
+            if (error.error) {
+              plusText = this.errorToPlainString(error.error);
+              if (plusText) {
+                text += _config_constants__WEBPACK_IMPORTED_MODULE_1__.errDelim2 + plusText;
+              }
+            }
+          }
+          // ajax 404
+          else if ((error.jqXHR && error.jqXHR.status === 404 || error.error === 'Not found') && error.settings && error.settings.url) {
+              console.error('errors.errorToPlainString Not found', { error: error }); // eslint-disable-line no-console
+              text = 'Сетевой ресурс не найден: <u>' + error.settings.url + '</u>';
+            } else
+            if (error.message) {
+              console.error('errors.errorToPlainString message', { error: error }); // eslint-disable-line no-console
+              // text += ( error.description || 'Сообщение об ошибке:' ) + errDelim2;
+              text += error.message;
+            } else
+            if ( /* error.error === 'errorMessages' && */Array.isArray(error.errorMessages)) {
+              console.error('errors.errorToPlainString errorMessages', { error: error }); // eslint-disable-line no-console
+              // text = ( error.description || 'Список ошибок:' ) + errDelim2;
+              text += error.errorMessages.
+              map(function (error) {return this.errorToPlainString(error);}, this).
+              join(_config_constants__WEBPACK_IMPORTED_MODULE_1__.errDelim2);
+
+            } else
+            if (error.textStatus === 'parsererror') {
+              text = 'Ошибка обработки ответа сервера';
+              plusText = error.error || error.jqXHR && error.jqXHR.responseText && (match = error.jqXHR.responseText.match(/<b>(Parse error|Fatal error).*/)) !== null && match[0];
+              if (plusText) {
+                if (plusText.length > _config_constants__WEBPACK_IMPORTED_MODULE_1__.maxShowStringLength) {
+                  plusText = plusText.substr(0, _config_constants__WEBPACK_IMPORTED_MODULE_1__.maxShowStringLength - 3) + '...';
+                }
+                text += _config_constants__WEBPACK_IMPORTED_MODULE_1__.errDelim + plusText;
+              }
+            } else
+            if (error.jqXHR && !error.error && error.textStatus === 'error') {
+              text = 'Некорректный ответ сервера (сервер недоступен)';
+            } else
+            if (error.error === 'jqXHR') {
+              console.error('errors.errorToPlainString jqXHR', { error: error }); // eslint-disable-line no-console
+              text = error.description || 'Ошибка ajax';
+              var
+              props = {
+                'адрес': error.url || error.location },
+
+              propsText = Object.keys(props).
+              filter(function (name) {return props[name] ? true : false;}).
+              map(function (name) {return name + ': ' + props[name];}).
+              join(', ');
+
+              if (propsText) {
+                text += ' (' + propsText + ')';
+              }
+              return text;
+            }
+            // Chaining errors
+            else if (error.error && typeof error.error === 'object' /* && !Array.isArray(error.error) */) {
+                  text += this.errorToPlainString(error.error);
+                }
+                // Исключение сервера, вида: {error: "Exception", errorCode: 0, description: "Library\Helper::getJsonResponse: Node error: Недостаточно прав для выполнения данного запроса"}
+              else if (error.error === 'Exception' && error.description) {
+                  text += '<b>Исключение сервера (php/phalcon):</b> ' + error.description;
+                } else
+                {
+                  text = error.description || error.message || error.error || error.errorText || error.status || 'Неопределённая ошибка';
+                  if (text === 'canceledByUser') {// TODO?
+                    text = 'Отменено пользователем';
+                  }
+                  // ?????
+                  var plus = [];
+                  if (error.jqXHR && error.jqXHR.responseText) {
+                    plus.push(error.jqXHR.responseText);
+                  }
+                  if (error.error && typeof error.error === 'object') {
+                    plus.push(error.error);
+                  }
+                  if (Array.isArray(error.trace)) {
+                    plus.push('<b>Ошибка перехвачена в:</b> ' + error.trace.join(', '));
+                  }
+                  if (plus.length) {
+                    text += _config_constants__WEBPACK_IMPORTED_MODULE_1__.errDelim2 + plus.map(function (plus) {
+                      if (typeof plus === 'object') {
+                        plus = this.errorToPlainString(plus);
+                      }
+                      if (typeof plus === 'string' && plus.match(/<html/i)) {
+                        plus = '<b>HTML:</b> ' + plus.
+                        replace(/<(script|link|style)[^<>]*>[\s\S]*?<\/\1>/gm, '').
+                        replace(/(\s*<[^<>]*>\s*)+/gm, ' ');
+
+                      }
+                      if (typeof plus === 'string' && plus.length > _config_constants__WEBPACK_IMPORTED_MODULE_1__.maxShowStringLength) {
+                        plus = plus.substr(0, _config_constants__WEBPACK_IMPORTED_MODULE_1__.maxShowStringLength - 3) + '...';
+                      }
+                      return plus;
+                    }, this).join(_config_constants__WEBPACK_IMPORTED_MODULE_1__.errDelim);
+                  }
+                }
+
+    // Strip extra spaces...
+    var result = text.
+    replace(/[ \t]+\n/gm, '\n') // Hanged spaces
+    .replace(/\n[ \t]+/gm, '\n') // Hanged spaces
+    .replace(/\n{3,}/gm, '\n\n') // Extra newlines
+    .trim() // Trim
+    ;
+
+    return result;
+
+  }
+  catch (error) {
+    console.error('errorToPlainString catched error:', { error: error }); // eslint-disable-line no-console
+    debugger; // eslint-disable-line no-debugger
+    (error.trace || (error.trace = [])).push('errors:errorToPlainString');
+    return error;
+  }
+
+}
+
+function safeStringify(obj, objId, depth, cache, cacheNames, nice) {
+  // var hasJQuery = (typeof jQuery !== 'undefined');
+  var status;
+  objId = objId || '@';
+  depth = depth || 0;
+  cache = cache || [];
+  cacheNames = cacheNames || [];
+  try {
+    // Reusable variables...
+    var p, n, res, id, val, itemId;
+    // Nicify params...
+    var niceSpace = ''; // Single indent space
+    var niceBaseSpace = ''; // This depth level indent space
+    if (nice) {
+      niceSpace = ' ';
+      if (typeof nice === 'number') {
+        for (n = 1; n < nice; n++) {
+          niceSpace += ' ';
+        }
+      }
+      for (n = 0; n < depth; n++) {
+        niceBaseSpace += niceSpace;
+      }
+    }
+    var niceDepthSpace = niceBaseSpace + niceSpace; // This depth level indent space
+    var niceNL = nice ? '\n' : ''; // Newline
+    // Object type...
+    var type = typeof obj;
+    var isObject = obj && type === 'object';
+    if (obj == null || type === 'number' && isNaN(obj)) {// Null-like
+      return 'null'; // Only JSON symbol for undefined or null values
+    } else
+    if (type === 'function') {
+      p = obj.name ? 'function ' + obj.name : obj.toString ? (0,_strings__WEBPACK_IMPORTED_MODULE_2__.safeEscape)(obj.toString().replace(/[\n\r\t ]+/g, ' ')) : 'anonymous function';
+      p = p.replace(/^(function\s+\S+)\(.*$/, '$1');
+      if (p.length > 80) {
+        p = p.substr(0, 80 - 3) + '...';
+      }
+      return '"[' + p + ']"';
+    } else
+    if (type === 'number' || type === 'boolean') {// Simple type
+      return (0,_strings__WEBPACK_IMPORTED_MODULE_2__.safeEscape)(obj);
+    } else
+    if (!isObject || type === 'string' || type === 'boolean') {// Quotable type
+      return (0,_strings__WEBPACK_IMPORTED_MODULE_2__.safeEscape)(obj, true);
+    } else
+    if (typeof BemEntity !== 'undefined' && obj instanceof BemEntity /* obj.entityName && obj.domElem */) {// BemNode
+        var bemId = '';
+        if (obj.entityName) {
+          // bemId += '(entityName:' + obj.entityName + ')';
+          bemId += obj.entityName;
+        }
+        if (obj.domElem && obj.domElem[0] && obj.domElem[0].className) {
+          bemId += '(className:.' + obj.domElem[0].className.replace(/ /g, '.') + ')';
+        }
+        // if (obj._modsCache) {
+        //   bemId += '(mods:' + Object.keys(obj._modsCache).map(function(key)) + ')';
+        // }
+        bemId = '"[BemNode: ' + (0,_strings__WEBPACK_IMPORTED_MODULE_2__.safeEscape)(bemId) + ']"';
+        return bemId;
+      } else
+    if (isDomElement(obj)) {// domNode?
+      var domId = '';
+      if (obj.nodeType) {
+        domId += '(nodeType:' + obj.nodeType + ')';
+      }
+      /* if (obj._class) {
+       *   domId += '(_class:' + obj._class + ')';
+       * }
+       */
+      if (obj.className) {
+        domId += '.' + obj.className.replace(/ /g, '.');
+      }
+      if (obj.id) {
+        domId += '#' + obj.id;
+      }
+      domId = '"[DomNode: ' + (0,_strings__WEBPACK_IMPORTED_MODULE_2__.safeEscape)(domId) + ']"';
+      return domId;
+    } else
+    if (typeof obj.then === 'function' && (obj instanceof Promise || typeof Promise.isPromise === 'function' && Promise.isPromise(obj))) {// Promise?
+      status = obj._status && _config_constants__WEBPACK_IMPORTED_MODULE_1__.promiseStatusTexts[obj._status] || '';
+      if (status) {
+        status = ': ' + status;
+      }
+      if (obj.__id) {
+        status = ' ' + obj.__id + status;
+      }
+      return '"[Promise' + status + ']"';
+    } else
+    if (typeof obj._promise && typeof Promise.isDeferred === 'function' && Promise.isDeferred(obj)) {// vow: Deferred?
+      status = obj._promise._status;
+      return '"[Deferred status:' + status + ']"';
+    } else
+    if (typeof XMLHttpRequest === 'object' && obj instanceof XMLHttpRequest && obj.readyState != null) {// XHR?
+      // readyState values:
+      // 0 	UNSENT 	Client has been created. open() not called yet.
+      // 1 	OPENED 	open() has been called.
+      // 2 	HEADERS_RECEIVED 	send() has been called, and headers and status are available.
+      // 3 	LOADING 	Downloading; responseText holds partial data.
+      // 4 	DONE 	The operation is complete.
+      var readyState = obj.readyState;
+      var info = 'readyState:' + readyState;
+      if (readyState === 4) {
+        if (obj.status) {
+          info += ',status:' + obj.status;
+        }
+      }
+      return '"[XHR ' + (0,_strings__WEBPACK_IMPORTED_MODULE_2__.safeEscape)(info) + ']"';
+    }
+    // TODO: Event object
+    else if (obj instanceof Error) {// Error?
+        // Using `UTILS.errorToPlainString` (included `errors` module to `UTILS`)
+        var message = errorToPlainString(obj, { showStack: true });
+        var stack = String(obj.stack || '').replace(_config_constants__WEBPACK_IMPORTED_MODULE_1__.errRegExp, '');
+        // Remove message duplicate from beggining of stack info
+        if (stack.indexOf(message) === 0) {
+          stack = stack.substr(message.length).trim();
+        }
+        if (obj.name && obj.name !== 'Error') {// oxpd-style error
+          message = '[' + obj.name + '] ' + message;
+        }
+        if (stack) {
+          message += '\n' + stack;
+        }
+        return (0,_strings__WEBPACK_IMPORTED_MODULE_2__.safeEscape)('Error: ' + message, true);
+      } else
+      if ((p = cache.indexOf(obj)) !== -1) {// Cyclic reference?
+        var cacheId = cacheNames[p];
+        return '"[cyclic: ' + (0,_strings__WEBPACK_IMPORTED_MODULE_2__.safeEscape)(cacheId) + ']"';
+      } else
+      if (obj instanceof Array || typeof jQuery !== 'undefined' && obj instanceof jQuery) {// Array, jQuery?
+        cache.push(obj);
+        cacheNames.push(objId);
+        res = _config_constants__WEBPACK_IMPORTED_MODULE_1__.squareOpen;
+        // p = obj.slice();
+        // p.sort();
+        for (n = 0; n < obj.length; n++) {
+          itemId = objId + _config_constants__WEBPACK_IMPORTED_MODULE_1__.squareOpen + n + _config_constants__WEBPACK_IMPORTED_MODULE_1__.squareClose;
+          val = obj[n];
+          if (n) {
+            res += ',';
+          }
+          res += niceNL + niceDepthSpace + this.safeStringify(val, itemId, depth + 1, cache, cacheNames, nice);
+        }
+        res += niceNL + niceBaseSpace + _config_constants__WEBPACK_IMPORTED_MODULE_1__.squareClose;
+        return res;
+      } else
+      {// Hash object...
+        cache.push(obj);
+        cacheNames.push(objId);
+        res = _config_constants__WEBPACK_IMPORTED_MODULE_1__.curlyOpen;
+        // var newObj = Object.keys(obj).reduce(function(newObj, id) {
+        p = Object.keys(obj);
+        p.sort();
+        for (n = 0; n < p.length; n++) {
+          id = p[n];
+          val = obj[id];
+          itemId = objId + (/\W/.test(id) ? _config_constants__WEBPACK_IMPORTED_MODULE_1__.squareOpen + id + _config_constants__WEBPACK_IMPORTED_MODULE_1__.squareClose : '.' + id);
+          if (n) {
+            res += ',';
+          }
+          val = this.safeStringify(val, itemId, depth + 1, cache, cacheNames, nice);
+          val = (0,_strings__WEBPACK_IMPORTED_MODULE_2__.safeEscape)(id, true) + ':' + val;
+          res += niceNL + niceDepthSpace + val;
+        }
+        res += niceNL + niceBaseSpace + _config_constants__WEBPACK_IMPORTED_MODULE_1__.curlyClose;
+        return res;
+      }
+  }
+  catch (error) {
+    console.error(error); // eslint-disable-line no-console
+    debugger; // eslint-disable-line no-debugger
+    throw error;
+  }
 }
 
 /***/ }),
@@ -10474,15 +10882,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "splitMultiline": function() { return /* binding */ splitMultiline; },
 /* harmony export */   "padNumber": function() { return /* binding */ padNumber; },
 /* harmony export */   "periodizeNumber": function() { return /* binding */ periodizeNumber; },
-/* harmony export */   "humanizeId": function() { return /* binding */ humanizeId; }
+/* harmony export */   "humanizeId": function() { return /* binding */ humanizeId; },
+/* harmony export */   "safeEscape": function() { return /* binding */ safeEscape; }
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _config_constants__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../config/constants */ "./src/config/constants.js");
 var _this = undefined; /** @module strings
  *  @description Strings utilities
  *  @since 2019.04.03, 14:38
  *  @changed 2021.07.13, 12:34
  */
+
+
 
 
 
@@ -10622,6 +11034,29 @@ function periodizeNumber(num, periodChar) {
  */
 function humanizeId(id) {
   return ucFirst(String(id)).replace(/\B([A-Z][a-z]+)/g, ' $1');
+}
+
+function safeEscape(str, quote, addQuotes) {
+  // Passed only addQuotes flag
+  if (quote === true && addQuotes == null) {
+    addQuotes = true;
+    quote = null;
+  }
+  quote = quote && typeof quote === 'string' ? quote : _config_constants__WEBPACK_IMPORTED_MODULE_1__.defaultQuote;
+  var quoteReg = new RegExp(quote, 'g');
+  str = String(str).
+  replace(/\\/g, '\\\\').
+  replace(quoteReg, '\\' + quote).
+  replace(/\n/g, '\\n').
+  replace(/\r/g, '\\r').
+  replace(/\t/g, '\\t')
+  // .replace(/\b/g, '\\b')
+  .replace(/\f/g, '\\f');
+
+  if (addQuotes === true && quote) {
+    str = quote + str + quote;
+  }
+  return str;
 }
 
 /***/ }),
