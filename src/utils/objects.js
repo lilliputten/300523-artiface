@@ -390,4 +390,3 @@ export function safeStringify(obj, objId, depth, cache, cacheNames, nice) {
     throw error;
   }
 }
-
