@@ -21,6 +21,7 @@ const wrapFormBooleanHOC = (WrappedComponent, params = {}) => class FormBoolean 
     value: PropTypes.bool,
     disabled: PropTypes.bool,
     onChange: PropTypes.func, // Change value handler (only for user changes).
+    onChecked: PropTypes.func, // 'Checked' value handler (only for user changes).
     onUpdate: PropTypes.func, // Update value handler. Called on any value change (including by an external way).
   }
 
@@ -122,7 +123,7 @@ const wrapFormBooleanHOC = (WrappedComponent, params = {}) => class FormBoolean 
    */
 
   handleChange = (params) => {
-    const { onChange, disabled, inputId } = this.props;
+    const { onChange, onChecked, disabled, inputId } = this.props;
     if (!disabled) {
       this.setState(({ value: stateValue }) => {
         let value = params && params.value;
@@ -132,9 +133,14 @@ const wrapFormBooleanHOC = (WrappedComponent, params = {}) => class FormBoolean 
         // TODO: Call alternative update handler
         return { active: true, value };
       }, () => {
+        const { value } = this.state;
+        const id = inputId || this.id;
+        const cbData = { id, value };
         if (typeof onChange === 'function') {
-          const { value } = this.state;
-          onChange({ id: inputId || this.id, value });
+          onChange(cbData);
+        }
+        if (value && typeof onChecked === 'function') {
+          onChecked(cbData);
         }
       });
       setTimeout(() => {

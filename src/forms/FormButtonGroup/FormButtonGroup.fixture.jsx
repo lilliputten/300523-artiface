@@ -4,10 +4,10 @@
  */
 
 import React from 'react';
-import FormButtonGroup from './FormButtonGroup';
+import FormButtonGroup from 'forms/FormButtonGroup';
 
-import FormButton from '../FormButton';
-import FormGroup from '../FormGroup';
+import FormButton from 'forms/FormButton';
+import FormGroup from 'forms/FormGroup';
 
 import { // Icons (solid)...
   faCheck,

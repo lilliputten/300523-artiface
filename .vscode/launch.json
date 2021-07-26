@@ -17,13 +17,25 @@
       "program": "${workspaceRoot}/node_modules/jest/bin/jest.js",
       "args": [
         "--verbose",
-        "objects",
+        // "objects",
       ],
       "type": "node",
       "request": "launch",
       "runtimeExecutable": "node",
       // "outputCapture" : "std",
       // "protocol": "inspector",
+      "console": "integratedTerminal",
+    },
+    {
+      "name": "jest objects",
+      "program": "${workspaceRoot}/node_modules/jest/bin/jest.js",
+      "args": [
+        "--verbose",
+        "objects",
+      ],
+      "type": "node",
+      "request": "launch",
+      "runtimeExecutable": "node",
       "console": "integratedTerminal",
     },
     {

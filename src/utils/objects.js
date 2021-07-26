@@ -1,7 +1,7 @@
 /** @module objects
  *  @description Objects utilities
  *  @since 2021.04.22, 13:47
- *  @changed 2021.07.22, 17:56
+ *  @changed 2021.07.26, 12:45
  */
 /* global jQuery, BemEntity */
 
@@ -389,4 +389,16 @@ export function safeStringify(obj, objId, depth, cache, cacheNames, nice) {
     debugger; // eslint-disable-line no-debugger
     throw error;
   }
+}
+
+/** getDeepValue -- Fetch value (id may be hierarchial path like `Account.Login`)
+ * @param {Object} data -- Data object
+ * @param {String} dataOd -- Field id (may be hierarchial path like `Account.Login`)
+ */
+export function getDeepValue(data, dataId) {
+  let value = data;
+  if (value && typeof value === 'object' && dataId && typeof dataId === 'string') {
+    dataId.split('.').forEach(chunkId => value = value[chunkId]);
+  }
+  return value;
 }

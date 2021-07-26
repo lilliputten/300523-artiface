@@ -53,4 +53,27 @@ describe('objects', () => {
     });
   });
 
+  describe('getDeepValue', () => {
+    it('should be a function', () => {
+      const type = typeof objects.getDeepValue;
+      expect(type).toBe('function');
+    });
+    it('should return null for null', () => {
+      const result = objects.getDeepValue(null);
+      expect(result).toEqual(null);
+    });
+    it('should fetch undefined for absent keys', () => {
+      const result = objects.getDeepValue({ a: 1 }, 'b');
+      expect(result).toEqual(undefined);
+    });
+    it('should fetch simple key value', () => {
+      const result = objects.getDeepValue({ a: 1 }, 'a');
+      expect(result).toEqual(1);
+    });
+    it('should fetch deep key value', () => {
+      const result = objects.getDeepValue({ a: { b: 2 } }, 'a.b');
+      expect(result).toEqual(2);
+    });
+  });
+
 });
