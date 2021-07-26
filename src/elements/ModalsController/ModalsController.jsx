@@ -47,11 +47,11 @@ class ModalsController extends React.PureComponent /** @lends @ModalsController.
   }
 
   componentDidMount() {
-    // Uncaught errors handler...
-    this.__saved_onunhandledrejection = window.onunhandledrejection;
-    this.__saved_onerror = window.onerror;
-    window.onunhandledrejection = this.onCatchedError;
-    window.onerror = this.onCatchedError;
+    // // Uncaught errors handler...
+    // this.__saved_onunhandledrejection = window.onunhandledrejection;
+    // this.__saved_onerror = window.onerror;
+    // window.onunhandledrejection = this.onCatchedError;
+    // window.onerror = this.onCatchedError;
 
     // this.registerGlobalHandlers()
     // Initialize global references & parameters...
@@ -72,9 +72,9 @@ class ModalsController extends React.PureComponent /** @lends @ModalsController.
   componentWillUnmount() {
     // this.unregisterGlobalHandlers()
 
-    // Reset uncaught errors handler...
-    window.onunhandledrejection = this.__saved_onunhandledrejection;
-    window.onerror = this.__saved_onerror;
+    // // Reset uncaught errors handler...
+    // window.onunhandledrejection = this.__saved_onunhandledrejection;
+    // window.onerror = this.__saved_onerror;
   }
 
   // Handlers...

@@ -1,7 +1,7 @@
 /** @module FormTextInput
  *  @class FormTextInput
  *  @since 2020.10.07, 00:20
- *  @changed 2021.04.12, 14:26
+ *  @changed 2021.07.26, 19:24
  */
 /* eslint-disable react/require-default-props */
 
@@ -43,6 +43,7 @@ class FormTextInput extends React.PureComponent /** @lends @FormTextInput.protot
     name: PropTypes.string,
     numericValue: PropTypes.bool,
     onChange: PropTypes.func,
+    onUpdate: PropTypes.func,
     onFocusIn: PropTypes.func,
     onFocusOut: PropTypes.func,
     onIconClick: PropTypes.func,
@@ -147,14 +148,14 @@ class FormTextInput extends React.PureComponent /** @lends @FormTextInput.protot
 
   updateValueWithState = (state) => {
     state = state || this.state;
-    const { id, inputId, name, onChange, disabled } = this.props;
-    if (!disabled && typeof onChange === 'function') {
+    const { id, inputId, name, onUpdate, disabled } = this.props;
+    if (!disabled && typeof onUpdate === 'function') {
       let { value } = state;
       // console.log('FormTextInput:updateValueWithState', {
       //   value,
       // });
       const setId = id || inputId || name;
-      onChange({ id: setId, value });
+      onUpdate({ id: setId, value });
     }
   }
 
@@ -179,10 +180,17 @@ class FormTextInput extends React.PureComponent /** @lends @FormTextInput.protot
   // Event handlers...
 
   handleChange = (event) => {
+    const { disabled, inputId, id, onChange } = this.props;
     const { target } = event;
     const origValue = target.value;
     const value = this.getCorrectedValue(origValue);
-    this.setState({ value });
+    if (value !== this.state.value) {
+      this.setState({ value });
+      if (!disabled && typeof onChange === 'function') {
+        const setId = id || inputId || name;
+        onChange({ id: setId, value });
+      }
+    }
   }
 
   onClearClick = () => {
