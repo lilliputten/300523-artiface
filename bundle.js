@@ -440,9 +440,9 @@ module.exports = { // Common-used build variables...
   DEV_DEBUG: DEV_DEBUG,
 
   THEME: "default",
-  buildTag: "v.0.3.8-210723-1513-build-dev-default",
-  timestamp: "2021.07.23, 15:13",
-  timetag: "210723-1513",
+  buildTag: "v.0.3.8-210726-1253-build-dev-default",
+  timestamp: "2021.07.26, 12:53",
+  timetag: "210726-1253",
   version: "0.3.8" };
 
 /***/ }),
@@ -5532,6 +5532,7 @@ var wrapFormBooleanHOC = function wrapFormBooleanHOC(WrappedComponent, params) {
 
 
 
+
     // Lifecycle methods...
 
     function FormBoolean(props) {var _this;
@@ -5625,7 +5626,7 @@ var wrapFormBooleanHOC = function wrapFormBooleanHOC(WrappedComponent, params) {
 
 
       function (params) {var _this$props2 =
-        _this.props,onChange = _this$props2.onChange,disabled = _this$props2.disabled,inputId = _this$props2.inputId;
+        _this.props,onChange = _this$props2.onChange,onChecked = _this$props2.onChecked,disabled = _this$props2.disabled,inputId = _this$props2.inputId;
         if (!disabled) {
           _this.setState(function (_ref) {var stateValue = _ref.value;
             var value = params && params.value;
@@ -5634,10 +5635,15 @@ var wrapFormBooleanHOC = function wrapFormBooleanHOC(WrappedComponent, params) {
             }
             // TODO: Call alternative update handler
             return { active: true, value: value };
-          }, function () {
-            if (typeof onChange === 'function') {var
-              value = _this.state.value;
-              onChange({ id: inputId || _this.id, value: value });
+          }, function () {var
+            value = _this.state.value;
+            var id = inputId || _this.id;
+            var cbData = { id: id, value: value };
+            if (typeof onChange === 'function') {
+              onChange(cbData);
+            }
+            if (value && typeof onChecked === 'function') {
+              onChecked(cbData);
             }
           });
           setTimeout(function () {
@@ -5680,9 +5686,9 @@ var wrapFormBooleanHOC = function wrapFormBooleanHOC(WrappedComponent, params) {
      */; // Render...
     _proto.render = function render() {var _this$props3 = this.props,id = _this$props3.id,disabled = _this$props3.disabled;var _this$state = this.state,active = _this$state.active,value = _this$state.value;var renderProps = { id: id, className: this.getClassName(), disabled: disabled, value: value, active: active, handleChange: this.handleChange, setDomRef: this.setDomRef, setInputDomRef: this.setInputDomRef };return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default().createElement(WrappedComponent, (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__.default)({}, this.props, renderProps));
     };return FormBoolean;}((react__WEBPACK_IMPORTED_MODULE_4___default().Component)), (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3__.default)(_class, "propTypes", { inputId: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().string), id: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().string), name: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().string), value: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().bool), disabled: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().bool), onChange: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().func), // Change value handler (only for user changes).
+    onChecked: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().func), // 'Checked' value handler (only for user changes).
     onUpdate: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().func) // Update value handler. Called on any value change (including by an external way).
   }), (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3__.default)(_class, "defaultProps", { id: params.id, value: false }), _temp;};
-
 /** Usage:
  * FormBooleanHOC(component)
  * FormBooleanHOC(params)(component)
@@ -9233,7 +9239,7 @@ __webpack_require__.r(__webpack_exports__);
 /** @module FormSpacer
  *  @class FormSpacer
  *  @since 2020.11.27, 12:52
- *  @changed 2020.11.27, 12:52
+ *  @changed 2021.07.26, 11:54
  */
 
 
@@ -9242,8 +9248,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var FormSpacer = function FormSpacer(props) {var
-  id = props.id;
-  var className = (0,_utils_configure__WEBPACK_IMPORTED_MODULE_1__.cn)('FormSpacer')({ id: id }, [props.className]);
+  id = props.id,size = props.size;
+  var className = (0,_utils_configure__WEBPACK_IMPORTED_MODULE_1__.cn)('FormSpacer')({ id: id, size: size }, [props.className]);
   return /*#__PURE__*/(
     react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", { className: className }));
 
@@ -10472,7 +10478,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "arrayIndexOf": function() { return /* binding */ arrayIndexOf; },
 /* harmony export */   "asyncPromiseState": function() { return /* binding */ asyncPromiseState; },
 /* harmony export */   "errorToPlainString": function() { return /* binding */ errorToPlainString; },
-/* harmony export */   "safeStringify": function() { return /* binding */ safeStringify; }
+/* harmony export */   "safeStringify": function() { return /* binding */ safeStringify; },
+/* harmony export */   "getDeepValue": function() { return /* binding */ getDeepValue; }
 /* harmony export */ });
 /* harmony import */ var _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
 /* harmony import */ var _config_constants__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../config/constants */ "./src/config/constants.js");
@@ -10480,7 +10487,7 @@ __webpack_require__.r(__webpack_exports__);
  /** @module objects
  *  @description Objects utilities
  *  @since 2021.04.22, 13:47
- *  @changed 2021.07.22, 17:56
+ *  @changed 2021.07.26, 12:45
  */
 /* global jQuery, BemEntity */
 
@@ -10857,6 +10864,18 @@ function safeStringify(obj, objId, depth, cache, cacheNames, nice) {
     debugger; // eslint-disable-line no-debugger
     throw error;
   }
+}
+
+/** getDeepValue -- Fetch value (id may be hierarchial path like `Account.Login`)
+ * @param {Object} data -- Data object
+ * @param {String} dataOd -- Field id (may be hierarchial path like `Account.Login`)
+ */
+function getDeepValue(data, dataId) {
+  var value = data;
+  if (value && typeof value === 'object' && dataId && typeof dataId === 'string') {
+    dataId.split('.').forEach(function (chunkId) {return value = value[chunkId];});
+  }
+  return value;
 }
 
 /***/ }),

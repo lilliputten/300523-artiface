@@ -1,5 +1,6 @@
 # CHANGELOG
 
+- 2021.07.23, 16:29 -- PD-4148: More tests for `objects` module.
 - 2021.07.22, 18:37 -- PD-4148: Added test dependencies. Adjusted basic test environment. Added simple test routine for objects module. Added more complex objects (isDomElement, arrayIndexOf, asyncPromiseState, errorToPlainString, safeStringify) and strings (safeEscape) methods, added some required constants.
 - 2021.07.22, 16:00 -- v.0.3.8.
 - 2021.07.16, 19:11 -- ModalPortal: canCloseOnAction. ModalProxifiedWindow: close method. Other minor changes.
@@ -143,5 +144,5 @@
 - 2020.10.05, 20:38 -- v.0.0.15: Extracted `demoSupport.jsx` routines, fixture selection from url query (parameter `fixture`), added avaialble fixtures list if fixture to display is not specified, added DemoWrapper & demoTitle exportable ficture parameters for demo rendering.
 
 <!--
- @changed 2021.07.22, 18:39
+ @changed 2021.07.23, 16:29
 -->
