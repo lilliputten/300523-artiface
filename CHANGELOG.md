@@ -1,5 +1,6 @@
 # CHANGELOG
 
+- 2021.07.26, 13:27 -- FormSpacer: `size` prop (xs, sm, md (default), lg, xl). FormBooleanHOC: `onChecked` event handler (only for value:true changes), objects: `getDeepValue` function (plus test).
 - 2021.07.23, 16:29 -- PD-4148: More tests for `objects` module.
 - 2021.07.22, 18:37 -- PD-4148: Added test dependencies. Adjusted basic test environment. Added simple test routine for objects module. Added more complex objects (isDomElement, arrayIndexOf, asyncPromiseState, errorToPlainString, safeStringify) and strings (safeEscape) methods, added some required constants.
 - 2021.07.22, 16:00 -- v.0.3.8.
@@ -144,5 +145,5 @@
 - 2020.10.05, 20:38 -- v.0.0.15: Extracted `demoSupport.jsx` routines, fixture selection from url query (parameter `fixture`), added avaialble fixtures list if fixture to display is not specified, added DemoWrapper & demoTitle exportable ficture parameters for demo rendering.
 
 <!--
- @changed 2021.07.23, 16:29
+ @changed 2021.07.26, 13:27
 -->

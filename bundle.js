@@ -440,9 +440,9 @@ module.exports = { // Common-used build variables...
   DEV_DEBUG: DEV_DEBUG,
 
   THEME: "default",
-  buildTag: "v.0.3.8-210726-1253-build-dev-default",
-  timestamp: "2021.07.26, 12:53",
-  timetag: "210726-1253",
+  buildTag: "v.0.3.8-210726-1924-build-dev-default",
+  timestamp: "2021.07.26, 19:24",
+  timetag: "210726-1924",
   version: "0.3.8" };
 
 /***/ }),
@@ -4837,8 +4837,12 @@ ModalsController = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runti
         return _this.proxyModalNodes[id];
       }
     });_this.state = { proxyModalsList: [] // Active proxy modals list; see `...ProxyModal...` functionality below
-    };return _this;}var _proto = ModalsController.prototype;_proto.componentDidMount = function componentDidMount() {// Uncaught errors handler...
-    this.__saved_onunhandledrejection = window.onunhandledrejection;this.__saved_onerror = window.onerror;window.onunhandledrejection = this.onCatchedError;window.onerror = this.onCatchedError; // this.registerGlobalHandlers()
+    };return _this;}var _proto = ModalsController.prototype;_proto.componentDidMount = function componentDidMount() {// // Uncaught errors handler...
+    // this.__saved_onunhandledrejection = window.onunhandledrejection;
+    // this.__saved_onerror = window.onerror;
+    // window.onunhandledrejection = this.onCatchedError;
+    // window.onerror = this.onCatchedError;
+    // this.registerGlobalHandlers()
     // Initialize global references & parameters...
     if (typeof _config_index_js__WEBPACK_IMPORTED_MODULE_8__.modals.__initPromiseResolve == 'function') {_config_index_js__WEBPACK_IMPORTED_MODULE_8__.modals.__initPromiseResolve();}_config_index_js__WEBPACK_IMPORTED_MODULE_8__.modals.isInited = true;_config_index_js__WEBPACK_IMPORTED_MODULE_8__.modals.controller = this; /* // UNUSED: Old method to obtain dom node re3ference (see setRef below).
      * // eslint-disable-next-line react/no-find-dom-node
@@ -4847,8 +4851,10 @@ ModalsController = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runti
      * this.domNode = domNode;
      * config.modals.domNode = domNode;
      */};_proto.componentWillUnmount = function componentWillUnmount() {// this.unregisterGlobalHandlers()
-    // Reset uncaught errors handler...
-    window.onunhandledrejection = this.__saved_onunhandledrejection;window.onerror = this.__saved_onerror;} // Handlers...
+    // // Reset uncaught errors handler...
+    // window.onunhandledrejection = this.__saved_onunhandledrejection;
+    // window.onerror = this.__saved_onerror;
+  } // Handlers...
   ; // External methods...
   _proto.getDomNode = function getDomNode() {// Get dom node
     return this.domNode || document.body;}; // External proxy methods...
@@ -9285,7 +9291,7 @@ __webpack_require__.r(__webpack_exports__);
  /** @module FormTextInput
  *  @class FormTextInput
  *  @since 2020.10.07, 00:20
- *  @changed 2021.04.12, 14:26
+ *  @changed 2021.07.26, 19:24
  */
 /* eslint-disable react/require-default-props */
 
@@ -9307,6 +9313,7 @@ __webpack_require__.r(__webpack_exports__);
 var cnFormTextInput = (0,_utils_configure__WEBPACK_IMPORTED_MODULE_6__.cn)('FormTextInput');var
 
 FormTextInput = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_helpers_inheritsLoose__WEBPACK_IMPORTED_MODULE_1__.default)(FormTextInput, _React$PureComponent);
+
 
 
 
@@ -9431,14 +9438,14 @@ FormTextInput = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_
 
     function (state) {
       state = state || _this.state;var _this$props =
-      _this.props,id = _this$props.id,inputId = _this$props.inputId,name = _this$props.name,onChange = _this$props.onChange,disabled = _this$props.disabled;
-      if (!disabled && typeof onChange === 'function') {var _state =
+      _this.props,id = _this$props.id,inputId = _this$props.inputId,name = _this$props.name,onUpdate = _this$props.onUpdate,disabled = _this$props.disabled;
+      if (!disabled && typeof onUpdate === 'function') {var _state =
         state,value = _state.value;
         // console.log('FormTextInput:updateValueWithState', {
         //   value,
         // });
         var setId = id || inputId || name;
-        onChange({ id: setId, value: value });
+        onUpdate({ id: setId, value: value });
       }
     });(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2__.default)((0,_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_0__.default)(_this), "handleChange",
 
@@ -9462,15 +9469,22 @@ FormTextInput = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_
 
 
 
-    function (event) {var
+    function (event) {var _this$props2 =
+      _this.props,disabled = _this$props2.disabled,inputId = _this$props2.inputId,id = _this$props2.id,onChange = _this$props2.onChange;var
       target = event.target;
       var origValue = target.value;
       var value = _this.getCorrectedValue(origValue);
-      _this.setState({ value: value });
+      if (value !== _this.state.value) {
+        _this.setState({ value: value });
+        if (!disabled && typeof onChange === 'function') {
+          var setId = id || inputId || name;
+          onChange({ id: setId, value: value });
+        }
+      }
     });(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2__.default)((0,_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_0__.default)(_this), "onClearClick",
 
-    function () {var _this$props2 =
-      _this.props,allowEmpty = _this$props2.allowEmpty,numericValue = _this$props2.numericValue;
+    function () {var _this$props3 =
+      _this.props,allowEmpty = _this$props3.allowEmpty,numericValue = _this$props3.numericValue;
       var value = numericValue && !allowEmpty ? 0 : '';
       _this.setState({ value: value });
     });(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2__.default)((0,_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_0__.default)(_this), "onFocusIn",
@@ -9526,16 +9540,16 @@ FormTextInput = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_
       this.setState({ value: stateValue }, this.updateValueWithState); // this.updateValueWithState(this.state);
     }} // Helper methods...
   ;_proto.getCorrectedValue = function getCorrectedValue(value) {// const origValue = value;
-    var _this$props3 = this.props,numericValue = _this$props3.numericValue,defaultValue = _this$props3.defaultValue,allowEmpty = _this$props3.allowEmpty;if (numericValue && typeof value !== 'number') {value = String(value).replace(/[^0-9.,-]/g, '');value = parseInt(value, 10);if (isNaN(value)) {value = defaultValue || allowEmpty ? '' : 0;}} // console.log('FormTextInput:getCorrectedValue', {
+    var _this$props4 = this.props,numericValue = _this$props4.numericValue,defaultValue = _this$props4.defaultValue,allowEmpty = _this$props4.allowEmpty;if (numericValue && typeof value !== 'number') {value = String(value).replace(/[^0-9.,-]/g, '');value = parseInt(value, 10);if (isNaN(value)) {value = defaultValue || allowEmpty ? '' : 0;}} // console.log('FormTextInput:getCorrectedValue', {
     //   origValue,
     //   value,
     //   numericValue,
     // });
-    return value;};_proto.hasValue = function hasValue() {var value = this.state.value;return value != null && value !== '';};_proto.hasIcon = function hasIcon() {var _this$props4 = this.props,icon = _this$props4.icon,hasIcon = _this$props4.hasIcon,hasClear = _this$props4.hasClear;return hasIcon || !!icon || hasClear && this.hasValue();};_proto.getClassName = function getClassName() {var _this$props5 = this.props,id = _this$props5.id,hasClear = _this$props5.hasClear,className = _this$props5.className;var hasValue = this.hasValue();var hasClearActive = hasClear && hasValue;var classList = cnFormTextInput({ id: id, hasIcon: this.hasIcon(), hasValue: this.hasValue(), hasClear: hasClear, hasClearActive: hasClearActive }, [className]);return classList;} // Event handlers...
+    return value;};_proto.hasValue = function hasValue() {var value = this.state.value;return value != null && value !== '';};_proto.hasIcon = function hasIcon() {var _this$props5 = this.props,icon = _this$props5.icon,hasIcon = _this$props5.hasIcon,hasClear = _this$props5.hasClear;return hasIcon || !!icon || hasClear && this.hasValue();};_proto.getClassName = function getClassName() {var _this$props6 = this.props,id = _this$props6.id,hasClear = _this$props6.hasClear,className = _this$props6.className;var hasValue = this.hasValue();var hasClearActive = hasClear && hasValue;var classList = cnFormTextInput({ id: id, hasIcon: this.hasIcon(), hasValue: this.hasValue(), hasClear: hasClear, hasClearActive: hasClearActive }, [className]);return classList;} // Event handlers...
   ; // Render...
   _proto.renderClearIcon = function renderClearIcon() {// DELETE
-    var _this$props6 = this.props,hasClear = _this$props6.hasClear,clearIcon = _this$props6.clearIcon,clearIconTitle = _this$props6.clearIconTitle,lang = _this$props6.lang;var hasValue = this.hasValue();var hasClearActive = hasClear && hasValue;var title = clearIconTitle || (0,_utils_lang__WEBPACK_IMPORTED_MODULE_7__.getCommonLangText)('clearButton', 'Clear', lang);return hasClearActive && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3___default().createElement(_elements_InlineIcon_index_ts__WEBPACK_IMPORTED_MODULE_8__.default, { icon: clearIcon || 'faTimes', className: cnFormTextInput('Icon', { mode: 'Clear' }), onClick: this.onClearClick, title: title });};_proto.renderIcon = function renderIcon() {// DELETE
-    var _this$props7 = this.props,icon = _this$props7.icon,iconTitle = _this$props7.iconTitle,onIconClick = _this$props7.onIconClick;return icon && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3___default().createElement(_elements_InlineIcon_index_ts__WEBPACK_IMPORTED_MODULE_8__.default, { icon: icon,
+    var _this$props7 = this.props,hasClear = _this$props7.hasClear,clearIcon = _this$props7.clearIcon,clearIconTitle = _this$props7.clearIconTitle,lang = _this$props7.lang;var hasValue = this.hasValue();var hasClearActive = hasClear && hasValue;var title = clearIconTitle || (0,_utils_lang__WEBPACK_IMPORTED_MODULE_7__.getCommonLangText)('clearButton', 'Clear', lang);return hasClearActive && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3___default().createElement(_elements_InlineIcon_index_ts__WEBPACK_IMPORTED_MODULE_8__.default, { icon: clearIcon || 'faTimes', className: cnFormTextInput('Icon', { mode: 'Clear' }), onClick: this.onClearClick, title: title });};_proto.renderIcon = function renderIcon() {// DELETE
+    var _this$props8 = this.props,icon = _this$props8.icon,iconTitle = _this$props8.iconTitle,onIconClick = _this$props8.onIconClick;return icon && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3___default().createElement(_elements_InlineIcon_index_ts__WEBPACK_IMPORTED_MODULE_8__.default, { icon: icon,
       className: cnFormTextInput('Icon'),
       onClick: onIconClick,
       title: iconTitle });
@@ -9546,7 +9560,7 @@ FormTextInput = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_
   renderInput = function renderInput() {var
 
     value =
-    this.state.value;var _this$props8 =
+    this.state.value;var _this$props9 =
 
 
 
@@ -9555,7 +9569,7 @@ FormTextInput = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_
 
 
 
-    this.props,id = _this$props8.id,inputId = _this$props8.inputId,name = _this$props8.name,disabled = _this$props8.disabled,placeholder = _this$props8.placeholder,_this$props8$type = _this$props8.type,type = _this$props8$type === void 0 ? 'text' : _this$props8$type;
+    this.props,id = _this$props9.id,inputId = _this$props9.inputId,name = _this$props9.name,disabled = _this$props9.disabled,placeholder = _this$props9.placeholder,_this$props9$type = _this$props9.type,type = _this$props9$type === void 0 ? 'text' : _this$props9$type;
 
     var inputProps = {
       key: 'Input',
@@ -9579,7 +9593,7 @@ FormTextInput = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_
 
   };_proto.
 
-  render = function render() {var _this$props9 =
+  render = function render() {var _this$props10 =
 
 
 
@@ -9587,7 +9601,7 @@ FormTextInput = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_
 
 
 
-    this.props,id = _this$props9.id,disabled = _this$props9.disabled,_this$props9$type = _this$props9.type,type = _this$props9$type === void 0 ? 'text' : _this$props9$type,title = _this$props9.title,setDomRef = _this$props9.setDomRef;
+    this.props,id = _this$props10.id,disabled = _this$props10.disabled,_this$props10$type = _this$props10.type,type = _this$props10$type === void 0 ? 'text' : _this$props10$type,title = _this$props10.title,setDomRef = _this$props10.setDomRef;
 
     var inputElem = this.renderInput();
 
@@ -9615,7 +9629,7 @@ FormTextInput = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_
 // export default FormItemHOC({ solid: true, hoverable: true, framed: true })(FormTextInput);
 (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2__.default)(FormTextInput, "propTypes", { // TODO: minValue, maxValue, maxLength
   allowEmpty: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), className: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), clearIcon: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), clearIconTitle: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), defaultValue: prop_types__WEBPACK_IMPORTED_MODULE_4___default().oneOfType([(prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), (prop_types__WEBPACK_IMPORTED_MODULE_4___default().number)]), disabled: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), hasClear: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), hasClearActive: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), hasIcon: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), hasValue: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), icon: prop_types__WEBPACK_IMPORTED_MODULE_4___default().oneOfType([(prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), (prop_types__WEBPACK_IMPORTED_MODULE_4___default().object)]), // Icon id or icon object
-  iconTitle: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), id: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), inputId: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), name: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), numericValue: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), onChange: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func), onFocusIn: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func), onFocusOut: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func), onIconClick: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func), placeholder: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), setDomRef: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func), setInputDomRef: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func), type: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), value: prop_types__WEBPACK_IMPORTED_MODULE_4___default().oneOfType([(prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), (prop_types__WEBPACK_IMPORTED_MODULE_4___default().number)]) });(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2__.default)(FormTextInput, "defaultProps", { // allowEmpty: true,
+  iconTitle: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), id: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), inputId: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), name: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), numericValue: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), onChange: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func), onUpdate: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func), onFocusIn: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func), onFocusOut: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func), onIconClick: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func), placeholder: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), setDomRef: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func), setInputDomRef: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func), type: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), value: prop_types__WEBPACK_IMPORTED_MODULE_4___default().oneOfType([(prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), (prop_types__WEBPACK_IMPORTED_MODULE_4___default().number)]) });(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2__.default)(FormTextInput, "defaultProps", { // allowEmpty: true,
   value: '' });/* harmony default export */ __webpack_exports__["default"] = ((0,redux__WEBPACK_IMPORTED_MODULE_5__.compose)( // withFormContext,
 _FormInteractiveItemHOC_index_ts__WEBPACK_IMPORTED_MODULE_10__.default, (0,_FormItemHOC_index_ts__WEBPACK_IMPORTED_MODULE_9__.default)({ solid: true, hoverable: true, focusable: true, framed: true }))(FormTextInput));
 
