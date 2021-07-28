@@ -440,9 +440,9 @@ module.exports = { // Common-used build variables...
   DEV_DEBUG: DEV_DEBUG,
 
   THEME: "default",
-  buildTag: "v.0.3.8-210726-1924-build-dev-default",
-  timestamp: "2021.07.26, 19:24",
-  timetag: "210726-1924",
+  buildTag: "v.0.3.8-210728-1855-build-dev-default",
+  timestamp: "2021.07.28, 18:55",
+  timetag: "210728-1855",
   version: "0.3.8" };
 
 /***/ }),
@@ -4147,14 +4147,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utils_configure__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../utils/configure */ "./src/utils/configure.js");
 /* harmony import */ var _config_index_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../config/index.js */ "./src/config/index.js");
 /* harmony import */ var _config_index_js__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_config_index_js__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _ModalPortal_index_ts__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../ModalPortal/index.ts */ "./src/elements/ModalPortal/index.ts");
-/* harmony import */ var _InlineIcon_index_ts__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../InlineIcon/index.ts */ "./src/elements/InlineIcon/index.ts");
-/* harmony import */ var _forms_FormButton_index_ts__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../forms/FormButton/index.ts */ "./src/forms/FormButton/index.ts");
-/* harmony import */ var _forms_FormActions_index_ts__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../forms/FormActions/index.ts */ "./src/forms/FormActions/index.ts");
-/* harmony import */ var _helpers_ActionsContext__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../helpers/ActionsContext */ "./src/helpers/ActionsContext.jsx");
-/* harmony import */ var _ModalWindow_Geometry_pcss__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./ModalWindow-Geometry.pcss */ "./src/elements/ModalWindow/ModalWindow-Geometry.pcss");
-/* harmony import */ var _ModalWindow_Themes_pcss__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./ModalWindow-Themes.pcss */ "./src/elements/ModalWindow/ModalWindow-Themes.pcss");
-/* harmony import */ var _ModalWindow_Errors_pcss__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./ModalWindow-Errors.pcss */ "./src/elements/ModalWindow/ModalWindow-Errors.pcss");
+/* harmony import */ var _utils_lang__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../utils/lang */ "./src/utils/lang.js");
+/* harmony import */ var _ModalPortal_index_ts__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../ModalPortal/index.ts */ "./src/elements/ModalPortal/index.ts");
+/* harmony import */ var _InlineIcon_index_ts__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../InlineIcon/index.ts */ "./src/elements/InlineIcon/index.ts");
+/* harmony import */ var _forms_FormButton_index_ts__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../forms/FormButton/index.ts */ "./src/forms/FormButton/index.ts");
+/* harmony import */ var _forms_FormActions_index_ts__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../forms/FormActions/index.ts */ "./src/forms/FormActions/index.ts");
+/* harmony import */ var _helpers_ActionsContext__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../helpers/ActionsContext */ "./src/helpers/ActionsContext.jsx");
+/* harmony import */ var _ModalWindow_Geometry_pcss__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./ModalWindow-Geometry.pcss */ "./src/elements/ModalWindow/ModalWindow-Geometry.pcss");
+/* harmony import */ var _ModalWindow_Themes_pcss__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./ModalWindow-Themes.pcss */ "./src/elements/ModalWindow/ModalWindow-Themes.pcss");
+/* harmony import */ var _ModalWindow_Errors_pcss__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./ModalWindow-Errors.pcss */ "./src/elements/ModalWindow/ModalWindow-Errors.pcss");
  /** @module ModalWindow
  *  @class ModalWindow
  *  @since 2020.12.21, 22:58
@@ -4168,6 +4169,7 @@ __webpack_require__.r(__webpack_exports__);
  *  TODO 2020.12.29, 21:51 -- Use level mod (increase margins)
  */
 /* --eslint-disable no-console */
+
 
 
 
@@ -4199,6 +4201,7 @@ var selfCloseActionId = 'modalSelfClose';
 var externalCloseActionId = 'modalExternalClose';var
 
 ModalWindow = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_helpers_inheritsLoose__WEBPACK_IMPORTED_MODULE_2__.default)(ModalWindow, _React$PureComponent);function ModalWindow() {var _this;for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {args[_key] = arguments[_key];}_this = _React$PureComponent.call.apply(_React$PureComponent, [this].concat(args)) || this;(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3__.default)((0,_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1__.default)(_this), "ModalPortal",
+
 
 
 
@@ -4398,6 +4401,7 @@ ModalWindow = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_he
 
 
 
+
     function (error) {
       if (Array.isArray(error)) {
         return error.
@@ -4480,12 +4484,12 @@ ModalWindow = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_he
   // Handlers...
   ; // Render helpers...
   // Render...
-  _proto.renderHeaderIcon = function renderHeaderIcon() {var _this$props4 = this.props,icon = _this$props4.icon,iconTheme = _this$props4.iconTheme;var theme = iconTheme || this.props.theme;var showIcon = icon || theme && (_config_index_js__WEBPACK_IMPORTED_MODULE_7___default().ui.defaultIcons)[theme];return showIcon && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default().createElement("div", { key: "HeaderIcon", className: cnModalWindow('HeaderIcon', { theme: theme }) }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default().createElement(_InlineIcon_index_ts__WEBPACK_IMPORTED_MODULE_9__.default, { theme: theme, icon: showIcon }));};_proto.renderHeaderTitle = function renderHeaderTitle() {var title = this.props.title;return title && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default().createElement("div", { key: "HeaderTitle", className: cnModalWindow('HeaderTitle') }, title);};_proto.renderHeaderCloseButton = function renderHeaderCloseButton() {var showCloseButton = this.props.showCloseButton;return showCloseButton && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default().createElement("div", { key: "HeaderCloseButton", className: cnModalWindow('HeaderCloseButton') }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default().createElement(_forms_FormButton_index_ts__WEBPACK_IMPORTED_MODULE_10__.default, { icon: "faTimes", largeIcon: true, plain: true, title: "Close window" // TODO; Translate?
-      , onClick: this.onCloseButtonClick }));};_proto.renderHeader = function renderHeader() {var _this$props5 = this.props,headerTheme = _this$props5.headerTheme,theme = _this$props5.theme;var content = [this.renderHeaderIcon(), this.renderHeaderTitle(), this.renderHeaderCloseButton()].filter(Boolean);var hasHeader = !!(content && content.length);return hasHeader && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default().createElement("div", { className: cnModalWindow('Header', { theme: headerTheme || theme }) }, content);};_proto.renderLeftContent = function renderLeftContent() {var leftContent = this.props.leftContent;return leftContent && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default().createElement("div", { className: cnModalWindow('LeftContent') }, leftContent);};_proto.renderContent = function renderContent() {var _this$props6 = this.props,children = _this$props6.children,contentClassName = _this$props6.contentClassName,error = _this$props6.error; // console.log('ModalWindow:renderContent', children)
+  _proto.renderHeaderIcon = function renderHeaderIcon() {var _this$props4 = this.props,icon = _this$props4.icon,iconTheme = _this$props4.iconTheme;var theme = iconTheme || this.props.theme;var showIcon = icon || theme && (_config_index_js__WEBPACK_IMPORTED_MODULE_7___default().ui.defaultIcons)[theme];return showIcon && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default().createElement("div", { key: "HeaderIcon", className: cnModalWindow('HeaderIcon', { theme: theme }) }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default().createElement(_InlineIcon_index_ts__WEBPACK_IMPORTED_MODULE_10__.default, { theme: theme, icon: showIcon }));};_proto.renderHeaderTitle = function renderHeaderTitle() {var title = this.props.title;return title && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default().createElement("div", { key: "HeaderTitle", className: cnModalWindow('HeaderTitle') }, title);};_proto.renderHeaderCloseButton = function renderHeaderCloseButton() {var _this$props5 = this.props,showCloseButton = _this$props5.showCloseButton,closeText = _this$props5.closeText,lang = _this$props5.lang;var title = closeText || (0,_utils_lang__WEBPACK_IMPORTED_MODULE_8__.getCommonLangText)('CloseWindow', 'Close window', lang);return showCloseButton && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default().createElement("div", { key: "HeaderCloseButton", className: cnModalWindow('HeaderCloseButton') }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default().createElement(_forms_FormButton_index_ts__WEBPACK_IMPORTED_MODULE_11__.default, { icon: "faTimes", largeIcon: true, plain: true, title: title, onClick: this.onCloseButtonClick }));};_proto.renderHeader = function renderHeader() {var _this$props6 = this.props,headerTheme = _this$props6.headerTheme,theme = _this$props6.theme;var content = [this.renderHeaderIcon(), this.renderHeaderTitle(), this.renderHeaderCloseButton()].filter(Boolean);var hasHeader = !!(content && content.length);return hasHeader && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default().createElement("div", { className: cnModalWindow('Header', { theme: headerTheme || theme }) }, content);};_proto.renderLeftContent = function renderLeftContent() {var leftContent = this.props.leftContent;return leftContent && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default().createElement("div", { className: cnModalWindow('LeftContent') }, leftContent);};_proto.renderContent = function renderContent() {var _this$props7 = this.props,children = _this$props7.children,contentClassName = _this$props7.contentClassName,error = _this$props7.error; // console.log('ModalWindow:renderContent', children)
     // debugger
     var errorContent = error && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default().createElement("div", { className: cnModalWindow('Error') }, this.renderContentError(error));return children && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default().createElement("div", { className: cnModalWindow('Content', [contentClassName]) }, errorContent, children);};_proto.renderActions = function renderActions() {var actions = this.props.actions;if (typeof actions === 'function') {actions = actions();} // Allow to treat actions as ids/texts/ list see `FromActions`.
-    return actions && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default().createElement(_helpers_ActionsContext__WEBPACK_IMPORTED_MODULE_12__.ActionsContextProvider, { value: this }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default().createElement(_forms_FormActions_index_ts__WEBPACK_IMPORTED_MODULE_11__.default, { className: cnModalWindow('Actions') }, actions));};_proto.render = function render() {var _this2 = this; // Add all custom handler props ('on*')...
-    var handlerKeys = Object.keys(this.props).filter(function (id) {return id.startsWith('on') && !_ModalPortal_index_ts__WEBPACK_IMPORTED_MODULE_8__.passModalPortalProps.includes(id);});var portalProps = _ModalPortal_index_ts__WEBPACK_IMPORTED_MODULE_8__.passModalPortalProps.concat(handlerKeys).reduce(function (data, id) {var _extends2;return (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__.default)({}, data, (_extends2 = {}, _extends2[id] = _this2.props[id], _extends2));}, {});Object.keys(this.props).
+    return actions && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default().createElement(_helpers_ActionsContext__WEBPACK_IMPORTED_MODULE_13__.ActionsContextProvider, { value: this }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default().createElement(_forms_FormActions_index_ts__WEBPACK_IMPORTED_MODULE_12__.default, { className: cnModalWindow('Actions') }, actions));};_proto.render = function render() {var _this2 = this; // Add all custom handler props ('on*')...
+    var handlerKeys = Object.keys(this.props).filter(function (id) {return id.startsWith('on') && !_ModalPortal_index_ts__WEBPACK_IMPORTED_MODULE_9__.passModalPortalProps.includes(id);});var portalProps = _ModalPortal_index_ts__WEBPACK_IMPORTED_MODULE_9__.passModalPortalProps.concat(handlerKeys).reduce(function (data, id) {var _extends2;return (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__.default)({}, data, (_extends2 = {}, _extends2[id] = _this2.props[id], _extends2));}, {});
+    Object.keys(this.props).
     filter(function (id) {return id.startsWith('on');}).
     forEach(function (id) {
       portalProps[id] = _this2.props[id];
@@ -4500,7 +4504,7 @@ ModalWindow = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_he
     // console.log('ModalWindow:render', this.props.children)
     // NOTE: Use arrow function to force update modal content
     return /*#__PURE__*/(
-      react__WEBPACK_IMPORTED_MODULE_4___default().createElement(_ModalPortal_index_ts__WEBPACK_IMPORTED_MODULE_8__.default, (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__.default)({}, portalProps, { type: "Window", setPortalNode: this.setPortalNode }),
+      react__WEBPACK_IMPORTED_MODULE_4___default().createElement(_ModalPortal_index_ts__WEBPACK_IMPORTED_MODULE_9__.default, (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__.default)({}, portalProps, { type: "Window", setPortalNode: this.setPortalNode }),
       this.renderWindow()));
 
 
@@ -4539,8 +4543,8 @@ ModalWindow = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_he
   windowClassName: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().string), // ModalWindow window class name
   windowTheme: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().string), // Window theme (using `theme` if not specified)
   wrapperClassName: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().string), // ModalWindow wrapper class name
-  wrapperTheme: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().string) // Wrapper (back-curtain) theme (using `theme` if not specified)
-});(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3__.default)(ModalWindow, "defaultProps", { closeOnClickOutside: true, // Close (with `selfCloseActionId` action id) modal by outisde-click.
+  wrapperTheme: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().string), // Wrapper (back-curtain) theme (using `theme` if not specified)
+  lang: prop_types__WEBPACK_IMPORTED_MODULE_5___default().objectOf((prop_types__WEBPACK_IMPORTED_MODULE_5___default().object)) });(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3__.default)(ModalWindow, "defaultProps", { closeOnClickOutside: true, // Close (with `selfCloseActionId` action id) modal by outisde-click.
   closeOnEscPressed: true, // Close (with `selfCloseActionId` action id) modal by esc-key.
   closeWithCloseButton: true, // Close (with `selfCloseActionId` action id) with 'Close button' (if present in layout -- see `showCloseButton`)
   loaderTheme: 'MediumDark', loading: false, open: false, showCloseButton: false, // Display 'Close button'?
@@ -8640,7 +8644,7 @@ FormPager = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_help
 
 
 
-  };return FormPager;}((react__WEBPACK_IMPORTED_MODULE_4___default().PureComponent) /** @lends @FormPager.prototype */);(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2__.default)(FormPager, "propTypes", { onPageSelect: (prop_types__WEBPACK_IMPORTED_MODULE_7___default().func), // lang: PropTypes.objectOf(PropTypes.object), // From state
+  };return FormPager;}((react__WEBPACK_IMPORTED_MODULE_4___default().PureComponent) /** @lends @FormPager.prototype */);(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2__.default)(FormPager, "propTypes", { onPageSelect: (prop_types__WEBPACK_IMPORTED_MODULE_7___default().func), // lang: PropTypes.objectOf(PropTypes.object),
   showPage: (prop_types__WEBPACK_IMPORTED_MODULE_7___default().number), totalPages: (prop_types__WEBPACK_IMPORTED_MODULE_7___default().number), noSpace: (prop_types__WEBPACK_IMPORTED_MODULE_7___default().bool), fullWidth: (prop_types__WEBPACK_IMPORTED_MODULE_7___default().bool), align: (prop_types__WEBPACK_IMPORTED_MODULE_7___default().string), className: (prop_types__WEBPACK_IMPORTED_MODULE_7___default().string) });
 
 
@@ -9469,24 +9473,40 @@ FormTextInput = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
     function (event) {var _this$props2 =
       _this.props,disabled = _this$props2.disabled,inputId = _this$props2.inputId,id = _this$props2.id,onChange = _this$props2.onChange;var
       target = event.target;
-      var origValue = target.value;
-      var value = _this.getCorrectedValue(origValue);
-      if (value !== _this.state.value) {
-        _this.setState({ value: value });
-        if (!disabled && typeof onChange === 'function') {
-          var setId = id || inputId || name;
-          onChange({ id: setId, value: value });
-        }
-      }
+      _this.changeValue(target.value);
+      // const origValue = target.value;
+      // const value = this.getCorrectedValue(origValue);
+      // if (value !== this.state.value) {
+      //   this.setState({ value });
+      //   if (!disabled && typeof onChange === 'function') {
+      //     const setId = id || inputId || name;
+      //     onChange({ id: setId, value });
+      //   }
+      // }
     });(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2__.default)((0,_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_0__.default)(_this), "onClearClick",
 
     function () {var _this$props3 =
-      _this.props,allowEmpty = _this$props3.allowEmpty,numericValue = _this$props3.numericValue;
-      var value = numericValue && !allowEmpty ? 0 : '';
-      _this.setState({ value: value });
+      _this.props,disabled = _this$props3.disabled,allowEmpty = _this$props3.allowEmpty,numericValue = _this$props3.numericValue;
+      if (!disabled) {
+        var value = numericValue && !allowEmpty ? 0 : '';
+        _this.changeValue(value);
+        // this.setState({ value });
+      }
     });(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2__.default)((0,_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_0__.default)(_this), "onFocusIn",
 
     function () {
@@ -9546,11 +9566,10 @@ FormTextInput = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_
     //   numericValue,
     // });
     return value;};_proto.hasValue = function hasValue() {var value = this.state.value;return value != null && value !== '';};_proto.hasIcon = function hasIcon() {var _this$props5 = this.props,icon = _this$props5.icon,hasIcon = _this$props5.hasIcon,hasClear = _this$props5.hasClear;return hasIcon || !!icon || hasClear && this.hasValue();};_proto.getClassName = function getClassName() {var _this$props6 = this.props,id = _this$props6.id,hasClear = _this$props6.hasClear,className = _this$props6.className;var hasValue = this.hasValue();var hasClearActive = hasClear && hasValue;var classList = cnFormTextInput({ id: id, hasIcon: this.hasIcon(), hasValue: this.hasValue(), hasClear: hasClear, hasClearActive: hasClearActive }, [className]);return classList;} // Event handlers...
-  ; // Render...
+  ;_proto.changeValue = function changeValue(value) {var _this$props7 = this.props,disabled = _this$props7.disabled,inputId = _this$props7.inputId,id = _this$props7.id,onChange = _this$props7.onChange;value = this.getCorrectedValue(value);if (value !== this.state.value) {this.setState({ value: value });if (!disabled && typeof onChange === 'function') {var setId = id || inputId || name;onChange({ id: setId, value: value });}}}; // Render...
   _proto.renderClearIcon = function renderClearIcon() {// DELETE
-    var _this$props7 = this.props,hasClear = _this$props7.hasClear,clearIcon = _this$props7.clearIcon,clearIconTitle = _this$props7.clearIconTitle,lang = _this$props7.lang;var hasValue = this.hasValue();var hasClearActive = hasClear && hasValue;var title = clearIconTitle || (0,_utils_lang__WEBPACK_IMPORTED_MODULE_7__.getCommonLangText)('clearButton', 'Clear', lang);return hasClearActive && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3___default().createElement(_elements_InlineIcon_index_ts__WEBPACK_IMPORTED_MODULE_8__.default, { icon: clearIcon || 'faTimes', className: cnFormTextInput('Icon', { mode: 'Clear' }), onClick: this.onClearClick, title: title });};_proto.renderIcon = function renderIcon() {// DELETE
-    var _this$props8 = this.props,icon = _this$props8.icon,iconTitle = _this$props8.iconTitle,onIconClick = _this$props8.onIconClick;return icon && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3___default().createElement(_elements_InlineIcon_index_ts__WEBPACK_IMPORTED_MODULE_8__.default, { icon: icon,
-      className: cnFormTextInput('Icon'),
+    var _this$props8 = this.props,hasClear = _this$props8.hasClear,clearIcon = _this$props8.clearIcon,clearIconTitle = _this$props8.clearIconTitle,lang = _this$props8.lang;var hasValue = this.hasValue();var hasClearActive = hasClear && hasValue;var title = clearIconTitle || (0,_utils_lang__WEBPACK_IMPORTED_MODULE_7__.getCommonLangText)('clearButton', 'Clear', lang);return hasClearActive && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3___default().createElement(_elements_InlineIcon_index_ts__WEBPACK_IMPORTED_MODULE_8__.default, { icon: clearIcon || 'faTimes', className: cnFormTextInput('Icon', { mode: 'Clear' }), onClick: this.onClearClick, title: title });};_proto.renderIcon = function renderIcon() {// DELETE
+    var _this$props9 = this.props,icon = _this$props9.icon,iconTitle = _this$props9.iconTitle,onIconClick = _this$props9.onIconClick;return icon && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3___default().createElement(_elements_InlineIcon_index_ts__WEBPACK_IMPORTED_MODULE_8__.default, { icon: icon, className: cnFormTextInput('Icon'),
       onClick: onIconClick,
       title: iconTitle });
 
@@ -9560,7 +9579,7 @@ FormTextInput = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_
   renderInput = function renderInput() {var
 
     value =
-    this.state.value;var _this$props9 =
+    this.state.value;var _this$props10 =
 
 
 
@@ -9569,7 +9588,7 @@ FormTextInput = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_
 
 
 
-    this.props,id = _this$props9.id,inputId = _this$props9.inputId,name = _this$props9.name,disabled = _this$props9.disabled,placeholder = _this$props9.placeholder,_this$props9$type = _this$props9.type,type = _this$props9$type === void 0 ? 'text' : _this$props9$type;
+    this.props,id = _this$props10.id,inputId = _this$props10.inputId,name = _this$props10.name,disabled = _this$props10.disabled,placeholder = _this$props10.placeholder,_this$props10$type = _this$props10.type,type = _this$props10$type === void 0 ? 'text' : _this$props10$type;
 
     var inputProps = {
       key: 'Input',
@@ -9593,7 +9612,7 @@ FormTextInput = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_
 
   };_proto.
 
-  render = function render() {var _this$props10 =
+  render = function render() {var _this$props11 =
 
 
 
@@ -9601,7 +9620,7 @@ FormTextInput = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_
 
 
 
-    this.props,id = _this$props10.id,disabled = _this$props10.disabled,_this$props10$type = _this$props10.type,type = _this$props10$type === void 0 ? 'text' : _this$props10$type,title = _this$props10.title,setDomRef = _this$props10.setDomRef;
+    this.props,id = _this$props11.id,disabled = _this$props11.disabled,_this$props11$type = _this$props11.type,type = _this$props11$type === void 0 ? 'text' : _this$props11$type,title = _this$props11.title,setDomRef = _this$props11.setDomRef;
 
     var inputElem = this.renderInput();
 
