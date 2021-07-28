@@ -1,7 +1,7 @@
 /** @module ModalWindow
  *  @class ModalWindow
  *  @since 2020.12.21, 22:58
- *  @changed 2021.07.16, 18:07
+ *  @changed 2021.07.28, 19:14
  *
  *  External methods (for PopupStack):
  *  - close
@@ -16,6 +16,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { cn } from 'utils/configure';
 import config from 'config';
+import { getCommonLangText } from 'utils/lang';
 
 import ModalPortal, { passModalPortalProps } from 'elements/ModalPortal';
 
@@ -83,6 +84,8 @@ class ModalWindow extends React.PureComponent /** @lends @ModalWindow.prototype 
     windowTheme: PropTypes.string, // Window theme (using `theme` if not specified)
     wrapperClassName: PropTypes.string, // ModalWindow wrapper class name
     wrapperTheme: PropTypes.string, // Wrapper (back-curtain) theme (using `theme` if not specified)
+    lang: PropTypes.objectOf(PropTypes.object), // Internationalization data
+    closeText: PropTypes.string, // Close button title
   }
 
   static defaultProps = {
@@ -202,14 +205,15 @@ class ModalWindow extends React.PureComponent /** @lends @ModalWindow.prototype 
     );
   }
   renderHeaderCloseButton() {
-    const { showCloseButton } = this.props;
+    const { showCloseButton, closeText, lang } = this.props;
+    const title = closeText || getCommonLangText('CloseWindow', 'Close window', lang);
     return showCloseButton && (
       <div key="HeaderCloseButton" className={cnModalWindow('HeaderCloseButton')}>
         <FormButton
           icon="faTimes"
           largeIcon
           plain
-          title="Close window" // TODO; Translate?
+          title={title}
           onClick={this.onCloseButtonClick}
         />
         {/* <InlineIcon icon="faTimes" /> */}

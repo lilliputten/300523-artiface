@@ -179,11 +179,9 @@ class FormTextInput extends React.PureComponent /** @lends @FormTextInput.protot
 
   // Event handlers...
 
-  handleChange = (event) => {
+  changeValue(value) {
     const { disabled, inputId, id, onChange } = this.props;
-    const { target } = event;
-    const origValue = target.value;
-    const value = this.getCorrectedValue(origValue);
+    value = this.getCorrectedValue(value);
     if (value !== this.state.value) {
       this.setState({ value });
       if (!disabled && typeof onChange === 'function') {
@@ -193,10 +191,28 @@ class FormTextInput extends React.PureComponent /** @lends @FormTextInput.protot
     }
   }
 
+  handleChange = (event) => {
+    const { disabled, inputId, id, onChange } = this.props;
+    const { target } = event;
+    this.changeValue(target.value);
+    // const origValue = target.value;
+    // const value = this.getCorrectedValue(origValue);
+    // if (value !== this.state.value) {
+    //   this.setState({ value });
+    //   if (!disabled && typeof onChange === 'function') {
+    //     const setId = id || inputId || name;
+    //     onChange({ id: setId, value });
+    //   }
+    // }
+  }
+
   onClearClick = () => {
-    const { allowEmpty, numericValue } = this.props;
-    const value = (numericValue && !allowEmpty) ? 0 : '';
-    this.setState({ value });
+    const { disabled, allowEmpty, numericValue } = this.props;
+    if (!disabled) {
+      const value = (numericValue && !allowEmpty) ? 0 : '';
+      this.changeValue(value);
+      // this.setState({ value });
+    }
   }
 
   onFocusIn = () => {
@@ -233,7 +249,6 @@ class FormTextInput extends React.PureComponent /** @lends @FormTextInput.protot
       hasClear,
       clearIcon,
       clearIconTitle,
-      // onClearClick,
       lang,
     } = this.props;
     const hasValue = this.hasValue();

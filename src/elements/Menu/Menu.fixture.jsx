@@ -30,12 +30,18 @@ const onClick = (params) => {
   const { value } = params;
   console.log('Menu.fixture: onClick handler', { value, params });
 };
+const onClick2 = (params) => {
+  const { value } = params;
+  console.log('Menu.fixture: onClick2 handler', { value, params });
+};
 
 const literalItemsList = [
   { val: 1, text: 'Swimming' },
   { val: 2, text: 'Skiing' },
   { id: 'separator' },
   { val: 3, text: 'Skiing' },
+  <MenuItem key="MenuItem" onClick={onClick2}>Menu item</MenuItem>,
+  <div key="SimpleElelent" className="SimpleElelent">SimpleElelent</div>,
 ];
 
 export default {
