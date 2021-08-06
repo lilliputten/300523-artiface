@@ -1059,7 +1059,6 @@
     font-size: 16px;
     font-weight: normal;
     line-height: 1.3;
-    color: #444;
     vertical-align: bottom;
     background: none;
     text-align: left;
@@ -4472,7 +4471,7 @@ label.FormLabel-Control[for] {
 
 /** @module MenuItem.styles
  *  @since 2020.10.27, 03:05
- *  @changed 2021.05.17, 14:38
+ *  @changed 2021.08.06, 12:26
  */
 
 .MenuItem {
@@ -4483,12 +4482,8 @@ label.FormLabel-Control[for] {
     cursor: pointer;
   }
 
-/* transition: background $(transitionTime)ms; // Blink*/
-
 .MenuItem.FormItem_hovered {
-      /* TODO: Use themes (via `themeColors`)?*/
-      background-color: #07f;
-      color: #fff;
+      background-color: #e0e0e0;
     }
 
 .MenuItem_checkable,
@@ -4513,27 +4508,18 @@ label.FormLabel-Control[for] {
         opacity: .75;
       }
 
-.MenuItem_theme_primary.MenuItem_checked, 
-      .MenuItem_theme_primary.FormItem_hovered {
+.MenuItem_theme_primary.MenuItem_checked {
         background-color: #07f;
         color: #fff;
       }
 
-.MenuItem_theme_primary.MenuItem_checked .MenuItem-Icon, .MenuItem_theme_primary.FormItem_hovered .MenuItem-Icon {
+.MenuItem_theme_primary.MenuItem_checked .MenuItem-Icon {
           color: #fff;
           opacity: .5;
         }
 
-.MenuItem_theme_primary.FormItem_hovered {
-        background-color: rgb(0, 107, 230);
-      }
-
 .MenuItem_theme_primary.MenuItem_checked.FormItem_hovered {
-        background-color: rgb(0, 95, 204);
-        /* & .MenuItem-Icon {*/
-        /*   color: $primaryContrastColor;*/
-        /*   opacity: .5;*/
-        /* }*/
+        background-color: rgb(0, 113, 242);
       }
 
 /*   @mixin MenuItemTheme $primaryColor;*/
@@ -4543,27 +4529,18 @@ label.FormLabel-Control[for] {
         opacity: .75;
       }
 
-.MenuItem_theme_secondary.MenuItem_checked, 
-      .MenuItem_theme_secondary.FormItem_hovered {
+.MenuItem_theme_secondary.MenuItem_checked {
         background-color: #677;
         color: #fff;
       }
 
-.MenuItem_theme_secondary.MenuItem_checked .MenuItem-Icon, .MenuItem_theme_secondary.FormItem_hovered .MenuItem-Icon {
+.MenuItem_theme_secondary.MenuItem_checked .MenuItem-Icon {
           color: #fff;
           opacity: .5;
         }
 
-.MenuItem_theme_secondary.FormItem_hovered {
-        background-color: rgb(92, 107, 107);
-      }
-
 .MenuItem_theme_secondary.MenuItem_checked.FormItem_hovered {
-        background-color: rgb(82, 95, 95);
-        /* & .MenuItem-Icon {*/
-        /*   color: $primaryContrastColor;*/
-        /*   opacity: .5;*/
-        /* }*/
+        background-color: rgb(97, 113, 113);
       }
 
 /* &_secondary {*/
@@ -4573,27 +4550,18 @@ label.FormLabel-Control[for] {
         opacity: .75;
       }
 
-.MenuItem_theme_neutral.MenuItem_checked, 
-      .MenuItem_theme_neutral.FormItem_hovered {
+.MenuItem_theme_neutral.MenuItem_checked {
         background-color: #666;
         color: #fff;
       }
 
-.MenuItem_theme_neutral.MenuItem_checked .MenuItem-Icon, .MenuItem_theme_neutral.FormItem_hovered .MenuItem-Icon {
+.MenuItem_theme_neutral.MenuItem_checked .MenuItem-Icon {
           color: #fff;
           opacity: .5;
         }
 
-.MenuItem_theme_neutral.FormItem_hovered {
-        background-color: rgb(92, 92, 92);
-      }
-
 .MenuItem_theme_neutral.MenuItem_checked.FormItem_hovered {
-        background-color: rgb(82, 82, 82);
-        /* & .MenuItem-Icon {*/
-        /*   color: $primaryContrastColor;*/
-        /*   opacity: .5;*/
-        /* }*/
+        background-color: rgb(97, 97, 97);
       }
 
 /* }*/
@@ -4603,27 +4571,18 @@ label.FormLabel-Control[for] {
         opacity: .75;
       }
 
-.MenuItem_theme_error.MenuItem_checked, 
-      .MenuItem_theme_error.FormItem_hovered {
+.MenuItem_theme_error.MenuItem_checked {
         background-color: #c33;
         color: #fff;
       }
 
-.MenuItem_theme_error.MenuItem_checked .MenuItem-Icon, .MenuItem_theme_error.FormItem_hovered .MenuItem-Icon {
+.MenuItem_theme_error.MenuItem_checked .MenuItem-Icon {
           color: #fff;
           opacity: .5;
         }
 
-.MenuItem_theme_error.FormItem_hovered {
-        background-color: rgb(184, 46, 46);
-      }
-
 .MenuItem_theme_error.MenuItem_checked.FormItem_hovered {
-        background-color: rgb(163, 41, 41);
-        /* & .MenuItem-Icon {*/
-        /*   color: $primaryContrastColor;*/
-        /*   opacity: .5;*/
-        /* }*/
+        background-color: rgb(194, 48, 48);
       }
 
 /*   @mixin MenuItemTheme $primaryColor;*/
@@ -4633,27 +4592,18 @@ label.FormLabel-Control[for] {
         opacity: .75;
       }
 
-.MenuItem_theme_warn.MenuItem_checked, 
-      .MenuItem_theme_warn.FormItem_hovered {
+.MenuItem_theme_warn.MenuItem_checked {
         background-color: #f73;
         color: #fff;
       }
 
-.MenuItem_theme_warn.MenuItem_checked .MenuItem-Icon, .MenuItem_theme_warn.FormItem_hovered .MenuItem-Icon {
+.MenuItem_theme_warn.MenuItem_checked .MenuItem-Icon {
           color: #fff;
           opacity: .5;
         }
 
-.MenuItem_theme_warn.FormItem_hovered {
-        background-color: rgb(230, 107, 46);
-      }
-
 .MenuItem_theme_warn.MenuItem_checked.FormItem_hovered {
-        background-color: rgb(204, 95, 41);
-        /* & .MenuItem-Icon {*/
-        /*   color: $primaryContrastColor;*/
-        /*   opacity: .5;*/
-        /* }*/
+        background-color: rgb(242, 113, 48);
       }
 
 /* &_primary {*/
@@ -4663,27 +4613,18 @@ label.FormLabel-Control[for] {
         opacity: .75;
       }
 
-.MenuItem_theme_success.MenuItem_checked, 
-      .MenuItem_theme_success.FormItem_hovered {
+.MenuItem_theme_success.MenuItem_checked {
         background-color: #593;
         color: #fff;
       }
 
-.MenuItem_theme_success.MenuItem_checked .MenuItem-Icon, .MenuItem_theme_success.FormItem_hovered .MenuItem-Icon {
+.MenuItem_theme_success.MenuItem_checked .MenuItem-Icon {
           color: #fff;
           opacity: .5;
         }
 
-.MenuItem_theme_success.FormItem_hovered {
-        background-color: rgb(77, 138, 46);
-      }
-
 .MenuItem_theme_success.MenuItem_checked.FormItem_hovered {
-        background-color: rgb(68, 122, 41);
-        /* & .MenuItem-Icon {*/
-        /*   color: $primaryContrastColor;*/
-        /*   opacity: .5;*/
-        /* }*/
+        background-color: rgb(81, 145, 48);
       }
 
 /* Theme colors...*/
@@ -4693,27 +4634,18 @@ label.FormLabel-Control[for] {
         opacity: .75;
       }
 
-.MenuItem_theme_info.MenuItem_checked, 
-      .MenuItem_theme_info.FormItem_hovered {
+.MenuItem_theme_info.MenuItem_checked {
         background-color: #07f;
         color: #fff;
       }
 
-.MenuItem_theme_info.MenuItem_checked .MenuItem-Icon, .MenuItem_theme_info.FormItem_hovered .MenuItem-Icon {
+.MenuItem_theme_info.MenuItem_checked .MenuItem-Icon {
           color: #fff;
           opacity: .5;
         }
 
-.MenuItem_theme_info.FormItem_hovered {
-        background-color: rgb(0, 107, 230);
-      }
-
 .MenuItem_theme_info.MenuItem_checked.FormItem_hovered {
-        background-color: rgb(0, 95, 204);
-        /* & .MenuItem-Icon {*/
-        /*   color: $primaryContrastColor;*/
-        /*   opacity: .5;*/
-        /* }*/
+        background-color: rgb(0, 113, 242);
       }
 
 .MenuItem_theme_confirm .MenuItem-Icon {
@@ -4721,27 +4653,18 @@ label.FormLabel-Control[for] {
         opacity: .75;
       }
 
-.MenuItem_theme_confirm.MenuItem_checked, 
-      .MenuItem_theme_confirm.FormItem_hovered {
+.MenuItem_theme_confirm.MenuItem_checked {
         background-color: #891;
         color: #fff;
       }
 
-.MenuItem_theme_confirm.MenuItem_checked .MenuItem-Icon, .MenuItem_theme_confirm.FormItem_hovered .MenuItem-Icon {
+.MenuItem_theme_confirm.MenuItem_checked .MenuItem-Icon {
           color: #fff;
           opacity: .5;
         }
 
-.MenuItem_theme_confirm.FormItem_hovered {
-        background-color: rgb(122, 138, 15);
-      }
-
 .MenuItem_theme_confirm.MenuItem_checked.FormItem_hovered {
-        background-color: rgb(109, 122, 14);
-        /* & .MenuItem-Icon {*/
-        /*   color: $primaryContrastColor;*/
-        /*   opacity: .5;*/
-        /* }*/
+        background-color: rgb(129, 145, 16);
       }
 
 .MenuItem_theme_select .MenuItem-Icon {
@@ -4749,27 +4672,18 @@ label.FormLabel-Control[for] {
         opacity: .75;
       }
 
-.MenuItem_theme_select.MenuItem_checked, 
-      .MenuItem_theme_select.FormItem_hovered {
+.MenuItem_theme_select.MenuItem_checked {
         background-color: #05b;
         color: #fff;
       }
 
-.MenuItem_theme_select.MenuItem_checked .MenuItem-Icon, .MenuItem_theme_select.FormItem_hovered .MenuItem-Icon {
+.MenuItem_theme_select.MenuItem_checked .MenuItem-Icon {
           color: #fff;
           opacity: .5;
         }
 
-.MenuItem_theme_select.FormItem_hovered {
-        background-color: rgb(0, 77, 168);
-      }
-
 .MenuItem_theme_select.MenuItem_checked.FormItem_hovered {
-        background-color: rgb(0, 68, 150);
-        /* & .MenuItem-Icon {*/
-        /*   color: $primaryContrastColor;*/
-        /*   opacity: .5;*/
-        /* }*/
+        background-color: rgb(0, 81, 178);
       }
 
 .MenuItem_theme_maroon .MenuItem-Icon {
@@ -4777,27 +4691,18 @@ label.FormLabel-Control[for] {
         opacity: .75;
       }
 
-.MenuItem_theme_maroon.MenuItem_checked, 
-      .MenuItem_theme_maroon.FormItem_hovered {
+.MenuItem_theme_maroon.MenuItem_checked {
         background-color: #800000;
         color: #fff;
       }
 
-.MenuItem_theme_maroon.MenuItem_checked .MenuItem-Icon, .MenuItem_theme_maroon.FormItem_hovered .MenuItem-Icon {
+.MenuItem_theme_maroon.MenuItem_checked .MenuItem-Icon {
           color: #fff;
           opacity: .5;
         }
 
-.MenuItem_theme_maroon.FormItem_hovered {
-        background-color: rgb(115, 0, 0);
-      }
-
 .MenuItem_theme_maroon.MenuItem_checked.FormItem_hovered {
-        background-color: rgb(102, 0, 0);
-        /* & .MenuItem-Icon {*/
-        /*   color: $primaryContrastColor;*/
-        /*   opacity: .5;*/
-        /* }*/
+        background-color: rgb(122, 0, 0);
       }
 
 .MenuItem_theme_red .MenuItem-Icon {
@@ -4805,27 +4710,18 @@ label.FormLabel-Control[for] {
         opacity: .75;
       }
 
-.MenuItem_theme_red.MenuItem_checked, 
-      .MenuItem_theme_red.FormItem_hovered {
+.MenuItem_theme_red.MenuItem_checked {
         background-color: #ff0000;
         color: #fff;
       }
 
-.MenuItem_theme_red.MenuItem_checked .MenuItem-Icon, .MenuItem_theme_red.FormItem_hovered .MenuItem-Icon {
+.MenuItem_theme_red.MenuItem_checked .MenuItem-Icon {
           color: #fff;
           opacity: .5;
         }
 
-.MenuItem_theme_red.FormItem_hovered {
-        background-color: rgb(230, 0, 0);
-      }
-
 .MenuItem_theme_red.MenuItem_checked.FormItem_hovered {
-        background-color: rgb(204, 0, 0);
-        /* & .MenuItem-Icon {*/
-        /*   color: $primaryContrastColor;*/
-        /*   opacity: .5;*/
-        /* }*/
+        background-color: rgb(242, 0, 0);
       }
 
 .MenuItem_theme_purple .MenuItem-Icon {
@@ -4833,27 +4729,18 @@ label.FormLabel-Control[for] {
         opacity: .75;
       }
 
-.MenuItem_theme_purple.MenuItem_checked, 
-      .MenuItem_theme_purple.FormItem_hovered {
+.MenuItem_theme_purple.MenuItem_checked {
         background-color: #800080;
         color: #fff;
       }
 
-.MenuItem_theme_purple.MenuItem_checked .MenuItem-Icon, .MenuItem_theme_purple.FormItem_hovered .MenuItem-Icon {
+.MenuItem_theme_purple.MenuItem_checked .MenuItem-Icon {
           color: #fff;
           opacity: .5;
         }
 
-.MenuItem_theme_purple.FormItem_hovered {
-        background-color: rgb(115, 0, 115);
-      }
-
 .MenuItem_theme_purple.MenuItem_checked.FormItem_hovered {
-        background-color: rgb(102, 0, 102);
-        /* & .MenuItem-Icon {*/
-        /*   color: $primaryContrastColor;*/
-        /*   opacity: .5;*/
-        /* }*/
+        background-color: rgb(122, 0, 122);
       }
 
 .MenuItem_theme_fuchsia .MenuItem-Icon {
@@ -4861,27 +4748,18 @@ label.FormLabel-Control[for] {
         opacity: .75;
       }
 
-.MenuItem_theme_fuchsia.MenuItem_checked, 
-      .MenuItem_theme_fuchsia.FormItem_hovered {
+.MenuItem_theme_fuchsia.MenuItem_checked {
         background-color: #ff00ff;
         color: #fff;
       }
 
-.MenuItem_theme_fuchsia.MenuItem_checked .MenuItem-Icon, .MenuItem_theme_fuchsia.FormItem_hovered .MenuItem-Icon {
+.MenuItem_theme_fuchsia.MenuItem_checked .MenuItem-Icon {
           color: #fff;
           opacity: .5;
         }
 
-.MenuItem_theme_fuchsia.FormItem_hovered {
-        background-color: rgb(230, 0, 230);
-      }
-
 .MenuItem_theme_fuchsia.MenuItem_checked.FormItem_hovered {
-        background-color: rgb(204, 0, 204);
-        /* & .MenuItem-Icon {*/
-        /*   color: $primaryContrastColor;*/
-        /*   opacity: .5;*/
-        /* }*/
+        background-color: rgb(242, 0, 242);
       }
 
 .MenuItem_theme_green .MenuItem-Icon {
@@ -4889,27 +4767,18 @@ label.FormLabel-Control[for] {
         opacity: .75;
       }
 
-.MenuItem_theme_green.MenuItem_checked, 
-      .MenuItem_theme_green.FormItem_hovered {
+.MenuItem_theme_green.MenuItem_checked {
         background-color: #008000;
         color: #fff;
       }
 
-.MenuItem_theme_green.MenuItem_checked .MenuItem-Icon, .MenuItem_theme_green.FormItem_hovered .MenuItem-Icon {
+.MenuItem_theme_green.MenuItem_checked .MenuItem-Icon {
           color: #fff;
           opacity: .5;
         }
 
-.MenuItem_theme_green.FormItem_hovered {
-        background-color: rgb(0, 115, 0);
-      }
-
 .MenuItem_theme_green.MenuItem_checked.FormItem_hovered {
-        background-color: rgb(0, 102, 0);
-        /* & .MenuItem-Icon {*/
-        /*   color: $primaryContrastColor;*/
-        /*   opacity: .5;*/
-        /* }*/
+        background-color: rgb(0, 122, 0);
       }
 
 .MenuItem_theme_olive .MenuItem-Icon {
@@ -4917,27 +4786,18 @@ label.FormLabel-Control[for] {
         opacity: .75;
       }
 
-.MenuItem_theme_olive.MenuItem_checked, 
-      .MenuItem_theme_olive.FormItem_hovered {
+.MenuItem_theme_olive.MenuItem_checked {
         background-color: #808000;
         color: #fff;
       }
 
-.MenuItem_theme_olive.MenuItem_checked .MenuItem-Icon, .MenuItem_theme_olive.FormItem_hovered .MenuItem-Icon {
+.MenuItem_theme_olive.MenuItem_checked .MenuItem-Icon {
           color: #fff;
           opacity: .5;
         }
 
-.MenuItem_theme_olive.FormItem_hovered {
-        background-color: rgb(115, 115, 0);
-      }
-
 .MenuItem_theme_olive.MenuItem_checked.FormItem_hovered {
-        background-color: rgb(102, 102, 0);
-        /* & .MenuItem-Icon {*/
-        /*   color: $primaryContrastColor;*/
-        /*   opacity: .5;*/
-        /* }*/
+        background-color: rgb(122, 122, 0);
       }
 
 .MenuItem_theme_navy .MenuItem-Icon {
@@ -4945,27 +4805,18 @@ label.FormLabel-Control[for] {
         opacity: .75;
       }
 
-.MenuItem_theme_navy.MenuItem_checked, 
-      .MenuItem_theme_navy.FormItem_hovered {
+.MenuItem_theme_navy.MenuItem_checked {
         background-color: #000080;
         color: #fff;
       }
 
-.MenuItem_theme_navy.MenuItem_checked .MenuItem-Icon, .MenuItem_theme_navy.FormItem_hovered .MenuItem-Icon {
+.MenuItem_theme_navy.MenuItem_checked .MenuItem-Icon {
           color: #fff;
           opacity: .5;
         }
 
-.MenuItem_theme_navy.FormItem_hovered {
-        background-color: rgb(0, 0, 115);
-      }
-
 .MenuItem_theme_navy.MenuItem_checked.FormItem_hovered {
-        background-color: rgb(0, 0, 102);
-        /* & .MenuItem-Icon {*/
-        /*   color: $primaryContrastColor;*/
-        /*   opacity: .5;*/
-        /* }*/
+        background-color: rgb(0, 0, 122);
       }
 
 .MenuItem_theme_blue .MenuItem-Icon {
@@ -4973,27 +4824,18 @@ label.FormLabel-Control[for] {
         opacity: .75;
       }
 
-.MenuItem_theme_blue.MenuItem_checked, 
-      .MenuItem_theme_blue.FormItem_hovered {
+.MenuItem_theme_blue.MenuItem_checked {
         background-color: #0000ff;
         color: #fff;
       }
 
-.MenuItem_theme_blue.MenuItem_checked .MenuItem-Icon, .MenuItem_theme_blue.FormItem_hovered .MenuItem-Icon {
+.MenuItem_theme_blue.MenuItem_checked .MenuItem-Icon {
           color: #fff;
           opacity: .5;
         }
 
-.MenuItem_theme_blue.FormItem_hovered {
-        background-color: rgb(0, 0, 230);
-      }
-
 .MenuItem_theme_blue.MenuItem_checked.FormItem_hovered {
-        background-color: rgb(0, 0, 204);
-        /* & .MenuItem-Icon {*/
-        /*   color: $primaryContrastColor;*/
-        /*   opacity: .5;*/
-        /* }*/
+        background-color: rgb(0, 0, 242);
       }
 
 .MenuItem_theme_teal .MenuItem-Icon {
@@ -5001,27 +4843,18 @@ label.FormLabel-Control[for] {
         opacity: .75;
       }
 
-.MenuItem_theme_teal.MenuItem_checked, 
-      .MenuItem_theme_teal.FormItem_hovered {
+.MenuItem_theme_teal.MenuItem_checked {
         background-color: #008080;
         color: #fff;
       }
 
-.MenuItem_theme_teal.MenuItem_checked .MenuItem-Icon, .MenuItem_theme_teal.FormItem_hovered .MenuItem-Icon {
+.MenuItem_theme_teal.MenuItem_checked .MenuItem-Icon {
           color: #fff;
           opacity: .5;
         }
 
-.MenuItem_theme_teal.FormItem_hovered {
-        background-color: rgb(0, 115, 115);
-      }
-
 .MenuItem_theme_teal.MenuItem_checked.FormItem_hovered {
-        background-color: rgb(0, 102, 102);
-        /* & .MenuItem-Icon {*/
-        /*   color: $primaryContrastColor;*/
-        /*   opacity: .5;*/
-        /* }*/
+        background-color: rgb(0, 122, 122);
       }
 
 .MenuItem_theme_orange .MenuItem-Icon {
@@ -5029,27 +4862,18 @@ label.FormLabel-Control[for] {
         opacity: .75;
       }
 
-.MenuItem_theme_orange.MenuItem_checked, 
-      .MenuItem_theme_orange.FormItem_hovered {
+.MenuItem_theme_orange.MenuItem_checked {
         background-color: #ffa500;
         color: #fff;
       }
 
-.MenuItem_theme_orange.MenuItem_checked .MenuItem-Icon, .MenuItem_theme_orange.FormItem_hovered .MenuItem-Icon {
+.MenuItem_theme_orange.MenuItem_checked .MenuItem-Icon {
           color: #fff;
           opacity: .5;
         }
 
-.MenuItem_theme_orange.FormItem_hovered {
-        background-color: rgb(230, 149, 0);
-      }
-
 .MenuItem_theme_orange.MenuItem_checked.FormItem_hovered {
-        background-color: rgb(204, 132, 0);
-        /* & .MenuItem-Icon {*/
-        /*   color: $primaryContrastColor;*/
-        /*   opacity: .5;*/
-        /* }*/
+        background-color: rgb(242, 157, 0);
       }
 
 .MenuItem_theme_blueviolet .MenuItem-Icon {
@@ -5057,27 +4881,18 @@ label.FormLabel-Control[for] {
         opacity: .75;
       }
 
-.MenuItem_theme_blueviolet.MenuItem_checked, 
-      .MenuItem_theme_blueviolet.FormItem_hovered {
+.MenuItem_theme_blueviolet.MenuItem_checked {
         background-color: #8a2be2;
         color: #fff;
       }
 
-.MenuItem_theme_blueviolet.MenuItem_checked .MenuItem-Icon, .MenuItem_theme_blueviolet.FormItem_hovered .MenuItem-Icon {
+.MenuItem_theme_blueviolet.MenuItem_checked .MenuItem-Icon {
           color: #fff;
           opacity: .5;
         }
 
-.MenuItem_theme_blueviolet.FormItem_hovered {
-        background-color: rgb(124, 39, 203);
-      }
-
 .MenuItem_theme_blueviolet.MenuItem_checked.FormItem_hovered {
-        background-color: rgb(110, 34, 181);
-        /* & .MenuItem-Icon {*/
-        /*   color: $primaryContrastColor;*/
-        /*   opacity: .5;*/
-        /* }*/
+        background-color: rgb(131, 41, 215);
       }
 
 .MenuItem_theme_brown .MenuItem-Icon {
@@ -5085,27 +4900,18 @@ label.FormLabel-Control[for] {
         opacity: .75;
       }
 
-.MenuItem_theme_brown.MenuItem_checked, 
-      .MenuItem_theme_brown.FormItem_hovered {
+.MenuItem_theme_brown.MenuItem_checked {
         background-color: #a52a2a;
         color: #fff;
       }
 
-.MenuItem_theme_brown.MenuItem_checked .MenuItem-Icon, .MenuItem_theme_brown.FormItem_hovered .MenuItem-Icon {
+.MenuItem_theme_brown.MenuItem_checked .MenuItem-Icon {
           color: #fff;
           opacity: .5;
         }
 
-.MenuItem_theme_brown.FormItem_hovered {
-        background-color: rgb(149, 38, 38);
-      }
-
 .MenuItem_theme_brown.MenuItem_checked.FormItem_hovered {
-        background-color: rgb(132, 34, 34);
-        /* & .MenuItem-Icon {*/
-        /*   color: $primaryContrastColor;*/
-        /*   opacity: .5;*/
-        /* }*/
+        background-color: rgb(157, 40, 40);
       }
 
 .MenuItem_theme_cadetblue .MenuItem-Icon {
@@ -5113,27 +4919,18 @@ label.FormLabel-Control[for] {
         opacity: .75;
       }
 
-.MenuItem_theme_cadetblue.MenuItem_checked, 
-      .MenuItem_theme_cadetblue.FormItem_hovered {
+.MenuItem_theme_cadetblue.MenuItem_checked {
         background-color: #5f9ea0;
         color: #fff;
       }
 
-.MenuItem_theme_cadetblue.MenuItem_checked .MenuItem-Icon, .MenuItem_theme_cadetblue.FormItem_hovered .MenuItem-Icon {
+.MenuItem_theme_cadetblue.MenuItem_checked .MenuItem-Icon {
           color: #fff;
           opacity: .5;
         }
 
-.MenuItem_theme_cadetblue.FormItem_hovered {
-        background-color: rgb(86, 142, 144);
-      }
-
 .MenuItem_theme_cadetblue.MenuItem_checked.FormItem_hovered {
-        background-color: rgb(76, 126, 128);
-        /* & .MenuItem-Icon {*/
-        /*   color: $primaryContrastColor;*/
-        /*   opacity: .5;*/
-        /* }*/
+        background-color: rgb(90, 150, 152);
       }
 
 .MenuItem_theme_darkblue .MenuItem-Icon {
@@ -5141,27 +4938,18 @@ label.FormLabel-Control[for] {
         opacity: .75;
       }
 
-.MenuItem_theme_darkblue.MenuItem_checked, 
-      .MenuItem_theme_darkblue.FormItem_hovered {
+.MenuItem_theme_darkblue.MenuItem_checked {
         background-color: #00008b;
         color: #fff;
       }
 
-.MenuItem_theme_darkblue.MenuItem_checked .MenuItem-Icon, .MenuItem_theme_darkblue.FormItem_hovered .MenuItem-Icon {
+.MenuItem_theme_darkblue.MenuItem_checked .MenuItem-Icon {
           color: #fff;
           opacity: .5;
         }
 
-.MenuItem_theme_darkblue.FormItem_hovered {
-        background-color: rgb(0, 0, 125);
-      }
-
 .MenuItem_theme_darkblue.MenuItem_checked.FormItem_hovered {
-        background-color: rgb(0, 0, 111);
-        /* & .MenuItem-Icon {*/
-        /*   color: $primaryContrastColor;*/
-        /*   opacity: .5;*/
-        /* }*/
+        background-color: rgb(0, 0, 132);
       }
 
 .MenuItem_theme_darkcyan .MenuItem-Icon {
@@ -5169,27 +4957,18 @@ label.FormLabel-Control[for] {
         opacity: .75;
       }
 
-.MenuItem_theme_darkcyan.MenuItem_checked, 
-      .MenuItem_theme_darkcyan.FormItem_hovered {
+.MenuItem_theme_darkcyan.MenuItem_checked {
         background-color: #008b8b;
         color: #fff;
       }
 
-.MenuItem_theme_darkcyan.MenuItem_checked .MenuItem-Icon, .MenuItem_theme_darkcyan.FormItem_hovered .MenuItem-Icon {
+.MenuItem_theme_darkcyan.MenuItem_checked .MenuItem-Icon {
           color: #fff;
           opacity: .5;
         }
 
-.MenuItem_theme_darkcyan.FormItem_hovered {
-        background-color: rgb(0, 125, 125);
-      }
-
 .MenuItem_theme_darkcyan.MenuItem_checked.FormItem_hovered {
-        background-color: rgb(0, 111, 111);
-        /* & .MenuItem-Icon {*/
-        /*   color: $primaryContrastColor;*/
-        /*   opacity: .5;*/
-        /* }*/
+        background-color: rgb(0, 132, 132);
       }
 
 .MenuItem_theme_darkgoldenrod .MenuItem-Icon {
@@ -5197,27 +4976,18 @@ label.FormLabel-Control[for] {
         opacity: .75;
       }
 
-.MenuItem_theme_darkgoldenrod.MenuItem_checked, 
-      .MenuItem_theme_darkgoldenrod.FormItem_hovered {
+.MenuItem_theme_darkgoldenrod.MenuItem_checked {
         background-color: #b8860b;
         color: #fff;
       }
 
-.MenuItem_theme_darkgoldenrod.MenuItem_checked .MenuItem-Icon, .MenuItem_theme_darkgoldenrod.FormItem_hovered .MenuItem-Icon {
+.MenuItem_theme_darkgoldenrod.MenuItem_checked .MenuItem-Icon {
           color: #fff;
           opacity: .5;
         }
 
-.MenuItem_theme_darkgoldenrod.FormItem_hovered {
-        background-color: rgb(166, 121, 10);
-      }
-
 .MenuItem_theme_darkgoldenrod.MenuItem_checked.FormItem_hovered {
-        background-color: rgb(147, 107, 9);
-        /* & .MenuItem-Icon {*/
-        /*   color: $primaryContrastColor;*/
-        /*   opacity: .5;*/
-        /* }*/
+        background-color: rgb(175, 127, 10);
       }
 
 .MenuItem_theme_darkorange .MenuItem-Icon {
@@ -5225,27 +4995,18 @@ label.FormLabel-Control[for] {
         opacity: .75;
       }
 
-.MenuItem_theme_darkorange.MenuItem_checked, 
-      .MenuItem_theme_darkorange.FormItem_hovered {
+.MenuItem_theme_darkorange.MenuItem_checked {
         background-color: #ff8c00;
         color: #fff;
       }
 
-.MenuItem_theme_darkorange.MenuItem_checked .MenuItem-Icon, .MenuItem_theme_darkorange.FormItem_hovered .MenuItem-Icon {
+.MenuItem_theme_darkorange.MenuItem_checked .MenuItem-Icon {
           color: #fff;
           opacity: .5;
         }
 
-.MenuItem_theme_darkorange.FormItem_hovered {
-        background-color: rgb(230, 126, 0);
-      }
-
 .MenuItem_theme_darkorange.MenuItem_checked.FormItem_hovered {
-        background-color: rgb(204, 112, 0);
-        /* & .MenuItem-Icon {*/
-        /*   color: $primaryContrastColor;*/
-        /*   opacity: .5;*/
-        /* }*/
+        background-color: rgb(242, 133, 0);
       }
 
 .MenuItem_theme_darkorchid .MenuItem-Icon {
@@ -5253,27 +5014,18 @@ label.FormLabel-Control[for] {
         opacity: .75;
       }
 
-.MenuItem_theme_darkorchid.MenuItem_checked, 
-      .MenuItem_theme_darkorchid.FormItem_hovered {
+.MenuItem_theme_darkorchid.MenuItem_checked {
         background-color: #9932cc;
         color: #fff;
       }
 
-.MenuItem_theme_darkorchid.MenuItem_checked .MenuItem-Icon, .MenuItem_theme_darkorchid.FormItem_hovered .MenuItem-Icon {
+.MenuItem_theme_darkorchid.MenuItem_checked .MenuItem-Icon {
           color: #fff;
           opacity: .5;
         }
 
-.MenuItem_theme_darkorchid.FormItem_hovered {
-        background-color: rgb(138, 45, 184);
-      }
-
 .MenuItem_theme_darkorchid.MenuItem_checked.FormItem_hovered {
-        background-color: rgb(122, 40, 163);
-        /* & .MenuItem-Icon {*/
-        /*   color: $primaryContrastColor;*/
-        /*   opacity: .5;*/
-        /* }*/
+        background-color: rgb(145, 48, 194);
       }
 
 .MenuItem_theme_darkred .MenuItem-Icon {
@@ -5281,27 +5033,18 @@ label.FormLabel-Control[for] {
         opacity: .75;
       }
 
-.MenuItem_theme_darkred.MenuItem_checked, 
-      .MenuItem_theme_darkred.FormItem_hovered {
+.MenuItem_theme_darkred.MenuItem_checked {
         background-color: #8b0000;
         color: #fff;
       }
 
-.MenuItem_theme_darkred.MenuItem_checked .MenuItem-Icon, .MenuItem_theme_darkred.FormItem_hovered .MenuItem-Icon {
+.MenuItem_theme_darkred.MenuItem_checked .MenuItem-Icon {
           color: #fff;
           opacity: .5;
         }
 
-.MenuItem_theme_darkred.FormItem_hovered {
-        background-color: rgb(125, 0, 0);
-      }
-
 .MenuItem_theme_darkred.MenuItem_checked.FormItem_hovered {
-        background-color: rgb(111, 0, 0);
-        /* & .MenuItem-Icon {*/
-        /*   color: $primaryContrastColor;*/
-        /*   opacity: .5;*/
-        /* }*/
+        background-color: rgb(132, 0, 0);
       }
 
 .MenuItem_theme_darkslateblue .MenuItem-Icon {
@@ -5309,27 +5052,18 @@ label.FormLabel-Control[for] {
         opacity: .75;
       }
 
-.MenuItem_theme_darkslateblue.MenuItem_checked, 
-      .MenuItem_theme_darkslateblue.FormItem_hovered {
+.MenuItem_theme_darkslateblue.MenuItem_checked {
         background-color: #483d8b;
         color: #fff;
       }
 
-.MenuItem_theme_darkslateblue.MenuItem_checked .MenuItem-Icon, .MenuItem_theme_darkslateblue.FormItem_hovered .MenuItem-Icon {
+.MenuItem_theme_darkslateblue.MenuItem_checked .MenuItem-Icon {
           color: #fff;
           opacity: .5;
         }
 
-.MenuItem_theme_darkslateblue.FormItem_hovered {
-        background-color: rgb(65, 55, 125);
-      }
-
 .MenuItem_theme_darkslateblue.MenuItem_checked.FormItem_hovered {
-        background-color: rgb(58, 49, 111);
-        /* & .MenuItem-Icon {*/
-        /*   color: $primaryContrastColor;*/
-        /*   opacity: .5;*/
-        /* }*/
+        background-color: rgb(68, 58, 132);
       }
 
 .MenuItem_theme_darkslategray .MenuItem-Icon {
@@ -5337,33 +5071,28 @@ label.FormLabel-Control[for] {
         opacity: .75;
       }
 
-.MenuItem_theme_darkslategray.MenuItem_checked, 
-      .MenuItem_theme_darkslategray.FormItem_hovered {
+.MenuItem_theme_darkslategray.MenuItem_checked {
         background-color: #2f4f4f;
         color: #fff;
       }
 
-.MenuItem_theme_darkslategray.MenuItem_checked .MenuItem-Icon, .MenuItem_theme_darkslategray.FormItem_hovered .MenuItem-Icon {
+.MenuItem_theme_darkslategray.MenuItem_checked .MenuItem-Icon {
           color: #fff;
           opacity: .5;
         }
 
-.MenuItem_theme_darkslategray.FormItem_hovered {
-        background-color: rgb(42, 71, 71);
-      }
-
 .MenuItem_theme_darkslategray.MenuItem_checked.FormItem_hovered {
-        background-color: rgb(38, 63, 63);
-        /* & .MenuItem-Icon {*/
-        /*   color: $primaryContrastColor;*/
-        /*   opacity: .5;*/
-        /* }*/
+        background-color: rgb(45, 75, 75);
       }
 
-.MenuItem:not(.MenuItem_wrap)-Text {
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+.MenuItem-Text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+.MenuItem_wrap .MenuItem-Text {
+      white-space: normal;
     }
 
 /** @module MenuItemSeparator.styles

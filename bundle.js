@@ -440,9 +440,9 @@ module.exports = { // Common-used build variables...
   DEV_DEBUG: DEV_DEBUG,
 
   THEME: "default",
-  buildTag: "v.0.3.8-210728-1855-build-dev-default",
-  timestamp: "2021.07.28, 18:55",
-  timetag: "210728-1855",
+  buildTag: "v.0.3.8-210806-1231-build-dev-default",
+  timestamp: "2021.08.06, 12:31",
+  timetag: "210806-1231",
   version: "0.3.8" };
 
 /***/ }),
@@ -4159,7 +4159,7 @@ __webpack_require__.r(__webpack_exports__);
  /** @module ModalWindow
  *  @class ModalWindow
  *  @since 2020.12.21, 22:58
- *  @changed 2021.07.16, 18:07
+ *  @changed 2021.07.28, 19:14
  *
  *  External methods (for PopupStack):
  *  - close
@@ -4201,6 +4201,7 @@ var selfCloseActionId = 'modalSelfClose';
 var externalCloseActionId = 'modalExternalClose';var
 
 ModalWindow = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_helpers_inheritsLoose__WEBPACK_IMPORTED_MODULE_2__.default)(ModalWindow, _React$PureComponent);function ModalWindow() {var _this;for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {args[_key] = arguments[_key];}_this = _React$PureComponent.call.apply(_React$PureComponent, [this].concat(args)) || this;(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3__.default)((0,_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1__.default)(_this), "ModalPortal",
+
 
 
 
@@ -4544,7 +4545,9 @@ ModalWindow = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_he
   windowTheme: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().string), // Window theme (using `theme` if not specified)
   wrapperClassName: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().string), // ModalWindow wrapper class name
   wrapperTheme: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().string), // Wrapper (back-curtain) theme (using `theme` if not specified)
-  lang: prop_types__WEBPACK_IMPORTED_MODULE_5___default().objectOf((prop_types__WEBPACK_IMPORTED_MODULE_5___default().object)) });(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3__.default)(ModalWindow, "defaultProps", { closeOnClickOutside: true, // Close (with `selfCloseActionId` action id) modal by outisde-click.
+  lang: prop_types__WEBPACK_IMPORTED_MODULE_5___default().objectOf((prop_types__WEBPACK_IMPORTED_MODULE_5___default().object)), // Internationalization data
+  closeText: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().string) // Close button title
+});(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3__.default)(ModalWindow, "defaultProps", { closeOnClickOutside: true, // Close (with `selfCloseActionId` action id) modal by outisde-click.
   closeOnEscPressed: true, // Close (with `selfCloseActionId` action id) modal by esc-key.
   closeWithCloseButton: true, // Close (with `selfCloseActionId` action id) with 'Close button' (if present in layout -- see `showCloseButton`)
   loaderTheme: 'MediumDark', loading: false, open: false, showCloseButton: false, // Display 'Close button'?
