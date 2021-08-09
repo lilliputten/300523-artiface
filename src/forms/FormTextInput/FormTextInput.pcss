@@ -60,10 +60,10 @@
       position: absolute;
       right: 8px;
       top: 6px; // ???
-      opacity: .5;
+      opacity: .7;
       cursor: pointer;
       &:hover { // Check for `disabled`?
-        opacity: .75;
+        opacity: .9;
       }
     }
   }
@@ -74,25 +74,49 @@
 
   transition: box-shadow $(transitionTime)ms;
 
+  @define-mixin styledTextInput $borderColor, $glowColor {
+    $hoveredBorderColor: color($borderColor shade(10));
+    $activeBorderColor: color($glowColor shade(15));
+    $hoveredFocusedBorderColor: color($activeBorderColor shade(5));
+    $hoveredGlowColor: color($borderColor alpha(1));
+    $activeGlowColor: color($glowColor alpha(.8));
+    @mixin FormItemFrame $borderColor, $(formItemBorderSize)px, 0px;
+    // @define-mixin FormItemFrame $borderColor, $innerSize, $innerGlowSize, $outerGlowColor, $outerSize, $outerGlowSize
+    &.FormItem_hovered {
+      @mixin FormItemFrame $hoveredBorderColor, $(formItemBorderSize)px, 1px, $hoveredGlowColor, 0px, $(formItemOuterGlow)px;
+      // @mixin FormItemFrame $hoveredBorderColor, $(formItemBorderSize)px, 1px, $hoveredGlowColor, 0px, $(formItemOuterGlow)px;
+    }
+    &.FormItem_focused {
+      @mixin FormItemFrame $activeBorderColor, $(formItemBorderSize)px, 1px, $activeGlowColor, 0px, 1px;
+    }
+    &.FormItem_focused.FormItem_hovered {
+      // @mixin FormItemFrame $activeBorderColor, $(formItemBorderSize)px, 1px, $activeGlowColor, 1px, $(formItemOuterGlow)px;
+      @mixin FormItemFrame $hoveredFocusedBorderColor, $(formItemBorderSize)px, 1px, $activeGlowColor, 1px, $(formItemOuterGlow)px;
+    }
+    & > .FormTextInput-Icon {
+      color: $borderColor;
+    }
+  }
+
   $borderColor: $formItemBorderColor;
   $glowColor: $formItemGlowColor;
-  $hoveredBorderColor: color($borderColor shade(10));
-  $activeBorderColor: color($glowColor shade(15));
-  $hoveredFocusedBorderColor: color($activeBorderColor shade(5));
-  $hoveredGlowColor: color($borderColor alpha(1)); // color($glowColor shade(10));
-  $activeGlowColor: color($glowColor alpha(.8));
-  @mixin FormItemFrame $borderColor, $(formItemBorderSize)px, 0px;
-  // @define-mixin FormItemFrame $borderColor, $innerSize, $innerGlowSize, $outerGlowColor, $outerSize, $outerGlowSize
-  &.FormItem_hovered {
-    @mixin FormItemFrame $hoveredBorderColor, $(formItemBorderSize)px, 1px, $hoveredGlowColor, 0px, $(formItemOuterGlow)px;
-    // @mixin FormItemFrame $hoveredBorderColor, $(formItemBorderSize)px, 1px, $hoveredGlowColor, 0px, $(formItemOuterGlow)px;
-  }
-  &.FormItem_focused {
-    @mixin FormItemFrame $activeBorderColor, $(formItemBorderSize)px, 1px, $activeGlowColor, 0px, 1px;
-  }
-  &.FormItem_focused.FormItem_hovered {
-    // @mixin FormItemFrame $activeBorderColor, $(formItemBorderSize)px, 1px, $activeGlowColor, 1px, $(formItemOuterGlow)px;
-    @mixin FormItemFrame $hoveredFocusedBorderColor, $(formItemBorderSize)px, 1px, $activeGlowColor, 1px, $(formItemOuterGlow)px;
+  @mixin styledTextInput $borderColor, $glowColor;
+
+  // Themes...
+
+  &_theme {
+    &_primary {
+      @mixin styledTextInput $primaryColor, $primaryColor;
+    }
+    &_secondary {
+      @mixin styledTextInput $secondaryColor, $secondaryColor;
+    }
+    // Theme colors...
+    @each $color $name in $themeColors {
+      &_$(name) {
+        @mixin styledTextInput $color, $color;
+      }
+    }
   }
 }
 

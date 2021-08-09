@@ -1,6 +1,6 @@
 /** @module FormTextInput.fixture
  *  @since 2020.10.07, 00:20
- *  @changed 2021.01.19, 16:08
+ *  @changed 2021.08.09, 11:47
  */
 
 import React from 'react';
@@ -72,6 +72,17 @@ const withIcon = (
   <FormTextInput
     icon="faEye"
     iconTitle="Show value"
+    placeholder="Themed with icon"
+    theme="error"
+  />
+);
+const disabledWithIcon = (
+  <FormTextInput
+    icon="faEye"
+    iconTitle="Show value"
+    placeholder="Disabled, themed with icon"
+    theme="error"
+    disabled
   />
 );
 const fullWidth = (
@@ -115,6 +126,7 @@ const numeric = (
 export default {
   simple,
   withIcon,
+  disabledWithIcon,
   fullWidth,
   withLabel,
   wrappedWithFormContext,

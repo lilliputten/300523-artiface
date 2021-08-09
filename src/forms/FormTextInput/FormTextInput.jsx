@@ -50,6 +50,7 @@ class FormTextInput extends React.PureComponent /** @lends @FormTextInput.protot
     placeholder: PropTypes.string,
     setDomRef: PropTypes.func,
     setInputDomRef: PropTypes.func,
+    theme: PropTypes.string,
     type: PropTypes.string,
     value: PropTypes.oneOfType([ PropTypes.string, PropTypes.number ]),
   }
@@ -164,6 +165,7 @@ class FormTextInput extends React.PureComponent /** @lends @FormTextInput.protot
       id,
       hasClear,
       className,
+      theme,
     } = this.props;
     const hasValue = this.hasValue();
     const hasClearActive = hasClear && hasValue;
@@ -173,6 +175,7 @@ class FormTextInput extends React.PureComponent /** @lends @FormTextInput.protot
       hasValue: this.hasValue(),
       hasClear,
       hasClearActive,
+      theme,
     }, [className]);
     return classList;
   }

@@ -215,6 +215,18 @@ export function errorToPlainString(error/* , opt */) {
 
 }
 
+export function isPromise(obj) {
+  return obj && typeof obj.then === 'function' && (obj instanceof Promise || (typeof Promise.isPromise === 'function' && Promise.isPromise(obj)));
+}
+
+export function isDeferred(obj) { // Only for vow lib?
+  return obj && typeof obj._promise && typeof Promise.isDeferred === 'function' && Promise.isDeferred(obj);
+}
+
+export function isArray(obj) {
+  return Array.isArray(obj);
+}
+
 export function safeStringify(obj, objId, depth, cache, cacheNames, nice) {
   // var hasJQuery = (typeof jQuery !== 'undefined');
   var status;
@@ -294,7 +306,8 @@ export function safeStringify(obj, objId, depth, cache, cacheNames, nice) {
       domId = '"[DomNode: ' + safeEscape(domId) + ']"';
       return domId;
     }
-    else if (typeof obj.then === 'function' && (obj instanceof Promise || (typeof Promise.isPromise === 'function' && Promise.isPromise(obj)))) { // Promise?
+    // else if (typeof obj.then === 'function' && (obj instanceof Promise || (typeof Promise.isPromise === 'function' && Promise.isPromise(obj)))) { // Promise?
+    else if (isPromise(obj)) { // Promise?
       status = obj._status && promiseStatusTexts[obj._status] || '';
       if (status) {
         status = ': ' + status;
@@ -304,7 +317,8 @@ export function safeStringify(obj, objId, depth, cache, cacheNames, nice) {
       }
       return '"[Promise' + status + ']"';
     }
-    else if (typeof obj._promise && typeof Promise.isDeferred === 'function' && Promise.isDeferred(obj)) { // vow: Deferred?
+    // else if (typeof obj._promise && typeof Promise.isDeferred === 'function' && Promise.isDeferred(obj)) { // vow: Deferred?
+    else if (isDeferred(obj)) { // vow: Deferred?
       status = obj._promise._status;
       return '"[Deferred status:' + status + ']"';
     }
