@@ -1,10 +1,11 @@
 /** @module ErrorContainer
  *  @desc Displays error messages
  *  @since 2021.05.07, 14:10
- *  @changed 2021.05.07, 14:10
+ *  @changed 2021.08.09, 12:04
  */
 
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 // import { cn } from '@bem-react/classname';
 import { cn } from 'utils/configure';
 import * as strings from 'utils/strings';
@@ -14,6 +15,12 @@ import './ErrorContainer.pcss';
 const cnErrorContainer = cn('ErrorContainer');
 
 class ErrorContainer extends PureComponent {
+
+  static propTypes = {
+    error: PropTypes.oneOfType([ PropTypes.string, PropTypes.array ]),
+    message: PropTypes.oneOfType([ PropTypes.string, PropTypes.array ]),
+    className: PropTypes.string,
+  }
 
   getErrorContent(error) {
     // const _origError = error;
@@ -52,6 +59,7 @@ class ErrorContainer extends PureComponent {
       </div>
     );
   }
+
 }
 
 export default ErrorContainer;
