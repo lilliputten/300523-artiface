@@ -1,5 +1,6 @@
 # CHANGELOG
 
+- 2021.08.06, 12:32 -- FormSelect: Changed color scheme (neutral highligting for hovers, theme accent for selected).
 - 2021.07.28, 18:56 -- ModalWindow: Translate 'Close window' button title.
 - 2021.07.26, 19:26 -- ModalsController: Removed global unhandled errors handler registration. FormTextInput: Use `onChange` (on client-authored changes) and `onUpdate` (on any updates) event handlers.
 - 2021.07.26, 13:27 -- FormSpacer: `size` prop (xs, sm, md (default), lg, xl). FormBooleanHOC: `onChecked` event handler (only for value:true changes), objects: `getDeepValue` function (plus test).
@@ -147,5 +148,5 @@
 - 2020.10.05, 20:38 -- v.0.0.15: Extracted `demoSupport.jsx` routines, fixture selection from url query (parameter `fixture`), added avaialble fixtures list if fixture to display is not specified, added DemoWrapper & demoTitle exportable ficture parameters for demo rendering.
 
 <!--
- @changed 2021.07.28, 18:56
+ @changed 2021.08.06, 12:33
 -->

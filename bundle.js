@@ -440,9 +440,9 @@ module.exports = { // Common-used build variables...
   DEV_DEBUG: DEV_DEBUG,
 
   THEME: "default",
-  buildTag: "v.0.3.8-210806-1231-build-dev-default",
-  timestamp: "2021.08.06, 12:31",
-  timetag: "210806-1231",
+  buildTag: "v.0.3.8-210809-1153-build-dev-default",
+  timestamp: "2021.08.09, 11:53",
+  timetag: "210809-1153",
   version: "0.3.8" };
 
 /***/ }),
@@ -9356,6 +9356,7 @@ FormTextInput = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_
 
 
 
+
   // Lifecycle...
 
   function FormTextInput(props) {var _this;
@@ -9488,6 +9489,8 @@ FormTextInput = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_
 
 
 
+
+
     function (event) {var _this$props2 =
       _this.props,disabled = _this$props2.disabled,inputId = _this$props2.inputId,id = _this$props2.id,onChange = _this$props2.onChange;var
       target = event.target;
@@ -9568,7 +9571,7 @@ FormTextInput = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_
     //   value,
     //   numericValue,
     // });
-    return value;};_proto.hasValue = function hasValue() {var value = this.state.value;return value != null && value !== '';};_proto.hasIcon = function hasIcon() {var _this$props5 = this.props,icon = _this$props5.icon,hasIcon = _this$props5.hasIcon,hasClear = _this$props5.hasClear;return hasIcon || !!icon || hasClear && this.hasValue();};_proto.getClassName = function getClassName() {var _this$props6 = this.props,id = _this$props6.id,hasClear = _this$props6.hasClear,className = _this$props6.className;var hasValue = this.hasValue();var hasClearActive = hasClear && hasValue;var classList = cnFormTextInput({ id: id, hasIcon: this.hasIcon(), hasValue: this.hasValue(), hasClear: hasClear, hasClearActive: hasClearActive }, [className]);return classList;} // Event handlers...
+    return value;};_proto.hasValue = function hasValue() {var value = this.state.value;return value != null && value !== '';};_proto.hasIcon = function hasIcon() {var _this$props5 = this.props,icon = _this$props5.icon,hasIcon = _this$props5.hasIcon,hasClear = _this$props5.hasClear;return hasIcon || !!icon || hasClear && this.hasValue();};_proto.getClassName = function getClassName() {var _this$props6 = this.props,id = _this$props6.id,hasClear = _this$props6.hasClear,className = _this$props6.className,theme = _this$props6.theme;var hasValue = this.hasValue();var hasClearActive = hasClear && hasValue;var classList = cnFormTextInput({ id: id, hasIcon: this.hasIcon(), hasValue: this.hasValue(), hasClear: hasClear, hasClearActive: hasClearActive, theme: theme }, [className]);return classList;} // Event handlers...
   ;_proto.changeValue = function changeValue(value) {var _this$props7 = this.props,disabled = _this$props7.disabled,inputId = _this$props7.inputId,id = _this$props7.id,onChange = _this$props7.onChange;value = this.getCorrectedValue(value);if (value !== this.state.value) {this.setState({ value: value });if (!disabled && typeof onChange === 'function') {var setId = id || inputId || name;onChange({ id: setId, value: value });}}}; // Render...
   _proto.renderClearIcon = function renderClearIcon() {// DELETE
     var _this$props8 = this.props,hasClear = _this$props8.hasClear,clearIcon = _this$props8.clearIcon,clearIconTitle = _this$props8.clearIconTitle,lang = _this$props8.lang;var hasValue = this.hasValue();var hasClearActive = hasClear && hasValue;var title = clearIconTitle || (0,_utils_lang__WEBPACK_IMPORTED_MODULE_7__.getCommonLangText)('clearButton', 'Clear', lang);return hasClearActive && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3___default().createElement(_elements_InlineIcon_index_ts__WEBPACK_IMPORTED_MODULE_8__.default, { icon: clearIcon || 'faTimes', className: cnFormTextInput('Icon', { mode: 'Clear' }), onClick: this.onClearClick, title: title });};_proto.renderIcon = function renderIcon() {// DELETE
@@ -9651,7 +9654,7 @@ FormTextInput = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_
 // export default FormItemHOC({ solid: true, hoverable: true, framed: true })(FormTextInput);
 (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2__.default)(FormTextInput, "propTypes", { // TODO: minValue, maxValue, maxLength
   allowEmpty: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), className: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), clearIcon: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), clearIconTitle: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), defaultValue: prop_types__WEBPACK_IMPORTED_MODULE_4___default().oneOfType([(prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), (prop_types__WEBPACK_IMPORTED_MODULE_4___default().number)]), disabled: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), hasClear: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), hasClearActive: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), hasIcon: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), hasValue: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), icon: prop_types__WEBPACK_IMPORTED_MODULE_4___default().oneOfType([(prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), (prop_types__WEBPACK_IMPORTED_MODULE_4___default().object)]), // Icon id or icon object
-  iconTitle: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), id: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), inputId: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), name: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), numericValue: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), onChange: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func), onUpdate: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func), onFocusIn: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func), onFocusOut: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func), onIconClick: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func), placeholder: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), setDomRef: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func), setInputDomRef: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func), type: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), value: prop_types__WEBPACK_IMPORTED_MODULE_4___default().oneOfType([(prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), (prop_types__WEBPACK_IMPORTED_MODULE_4___default().number)]) });(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2__.default)(FormTextInput, "defaultProps", { // allowEmpty: true,
+  iconTitle: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), id: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), inputId: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), name: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), numericValue: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), onChange: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func), onUpdate: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func), onFocusIn: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func), onFocusOut: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func), onIconClick: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func), placeholder: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), setDomRef: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func), setInputDomRef: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func), theme: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), type: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), value: prop_types__WEBPACK_IMPORTED_MODULE_4___default().oneOfType([(prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), (prop_types__WEBPACK_IMPORTED_MODULE_4___default().number)]) });(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2__.default)(FormTextInput, "defaultProps", { // allowEmpty: true,
   value: '' });/* harmony default export */ __webpack_exports__["default"] = ((0,redux__WEBPACK_IMPORTED_MODULE_5__.compose)( // withFormContext,
 _FormInteractiveItemHOC_index_ts__WEBPACK_IMPORTED_MODULE_10__.default, (0,_FormItemHOC_index_ts__WEBPACK_IMPORTED_MODULE_9__.default)({ solid: true, hoverable: true, focusable: true, framed: true }))(FormTextInput));
 
@@ -10514,6 +10517,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "arrayIndexOf": function() { return /* binding */ arrayIndexOf; },
 /* harmony export */   "asyncPromiseState": function() { return /* binding */ asyncPromiseState; },
 /* harmony export */   "errorToPlainString": function() { return /* binding */ errorToPlainString; },
+/* harmony export */   "isPromise": function() { return /* binding */ isPromise; },
+/* harmony export */   "isDeferred": function() { return /* binding */ isDeferred; },
+/* harmony export */   "isArray": function() { return /* binding */ isArray; },
 /* harmony export */   "safeStringify": function() { return /* binding */ safeStringify; },
 /* harmony export */   "getDeepValue": function() { return /* binding */ getDeepValue; }
 /* harmony export */ });
@@ -10726,6 +10732,18 @@ function errorToPlainString(error /* , opt */) {
 
 }
 
+function isPromise(obj) {
+  return obj && typeof obj.then === 'function' && (obj instanceof Promise || typeof Promise.isPromise === 'function' && Promise.isPromise(obj));
+}
+
+function isDeferred(obj) {// Only for vow lib?
+  return obj && typeof obj._promise && typeof Promise.isDeferred === 'function' && Promise.isDeferred(obj);
+}
+
+function isArray(obj) {
+  return Array.isArray(obj);
+}
+
 function safeStringify(obj, objId, depth, cache, cacheNames, nice) {
   // var hasJQuery = (typeof jQuery !== 'undefined');
   var status;
@@ -10804,96 +10822,98 @@ function safeStringify(obj, objId, depth, cache, cacheNames, nice) {
       }
       domId = '"[DomNode: ' + (0,_strings__WEBPACK_IMPORTED_MODULE_2__.safeEscape)(domId) + ']"';
       return domId;
-    } else
-    if (typeof obj.then === 'function' && (obj instanceof Promise || typeof Promise.isPromise === 'function' && Promise.isPromise(obj))) {// Promise?
-      status = obj._status && _config_constants__WEBPACK_IMPORTED_MODULE_1__.promiseStatusTexts[obj._status] || '';
-      if (status) {
-        status = ': ' + status;
-      }
-      if (obj.__id) {
-        status = ' ' + obj.__id + status;
-      }
-      return '"[Promise' + status + ']"';
-    } else
-    if (typeof obj._promise && typeof Promise.isDeferred === 'function' && Promise.isDeferred(obj)) {// vow: Deferred?
-      status = obj._promise._status;
-      return '"[Deferred status:' + status + ']"';
-    } else
-    if (typeof XMLHttpRequest === 'object' && obj instanceof XMLHttpRequest && obj.readyState != null) {// XHR?
-      // readyState values:
-      // 0 	UNSENT 	Client has been created. open() not called yet.
-      // 1 	OPENED 	open() has been called.
-      // 2 	HEADERS_RECEIVED 	send() has been called, and headers and status are available.
-      // 3 	LOADING 	Downloading; responseText holds partial data.
-      // 4 	DONE 	The operation is complete.
-      var readyState = obj.readyState;
-      var info = 'readyState:' + readyState;
-      if (readyState === 4) {
-        if (obj.status) {
-          info += ',status:' + obj.status;
-        }
-      }
-      return '"[XHR ' + (0,_strings__WEBPACK_IMPORTED_MODULE_2__.safeEscape)(info) + ']"';
     }
-    // TODO: Event object
-    else if (obj instanceof Error) {// Error?
-        // Using `UTILS.errorToPlainString` (included `errors` module to `UTILS`)
-        var message = errorToPlainString(obj, { showStack: true });
-        var stack = String(obj.stack || '').replace(_config_constants__WEBPACK_IMPORTED_MODULE_1__.errRegExp, '');
-        // Remove message duplicate from beggining of stack info
-        if (stack.indexOf(message) === 0) {
-          stack = stack.substr(message.length).trim();
+    // else if (typeof obj.then === 'function' && (obj instanceof Promise || (typeof Promise.isPromise === 'function' && Promise.isPromise(obj)))) { // Promise?
+    else if (isPromise(obj)) {// Promise?
+        status = obj._status && _config_constants__WEBPACK_IMPORTED_MODULE_1__.promiseStatusTexts[obj._status] || '';
+        if (status) {
+          status = ': ' + status;
         }
-        if (obj.name && obj.name !== 'Error') {// oxpd-style error
-          message = '[' + obj.name + '] ' + message;
+        if (obj.__id) {
+          status = ' ' + obj.__id + status;
         }
-        if (stack) {
-          message += '\n' + stack;
-        }
-        return (0,_strings__WEBPACK_IMPORTED_MODULE_2__.safeEscape)('Error: ' + message, true);
-      } else
-      if ((p = cache.indexOf(obj)) !== -1) {// Cyclic reference?
-        var cacheId = cacheNames[p];
-        return '"[cyclic: ' + (0,_strings__WEBPACK_IMPORTED_MODULE_2__.safeEscape)(cacheId) + ']"';
-      } else
-      if (obj instanceof Array || typeof jQuery !== 'undefined' && obj instanceof jQuery) {// Array, jQuery?
-        cache.push(obj);
-        cacheNames.push(objId);
-        res = _config_constants__WEBPACK_IMPORTED_MODULE_1__.squareOpen;
-        // p = obj.slice();
-        // p.sort();
-        for (n = 0; n < obj.length; n++) {
-          itemId = objId + _config_constants__WEBPACK_IMPORTED_MODULE_1__.squareOpen + n + _config_constants__WEBPACK_IMPORTED_MODULE_1__.squareClose;
-          val = obj[n];
-          if (n) {
-            res += ',';
-          }
-          res += niceNL + niceDepthSpace + this.safeStringify(val, itemId, depth + 1, cache, cacheNames, nice);
-        }
-        res += niceNL + niceBaseSpace + _config_constants__WEBPACK_IMPORTED_MODULE_1__.squareClose;
-        return res;
-      } else
-      {// Hash object...
-        cache.push(obj);
-        cacheNames.push(objId);
-        res = _config_constants__WEBPACK_IMPORTED_MODULE_1__.curlyOpen;
-        // var newObj = Object.keys(obj).reduce(function(newObj, id) {
-        p = Object.keys(obj);
-        p.sort();
-        for (n = 0; n < p.length; n++) {
-          id = p[n];
-          val = obj[id];
-          itemId = objId + (/\W/.test(id) ? _config_constants__WEBPACK_IMPORTED_MODULE_1__.squareOpen + id + _config_constants__WEBPACK_IMPORTED_MODULE_1__.squareClose : '.' + id);
-          if (n) {
-            res += ',';
-          }
-          val = this.safeStringify(val, itemId, depth + 1, cache, cacheNames, nice);
-          val = (0,_strings__WEBPACK_IMPORTED_MODULE_2__.safeEscape)(id, true) + ':' + val;
-          res += niceNL + niceDepthSpace + val;
-        }
-        res += niceNL + niceBaseSpace + _config_constants__WEBPACK_IMPORTED_MODULE_1__.curlyClose;
-        return res;
+        return '"[Promise' + status + ']"';
       }
+      // else if (typeof obj._promise && typeof Promise.isDeferred === 'function' && Promise.isDeferred(obj)) { // vow: Deferred?
+      else if (isDeferred(obj)) {// vow: Deferred?
+          status = obj._promise._status;
+          return '"[Deferred status:' + status + ']"';
+        } else
+        if (typeof XMLHttpRequest === 'object' && obj instanceof XMLHttpRequest && obj.readyState != null) {// XHR?
+          // readyState values:
+          // 0 	UNSENT 	Client has been created. open() not called yet.
+          // 1 	OPENED 	open() has been called.
+          // 2 	HEADERS_RECEIVED 	send() has been called, and headers and status are available.
+          // 3 	LOADING 	Downloading; responseText holds partial data.
+          // 4 	DONE 	The operation is complete.
+          var readyState = obj.readyState;
+          var info = 'readyState:' + readyState;
+          if (readyState === 4) {
+            if (obj.status) {
+              info += ',status:' + obj.status;
+            }
+          }
+          return '"[XHR ' + (0,_strings__WEBPACK_IMPORTED_MODULE_2__.safeEscape)(info) + ']"';
+        }
+        // TODO: Event object
+        else if (obj instanceof Error) {// Error?
+            // Using `UTILS.errorToPlainString` (included `errors` module to `UTILS`)
+            var message = errorToPlainString(obj, { showStack: true });
+            var stack = String(obj.stack || '').replace(_config_constants__WEBPACK_IMPORTED_MODULE_1__.errRegExp, '');
+            // Remove message duplicate from beggining of stack info
+            if (stack.indexOf(message) === 0) {
+              stack = stack.substr(message.length).trim();
+            }
+            if (obj.name && obj.name !== 'Error') {// oxpd-style error
+              message = '[' + obj.name + '] ' + message;
+            }
+            if (stack) {
+              message += '\n' + stack;
+            }
+            return (0,_strings__WEBPACK_IMPORTED_MODULE_2__.safeEscape)('Error: ' + message, true);
+          } else
+          if ((p = cache.indexOf(obj)) !== -1) {// Cyclic reference?
+            var cacheId = cacheNames[p];
+            return '"[cyclic: ' + (0,_strings__WEBPACK_IMPORTED_MODULE_2__.safeEscape)(cacheId) + ']"';
+          } else
+          if (obj instanceof Array || typeof jQuery !== 'undefined' && obj instanceof jQuery) {// Array, jQuery?
+            cache.push(obj);
+            cacheNames.push(objId);
+            res = _config_constants__WEBPACK_IMPORTED_MODULE_1__.squareOpen;
+            // p = obj.slice();
+            // p.sort();
+            for (n = 0; n < obj.length; n++) {
+              itemId = objId + _config_constants__WEBPACK_IMPORTED_MODULE_1__.squareOpen + n + _config_constants__WEBPACK_IMPORTED_MODULE_1__.squareClose;
+              val = obj[n];
+              if (n) {
+                res += ',';
+              }
+              res += niceNL + niceDepthSpace + this.safeStringify(val, itemId, depth + 1, cache, cacheNames, nice);
+            }
+            res += niceNL + niceBaseSpace + _config_constants__WEBPACK_IMPORTED_MODULE_1__.squareClose;
+            return res;
+          } else
+          {// Hash object...
+            cache.push(obj);
+            cacheNames.push(objId);
+            res = _config_constants__WEBPACK_IMPORTED_MODULE_1__.curlyOpen;
+            // var newObj = Object.keys(obj).reduce(function(newObj, id) {
+            p = Object.keys(obj);
+            p.sort();
+            for (n = 0; n < p.length; n++) {
+              id = p[n];
+              val = obj[id];
+              itemId = objId + (/\W/.test(id) ? _config_constants__WEBPACK_IMPORTED_MODULE_1__.squareOpen + id + _config_constants__WEBPACK_IMPORTED_MODULE_1__.squareClose : '.' + id);
+              if (n) {
+                res += ',';
+              }
+              val = this.safeStringify(val, itemId, depth + 1, cache, cacheNames, nice);
+              val = (0,_strings__WEBPACK_IMPORTED_MODULE_2__.safeEscape)(id, true) + ':' + val;
+              res += niceNL + niceDepthSpace + val;
+            }
+            res += niceNL + niceBaseSpace + _config_constants__WEBPACK_IMPORTED_MODULE_1__.curlyClose;
+            return res;
+          }
   }
   catch (error) {
     console.error(error); // eslint-disable-line no-console
