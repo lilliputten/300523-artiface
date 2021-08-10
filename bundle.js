@@ -440,9 +440,9 @@ module.exports = { // Common-used build variables...
   DEV_DEBUG: DEV_DEBUG,
 
   THEME: "default",
-  buildTag: "v.0.3.8-210809-1153-build-dev-default",
-  timestamp: "2021.08.09, 11:53",
-  timetag: "210809-1153",
+  buildTag: "v.0.3.8-210810-1350-build-dev-default",
+  timestamp: "2021.08.10, 13:50",
+  timetag: "210810-1350",
   version: "0.3.8" };
 
 /***/ }),
@@ -1386,16 +1386,20 @@ DateTimeSelector = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runti
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_helpers_inheritsLoose__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/inheritsLoose */ "./node_modules/@babel/runtime/helpers/esm/inheritsLoose.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _utils_configure__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../utils/configure */ "./src/utils/configure.js");
-/* harmony import */ var _utils_strings__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../utils/strings */ "./src/utils/strings.js");
-/* harmony import */ var _ErrorContainer_pcss__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./ErrorContainer.pcss */ "./src/elements/ErrorContainer/ErrorContainer.pcss");
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/esm/defineProperty.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _utils_configure__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../utils/configure */ "./src/utils/configure.js");
+/* harmony import */ var _utils_strings__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../utils/strings */ "./src/utils/strings.js");
+/* harmony import */ var _ErrorContainer_pcss__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./ErrorContainer.pcss */ "./src/elements/ErrorContainer/ErrorContainer.pcss");
  /** @module ErrorContainer
  *  @desc Displays error messages
  *  @since 2021.05.07, 14:10
- *  @changed 2021.05.07, 14:10
+ *  @changed 2021.08.09, 12:04
  */
+
 
 
 // import { cn } from '@bem-react/classname';
@@ -1404,16 +1408,22 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var cnErrorContainer = (0,_utils_configure__WEBPACK_IMPORTED_MODULE_2__.cn)('ErrorContainer');var
+var cnErrorContainer = (0,_utils_configure__WEBPACK_IMPORTED_MODULE_4__.cn)('ErrorContainer');var
 
 ErrorContainer = /*#__PURE__*/function (_PureComponent) {(0,_babel_runtime_helpers_inheritsLoose__WEBPACK_IMPORTED_MODULE_0__.default)(ErrorContainer, _PureComponent);function ErrorContainer() {return _PureComponent.apply(this, arguments) || this;}var _proto = ErrorContainer.prototype;_proto.
+
+
+
+
+
+
 
   getErrorContent = function getErrorContent(error) {
     // const _origError = error;
     if (Array.isArray(error)) {
       error = error.map(this.getErrorContent, this);
     } else
-    if (typeof error !== 'object' || ! /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().isValidElement(error)) {// If not react element...
+    if (typeof error !== 'object' || ! /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().isValidElement(error)) {// If not react element...
       // ...prepare text...
       if (error instanceof Error && error.message) {
         error = error.message;
@@ -1426,7 +1436,7 @@ ErrorContainer = /*#__PURE__*/function (_PureComponent) {(0,_babel_runtime_helpe
       }
       // TODO: To process html text?
       // `strings.html2string`?
-      error = _utils_strings__WEBPACK_IMPORTED_MODULE_3__.splitMultiline(error);
+      error = _utils_strings__WEBPACK_IMPORTED_MODULE_5__.splitMultiline(error);
     }
     return error;
   };_proto.
@@ -1440,11 +1450,12 @@ ErrorContainer = /*#__PURE__*/function (_PureComponent) {(0,_babel_runtime_helpe
     var error = this.getErrorContent(errors);
     var className = cnErrorContainer(null, [this.props.className]); // null, ['col-12 bg-danger p-2 mt-2 text-light']);
     return /*#__PURE__*/(
-      react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", { className: className },
+      react__WEBPACK_IMPORTED_MODULE_2___default().createElement("div", { className: className },
       error));
 
 
-  };return ErrorContainer;}(react__WEBPACK_IMPORTED_MODULE_1__.PureComponent);
+  };return ErrorContainer;}(react__WEBPACK_IMPORTED_MODULE_2__.PureComponent);(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1__.default)(ErrorContainer, "propTypes", { error: prop_types__WEBPACK_IMPORTED_MODULE_3___default().oneOfType([(prop_types__WEBPACK_IMPORTED_MODULE_3___default().string), (prop_types__WEBPACK_IMPORTED_MODULE_3___default().array)]), message: prop_types__WEBPACK_IMPORTED_MODULE_3___default().oneOfType([(prop_types__WEBPACK_IMPORTED_MODULE_3___default().string), (prop_types__WEBPACK_IMPORTED_MODULE_3___default().array)]), className: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().string) });
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = (ErrorContainer);
@@ -9357,10 +9368,37 @@ FormTextInput = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_
 
 
 
+
+
+
   // Lifecycle...
 
   function FormTextInput(props) {var _this;
     _this = _React$PureComponent.call(this, props) || this;(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2__.default)((0,_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_0__.default)(_this), "updateValueWithState",
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -9566,24 +9604,24 @@ FormTextInput = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_
       this.setState({ value: stateValue }, this.updateValueWithState); // this.updateValueWithState(this.state);
     }} // Helper methods...
   ;_proto.getCorrectedValue = function getCorrectedValue(value) {// const origValue = value;
-    var _this$props4 = this.props,numericValue = _this$props4.numericValue,defaultValue = _this$props4.defaultValue,allowEmpty = _this$props4.allowEmpty;if (numericValue && typeof value !== 'number') {value = String(value).replace(/[^0-9.,-]/g, '');value = parseInt(value, 10);if (isNaN(value)) {value = defaultValue || allowEmpty ? '' : 0;}} // console.log('FormTextInput:getCorrectedValue', {
+    var _this$props4 = this.props,numericValue = _this$props4.numericValue,defaultValue = _this$props4.defaultValue,allowEmpty = _this$props4.allowEmpty,maxLength = _this$props4.maxLength,maxValue = _this$props4.maxValue,minValue = _this$props4.minValue;if (maxLength && value.length > maxLength) {// Check maxLength...
+      value = value.substr(0, maxLength);}if (numericValue) {// Process number values...
+      if (typeof value !== 'number') {// Convert to number...
+        value = String(value).replace(/[^0-9.,-]/g, '');value = parseInt(value, 10);if (isNaN(value)) {value = defaultValue || allowEmpty ? '' : 0;}}if (value !== '') {// Check ranges for non-empty values...
+        if (minValue != null && value < minValue) {value = minValue;}if (maxValue != null && value > maxValue) {value = maxValue;}}} // console.log('FormTextInput:getCorrectedValue', {
     //   origValue,
     //   value,
     //   numericValue,
+    //   allowEmpty,
+    //   maxLength,
+    //   maxValue,
+    //   minValue,
     // });
     return value;};_proto.hasValue = function hasValue() {var value = this.state.value;return value != null && value !== '';};_proto.hasIcon = function hasIcon() {var _this$props5 = this.props,icon = _this$props5.icon,hasIcon = _this$props5.hasIcon,hasClear = _this$props5.hasClear;return hasIcon || !!icon || hasClear && this.hasValue();};_proto.getClassName = function getClassName() {var _this$props6 = this.props,id = _this$props6.id,hasClear = _this$props6.hasClear,className = _this$props6.className,theme = _this$props6.theme;var hasValue = this.hasValue();var hasClearActive = hasClear && hasValue;var classList = cnFormTextInput({ id: id, hasIcon: this.hasIcon(), hasValue: this.hasValue(), hasClear: hasClear, hasClearActive: hasClearActive, theme: theme }, [className]);return classList;} // Event handlers...
   ;_proto.changeValue = function changeValue(value) {var _this$props7 = this.props,disabled = _this$props7.disabled,inputId = _this$props7.inputId,id = _this$props7.id,onChange = _this$props7.onChange;value = this.getCorrectedValue(value);if (value !== this.state.value) {this.setState({ value: value });if (!disabled && typeof onChange === 'function') {var setId = id || inputId || name;onChange({ id: setId, value: value });}}}; // Render...
   _proto.renderClearIcon = function renderClearIcon() {// DELETE
     var _this$props8 = this.props,hasClear = _this$props8.hasClear,clearIcon = _this$props8.clearIcon,clearIconTitle = _this$props8.clearIconTitle,lang = _this$props8.lang;var hasValue = this.hasValue();var hasClearActive = hasClear && hasValue;var title = clearIconTitle || (0,_utils_lang__WEBPACK_IMPORTED_MODULE_7__.getCommonLangText)('clearButton', 'Clear', lang);return hasClearActive && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3___default().createElement(_elements_InlineIcon_index_ts__WEBPACK_IMPORTED_MODULE_8__.default, { icon: clearIcon || 'faTimes', className: cnFormTextInput('Icon', { mode: 'Clear' }), onClick: this.onClearClick, title: title });};_proto.renderIcon = function renderIcon() {// DELETE
-    var _this$props9 = this.props,icon = _this$props9.icon,iconTitle = _this$props9.iconTitle,onIconClick = _this$props9.onIconClick;return icon && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3___default().createElement(_elements_InlineIcon_index_ts__WEBPACK_IMPORTED_MODULE_8__.default, { icon: icon, className: cnFormTextInput('Icon'),
-      onClick: onIconClick,
-      title: iconTitle });
-
-
-  };_proto.
-
-  renderInput = function renderInput() {var
-
+    var _this$props9 = this.props,icon = _this$props9.icon,iconTitle = _this$props9.iconTitle,onIconClick = _this$props9.onIconClick;return icon && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3___default().createElement(_elements_InlineIcon_index_ts__WEBPACK_IMPORTED_MODULE_8__.default, { icon: icon, className: cnFormTextInput('Icon'), onClick: onIconClick, title: iconTitle });};_proto.renderInput = function renderInput() {var
     value =
     this.state.value;var _this$props10 =
 
@@ -9654,7 +9692,7 @@ FormTextInput = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_
 // export default FormItemHOC({ solid: true, hoverable: true, framed: true })(FormTextInput);
 (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2__.default)(FormTextInput, "propTypes", { // TODO: minValue, maxValue, maxLength
   allowEmpty: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), className: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), clearIcon: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), clearIconTitle: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), defaultValue: prop_types__WEBPACK_IMPORTED_MODULE_4___default().oneOfType([(prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), (prop_types__WEBPACK_IMPORTED_MODULE_4___default().number)]), disabled: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), hasClear: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), hasClearActive: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), hasIcon: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), hasValue: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), icon: prop_types__WEBPACK_IMPORTED_MODULE_4___default().oneOfType([(prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), (prop_types__WEBPACK_IMPORTED_MODULE_4___default().object)]), // Icon id or icon object
-  iconTitle: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), id: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), inputId: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), name: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), numericValue: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), onChange: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func), onUpdate: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func), onFocusIn: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func), onFocusOut: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func), onIconClick: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func), placeholder: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), setDomRef: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func), setInputDomRef: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func), theme: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), type: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), value: prop_types__WEBPACK_IMPORTED_MODULE_4___default().oneOfType([(prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), (prop_types__WEBPACK_IMPORTED_MODULE_4___default().number)]) });(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2__.default)(FormTextInput, "defaultProps", { // allowEmpty: true,
+  iconTitle: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), id: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), inputId: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), maxLength: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().number), maxValue: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().number), minValue: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().number), name: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), numericValue: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), onChange: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func), onUpdate: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func), onFocusIn: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func), onFocusOut: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func), onIconClick: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func), placeholder: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), setDomRef: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func), setInputDomRef: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func), theme: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), type: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), value: prop_types__WEBPACK_IMPORTED_MODULE_4___default().oneOfType([(prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), (prop_types__WEBPACK_IMPORTED_MODULE_4___default().number)]) });(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2__.default)(FormTextInput, "defaultProps", { // allowEmpty: true,
   value: '' });/* harmony default export */ __webpack_exports__["default"] = ((0,redux__WEBPACK_IMPORTED_MODULE_5__.compose)( // withFormContext,
 _FormInteractiveItemHOC_index_ts__WEBPACK_IMPORTED_MODULE_10__.default, (0,_FormItemHOC_index_ts__WEBPACK_IMPORTED_MODULE_9__.default)({ solid: true, hoverable: true, focusable: true, framed: true }))(FormTextInput));
 
@@ -10514,12 +10552,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "reverseKeyAndValue": function() { return /* binding */ reverseKeyAndValue; },
 /* harmony export */   "reverseDataHash": function() { return /* binding */ reverseDataHash; },
 /* harmony export */   "isDomElement": function() { return /* binding */ isDomElement; },
+/* harmony export */   "isArray": function() { return /* binding */ isArray; },
 /* harmony export */   "arrayIndexOf": function() { return /* binding */ arrayIndexOf; },
 /* harmony export */   "asyncPromiseState": function() { return /* binding */ asyncPromiseState; },
 /* harmony export */   "errorToPlainString": function() { return /* binding */ errorToPlainString; },
 /* harmony export */   "isPromise": function() { return /* binding */ isPromise; },
 /* harmony export */   "isDeferred": function() { return /* binding */ isDeferred; },
-/* harmony export */   "isArray": function() { return /* binding */ isArray; },
 /* harmony export */   "safeStringify": function() { return /* binding */ safeStringify; },
 /* harmony export */   "getDeepValue": function() { return /* binding */ getDeepValue; }
 /* harmony export */ });
@@ -10549,6 +10587,10 @@ function isDomElement(obj) {
   return !!obj && (typeof HTMLElement === 'object' ? obj instanceof HTMLElement : // DOM2
   typeof obj === 'object' && obj.nodeType === 1 && typeof obj.nodeName === 'string');
 
+}
+
+function isArray(obj) {
+  return Array.isArray(obj);
 }
 
 function arrayIndexOf(arr, find) {
@@ -10738,10 +10780,6 @@ function isPromise(obj) {
 
 function isDeferred(obj) {// Only for vow lib?
   return obj && typeof obj._promise && typeof Promise.isDeferred === 'function' && Promise.isDeferred(obj);
-}
-
-function isArray(obj) {
-  return Array.isArray(obj);
 }
 
 function safeStringify(obj, objId, depth, cache, cacheNames, nice) {
