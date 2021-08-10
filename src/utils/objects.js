@@ -34,6 +34,10 @@ export function isDomElement(obj) {
   );
 }
 
+export function isArray(obj) {
+  return Array.isArray(obj);
+}
+
 export function arrayIndexOf(arr, find) {
   if (!(arr instanceof Array) || !arr.length) {
     return -1;
@@ -221,10 +225,6 @@ export function isPromise(obj) {
 
 export function isDeferred(obj) { // Only for vow lib?
   return obj && typeof obj._promise && typeof Promise.isDeferred === 'function' && Promise.isDeferred(obj);
-}
-
-export function isArray(obj) {
-  return Array.isArray(obj);
 }
 
 export function safeStringify(obj, objId, depth, cache, cacheNames, nice) {

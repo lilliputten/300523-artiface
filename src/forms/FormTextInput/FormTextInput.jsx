@@ -40,6 +40,9 @@ class FormTextInput extends React.PureComponent /** @lends @FormTextInput.protot
     iconTitle: PropTypes.string,
     id: PropTypes.string,
     inputId: PropTypes.string,
+    maxLength: PropTypes.number,
+    maxValue: PropTypes.number,
+    minValue: PropTypes.number,
     name: PropTypes.string,
     numericValue: PropTypes.bool,
     onChange: PropTypes.func,
@@ -115,18 +118,42 @@ class FormTextInput extends React.PureComponent /** @lends @FormTextInput.protot
 
   getCorrectedValue(value) {
     // const origValue = value;
-    const { numericValue, defaultValue, allowEmpty } = this.props;
-    if (numericValue && typeof value !== 'number') {
-      value = String(value).replace(/[^0-9.,-]/g, '');
-      value = parseInt(value, 10);
-      if (isNaN(value)) {
-        value = defaultValue || allowEmpty ? '' : 0;
+    const {
+      numericValue,
+      defaultValue,
+      allowEmpty,
+      maxLength,
+      maxValue,
+      minValue,
+    } = this.props;
+    if (maxLength && value.length > maxLength) { // Check maxLength...
+      value = value.substr(0, maxLength);
+    }
+    if (numericValue) { // Process number values...
+      if (typeof value !== 'number') { // Convert to number...
+        value = String(value).replace(/[^0-9.,-]/g, '');
+        value = parseInt(value, 10);
+        if (isNaN(value)) {
+          value = defaultValue || allowEmpty ? '' : 0;
+        }
+      }
+      if (value !== '') { // Check ranges for non-empty values...
+        if (minValue != null && value < minValue) {
+          value = minValue;
+        }
+        if (maxValue != null && value > maxValue) {
+          value = maxValue;
+        }
       }
     }
     // console.log('FormTextInput:getCorrectedValue', {
     //   origValue,
     //   value,
     //   numericValue,
+    //   allowEmpty,
+    //   maxLength,
+    //   maxValue,
+    //   minValue,
     // });
     return value;
   }

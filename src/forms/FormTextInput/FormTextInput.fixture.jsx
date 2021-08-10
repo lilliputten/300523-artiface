@@ -2,6 +2,7 @@
  *  @since 2020.10.07, 00:20
  *  @changed 2021.08.09, 11:47
  */
+/* eslint-disable no-console */
 
 import React from 'react';
 import FormTextInput from './FormTextInput';
@@ -116,9 +117,12 @@ const numeric = (
     // inputId="simpleInputControl"
     value="1"
     hasClear
-    allowEmpty={false}
+    allowEmpty={true}
     fullWidth
     numericValue
+    maxLength={2}
+    minValue={2}
+    maxValue={20}
     onChange={onChange}
   />
 );
