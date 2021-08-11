@@ -1,7 +1,7 @@
 /** @module config.css
  *  @description Global styles config
  *  @since 2019.08.29, 10:28
- *  @changed 2021.07.07, 19:55
+ *  @changed 2021.08.11, 21:25
  */
 
 // Theme...
@@ -36,17 +36,19 @@ const infoColor = theme.infoColor || primaryColor; // '#29a' // '#9bd'
 const confirmColor = theme.confirmColor /* || primaryColor || textColor */ || '#891'; // '#07f'
 const selectColor = theme.selectColor || '#05b';
 
+const neutralColor = '#ccc';
+
 // module.exports = { // Common-used css variables...
 const cssConfig = { // Common-used css variables...
 
   THEME: THEME,
 
-  primaryColor: primaryColor,
+  // primaryColor: primaryColor, // Extends from themeColors
   primaryLightColor: primaryLightColor,
   primaryDarkColor: primaryDarkColor,
   primaryContrastColor: primaryContrastColor || '#fff',
 
-  secondaryColor: secondaryColor,
+  // secondaryColor: secondaryColor, // Extends from themeColors
   secondaryLightColor: secondaryLightColor,
   secondaryDarkColor: secondaryDarkColor,
   secondaryContrastColor: secondaryContrastColor || '#fff',
@@ -75,7 +77,7 @@ const cssConfig = { // Common-used css variables...
   neutralDarkColor: '#999',
   neutralTintedDarkColor: '#aaa',
   neutralShadedColor: '#bbb',
-  neutralColor: '#ccc',
+  // neutralColor: neutralColor, // '#ccc', // Extends from themeColors
   neutralTintedColor: '#d0d0d0',
   neutralLightColor: '#e0e0e0',
   neutralSuperLightColor: '#eee',
@@ -98,7 +100,7 @@ const cssConfig = { // Common-used css variables...
     primary: primaryColor,
     secondary: secondaryColor,
 
-    neutral: '#666',
+    neutral: neutralColor,
 
     error: errorColor,
     warn: warnColor,
@@ -110,9 +112,9 @@ const cssConfig = { // Common-used css variables...
     // red: '#c33',
     // orange: '#f73',
     // green: '#593',
-    // grassGreen: '#891',
-    // Blue: '#05b',
-    // lightBue: '#29a',
+    grassGreen: '#891',
+    softBlue: '#05b',
+    lightBlue: '#29a',
 
     maroon: '#800000',
     red: '#ff0000',
@@ -128,17 +130,17 @@ const cssConfig = { // Common-used css variables...
     // aqua: '#00ffff',
     orange: '#ffa500',
 
-    blueviolet: '#8a2be2',
+    blueViolet: '#8a2be2',
     brown: '#a52a2a',
-    cadetblue: '#5f9ea0',
-    darkblue: '#00008b',
-    darkcyan: '#008b8b',
-    darkgoldenrod: '#b8860b',
-    darkorange: '#ff8c00',
-    darkorchid: '#9932cc',
-    darkred: '#8b0000',
-    darkslateblue: '#483d8b',
-    darkslategray: '#2f4f4f',
+    cadetBlue: '#5f9ea0',
+    darkBlue: '#00008b',
+    darkCyan: '#008b8b',
+    darkGoldenRod: '#b8860b',
+    darkOrange: '#ff8c00',
+    darkOrchid: '#9932cc',
+    darkRed: '#8b0000',
+    darkSlateBlue: '#483d8b',
+    darkSlateGray: '#2f4f4f',
 
   },
 
@@ -225,6 +227,13 @@ const cssConfig = { // Common-used css variables...
   // useGlobalClipping: true,
 
 };
+
+// Expand `cssConfig.themeColors.*` to `cssConfig.*Color`
+Object.keys(cssConfig.themeColors).forEach(id => {
+  if (!cssConfig[id + 'Color']) {
+    cssConfig[id + 'Color'] = cssConfig.themeColors[id];
+  }
+});
 
 const formItemSpacing = 4;
 const formItemHeight = 32; // px
