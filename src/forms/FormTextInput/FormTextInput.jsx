@@ -222,18 +222,8 @@ class FormTextInput extends React.PureComponent /** @lends @FormTextInput.protot
   }
 
   handleChange = (event) => {
-    const { disabled, inputId, id, onChange } = this.props;
     const { target } = event;
     this.changeValue(target.value);
-    // const origValue = target.value;
-    // const value = this.getCorrectedValue(origValue);
-    // if (value !== this.state.value) {
-    //   this.setState({ value });
-    //   if (!disabled && typeof onChange === 'function') {
-    //     const setId = id || inputId || name;
-    //     onChange({ id: setId, value });
-    //   }
-    // }
   }
 
   onClearClick = () => {

@@ -118,8 +118,8 @@ const numeric = (
     // inputId="simpleInputControl"
     value="1"
     hasClear
-    allowEmpty={true}
     fullWidth
+    allowEmpty
     numericValue
     maxLength={2}
     minValue={2}

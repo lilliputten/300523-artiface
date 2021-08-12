@@ -44,7 +44,7 @@ class FormSelect extends React.PureComponent /** @lends @FormSelect.prototype */
     selected: PropTypes.arrayOf(PropTypes.oneOfType([ PropTypes.string, PropTypes.number ])),
     setDomRef: PropTypes.func,
     setPopupNodeRef: PropTypes.func,
-    singleChoice: PropTypes.oneOfType([ PropTypes.string, PropTypes.bool ]),
+    singleChoice: PropTypes.oneOfType([ PropTypes.string, PropTypes.bool ]), // false, true, 'forced'. See Menu `singleChoice` prop definition.
     text: PropTypes.string,
     title: PropTypes.string,
     value: PropTypes.oneOfType([ PropTypes.string, PropTypes.number ]),
@@ -105,16 +105,18 @@ class FormSelect extends React.PureComponent /** @lends @FormSelect.prototype */
     }
   }
   onMenuChange = (params) => {
-    const { onChange } = this.props;
-    const { selected, /* id, value */ } = params;
-    if (typeof onChange === 'function') {
-      const { id, inputId, name, singleChoice } = this.props;
-      const value = singleChoice ? selected[0] : selected;
-      const setId = id || inputId || name;
-      const setParams = { id: setId, selected, value };
-      onChange(setParams);
+    const { onChange, disabled } = this.props;
+    if (!disabled) {
+      const { selected, /* id, value */ } = params;
+      if (typeof onChange === 'function') {
+        const { id, inputId, name, singleChoice } = this.props;
+        const value = singleChoice ? selected[0] : selected;
+        const setId = id || inputId || name;
+        const setParams = { id: setId, inputId, name, selected, value };
+        onChange(setParams);
+      }
+      this.setState({ selected });
     }
-    this.setState({ selected });
   }
 
   setPopupRef = (node) => {

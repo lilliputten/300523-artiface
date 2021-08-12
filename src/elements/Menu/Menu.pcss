@@ -1,6 +1,6 @@
 /** @module Menu.styles
  *  @since 2020.10.27, 02:58
- *  @changed 2020.10.27, 02:58
+ *  @changed 2021.08.12, 21:30
  */
 
 .Menu {
@@ -24,6 +24,11 @@
       &_fullWidth {
         width: 100%;
       }
+    }
+  }
+  &_singleChoice_forced {
+    .MenuItem_checked {
+      cursor: default; // Inactive item
     }
   }
 }

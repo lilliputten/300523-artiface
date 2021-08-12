@@ -123,7 +123,7 @@ const wrapFormBooleanHOC = (WrappedComponent, params = {}) => class FormBoolean 
    */
 
   handleChange = (params) => {
-    const { onChange, onChecked, disabled, inputId } = this.props;
+    const { onChange, onChecked, disabled, inputId, name } = this.props;
     if (!disabled) {
       this.setState(({ value: stateValue }) => {
         let value = params && params.value;
@@ -135,7 +135,7 @@ const wrapFormBooleanHOC = (WrappedComponent, params = {}) => class FormBoolean 
       }, () => {
         const { value } = this.state;
         const id = inputId || this.id;
-        const cbData = { id, value };
+        const cbData = { id, value, inputId, name };
         if (typeof onChange === 'function') {
           onChange(cbData);
         }

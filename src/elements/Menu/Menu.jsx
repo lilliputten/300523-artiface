@@ -1,7 +1,7 @@
 /** @module Menu
  *  @class Menu
  *  @since 2020.10.27, 02:58
- *  @changed 2021.02.15, 18:28
+ *  @changed 2021.08.12, 21:30
  */
 
 import React from 'react';
@@ -33,7 +33,7 @@ class Menu extends React.PureComponent /** @lends @Menu.prototype */ {
     checkedItemTheme: PropTypes.string,
     itemTheme: PropTypes.string,
     layout: PropTypes.string,
-    mode: PropTypes.string, // ???
+    // mode: PropTypes.string, // ???
     onChange: PropTypes.func,
     onClick: PropTypes.func,
     selectable: PropTypes.bool,
@@ -51,14 +51,16 @@ class Menu extends React.PureComponent /** @lends @Menu.prototype */ {
     const {
       id,
       disabled,
-      mode,
+      // mode,
       layout,
+      singleChoice,
     } = this.props;
     const className = cnMenu({
       id,
       disabled,
-      mode,
+      // mode,
       layout,
+      singleChoice,
     }, [this.props.className]);
     return className;
   }
