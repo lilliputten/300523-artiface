@@ -440,9 +440,9 @@ module.exports = { // Common-used build variables...
   DEV_DEBUG: DEV_DEBUG,
 
   THEME: "default",
-  buildTag: "v.0.3.8-210812-1218-build-dev-default",
-  timestamp: "2021.08.12, 12:18",
-  timetag: "210812-1218",
+  buildTag: "v.0.3.8-210812-2134-build-dev-default",
+  timestamp: "2021.08.12, 21:34",
+  timetag: "210812-2134",
   version: "0.3.8" };
 
 /***/ }),
@@ -1978,7 +1978,7 @@ __webpack_require__.r(__webpack_exports__);
  /** @module Menu
  *  @class Menu
  *  @since 2020.10.27, 02:58
- *  @changed 2021.02.15, 18:28
+ *  @changed 2021.08.12, 21:30
  */
 
 
@@ -2028,12 +2028,14 @@ Menu = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_helpers_i
 
 
 
-    this.props,id = _this$props.id,disabled = _this$props.disabled,mode = _this$props.mode,layout = _this$props.layout;
+
+    this.props,id = _this$props.id,disabled = _this$props.disabled,layout = _this$props.layout,singleChoice = _this$props.singleChoice;
     var className = cnMenu({
       id: id,
       disabled: disabled,
-      mode: mode,
-      layout: layout },
+      // mode,
+      layout: layout,
+      singleChoice: singleChoice },
     [this.props.className]);
     return className;
   };_proto.
@@ -2250,7 +2252,7 @@ Menu = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_helpers_i
 
 
 
-  };return Menu;}((react__WEBPACK_IMPORTED_MODULE_4___default().PureComponent) /** @lends @Menu.prototype */);(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3__.default)(Menu, "propTypes", { className: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().string), disabled: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().bool), id: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().string), checkedItemTheme: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().string), itemTheme: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().string), layout: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().string), mode: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().string), // ???
+  };return Menu;}((react__WEBPACK_IMPORTED_MODULE_4___default().PureComponent) /** @lends @Menu.prototype */);(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3__.default)(Menu, "propTypes", { className: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().string), disabled: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().bool), id: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().string), checkedItemTheme: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().string), itemTheme: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().string), layout: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().string), // mode: PropTypes.string, // ???
   onChange: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().func), onClick: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().func), selectable: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().bool), selected: prop_types__WEBPACK_IMPORTED_MODULE_5___default().arrayOf(prop_types__WEBPACK_IMPORTED_MODULE_5___default().oneOfType([(prop_types__WEBPACK_IMPORTED_MODULE_5___default().string), (prop_types__WEBPACK_IMPORTED_MODULE_5___default().number)])), setDomRef: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().func), singleChoice: prop_types__WEBPACK_IMPORTED_MODULE_5___default().oneOfType([(prop_types__WEBPACK_IMPORTED_MODULE_5___default().string), (prop_types__WEBPACK_IMPORTED_MODULE_5___default().bool)]), // false, true, 'forced'
   value: prop_types__WEBPACK_IMPORTED_MODULE_5___default().oneOfType([(prop_types__WEBPACK_IMPORTED_MODULE_5___default().string), (prop_types__WEBPACK_IMPORTED_MODULE_5___default().number)]), // ???
   wrapContent: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().bool) });
@@ -5659,7 +5661,7 @@ var wrapFormBooleanHOC = function wrapFormBooleanHOC(WrappedComponent, params) {
 
 
       function (params) {var _this$props2 =
-        _this.props,onChange = _this$props2.onChange,onChecked = _this$props2.onChecked,disabled = _this$props2.disabled,inputId = _this$props2.inputId;
+        _this.props,onChange = _this$props2.onChange,onChecked = _this$props2.onChecked,disabled = _this$props2.disabled,inputId = _this$props2.inputId,name = _this$props2.name;
         if (!disabled) {
           _this.setState(function (_ref) {var stateValue = _ref.value;
             var value = params && params.value;
@@ -5671,7 +5673,7 @@ var wrapFormBooleanHOC = function wrapFormBooleanHOC(WrappedComponent, params) {
           }, function () {var
             value = _this.state.value;
             var id = inputId || _this.id;
-            var cbData = { id: id, value: value };
+            var cbData = { id: id, value: value, inputId: inputId, name: name };
             if (typeof onChange === 'function') {
               onChange(cbData);
             }
@@ -9089,17 +9091,19 @@ FormSelect = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_hel
         _this.popupNode.close();
       }
     });(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2__.default)((0,_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_0__.default)(_this), "onMenuChange",
-    function (params) {var
-      onChange = _this.props.onChange;var
-      selected = params.selected;
-      if (typeof onChange === 'function') {var _this$props2 =
-        _this.props,id = _this$props2.id,inputId = _this$props2.inputId,name = _this$props2.name,singleChoice = _this$props2.singleChoice;
-        var value = singleChoice ? selected[0] : selected;
-        var setId = id || inputId || name;
-        var setParams = { id: setId, selected: selected, value: value };
-        onChange(setParams);
+    function (params) {var _this$props2 =
+      _this.props,onChange = _this$props2.onChange,disabled = _this$props2.disabled;
+      if (!disabled) {var
+        selected = params.selected;
+        if (typeof onChange === 'function') {var _this$props3 =
+          _this.props,id = _this$props3.id,inputId = _this$props3.inputId,name = _this$props3.name,singleChoice = _this$props3.singleChoice;
+          var value = singleChoice ? selected[0] : selected;
+          var setId = id || inputId || name;
+          var setParams = { id: setId, inputId: inputId, name: name, selected: selected, value: value };
+          onChange(setParams);
+        }
+        _this.setState({ selected: selected });
       }
-      _this.setState({ selected: selected });
     });(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2__.default)((0,_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_0__.default)(_this), "setPopupRef",
 
     function (node) {var
@@ -9118,7 +9122,7 @@ FormSelect = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_hel
     return _this;} // Helper methods...
   var _proto = FormSelect.prototype;_proto.getClassName = function getClassName() {var id = this.id;var classList = cnFormSelect({ id: id }, [this.props.className]);return classList;};_proto.getItemsText = function getItemsText() {var selected = this.state.selected;var options = this.props.options;var text = Array.isArray(options) && Array.isArray(selected) && options.map(function (_ref2) {var val = _ref2.val,text = _ref2.text;if (selected.includes(val)) {return text;}}).filter(Boolean).join(', ');return text;} // Handlers...
   ; // Render...
-  _proto.renderControlContent = function renderControlContent() {var _this$props3 =
+  _proto.renderControlContent = function renderControlContent() {var _this$props4 =
 
 
 
@@ -9126,7 +9130,7 @@ FormSelect = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_hel
 
 
 
-    this.props,text = _this$props3.text,placeholder = _this$props3.placeholder,title = _this$props3.title,controlButtonTheme = _this$props3.controlButtonTheme,fullWidth = _this$props3.fullWidth,disabled = _this$props3.disabled,inputId = _this$props3.inputId,maxWidth = _this$props3.maxWidth;var
+    this.props,text = _this$props4.text,placeholder = _this$props4.placeholder,title = _this$props4.title,controlButtonTheme = _this$props4.controlButtonTheme,fullWidth = _this$props4.fullWidth,disabled = _this$props4.disabled,inputId = _this$props4.inputId,maxWidth = _this$props4.maxWidth;var
     open = this.state.open;
     var buttonText = this.getItemsText() || placeholder || text;
     var style = { maxWidth: maxWidth };
@@ -9149,7 +9153,7 @@ FormSelect = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_hel
 
   };_proto.
 
-  renderMenuContent = function renderMenuContent() {var _this$props4 =
+  renderMenuContent = function renderMenuContent() {var _this$props5 =
 
 
 
@@ -9158,7 +9162,7 @@ FormSelect = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_hel
 
 
 
-    this.props,singleChoice = _this$props4.singleChoice,options = _this$props4.options,disabled = _this$props4.disabled,itemTheme = _this$props4.itemTheme,wrapContent = _this$props4.wrapContent;var
+    this.props,singleChoice = _this$props5.singleChoice,options = _this$props5.options,disabled = _this$props5.disabled,itemTheme = _this$props5.itemTheme,wrapContent = _this$props5.wrapContent;var
 
     selected =
     this.state.selected;
@@ -9180,7 +9184,7 @@ FormSelect = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_hel
 
   };_proto.
 
-  render = function render() {var _this$props5 =
+  render = function render() {var _this$props6 =
 
 
 
@@ -9189,7 +9193,7 @@ FormSelect = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_hel
 
 
 
-    this.props,id = _this$props5.id,disabled = _this$props5.disabled,title = _this$props5.title,open = _this$props5.open,fullWidth = _this$props5.fullWidth,setDomRef = _this$props5.setDomRef;
+    this.props,id = _this$props6.id,disabled = _this$props6.disabled,title = _this$props6.title,open = _this$props6.open,fullWidth = _this$props6.fullWidth,setDomRef = _this$props6.setDomRef;
 
     var controlContent = this.renderControlContent();
     var menuContent = this.renderMenuContent();
@@ -9217,8 +9221,8 @@ FormSelect = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_hel
   };return FormSelect;}((react__WEBPACK_IMPORTED_MODULE_3___default().PureComponent) /** @lends @FormSelect.prototype */);(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2__.default)(FormSelect, "propTypes", { // setNodeRef: PropTypes.func,
   // value: PropTypes.oneOfType([ PropTypes.string, PropTypes.number, PropTypes.arrayOf(PropTypes.oneOfType([ PropTypes.string, PropTypes.number ])) ]),
   closeOnSelect: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), controlButtonTheme: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), // itemSelectedTheme: PropTypes.string,
-  wrapContent: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), disabled: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), fullWidth: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), id: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), inputId: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), name: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), onChange: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func), onControlClick: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func), onMenuItemClick: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func), open: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), options: prop_types__WEBPACK_IMPORTED_MODULE_4___default().arrayOf(prop_types__WEBPACK_IMPORTED_MODULE_4___default().shape({ val: prop_types__WEBPACK_IMPORTED_MODULE_4___default().oneOfType([(prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), (prop_types__WEBPACK_IMPORTED_MODULE_4___default().number)]), text: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string) })), placeholder: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), selected: prop_types__WEBPACK_IMPORTED_MODULE_4___default().arrayOf(prop_types__WEBPACK_IMPORTED_MODULE_4___default().oneOfType([(prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), (prop_types__WEBPACK_IMPORTED_MODULE_4___default().number)])), setDomRef: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func), setPopupNodeRef: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func), singleChoice: prop_types__WEBPACK_IMPORTED_MODULE_4___default().oneOfType([(prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool)]), text: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), title: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), value: prop_types__WEBPACK_IMPORTED_MODULE_4___default().oneOfType([(prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), (prop_types__WEBPACK_IMPORTED_MODULE_4___default().number)]), style: prop_types__WEBPACK_IMPORTED_MODULE_4___default().oneOfType([(prop_types__WEBPACK_IMPORTED_MODULE_4___default().object), (prop_types__WEBPACK_IMPORTED_MODULE_4___default().array)]) });
-/* harmony default export */ __webpack_exports__["default"] = ((0,_FormItemHOC_index_ts__WEBPACK_IMPORTED_MODULE_6__.default)({ solid: true, hoverable: true })(FormSelect));
+  wrapContent: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), disabled: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), fullWidth: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), id: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), inputId: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), name: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), onChange: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func), onControlClick: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func), onMenuItemClick: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func), open: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), options: prop_types__WEBPACK_IMPORTED_MODULE_4___default().arrayOf(prop_types__WEBPACK_IMPORTED_MODULE_4___default().shape({ val: prop_types__WEBPACK_IMPORTED_MODULE_4___default().oneOfType([(prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), (prop_types__WEBPACK_IMPORTED_MODULE_4___default().number)]), text: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string) })), placeholder: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), selected: prop_types__WEBPACK_IMPORTED_MODULE_4___default().arrayOf(prop_types__WEBPACK_IMPORTED_MODULE_4___default().oneOfType([(prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), (prop_types__WEBPACK_IMPORTED_MODULE_4___default().number)])), setDomRef: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func), setPopupNodeRef: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func), singleChoice: prop_types__WEBPACK_IMPORTED_MODULE_4___default().oneOfType([(prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool)]), // false, true, 'forced'. See Menu `singleChoice` prop definition.
+  text: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), title: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), value: prop_types__WEBPACK_IMPORTED_MODULE_4___default().oneOfType([(prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), (prop_types__WEBPACK_IMPORTED_MODULE_4___default().number)]), style: prop_types__WEBPACK_IMPORTED_MODULE_4___default().oneOfType([(prop_types__WEBPACK_IMPORTED_MODULE_4___default().object), (prop_types__WEBPACK_IMPORTED_MODULE_4___default().array)]) });/* harmony default export */ __webpack_exports__["default"] = ((0,_FormItemHOC_index_ts__WEBPACK_IMPORTED_MODULE_6__.default)({ solid: true, hoverable: true })(FormSelect));
 
 /***/ }),
 
@@ -9318,7 +9322,7 @@ __webpack_require__.r(__webpack_exports__);
  /** @module FormTextInput
  *  @class FormTextInput
  *  @since 2020.10.07, 00:20
- *  @changed 2021.07.26, 19:24
+ *  @changed 2021.08.12, 12:16
  */
 /* eslint-disable react/require-default-props */
 
@@ -9538,23 +9542,13 @@ FormTextInput = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_
 
 
 
-    function (event) {var _this$props2 =
-      _this.props,disabled = _this$props2.disabled,inputId = _this$props2.inputId,id = _this$props2.id,onChange = _this$props2.onChange;var
+    function (event) {var
       target = event.target;
       _this.changeValue(target.value);
-      // const origValue = target.value;
-      // const value = this.getCorrectedValue(origValue);
-      // if (value !== this.state.value) {
-      //   this.setState({ value });
-      //   if (!disabled && typeof onChange === 'function') {
-      //     const setId = id || inputId || name;
-      //     onChange({ id: setId, value });
-      //   }
-      // }
     });(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2__.default)((0,_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_0__.default)(_this), "onClearClick",
 
-    function () {var _this$props3 =
-      _this.props,disabled = _this$props3.disabled,allowEmpty = _this$props3.allowEmpty,numericValue = _this$props3.numericValue;
+    function () {var _this$props2 =
+      _this.props,disabled = _this$props2.disabled,allowEmpty = _this$props2.allowEmpty,numericValue = _this$props2.numericValue;
       if (!disabled) {
         var value = numericValue && !allowEmpty ? 0 : '';
         _this.changeValue(value);
@@ -9613,7 +9607,7 @@ FormTextInput = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_
       this.setState({ value: stateValue }, this.updateValueWithState); // this.updateValueWithState(this.state);
     }} // Helper methods...
   ;_proto.getCorrectedValue = function getCorrectedValue(value) {// const origValue = value;
-    var _this$props4 = this.props,numericValue = _this$props4.numericValue,defaultValue = _this$props4.defaultValue,allowEmpty = _this$props4.allowEmpty,maxLength = _this$props4.maxLength,maxValue = _this$props4.maxValue,minValue = _this$props4.minValue;if (maxLength && value.length > maxLength) {// Check maxLength...
+    var _this$props3 = this.props,numericValue = _this$props3.numericValue,defaultValue = _this$props3.defaultValue,allowEmpty = _this$props3.allowEmpty,maxLength = _this$props3.maxLength,maxValue = _this$props3.maxValue,minValue = _this$props3.minValue;if (maxLength && value.length > maxLength) {// Check maxLength...
       value = value.substr(0, maxLength);}if (numericValue) {// Process number values...
       if (typeof value !== 'number') {// Convert to number...
         value = String(value).replace(/[^0-9.,-]/g, '');value = parseInt(value, 10);if (isNaN(value)) {value = defaultValue || allowEmpty ? '' : 0;}}if (value !== '') {// Check ranges for non-empty values...
@@ -9626,13 +9620,13 @@ FormTextInput = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_
     //   maxValue,
     //   minValue,
     // });
-    return value;};_proto.hasValue = function hasValue() {var value = this.state.value;return value != null && value !== '';};_proto.hasIcon = function hasIcon() {var _this$props5 = this.props,icon = _this$props5.icon,hasIcon = _this$props5.hasIcon,hasClear = _this$props5.hasClear;return hasIcon || !!icon || hasClear && this.hasValue();};_proto.getClassName = function getClassName() {var _this$props6 = this.props,id = _this$props6.id,hasClear = _this$props6.hasClear,className = _this$props6.className,theme = _this$props6.theme;var hasValue = this.hasValue();var hasClearActive = hasClear && hasValue;var classList = cnFormTextInput({ id: id, hasIcon: this.hasIcon(), hasValue: this.hasValue(), hasClear: hasClear, hasClearActive: hasClearActive, theme: theme }, [className]);return classList;} // Event handlers...
-  ;_proto.changeValue = function changeValue(value) {var _this$props7 = this.props,disabled = _this$props7.disabled,inputId = _this$props7.inputId,id = _this$props7.id,onChange = _this$props7.onChange,name = _this$props7.name;value = this.getCorrectedValue(value);if (value !== this.state.value) {this.setState({ value: value });if (!disabled && typeof onChange === 'function') {var setId = id || inputId || name;onChange({ id: setId, inputId: inputId, name: name, value: value });}}}; // Render...
+    return value;};_proto.hasValue = function hasValue() {var value = this.state.value;return value != null && value !== '';};_proto.hasIcon = function hasIcon() {var _this$props4 = this.props,icon = _this$props4.icon,hasIcon = _this$props4.hasIcon,hasClear = _this$props4.hasClear;return hasIcon || !!icon || hasClear && this.hasValue();};_proto.getClassName = function getClassName() {var _this$props5 = this.props,id = _this$props5.id,hasClear = _this$props5.hasClear,className = _this$props5.className,theme = _this$props5.theme;var hasValue = this.hasValue();var hasClearActive = hasClear && hasValue;var classList = cnFormTextInput({ id: id, hasIcon: this.hasIcon(), hasValue: this.hasValue(), hasClear: hasClear, hasClearActive: hasClearActive, theme: theme }, [className]);return classList;} // Event handlers...
+  ;_proto.changeValue = function changeValue(value) {var _this$props6 = this.props,disabled = _this$props6.disabled,inputId = _this$props6.inputId,id = _this$props6.id,onChange = _this$props6.onChange,name = _this$props6.name;value = this.getCorrectedValue(value);if (value !== this.state.value) {this.setState({ value: value });if (!disabled && typeof onChange === 'function') {var setId = id || inputId || name;onChange({ id: setId, inputId: inputId, name: name, value: value });}}}; // Render...
   _proto.renderClearIcon = function renderClearIcon() {// DELETE
-    var _this$props8 = this.props,hasClear = _this$props8.hasClear,clearIcon = _this$props8.clearIcon,clearIconTitle = _this$props8.clearIconTitle,lang = _this$props8.lang;var hasValue = this.hasValue();var hasClearActive = hasClear && hasValue;var title = clearIconTitle || (0,_utils_lang__WEBPACK_IMPORTED_MODULE_7__.getCommonLangText)('clearButton', 'Clear', lang);return hasClearActive && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3___default().createElement(_elements_InlineIcon_index_ts__WEBPACK_IMPORTED_MODULE_8__.default, { icon: clearIcon || 'faTimes', className: cnFormTextInput('Icon', { mode: 'Clear' }), onClick: this.onClearClick, title: title });};_proto.renderIcon = function renderIcon() {// DELETE
-    var _this$props9 = this.props,icon = _this$props9.icon,iconTitle = _this$props9.iconTitle,onIconClick = _this$props9.onIconClick;return icon && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3___default().createElement(_elements_InlineIcon_index_ts__WEBPACK_IMPORTED_MODULE_8__.default, { icon: icon, className: cnFormTextInput('Icon'), onClick: onIconClick, title: iconTitle });};_proto.renderInput = function renderInput() {var
+    var _this$props7 = this.props,hasClear = _this$props7.hasClear,clearIcon = _this$props7.clearIcon,clearIconTitle = _this$props7.clearIconTitle,lang = _this$props7.lang;var hasValue = this.hasValue();var hasClearActive = hasClear && hasValue;var title = clearIconTitle || (0,_utils_lang__WEBPACK_IMPORTED_MODULE_7__.getCommonLangText)('clearButton', 'Clear', lang);return hasClearActive && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3___default().createElement(_elements_InlineIcon_index_ts__WEBPACK_IMPORTED_MODULE_8__.default, { icon: clearIcon || 'faTimes', className: cnFormTextInput('Icon', { mode: 'Clear' }), onClick: this.onClearClick, title: title });};_proto.renderIcon = function renderIcon() {// DELETE
+    var _this$props8 = this.props,icon = _this$props8.icon,iconTitle = _this$props8.iconTitle,onIconClick = _this$props8.onIconClick;return icon && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3___default().createElement(_elements_InlineIcon_index_ts__WEBPACK_IMPORTED_MODULE_8__.default, { icon: icon, className: cnFormTextInput('Icon'), onClick: onIconClick, title: iconTitle });};_proto.renderInput = function renderInput() {var
     value =
-    this.state.value;var _this$props10 =
+    this.state.value;var _this$props9 =
 
 
 
@@ -9641,7 +9635,7 @@ FormTextInput = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_
 
 
 
-    this.props,id = _this$props10.id,inputId = _this$props10.inputId,name = _this$props10.name,disabled = _this$props10.disabled,placeholder = _this$props10.placeholder,_this$props10$type = _this$props10.type,type = _this$props10$type === void 0 ? 'text' : _this$props10$type;
+    this.props,id = _this$props9.id,inputId = _this$props9.inputId,name = _this$props9.name,disabled = _this$props9.disabled,placeholder = _this$props9.placeholder,_this$props9$type = _this$props9.type,type = _this$props9$type === void 0 ? 'text' : _this$props9$type;
 
     var inputProps = {
       key: 'Input',
@@ -9665,7 +9659,7 @@ FormTextInput = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_
 
   };_proto.
 
-  render = function render() {var _this$props11 =
+  render = function render() {var _this$props10 =
 
 
 
@@ -9673,7 +9667,7 @@ FormTextInput = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_
 
 
 
-    this.props,id = _this$props11.id,disabled = _this$props11.disabled,_this$props11$type = _this$props11.type,type = _this$props11$type === void 0 ? 'text' : _this$props11$type,title = _this$props11.title,setDomRef = _this$props11.setDomRef;
+    this.props,id = _this$props10.id,disabled = _this$props10.disabled,_this$props10$type = _this$props10.type,type = _this$props10$type === void 0 ? 'text' : _this$props10$type,title = _this$props10.title,setDomRef = _this$props10.setDomRef;
 
     var inputElem = this.renderInput();
 
