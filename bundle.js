@@ -440,9 +440,9 @@ module.exports = { // Common-used build variables...
   DEV_DEBUG: DEV_DEBUG,
 
   THEME: "default",
-  buildTag: "v.0.3.8-210811-2124-build-dev-default",
-  timestamp: "2021.08.11, 21:24",
-  timetag: "210811-2124",
+  buildTag: "v.0.3.8-210812-1218-build-dev-default",
+  timestamp: "2021.08.12, 12:18",
+  timetag: "210812-1218",
   version: "0.3.8" };
 
 /***/ }),
@@ -541,7 +541,7 @@ var maxShowStringLength = 300;
 /** @module config.css
  *  @description Global styles config
  *  @since 2019.08.29, 10:28
- *  @changed 2021.07.07, 19:55
+ *  @changed 2021.08.11, 21:25
  */
 
 // Theme...
@@ -768,9 +768,11 @@ var cssConfig = { // Common-used css variables...
 };
 
 
-// Expand themeColors to `*Color`
+// Expand `cssConfig.themeColors.*` to `cssConfig.*Color`
 Object.keys(cssConfig.themeColors).forEach(function (id) {
-  cssConfig[id + 'Color'] = cssConfig.themeColors[id];
+  if (!cssConfig[id + 'Color']) {
+    cssConfig[id + 'Color'] = cssConfig.themeColors[id];
+  }
 });
 
 var formItemSpacing = 4;
@@ -9625,7 +9627,7 @@ FormTextInput = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_
     //   minValue,
     // });
     return value;};_proto.hasValue = function hasValue() {var value = this.state.value;return value != null && value !== '';};_proto.hasIcon = function hasIcon() {var _this$props5 = this.props,icon = _this$props5.icon,hasIcon = _this$props5.hasIcon,hasClear = _this$props5.hasClear;return hasIcon || !!icon || hasClear && this.hasValue();};_proto.getClassName = function getClassName() {var _this$props6 = this.props,id = _this$props6.id,hasClear = _this$props6.hasClear,className = _this$props6.className,theme = _this$props6.theme;var hasValue = this.hasValue();var hasClearActive = hasClear && hasValue;var classList = cnFormTextInput({ id: id, hasIcon: this.hasIcon(), hasValue: this.hasValue(), hasClear: hasClear, hasClearActive: hasClearActive, theme: theme }, [className]);return classList;} // Event handlers...
-  ;_proto.changeValue = function changeValue(value) {var _this$props7 = this.props,disabled = _this$props7.disabled,inputId = _this$props7.inputId,id = _this$props7.id,onChange = _this$props7.onChange;value = this.getCorrectedValue(value);if (value !== this.state.value) {this.setState({ value: value });if (!disabled && typeof onChange === 'function') {var setId = id || inputId || name;onChange({ id: setId, value: value });}}}; // Render...
+  ;_proto.changeValue = function changeValue(value) {var _this$props7 = this.props,disabled = _this$props7.disabled,inputId = _this$props7.inputId,id = _this$props7.id,onChange = _this$props7.onChange,name = _this$props7.name;value = this.getCorrectedValue(value);if (value !== this.state.value) {this.setState({ value: value });if (!disabled && typeof onChange === 'function') {var setId = id || inputId || name;onChange({ id: setId, inputId: inputId, name: name, value: value });}}}; // Render...
   _proto.renderClearIcon = function renderClearIcon() {// DELETE
     var _this$props8 = this.props,hasClear = _this$props8.hasClear,clearIcon = _this$props8.clearIcon,clearIconTitle = _this$props8.clearIconTitle,lang = _this$props8.lang;var hasValue = this.hasValue();var hasClearActive = hasClear && hasValue;var title = clearIconTitle || (0,_utils_lang__WEBPACK_IMPORTED_MODULE_7__.getCommonLangText)('clearButton', 'Clear', lang);return hasClearActive && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3___default().createElement(_elements_InlineIcon_index_ts__WEBPACK_IMPORTED_MODULE_8__.default, { icon: clearIcon || 'faTimes', className: cnFormTextInput('Icon', { mode: 'Clear' }), onClick: this.onClearClick, title: title });};_proto.renderIcon = function renderIcon() {// DELETE
     var _this$props9 = this.props,icon = _this$props9.icon,iconTitle = _this$props9.iconTitle,onIconClick = _this$props9.onIconClick;return icon && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3___default().createElement(_elements_InlineIcon_index_ts__WEBPACK_IMPORTED_MODULE_8__.default, { icon: icon, className: cnFormTextInput('Icon'), onClick: onIconClick, title: iconTitle });};_proto.renderInput = function renderInput() {var

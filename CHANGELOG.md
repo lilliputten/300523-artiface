@@ -1,5 +1,6 @@
 # CHANGELOG
 
+- 2021.08.11, 21:36 -- Expand `cssConfig.themeColors.*` to `cssConfig.*Color`.
 - 2021.08.10, 13:57 -- FormTextInput: Added properties: maxLength, minValue, maxValue.
 - 2021.08.09, 11:56 -- utils.objects: Added functions: `isPromise`, `isDeferred`, `isArray`. FormTextInput: Added `theme` property (stylized with `config/css:themeColors` values).
 - 2021.08.06, 12:32 -- FormSelect: Changed color scheme (neutral highligting for hovers, theme accent for selected).
@@ -150,5 +151,5 @@
 - 2020.10.05, 20:38 -- v.0.0.15: Extracted `demoSupport.jsx` routines, fixture selection from url query (parameter `fixture`), added avaialble fixtures list if fixture to display is not specified, added DemoWrapper & demoTitle exportable ficture parameters for demo rendering.
 
 <!--
- @changed 2021.08.10, 13:58
+ @changed 2021.08.11, 21:36
 -->
