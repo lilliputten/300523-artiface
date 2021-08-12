@@ -1,7 +1,7 @@
 /** @module FormTextInput
  *  @class FormTextInput
  *  @since 2020.10.07, 00:20
- *  @changed 2021.07.26, 19:24
+ *  @changed 2021.08.12, 12:16
  */
 /* eslint-disable react/require-default-props */
 
@@ -210,13 +210,13 @@ class FormTextInput extends React.PureComponent /** @lends @FormTextInput.protot
   // Event handlers...
 
   changeValue(value) {
-    const { disabled, inputId, id, onChange } = this.props;
+    const { disabled, inputId, id, onChange, name } = this.props;
     value = this.getCorrectedValue(value);
     if (value !== this.state.value) {
       this.setState({ value });
       if (!disabled && typeof onChange === 'function') {
         const setId = id || inputId || name;
-        onChange({ id: setId, value });
+        onChange({ id: setId, inputId, name, value });
       }
     }
   }

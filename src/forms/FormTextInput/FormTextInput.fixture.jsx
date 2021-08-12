@@ -1,6 +1,6 @@
 /** @module FormTextInput.fixture
  *  @since 2020.10.07, 00:20
- *  @changed 2021.08.09, 11:47
+ *  @changed 2021.08.12, 12:16
  */
 /* eslint-disable no-console */
 
@@ -19,9 +19,10 @@ import { FormContextProvider } from 'helpers/FormContext';
 // export const DemoWrapper = FormGroup // ({ children }) => {
 export const DemoWrapper = <FormGroup stack id="Wrapper" />; // ({ children }) => {
 
-const onChange = ({ id, value }) => {
+const onChange = ({ id, name, value }) => {
   console.log('FormTextInput:fixture:onChange', {
     id,
+    name,
     value,
   });
   // debugger;
@@ -39,6 +40,8 @@ class WithFormContext extends React.PureComponent {
           className="WithFormContext"
           type="text"
           id="WithFormContext"
+          inputId="inputId"
+          name="inputName"
           value="With Form Context"
           placeholder="placeholder"
           title="title"
@@ -53,25 +56,23 @@ const simple = (
   <FormTextInput
     className="addClassName"
     type="text"
-    name="name"
     id="simpleInput"
+    name="inputName"
     inputId="simpleInputControl"
-    value="text value"
+    value="simple"
     placeholder="placeholder"
     title="title"
     hasClear
     fullWidth
-    /*
-    simpleValue="simpleValue"
-    onChange={this.onLimitChange}
-    onFocusOut={this.validateValues}
-    disabled={false}
-    */
+    onChange={onChange}
+    // simpleValue="simpleValue"
+    // onFocusOut={this.validateValues}
+    // disabled={false}
   />
 );
 const withIcon = (
   <FormTextInput
-    icon="faEye"
+    icon="faExclamationTriangle"
     iconTitle="Show value"
     placeholder="Themed with icon"
     theme="error"
@@ -79,7 +80,7 @@ const withIcon = (
 );
 const disabledWithIcon = (
   <FormTextInput
-    icon="faEye"
+    icon="faExclamationTriangle"
     iconTitle="Show value"
     placeholder="Disabled, themed with icon"
     theme="error"

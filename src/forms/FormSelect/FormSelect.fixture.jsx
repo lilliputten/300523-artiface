@@ -67,7 +67,7 @@ export default {
       // itemSelectedTheme="success"
       onChange={demoChange}
       singleChoice
-      // closeOnSelect
+      closeOnSelect
       wrapContent
       maxWidth={100}
     />
