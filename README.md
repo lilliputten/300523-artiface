@@ -3,8 +3,8 @@
 ## Build info (auto-generated)
 
 - Version: 0.3.8
-- Last changes timestamp: 2021.08.13, 13:45
-- Last changes timetag: 210813-1345
+- Last changes timestamp: 2021.08.13, 14:41
+- Last changes timetag: 210813-1441
 
 ## Documents
 
@@ -95,9 +95,27 @@ npm run -s build
 npm run -s publish
 ```
 
+or
+
+```shell
+util-publish.sh
+```
+
 NOTE: Target repository specified in npm script `postinstall-publish-submodule`.
 
 TODO: To use external automation scripts? To use crossplatform replacements for posix commands?
+
+### Complex build & update command
+
+```shell
+sh ./util-update-build-variables.sh && npm run -s build && sh ./util-publish-update.sh && sh ./util-publish.sh
+```
+
+It updates all build variables, makes build, update build files in publish folder and publish build to repository.
+
+NOTE: You can use `util-publish-update-debug.sh` for update target project (if it located in `../WebUi`).
+
+And `util-update-core-lib.sh` can be used from target project path (assuming same location considerations).
 
 ## Installation & usage in target project
 
@@ -144,5 +162,5 @@ render(<App />, document.getElementById('root'));
 ```
 
 <!--
- @changed 2021.01.17, 19:59
+ @changed 2021.08.13, 14:50
 -->
