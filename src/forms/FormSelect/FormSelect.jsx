@@ -34,6 +34,7 @@ class FormSelect extends React.PureComponent /** @lends @FormSelect.prototype */
     fullWidth: PropTypes.bool,
     id: PropTypes.string,
     inputId: PropTypes.string,
+    itemTheme: PropTypes.string,
     name: PropTypes.string,
     onChange: PropTypes.func,
     onControlClick: PropTypes.func,

@@ -1,6 +1,6 @@
 /** @module FormSelect.fixture
  *  @since 2020.10.28, 22:49
- *  @changed 2021.07.07, 19:55
+ *  @changed 2021.08.13, 13:47
  */
 /* eslint-disable react/jsx-max-depth, no-console */
 
@@ -17,6 +17,11 @@ import './FormSelect.fixture.pcss';
 
 // export const DemoWrapper = FormGroup // ({ children }) => {
 export const DemoWrapper = <FormGroup stack id="Wrapper" />; // ({ children }) => {
+
+const xlOptions = Array.from(Array(30).keys()).map(val => {
+  ++val;
+  return { text: String(val), val };
+});
 
 const demoOptions = [
   { val: 1, text: 'Ruinning' },
@@ -55,6 +60,7 @@ export default {
       text="Select"
       options={demoOptions}
       onChange={demoChange}
+      itemTheme="primary"
     />
   ),
   withExtraOptions: (
@@ -140,4 +146,19 @@ export default {
    *   </div>
    * ),
    */
+  xlOptions: ( // Used for testing clippping & scrolling (see `.ModalPortal_type_Popup .ModalPortal-Window: overflow: auto|hidden` in `ModalPopup.pcss`)
+    <FormLabeledGroup id="xlOptions" htmlFor="xlOptions-Label" title="xlOptions" fullWidth flow>
+      <FormSelect
+        inputId="xlOptions-Label"
+        title="xlOptions"
+        placeholder="Select some option"
+        // selected={[1]}
+        onChange={demoChange}
+        options={xlOptions}
+        // controlButtonTheme="default"
+        itemTheme="primary"
+        fullWidth
+      />
+    </FormLabeledGroup>
+  ),
 };
