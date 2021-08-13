@@ -89,7 +89,7 @@ util-update-build-variables.sh
 npm run -s build
 ```
 
-### Update & push `publish` repository:
+### Update & push build to `publish` repository:
 
 ```shell
 npm run -s publish
@@ -98,7 +98,7 @@ npm run -s publish
 or
 
 ```shell
-util-publish.sh
+sh ./util-publish.sh
 ```
 
 NOTE: Target repository specified in npm script `postinstall-publish-submodule`.
@@ -116,6 +116,20 @@ It updates all build variables, makes build, update build files in publish folde
 NOTE: You can use `util-publish-update-debug.sh` for update target project (if it located in `../WebUi`).
 
 And `util-update-core-lib.sh` can be used from target project path (assuming same location considerations).
+
+### Push sources with version tag
+
+You can automatically update current version tag (taken from automatically-managed `build-version.txt`) with command:
+
+```shell
+sh ./util-push-with-version-tag.sh
+```
+
+Increment patch version number with:
+
+```shell
+sh ./util-increment-version.sh
+```
 
 ## Installation & usage in target project
 
