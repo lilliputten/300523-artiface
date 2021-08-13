@@ -4645,7 +4645,7 @@ label.FormLabel-Control[for] {
 
 /** @module ModalPopup.styles
  *  @since 2020.10.27, 00:39
- *  @changed 2020.12.18, 01:32
+ *  @changed 2021.08.13, 13:47
  */
 
 .ModalPortal_type_Popup .ModalPortal-Wrapper {
@@ -4654,7 +4654,8 @@ label.FormLabel-Control[for] {
 .ModalPortal_type_Popup .ModalPortal-Window {
       -webkit-box-sizing: border-box;
               box-sizing: border-box;
-      overflow: hidden;
+      /* overflow: hidden; // ???*/
+      overflow: auto; /* ??? -- Need for scrollable popups*/
       /* max-width: 100%;*/
       /* z-index: 100; // Lift above all other regular elements*/
       position: absolute;
