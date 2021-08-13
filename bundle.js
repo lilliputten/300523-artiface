@@ -440,9 +440,9 @@ module.exports = { // Common-used build variables...
   DEV_DEBUG: DEV_DEBUG,
 
   THEME: "default",
-  buildTag: "v.0.3.8-210813-1345-build-dev-default",
-  timestamp: "2021.08.13, 13:45",
-  timetag: "210813-1345",
+  buildTag: "v.0.3.8-210813-1441-build-dev-default",
+  timestamp: "2021.08.13, 14:41",
+  timetag: "210813-1441",
   version: "0.3.8" };
 
 /***/ }),
