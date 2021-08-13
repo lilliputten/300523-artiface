@@ -48,7 +48,7 @@ class FormSelect extends React.PureComponent /** @lends @FormSelect.prototype */
     singleChoice: PropTypes.oneOfType([ PropTypes.string, PropTypes.bool ]), // false, true, 'forced'. See Menu `singleChoice` prop definition.
     text: PropTypes.string,
     title: PropTypes.string,
-    value: PropTypes.oneOfType([ PropTypes.string, PropTypes.number ]),
+    value: PropTypes.oneOfType([ PropTypes.string, PropTypes.number ]), // Array?
     style: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
   }
 
@@ -59,12 +59,39 @@ class FormSelect extends React.PureComponent /** @lends @FormSelect.prototype */
     // this.formItemRef = React.createRef()
     this.id = props.id || props.inputId || props.name;
     const { selected, value } = props;
+    let setSelected = (selected != null) ? selected : value;
+    if (!Array.isArray(setSelected)) {
+      setSelected = [setSelected];
+    }
     this.state = {
-      selected: Array.isArray(selected) ? selected : value && [value] || []
+      selected: setSelected, // : Array.isArray(selected) ? selected : value && [value] || []
     };
     // if (props.setNodeRef) {
     //   props.setNodeRef(this);
     // }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    // Update `selected` or `value` state parameters with updated props
+    const prevPropsSelected = prevProps.selected;
+    const propsSelected = this.props.selected;
+    const prevStateSelected = prevState.selected;
+    const prevPropsValue = prevProps.value;
+    const propsValue = this.props.value;
+    const prevStateValue = prevState.value;
+    let setSelected;
+    if (propsSelected !== prevPropsSelected && propsSelected !== prevStateSelected) { // New selected from props
+      setSelected = propsSelected;
+    }
+    else if (propsValue !== prevPropsValue && propsValue !== prevStateValue) { // New value from props
+      setSelected = propsValue;
+    }
+    if (setSelected != null) {
+      if (!Array.isArray(setSelected)) {
+        setSelected = [setSelected];
+      }
+      this.setState({ selected: setSelected });
+    }
   }
 
   // Helper methods...

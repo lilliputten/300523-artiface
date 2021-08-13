@@ -36,15 +36,21 @@ class FormButton extends React.PureComponent /** @lends @FormButton.prototype */
     icon: PropTypes.oneOfType([ PropTypes.string, PropTypes.object ]), // Icon component. May be as image resource loaded with `file/url-loader` as `FontAwesomeIcon` component.
     id: PropTypes.string,
     inline: PropTypes.bool,
+    inputId: PropTypes.string,
     largeIcon: PropTypes.bool, // Large icon
+    name: PropTypes.string,
     onClick: PropTypes.func,
     onDark:  PropTypes.bool, // On dark background
     onlyIcon: PropTypes.bool, // Only icon
     plain: PropTypes.bool, // ??? Plain icon (no border & background -- if no style specified, looks as link)
     rightIcon: PropTypes.bool, // Icon placed at right side
+    style: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+    tag: PropTypes.string,
     text: PropTypes.string, // Text content (may be passed as node children)
     theme: PropTypes.string, // Button style (plain, default, primary, secondary, error, warn, success, info, etc -- some are in progress -- see styles file)
-    style: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+    title: PropTypes.string,
+    type: PropTypes.string,
+    href: PropTypes.string,
     // setDomRef: PropTypes.func,
     // setNodeRef: PropTypes.func,
   }
@@ -147,6 +153,7 @@ class FormButton extends React.PureComponent /** @lends @FormButton.prototype */
     const {
       id,
       inputId,
+      name,
       actionsContextNode, // ActionsContext Provider
       disabled,
       onClick,
@@ -157,6 +164,8 @@ class FormButton extends React.PureComponent /** @lends @FormButton.prototype */
       const actionProps = {
         // ...event,
         id: inputId || id,
+        inputId,
+        name,
       };
       const result = hasOnClick ? onClick(actionProps) : undefined; // true;
       if (result !== false && actionsContextNode && typeof actionsContextNode.onAction === 'function') {
@@ -216,6 +225,7 @@ class FormButton extends React.PureComponent /** @lends @FormButton.prototype */
       disabled,
       tag,
       type,
+      href,
       title,
       setDomRef, // From FormItemHOC
       // actionsContextNode,
@@ -233,6 +243,7 @@ class FormButton extends React.PureComponent /** @lends @FormButton.prototype */
       disabled,
       title,
       type,
+      href,
       onClick: this.onClick,
       ref: setDomRef, // Init ref for FormItemHOC
       tabIndex: 0,

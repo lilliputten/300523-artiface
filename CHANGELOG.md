@@ -1,5 +1,6 @@
 # CHANGELOG
 
+- 2021.08.13, 20:14 -- FormButton: Pass extra properties (name, inputId) for onClick event handler. FormSelect: Update `selected` or `value` state parameters with updated props.
 - 2021.08.13, 13:49 -- Fixed scrollable modal popups (see `.ModalPortal_type_Popup .ModalPortal-Window: overflow: auto|hidden` in `ModalPopup.pcss`).
 - 2021.08.12, 21:34 -- FormBooleanHOC, FormSelect: Pass extra props (`inputId`, `name`) for `onChange` events. Menu: Inactive current (`checked`) element for `Menu:singleChoice:forced` mod.
 - 2021.08.12, 16:58 -- FormSelect: minor styles changes. FormTextInput: pass extra params on onChange event (name, inputId).
@@ -154,5 +155,5 @@
 - 2020.10.05, 20:38 -- v.0.0.15: Extracted `demoSupport.jsx` routines, fixture selection from url query (parameter `fixture`), added avaialble fixtures list if fixture to display is not specified, added DemoWrapper & demoTitle exportable ficture parameters for demo rendering.
 
 <!--
- @changed 2021.08.13, 13:49
+ @changed 2021.08.13, 20:14
 -->

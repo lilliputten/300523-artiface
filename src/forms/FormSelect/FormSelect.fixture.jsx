@@ -53,6 +53,45 @@ const demoChange = (params) => {
  * }
  */
 
+class DynamicSelect extends React.PureComponent {
+  constructor(props) {
+    super(props);
+    this.state = {
+      // selected: [1],
+      value: 1,
+      theme: 'default',
+    };
+    setTimeout(() => {
+      this.setState({
+        // selected: [2],
+        value: 2,
+        theme: 'success',
+      });
+    }, 2000);
+  }
+  render() {
+    return (
+      <FormLabeledGroup id="DynamicSelect" htmlFor="DynamicSelect-Label" title="DynamicSelect" fullWidth flow>
+        <FormSelect
+          inputId="DynamicSelect-Label"
+          title="DynamicSelect"
+          placeholder="Select some option"
+          // selected={[1]}
+          onChange={demoChange}
+          options={demoOptions}
+          // controlButtonTheme="default"
+          controlButtonTheme={this.state.theme}
+          itemTheme={this.state.theme}
+          selected={this.state.selected}
+          value={this.state.value}
+          fullWidth
+        />
+      </FormLabeledGroup>
+    );
+  }
+}
+const dynamicSelect = <DynamicSelect />;
+
 export default {
   simple: (
     <FormSelect
@@ -161,4 +200,5 @@ export default {
       />
     </FormLabeledGroup>
   ),
+  dynamicSelect,
 };

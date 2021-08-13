@@ -63,6 +63,7 @@ export default {
   withIconAsComponent: <FormButton icon={faCheck} theme="default" text="With icon as string" />,
   withIconAsString: <FormButton icon="faCheck" theme="default" text="With icon as text" />,
   submitButton,
+  link: <FormButton tag="a" href="#linkHref" text="Link" theme="default" />,
 
   /* // TODO:
    * - onlyIcon
