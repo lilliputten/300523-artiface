@@ -440,9 +440,9 @@ module.exports = { // Common-used build variables...
   DEV_DEBUG: DEV_DEBUG,
 
   THEME: "default",
-  buildTag: "v.0.3.8-210813-1441-build-dev-default",
-  timestamp: "2021.08.13, 14:41",
-  timetag: "210813-1441",
+  buildTag: "v.0.3.8-210813-2013-build-dev-default",
+  timestamp: "2021.08.13, 20:13",
+  timetag: "210813-2013",
   version: "0.3.8" };
 
 /***/ }),
@@ -5911,6 +5911,12 @@ FormButton = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_hel
 
 
 
+
+
+
+
+
+
   // Lifecycle...
 
   function FormButton(props) {var _this;
@@ -6013,12 +6019,15 @@ FormButton = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_hel
 
 
 
-      _this.props,id = _this$props.id,inputId = _this$props.inputId,actionsContextNode = _this$props.actionsContextNode,disabled = _this$props.disabled,onClick = _this$props.onClick;
+
+      _this.props,id = _this$props.id,inputId = _this$props.inputId,name = _this$props.name,actionsContextNode = _this$props.actionsContextNode,disabled = _this$props.disabled,onClick = _this$props.onClick;
       if (!disabled) {
         var hasOnClick = onClick && typeof onClick === 'function';
         var actionProps = {
           // ...event,
-          id: inputId || id };
+          id: inputId || id,
+          inputId: inputId,
+          name: name };
 
         var result = hasOnClick ? onClick(actionProps) : undefined; // true;
         if (result !== false && actionsContextNode && typeof actionsContextNode.onAction === 'function') {
@@ -6082,7 +6091,8 @@ FormButton = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_hel
 
 
 
-    this.props,id = _this$props6.id,inputId = _this$props6.inputId,disabled = _this$props6.disabled,tag = _this$props6.tag,type = _this$props6.type,title = _this$props6.title,setDomRef = _this$props6.setDomRef,style = _this$props6.style;
+
+    this.props,id = _this$props6.id,inputId = _this$props6.inputId,disabled = _this$props6.disabled,tag = _this$props6.tag,type = _this$props6.type,href = _this$props6.href,title = _this$props6.title,setDomRef = _this$props6.setDomRef,style = _this$props6.style;
 
     var iconElem = this.renderIcon(); // Icon element
     var textElem = this.renderText(); // Text element
@@ -6095,6 +6105,7 @@ FormButton = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_hel
       disabled: disabled,
       title: title,
       type: type,
+      href: href,
       onClick: this.onClick,
       ref: setDomRef, // Init ref for FormItemHOC
       tabIndex: 0,
@@ -6123,14 +6134,14 @@ FormButton = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_hel
   hasIcon: (prop_types__WEBPACK_IMPORTED_MODULE_6___default().bool), // Optional
   hasText: (prop_types__WEBPACK_IMPORTED_MODULE_6___default().bool), // Optional
   icon: prop_types__WEBPACK_IMPORTED_MODULE_6___default().oneOfType([(prop_types__WEBPACK_IMPORTED_MODULE_6___default().string), (prop_types__WEBPACK_IMPORTED_MODULE_6___default().object)]), // Icon component. May be as image resource loaded with `file/url-loader` as `FontAwesomeIcon` component.
-  id: (prop_types__WEBPACK_IMPORTED_MODULE_6___default().string), inline: (prop_types__WEBPACK_IMPORTED_MODULE_6___default().bool), largeIcon: (prop_types__WEBPACK_IMPORTED_MODULE_6___default().bool), // Large icon
-  onClick: (prop_types__WEBPACK_IMPORTED_MODULE_6___default().func), onDark: (prop_types__WEBPACK_IMPORTED_MODULE_6___default().bool), // On dark background
+  id: (prop_types__WEBPACK_IMPORTED_MODULE_6___default().string), inline: (prop_types__WEBPACK_IMPORTED_MODULE_6___default().bool), inputId: (prop_types__WEBPACK_IMPORTED_MODULE_6___default().string), largeIcon: (prop_types__WEBPACK_IMPORTED_MODULE_6___default().bool), // Large icon
+  name: (prop_types__WEBPACK_IMPORTED_MODULE_6___default().string), onClick: (prop_types__WEBPACK_IMPORTED_MODULE_6___default().func), onDark: (prop_types__WEBPACK_IMPORTED_MODULE_6___default().bool), // On dark background
   onlyIcon: (prop_types__WEBPACK_IMPORTED_MODULE_6___default().bool), // Only icon
   plain: (prop_types__WEBPACK_IMPORTED_MODULE_6___default().bool), // ??? Plain icon (no border & background -- if no style specified, looks as link)
   rightIcon: (prop_types__WEBPACK_IMPORTED_MODULE_6___default().bool), // Icon placed at right side
-  text: (prop_types__WEBPACK_IMPORTED_MODULE_6___default().string), // Text content (may be passed as node children)
+  style: prop_types__WEBPACK_IMPORTED_MODULE_6___default().oneOfType([(prop_types__WEBPACK_IMPORTED_MODULE_6___default().object), (prop_types__WEBPACK_IMPORTED_MODULE_6___default().array)]), tag: (prop_types__WEBPACK_IMPORTED_MODULE_6___default().string), text: (prop_types__WEBPACK_IMPORTED_MODULE_6___default().string), // Text content (may be passed as node children)
   theme: (prop_types__WEBPACK_IMPORTED_MODULE_6___default().string), // Button style (plain, default, primary, secondary, error, warn, success, info, etc -- some are in progress -- see styles file)
-  style: prop_types__WEBPACK_IMPORTED_MODULE_6___default().oneOfType([(prop_types__WEBPACK_IMPORTED_MODULE_6___default().object), (prop_types__WEBPACK_IMPORTED_MODULE_6___default().array)]) // setDomRef: PropTypes.func,
+  title: (prop_types__WEBPACK_IMPORTED_MODULE_6___default().string), type: (prop_types__WEBPACK_IMPORTED_MODULE_6___default().string), href: (prop_types__WEBPACK_IMPORTED_MODULE_6___default().string) // setDomRef: PropTypes.func,
   // setNodeRef: PropTypes.func,
 });/* harmony default export */ __webpack_exports__["default"] = ((0,redux__WEBPACK_IMPORTED_MODULE_5__.compose)(_helpers_ActionsContext__WEBPACK_IMPORTED_MODULE_8__.withActionsContext, (0,_FormItemHOC_index_ts__WEBPACK_IMPORTED_MODULE_10__.default)({ solid: true, hoverable: true, focusable: true, framed: true }))(FormButton));
 
@@ -9077,6 +9088,33 @@ FormSelect = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_hel
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     function (params) {var
       onControlClick = _this.props.onControlClick;
       if (typeof onControlClick === 'function') {
@@ -9117,17 +9155,17 @@ FormSelect = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_hel
 
     function (_ref) {var open = _ref.open;
       _this.setState({ open: open });
-    });_this.id = props.id || props.inputId || props.name;var _selected = props.selected,_value = props.value;_this.state = { selected: Array.isArray(_selected) ? _selected : _value && [_value] || [] }; // if (props.setNodeRef) {
+    });_this.id = props.id || props.inputId || props.name;var _selected = props.selected,_value = props.value;var setSelected = _selected != null ? _selected : _value;if (!Array.isArray(setSelected)) {setSelected = [setSelected];}_this.state = { selected: setSelected // : Array.isArray(selected) ? selected : value && [value] || []
+    }; // if (props.setNodeRef) {
     //   props.setNodeRef(this);
     // }
-    return _this;} // Helper methods...
-  var _proto = FormSelect.prototype;_proto.getClassName = function getClassName() {var id = this.id;var classList = cnFormSelect({ id: id }, [this.props.className]);return classList;};_proto.getItemsText = function getItemsText() {var selected = this.state.selected;var options = this.props.options;var text = Array.isArray(options) && Array.isArray(selected) && options.map(function (_ref2) {var val = _ref2.val,text = _ref2.text;if (selected.includes(val)) {return text;}}).filter(Boolean).join(', ');return text;} // Handlers...
+    return _this;}var _proto = FormSelect.prototype;_proto.componentDidUpdate = function componentDidUpdate(prevProps, prevState) {// Update `selected` or `value` state parameters with updated props
+    var prevPropsSelected = prevProps.selected;var propsSelected = this.props.selected;var prevStateSelected = prevState.selected;var prevPropsValue = prevProps.value;var propsValue = this.props.value;var prevStateValue = prevState.value;var setSelected;if (propsSelected !== prevPropsSelected && propsSelected !== prevStateSelected) {// New selected from props
+      setSelected = propsSelected;} else if (propsValue !== prevPropsValue && propsValue !== prevStateValue) {// New value from props
+      setSelected = propsValue;}if (setSelected != null) {if (!Array.isArray(setSelected)) {setSelected = [setSelected];}this.setState({ selected: setSelected });}} // Helper methods...
+  ;_proto.getClassName = function getClassName() {var id = this.id;var classList = cnFormSelect({ id: id }, [this.props.className]);return classList;};_proto.getItemsText = function getItemsText() {var selected = this.state.selected;var options = this.props.options;var text = Array.isArray(options) && Array.isArray(selected) && options.map(function (_ref2) {var val = _ref2.val,text = _ref2.text;if (selected.includes(val)) {return text;}}).filter(Boolean).join(', ');return text;} // Handlers...
   ; // Render...
   _proto.renderControlContent = function renderControlContent() {var _this$props4 =
-
-
-
-
 
 
 
@@ -9223,7 +9261,8 @@ FormSelect = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_hel
   // value: PropTypes.oneOfType([ PropTypes.string, PropTypes.number, PropTypes.arrayOf(PropTypes.oneOfType([ PropTypes.string, PropTypes.number ])) ]),
   closeOnSelect: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), controlButtonTheme: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), // itemSelectedTheme: PropTypes.string,
   wrapContent: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), disabled: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), fullWidth: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), id: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), inputId: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), itemTheme: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), name: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), onChange: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func), onControlClick: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func), onMenuItemClick: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func), open: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), options: prop_types__WEBPACK_IMPORTED_MODULE_4___default().arrayOf(prop_types__WEBPACK_IMPORTED_MODULE_4___default().shape({ val: prop_types__WEBPACK_IMPORTED_MODULE_4___default().oneOfType([(prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), (prop_types__WEBPACK_IMPORTED_MODULE_4___default().number)]), text: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string) })), placeholder: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), selected: prop_types__WEBPACK_IMPORTED_MODULE_4___default().arrayOf(prop_types__WEBPACK_IMPORTED_MODULE_4___default().oneOfType([(prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), (prop_types__WEBPACK_IMPORTED_MODULE_4___default().number)])), setDomRef: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func), setPopupNodeRef: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func), singleChoice: prop_types__WEBPACK_IMPORTED_MODULE_4___default().oneOfType([(prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool)]), // false, true, 'forced'. See Menu `singleChoice` prop definition.
-  text: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), title: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), value: prop_types__WEBPACK_IMPORTED_MODULE_4___default().oneOfType([(prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), (prop_types__WEBPACK_IMPORTED_MODULE_4___default().number)]), style: prop_types__WEBPACK_IMPORTED_MODULE_4___default().oneOfType([(prop_types__WEBPACK_IMPORTED_MODULE_4___default().object), (prop_types__WEBPACK_IMPORTED_MODULE_4___default().array)]) });/* harmony default export */ __webpack_exports__["default"] = ((0,_FormItemHOC_index_ts__WEBPACK_IMPORTED_MODULE_6__.default)({ solid: true, hoverable: true })(FormSelect));
+  text: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), title: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), value: prop_types__WEBPACK_IMPORTED_MODULE_4___default().oneOfType([(prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), (prop_types__WEBPACK_IMPORTED_MODULE_4___default().number)]), // Array?
+  style: prop_types__WEBPACK_IMPORTED_MODULE_4___default().oneOfType([(prop_types__WEBPACK_IMPORTED_MODULE_4___default().object), (prop_types__WEBPACK_IMPORTED_MODULE_4___default().array)]) });/* harmony default export */ __webpack_exports__["default"] = ((0,_FormItemHOC_index_ts__WEBPACK_IMPORTED_MODULE_6__.default)({ solid: true, hoverable: true })(FormSelect));
 
 /***/ }),
 
