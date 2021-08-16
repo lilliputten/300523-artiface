@@ -17,7 +17,7 @@
       "program": "${workspaceRoot}/node_modules/jest/bin/jest.js",
       "args": [
         "--verbose",
-        // "objects",
+        "FormSelect",
       ],
       "type": "node",
       "request": "launch",
