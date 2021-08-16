@@ -21,7 +21,8 @@ import DatePicker from 'react-datepicker';
 import * as dateUtils from 'utils/dates';
 import * as stringUtils from 'utils/strings';
 
-import { ru } from 'date-fns/esm/locale';
+// import { ru } from 'date-fns/esm/locale'; // 2021.08.16, 11:44: Jest error `SyntaxError: Unexpected token 'export'` for ` export { default as af } from "./af/index.js";` -- see [jest error Unexpected token 'export' when I try to import localizations · Issue #2485 · date-fns/date-fns](https://github.com/date-fns/date-fns/issues/2485#issuecomment-845801901)
+import { ru } from 'date-fns/locale';
 import { registerLocale } from 'react-datepicker';
 // Initialize locales...
 registerLocale('ru-RU', ru);

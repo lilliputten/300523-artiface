@@ -3,6 +3,12 @@
  *  @since 2021.02.15, 18:05
  *  @changed 2021.07.08, 15:02
  */
+/* tslint:disable: no-implicit-dependencies no-submodule-imports */
+
+/* TODO 2021.08.16, 11:27 -- To fix tslint errors:
+ * ERROR: 21:18  no-submodule-imports      Submodule import paths from this package are disallowed; import from the root instead
+ * ERROR: 21:18  no-implicit-dependencies  Module 'demo' is not listed as dependency in package.json
+ */
 
 // import * as build from './build'
 

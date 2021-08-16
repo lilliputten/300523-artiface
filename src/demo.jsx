@@ -3,7 +3,8 @@
  *  @since 2020.05.19, 17:16
  *  @changed 2021.05.31, 16:24
  */
-/* eslint-disable react/jsx-max-depth */
+/* eslint-disable react/jsx-max-depth, no-console */
+/* tslint:disable: no-console */
 
 import 'es5-shim/es5-shim';
 import 'es5-shim/es5-sham';
@@ -112,22 +113,20 @@ function getFixtureContent() {
   const fixtureItemId = findFixture && findFixture[3];
   const fixtureModuleExports = fixtureId && demoFixtures[fixtureId];
 
-  let content;
-
   if (fixtureModuleExports) { // Found fixture
     const {
       default: fixture,
       demoTitle = 'Demo fixture: ' + fixtureId, // fullFixtureId,
       DemoWrapper,
     } = fixtureModuleExports;
-    content = demoSupport.PlaceFixture({ fixtureId, fixture, fixtureItemId, demoTitle, DemoWrapper });
+    return demoSupport.PlaceFixture({ fixtureId, fixture, fixtureItemId, demoTitle, DemoWrapper });
   }
   else if (fixtureId) { // Fixture specified but not found!
-    content = 'Fixture for id "' + fixtureId + '" not found!';
+    return 'Fixture for id "' + fixtureId + '" not found!';
   }
   else { // List all available fixtures to display
     const fixtures = demoSupport.FixturesContents(demoFixtures);
-    content = (
+    return (
       <div className="demoIndex">
         <h3 className="demoIndex-Title">Available fixtures</h3>
         {fixtures}
@@ -137,8 +136,6 @@ function getFixtureContent() {
       </div>
     );
   }
-
-  return content;
 }
 
 const content = getFixtureContent();
@@ -146,7 +143,7 @@ const content = getFixtureContent();
 // DEBUG: Demo redux state...
 const demoInitialState = { stateTest: 'Zero' };
 export function demoReducer(state = demoInitialState, action) {
-  console.log('demo:demoReducer', { state, action });
+  console.log('demo:demoReducer', { state, action }); // eslint-disable-line no-console
   // debugger;
   switch (action.type) {
     case 'LOAD_RESPONSE':

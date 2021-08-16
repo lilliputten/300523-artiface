@@ -128,7 +128,7 @@ overrides:
   #   files: '**/*.{ts,tsx}'
   #   parser: '@typescript-eslint/parser'
   -  # default js
-    files: '**/*.{js,jsx}'
+    files: '**/*.{js,jsx,ts,tsx}'
     env:
       browser: true
       commonjs: true
@@ -136,3 +136,18 @@ overrides:
       node: true
     # globals:
     #   process: true
+  -  # Jest tests
+    files: '**/*.test.{js,jsx,ts,tsx}'
+    env:
+      jest: true
+    plugins:
+      - jest
+    rules:
+      # semi: 0
+      react/jsx-filename-extension: 0
+      # 'jest/no-disabled-tests': 'warn'
+      # 'jest/no-focused-tests': 'error'
+      # 'jest/no-identical-title': 'error'
+      # 'jest/prefer-to-have-length': 'warn'
+      # 'jest/valid-expect': 'error'
+
