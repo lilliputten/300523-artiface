@@ -59,14 +59,9 @@ class FormSelect extends React.PureComponent /** @lends @FormSelect.prototype */
     // this.formItemRef = React.createRef()
     this.id = props.id || props.inputId || props.name;
     const { selected, value } = props;
-    // let setSelected = (selected != null) ? selected : value;
-    // if (!Array.isArray(setSelected)) {
-    //   setSelected = [setSelected];
-    // }
     this.state = {
-      // selected: setSelected, // : Array.isArray(selected) ? selected : value && [value] || []
-      selected,
       value,
+      selected: value == null ? selected : Array.isArray(value) ? value : [value],
     };
     // if (props.setNodeRef) {
     //   props.setNodeRef(this);
@@ -81,21 +76,12 @@ class FormSelect extends React.PureComponent /** @lends @FormSelect.prototype */
     const prevPropsValue = prevProps.value;
     const value = this.props.value;
     const prevStateValue = prevState.value;
-    // let setSelected;
-    if (selected !== prevPropsSelected && selected !== prevStateSelected) { // New selected from props
-      // setSelected = selected;
+    if (value !== prevPropsValue && value !== prevStateValue) { // New value from props
+      this.setState({ value, selected: Array.isArray(value) ? value : [value] });
+    }
+    else if (selected !== prevPropsSelected && selected !== prevStateSelected) { // New selected from props
       this.setState({ selected });
     }
-    else if (value !== prevPropsValue && value !== prevStateValue) { // New value from props
-      // setSelected = value;
-      this.setState({ value });
-    }
-    // if (setSelected != null) {
-    //   if (!Array.isArray(setSelected)) {
-    //     setSelected = [setSelected];
-    //   }
-    //   this.setState({ selected: setSelected });
-    // }
   }
 
   // Helper methods...
@@ -211,16 +197,17 @@ class FormSelect extends React.PureComponent /** @lends @FormSelect.prototype */
     } = this.props;
     const {
       selected,
-      value,
+      // value,
     } = this.state;
-    let menuSelected = selected || value;
+    // let menuSelected = selected || value;
     return (
       <Menu
         selectable={true}
         singleChoice={singleChoice}
         onChange={this.onMenuChange}
         onClick={this.onMenuItemClick}
-        selected={menuSelected}
+        selected={selected}
+        // selected={menuSelected}
         // value={value}
         disabled={disabled}
         itemTheme={itemTheme}
