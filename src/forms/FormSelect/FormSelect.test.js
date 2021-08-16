@@ -1,6 +1,6 @@
 /** @module FormSelect.test
  *  @since 2021.08.16, 11:32
- *  @changed 2021.08.16, 11:32
+ *  @changed 2021.08.16, 12:51
  *  @jest-environment jsdom
  */
 /* eslint-disable no-debugger, no-console */
@@ -65,6 +65,7 @@ describe('FormSelect', () => {
     wrapper.setProps({ selected: [2] });
     expect(wrapper.state().selected).toStrictEqual([2]);
   });
+  // TODO: Test update of popup'ed `Menu` state change & correct options rendering.
   /* it('Component should call componentWillReceiveProps on update (using sinon)', () => {
    *   const spy = sinon.spy(Component.prototype, 'componentWillReceiveProps');
    *   const wrapper = shallow(<Component {...props} />);

@@ -220,7 +220,7 @@ class FormSelect extends React.PureComponent /** @lends @FormSelect.prototype */
         singleChoice={singleChoice}
         onChange={this.onMenuChange}
         onClick={this.onMenuItemClick}
-        selected={selected}
+        selected={menuSelected}
         // value={value}
         disabled={disabled}
         itemTheme={itemTheme}

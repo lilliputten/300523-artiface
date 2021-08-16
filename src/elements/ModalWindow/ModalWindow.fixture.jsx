@@ -2,7 +2,7 @@
  *  @since 2020.12.21, 22:58
  *  @changed 2020.12.24, 18:19
  */
-/* eslint-disable react/jsx-max-depth, react/no-multi-comp, no-console */
+/* eslint-disable react/jsx-max-depth, react/no-multi-comp, no-console, no-debugger */
 
 import React from 'react';
 
@@ -11,7 +11,7 @@ import FormGroup from 'forms/FormGroup';
 import FormButton from 'forms/FormButton';
 import FormSelect from 'forms/FormSelect';
 import FormTextInput from 'forms/FormTextInput';
-import Menu from 'elements/Menu'
+import Menu from 'elements/Menu';
 
 // Demo styles for cosmos engine
 // import 'demo.pcss';
@@ -408,7 +408,6 @@ class WithMenu extends React.PureComponent {
     );
   }
   renderContent() {
-    const { value } = this.state;
     return (
       <Menu
         id="menu1"
@@ -422,7 +421,7 @@ class WithMenu extends React.PureComponent {
     );
   }
   render() {
-    const { value, open } = this.state;
+    const { open } = this.state;
     // console.log('withMenu:render', value);
     const actions = this.renderActions();
     // const isElement = React.isValidElement(actions)

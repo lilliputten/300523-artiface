@@ -8,9 +8,9 @@ import React, { useState } from 'react';
 
 import FormPager from './FormPager';
 
-import { // Icons (solid)...
-  faCheck,
-} from '@fortawesome/free-solid-svg-icons';
+// import { // Icons (solid)...
+//   faCheck,
+// } from '@fortawesome/free-solid-svg-icons';
 
 // Demo styles for cosmos engine
 // import 'demo.pcss';
