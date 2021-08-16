@@ -440,9 +440,9 @@ module.exports = { // Common-used build variables...
   DEV_DEBUG: DEV_DEBUG,
 
   THEME: "default",
-  buildTag: "v.0.3.8-210813-2013-build-dev-default",
-  timestamp: "2021.08.13, 20:13",
-  timetag: "210813-2013",
+  buildTag: "v.0.3.8-210816-1258-build-dev-default",
+  timestamp: "2021.08.16, 12:58",
+  timetag: "210816-1258",
   version: "0.3.8" };
 
 /***/ }),
@@ -9219,7 +9219,7 @@ FormSelect = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_hel
         singleChoice: singleChoice,
         onChange: this.onMenuChange,
         onClick: this.onMenuItemClick,
-        selected: selected
+        selected: menuSelected
         // value={value}
         , disabled: disabled,
         itemTheme: itemTheme
