@@ -440,9 +440,9 @@ module.exports = { // Common-used build variables...
   DEV_DEBUG: DEV_DEBUG,
 
   THEME: "default",
-  buildTag: "v.0.3.8-210816-1258-build-dev-default",
-  timestamp: "2021.08.16, 12:58",
-  timetag: "210816-1258",
+  buildTag: "v.0.3.8-210816-1326-build-dev-default",
+  timestamp: "2021.08.16, 13:26",
+  timetag: "210816-1326",
   version: "0.3.8" };
 
 /***/ }),
@@ -9107,20 +9107,6 @@ FormSelect = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_hel
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     function (params) {var
       onControlClick = _this.props.onControlClick;
       if (typeof onControlClick === 'function') {
@@ -9161,39 +9147,39 @@ FormSelect = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_hel
 
     function (_ref) {var open = _ref.open;
       _this.setState({ open: open });
-    });_this.id = props.id || props.inputId || props.name;var _selected = props.selected,_value = props.value; // let setSelected = (selected != null) ? selected : value;
-    // if (!Array.isArray(setSelected)) {
-    //   setSelected = [setSelected];
-    // }
-    _this.state = { // selected: setSelected, // : Array.isArray(selected) ? selected : value && [value] || []
-      selected: _selected, value: _value }; // if (props.setNodeRef) {
+    });_this.id = props.id || props.inputId || props.name;var _selected = props.selected,_value = props.value;_this.state = { value: _value, selected: _value == null ? _selected : Array.isArray(_value) ? _value : [_value] }; // if (props.setNodeRef) {
     //   props.setNodeRef(this);
     // }
     return _this;}var _proto = FormSelect.prototype;_proto.componentDidUpdate = function componentDidUpdate(prevProps, prevState) {// Update `selected` or `value` state parameters with updated props
-    var prevPropsSelected = prevProps.selected;var selected = this.props.selected;var prevStateSelected = prevState.selected;var prevPropsValue = prevProps.value;var value = this.props.value;var prevStateValue = prevState.value; // let setSelected;
-    if (selected !== prevPropsSelected && selected !== prevStateSelected) {// New selected from props
-      // setSelected = selected;
-      this.setState({ selected: selected });} else if (value !== prevPropsValue && value !== prevStateValue) {// New value from props
-      // setSelected = value;
-      this.setState({ value: value });} // if (setSelected != null) {
-    //   if (!Array.isArray(setSelected)) {
-    //     setSelected = [setSelected];
-    //   }
-    //   this.setState({ selected: setSelected });
-    // }
-  } // Helper methods...
+    var prevPropsSelected = prevProps.selected;var selected = this.props.selected;var prevStateSelected = prevState.selected;var prevPropsValue = prevProps.value;var value = this.props.value;var prevStateValue = prevState.value;if (value !== prevPropsValue && value !== prevStateValue) {// New value from props
+      this.setState({ value: value, selected: Array.isArray(value) ? value : [value] });} else if (selected !== prevPropsSelected && selected !== prevStateSelected) {// New selected from props
+      this.setState({ selected: selected });}} // Helper methods...
   ;_proto.getClassName = function getClassName() {var _this$props4 = this.props,id = _this$props4.id,inputId = _this$props4.inputId,name = _this$props4.name;var setId = id || inputId || name;var classList = cnFormSelect({ id: setId }, [this.props.className]);return classList;};_proto.getItemsText = function getItemsText() {var selected = this.state.selected;var options = this.props.options;var text = Array.isArray(options) && Array.isArray(selected) && options.map(function (_ref2) {var val = _ref2.val,text = _ref2.text;if (selected.includes(val)) {return text;}}).filter(Boolean).join(', ');return text;} // Handlers...
   ; // Render...
-  _proto.renderControlContent = function renderControlContent() {var _this$props5 = this.props,text = _this$props5.text,placeholder = _this$props5.placeholder,title = _this$props5.title,controlButtonTheme = _this$props5.controlButtonTheme,fullWidth = _this$props5.fullWidth,disabled = _this$props5.disabled,inputId = _this$props5.inputId,maxWidth = _this$props5.maxWidth;var open = this.state.open;var buttonText = this.getItemsText() || placeholder || text;var style = { maxWidth: maxWidth };return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3___default().createElement(_FormButton_index_ts__WEBPACK_IMPORTED_MODULE_9__.default, { inputId: inputId, icon: "faChevronDown", rightIcon: true, theme: controlButtonTheme || 'primary',
-      variation: "popupControl",
-      rotatedIcon: true,
-      text: buttonText,
-      title: title,
-      fullWidth: fullWidth,
-      disabled: disabled,
-      checkable: true,
-      checked: open,
-      style: style });
+  _proto.renderControlContent = function renderControlContent() {var _this$props5 =
+
+
+
+
+    this.props,text = _this$props5.text,placeholder = _this$props5.placeholder,title = _this$props5.title,controlButtonTheme = _this$props5.controlButtonTheme,fullWidth = _this$props5.fullWidth,disabled = _this$props5.disabled,inputId = _this$props5.inputId,maxWidth = _this$props5.maxWidth;var
+    open = this.state.open;
+    var buttonText = this.getItemsText() || placeholder || text;
+    var style = { maxWidth: maxWidth };
+    return /*#__PURE__*/(
+      react__WEBPACK_IMPORTED_MODULE_3___default().createElement(_FormButton_index_ts__WEBPACK_IMPORTED_MODULE_9__.default, {
+        inputId: inputId,
+        icon: "faChevronDown",
+        rightIcon: true,
+        theme: controlButtonTheme || 'primary',
+        variation: "popupControl",
+        rotatedIcon: true,
+        text: buttonText,
+        title: title,
+        fullWidth: fullWidth,
+        disabled: disabled,
+        checkable: true,
+        checked: open,
+        style: style }));
 
 
   };_proto.
@@ -9207,19 +9193,20 @@ FormSelect = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_hel
 
 
 
-    this.props,singleChoice = _this$props6.singleChoice,options = _this$props6.options,disabled = _this$props6.disabled,itemTheme = _this$props6.itemTheme,wrapContent = _this$props6.wrapContent;var _this$state =
+    this.props,singleChoice = _this$props6.singleChoice,options = _this$props6.options,disabled = _this$props6.disabled,itemTheme = _this$props6.itemTheme,wrapContent = _this$props6.wrapContent;var
 
+    selected =
 
-
-    this.state,selected = _this$state.selected,value = _this$state.value;
-    var menuSelected = selected || value;
+    this.state.selected;
+    // let menuSelected = selected || value;
     return /*#__PURE__*/(
       react__WEBPACK_IMPORTED_MODULE_3___default().createElement(_elements_Menu_index_ts__WEBPACK_IMPORTED_MODULE_8__.default, {
         selectable: true,
         singleChoice: singleChoice,
         onChange: this.onMenuChange,
         onClick: this.onMenuItemClick,
-        selected: menuSelected
+        selected: selected
+        // selected={menuSelected}
         // value={value}
         , disabled: disabled,
         itemTheme: itemTheme
