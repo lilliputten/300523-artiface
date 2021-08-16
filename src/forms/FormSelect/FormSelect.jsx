@@ -59,12 +59,14 @@ class FormSelect extends React.PureComponent /** @lends @FormSelect.prototype */
     // this.formItemRef = React.createRef()
     this.id = props.id || props.inputId || props.name;
     const { selected, value } = props;
-    let setSelected = (selected != null) ? selected : value;
-    if (!Array.isArray(setSelected)) {
-      setSelected = [setSelected];
-    }
+    // let setSelected = (selected != null) ? selected : value;
+    // if (!Array.isArray(setSelected)) {
+    //   setSelected = [setSelected];
+    // }
     this.state = {
-      selected: setSelected, // : Array.isArray(selected) ? selected : value && [value] || []
+      // selected: setSelected, // : Array.isArray(selected) ? selected : value && [value] || []
+      selected,
+      value,
     };
     // if (props.setNodeRef) {
     //   props.setNodeRef(this);
@@ -74,32 +76,35 @@ class FormSelect extends React.PureComponent /** @lends @FormSelect.prototype */
   componentDidUpdate(prevProps, prevState) {
     // Update `selected` or `value` state parameters with updated props
     const prevPropsSelected = prevProps.selected;
-    const propsSelected = this.props.selected;
+    const selected = this.props.selected;
     const prevStateSelected = prevState.selected;
     const prevPropsValue = prevProps.value;
-    const propsValue = this.props.value;
+    const value = this.props.value;
     const prevStateValue = prevState.value;
-    let setSelected;
-    if (propsSelected !== prevPropsSelected && propsSelected !== prevStateSelected) { // New selected from props
-      setSelected = propsSelected;
+    // let setSelected;
+    if (selected !== prevPropsSelected && selected !== prevStateSelected) { // New selected from props
+      // setSelected = selected;
+      this.setState({ selected });
     }
-    else if (propsValue !== prevPropsValue && propsValue !== prevStateValue) { // New value from props
-      setSelected = propsValue;
+    else if (value !== prevPropsValue && value !== prevStateValue) { // New value from props
+      // setSelected = value;
+      this.setState({ value });
     }
-    if (setSelected != null) {
-      if (!Array.isArray(setSelected)) {
-        setSelected = [setSelected];
-      }
-      this.setState({ selected: setSelected });
-    }
+    // if (setSelected != null) {
+    //   if (!Array.isArray(setSelected)) {
+    //     setSelected = [setSelected];
+    //   }
+    //   this.setState({ selected: setSelected });
+    // }
   }
 
   // Helper methods...
 
   getClassName() {
-    const { id } = this;
+    const { id, inputId, name } = this.props;
+    const setId = id || inputId || name;
     const classList = cnFormSelect({
-      id,
+      id: setId,
     }, [this.props.className]);
     return classList;
   }
@@ -206,7 +211,9 @@ class FormSelect extends React.PureComponent /** @lends @FormSelect.prototype */
     } = this.props;
     const {
       selected,
+      value,
     } = this.state;
+    let menuSelected = selected || value;
     return (
       <Menu
         selectable={true}
