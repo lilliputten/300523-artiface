@@ -1,5 +1,9 @@
 # TODO
 
+- 2021.08.16, 15:33 -- ModalPopup: Register onscroll event handlers for all popup ancestors.
+
+## Old (irrelevant?) tasks (as is on 2021.08.16):
+
 - 2021.03.26, 13:38 -- Secondary css style color (now is the same as primary: look for bootstrap/md realisation).
 - 2021.03.26, 11:56 -- Datepicker: set auto-adjustable time selector height (adjusts for different calendar heights).
 - 2021.01.26, 21:18 -- Focusable FormButton.
