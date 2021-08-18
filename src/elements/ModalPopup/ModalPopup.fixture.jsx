@@ -102,7 +102,7 @@ const noWrapper = (
 const withMenu = (
   <ModalPopup
     id="withMenu"
-    popupControl={<FormButton icon="faChevronRight" rightIcon theme="primary" variation="popupControl" text="withMenu" />}
+    popupControl={<FormButton icon="faChevronUp" rightIcon theme="primary" variation="popupControl" text="withMenu" />}
     popupContent={demoMenu}
   />
 );
@@ -118,9 +118,31 @@ const stayOpenAfterItemClick = (
   />
 );
 
+const inScrollable = (
+  <div className="ScrollableDiv">
+    <p>text</p>
+    <p>text</p>
+    <p>text</p>
+    <p>text</p>
+    <ModalPopup
+      id="inScrollable"
+      onControlClick={buttonOnClick}
+      popupControl={<FormButton icon="faChevronDown" rightIcon theme="primary" variation="popupControl" text="In scrollable" />}
+      popupContent={demoMenu}
+      closeOnClickOutside={true}
+      fullWidth
+    />
+    <p>text</p>
+    <p>text</p>
+    <p>text</p>
+    <p>text</p>
+  </div>
+);
+
 export default {
   simple,
   noWrapper,
   withMenu,
   stayOpenAfterItemClick,
+  inScrollable,
 };
