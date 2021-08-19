@@ -440,9 +440,9 @@ module.exports = { // Common-used build variables...
   DEV_DEBUG: DEV_DEBUG,
 
   THEME: "default",
-  buildTag: "v.0.3.8b-210818-1735-build-dev-default",
-  timestamp: "2021.08.18, 17:35",
-  timetag: "210818-1735",
+  buildTag: "v.0.3.8b-210819-2040-build-dev-default",
+  timestamp: "2021.08.19, 20:40",
+  timetag: "210819-2040",
   version: "0.3.8b" };
 
 /***/ }),
@@ -465,6 +465,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "dateTimeMsFormat": function() { return /* binding */ dateTimeMsFormat; },
 /* harmony export */   "dateRangeDelim": function() { return /* binding */ dateRangeDelim; },
 /* harmony export */   "timeIntervals": function() { return /* binding */ timeIntervals; },
+/* harmony export */   "minuteTicks": function() { return /* binding */ minuteTicks; },
+/* harmony export */   "hourTicks": function() { return /* binding */ hourTicks; },
 /* harmony export */   "dayTicks": function() { return /* binding */ dayTicks; },
 /* harmony export */   "weekTicks": function() { return /* binding */ weekTicks; },
 /* harmony export */   "defaultQuote": function() { return /* binding */ defaultQuote; },
@@ -500,7 +502,9 @@ var dateTimeMsFormat = dateFormat + ' ' + timeMsFormat;
 var dateRangeDelim = ' – ';
 
 var timeIntervals = 60;
-var dayTicks = 1000 * 60 * 60 * 24;
+var minuteTicks = 1000 * 60;
+var hourTicks = minuteTicks * 60;
+var dayTicks = hourTicks * 24;
 var weekTicks = dayTicks * 7;
 
 // dateStringFormat: 'yyyy.mm.dd HH:MM:ss',
@@ -5006,6 +5010,8 @@ __webpack_require__.r(__webpack_exports__);
  *  @class ModalsProxy
  *  @since 2021.05.14, 14:38
  *  @changed 2021.05.31, 16:57
+ *
+ *  NOTE: Modals aren't closing if uncaught error occured during close procedure (return values etc).
  */
 
 var
@@ -6823,7 +6829,7 @@ __webpack_require__.r(__webpack_exports__);
  /** @module FormDateTime
  *  @class FormDateTime
  *  @since 2021.01.23, 19:44
- *  @changed 2021.01.23, 19:44
+ *  @changed 2021.08.19, 17:23
  *
  *  TODO 2020.12.16, 23:07 -- Add hidden html form element (for form submission)
  */
@@ -6881,10 +6887,27 @@ FormDateTime = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_h
 
 
 
+
   // Lifecycle methods...
 
   function FormDateTime(props) {var _this;
     _this = _React$PureComponent.call(this, props) || this;(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2__.default)((0,_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_0__.default)(_this), "onControlClick",
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -6931,17 +6954,28 @@ FormDateTime = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_h
 
 
 
+
     function (_ref) {var value = _ref.value,valueObj = _ref.valueObj;var _this$props =
 
 
 
-      _this.props,onChange = _this$props.onChange,closeOnSelect = _this$props.closeOnSelect;
-      var setParams = { id: _this.id, value: value, valueObj: valueObj };
-      setParams.displayValue = _this.getDisplayValue(setParams); // dateUtils.formatDateToString(value); // TODO: showTime option
-      // console.log('FormDateTime:onChange', setParams);
-      _this.setState(setParams);
+
+
+      _this.props,onChange = _this$props.onChange,inputId = _this$props.inputId,name = _this$props.name,closeOnSelect = _this$props.closeOnSelect;
+      var displayValue = _this.getDisplayValue({ value: value });
+      var setData = {
+        id: _this.id,
+        inputId: inputId,
+        name: name,
+        value: value,
+        valueObj: valueObj,
+        displayValue: displayValue };
+
+      // setData.displayValue = this.getDisplayValue(setData); // dateUtils.formatDateToString(value); // TODO: showTime option
+      // console.log('FormDateTime:onChange', setData);
+      _this.setState({ value: value, displayValue: displayValue });
       if (typeof onChange === 'function') {
-        onChange(setParams);
+        onChange(setData);
       }
       if (closeOnSelect && _this.popupNode) {
         _this.popupNode.close();
@@ -6958,26 +6992,27 @@ FormDateTime = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_h
 
     function (_ref2) {var open = _ref2.open;
       _this.setState({ open: open });
-    });var _value = props.value;_this.id = props.id || props.inputId; // || props.name;
-    _this.state = { value: _value };_this.state.displayValue = _this.getDisplayValue(_this.state);return _this;} // Helper methods...
-  var _proto = FormDateTime.prototype;_proto.getClassName = function getClassName() {var id = this.id;var classList = cnFormDateTime({ id: id }, [this.props.className]);return classList;};_proto.getItemsText = function getItemsText() {var displayValue = this.state.displayValue;return displayValue;} // Handlers...
-  ;_proto.getDisplayValue = function getDisplayValue(params) {params = params || this.state;var _params = params,value = _params.value;var showTime = this.props.showTime;var dateFormat = showTime ? (_config_index_js__WEBPACK_IMPORTED_MODULE_6___default().constants.dateTimeFormat) : (_config_index_js__WEBPACK_IMPORTED_MODULE_6___default().constants.dateFormat);return _utils_dates__WEBPACK_IMPORTED_MODULE_11__.formatDateToString(value, dateFormat);}; // Render...
-  _proto.renderControlContent = function renderControlContent() {var _this$props2 =
+    });var _value = props.value,allowEmpty = props.allowEmpty;if (!_value) {_value = allowEmpty ? '' : Date.now();}_this.id = props.id || props.inputId; // || props.name;
+    _this.state = { value: _value, displayValue: _this.getDisplayValue({ value: _value }) }; // this.state.displayValue = this.getDisplayValue(this.state);
+    return _this;}var _proto = FormDateTime.prototype;_proto.componentDidUpdate = function componentDidUpdate(prevProps, prevState) {var prevPropsValue = prevProps.value;var value = this.props.value; // const stateValue = this.state.value;
+    var prevStateValue = prevState.value;if (value !== prevPropsValue && value !== prevStateValue) {// New value from props
+      // console.log('FormDateTime:componentDidUpdate (value)', {
+      //   prevPropsValue,
+      //   value,
+      //   // stateValue,
+      //   prevStateValue,
+      // });
+      this.setState({ value: value, displayValue: this.getDisplayValue({ value: value }) });}} // Helper methods...
+  ;_proto.getClassName = function getClassName() {var id = this.id;var classList = cnFormDateTime({ id: id }, [this.props.className]);return classList;} // Handlers...
+  ;_proto.getDisplayValue = function getDisplayValue(state) {state = state || this.state;var _state = state,value = _state.value; // const { allowEmpty } = this.props;
+    // Is empty-value?
+    if (!value) {return '';}var showTime = this.props.showTime;var dateFormat = showTime ? (_config_index_js__WEBPACK_IMPORTED_MODULE_6___default().constants.dateTimeFormat) : (_config_index_js__WEBPACK_IMPORTED_MODULE_6___default().constants.dateFormat);return _utils_dates__WEBPACK_IMPORTED_MODULE_11__.formatDateToString(value, dateFormat);}; // Render...
+  _proto.renderControlContent = function renderControlContent() {var _this$props2 = this.props,id = _this$props2.id,inputId = _this$props2.inputId,placeholder = _this$props2.placeholder,title = _this$props2.title,controlButtonTheme = _this$props2.controlButtonTheme,_this$props2$fullWidt = _this$props2.fullWidth,fullWidth = _this$props2$fullWidt === void 0 ? true : _this$props2$fullWidt,disabled = _this$props2.disabled;var _this$state =
 
-
-
-
-
-
-
-
-    this.props,id = _this$props2.id,inputId = _this$props2.inputId,placeholder = _this$props2.placeholder,title = _this$props2.title,controlButtonTheme = _this$props2.controlButtonTheme,_this$props2$fullWidt = _this$props2.fullWidth,fullWidth = _this$props2$fullWidt === void 0 ? true : _this$props2$fullWidt,disabled = _this$props2.disabled;var
-
-    open =
-    this.state.open;
+    this.state,open = _this$state.open,displayValue = _this$state.displayValue;
     // const icon = open ? 'faCalendarCheck' : 'regular:faCalendar';
     var icon = open ? _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_12__.faCalendarCheck : _fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_13__.faCalendar;
-    var buttonText = this.getItemsText() || placeholder; // || text;
+    var buttonText = displayValue || placeholder; // || text;
     return /*#__PURE__*/(
       react__WEBPACK_IMPORTED_MODULE_3___default().createElement(_FormButton_index_ts__WEBPACK_IMPORTED_MODULE_9__.default, {
         id: id,
@@ -7074,7 +7109,7 @@ FormDateTime = /*#__PURE__*/function (_React$PureComponent) {(0,_babel_runtime_h
       react__WEBPACK_IMPORTED_MODULE_3___default().createElement(_elements_ModalPopup_index_ts__WEBPACK_IMPORTED_MODULE_8__.default, popupProps));
 
 
-  };return FormDateTime;}((react__WEBPACK_IMPORTED_MODULE_3___default().PureComponent) /** @lends @FormDateTime.prototype */);(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2__.default)(FormDateTime, "propTypes", { calendarClassName: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), className: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), closeOnSelect: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), controlButtonTheme: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), disabled: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), fullWidth: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), id: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), inputId: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), onChange: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func), onControlClick: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func), open: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), placeholder: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), selectsEnd: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), selectsRange: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), selectsStart: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), setDomRef: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func), setPopupNodeRef: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func), showTime: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), title: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), value: prop_types__WEBPACK_IMPORTED_MODULE_4___default().oneOfType([(prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), (prop_types__WEBPACK_IMPORTED_MODULE_4___default().number), prop_types__WEBPACK_IMPORTED_MODULE_4___default().instanceOf(Date)]) });
+  };return FormDateTime;}((react__WEBPACK_IMPORTED_MODULE_3___default().PureComponent) /** @lends @FormDateTime.prototype */);(0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_2__.default)(FormDateTime, "propTypes", { calendarClassName: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), className: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), closeOnSelect: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), controlButtonTheme: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), disabled: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), fullWidth: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), id: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), inputId: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), onChange: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func), onControlClick: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func), open: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), placeholder: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), selectsEnd: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), selectsRange: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), selectsStart: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), setDomRef: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func), setPopupNodeRef: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func), showTime: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool), title: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), value: prop_types__WEBPACK_IMPORTED_MODULE_4___default().oneOfType([(prop_types__WEBPACK_IMPORTED_MODULE_4___default().string), (prop_types__WEBPACK_IMPORTED_MODULE_4___default().number), prop_types__WEBPACK_IMPORTED_MODULE_4___default().instanceOf(Date)]), allowEmpty: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool) });
 
 
 
@@ -10187,6 +10222,9 @@ var cn = function cn() {for (var _len = arguments.length, args = new Array(_len)
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "dateTypes": function() { return /* binding */ dateTypes; },
+/* harmony export */   "minuteTicks": function() { return /* binding */ minuteTicks; },
+/* harmony export */   "hourTicks": function() { return /* binding */ hourTicks; },
 /* harmony export */   "dayTicks": function() { return /* binding */ dayTicks; },
 /* harmony export */   "weekTicks": function() { return /* binding */ weekTicks; },
 /* harmony export */   "detectDateValueType": function() { return /* binding */ detectDateValueType; },
@@ -10208,7 +10246,7 @@ __webpack_require__.r(__webpack_exports__);
 /** @module dates
  *  @description Objects utilities
  *  @since 2021.01.23, 20:29
- *  @changed 2021.04.30, 14:28
+ *  @changed 2021.08.19, 17:51
  */
 
 
@@ -10218,8 +10256,18 @@ __webpack_require__.r(__webpack_exports__);
 var msDatePrefix = '/Date(';
 var msDatePostfix = ')/';
 
+var dateTypes = [// Used date types list
+'number', // Datetime ticks
+'string', // String date representation
+'msDateStr', // Microsoft date string, eg: '/Date(1498653276417+0300)/'
+'object', // Date object
+'moment' // Moment date object
+];
+
 // Export constants...
 
+var minuteTicks = (_config_index_js__WEBPACK_IMPORTED_MODULE_2___default().constants.minuteTicks); // 1000 * 60 * 60;
+var hourTicks = (_config_index_js__WEBPACK_IMPORTED_MODULE_2___default().constants.hourTicks); // 1000 * 60 * 60;
 var dayTicks = (_config_index_js__WEBPACK_IMPORTED_MODULE_2___default().constants.dayTicks); // 1000 * 60 * 60 * 24;
 var weekTicks = (_config_index_js__WEBPACK_IMPORTED_MODULE_2___default().constants.weekTicks); // dayTicks * 7;
 
@@ -10269,12 +10317,19 @@ function convertToDateObject(date) {
  * @return {String}
  */
 function toMicrosoftDateTime(date) {
-  if (typeof date === 'number') {// Milliseconds passed?
+  var dateType = detectDateValueType(date);
+  if (dateType === 'msDateStr') {// Already msDateStr
+    return date;
+  } else
+  if (dateType === 'number') {// Milliseconds passed?
     // TODO: Use timestamp number to compose ms date (which offset should we to use?)
     date = new Date(date);
   } else
-  if (date instanceof (moment__WEBPACK_IMPORTED_MODULE_0___default())) {
+  if (dateType === 'moment') {// Moment?
     date = date.toDate();
+  } else
+  if (dateType === 'string') {// String? (???)
+    throw new Error('Converting method for string dates not implemented');
   }
   // TODO: To check for valid date object?
   // const offset = date.toString().replace(/^.*GMT\s*([+-]\d+).*$/, '$1') // ???
