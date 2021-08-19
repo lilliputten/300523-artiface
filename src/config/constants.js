@@ -19,8 +19,10 @@ export const dateTimeMsFormat = dateFormat + ' ' + timeMsFormat;
 export const dateRangeDelim = ' – ';
 
 export const timeIntervals = 60;
-export const dayTicks = 1000 * 60 * 60 * 24;
-export const weekTicks = dayTicks *7;
+export const minuteTicks = 1000 * 60;
+export const hourTicks = minuteTicks * 60;
+export const dayTicks = hourTicks * 24;
+export const weekTicks = dayTicks * 7;
 
 // dateStringFormat: 'yyyy.mm.dd HH:MM:ss',
 // dateTagFormat: 'yymmdd-HHMM',

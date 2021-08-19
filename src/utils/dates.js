@@ -1,7 +1,7 @@
 /** @module dates
  *  @description Objects utilities
  *  @since 2021.01.23, 20:29
- *  @changed 2021.04.30, 14:28
+ *  @changed 2021.08.19, 17:51
  */
 
 import moment from 'moment';
@@ -14,8 +14,18 @@ import config from 'config';
 const msDatePrefix = '/Date(';
 const msDatePostfix = ')/';
 
+export const dateTypes = [ // Used date types list
+  'number', // Datetime ticks
+  'string', // String date representation
+  'msDateStr', // Microsoft date string, eg: '/Date(1498653276417+0300)/'
+  'object', // Date object
+  'moment', // Moment date object
+];
+
 // Export constants...
 
+export const minuteTicks = config.constants.minuteTicks; // 1000 * 60 * 60;
+export const hourTicks = config.constants.hourTicks; // 1000 * 60 * 60;
 export const dayTicks = config.constants.dayTicks; // 1000 * 60 * 60 * 24;
 export const weekTicks = config.constants.weekTicks; // dayTicks * 7;
 
@@ -65,12 +75,19 @@ export function convertToDateObject(date) {
  * @return {String}
  */
 export function toMicrosoftDateTime(date) {
-  if (typeof date === 'number') { // Milliseconds passed?
+  const dateType = detectDateValueType(date);
+  if (dateType === 'msDateStr') { // Already msDateStr
+    return date;
+  }
+  else if (dateType === 'number') { // Milliseconds passed?
     // TODO: Use timestamp number to compose ms date (which offset should we to use?)
     date = new Date(date);
   }
-  else if (date instanceof moment) {
+  else if (dateType === 'moment') { // Moment?
     date = date.toDate();
+  }
+  else if (dateType === 'string') { // String? (???)
+    throw new Error('Converting method for string dates not implemented');
   }
   // TODO: To check for valid date object?
   // const offset = date.toString().replace(/^.*GMT\s*([+-]\d+).*$/, '$1') // ???

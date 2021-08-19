@@ -2,6 +2,8 @@
  *  @class ModalsProxy
  *  @since 2021.05.14, 14:38
  *  @changed 2021.05.31, 16:57
+ *
+ *  NOTE: Modals aren't closing if uncaught error occured during close procedure (return values etc).
  */
 
 import config from 'config';

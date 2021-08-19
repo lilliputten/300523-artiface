@@ -1,7 +1,7 @@
 /** @module FormDateTime
  *  @class FormDateTime
  *  @since 2021.01.23, 19:44
- *  @changed 2021.01.23, 19:44
+ *  @changed 2021.08.19, 17:23
  *
  *  TODO 2020.12.16, 23:07 -- Add hidden html form element (for form submission)
  */
@@ -57,20 +57,42 @@ class FormDateTime extends React.PureComponent /** @lends @FormDateTime.prototyp
     showTime: PropTypes.bool,
     title: PropTypes.string,
     value: PropTypes.oneOfType([ PropTypes.string, PropTypes.number, PropTypes.instanceOf(Date) ]),
+    allowEmpty: PropTypes.bool,
   }
 
   // Lifecycle methods...
 
   constructor(props) {
     super(props);
-    const {
-      value,
-    } = props;
+    let { value, allowEmpty } = props;
+    if (!value) {
+      value = allowEmpty ? '' : Date.now();
+    }
     this.id = props.id || props.inputId; // || props.name;
     this.state = {
       value,
+      displayValue: this.getDisplayValue({ value }),
     };
-    this.state.displayValue = this.getDisplayValue(this.state);
+    // this.state.displayValue = this.getDisplayValue(this.state);
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const prevPropsValue = prevProps.value;
+    const value = this.props.value;
+    // const stateValue = this.state.value;
+    const prevStateValue = prevState.value;
+    if (value !== prevPropsValue && value !== prevStateValue) { // New value from props
+      // console.log('FormDateTime:componentDidUpdate (value)', {
+      //   prevPropsValue,
+      //   value,
+      //   // stateValue,
+      //   prevStateValue,
+      // });
+      this.setState({
+        value,
+        displayValue: this.getDisplayValue({ value }),
+      });
+    }
   }
 
   // Helper methods...
@@ -83,11 +105,6 @@ class FormDateTime extends React.PureComponent /** @lends @FormDateTime.prototyp
     return classList;
   }
 
-  getItemsText() {
-    const { displayValue } = this.state;
-    return displayValue;
-  }
-
   // Handlers...
 
   onControlClick = (params) => {
@@ -97,14 +114,15 @@ class FormDateTime extends React.PureComponent /** @lends @FormDateTime.prototyp
     }
   }
 
-  getDisplayValue(params) {
-    params = params || this.state;
-    const {
-      value,
-    } = params;
-    const {
-      showTime,
-    } = this.props;
+  getDisplayValue(state) {
+    state = state || this.state;
+    const { value } = state;
+    // const { allowEmpty } = this.props;
+    // Is empty-value?
+    if (!value) {
+      return '';
+    }
+    const { showTime } = this.props;
     const dateFormat = showTime ? config.constants.dateTimeFormat : config.constants.dateFormat;
     return dateUtils.formatDateToString(value, dateFormat);
   }
@@ -112,14 +130,24 @@ class FormDateTime extends React.PureComponent /** @lends @FormDateTime.prototyp
   onChange = ({ value, valueObj }) => {
     const {
       onChange,
+      inputId,
+      name,
       closeOnSelect,
     } = this.props;
-    let setParams = { id: this.id, value, valueObj };
-    setParams.displayValue = this.getDisplayValue(setParams); // dateUtils.formatDateToString(value); // TODO: showTime option
-    // console.log('FormDateTime:onChange', setParams);
-    this.setState(setParams);
+    const displayValue = this.getDisplayValue({ value });
+    let setData = {
+      id: this.id,
+      inputId,
+      name,
+      value,
+      valueObj,
+      displayValue,
+    };
+    // setData.displayValue = this.getDisplayValue(setData); // dateUtils.formatDateToString(value); // TODO: showTime option
+    // console.log('FormDateTime:onChange', setData);
+    this.setState({ value, displayValue });
     if (typeof onChange === 'function') {
-      onChange(setParams);
+      onChange(setData);
     }
     if (closeOnSelect && this.popupNode) {
       this.popupNode.close();
@@ -152,10 +180,11 @@ class FormDateTime extends React.PureComponent /** @lends @FormDateTime.prototyp
     } = this.props;
     const {
       open,
+      displayValue,
     } = this.state;
     // const icon = open ? 'faCalendarCheck' : 'regular:faCalendar';
     const icon = open ? faCalendarCheck : faCalendar;
-    const buttonText = this.getItemsText() || placeholder; // || text;
+    const buttonText = displayValue || placeholder; // || text;
     return (
       <FormButton
         id={id}

@@ -1,5 +1,6 @@
 # CHANGELOG
 
+- 2021.08.19, 20:51 -- Fixed misc bugs: Added date constants (minuteTicks, hourTicks), ModalWindow header geometry updated (correct layout with empty title), FormDateTime updates value from external props, passed extra parameters (name, inputId) for onChange event, added importable available date types list, more safe `toMicrosoftDateTime` -- returns unchanged date value if it is already of msDateStr type, throws error for string-type date (TODO: to parse string?).
 - 2021.08.16, 13:28 -- FormSelect: fixed update selected or value params from props using: `selected` (if passed) has higher priority, `value` converted to list and stored as `selected`, original `value` also stored for detecting future changes.
 - 2021.08.16, 12:48 -- PD-4148: FormSelect: Added test for `selected` property updating. (2h)
 - 2021.08.16, 11:52 -- PD-4148: Fixed  (muted) linter errors. Updated test configuration for jest (for testing react components).
@@ -158,5 +159,5 @@
 - 2020.10.05, 20:38 -- v.0.0.15: Extracted `demoSupport.jsx` routines, fixture selection from url query (parameter `fixture`), added avaialble fixtures list if fixture to display is not specified, added DemoWrapper & demoTitle exportable ficture parameters for demo rendering.
 
 <!--
- @changed 2021.08.16, 13:28
+ @changed 2021.08.19, 20:51
 -->
