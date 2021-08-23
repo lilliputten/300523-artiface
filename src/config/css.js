@@ -33,7 +33,7 @@ const errorColor = theme.errorColor || '#c33';
 const warnColor = theme.warnColor || '#f73'; // '#f96'
 const successColor = theme.successColor || '#593'; // '#ac9'
 const infoColor = theme.infoColor || primaryColor; // '#29a' // '#9bd'
-const confirmColor = theme.confirmColor /* || primaryColor || textColor */ || '#891'; // '#07f'
+const confirmColor = theme.primaryColor; // theme.confirmColor /* || primaryColor || textColor */ || '#891'; // '#07f'
 const selectColor = theme.selectColor || '#05b';
 
 const neutralColor = '#ccc';
