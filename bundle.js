@@ -440,9 +440,9 @@ module.exports = { // Common-used build variables...
   DEV_DEBUG: DEV_DEBUG,
 
   THEME: "default",
-  buildTag: "v.0.3.8b-210819-2040-build-dev-default",
-  timestamp: "2021.08.19, 20:40",
-  timetag: "210819-2040",
+  buildTag: "v.0.3.8b-210823-1422-build-dev-default",
+  timestamp: "2021.08.23, 14:22",
+  timetag: "210823-1422",
   version: "0.3.8b" };
 
 /***/ }),
@@ -577,7 +577,7 @@ var errorColor = theme.errorColor || '#c33';
 var warnColor = theme.warnColor || '#f73'; // '#f96'
 var successColor = theme.successColor || '#593'; // '#ac9'
 var infoColor = theme.infoColor || primaryColor; // '#29a' // '#9bd'
-var confirmColor = theme.confirmColor /* || primaryColor || textColor */ || '#891'; // '#07f'
+var confirmColor = theme.primaryColor; // theme.confirmColor /* || primaryColor || textColor */ || '#891'; // '#07f'
 var selectColor = theme.selectColor || '#05b';
 
 var neutralColor = '#ccc';
