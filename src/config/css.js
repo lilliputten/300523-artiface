@@ -1,7 +1,7 @@
 /** @module config.css
  *  @description Global styles config
  *  @since 2019.08.29, 10:28
- *  @changed 2021.08.11, 21:25
+ *  @changed 2021.08.26, 14:14
  */
 
 // Theme...
@@ -30,6 +30,7 @@ const secondaryContrastColor = theme.secondaryContrastColor || '#fff';
 // theme\.\(primaryDarkColor\|primaryColor\|primaryLightColor\|primaryContrastColor\|secondaryDarkColor\|secondaryColor\|secondaryLightColor\|secondaryContrastColor\)\>
 
 const errorColor = theme.errorColor || '#c33';
+const dangerColor = theme.dangerColor || '#c33';
 const warnColor = theme.warnColor || '#f73'; // '#f96'
 const successColor = theme.successColor || '#593'; // '#ac9'
 const infoColor = theme.infoColor || primaryColor; // '#29a' // '#9bd'
@@ -57,6 +58,7 @@ const cssConfig = { // Common-used css variables...
 
   // Colors for dialogs styles
   errorColor, // theme.errorColor || '#c33',
+  dangerColor, // theme.dangerColor || '#c33',
   warnColor, // theme.warnColor || '#f73', // '#f96',
   successColor, // theme.successColor || '#593', // '#ac9',
   infoColor, // theme.infoColor || '#29a', // '#9bd',
@@ -102,6 +104,7 @@ const cssConfig = { // Common-used css variables...
 
     neutral: neutralColor,
 
+    danger: dangerColor,
     error: errorColor,
     warn: warnColor,
     success: successColor,

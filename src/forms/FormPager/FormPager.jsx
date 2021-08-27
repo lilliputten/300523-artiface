@@ -58,7 +58,7 @@ class FormPager extends React.PureComponent /** @lends @FormPager.prototype */ {
   static propTypes = {
     onPageSelect: PropTypes.func,
     // lang: PropTypes.objectOf(PropTypes.object),
-    showPage: PropTypes.number,
+    showPage: PropTypes.number, // Cardinal, {1..totalPages}
     totalPages: PropTypes.number,
     noSpace: PropTypes.bool,
     fullWidth: PropTypes.bool,
@@ -227,7 +227,6 @@ const mapStateToProps = store => ({
   // language: store.language,
   // commonLang: store && store.language && store.language && store.language.components.common || {},
 });
-
 export default compose(
   // withActionsContext,
   FormItemHOC,
