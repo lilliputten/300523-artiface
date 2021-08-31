@@ -31,7 +31,7 @@ const demoOptions = [
 
 const nullableOptions = [{ val: -1, text: '--Unselected--' }]
   .concat(demoOptions);
-const nullableOptionsElements = nullableOptions.map((props, i) => {
+const nullableOptionsElements = nullableOptions.map((props/*, i*/) => {
   return React.createElement(MenuItem, { ...props, key: props.val });
 });
 
