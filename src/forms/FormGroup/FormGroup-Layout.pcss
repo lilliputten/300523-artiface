@@ -48,7 +48,7 @@
 
   &_flow { // Horizontal flow layout
     & > .FormItem {
-      &:not(.FormSeparator) {
+      &:not(.FormSeparator):not(.FormLabel_fixed) {
         min-width: $(formItemHeight)px; // ??? Hint for limiting the maximum width (overflow causes cropping items outer glow on interactive control events).
       }
       display: block;
