@@ -1,6 +1,6 @@
 /** @module FormButton.fixture
  *  @since 2020.07.20, 19:07
- *  @changed 2020.10.21, 22:52
+ *  @changed 2021.08.31, 13:01
  */
 
 import React from 'react';
@@ -56,7 +56,8 @@ export default {
   themeDefault: <FormButton theme="default" text="Theme: default" />,
   darkPlain: <DarkBg><FormButton icon={inlineIcon} plain onDark text="Plain on dark" /></DarkBg>,
   darkDefault: <DarkBg><FormButton icon={inlineIcon} theme="default" onDark text="Default on dark" /></DarkBg>,
-  defaultPlainWithIcon: <FormButton icon={inlineIcon} text="Default plain with icon" theme="default" plain />,
+  defaultPlainWithIcon: <FormButton icon={inlineIcon} text="Default plain with icon" theme="default" plain style={{ maxWidth: 100 }} />,
+  noText: <FormButton icon="faBan" hasText theme="default" plain rightIcon style={{ width: 100 }} />,
   themePrimary: <FormButton theme="primary" text="Theme: primary" />,
   themeError: <FormButton theme="error" text="Theme: error" />,
   withInlineIcon: <FormButton icon={inlineIcon} theme="default" text="With inline icon" />,

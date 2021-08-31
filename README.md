@@ -3,8 +3,8 @@
 ## Build info (auto-generated)
 
 - Version: 0.3.8b
-- Last changes timestamp: 2021.08.27, 17:19
-- Last changes timetag: 210827-1719
+- Last changes timestamp: 2021.08.31, 13:02
+- Last changes timetag: 210831-1302
 
 ## Documents
 

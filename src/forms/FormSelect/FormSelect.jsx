@@ -1,7 +1,7 @@
 /** @module FormSelect
  *  @class FormSelect
  *  @since 2020.10.28, 22:49
- *  @changed 2021.07.07, 19:54
+ *  @changed 2021.08.31, 13:00
  *
  *  TODO 2020.12.16, 23:07 -- Add hidden html form element (for form submission)
  */
@@ -97,13 +97,24 @@ class FormSelect extends React.PureComponent /** @lends @FormSelect.prototype */
 
   getItemsText() {
     const { selected } = this.state;
-    const { options } = this.props;
-    const text = Array.isArray(options) && Array.isArray(selected) && options.map(({ val, text }) => {
-      if (selected.includes(val)) {
-        return text;
+    const { options, singleChoice } = this.props;
+    if (Array.isArray(options) && options.length) {
+      let text;
+      if (Array.isArray(selected) && selected.length) {
+        text = Array.isArray(selected) && options.map(props => {
+          props = props && props.props || props || {}; // Element, raw object, undefined?
+          const { val, text } = props;
+          if (selected.includes(val)) {
+            return text;
+          }
+        }).filter(Boolean).join(', ');
       }
-    }).filter(Boolean).join(', ');
-    return text;
+      else if (singleChoice) {
+        const firstItem = options[0];
+        text = firstItem && firstItem.text || (firstItem.props && firstItem.props.text);
+      }
+      return text;
+    }
   }
 
   // Handlers...
@@ -154,6 +165,8 @@ class FormSelect extends React.PureComponent /** @lends @FormSelect.prototype */
 
   renderControlContent() {
     const {
+      // singleChoice,
+      // options,
       text,
       placeholder,
       title,
@@ -165,6 +178,11 @@ class FormSelect extends React.PureComponent /** @lends @FormSelect.prototype */
     } = this.props;
     const { open } = this.state;
     const buttonText = this.getItemsText() || placeholder || text;
+    // console.log('FormSelect:renderControlContent', {
+    //   singleChoice,
+    //   selected,
+    //   options,
+    // });
     const style = { maxWidth };
     return (
       <FormButton
@@ -181,6 +199,7 @@ class FormSelect extends React.PureComponent /** @lends @FormSelect.prototype */
         checkable
         checked={open}
         style={style}
+        hasText
       />
     );
   }
@@ -195,11 +214,18 @@ class FormSelect extends React.PureComponent /** @lends @FormSelect.prototype */
       wrapContent,
       // inputId, // ???
     } = this.props;
-    const {
-      selected,
-      // value,
-    } = this.state;
-    // let menuSelected = selected || value;
+    let { selected } = this.state;
+    // console.log('FormSelect:renderMenuContent', {
+    //   singleChoice,
+    //   selected,
+    //   options,
+    // });
+    // debugger;
+    // if (selected == null && singleChoice === 'forced' && Array.isArray(options) && options.length) {
+    //   // Make first item active
+    //   const firstItem = options[0];
+    //   if (firstItem.val)
+    // }
     return (
       <Menu
         selectable={true}
@@ -207,8 +233,6 @@ class FormSelect extends React.PureComponent /** @lends @FormSelect.prototype */
         onChange={this.onMenuChange}
         onClick={this.onMenuItemClick}
         selected={selected}
-        // selected={menuSelected}
-        // value={value}
         disabled={disabled}
         itemTheme={itemTheme}
         // itemSelectedTheme={itemSelectedTheme}

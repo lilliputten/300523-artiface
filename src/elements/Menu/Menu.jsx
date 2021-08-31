@@ -1,7 +1,7 @@
 /** @module Menu
  *  @class Menu
  *  @since 2020.10.27, 02:58
- *  @changed 2021.08.12, 21:30
+ *  @changed 2021.08.31, 13:00
  */
 
 import React from 'react';
@@ -71,12 +71,19 @@ class Menu extends React.PureComponent /** @lends @Menu.prototype */ {
     }
     const {
       singleChoice,
-      value,
+      // value,
       selected,
       itemTheme,
       checkedItemTheme,
       wrapContent,
+      children,
     } = this.props;
+    let value = this.props.value;
+    if (singleChoice && value == null && !selected && Array.isArray(children) && children.length) {
+      const firstItem = children[0];
+      value = firstItem.val || (firstItem.props && firstItem.props.val);
+      // debugger;
+    }
     const propsSelected = (singleChoice && value != null) ? [value] : selected;
     const isArray = !!item && Array.isArray(item);
     const isObject = !!item && typeof item ==='object' && !isArray; // Array.isArray(item)
@@ -110,6 +117,7 @@ class Menu extends React.PureComponent /** @lends @Menu.prototype */ {
     // TODO: Process arrays (subitems/groups)?
     // console.log('Menu:setChildrenItemsFromProps:item', {
     //   item,
+    //   selected,
     //   isElement,
     //   isArray,
     //   isObject,
@@ -119,10 +127,14 @@ class Menu extends React.PureComponent /** @lends @Menu.prototype */ {
   }
 
   setChildrenItemsFromProps() {
-    // console.log('Menu:setChildrenItemsFromProps', {
-    //   children,
-    // })
     let children = this.props.children;
+    const {
+      singleChoice,
+    } = this.props;
+    // console.log('Menu:setChildrenItemsFromProps', {
+    //   singleChoice,
+    //   children,
+    // });
     let selectedList;
     if (Array.isArray(children)) {
       children = children.map(this.createItemElement, this);
@@ -238,6 +250,12 @@ class Menu extends React.PureComponent /** @lends @Menu.prototype */ {
     if (!disabled) {
       const { selectedList } = this.state;
       const setSelected = !selectedList.includes(val);
+      // console.log('Menu:onMenuItemClick', {
+      //   val,
+      //   setSelected,
+      //   singleChoice,
+      //   selectedList,
+      // });
       if (singleChoice === 'forced' && !setSelected) { // Don not made changes if single mode and clicked item was selected
         return;
       }
@@ -284,4 +302,3 @@ class Menu extends React.PureComponent /** @lends @Menu.prototype */ {
 export default compose(
   withActionsContext,
 )(Menu);
-// export default Menu;

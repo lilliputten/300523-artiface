@@ -1,6 +1,6 @@
 /** @module FormSelect.fixture
  *  @since 2020.10.28, 22:49
- *  @changed 2021.08.13, 13:47
+ *  @changed 2021.08.31, 13:00
  */
 /* eslint-disable react/jsx-max-depth, no-console */
 
@@ -9,6 +9,7 @@ import FormSelect from './FormSelect';
 import FormGroup from '../FormGroup';
 import FormLabeledGroup from '../FormLabeledGroup';
 import FormLabel from '../FormLabel';
+import MenuItem from 'elements/MenuItem';
 
 // Demo styles for cosmos engine
 // import 'demo.pcss';
@@ -28,9 +29,16 @@ const demoOptions = [
   { val: 2, text: 'Swimming extra long text item name string value' },
 ];
 
+const nullableOptions = [{ val: -1, text: '--Unselected--' }]
+  .concat(demoOptions);
+const nullableOptionsElements = nullableOptions.map((props, i) => {
+  return React.createElement(MenuItem, { ...props, key: props.val });
+});
+
+
 const demoChange = (params) => {
-  const { id, selected, value } = params;
-  console.log('FormSelect.fixture:demoChange', { id, selected, value, params });
+  // const { id, selected, value } = params;
+  console.log('FormSelect.fixture:demoChange', params);
   // debugger
 };
 
@@ -100,6 +108,21 @@ export default {
       options={demoOptions}
       onChange={demoChange}
       itemTheme="primary"
+    />
+  ),
+  nullable: (
+    <FormSelect
+      title="Nullable title"
+      // text="Nullable text"
+      // options={nullableOptions}
+      options={nullableOptionsElements}
+      controlButtonTheme="success"
+      itemTheme="success"
+      // itemSelectedTheme="success"
+      onChange={demoChange}
+      singleChoice="forced"
+      closeOnSelect
+      fullWidth
     />
   ),
   withExtraOptions: (
